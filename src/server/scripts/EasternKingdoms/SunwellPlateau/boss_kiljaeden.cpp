@@ -523,9 +523,11 @@ public:
         bool SpeechBegins;
 
         void InitializeAI()
-        {
-            // Scripted_NoMovementAI::InitializeAI();
-        }
+		{
+			if (!me->isDead())
+			Reset();
+			// Scripted_NoMovementAI::InitializeAI();
+		}
 
         void Reset()
         {

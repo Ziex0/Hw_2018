@@ -552,14 +552,19 @@ enum TrinityStrings
     LANG_NPCINFO_VENDOR                 = 545,
     LANG_NPCINFO_TRAINER                = 546,
     LANG_NPCINFO_DUNGEON_ID             = 547,
-
+	
+	// Pinfo commands
     LANG_PINFO_ACCOUNT                  = 548,
     LANG_PINFO_LEVEL                    = 549,
-    LANG_PINFO_MUTE                     = 550,
+    LANG_PINFO_MUTED                    = 550,
     LANG_PINFO_BAN                      = 453,
     LANG_PINFO_MAP_ONLINE               = 714,
     LANG_PINFO_MAP_OFFLINE              = 716,
     LANG_PINFO_GUILD_INFO               = 749,
+	//Custom Pi
+	LANG_PINFO_CHR_PHASE                = 846,
+	LANG_PINFO_CHR_MAP                  = 848,
+	LANG_PINFO_CHR_MAILS                = 854,
 
     LANG_YOU_SET_EXPLORE_ALL            = 551,
     LANG_YOU_SET_EXPLORE_NOTHING        = 552,
@@ -805,9 +810,7 @@ enum TrinityStrings
     LANG_NPCINFO_MAILBOX                = 841,
     LANG_NPCINFO_PLAYER_VEHICLE         = 842,
 	
-	//Custom Pi
-	LANG_PINFO_CHR_MAP                  = 848,
-
+	
     // Room for in-game strings           843-999 not used
 
     // Level 4 (CLI only commands)

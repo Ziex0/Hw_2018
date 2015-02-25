@@ -1634,11 +1634,11 @@ public:
         }
 
         if (muteTime > 0)
-            handler->PSendSysMessage(LANG_PINFO_MUTE, secsToTimeString(muteTime - time(NULL), true).c_str(), muteBy.c_str(), muteReason.c_str());
+            handler->PSendSysMessage(LANG_PINFO_MUTED, secsToTimeString(muteTime - time(NULL), true).c_str(), muteReason.c_str(), muteBy.c_str());
 
         if (banTime >= 0)
             handler->PSendSysMessage(LANG_PINFO_BAN, banTime > 0 ? secsToTimeString(banTime - time(NULL), true).c_str() : "permanently", bannedby.c_str(), banreason.c_str());
-
+		
         std::string raceStr, ClassStr;
         switch (race)
         {
@@ -1734,13 +1734,13 @@ public:
         if (target)
         {
             if (!zoneName.empty())
-				handler->PSendSysMessage(LANG_PINFO_CHR_MAP, map->name[locale], zoneName.c_str(), areaName.c_str(), phase);
+                handler->PSendSysMessage(LANG_PINFO_MAP_ONLINE, map->name, zoneName.c_str(), areaName.c_str(), phase);
             else
-				handler->PSendSysMessage(LANG_PINFO_CHR_MAP, map->name[locale], areaName.c_str(), "<unknown>", phase);
+                handler->PSendSysMessage(LANG_PINFO_MAP_ONLINE, map->name, areaName.c_str(), "<unknown>", phase);
         }
         else
-			handler->PSendSysMessage(LANG_PINFO_CHR_MAP, map->name[locale], areaName.c_str());
-
+           handler->PSendSysMessage(LANG_PINFO_MAP_OFFLINE, map->name, areaName.c_str());
+	   
         stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_GUILD_MEMBER_EXTENDED);
         stmt->setUInt32(0, GUID_LOPART(targetGuid));
 
