@@ -382,7 +382,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 			case SEC_DEV: // DEV6
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF006E[ DEV ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF006E[ Developer ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
 					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
@@ -392,7 +392,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 			case SEC_HEAD_DEV: // HEAD DEV7
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF006E[ Head DEV ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF006E[ Head Developer ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
 					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
@@ -402,7 +402,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 			case SEC_ADMINISTRATOR: // ADMIN8
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF0000[Admin]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF0000[ Admin ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
 					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
@@ -412,7 +412,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 			case SEC_HEAD_ADMIN: // ADMIN9
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF0000[Head ADMIN]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF0000[ Head Admin ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
 					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
@@ -422,7 +422,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 			case SEC_CO: // ADMIN10
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF0000[CO-Owner]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF0000[ CO-Owner ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
 					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
