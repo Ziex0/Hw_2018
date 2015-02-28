@@ -98,6 +98,21 @@ enum RBACPermissions
 	RBAC_PERM_COMMAND_GUILD_LINFO                            = 1000,
     RBAC_PERM_COMMAND_GUILD_SET_LEVEL                        = 1001,
     RBAC_PERM_COMMAND_GUILD_GIVE_XP                          = 1002,
+	// custom permissions 1000+
+
+    //NpcBot command permissions
+    RBAC_PERM_COMMAND_NPCBOT                                 = 1010,
+    RBAC_PERM_COMMAND_NPCBOT_ADD                             = 1011,
+    RBAC_PERM_COMMAND_NPCBOT_REMOVE                          = 1012,
+    RBAC_PERM_COMMAND_NPCBOT_RESET                           = 1013,
+    RBAC_PERM_COMMAND_NPCBOT_CMD                             = 1014,
+    RBAC_PERM_COMMAND_NPCBOT_DIST                            = 1015,
+    RBAC_PERM_COMMAND_NPCBOT_INFO                            = 1016,
+    RBAC_PERM_COMMAND_NPCBOT_HELPER                          = 1017,
+    RBAC_PERM_COMMAND_NPCBOT_REVIVE                          = 1018,
+    RBAC_PERM_COMMAND_MAINTANK                               = 1019,
+    //end NpcBot
+
     RBAC_PERM_MAX
 };
 

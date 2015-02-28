@@ -38,6 +38,9 @@
 #include "CreatureAI.h"
 #include "SpellInfo.h"
 
+//Bot
+#include "bothelper.h"
+
 enum StableResultCode
 {
     STABLE_ERR_MONEY        = 0x01,                         // "you don't have enough money"
@@ -301,6 +304,36 @@ void WorldSession::HandleGossipHelloOpcode(WorldPacket& recvData)
 
     uint64 guid;
     recvData >> guid;
+
+    //Bot
+    if (guid == _player->GetGUID())
+    {
+        if (!_player->GetBotHelper())
+        {
+             sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: HandleGossipSelectOptionOpcode - Player (GUID: %u) do not have a helper on gossip hello.", uint32(GUID_LOPART(guid)));
+            return;
+        }
+        _player->GetBotHelper()->OnGossipHello(_player);
+        return;
+    }
+    else if (IS_CREATURE_GUID(guid))
+    {
+        if (Creature* qBot = ObjectAccessor::GetCreatureOrPetOrVehicle(*_player, guid))
+        {
+            if (qBot->IsQuestBot() &&
+                (_player->IsAlive() || qBot->GetCreatureTemplate()->type_flags & CREATURE_TYPEFLAGS_GHOST) &&
+                (qBot->IsAlive() || (qBot->GetCreatureTemplate()->type_flags & CREATURE_TYPEFLAGS_DEAD_INTERACT)))
+            {
+                if (!sScriptMgr->OnGossipHello(_player, qBot))
+                {
+                    sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: HandleGossipHelloOpcode - qBot %s (Entry: %u) returned false on gossip hello.",
+                        qBot->GetName().c_str(), qBot->GetEntry());
+                }
+                return;
+            }
+        }
+    }
+    //end Bot
 
     Creature* unit = GetPlayer()->GetNPCIfCanInteractWith(guid, UNIT_NPC_FLAG_NONE);
     if (!unit)

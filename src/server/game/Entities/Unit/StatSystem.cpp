@@ -180,6 +180,10 @@ bool Player::UpdateAllStats()
     for (int i = SPELL_SCHOOL_NORMAL; i < MAX_SPELL_SCHOOL; ++i)
         UpdateResistances(i);
 
+    for (uint8 i = 0; i != GetMaxNpcBots(); ++i)
+        if (Creature* bot = GetBotMap(i)->_Cre())
+            bot->SetBotShouldUpdateStats();
+
     return true;
 }
 

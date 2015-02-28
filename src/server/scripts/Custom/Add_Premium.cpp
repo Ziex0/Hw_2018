@@ -68,7 +68,7 @@ public:
         //if(player->GetSession()->IsPremium())
         //{
             //Different Checks
-            //if(player->isInCombat() || player->IsInFlight() || player->GetMap()->IsBattlegroundOrArena() || player->HasStealthAura() || player->HasFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_FEIGN_DEATH) || player->isDead())
+            //if(player->isInCombat() || player->isInFlight() || player->GetMap()->IsBattlegroundOrArena() || player->HasStealthAura() || player->HasFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_FEIGN_DEATH) || player->isDead())
             //{
             //    handler->SendSysMessage(LANG_PREMIUM_CANT_DO);
             //    handler->SetSentErrorMessage(true);

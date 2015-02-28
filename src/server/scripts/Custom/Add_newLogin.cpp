@@ -1,44 +1,41 @@
 #include "ScriptPCH.h"
-#define CUSTOM_BLUE	 "|cff00479E"
-#define CUSTOM_RED       "|cffFF0000"
-#define CUSTOM_LIGHTRED  "|cffD63931"
-#define CUSTOM_WHITE     "|cffffffff"
 
-class announce_login : public PlayerScript
+#define SONG 13473
+
+class on_login : public PlayerScript
 {
-public:
-	announce_login() : PlayerScript("announce_login") { }
+    public:
+        on_login() : PlayerScript("on_login") {}
 
-	void OnPlayerLogin(Player* player, bool /*firstLogin*/)
-	{
-		char msg[500];
-		if (player->GetTeam() == ALLIANCE)
-		{
-			sprintf(msg, "[%sATT|r]: %s%s|r has logged in ! [%sA|r]", CUSTOM_LIGHTRED, CUSTOM_WHITE, GetName().c_str(), CUSTOM_BLUE);
-			sWorld->SendServerMessage(SERVER_MSG_STRING, msg);
-		}
-		else{
-			sprintf(msg, "[%sATT|r]: %s%s|r hat sich eingeloggt!! [%sH|r]", CUSTOM_LIGHTRED, CUSTOM_WHITE, GetName().c_str(), CUSTOM_RED);
-			sWorld->SendServerMessage(SERVER_MSG_STRING, msg);
-		}
-	}
+    void OnLogin(Player* player)
+    {
+            ChatHandler(player->GetSession()).PSendSysMessage("Welcome back online! Your character has been saved to the database, buffed and healed! Now remember to vote every 12 hours on www.unforgivenwow.com!");
+	     player->GetSession()->SendNotification("WELCOME BACK ONLINE ");
+	     player->GetSession()->SendNotification("! %s !", player->GetName());
 
-	void OnPlayerLogout(Player* player)
-	{
-		char msg[500];
-		if (player->GetTeam() == ALLIANCE)
-		{
-			sprintf(msg, "[%sATT|r]: %s%s|r has logged out ! [%sA|r]", CUSTOM_LIGHTRED, CUSTOM_WHITE, GetName().c_str(), CUSTOM_BLUE);
-			sWorld->SendServerMessage(SERVER_MSG_STRING, msg);
-		}
-		else{
-			sprintf(msg, "[%sATT|r]: %s%s|r has logged out ! [%sH|r]", CUSTOM_LIGHTRED, CUSTOM_WHITE, GetName().c_str(), CUSTOM_RED);
-			sWorld->SendServerMessage(SERVER_MSG_STRING, msg);
-		}
-	}
+	     //player->SetXpRate(1);	     
+
+	     if (player->GetMap()->IsBattlegroundOrArena())
+	     {
+	     	  player->ResurrectPlayer(0.5f);
+	         player->TeleportTo(0, 1610.99f, -5526.4f, 111.158f, 1.00078f);
+	     }
+
+	     /*QueryResult result = CharacterDatabase.PQuery("SELECT first_login FROM characters WHERE guid = '%u'", player->GetGUID());
+ 
+	     Field* fields = result->Fetch();
+	     uint8 flag = fields[0].GetUInt8();
+
+            if (player->HasFlag)
+            {
+		  player->CastSpell(player, 11543, 1);
+		  player->PlayDirectSound(11466, player);
+		  CharacterDatabase.PExecute("UPDATE characters set first_login = 1 WHERE guid = '%u'", player->GetGUID());
+            }*/
+    }
 };
 
-void AddSC_announce_login()
+void AddSC_on_login()
 {
-	new announce_login();
+    new on_login();
 }

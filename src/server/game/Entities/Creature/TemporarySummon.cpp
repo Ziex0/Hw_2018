@@ -253,6 +253,14 @@ void TempSummon::UnSummon(uint32 msTime)
     if (owner && owner->GetTypeId() == TYPEID_UNIT && owner->ToCreature()->IsAIEnabled)
         owner->ToCreature()->AI()->SummonedCreatureDespawn(this);
 
+    //npcbot
+    if (GetIAmABot() || GetIAmABotsPet())
+    {
+        //TC_LOG_ERROR("TempSummon::UnSummon(): Trying to unsummon Bot %s(owner: %s). Aborted", GetName(), GetBotOwner()->GetName());
+        return;
+    }
+    //end npcbots
+
     AddObjectToRemoveList();
 }
 

@@ -110,6 +110,9 @@ bool Group::Create(Player* leader)
     if (m_groupType & GROUPTYPE_RAID)
         _initRaidSubGroupsCounter();
 
+    if (leader->HaveBot()) //player + npcbot so set to free-for-all on create
+        m_lootMethod = FREE_FOR_ALL;
+    else
     if (!isLFGGroup())
         m_lootMethod = GROUP_LOOT;
 
@@ -364,6 +367,8 @@ bool Group::AddMember(Player* player)
     m_memberSlots.push_back(member);
 
     SubGroupCounterIncrease(subGroup);
+	if (IS_PLAYER_GUID(player->GetGUID()))
+    {
 
     if (player)
     {
@@ -382,6 +387,7 @@ bool Group::AddMember(Player* player)
         InstanceGroupBind* bind = GetBoundInstance(player);
         if (bind && bind->save->GetInstanceId() == player->GetInstanceId())
             player->m_InstanceValid = true;
+	}
     }
 
     if (!isRaidGroup())                                      // reset targetIcons for non-raid-groups
@@ -407,6 +413,8 @@ bool Group::AddMember(Player* player)
 
     SendUpdate();
     sScriptMgr->OnGroupAddMember(this, player->GetGUID());
+	if (IS_PLAYER_GUID(player->GetGUID()))
+  {
 
     if (player)
     {
@@ -484,8 +492,11 @@ bool Group::AddMember(Player* player)
         }
 
         if (m_maxEnchantingLevel < player->GetSkillValue(SKILL_ENCHANTING))
-            m_maxEnchantingLevel = player->GetSkillValue(SKILL_ENCHANTING);
-    }
+			m_maxEnchantingLevel = player->GetSkillValue(SKILL_ENCHANTING);
+			
+	}
+
+  }
 
     return true;
 }
@@ -609,6 +620,9 @@ bool Group::RemoveMember(uint64 guid, const RemoveMethod &method /*= GROUP_REMOV
         }
 
         if (m_memberMgr.getSize() < ((isLFGGroup() || isBGGroup()) ? 1u : 2u))
+        //npcbot
+        if (GetMembersCount() < ((isBGGroup() || isLFGGroup()) ? 1u : 2u))
+        //end npcbot
             Disband();
 
         return true;
