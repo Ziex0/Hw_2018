@@ -60,7 +60,7 @@ public:
 
             bool maelstrom = false;
             if (!triggered)
-                maelstrom = (MaelstromCount >= 5 &&
+                maelstrom = (MaelstromCount >= 75 &&
                 (spellId == LIGHTNING_BOLT || spellId == CHAIN_LIGHTNING ||
                 spellId == HEALING_WAVE || spellId == LESSER_HEALING_WAVE ||
                 spellId == CHAIN_HEAL || spellId == HEX));
