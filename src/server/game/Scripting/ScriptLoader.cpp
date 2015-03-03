@@ -1361,6 +1361,8 @@ void AddBattlegroundScripts()
 	void AddSC_boss_test_script();
 	void AddSC_Online_Time_DP();
 	void AddSC_on_login();
+	//void AddSC_ItemUpdater();
+	void AddSC_player_abuse();
 	//Bots
 	void AddSC_death_knight_bot();
 	void AddSC_druid_bot();
@@ -1443,6 +1445,8 @@ void AddCustomScripts()
 	AddSC_boss_test_script();
 	AddSC_Online_Time_DP();
 	AddSC_on_login();
+	//AddSC_ItemUpdater();
+	AddSC_player_abuse();
 	//Bots
     AddSC_death_knight_bot();
     AddSC_druid_bot();

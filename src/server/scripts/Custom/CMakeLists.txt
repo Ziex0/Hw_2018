@@ -63,6 +63,8 @@ set(scripts_STAT_SRCS
   Custom/Add_KillStreak.cpp
   Custom/Add_gurubashi.cpp
   Custom/Add_Reforging.cpp
+  #Custom/ItemUpdater.cpp
+  Custom/Add_Abuse.cpp
   
   Custom/VIP/vip_commands.cpp
   Custom/VIP/vip_do_com.cpp

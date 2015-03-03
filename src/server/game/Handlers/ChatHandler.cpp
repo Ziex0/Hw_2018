@@ -238,7 +238,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 
     switch (type)
     {
-        case CHAT_MSG_SAY:
+        case CHAT_MSG_SAY:					
         case CHAT_MSG_EMOTE:
         case CHAT_MSG_YELL:
         {
@@ -247,14 +247,13 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
                 SendNotification(GetTrinityString(LANG_SAY_REQ), sWorld->getIntConfig(CONFIG_CHAT_SAY_LEVEL_REQ));
                 return;
             }
-
-            if (type == CHAT_MSG_SAY)
-                sender->Say(msg, lang);
-            else if (type == CHAT_MSG_EMOTE)
+			if (type == CHAT_MSG_SAY)
+				sender->Say(msg, lang);
+			else if (type == CHAT_MSG_EMOTE)
                 sender->TextEmote(msg);
             else if (type == CHAT_MSG_YELL)
                 sender->Yell(msg, lang);
-        } break;
+		} break;
         case CHAT_MSG_WHISPER:
         {
             if (!normalizePlayerName(to))
@@ -342,11 +341,11 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 			switch(GetPlayer()->GetSession()->GetSecurity())
 			{
 			case SEC_PLAYER: // normal player, non-vip	1				
-					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());					
+					snprintf(message, 1024, "|cff33CC00World |TInterface\\PvPRankBadges\\PvPRank01:13:13|t]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());					
 					break;
 					
 			case SEC_VIP: // VIP2
-					snprintf(message, 1024, "|cff33CC00World |cffFFD800[ V.I.P ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cff33CC00World |TInterface\\PvPRankBadges\\PvPRank02:13:13|t]|cffFFD800[ V.I.P ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					break;
 					
 			case SEC_MODERATOR: // TRIAL GM3
