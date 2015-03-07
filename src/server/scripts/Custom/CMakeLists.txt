@@ -75,7 +75,6 @@ set(scripts_STAT_SRCS
   Custom/Boss_1.cpp
   Custom/Boss_2.cpp
   Custom/npc_morpher.cpp
-  Custom/Add_newLogin.cpp
 	
 )
 

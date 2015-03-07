@@ -2283,6 +2283,20 @@ class Player : public Unit, public GridObject<Player>
 
         float GetAverageItemLevel();
         bool isDebugAreaTriggers;
+		
+		/********************************************************************/
+        /***                 ANTICHEAT SYSTEM       SymbolixDEV           ***/
+        /********************************************************************/
+        uint32 GetLastPacketTime() { return uiLastPacketTime;}
+        uint32 GetLastOpcode() { return uiLastOpcode; }
+        float GetLastSpeedRate() { return fLastSpeedRate; }
+        void SetLastPacketTime(uint32 uiTime) { uiLastPacketTime = uiTime; }
+        void SetLastSpeedRate(float fSpeedRateRate) { fLastSpeedRate = fSpeedRateRate; }
+        void SetLastOpcode(uint32 uiOpcode) { uiLastOpcode = uiOpcode; }
+        void ElaborateCheatReport(Player* pPlayer, uint8 uiReportType);
+        bool CanFlyAnticheat(MovementInfo& pMovementInfo);
+        bool HasFirstReport();
+        void CleanTempCheatReports();
 
         void ClearWhisperWhiteList() { WhisperList.clear(); }
         void AddWhisperWhiteList(uint64 guid) { WhisperList.push_back(guid); }
@@ -2593,7 +2607,9 @@ class Player : public Unit, public GridObject<Player>
         DeclinedName *m_declinedname;
         Runes *m_runes;
         EquipmentSets m_EquipmentSets;
-
+		
+		bool isAlwaysDetectableFor(WorldObject const* seer) const;
+		
         bool CanAlwaysSee(WorldObject const* obj) const;
 
         bool IsAlwaysDetectableFor(WorldObject const* seer) const;
@@ -2625,6 +2641,13 @@ class Player : public Unit, public GridObject<Player>
         /*********************************************************/
         /***                END BOT SYSTEM                     ***/
         /*********************************************************/
+		
+		/********************************************************************/
+        /***                    ANTICHEAT SYSTEM          SymboliXDEV     ***/
+        /********************************************************************/
+        uint32  uiLastPacketTime;
+        float fLastSpeedRate;
+        uint32 uiLastOpcode;
 
         // internal common parts for CanStore/StoreItem functions
         InventoryResult CanStoreItem_InSpecificSlot(uint8 bag, uint8 slot, ItemPosCountVec& dest, ItemTemplate const* pProto, uint32& count, bool swap, Item* pSrcItem) const;

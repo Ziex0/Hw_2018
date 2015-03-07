@@ -922,6 +922,10 @@ Player::~Player()
 {
     // it must be unloaded already in PlayerLogout and accessed only for loggined player
     //m_social = NULL;
+	
+	   // anticheat
+    if (sWorld->getBoolConfig(CONFIG_ANTICHEAT_ENABLE))
+        CleanTempCheatReports();
 
     // Note: buy back item already deleted from DB when player was saved
     for (uint8 i = 0; i < PLAYER_SLOTS_COUNT; ++i)
@@ -965,6 +969,202 @@ Player::~Player()
         delete m_botmap[i];
 
     sWorld->DecreasePlayerCount();
+}
+
+bool Player::HasFirstReport()
+{
+     QueryResult result = CharacterDatabase.PQuery("SELECT * FROM cheat_first_report WHERE guid = %u",GetGUIDLow());
+
+    if (result)
+        return true;
+    else 
+        return false;
+}
+
+void Player::CleanTempCheatReports()
+{
+    for (uint8 uiI = 0; uiI < 2; uiI++)
+    {
+         
+        if (uiI == 0)
+		{
+            // QueryResult result = CharacterDatabase.PQuery( "DELETE FROM cheat_first_report WHERE guid = %u",GetGUIDLow());
+		}
+        else 
+            QueryResult result = CharacterDatabase.PQuery("DELETE FROM cheat_temp_reports WHERE guid = %u",GetGUIDLow()); 
+		
+    }
+}
+
+void Player::ElaborateCheatReport(Player* pPlayer, uint8 uiCheatType)
+{
+    if (!pPlayer)
+        return;
+
+    // cheatType 1 == SpeedHack
+    // cheatType 2 == FlyHack
+	// cheatType 3 == WalkOnWaterHack
+
+    std::string strReportType;
+
+
+    switch(uiCheatType)
+    {
+    case 1:
+        strReportType = "Speed-Hack";
+        break;
+    case 2:
+        strReportType = "Fly-Hack"; 
+	case 3:
+		strReportType = "WalkOnWater-Hack";
+        break;
+    default:
+        strReportType = "";
+        break;
+    }
+	
+	std::string name = pPlayer->GetName();
+    //CharacterDatabase.c_str(name);
+	  
+    if (!HasFirstReport())
+    {
+		CharacterDatabase.PExecute("INSERT INTO cheat_first_report (`guid`,`name`,`latency`,`time`) VALUES (%u,'%s',%u,NOW())",
+			pPlayer->GetGUIDLow(),
+			name.c_str(),
+			pPlayer->GetSession()->GetLatency());
+		ChatHandler(pPlayer->GetSession()).PSendSysMessage("You have been cought cheating and was reported , The Punishment for This offence is a lifetime ip and account and similer accounts ban , you will be punished automaticly if you continue.");
+    }
+    
+    for (uint8 uiI = 0; uiI < 2; uiI++)
+    {
+        if (uiI == 0)
+		{
+           CharacterDatabase.PExecute("INSERT INTO cheat_reports (`guid`,`name`,`latency`,`mapid`,`position_x`,`position_y`,`position_z`,`report`,`time`) VALUES (%u,'%s',%u,%u,%f,%f,%f,'%s',NOW())",
+			pPlayer->GetGUIDLow(),
+			name.c_str(),
+			pPlayer->GetSession()->GetLatency(),
+			pPlayer->GetMapId(),
+			pPlayer->GetPositionX(),
+			pPlayer->GetPositionY(),
+			pPlayer->GetPositionZ(),
+			strReportType.c_str());
+
+		     uint32 charcount = 0;
+			// check character count
+			QueryResult count = CharacterDatabase.PQuery("SELECT COUNT(*) FROM cheat_reports WHERE guid = '%d'", pPlayer->GetGUIDLow());
+			 if (count)
+			 {
+				Field *fields=count->Fetch();
+				charcount = fields[0].GetUInt32();
+			 }
+
+			 // If Its Speed Hacking
+			if(uiCheatType == 1)
+			{
+				if(charcount >= 2 && charcount << 4)
+					{
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("You have continued to cheat and you will be killed , if you still continue to cheat you will be automaticly banned , be careful !");
+					}
+				if(charcount >= 4 && charcount << 6)
+					{
+						if(pPlayer->isDead())
+						{
+						pPlayer->GetSession()->KickPlayer();
+						}else
+						{
+						pPlayer->Kill(pPlayer,true);
+						}
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Next Time Its More then that  !");
+					}	
+				if(charcount >= 6 && charcount << 8)
+					{
+						pPlayer->GetSession()->KickPlayer();
+					}
+				if(charcount >= 8 && charcount << 10)
+					{
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Why Do You Continue to cheat , do you think you will get better at the game , get items using cheats , this is the third time you are warned , one more time and you will be banned for life automaticly ! ");
+					}
+				if(charcount >= 10 && charcount << 12)
+					{
+						pPlayer->GetSession()->KickPlayer();
+						LoginDatabase.PExecute("INSERT INTO account_banned VALUES ('%u', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), 'Anti-Cheat System', '%s', '1')",
+						pPlayer->GetSession()->GetAccountId(),
+						strReportType.c_str());
+					}
+				if(charcount >= 12 && charcount << 14)
+					{
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("It seems you just do not understand how this works ,  more cheating will result in an IP Ban , Now Stop it you Idoit ! ");
+					}
+				if(charcount >= 16)
+					{
+						pPlayer->GetSession()->KickPlayer();
+						LoginDatabase.PExecute("INSERT INTO ip_banned VALUES ('%s',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),'Anti-Cheat System','%s')",
+						pPlayer->GetSession()->GetPlayerName(),
+						strReportType.c_str());
+					}
+				}
+			// if its Fly hacking
+			if(uiCheatType == 2 || 3)
+			{
+				if(charcount >= 4 && charcount << 6)
+					{
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("You have continued to cheat and you will be killed , if you still continue to cheat you will be automaticly banned , be careful !");
+					}
+				if(charcount >= 8 && charcount << 10)
+					{
+						if(pPlayer->isDead())
+						{
+						pPlayer->GetSession()->KickPlayer();
+						}else
+						{
+						pPlayer->Kill(pPlayer,true);
+						}
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Next Time Its More then that  !");
+					}	
+				if(charcount >= 10 && charcount << 14)
+					{
+						pPlayer->GetSession()->KickPlayer();
+					}
+				if(charcount >= 16 && charcount << 18)
+					{
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Why Do You Continue to cheat , do you think you will get better at the game , get items using cheats , this is the third time you are warned , one more time and you will be banned for life automaticly ! ");
+					}
+				if(charcount >= 20 && charcount << 24)
+					{
+						pPlayer->GetSession()->KickPlayer();
+						LoginDatabase.PExecute("INSERT INTO account_banned VALUES ('%u', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), 'Anti-Cheat System', '%s', '1')",
+						pPlayer->GetSession()->GetAccountId(),
+						strReportType.c_str());
+					}
+				if(charcount >= 26 && charcount << 28)
+					{
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("It seems you just do not understand how this works ,  more cheating will result in an IP Ban , Now Stop it you Idoit ! ");
+					}
+				if(charcount >= 30)
+					{
+						pPlayer->GetSession()->KickPlayer();
+						LoginDatabase.PExecute("INSERT INTO ip_banned VALUES ('%s',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),'Anti-Cheat System','%s')",
+						pPlayer->GetSession()->GetPlayerName(),
+						strReportType.c_str());
+					}
+				}
+		}
+        else 
+		{
+           CharacterDatabase.PExecute("INSERT INTO cheat_temp_reports (`guid`,`name`,`mapid`,`position_x`,`position_y`,`position_z`,`report`,`time`) VALUES (%u,'%s',%u,%f,%f,%f,'%s',NOW())",
+			pPlayer->GetGUIDLow(),
+			name.c_str(),
+			pPlayer->GetMapId(),
+			pPlayer->GetPositionX(),
+			pPlayer->GetPositionY(),
+			pPlayer->GetPositionZ(),
+			strReportType.c_str());
+				// End of Else
+			}
+		// End of For
+		}
+
+	// End of Void
 }
 
 void Player::CleanupsBeforeDelete(bool finalCleanup)
@@ -22923,6 +23123,21 @@ void Player::UpdateHomebindTime(uint32 time)
         GetSession()->SendPacket(&data);
         sLog->outDebug(LOG_FILTER_MAPS, "PLAYER: Player '%s' (GUID: %u) will be teleported to homebind in 60 seconds", GetName().c_str(), GetGUIDLow());
     }
+}
+
+bool Player::CanFlyAnticheat(MovementInfo& pMovementInfo)
+{
+    if (IsUnderWater())
+        return false;
+
+    if (HasAuraType(SPELL_AURA_FLY) || HasAuraType(SPELL_AURA_WATER_WALK) || HasAuraType(SPELL_AURA_MOD_INCREASE_MOUNTED_FLIGHT_SPEED) || HasAuraType(SPELL_AURA_MOD_INCREASE_FLIGHT_SPEED))
+        return false;
+
+    if (Creature* pCreature = GetVehicleCreatureBase())
+        if (pCreature->GetCreatureTemplate()->InhabitType & INHABIT_AIR)
+            return false;
+  
+    return true;
 }
 
 void Player::UpdatePvPState(bool onlyFFA)

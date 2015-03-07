@@ -196,7 +196,7 @@ void AnticheatMgr::SpeedHackDetection(Player* player,MovementInfo movementInfo)
         moveType = MOVE_WALK;
     else
         moveType = MOVE_RUN;
-
+	
     // how many yards the player can do in one sec.
     uint32 speedRate = (uint32)(player->GetSpeed(UnitMoveType(moveType)) + movementInfo.j_xyspeed);
 

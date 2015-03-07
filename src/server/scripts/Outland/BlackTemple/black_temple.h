@@ -32,7 +32,7 @@ enum DataTypes
     DATA_GURTOGG_BLOODBOIL          = 4,
     DATA_RELIQUARY_OF_SOULS         = 5,
     DATA_MOTHER_SHAHRAZ             = 6,
-    DATA_ILLIDARI_COUNCIL           = 7,
+    //DATA_ILLIDARI_COUNCIL           = 7,
     DATA_ILLIDAN_STORMRAGE          = 8,
 
     // Additional Data
@@ -62,8 +62,8 @@ enum CreatureIds
     NPC_HIGH_NETHERMANCER_ZEREVOR   = 22950,
     NPC_LADY_MALANDE                = 22951,
     NPC_VERAS_DARKSHADOW            = 22952,
-    NPC_ILLIDARI_COUNCIL            = 23426,
-    NPC_BLOOD_ELF_COUNCIL_VOICE     = 23499,
+    //NPC_ILLIDARI_COUNCIL            = 23426,
+    //NPC_BLOOD_ELF_COUNCIL_VOICE     = 23499,
 
     NPC_ILLIDAN_STORMRAGE           = 22917
 };

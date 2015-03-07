@@ -582,7 +582,7 @@ public:
                     {
                         if (doCast(target, REGROWTH))
                         {
-                            GC_Timer = 300;
+                            GC_Timer = 1300;
                             return true;
                         }
                     }
@@ -620,7 +620,7 @@ public:
                 (hp < 70 || GetLostHP(target) > 3000) && Regrowth_Timer <= diff && GC_Timer <= diff))
             {
                 if (doCast(target, REGROWTH))
-                { Regrowth_Timer = 2000; return true; }
+                { Regrowth_Timer = 12000; return true; }
             }
             if (hp > 25 && (hp < 90 || GetLostHP(target) > 2000 || tanking) && GC_Timer <= diff &&
                 !HasAuraName(target, REJUVENATION, me->GetGUID()))
@@ -630,7 +630,7 @@ public:
                     if (!target->getAttackers().empty() && (hp < 75 || GetLostHP(target) > 4000))
                         if (SWIFTMEND && Swiftmend_Timer <= diff && doCast(target, SWIFTMEND))
                             Swiftmend_Timer = 10000;
-                    GC_Timer = 500;
+                    GC_Timer = 1500;
                     return true;
                 }
             }
@@ -646,7 +646,7 @@ public:
             if (hp > 30 && (hp < 70 || GetLostHP(target) > 3000) && Heal_Timer <= diff &&
                 doCast(target, HEALING_TOUCH))
             {
-                Heal_Timer = 3000;
+                Heal_Timer = 13000;
                 return true;
             }
             return false;
@@ -933,9 +933,9 @@ public:
         void Reset()
         {
             Heal_Timer = 0;
-            Regrowth_Timer = 0;
+            Regrowth_Timer = 500;
             Swiftmend_Timer = 0;
-            Wild_Growth_Timer = 0;
+            Wild_Growth_Timer = 600;
             Tranquility_Timer = 10000;
             Nature_Swiftness_Timer = 15000;
             Rebirth_Timer = 10000;

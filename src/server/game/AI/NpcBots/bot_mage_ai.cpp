@@ -129,8 +129,8 @@ public:
             if (GC_Timer > diff || Rand() > 20) return false;
             if (me->isInCombat() && !master->GetMap()->IsRaid()) return false;
             if (me->GetExactDist(target) > 30) return false;
-            if (ARCANEINTELLECT && target->getPowerType() == POWER_MANA && !HasAuraName(target, ARCANEINTELLECT) &&
-                doCast(target, ARCANEINTELLECT))
+            //if (ARCANEINTELLECT && target->getPowerType() == POWER_MANA && !HasAuraName(target, ARCANEINTELLECT) &&
+                //doCast(target, ARCANEINTELLECT))
                 return true;
 
             return false;
@@ -758,7 +758,7 @@ public:
         {
             uint8 lvl = me->getLevel();
             DAMPENMAGIC                             = InitSpell(me, DAMPENMAGIC_1);
-            ARCANEINTELLECT                         = InitSpell(me, ARCANEINTELLECT_1);
+            //ARCANEINTELLECT                         = InitSpell(me, ARCANEINTELLECT_1);
             ARCANEMISSILES                          = InitSpell(me, ARCANEMISSILES_1);
             POLYMORPH                               = InitSpell(me, POLYMORPH_1);
             COUNTERSPELL                            = InitSpell(me, COUNTERSPELL_1);
@@ -887,7 +887,7 @@ public:
 
     private:
         uint32
-  /*Arcane*/DAMPENMAGIC, ARCANEINTELLECT, ARCANEMISSILES, POLYMORPH, COUNTERSPELL, FOCUSMAGIC,
+  /*Arcane*/DAMPENMAGIC, /*ARCANEINTELLECT,*/ ARCANEMISSILES, POLYMORPH, COUNTERSPELL, FOCUSMAGIC,
   /*Arcane*/SPELLSTEAL, EVOCATION, BLINK, REMOVE_CURSE, /*INVISIBILITY,*/
     /*Fire*/FIREBALL, FIREBLAST, FLAMESTRIKE, PYROBLAST, COMBUSTION, BLASTWAVE, DRAGONBREATH, LIVINGBOMB,
    /*Frost*/FROSTBOLT, FROSTNOVA, CONEOFCOLD, BLIZZARD, ICEARMOR, ICEBLOCK, ICE_BARRIER, FROSTBITE;
@@ -904,7 +904,7 @@ public:
         enum MageBaseSpells// all orignals
         {
             DAMPENMAGIC_1                       = 604,
-            ARCANEINTELLECT_1                   = 1459,
+            //ARCANEINTELLECT_1                   = 1459,
             ARCANEMISSILES_1                    = 5143,
             POLYMORPH_1                         = 118,
             COUNTERSPELL_1                      = 2139,

@@ -7,8 +7,8 @@ using namespace std;
 		
 	/*Basic Menu*/
 #define Menu_Whisp "THE SATRIA Top Class killers"
-#define Notification "THE SATRIA/NOTIFICATION"
-#define M_Whisper "THE SATRIA/NOTIFICATION"
+#define Notification "Choose what Class you want see who in there is top killer!!"
+#define M_Whisper "Choose what Class you want see who in there is top killer!!"
 #define leave "Nevermind"
     /*Class E_Menu*/
 #define E_Warrior "View top 5 Warrior Killers"

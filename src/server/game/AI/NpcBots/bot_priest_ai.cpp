@@ -407,7 +407,7 @@ public:
                 !target->HasAura(RENEW, me->GetGUID()) &&
                 doCast(target, RENEW))
             {
-                GC_Timer = 800;
+                GC_Timer = 2800;
                 return true;
             }
 

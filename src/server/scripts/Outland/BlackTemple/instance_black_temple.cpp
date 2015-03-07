@@ -30,8 +30,8 @@ DoorData const doorData[] =
     { GO_GURTOGG_DOOR,          DATA_GURTOGG_BLOODBOIL,     DOOR_TYPE_PASSAGE,  BOUNDARY_NONE },
     { GO_TEMPLE_DOOR,           DATA_RELIQUARY_OF_SOULS,    DOOR_TYPE_PASSAGE,  BOUNDARY_NONE },
     { GO_MOTHER_SHAHRAZ_DOOR,   DATA_MOTHER_SHAHRAZ,        DOOR_TYPE_PASSAGE,  BOUNDARY_NONE },
-    { GO_COUNCIL_DOOR_1,        DATA_ILLIDARI_COUNCIL,      DOOR_TYPE_ROOM,     BOUNDARY_NONE },
-    { GO_COUNCIL_DOOR_2,        DATA_ILLIDARI_COUNCIL,      DOOR_TYPE_ROOM,     BOUNDARY_NONE },
+    //{ GO_COUNCIL_DOOR_1,        DATA_ILLIDARI_COUNCIL,      DOOR_TYPE_ROOM,     BOUNDARY_NONE },
+    //{ GO_COUNCIL_DOOR_2,        DATA_ILLIDARI_COUNCIL,      DOOR_TYPE_ROOM,     BOUNDARY_NONE },
     { 0,                        0,                          DOOR_TYPE_ROOM,     BOUNDARY_NONE } // END
 };
 
@@ -96,12 +96,12 @@ class instance_black_temple : public InstanceMapScript
                     case NPC_VERAS_DARKSHADOW:
                         VerasDarkshadowGUID = creature->GetGUID();
                         break;
-                    case NPC_ILLIDARI_COUNCIL:
-                        IllidariCouncilGUID = creature->GetGUID();
-                        break;
-                    case NPC_BLOOD_ELF_COUNCIL_VOICE:
-                        BloodElfCouncilVoiceGUID = creature->GetGUID();
-                        break;
+                    //case NPC_ILLIDARI_COUNCIL:
+                        //IllidariCouncilGUID = creature->GetGUID();
+                        //break;
+                    //case NPC_BLOOD_ELF_COUNCIL_VOICE:
+                        //BloodElfCouncilVoiceGUID = creature->GetGUID();
+                        //break;
                     case NPC_ILLIDAN_STORMRAGE:
                         IllidanStormrageGUID = creature->GetGUID();
                         break;
@@ -183,10 +183,10 @@ class instance_black_temple : public InstanceMapScript
                         return LadyMalandeGUID;
                     case DATA_VERAS_DARKSHADOW:
                         return VerasDarkshadowGUID;
-                    case DATA_ILLIDARI_COUNCIL:
-                        return IllidariCouncilGUID;
-                    case DATA_BLOOD_ELF_COUNCIL_VOICE:
-                        return BloodElfCouncilVoiceGUID;
+                    //case DATA_ILLIDARI_COUNCIL:
+                        //return IllidariCouncilGUID;
+                    //case DATA_BLOOD_ELF_COUNCIL_VOICE:
+                        //return BloodElfCouncilVoiceGUID;
                     case DATA_ILLIDAN_STORMRAGE:
                         return IllidanStormrageGUID;
                     case DATA_GO_ILLIDAN_GATE:
