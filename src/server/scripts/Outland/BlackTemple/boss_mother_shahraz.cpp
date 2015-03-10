@@ -111,7 +111,7 @@ public:
 
         bool Enraged;
 
-        void Reset()override
+        void Reset() override
         {
             if (instance)
                 instance->SetBossState(DATA_MOTHER_SHAHRAZ, NOT_STARTED);
@@ -134,7 +134,7 @@ public:
             Enraged = false;
         }
 
-        void EnterCombat(Unit* /*who*/)override
+        void EnterCombat(Unit* /*who*/) override
         {
             if (instance)
                 instance->SetBossState(DATA_MOTHER_SHAHRAZ, IN_PROGRESS);
@@ -143,12 +143,12 @@ public:
             Talk(SAY_AGGRO);
         }
 
-        void KilledUnit(Unit* /*victim*/)override
+        void KilledUnit(Unit* /*victim*/) override
         {
             Talk(SAY_SLAY);
         }
 
-        void JustDied(Unit* /*killer*/)override
+        void JustDied(Unit* /*killer*/) override
         {
             if (instance)
                 instance->SetBossState(DATA_MOTHER_SHAHRAZ, DONE);
@@ -174,7 +174,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)override
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;

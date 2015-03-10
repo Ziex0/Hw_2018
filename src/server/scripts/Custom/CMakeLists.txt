@@ -64,7 +64,7 @@ set(scripts_STAT_SRCS
   Custom/Add_gurubashi.cpp
   Custom/Add_Reforging.cpp
   Custom/Add_Abuse.cpp
-  
+  Custom/Add_Glyph.cpp
   Custom/VIP/vip_commands.cpp
   Custom/VIP/vip_do_com.cpp
   Custom/VIP/vip_only_area.cpp

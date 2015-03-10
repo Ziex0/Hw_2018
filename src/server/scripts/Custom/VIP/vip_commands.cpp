@@ -45,6 +45,7 @@ public:
 			{ "tele",           	 SEC_VIP,  false, &HandleTeleCommand,         		"", NULL },
 			{ "scale",        		 SEC_VIP,  false, &HandleScaleCommand,           	"", NULL },
 			{ "repair",        		 SEC_VIP,  false, &HandleVIPrepairCommand,           	"", NULL },
+			{ "heal", 				 SEC_VIP,  false, &HandleHealCommand, 				"", NULL },
 			
             { NULL,             0,             false, NULL,                         	"", NULL }
         };
@@ -68,7 +69,43 @@ public:
             return true;
     }
 	
-	
+	static bool HandleHealCommand(ChatHandler * handler, char const* args)
+{
+                Player* plr = handler->GetSession()->GetPlayer();
+                 
+                if (plr->isInCombat())
+                {plr->GetSession()->SendNotification("You're in combat!");      
+                                return true;
+                }
+                  
+                if (plr->InBattleground())
+                {plr->GetSession()->SendNotification("You're in a Battleground!");
+                                return true;
+                }
+                 
+                if (plr->InArena())
+                {plr->GetSession()->SendNotification("You're in a Arena!");
+                                return true;
+                }
+                                
+                if (plr->isDead())
+                {plr->GetSession()->SendNotification("You're dead and not allowed to use this command");
+                                return true;
+                }
+                                
+               
+                if (plr->getClass() == CLASS_MAGE || plr->getClass() == CLASS_PRIEST || plr->getClass() == CLASS_WARLOCK)
+                {
+                                plr->SetPower(POWER_MANA, plr->GetMaxPower(POWER_MANA));
+                                plr->SetHealth(plr->GetMaxHealth());
+                                plr->GetSession()->SendNotification("Your health and mana has been restored!");
+                                return true;
+                }
+                                plr->SetHealth(plr->GetMaxHealth());
+                                plr->GetSession()->SendNotification("Your health has been restored!");
+                                return true;
+        
+}
 	
 	static bool HandleVIPMorphCommand(ChatHandler* handler, const char* args)
     {

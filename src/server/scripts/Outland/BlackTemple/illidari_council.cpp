@@ -161,10 +161,10 @@ public:
         {
             if (InstanceScript* instance = me->GetInstanceScript())
             {
-                Council[0] = instance->GetData64(DATA_GATHIOS_THE_SHATTERER);
-                Council[1] = instance->GetData64(DATA_VERAS_DARKSHADOW);
-                Council[2] = instance->GetData64(DATA_LADY_MALANDE);
-                Council[3] = instance->GetData64(DATA_HIGH_NETHERMANCER_ZEREVOR);
+                Council[0] = instance->GetData(DATA_GATHIOS_THE_SHATTERER);
+                Council[1] = instance->GetData(DATA_VERAS_DARKSHADOW);
+                Council[2] = instance->GetData(DATA_LADY_MALANDE);
+                Council[3] = instance->GetData(DATA_HIGH_NETHERMANCER_ZEREVOR);
             } else sLog->outError(LOG_FILTER_TSCR, ERROR_INST_DATA);
         }
 
@@ -272,8 +272,8 @@ public:
                 pMember->AI()->EnterEvadeMode();
             }
 
-            //instance->SetBossState(DATA_ILLIDARI_COUNCIL, NOT_STARTED);
-            if (Creature* VoiceTrigger = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_BLOOD_ELF_COUNCIL_VOICE)))
+            instance->SetBossState(DATA_ILLIDARI_COUNCIL, NOT_STARTED);
+            if (Creature* VoiceTrigger = ObjectAccessor::GetCreature(*me, instance->GetData(DATA_BLOOD_ELF_COUNCIL_VOICE)))
                 VoiceTrigger->AI()->EnterEvadeMode();
 
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
@@ -290,13 +290,13 @@ public:
         {
             if (target && target->IsAlive())
             {
-                Council[0] = instance->GetData64(DATA_GATHIOS_THE_SHATTERER);
-                Council[1] = instance->GetData64(DATA_HIGH_NETHERMANCER_ZEREVOR);
-                Council[2] = instance->GetData64(DATA_LADY_MALANDE);
-                Council[3] = instance->GetData64(DATA_VERAS_DARKSHADOW);
+                Council[0] = instance->GetData(DATA_GATHIOS_THE_SHATTERER);
+                Council[1] = instance->GetData(DATA_HIGH_NETHERMANCER_ZEREVOR);
+                Council[2] = instance->GetData(DATA_LADY_MALANDE);
+                Council[3] = instance->GetData(DATA_VERAS_DARKSHADOW);
 
                 // Start the event for the Voice Trigger
-                if (Creature* VoiceTrigger = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_BLOOD_ELF_COUNCIL_VOICE)))
+                if (Creature* VoiceTrigger = ObjectAccessor::GetCreature(*me, instance->GetData(DATA_BLOOD_ELF_COUNCIL_VOICE)))
                 {
                     CAST_AI(npc_blood_elf_council_voice_trigger::npc_blood_elf_council_voice_triggerAI, VoiceTrigger->AI())->LoadCouncilGUIDs();
                     CAST_AI(npc_blood_elf_council_voice_trigger::npc_blood_elf_council_voice_triggerAI, VoiceTrigger->AI())->EventStarted = true;
@@ -304,7 +304,7 @@ public:
 
                 for (uint8 i = 0; i < 4; ++i)
                 {
-                    if (Council[i])
+                    if (!Council[i])
                     {
                         if (Creature* member = ObjectAccessor::GetCreature(*me, Council[i]))
                             if (member->IsAlive())
@@ -312,7 +312,7 @@ public:
                     }
                 }
 
-                //instance->SetBossState(DATA_ILLIDARI_COUNCIL, IN_PROGRESS);
+                instance->SetBossState(DATA_ILLIDARI_COUNCIL, IN_PROGRESS);
 
                 EventBegun = true;
             }
@@ -329,9 +329,9 @@ public:
                 {
                     if (DeathCount > 3)
                     {
-                        if (Creature* VoiceTrigger = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_BLOOD_ELF_COUNCIL_VOICE)))
+                        if (Creature* VoiceTrigger = ObjectAccessor::GetCreature(*me, instance->GetData(DATA_BLOOD_ELF_COUNCIL_VOICE)))
                             VoiceTrigger->DealDamage(VoiceTrigger, VoiceTrigger->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
-                       // instance->SetBossState(DATA_ILLIDARI_COUNCIL, DONE);
+                        instance->SetBossState(DATA_ILLIDARI_COUNCIL, DONE);
                         //me->SummonCreature(AKAMAID, 746.466980f, 304.394989f, 311.90208f, 6.272870f, TEMPSUMMON_DEAD_DESPAWN, 0);
                         me->DealDamage(me, me->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
                         return;
@@ -397,8 +397,8 @@ struct boss_illidari_councilAI : public ScriptedAI
 
     void EnterCombat(Unit* who) override
     {
-        //if (Creature* controller = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_ILLIDARI_COUNCIL)))
-            //CAST_AI(npc_illidari_council::npc_illidari_councilAI, controller->AI())->StartEvent(who);
+        if (Creature* controller = ObjectAccessor::GetCreature(*me, instance->GetData(DATA_ILLIDARI_COUNCIL)))
+            CAST_AI(npc_illidari_council::npc_illidari_councilAI, controller->AI())->StartEvent(who);
         DoZoneInCombat();
         // Load GUIDs on first aggro because the Creature guids are only set as the creatures are created in world-
         // this means that for each creature, it will attempt to LoadGUIDs even though some of the other creatures are
@@ -441,10 +441,10 @@ struct boss_illidari_councilAI : public ScriptedAI
 
     void LoadGUIDs()
     {
-        Council[0] = instance->GetData64(DATA_LADY_MALANDE);
-        Council[1] = instance->GetData64(DATA_HIGH_NETHERMANCER_ZEREVOR);
-        Council[2] = instance->GetData64(DATA_GATHIOS_THE_SHATTERER);
-        Council[3] = instance->GetData64(DATA_VERAS_DARKSHADOW);
+        Council[0] = instance->GetData(DATA_LADY_MALANDE);
+        Council[1] = instance->GetData(DATA_HIGH_NETHERMANCER_ZEREVOR);
+        Council[2] = instance->GetData(DATA_GATHIOS_THE_SHATTERER);
+        Council[3] = instance->GetData(DATA_VERAS_DARKSHADOW);
 
         LoadedGUIDs = true;
     }

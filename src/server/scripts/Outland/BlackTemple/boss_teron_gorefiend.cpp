@@ -63,22 +63,22 @@ public:
 
     struct npc_doom_blossomAI : public ScriptedAI
     {
-        npc_doom_blossomAI(Creature* creature) : ScriptedAI(creature) { }
+        npc_doom_blossomAI(Creature* creature) : ScriptedAI(creature) {}
 
         uint32 CheckTeronTimer;
         uint32 ShadowBoltTimer;
         uint64 TeronGUID;
 
-        void Reset()override
+        void Reset() override
         {
             CheckTeronTimer = 5000;
             ShadowBoltTimer = 12000;
             TeronGUID = 0;
         }
 
-        void EnterCombat(Unit* /*who*/)override { }
-        void AttackStart(Unit* /*who*/)override { }
-        void MoveInLineOfSight(Unit* /*who*/)override { }
+        void EnterCombat(Unit* /*who*/) override {}
+        void AttackStart(Unit* /*who*/) override {}
+        void MoveInLineOfSight(Unit* /*who*/) override {}
 
 
         void Despawn()
@@ -87,7 +87,7 @@ public:
             me->RemoveCorpse();
         }
 
-        void UpdateAI(uint32 diff)override
+        void UpdateAI(uint32 diff) override
         {
             if (CheckTeronTimer <= diff)
             {
@@ -132,7 +132,7 @@ public:
 
     struct npc_shadowy_constructAI : public ScriptedAI
     {
-        npc_shadowy_constructAI(Creature* creature) : ScriptedAI(creature) { }
+        npc_shadowy_constructAI(Creature* creature) : ScriptedAI(creature) {}
 
         uint64 GhostGUID;
         uint64 TeronGUID;
@@ -140,7 +140,7 @@ public:
         uint32 CheckPlayerTimer;
         uint32 CheckTeronTimer;
 
-        void Reset()override
+        void Reset() override
         {
             GhostGUID = 0;
             TeronGUID = 0;
@@ -149,9 +149,9 @@ public:
             CheckTeronTimer = 5000;
         }
 
-        void EnterCombat(Unit* /*who*/)override { }
+        void EnterCombat(Unit* /*who*/) override {}
 
-        void MoveInLineOfSight(Unit* who)override
+        void MoveInLineOfSight(Unit* who) override
 
         {
             if (!who || (!who->IsAlive()) || (who->GetGUID() == GhostGUID))
@@ -161,7 +161,7 @@ public:
         }
 
     /* Comment it out for now. NOTE TO FUTURE DEV: UNCOMMENT THIS OUT ONLY AFTER MIND CONTROL IS IMPLEMENTED
-        void DamageTaken(Unit* done_by, uint32 &damage)override
+        void DamageTaken(Unit* done_by, uint32 &damage) override
         {
             if (done_by->GetGUID() != GhostGUID)
             damage = 0;                                         // Only the ghost can deal damage.
@@ -190,7 +190,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)override
+        void UpdateAI(uint32 diff) override
         {
             if (CheckPlayerTimer <= diff)
             {
@@ -244,7 +244,7 @@ public:
         bool Intro;
         bool Done;
 
-        void Reset()override
+        void Reset() override
         {
             if (instance)
                 instance->SetBossState(DATA_TERON_GOREFIEND, NOT_STARTED);
@@ -266,9 +266,9 @@ public:
             Done = false;
         }
 
-        void EnterCombat(Unit* /*who*/)override { }
+        void EnterCombat(Unit* /*who*/) override {}
 
-        void MoveInLineOfSight(Unit* who)override
+        void MoveInLineOfSight(Unit* who) override
 
         {
             if (!Intro && who->GetTypeId() == TYPEID_PLAYER && me->canCreatureAttack(who))
@@ -290,12 +290,12 @@ public:
                 ScriptedAI::MoveInLineOfSight(who);
         }
 
-        void KilledUnit(Unit* /*victim*/)override
+        void KilledUnit(Unit* /*victim*/) override
         {
             Talk(SAY_SLAY);
         }
 
-        void JustDied(Unit* /*killer*/)override
+        void JustDied(Unit* /*killer*/) override
         {
             if (instance)
                 instance->SetBossState(DATA_TERON_GOREFIEND, DONE);
@@ -381,7 +381,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)override
+        void UpdateAI(uint32 diff) override
         {
             if (Intro && !Done)
             {

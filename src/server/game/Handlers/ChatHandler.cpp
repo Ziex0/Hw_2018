@@ -176,7 +176,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
         return;
     }
 
-    std::string to, channel, msg;
+    std::string to, channel, msg, color;
     bool ignoreChecks = false;
     switch (type)
     {
@@ -247,12 +247,71 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
                 SendNotification(GetTrinityString(LANG_SAY_REQ), sWorld->getIntConfig(CONFIG_CHAT_SAY_LEVEL_REQ));
                 return;
             }
+			
 			if (type == CHAT_MSG_SAY)
-				sender->Say(msg, lang);
+		{
+                switch (sender->GetSession()->GetSecurity())
+            {	
+				
+                case SEC_PLAYER:
+                    color = "|cffFFFFFF";
+                    break;
+				
+				case SEC_VIP:
+                    color =  "|cffB6FF00";
+                    break;
+
+                case SEC_MODERATOR:
+				case SEC_GAMEMASTER:
+				case SEC_HEAD_GM:
+				if (GetPlayer()->isGameMaster()==TRUE)
+					{				
+                    color =  "|cff0094FF";
+					}
+					{
+					if (GetPlayer()->isGameMaster()==FALSE)
+					color = "|cffFFFFFF";
+					}
+                    break;
+
+                case SEC_DEV:
+				case SEC_HEAD_DEV:
+				if (GetPlayer()->isGameMaster()==TRUE)
+					{				
+                    color =  "|cffB200FF";
+					if (GetPlayer()->isGameMaster()==FALSE)
+					color = "|cffFFFFFF";
+					}
+                    break;
+
+                case SEC_ADMINISTRATOR:
+				case SEC_HEAD_ADMIN:
+				if (GetPlayer()->isGameMaster()==TRUE)
+					{
+                    color =  "|cffFF006E";
+					if (GetPlayer()->isGameMaster()==FALSE)
+					color = "|cffFFFFFF";
+					}
+                    break;
+				
+				case SEC_CO:
+				case SEC_OWNER:
+				if (GetPlayer()->isGameMaster()==TRUE)
+					{
+                    color =  "|cffFF0000";
+					if (GetPlayer()->isGameMaster()==FALSE)
+					color = "|cffFFFFFF";
+					}
+                    break;				
+				
+            }
+			sender->Say(color + msg, Language(lang));
+        }
+		
 			else if (type == CHAT_MSG_EMOTE)
                 sender->TextEmote(msg);
             else if (type == CHAT_MSG_YELL)
-                sender->Yell(msg, lang);
+                sender->Yell(msg, Language(lang));
 		} break;
         case CHAT_MSG_WHISPER:
         {
@@ -265,16 +324,17 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
             Player* receiver = sObjectAccessor->FindPlayerByName(to);
             if (!receiver || (!receiver->isAcceptWhispers() && receiver->GetSession()->HasPermission(RBAC_PERM_CAN_FILTER_WHISPERS) && !receiver->IsInWhisperWhiteList(sender->GetGUID())))
             {
-                // If Fake WHO List system on then show player DND
-                if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
-                {
-                    ChatHandler(sender->GetSession()).PSendSysMessage(LANG_FAKE_NOT_DISTURB);
-                }
-                else
-                {
-                    SendPlayerNotFoundNotice(to);
-                }
+			// If Fake WHO List system on then show player DND 
+                if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST)) 
+                { 
+                    sWorld->SendWorldText(LANG_FAKE_NOT_DISTURB); 
+                    return; 
+                } 
+                else 
+                { 
+                SendPlayerNotFoundNotice(to);
                 return;
+				}
             }
             if (!sender->isGameMaster() && sender->getLevel() < sWorld->getIntConfig(CONFIG_CHAT_WHISPER_LEVEL_REQ) && !receiver->IsInWhisperWhiteList(sender->GetGUID()))
             {
@@ -282,7 +342,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
                 return;
             }
 
-            if (GetPlayer()->GetTeam() != receiver->GetTeam() && !receiver->IsInWhisperWhiteList(sender->GetGUID()))
+            if (GetPlayer()->GetTeam() != receiver->GetTeam() && !HasPermission(RBAC_PERM_TWO_SIDE_INTERACTION_CHAT) && !receiver->IsInWhisperWhiteList(sender->GetGUID()))
             {
                 SendWrongFactionNotice();
                 return;
@@ -296,7 +356,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 
             // If player is a Gamemaster and doesn't accept whisper, we auto-whitelist every player that the Gamemaster is talking to
             // We also do that if a player is under the required level for whispers.
-            if (receiver->getLevel() < sWorld->getIntConfig(CONFIG_CHAT_WHISPER_LEVEL_REQ) || 
+            if (receiver->getLevel() < sWorld->getIntConfig(CONFIG_CHAT_WHISPER_LEVEL_REQ) ||
                 (HasPermission(RBAC_PERM_CAN_FILTER_WHISPERS) && !sender->isAcceptWhispers() && !sender->IsInWhisperWhiteList(receiver->GetGUID())))
                 sender->AddWhisperWhiteList(receiver->GetGUID());
 

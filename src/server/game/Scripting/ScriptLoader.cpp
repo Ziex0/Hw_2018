@@ -1376,6 +1376,7 @@ void AddBattlegroundScripts()
 	//advanced
 	void AddSC_BotQuests_chapter1();
 	//end Bots
+	void AddSC_npc_glyph_template();
 
 #endif
 
@@ -1458,6 +1459,7 @@ void AddCustomScripts()
     //advanced
     AddSC_BotQuests_chapter1();
     //end Bots
+	AddSC_npc_glyph_template();
 
 #endif
 }

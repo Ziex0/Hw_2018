@@ -120,8 +120,7 @@ WorldSession::WorldSession(uint32 id, WorldSocket* sock, AccountTypes sec, bool 
     isRecruiter(isARecruiter),
     timeLastWhoCommand(0),
 	m_CurrentVendor(0),
-    _RBACData(NULL),
-	protectedPacketsCounter()
+     _RBACData(NULL)
 {
     if (sock)
     {

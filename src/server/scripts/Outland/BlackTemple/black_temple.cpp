@@ -63,9 +63,9 @@ public:
 
     struct npc_spirit_of_olumAI : public ScriptedAI
     {
-        npc_spirit_of_olumAI(Creature* creature) : ScriptedAI(creature) { }
+        npc_spirit_of_olumAI(Creature* creature) : ScriptedAI(creature) {}
 
-        void sGossipSelect(Player* player, uint32 /*sender*/, uint32 action)override
+        void sGossipSelect(Player* player, uint32 /*sender*/, uint32 action) override
         {
             if (action == 1)
             {
@@ -98,22 +98,22 @@ public:
             instance = creature->GetInstanceScript();
         }
 
-        void Reset()override
+        void Reset() override
         {
             events.ScheduleEvent(EVENT_GET_CHANNELERS, 3000);
             enteredCombat = false;
         }
 
-        void JustDied(Unit* /*killer*/)override { }
+        void JustDied(Unit* /*killer*/) override { }
 
-        void EnterCombat(Unit* /*who*/)override
+        void EnterCombat(Unit* /*who*/) override
         {
             events.ScheduleEvent(EVENT_CLEAVE, 5000);
             events.ScheduleEvent(EVENT_IGNORED, 7000);
             enteredCombat = true;
         }
 
-        void UpdateAI(uint32 diff)override
+        void UpdateAI(uint32 diff) override
         {
 
             if (!enteredCombat)

@@ -111,19 +111,19 @@ public:
 
     struct npc_enslaved_soulAI : public ScriptedAI
     {
-        npc_enslaved_soulAI(Creature* creature) : ScriptedAI(creature) { }
+        npc_enslaved_soulAI(Creature* creature) : ScriptedAI(creature) {}
 
         uint64 ReliquaryGUID;
 
-        void Reset()override { ReliquaryGUID = 0; }
+        void Reset() override { ReliquaryGUID = 0; }
 
-        void EnterCombat(Unit* /*who*/)override
+        void EnterCombat(Unit* /*who*/) override
         {
             DoCast(me, ENSLAVED_SOUL_PASSIVE, true);
             DoZoneInCombat();
         }
 
-        void JustDied(Unit* /*killer*/)override;
+        void JustDied(Unit* /*killer*/) override;
     };
 };
 
@@ -156,7 +156,7 @@ public:
         uint32 SoulCount;
         uint32 SoulDeathCount;
 
-        void Reset()override
+        void Reset() override
         {
             if (instance)
                 instance->SetBossState(DATA_RELIQUARY_OF_SOULS, NOT_STARTED);
@@ -176,7 +176,7 @@ public:
             me->RemoveAurasDueToSpell(SPELL_SUBMERGE);
         }
 
-        void MoveInLineOfSight(Unit* who)override
+        void MoveInLineOfSight(Unit* who) override
         {
             if (!who)
                 return;
@@ -193,7 +193,7 @@ public:
             AttackStartNoMove(who);
         }
 
-        void EnterCombat(Unit* who)override
+        void EnterCombat(Unit* who) override
         {
             me->AddThreat(who, 10000.0f);
             DoZoneInCombat();
@@ -241,13 +241,13 @@ public:
             }
         }
 
-        void JustDied(Unit* /*killer*/)override
+        void JustDied(Unit* /*killer*/) override
         {
             if (instance)
                 instance->SetBossState(DATA_RELIQUARY_OF_SOULS, DONE);
         }
 
-        void UpdateAI(uint32 diff)override
+        void UpdateAI(uint32 diff) override
         {
             if (!Phase)
                 return;
@@ -393,7 +393,7 @@ public:
 
     struct boss_essence_of_sufferingAI : public ScriptedAI
     {
-        boss_essence_of_sufferingAI(Creature* creature) : ScriptedAI(creature) { }
+        boss_essence_of_sufferingAI(Creature* creature) : ScriptedAI(creature) {}
 
         uint64 StatAuraGUID;
 
@@ -403,7 +403,7 @@ public:
         uint32 SoulDrainTimer;
         uint32 AuraTimer;
 
-        void Reset()override
+        void Reset() override
         {
             StatAuraGUID = 0;
 
@@ -414,7 +414,7 @@ public:
             AuraTimer = 5000;
         }
 
-        void DamageTaken(Unit* /*done_by*/, uint32 &damage)override
+        void DamageTaken(Unit* /*done_by*/, uint32 &damage) override
         {
             if (damage >= me->GetHealth())
             {
@@ -425,7 +425,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/)override
+        void EnterCombat(Unit* /*who*/) override
         {
             if (!me->HasFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE))
             {
@@ -437,7 +437,7 @@ public:
             }
         }
 
-        void KilledUnit(Unit* /*victim*/)override
+        void KilledUnit(Unit* /*victim*/) override
         {
             Talk(SUFF_SAY_SLAY);
         }
@@ -466,7 +466,7 @@ public:
             me->AddThreat(target, 1000000);
         }
 
-        void UpdateAI(uint32 diff)override
+        void UpdateAI(uint32 diff) override
         {
             if (me->isInCombat())
             {
@@ -516,13 +516,13 @@ public:
 
     struct boss_essence_of_desireAI : public ScriptedAI
     {
-        boss_essence_of_desireAI(Creature* creature) : ScriptedAI(creature) { }
+        boss_essence_of_desireAI(Creature* creature) : ScriptedAI(creature) {}
 
         uint32 RuneShieldTimer;
         uint32 DeadenTimer;
         uint32 SoulShockTimer;
 
-        void Reset()override
+        void Reset() override
         {
             RuneShieldTimer = 60000;
             DeadenTimer = 30000;
@@ -530,7 +530,7 @@ public:
             me->ApplySpellImmune(0, IMMUNITY_STATE, SPELL_AURA_MOD_CONFUSE, true);
         }
 
-        void DamageTaken(Unit* done_by, uint32 &damage)override
+        void DamageTaken(Unit* done_by, uint32 &damage) override
         {
             if (done_by == me)
                 return;
@@ -549,7 +549,7 @@ public:
             }
         }
 
-        void SpellHit(Unit* /*caster*/, const SpellInfo* spell)override
+        void SpellHit(Unit* /*caster*/, const SpellInfo* spell) override
         {
             if (me->GetCurrentSpell(CURRENT_GENERIC_SPELL))
                 for (uint8 i = 0; i < 3; ++i)
@@ -559,19 +559,19 @@ public:
                             me->InterruptSpell(CURRENT_GENERIC_SPELL, false);
         }
 
-        void EnterCombat(Unit* /*who*/)override
+        void EnterCombat(Unit* /*who*/) override
         {
             Talk(DESI_SAY_FREED);
             DoZoneInCombat();
             DoCast(me, AURA_OF_DESIRE, true);
         }
 
-        void KilledUnit(Unit* /*victim*/)override
+        void KilledUnit(Unit* /*victim*/) override
         {
             Talk(DESI_SAY_SLAY);
         }
 
-        void UpdateAI(uint32 diff)override
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;
@@ -619,7 +619,7 @@ public:
 
     struct boss_essence_of_angerAI : public ScriptedAI
     {
-        boss_essence_of_angerAI(Creature* creature) : ScriptedAI(creature) { }
+        boss_essence_of_angerAI(Creature* creature) : ScriptedAI(creature) {}
 
         uint64 AggroTargetGUID;
 
@@ -631,7 +631,7 @@ public:
 
         bool CheckedAggro;
 
-        void Reset()override
+        void Reset() override
         {
             AggroTargetGUID = 0;
 
@@ -644,7 +644,7 @@ public:
             CheckedAggro = false;
         }
 
-        void EnterCombat(Unit* /*who*/)override
+        void EnterCombat(Unit* /*who*/) override
         {
             Talk(ANGER_SAY_FREED);
 
@@ -652,17 +652,17 @@ public:
             DoCast(me, AURA_OF_ANGER, true);
         }
 
-        void JustDied(Unit* /*killer*/)override
+        void JustDied(Unit* /*killer*/) override
         {
             Talk(ANGER_SAY_DEATH);
         }
 
-        void KilledUnit(Unit* /*victim*/)override
+        void KilledUnit(Unit* /*victim*/) override
         {
             Talk(ANGER_SAY_SLAY);
         }
 
-        void UpdateAI(uint32 diff)override
+        void UpdateAI(uint32 diff) override
         {
             //Return since we have no target
             if (!UpdateVictim())

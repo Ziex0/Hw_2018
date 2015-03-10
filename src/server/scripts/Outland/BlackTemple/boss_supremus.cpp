@@ -70,9 +70,9 @@ public:
 
     struct molten_flameAI : public NullCreatureAI
     {
-        molten_flameAI(Creature* creature) : NullCreatureAI(creature) { }
+        molten_flameAI(Creature* creature) : NullCreatureAI(creature) {}
 
-        void InitializeAI()override
+        void InitializeAI() override
         {
             float x, y, z;
             me->GetNearPoint(me, x, y, z, 1, 100, float(M_PI*2*rand_norm()));
@@ -105,7 +105,7 @@ public:
         SummonList summons;
         uint32 phase;
 
-        void Reset()override
+        void Reset() override
         {
             if (instance)
             {
@@ -119,7 +119,7 @@ public:
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* /*who*/)override
+        void EnterCombat(Unit* /*who*/) override
         {
             if (instance)
                 instance->SetBossState(DATA_SUPREMUS, IN_PROGRESS);
@@ -156,7 +156,7 @@ public:
             events.ScheduleEvent(EVENT_SWITCH_PHASE, 60000, GCD_CAST);
         }
 
-        void JustDied(Unit* /*killer*/)override
+        void JustDied(Unit* /*killer*/) override
         {
             if (instance)
                 instance->SetBossState(DATA_SUPREMUS, DONE);
@@ -164,12 +164,12 @@ public:
             summons.DespawnAll();
         }
 
-        void JustSummoned(Creature* summon)override
+        void JustSummoned(Creature* summon) override
         {
             summons.Summon(summon);
         }
 
-        void SummonedCreatureDespawn(Creature* summon)override
+        void SummonedCreatureDespawn(Creature* summon) override
         {
             summons.Despawn(summon);
         }
@@ -197,7 +197,7 @@ public:
             return target;
         }
 
-        void UpdateAI(uint32 diff)override
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;
@@ -273,7 +273,7 @@ public:
             SetCombatMovement(false);
         }
 
-        void Reset()override
+        void Reset() override
         {
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
@@ -283,17 +283,17 @@ public:
         }
         uint32 wait;
 
-        void EnterCombat(Unit* /*who*/)override { }
+        void EnterCombat(Unit* /*who*/) override {}
 
-        void MoveInLineOfSight(Unit* /*who*/)override { }
+        void MoveInLineOfSight(Unit* /*who*/) override {}
 
 
-        void DoAction(int32 /*info*/)override
+        void DoAction(int32 /*info*/) override
         {
             me->RemoveAura(SPELL_VOLCANIC_ERUPTION);
         }
 
-        void UpdateAI(uint32 diff)override
+        void UpdateAI(uint32 diff) override
         {
             if (wait <= diff)//wait 3secs before casting
             {
