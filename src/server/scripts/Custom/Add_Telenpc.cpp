@@ -1502,7 +1502,7 @@ public:
 			//boss3
 			case GOSSIP_ACTION_INFO_DEF + 713:
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(0, 6899.4638f, -4586.5009f, 452.4584f, 2.370218f);  //Off Set
+				pPlayer->TeleportTo(571, 6899.4638f, -4586.5009f, 452.4584f, 2.370218f);  //Off Set
 				break;
 
 				//mall
@@ -2574,7 +2574,7 @@ case GOSSIP_ACTION_INFO_DEF + 3007:
 				
 				case GOSSIP_ACTION_INFO_DEF + 1110:
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(0, 6899.46f, -4586.5f, 451.002f, 2.37022f);
+				pPlayer->TeleportTo(0, -8254.06f, -107.952f, 238.931f, 6.03092f);
 				break;
 		}
 

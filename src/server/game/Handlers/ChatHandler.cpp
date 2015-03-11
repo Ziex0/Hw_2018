@@ -288,7 +288,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 				case SEC_HEAD_ADMIN:
 				if (GetPlayer()->isGameMaster()==TRUE)
 					{
-                    color =  "|cffFF006E";
+                    color =  "|cff806517";
 					if (GetPlayer()->isGameMaster()==FALSE)
 					color = "|cffFFFFFF";
 					}
@@ -401,100 +401,100 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 			switch(GetPlayer()->GetSession()->GetSecurity())
 			{
 			case SEC_PLAYER: // normal player, non-vip	1				
-					snprintf(message, 1024, "|cff33CC00World |TInterface\\PvPRankBadges\\PvPRank01:13:13|t]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());					
+					snprintf(message, 1024, "|cffFF6549World |TInterface\\PvPRankBadges\\PvPRank01:13:13|t]|cff00E21A[ Player ]|cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());					
 					break;
 					
 			case SEC_VIP: // VIP2
-					snprintf(message, 1024, "|cff33CC00World |TInterface\\PvPRankBadges\\PvPRank02:13:13|t]|cffFFD800[ V.I.P ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |TInterface\\PvPRankBadges\\PvPRank02:13:13|t]|cff00E21A[ V.I.P ]|cff00E2E2[%s]:|cffB6FF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					break;
 					
 			case SEC_MODERATOR: // TRIAL GM3
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024, "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00FFFF[Trial GM]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Trial GM ]|cff00E2E2[%s]:|cff0094FF %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}
 					break;
 					
 			case SEC_GAMEMASTER: // GM/SGM4
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024, "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF6A00[ GM ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ GM ]|cff00E2E2[%s]:|cff0094FF %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}
 					break;
 					
 			 case SEC_HEAD_GM: // ADMIN5
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff6600AA[Head GM]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Head GM ]|cff00E2E2[%s]:|cff0094FF %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}
 					break;
 				
 			case SEC_DEV: // DEV6
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF006E[ Developer ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Developer ]|cff00E2E2[%s]:|cffB200FF %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}
 					break;
 			
 			case SEC_HEAD_DEV: // HEAD DEV7
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF006E[ Head Developer ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Head Developer ]|cff00E2E2[%s]:|cffB200FF %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}
 					break;
 			
 			case SEC_ADMINISTRATOR: // ADMIN8
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF0000[ Admin ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Admin ]|cff00E2E2[%s]:|cff806517 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}
 					break;
 					
 			case SEC_HEAD_ADMIN: // ADMIN9
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF0000[ Head Admin ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Head Admin ]|cff00E2E2[%s]:|cff806517 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}
 					break;
 			
 			case SEC_CO: // ADMIN10
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF0000[ CO-Owner ]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Co-Owner ]|cff00E2E2[%s]:|cffFF0000 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}
 					break;			
 					
 			case SEC_OWNER: // ADMIN11
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cff33CC00World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cffFF0000[Owner]|cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Owner ]|cff00E2E2[%s]:|cffFF0000 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cff33CC00World |cff00CCEE[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}
 					break;
 										
