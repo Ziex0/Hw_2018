@@ -12973,6 +12973,13 @@ InventoryResult Player::CanEquipItem(uint8 slot, uint16 &dest, Item* pItem, bool
         ItemTemplate const* pProto = pItem->GetTemplate();
         if (pProto)
         {
+			uint32 IvipLevel = pProto->vipLevel;
+		uint32 PvipLevel = GetSession()->GetSecurity();
+		if(IvipLevel  > PvipLevel)
+		{
+			// can't equip item if vip level higher than your GM rank
+			return EQUIP_ERR_YOU_CAN_NEVER_USE_THAT_ITEM;
+ 		}
             // item used
             if (pItem->m_lootGenerated)
                 return EQUIP_ERR_ALREADY_LOOTED;
@@ -13178,8 +13185,10 @@ InventoryResult Player::CanBankItem(uint8 bag, uint8 slot, ItemPosCountVec &dest
     sLog->outDebug(LOG_FILTER_PLAYER_ITEMS, "STORAGE: CanBankItem bag = %u, slot = %u, item = %u, count = %u", bag, slot, pItem->GetEntry(), pItem->GetCount());
     ItemTemplate const* pProto = pItem->GetTemplate();
     if (!pProto)
-        return swap ? EQUIP_ERR_ITEMS_CANT_BE_SWAPPED : EQUIP_ERR_ITEM_NOT_FOUND;
 
+        return swap ? EQUIP_ERR_ITEMS_CANT_BE_SWAPPED : EQUIP_ERR_ITEM_NOT_FOUND;
+	
+	
     // item used
     if (pItem->m_lootGenerated)
         return EQUIP_ERR_ALREADY_LOOTED;
