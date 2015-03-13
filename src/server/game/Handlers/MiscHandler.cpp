@@ -400,21 +400,15 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
         ++displaycount;
     }
 
-    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 49)
+    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 255)
     {
-        const char fake_players_db = (searchBool ? FAKE_CHAR_ONLINE_SEARCH : FAKE_CHAR_ONLINE);
-        PreparedStatement* fake = CharacterDatabase.GetPreparedStatement(fake_players_db);
-
-        fake->setUInt32(0, sWorld->getIntConfig(CONFIG_FAKE_WHO_ONLINE_INTERVAL));
-        if (searchBool)
-            fake->setString(1, searchName);
-
-        PreparedQueryResult fakeresult = CharacterDatabase.Query(fake);
-        if (fakeresult)
+        // Fake players on WHO LIST                            0,   1,    2,   3,    4,   5
+        QueryResult result = CharacterDatabase.Query("SELECT name,race,class,level,zone,gender FROM characters_fake WHERE HOUR(online) BETWEEN HOUR(NOW()) AND (HOUR(NOW())+3)");
+        if (result)
         {
             do
             {
-                Field *fields = fakeresult->Fetch();
+                Field *fields = result->Fetch();
 
                 std::string pname = fields[0].GetString();  // player name
                 std::string gname;                          // guild name
@@ -434,11 +428,11 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
 
                 if ((++matchcount) == 49)
                     break;
-            } while (fakeresult->NextRow());
+            } while (result->NextRow());
         }
     }
 
-    data.put(0, matchcount);
+    data.put(0, matchcount);                            // insert right count, count displayed
     data.put(4, matchcount);                              // insert right count, count of matches
 
     SendPacket(&data);
@@ -698,6 +692,11 @@ void WorldSession::HandleAddFriendOpcodeCallBack(PreparedQueryResult result, std
                 GetPlayer()->GetSocial()->SetFriendNote(GUID_LOPART(friendGuid), friendNote);
             }
         }
+    }
+	
+	else if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
+    {
+        friendResult = FRIEND_ENEMY;
     }
 
     sSocialMgr->SendFriendStatus(GetPlayer(), friendResult, GUID_LOPART(friendGuid), false);

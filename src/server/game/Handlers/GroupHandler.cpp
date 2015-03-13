@@ -80,10 +80,9 @@ void WorldSession::HandleGroupInviteOpcode(WorldPacket& recvData)
 
     // no player
     if (!player)
-    {
-        if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
-        {
-           ChatHandler(_player->GetSession()).PSendSysMessage(LANG_FAKE_NOT_DISTURB);
+    {    
+        if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST)) {
+           SendPartyResult(PARTY_OP_INVITE, membername, ERR_ALREADY_IN_GROUP_S);
         }
         else
         {

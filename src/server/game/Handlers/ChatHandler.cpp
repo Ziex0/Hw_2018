@@ -324,18 +324,17 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
             Player* receiver = sObjectAccessor->FindPlayerByName(to);
             if (!receiver || (!receiver->isAcceptWhispers() && receiver->GetSession()->HasPermission(RBAC_PERM_CAN_FILTER_WHISPERS) && !receiver->IsInWhisperWhiteList(sender->GetGUID())))
             {
-			// If Fake WHO List system on then show player DND 
-                if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST)) 
-                { 
-                    sWorld->SendWorldText(LANG_FAKE_NOT_DISTURB); 
-                    return; 
-                } 
-                else 
-                { 
-                SendPlayerNotFoundNotice(to);
-                return;
-				}
-            }
+			// If Fake WHO List system on then show player DND
+                if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
+                {
+                    ChatHandler(sender->GetSession()).PSendSysMessage(LANG_FAKE_NOT_DISTURB);
+                }
+                else
+                {
+                    SendPlayerNotFoundNotice(to);
+                }
+                 return;
+             }
             if (!sender->isGameMaster() && sender->getLevel() < sWorld->getIntConfig(CONFIG_CHAT_WHISPER_LEVEL_REQ) && !receiver->IsInWhisperWhiteList(sender->GetGUID()))
             {
                 SendNotification(GetTrinityString(LANG_WHISPER_REQ), sWorld->getIntConfig(CONFIG_CHAT_WHISPER_LEVEL_REQ));
