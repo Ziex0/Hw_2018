@@ -68,9 +68,11 @@ set(scripts_STAT_SRCS
   Custom/VIP/vip_commands.cpp
   Custom/VIP/vip_do_com.cpp
   Custom/VIP/vip_only_area.cpp
-  
+  Custom/Add_thefallen.cpp
+  Custom/vp_redeem.cpp
   Custom/system/sec_anti_farming.cpp
   Custom/system/chat_censure.cpp
+  Custom/Custom_Talent_Template.cpp
   
   Custom/Boss_1.cpp
   Custom/Boss_2.cpp

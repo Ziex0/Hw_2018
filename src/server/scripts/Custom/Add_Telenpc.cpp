@@ -844,6 +844,7 @@ public:
 			case GOSSIP_ACTION_INFO_DEF + 69:
 			case GOSSIP_ACTION_INFO_DEF + 70:
 			case GOSSIP_ACTION_INFO_DEF + 102:
+			case GOSSIP_ACTION_INFO_DEF + 43003:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(571, 9049.37f, -1282.35f, 1060.19f, 5.8395f);
 
@@ -855,7 +856,7 @@ public:
 				break;
 			case GOSSIP_ACTION_INFO_DEF + 75:
 			case GOSSIP_ACTION_INFO_DEF + 104:
-			case GOSSIP_ACTION_INFO_DEF +33026:
+			case GOSSIP_ACTION_INFO_DEF + 33026:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(571, 8515.89f, 629.25f, 547.396f, 1.5747f);
 
@@ -1483,7 +1484,9 @@ public:
 			case GOSSIP_ACTION_INFO_DEF + 710:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "SpiritStep", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 711);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Slithering Revenant", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 712);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Boss for OffSet Gear", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 713);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "OffSet Gear Boss", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 713);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The fallen Boss (PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 714);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shadow Moon ( Daily Star Coins)(PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 715);
 				
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -1503,6 +1506,18 @@ public:
 			case GOSSIP_ACTION_INFO_DEF + 713:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(571, 6899.4638f, -4586.5009f, 452.4584f, 2.370218f);  //Off Set
+				break;
+				
+			//fallen
+			case GOSSIP_ACTION_INFO_DEF + 714:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(571, 6197.58f, 2622.15f, 570.25f, 2.01217f);  //Off Set
+				break;
+				
+			//shadow moon
+			case GOSSIP_ACTION_INFO_DEF + 715:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(571, 4625.62f, -5627.06f, 109.938f, 4.84263f);  //Off Set
 				break;
 
 				//mall
@@ -1799,6 +1814,7 @@ public:
 				break;
 			case GOSSIP_ACTION_INFO_DEF + 246:
 				GiveRidingSkill(pPlayer, pCreature);
+				break;
 				
 				case GOSSIP_ACTION_INFO_DEF + 3526:
 				{
@@ -1814,6 +1830,7 @@ public:
                             }
                     return true;
                 };
+				break;
 
 				pPlayer->CLOSE_GOSSIP_MENU();
 				break;
