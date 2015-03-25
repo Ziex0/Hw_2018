@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -176,6 +176,7 @@ void AddSC_bosses_opera();
 void AddSC_boss_netherspite();
 void AddSC_instance_karazhan();
 void AddSC_karazhan();
+void AddSC_chess_event();  //chess
 void AddSC_boss_nightbane();
 void AddSC_boss_felblood_kaelthas();         // Magister's Terrace
 void AddSC_boss_selin_fireheart();
@@ -820,6 +821,7 @@ void AddEasternKingdomsScripts()
     AddSC_boss_netherspite();
     AddSC_instance_karazhan();
     AddSC_karazhan();
+	AddSC_chess_event();  //chess
     AddSC_boss_nightbane();
     AddSC_boss_felblood_kaelthas();         // Magister's Terrace
     AddSC_boss_selin_fireheart();
@@ -1380,6 +1382,7 @@ void AddBattlegroundScripts()
 	void AddSC_vpredeem();
 	void AddSC_The_Fallen();
 	//void AddSC_Custom_Talent_Template();
+	void AddSC_vip_set();
 
 #endif
 
@@ -1466,6 +1469,7 @@ void AddCustomScripts()
 	AddSC_vpredeem();
 	AddSC_The_Fallen();
 	//AddSC_Custom_Talent_Template();
+	AddSC_vip_set();
 
 #endif
 }

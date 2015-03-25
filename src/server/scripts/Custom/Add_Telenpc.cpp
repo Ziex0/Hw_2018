@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation; either version 2 of the License, or (at your
@@ -103,7 +103,7 @@ public:
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_FeatsOfStrength_Gladiator_10:24|t Quest Location ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 310);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t Fusion Item Drop Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3810);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Coin_03:24|t I want free Mounts ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 177);
-		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "[|cff00FFFFEvent Zone]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 810);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_FeatsOfStrength_Gladiator_10:24|t Event Zone->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 810);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Leveling Zone", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8000);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Farming Zone", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9000);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Custom Boss Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 710);
@@ -1525,8 +1525,8 @@ public:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo (0, 1610.99f, -5526.4f, 111.158f, 1.00078f);
 				break;
-
-								
+				
+											
 				//custom zones
 				case GOSSIP_ACTION_INFO_DEF + 310:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Armor", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33000);
@@ -2592,6 +2592,19 @@ case GOSSIP_ACTION_INFO_DEF + 3007:
 				case GOSSIP_ACTION_INFO_DEF + 1110:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(0, -8254.06f, -107.952f, 238.931f, 6.03092f);
+				break;
+			
+			//custom events
+			case GOSSIP_ACTION_INFO_DEF + 810:
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Heaven Stair", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 850);
+				
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
+				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
+				break;
+			
+			case GOSSIP_ACTION_INFO_DEF + 850:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo (1, 2920.26f, 2974.38f, 1.61716f, 4.19481f);
 				break;
 		}
 

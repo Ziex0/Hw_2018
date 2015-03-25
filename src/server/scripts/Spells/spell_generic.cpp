@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -3181,7 +3181,7 @@ class spell_gen_mount : public SpellScriptLoader
                     // Triggered spell id dependent on riding skill and zone
                     bool canFly = false;
                     uint32 map = GetVirtualMapForMapAndZone(target->GetMapId(), target->GetZoneId());
-                    if (map == 530 || (map == 571 && target->HasSpell(SPELL_COLD_WEATHER_FLYING)))
+                    if (map == 530 || (map == 571 && target->HasSpell(SPELL_COLD_WEATHER_FLYING)) || map == 0)
                         canFly = true;
 
                     float x, y, z;
