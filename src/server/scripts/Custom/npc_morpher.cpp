@@ -50,6 +50,7 @@ enum Actions
 	ACTION_MINOTAUR                      = 20,
 	ACTION_LICHKING                      = 21,
 	ACTION_SKULL                         = 100,
+	ACTION_PANDA						 = 200,
 
 	// Scaled Actions
 	ACTION_SCALE_VRYKUL_DEFAULT			 = 23,
@@ -75,6 +76,7 @@ enum DisplayId
 	DISPLAY_ID_MINOTAUR				  =	22007, // Set Scale 0.80
 	DISPLAY_ID_LICHKING				  =	22234, // Set Scale 2
 	DISPLAY_ID_SKULL				  =	29404, // Set Scale 2
+	DISPLAY_ID_PANDA				  =	40042, // Set Scale 2
 };
 
 class npc_morpher : public CreatureScript
@@ -119,6 +121,7 @@ public:
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Minotaur", GOSSIP_SENDER_MAIN, ACTION_MINOTAUR);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Lich King", GOSSIP_SENDER_MAIN, ACTION_LICHKING);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Macabre", GOSSIP_SENDER_MAIN, ACTION_SKULL);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "MOP Panda", GOSSIP_SENDER_MAIN, ACTION_PANDA);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Demorph] Logout for Effect!!!", GOSSIP_SENDER_MAIN, ACTION_DEMORPH);
 				player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE,creature->GetGUID());
 				return true;
@@ -257,7 +260,7 @@ public:
 				CharacterDatabase.PExecute("DELETE FROM `character_morph` WHERE guid = %u;", player->GetGUID());
 				CharacterDatabase.PExecute("INSERT INTO `character_morph` (`guid`, `morph`) VALUES(%u, 22234);", player->GetGUID());
 				CharacterDatabase.PExecute("DELETE FROM `character_scale` WHERE guid = %u;", player->GetGUID());
-				CharacterDatabase.PExecute("INSERT INTO `character_scale` (`guid`, `scale`, `comment`) VALUES(%u, 2, 'Lich King');", player->GetGUID());
+				CharacterDatabase.PExecute("INSERT INTO `character_scale` (`guid`, `scale`, `comment`) VALUES(%u, 1, 'Lich King');", player->GetGUID());
 			}
 			player->SetFloatValue(OBJECT_FIELD_SCALE_X, 2);
 			break;
@@ -270,6 +273,18 @@ public:
 				CharacterDatabase.PExecute("INSERT INTO `character_morph` (`guid`, `morph`) VALUES(%u, 29404);", player->GetGUID());
 				CharacterDatabase.PExecute("DELETE FROM `character_scale` WHERE guid = %u;", player->GetGUID());
 				CharacterDatabase.PExecute("INSERT INTO `character_scale` (`guid`, `scale`, `comment`) VALUES(%u, 2, 'Skull');", player->GetGUID());
+			}
+			player->SetFloatValue(OBJECT_FIELD_SCALE_X, 2);
+			break;
+			
+		case ACTION_PANDA:
+			player->CLOSE_GOSSIP_MENU();
+			player->SetDisplayId(DISPLAY_ID_PANDA);
+			{
+				CharacterDatabase.PExecute("DELETE FROM `character_morph` WHERE guid = %u;", player->GetGUID());
+				CharacterDatabase.PExecute("INSERT INTO `character_morph` (`guid`, `morph`) VALUES(%u, 40042);", player->GetGUID());
+				CharacterDatabase.PExecute("DELETE FROM `character_scale` WHERE guid = %u;", player->GetGUID());
+				CharacterDatabase.PExecute("INSERT INTO `character_scale` (`guid`, `scale`, `comment`) VALUES(%u, 1, 'Panda');", player->GetGUID());
 			}
 			player->SetFloatValue(OBJECT_FIELD_SCALE_X, 2);
 			break;
@@ -290,9 +305,9 @@ public:
 			{
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Set my Scale to One", GOSSIP_SENDER_MAIN, ACTION_SCALE_ONE);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Set my Scale to Two", GOSSIP_SENDER_MAIN, ACTION_SCALE_TWO);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Set my Scale to Three", GOSSIP_SENDER_MAIN, ACTION_SCALE_THREE);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Set my Scale to Four", GOSSIP_SENDER_MAIN, ACTION_SCALE_FOUR);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Set my Scale to Five", GOSSIP_SENDER_MAIN, ACTION_SCALE_FIVE);
+				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Set my Scale to Three", GOSSIP_SENDER_MAIN, ACTION_SCALE_THREE);
+				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Set my Scale to Four", GOSSIP_SENDER_MAIN, ACTION_SCALE_FOUR);
+				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Set my Scale to Five", GOSSIP_SENDER_MAIN, ACTION_SCALE_FIVE);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Vrykul Default Scale", GOSSIP_SENDER_MAIN, ACTION_SCALE_VRYKUL_DEFAULT);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "ALGALON Scale Fixer", GOSSIP_SENDER_MAIN, ACTION_SCALE_ALGALON_FIX);
 				player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE,creature->GetGUID());

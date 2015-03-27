@@ -105,7 +105,7 @@ public:
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Coin_03:24|t I want free Mounts ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 177);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_FeatsOfStrength_Gladiator_10:24|t Event Zone->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 810);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Leveling Zone", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8000);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Farming Zone", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9000);
+		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Farming Zone", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9000);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Custom Boss Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 710);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "--|cffFF0000Advance Summon Boss Area--", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9710);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t |cffFF00DEChill Area--", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1110);
@@ -1487,6 +1487,7 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "OffSet Gear Boss", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 713);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The fallen Boss (PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 714);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shadow Moon ( Daily Star Coins)(PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 715);
+				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Slyverinx ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 716);
 				
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -1519,11 +1520,17 @@ public:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(571, 4625.62f, -5627.06f, 109.938f, 4.84263f);  //Off Set
 				break;
+				
+			//shadow moon
+			case GOSSIP_ACTION_INFO_DEF + 716:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(533, 3598.00f, -4523.00f, 198.865f, 5.24257f);  //Off Set
+				break;
 
 				//mall
 			case GOSSIP_ACTION_INFO_DEF + 8910:
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo (0, 1610.99f, -5526.4f, 111.158f, 1.00078f);
+				pPlayer->TeleportTo (530, -266.10f, 921.734f, 84.3799f, 0.582604f);
 				break;
 				
 											

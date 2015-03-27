@@ -1383,6 +1383,12 @@ void AddBattlegroundScripts()
 	void AddSC_The_Fallen();
 	//void AddSC_Custom_Talent_Template();
 	void AddSC_vip_set();
+	
+	// Custom
+	void AddSC_city_conquest_boss();
+	void AddSC_city_conquest_generic();
+	void AddSC_city_conquest_portal();
+	void AddSC_city_conquest_spawner();
 
 #endif
 
@@ -1470,6 +1476,10 @@ void AddCustomScripts()
 	AddSC_The_Fallen();
 	//AddSC_Custom_Talent_Template();
 	AddSC_vip_set();
+	AddSC_city_conquest_boss();
+	AddSC_city_conquest_generic();
+	AddSC_city_conquest_portal();
+	AddSC_city_conquest_spawner();
 
 #endif
 }
