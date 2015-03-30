@@ -24,7 +24,7 @@
      
             bool OnGossipHello(Player * me, Creature * pCreature)
             {
-									   if (me->GetSession()->GetSecurity() >= 1)
+									   if (me->GetSession()->GetSecurity() >= SEC_VIP)
                     {
 										me->ADD_GOSSIP_ITEM(6, "VIP VENDOR", GOSSIP_SENDER_MAIN, GOSSIP_OPTION_VENDOR);
                                         }
@@ -46,7 +46,7 @@
                                 break;
                                 case 1:
                                 m_creature->MonsterWhisper("Why are you here?  You are not a VIP! - You have been reported to Mall!", player -> GetGUID());
-								player->TeleportTo(571, 6182.615234f, 5738.993652f, 1.402846f, 5.567000f); // Where you get teleported.
+								player->TeleportTo(530, -266.10f, 921.734f, 84.3799f, 0.582604f);// Where you get teleported.
                                 player->CLOSE_GOSSIP_MENU();
                                 break;
                         }

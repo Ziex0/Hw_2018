@@ -246,7 +246,7 @@ float Player::GetManaBonusFromIntellect()
     float baseInt = std::min(20.0f, intellect);
     float moreInt = intellect - baseInt;
 
-    return baseInt + (moreInt * 15.0f);
+    return baseInt + (moreInt * 20.0f);
 }
 
 void Player::UpdateMaxHealth()
@@ -343,7 +343,7 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
                 val2 = level * 2.0f + GetStat(STAT_STRENGTH) + GetStat(STAT_AGILITY) - 20.0f;
                 break;
             case CLASS_SHAMAN:
-                val2 = level * 2.0f + GetStat(STAT_STRENGTH) + GetStat(STAT_AGILITY) - 20.0f;
+                val2 = level * 5.0f + GetStat(STAT_STRENGTH) + GetStat(STAT_AGILITY) - 50.0f;
                 break;
             case CLASS_DRUID:
             {
@@ -400,13 +400,13 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
                 break;
             }
             case CLASS_MAGE:
-                val2 = GetStat(STAT_STRENGTH) - 15.0f;
+                val2 = GetStat(STAT_STRENGTH) - 30.0f;
                 break;
             case CLASS_PRIEST:
-                val2 = GetStat(STAT_STRENGTH) - 15.0f;
+                val2 = GetStat(STAT_STRENGTH) - 40.0f;
                 break;
             case CLASS_WARLOCK:
-                val2 = GetStat(STAT_STRENGTH) - 15.0f;
+                val2 = GetStat(STAT_STRENGTH) - 40.0f;
                 break;
         }
     }
@@ -617,6 +617,12 @@ void Player::UpdateCritPercentage(WeaponAttackType attType)
     value += (int32(GetWeaponSkillValue(attType)) - int32(GetMaxSkillValueForLevel())) * 0.04f;
     value = value < 0.0f ? 0.0f : value;
     SetStatFloatValue(index, value);
+	{
+		if(value > 50)
+		value = 50;
+		SetStatFloatValue(PLAYER_BLOCK_PERCENTAGE, value);
+	}
+    
 }
 
 void Player::UpdateAllCritPercentages()

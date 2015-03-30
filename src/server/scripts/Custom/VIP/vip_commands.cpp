@@ -44,9 +44,11 @@ public:
 			{ "demorph",           	 SEC_VIP,  false, &HandleVIPDeMorphCommand,        "", NULL },
 			{ "tele",           	 SEC_VIP,  false, &HandleTeleCommand,         		"", NULL },
 			{ "scale",        		 SEC_VIP,  false, &HandleScaleCommand,           	"", NULL },
-			{ "repair",        		 SEC_VIP,  false, &HandleVIPrepairCommand,           	"", NULL },
+			{ "repair",        		 SEC_VIP,  false, &HandleVIPrepairCommand,          "", NULL },
 			{ "heal", 				 SEC_VIP,  false, &HandleHealCommand, 				"", NULL },
-			{ "combat", 			 SEC_VIP,  false, &HandleCombatStopCommand, 				"", NULL },
+			{ "combat", 			 SEC_VIP,  false, &HandleCombatStopCommand, 		"", NULL },
+			//{ "appear", 			 SEC_VIP,  false, &HandleVIPAppearCommand, 		"", NULL },
+			//{ "summon", 			 SEC_VIP,  false, &HandleVIPSummonCommand, 		"", NULL },
 			
             { NULL,             0,             false, NULL,                         	"", NULL }
         };

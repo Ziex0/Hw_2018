@@ -74,6 +74,7 @@ set(scripts_STAT_SRCS
   Custom/system/chat_censure.cpp
   Custom/Custom_Talent_Template.cpp
   Custom/vipset.cpp
+  Custom/Add_refund.cpp
   
   Custom/Boss_1.cpp
   Custom/Boss_2.cpp
