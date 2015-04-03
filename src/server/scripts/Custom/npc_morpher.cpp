@@ -51,6 +51,8 @@ enum Actions
 	ACTION_LICHKING                      = 21,
 	ACTION_SKULL                         = 100,
 	ACTION_PANDA						 = 200,
+	ACTION_THRALL_PLATE				 = 300,
+	ACTION_THRALL						 = 400,
 
 	// Scaled Actions
 	ACTION_SCALE_VRYKUL_DEFAULT			 = 23,
@@ -77,6 +79,8 @@ enum DisplayId
 	DISPLAY_ID_LICHKING				  =	22234, // Set Scale 2
 	DISPLAY_ID_SKULL				  =	29404, // Set Scale 2
 	DISPLAY_ID_PANDA				  =	40042, // Set Scale 2
+	DISPLAY_ID_THRALL_PLATE		  =	50000, // Set Scale 2
+	DISPLAY_ID_THRALL				  =	50001, // Set Scale 2
 };
 
 class npc_morpher : public CreatureScript
@@ -122,6 +126,8 @@ public:
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Lich King", GOSSIP_SENDER_MAIN, ACTION_LICHKING);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Macabre", GOSSIP_SENDER_MAIN, ACTION_SKULL);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "MOP Panda", GOSSIP_SENDER_MAIN, ACTION_PANDA);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Thrall Plate", GOSSIP_SENDER_MAIN, ACTION_THRALL_PLATE);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Garrosh", GOSSIP_SENDER_MAIN, ACTION_THRALL);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Demorph] Logout for Effect!!!", GOSSIP_SENDER_MAIN, ACTION_DEMORPH);
 				player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE,creature->GetGUID());
 				return true;
@@ -285,6 +291,30 @@ public:
 				CharacterDatabase.PExecute("INSERT INTO `character_morph` (`guid`, `morph`) VALUES(%u, 40042);", player->GetGUID());
 				CharacterDatabase.PExecute("DELETE FROM `character_scale` WHERE guid = %u;", player->GetGUID());
 				CharacterDatabase.PExecute("INSERT INTO `character_scale` (`guid`, `scale`, `comment`) VALUES(%u, 1, 'Panda');", player->GetGUID());
+			}
+			player->SetFloatValue(OBJECT_FIELD_SCALE_X, 2);
+			break;
+		
+		case ACTION_THRALL_PLATE:
+			player->CLOSE_GOSSIP_MENU();
+			player->SetDisplayId(DISPLAY_ID_THRALL_PLATE);
+			{
+				CharacterDatabase.PExecute("DELETE FROM `character_morph` WHERE guid = %u;", player->GetGUID());
+				CharacterDatabase.PExecute("INSERT INTO `character_morph` (`guid`, `morph`) VALUES(%u, 50000);", player->GetGUID());
+				CharacterDatabase.PExecute("DELETE FROM `character_scale` WHERE guid = %u;", player->GetGUID());
+				CharacterDatabase.PExecute("INSERT INTO `character_scale` (`guid`, `scale`, `comment`) VALUES(%u, 1, 'garroshPLATE');", player->GetGUID());
+			}
+			player->SetFloatValue(OBJECT_FIELD_SCALE_X, 2);
+			break;
+			
+		case ACTION_THRALL:
+			player->CLOSE_GOSSIP_MENU();
+			player->SetDisplayId(DISPLAY_ID_THRALL);
+			{
+				CharacterDatabase.PExecute("DELETE FROM `character_morph` WHERE guid = %u;", player->GetGUID());
+				CharacterDatabase.PExecute("INSERT INTO `character_morph` (`guid`, `morph`) VALUES(%u, 50001);", player->GetGUID());
+				CharacterDatabase.PExecute("DELETE FROM `character_scale` WHERE guid = %u;", player->GetGUID());
+				CharacterDatabase.PExecute("INSERT INTO `character_scale` (`guid`, `scale`, `comment`) VALUES(%u, 1, 'garrosh');", player->GetGUID());
 			}
 			player->SetFloatValue(OBJECT_FIELD_SCALE_X, 2);
 			break;

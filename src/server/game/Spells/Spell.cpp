@@ -4715,6 +4715,11 @@ void Spell::HandleEffects(Unit* pUnitTarget, Item* pItemTarget, GameObject* pGOT
 
 SpellCastResult Spell::CheckCast(bool strict)
 {
+	if (MapEntry const* mapEntry = sMapStore.LookupEntry(m_caster->GetMapId()))
+		if (mapEntry->IsDungeon())
+			if (m_spellInfo->Id == 11445 || m_spellInfo->Id == 33245)
+				return SPELL_FAILED_NOT_IN_ARENA;
+				
     // check death state
     if (!m_caster->IsAlive() && !(m_spellInfo->Attributes & SPELL_ATTR0_PASSIVE) && !((m_spellInfo->Attributes & SPELL_ATTR0_CASTABLE_WHILE_DEAD) || (IsTriggered() && !m_triggeredByAuraSpell)))
         return SPELL_FAILED_CASTER_DEAD;
@@ -4735,6 +4740,7 @@ SpellCastResult Spell::CheckCast(bool strict)
                  
                 return SPELL_FAILED_NOT_READY;
         }
+		
     }
 
     if (m_spellInfo->AttributesEx7 & SPELL_ATTR7_IS_CHEAT_SPELL && !m_caster->HasFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_ALLOW_CHEAT_SPELLS))

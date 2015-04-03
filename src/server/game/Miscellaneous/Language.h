@@ -1221,6 +1221,7 @@ enum TrinityStrings
     LANG_OPVP_CA_LOOSE_TOWER_F_H        	= 16005,
     LANG_OPVP_CA_KILLED_N_BOSS_A       		= 16006,
     LANG_OPVP_CA_KILLED_N_BOSS_H        	= 16007,
+	LANG_SPELL_NOT_ALLOWED        			= 16008,
 	
 
 

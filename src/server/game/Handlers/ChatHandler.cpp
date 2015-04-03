@@ -253,9 +253,9 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
                 switch (sender->GetSession()->GetSecurity())
             {	
 				
-                case SEC_PLAYER:
+                /*case SEC_PLAYER:
                     color = "|cffFFFFFF";
-                    break;
+                    break;*/
 
 				case SEC_VIP:
                     color =  "|cffB6FF00";
