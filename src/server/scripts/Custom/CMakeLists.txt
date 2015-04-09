@@ -76,6 +76,8 @@ set(scripts_STAT_SRCS
   Custom/vipset.cpp
   Custom/Add_refund.cpp
   Custom/Add_votereleaser.cpp
+  Custom/Add_Event_reward.cpp
+  Custom/Add_berserk.cpp
   
   Custom/Boss_1.cpp
   Custom/Boss_2.cpp

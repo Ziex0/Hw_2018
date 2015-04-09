@@ -1361,7 +1361,7 @@ void AddBattlegroundScripts()
 	void AddSC_npc_morpher();
 	void AddSC_boss_nazaryan();
 	void AddSC_boss_test_script();
-	void AddSC_Online_Time_DP();
+	//void AddSC_Online_Time_DP();
 	void AddSC_player_abuse();
 	//Bots
 	void AddSC_death_knight_bot();
@@ -1385,6 +1385,7 @@ void AddBattlegroundScripts()
 	void AddSC_vip_set();
 	void AddSC_refundvendor();
 	void AddSC_Vote_releaser();
+	void AddSC_Event_Vendor();
 	
 	// Custom
 	void AddSC_city_conquest_boss();
@@ -1456,7 +1457,7 @@ void AddCustomScripts()
 	AddSC_npc_morpher();
 	AddSC_boss_nazaryan();
 	AddSC_boss_test_script();
-	AddSC_Online_Time_DP();
+	//AddSC_Online_Time_DP();
 	AddSC_player_abuse();
 	//Bots
     AddSC_death_knight_bot();
@@ -1480,6 +1481,7 @@ void AddCustomScripts()
 	AddSC_vip_set();
 	AddSC_refundvendor();
 	AddSC_Vote_releaser();
+	AddSC_Event_Vendor();
 
 	AddSC_city_conquest_boss();
 	AddSC_city_conquest_generic();

@@ -446,15 +446,21 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
         ++displaycount;
     }
 
-    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 255)
+    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 60)
     {
-        // Fake players on WHO LIST                            0,   1,    2,   3,    4,   5
-        QueryResult result = CharacterDatabase.Query("SELECT name,race,class,level,zone,gender FROM characters_fake WHERE HOUR(online) BETWEEN HOUR(NOW()) AND (HOUR(NOW())+3)");
-        if (result)
+        const char fake_players_db = (searchBool ? FAKE_CHAR_ONLINE_SEARCH : FAKE_CHAR_ONLINE);
+        PreparedStatement* fake = CharacterDatabase.GetPreparedStatement(fake_players_db);
+
+        fake->setUInt32(0, sWorld->getIntConfig(CONFIG_FAKE_WHO_ONLINE_INTERVAL));
+        if (searchBool)
+            fake->setString(1, searchName);
+
+        PreparedQueryResult fakeresult = CharacterDatabase.Query(fake);
+        if (fakeresult)
         {
             do
             {
-                Field *fields = result->Fetch();
+                Field *fields = fakeresult->Fetch();
 
                 std::string pname = fields[0].GetString();  // player name
                 std::string gname;                          // guild name
@@ -472,16 +478,15 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
                 data << uint8(gender);                      // player gender
                 data << uint32(pzoneid);                    // player zone id
 
-                if ((++matchcount) == 49)
+                if ((++matchcount) == 60)
                     break;
-            } while (result->NextRow());
+            } while (fakeresult->NextRow());
         }
     }
 
-    data.put(0, matchcount);                            // insert right count, count displayed
+    data.put(0, matchcount);
     data.put(4, matchcount);                              // insert right count, count of matches
 
-    SendPacket(&data);
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: Send SMSG_WHO Message");
 }
 

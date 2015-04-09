@@ -112,7 +112,7 @@ public:
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Professions ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 196);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Learn Spells ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 460);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Player Tools ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 450);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Chest_Plate13:24|t Combat Clear", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3526);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Chest_Plate13:24|t Combat Remover", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3526);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Buffs Me UP", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2500);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:30|t Learn me Pet Tame Beast Skill--", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 50000);
 		pPlayer->SEND_GOSSIP_MENU(907, pCreature->GetGUID());
@@ -1827,8 +1827,9 @@ public:
 				{
 					if(!pPlayer->duel) // Checks if a player is in a duel or not.
                         {
-                        pPlayer->ClearInCombat();
+                        pPlayer->CombatStop(true);
                         ChatHandler(pPlayer->GetSession()).SendSysMessage("Your combat is cleared!");
+						pPlayer->PlayerTalkClass->SendCloseGossip();
                         }
                             else
                             {
