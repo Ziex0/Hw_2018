@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -1221,6 +1221,7 @@ enum TrinityStrings
     LANG_OPVP_CA_LOOSE_TOWER_F_H        	= 16005,
     LANG_OPVP_CA_KILLED_N_BOSS_A       		= 16006,
     LANG_OPVP_CA_KILLED_N_BOSS_H        	= 16007,
+	LANG_SPELL_NOT_ALLOWED        			= 16008,
 	
 
 

@@ -68,13 +68,25 @@ set(scripts_STAT_SRCS
   Custom/VIP/vip_commands.cpp
   Custom/VIP/vip_do_com.cpp
   Custom/VIP/vip_only_area.cpp
-  
+  Custom/Add_thefallen.cpp
+  Custom/vp_redeem.cpp
   Custom/system/sec_anti_farming.cpp
   Custom/system/chat_censure.cpp
+  Custom/Custom_Talent_Template.cpp
+  Custom/vipset.cpp
+  Custom/Add_refund.cpp
+  Custom/Add_votereleaser.cpp
+  Custom/Add_Event_reward.cpp
+  Custom/Add_berserk.cpp
   
   Custom/Boss_1.cpp
   Custom/Boss_2.cpp
   Custom/npc_morpher.cpp
+  
+  Custom/city_conquest_boss.cpp
+  Custom/city_conquest_generic.cpp
+  Custom/city_conquest_portal.cpp
+  Custom/city_conquest_spawner.cpp
 	
 )
 

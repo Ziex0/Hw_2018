@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -962,12 +962,7 @@ public:
 
         uint32 id = atoi((char*)args);
 
-        bool found = false;
-        uint32 count = 0;
-        uint32 maxResults = 1;
-
-        SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(id);
-        if (spellInfo)
+        if (SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(id))
         {
             int locale = handler->GetSessionDbcLocale();
             std::string name = spellInfo->SpellName[locale];
@@ -976,14 +971,6 @@ public:
                 handler->SendSysMessage(LANG_COMMAND_NOSPELLFOUND);
                 return true;
             }
-
-            if (locale < TOTAL_LOCALES)
-            {
-                if (maxResults && count++ == maxResults)
-                {
-                    handler->PSendSysMessage(LANG_COMMAND_LOOKUP_MAX_RESULTS, maxResults);
-                    return true;
-                }
 
                 bool known = target && target->HasSpell(id);
                 bool learn = (spellInfo->Effects[0].Effect == SPELL_EFFECT_LEARN_SPELL);
@@ -1028,13 +1015,8 @@ public:
                     ss << handler->GetTrinityString(LANG_ACTIVE);
 
                 handler->SendSysMessage(ss.str().c_str());
-
-                if (!found)
-                    found = true;
-            }
         }
-
-        if (!found)
+        else
             handler->SendSysMessage(LANG_COMMAND_NOSPELLFOUND);
 
         return true;
@@ -1201,6 +1183,7 @@ public:
             CharTitlesEntry const* titleInfo = sCharTitlesStore.LookupEntry(id);
             if (titleInfo)
             {
+                /// @todo: implement female support
                 int locale = handler->GetSessionDbcLocale();
                 std::string name = titleInfo->name[locale];
                 if (name.empty())

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -38,8 +38,8 @@
 #ifdef _WIN32
 #include "ServiceWin32.h"
 char serviceName[] = "worldserver";
-char serviceLongName[] = "TrinityCore world service";
-char serviceDescription[] = "TrinityCore World of Warcraft emulator world service";
+char serviceLongName[] = "SatriaCore world service";
+char serviceDescription[] = "SatriaCore World of Warcraft emulator world service";
 /*
  * -1 - not in service mode
  *  0 - stopped

@@ -1,12 +1,3 @@
-/*
-* Author: Ap Rose (Akamaran) Update by Zie
-* Version: 1.0.1
-* Contact: andra778@yahoo.com
-*
-* Build: Succeeded (2015)
-* Rev: TrinityCore rev. d5d28057710e (3.3.5a - 12340)
-* Copyright (C) 2008-2015 TrinityCore <http://www.trinitycore.org/>
-*/
 
 #include "ScriptPCH.h"
 #include "Chat.h"

@@ -37,15 +37,18 @@ public:
 			{ "changefaction",		 SEC_VIP,  false, &HandleChangeFactionCommand,		"", NULL },
 			{ "maxskills",			 SEC_VIP,  false, &HandleMaxSkillsCommand,			"", NULL },
 			{ "customize",			 SEC_VIP,  false, &HandleCustomizeCommand,			"", NULL },
-			{ "buff",      		 	 SEC_VIP,  false, &HandleBuffCommand,				"", NULL },
+			{ "buffs",      		 	 SEC_VIP,  false, &HandleBuffCommand,				"", NULL },
 			{ "getdrunk",   		 SEC_VIP,  false, &HandleGetDrunkCommand,     		"", NULL },
 			{ "soberup",    		 SEC_VIP,  false, &HandleSoberUpCommand,         	"", NULL },
-			{ "morph",           	 SEC_VIP,  false, &HandleVIPMorphCommand,              "", NULL },
-			{ "demorph",           	 SEC_VIP,  false, &HandleVIPDeMorphCommand,              "", NULL },
+			{ "morph",           	 SEC_VIP,  false, &HandleVIPMorphCommand,          "", NULL },
+			{ "demorph",           	 SEC_VIP,  false, &HandleVIPDeMorphCommand,        "", NULL },
 			{ "tele",           	 SEC_VIP,  false, &HandleTeleCommand,         		"", NULL },
 			{ "scale",        		 SEC_VIP,  false, &HandleScaleCommand,           	"", NULL },
-			{ "repair",        		 SEC_VIP,  false, &HandleVIPrepairCommand,           	"", NULL },
+			{ "repair",        		 SEC_VIP,  false, &HandleVIPrepairCommand,          "", NULL },
 			{ "heal", 				 SEC_VIP,  false, &HandleHealCommand, 				"", NULL },
+			{ "combat", 			 SEC_VIP,  false, &HandleCombatStopCommand, 		"", NULL },
+			//{ "appear", 			 SEC_VIP,  false, &HandleVIPAppearCommand, 		"", NULL },
+			//{ "summon", 			 SEC_VIP,  false, &HandleVIPSummonCommand, 		"", NULL },
 			
             { NULL,             0,             false, NULL,                         	"", NULL }
         };
@@ -68,6 +71,27 @@ public:
             me->Say("vip command?", LANG_UNIVERSAL);
             return true;
     }
+	
+	static bool HandleCombatStopCommand(ChatHandler* handler, const char* args)
+	{
+		Player* player = handler->GetSession()->GetPlayer();
+
+		if (player->GetMap()->IsBattlegroundOrArena())
+		{
+			handler->PSendSysMessage(LANG_YOU_IN_BATTLEGROUND);
+			handler->SetSentErrorMessage(true);
+			return false; 
+		}
+
+		//if (player->GetMap()->Instanceable())
+		else
+			player->CombatStop();
+			player->getHostileRefManager().deleteReferences();
+			handler->PSendSysMessage("you are no longer in combat!");
+		return true;
+		
+		
+	}
 	
 	static bool HandleHealCommand(ChatHandler * handler, char const* args)
 {

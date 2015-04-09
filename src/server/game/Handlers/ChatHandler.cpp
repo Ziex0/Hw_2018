@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -253,10 +253,10 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
                 switch (sender->GetSession()->GetSecurity())
             {	
 				
-                case SEC_PLAYER:
+                /*case SEC_PLAYER:
                     color = "|cffFFFFFF";
-                    break;
-				
+                    break;*/
+
 				case SEC_VIP:
                     color =  "|cffB6FF00";
                     break;
@@ -275,7 +275,6 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
                     break;
 
                 case SEC_DEV:
-				case SEC_HEAD_DEV:
 				if (GetPlayer()->isGameMaster()==TRUE)
 					{				
                     color =  "|cffB200FF";
@@ -288,13 +287,14 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 				case SEC_HEAD_ADMIN:
 				if (GetPlayer()->isGameMaster()==TRUE)
 					{
-                    color =  "|cff806517";
+                    color =  "|cff00FFFF";
 					if (GetPlayer()->isGameMaster()==FALSE)
 					color = "|cffFFFFFF";
 					}
                     break;
 				
 				case SEC_CO:
+				case SEC_STAFF:
 				case SEC_OWNER:
 				if (GetPlayer()->isGameMaster()==TRUE)
 					{
@@ -402,9 +402,9 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 			case SEC_PLAYER: // normal player, non-vip	1				
 					snprintf(message, 1024, "|cffFF6549World |TInterface\\PvPRankBadges\\PvPRank01:13:13|t]|cff00E21A[ Player ]|cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());					
 					break;
-					
+
 			case SEC_VIP: // VIP2
-					snprintf(message, 1024, "|cffFF6549World |TInterface\\PvPRankBadges\\PvPRank02:13:13|t]|cff00E21A[ V.I.P ]|cff00E2E2[%s]:|cffB6FF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024, "|cffFF6549World |TInterface\\PvPRankBadges\\PvPRank03:13:13|t]|cff00E21A[ V.I.P ]|cff00E2E2[%s]:|cffB6FF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					break;
 					
 			case SEC_MODERATOR: // TRIAL GM3
@@ -447,20 +447,11 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 					}
 					break;
 			
-			case SEC_HEAD_DEV: // HEAD DEV7
-					if (GetPlayer()->isGameMaster()==TRUE)
-					{
-					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Head Developer ]|cff00E2E2[%s]:|cffB200FF %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}{
-					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}
-					break;
-			
+						
 			case SEC_ADMINISTRATOR: // ADMIN8
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Admin ]|cff00E2E2[%s]:|cff806517 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Admin ]|cff00E2E2[%s]:|cff00FFFF %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
 					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
@@ -470,7 +461,17 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 			case SEC_HEAD_ADMIN: // ADMIN9
 					if (GetPlayer()->isGameMaster()==TRUE)
 					{
-					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Head Admin ]|cff00E2E2[%s]:|cff806517 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Head Admin ]|cff00E2E2[%s]:|cff00FFFF %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					}{
+					if (GetPlayer()->isGameMaster()==FALSE)
+					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
+					}
+					break;
+
+			case SEC_STAFF: // ADMIN10
+					if (GetPlayer()->isGameMaster()==TRUE)
+					{
+					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Head Of Staffs ]|cff00E2E2[%s]:|cffFF0000 %s", GetPlayer()->GetName().c_str(), msg.c_str());
 					}{
 					if (GetPlayer()->isGameMaster()==FALSE)
 					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());

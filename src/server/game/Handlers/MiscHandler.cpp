@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -101,6 +101,7 @@ void WorldSession::HandleGossipSelectOptionOpcode(WorldPacket& recvData)
     if (_player->PlayerTalkClass->IsGossipOptionCoded(gossipListId))
         recvData >> code;
 
+	Item* item = NULL;
     Creature* unit = NULL;
     GameObject* go = NULL;
     if (IS_CRE_OR_VEH_GUID(guid))
@@ -128,6 +129,33 @@ void WorldSession::HandleGossipSelectOptionOpcode(WorldPacket& recvData)
         if (!go)
         {
             sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: HandleGossipSelectOptionOpcode - GameObject (GUID: %u) not found.", uint32(GUID_LOPART(guid)));
+            return;
+        }
+    }
+	
+    else if (IS_GAMEOBJECT_GUID(guid))
+    {
+        go = _player->GetMap()->GetGameObject(guid);
+        if (!go)
+        {
+            sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: HandleGossipSelectOptionOpcode - GameObject (GUID: %u) not found.", uint32(GUID_LOPART(guid)));
+            return;
+        }
+    }
+    else if (IS_ITEM_GUID(guid))
+    {
+        item = _player->GetItemByGuid(guid);
+        if (!item)
+        {
+            sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: HandleGossipSelectOptionOpcode - Item (GUID: %u) not found.", uint32(GUID_LOPART(guid)));
+            return;
+        }
+    }
+    else if (IS_PLAYER_GUID(guid))
+    {
+        if (_player->GetGUID() != guid)
+        {
+            sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: HandleGossipSelectOptionOpcode - Player (GUID: %u) not receiver.", uint32(GUID_LOPART(guid)));
             return;
         }
     }
@@ -171,11 +199,21 @@ void WorldSession::HandleGossipSelectOptionOpcode(WorldPacket& recvData)
             //_player->GetBotHelper()->OnCodedGossipSelect(_player, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId), code.c_str());
         }
         //end Bot
-        else
+        else if (go)
         {
             go->AI()->GossipSelectCode(_player, menuId, gossipListId, code.c_str());
             sScriptMgr->OnGossipSelectCode(_player, go, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId), code.c_str());
         }
+		
+		else if (item)
+        {
+            sScriptMgr->OnGossipSelectCode(_player, item, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId), code.c_str());
+        }
+        else if (_player->PlayerTalkClass->GetGossipMenu().GetMenuId() == menuId)
+        {
+            sScriptMgr->OnGossipSelectCode(_player, menuId, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId), code.c_str());
+        }
+		
     }
     else
     {
@@ -196,11 +234,19 @@ void WorldSession::HandleGossipSelectOptionOpcode(WorldPacket& recvData)
             _player->GetBotHelper()->OnGossipSelect(_player, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId));
         }
         //end Bot
-        else
+        else if (go)
         {
             go->AI()->GossipSelect(_player, menuId, gossipListId);
             if (!sScriptMgr->OnGossipSelect(_player, go, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId)))
                 _player->OnGossipSelect(go, gossipListId, menuId);
+        }
+		else if (item)
+        {
+            sScriptMgr->OnGossipSelect(_player, item, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId));
+        }
+        else if (_player->PlayerTalkClass->GetGossipMenu().GetMenuId() == menuId)
+        {
+            sScriptMgr->OnGossipSelect(_player, menuId, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId));
         }
     }
 }
@@ -400,15 +446,21 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
         ++displaycount;
     }
 
-    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 255)
+    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 60)
     {
-        // Fake players on WHO LIST                            0,   1,    2,   3,    4,   5
-        QueryResult result = CharacterDatabase.Query("SELECT name,race,class,level,zone,gender FROM characters_fake WHERE HOUR(online) BETWEEN HOUR(NOW()) AND (HOUR(NOW())+3)");
-        if (result)
+        const char fake_players_db = (searchBool ? FAKE_CHAR_ONLINE_SEARCH : FAKE_CHAR_ONLINE);
+        PreparedStatement* fake = CharacterDatabase.GetPreparedStatement(fake_players_db);
+
+        fake->setUInt32(0, sWorld->getIntConfig(CONFIG_FAKE_WHO_ONLINE_INTERVAL));
+        if (searchBool)
+            fake->setString(1, searchName);
+
+        PreparedQueryResult fakeresult = CharacterDatabase.Query(fake);
+        if (fakeresult)
         {
             do
             {
-                Field *fields = result->Fetch();
+                Field *fields = fakeresult->Fetch();
 
                 std::string pname = fields[0].GetString();  // player name
                 std::string gname;                          // guild name
@@ -426,16 +478,15 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
                 data << uint8(gender);                      // player gender
                 data << uint32(pzoneid);                    // player zone id
 
-                if ((++matchcount) == 49)
+                if ((++matchcount) == 60)
                     break;
-            } while (result->NextRow());
+            } while (fakeresult->NextRow());
         }
     }
 
-    data.put(0, matchcount);                            // insert right count, count displayed
+    data.put(0, matchcount);
     data.put(4, matchcount);                              // insert right count, count of matches
 
-    SendPacket(&data);
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: Send SMSG_WHO Message");
 }
 

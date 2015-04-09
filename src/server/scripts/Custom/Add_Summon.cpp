@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation; either version 2 of the License, or (at your
@@ -25,11 +25,7 @@ public:
 
     bool OnGossipHello(Player* pPlayer, Creature* pCreature)
     {
-        if (pPlayer->isInCombat())
-        {
-            pPlayer->GetSession()->SendNotification("You are in combat");
-            return false;
-        }
+        
         pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Teleporter", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +1);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Trainer", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +2);
         pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Transmorg NPC", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +3);

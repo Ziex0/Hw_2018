@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -176,6 +176,7 @@ void AddSC_bosses_opera();
 void AddSC_boss_netherspite();
 void AddSC_instance_karazhan();
 void AddSC_karazhan();
+void AddSC_chess_event();  //chess
 void AddSC_boss_nightbane();
 void AddSC_boss_felblood_kaelthas();         // Magister's Terrace
 void AddSC_boss_selin_fireheart();
@@ -820,6 +821,7 @@ void AddEasternKingdomsScripts()
     AddSC_boss_netherspite();
     AddSC_instance_karazhan();
     AddSC_karazhan();
+	AddSC_chess_event();  //chess
     AddSC_boss_nightbane();
     AddSC_boss_felblood_kaelthas();         // Magister's Terrace
     AddSC_boss_selin_fireheart();
@@ -1359,7 +1361,7 @@ void AddBattlegroundScripts()
 	void AddSC_npc_morpher();
 	void AddSC_boss_nazaryan();
 	void AddSC_boss_test_script();
-	void AddSC_Online_Time_DP();
+	//void AddSC_Online_Time_DP();
 	void AddSC_player_abuse();
 	//Bots
 	void AddSC_death_knight_bot();
@@ -1377,6 +1379,19 @@ void AddBattlegroundScripts()
 	void AddSC_BotQuests_chapter1();
 	//end Bots
 	void AddSC_npc_glyph_template();
+	void AddSC_vpredeem();
+	void AddSC_The_Fallen();
+	//void AddSC_Custom_Talent_Template();
+	void AddSC_vip_set();
+	void AddSC_refundvendor();
+	void AddSC_Vote_releaser();
+	void AddSC_Event_Vendor();
+	
+	// Custom
+	void AddSC_city_conquest_boss();
+	void AddSC_city_conquest_generic();
+	void AddSC_city_conquest_portal();
+	void AddSC_city_conquest_spawner();
 
 #endif
 
@@ -1442,7 +1457,7 @@ void AddCustomScripts()
 	AddSC_npc_morpher();
 	AddSC_boss_nazaryan();
 	AddSC_boss_test_script();
-	AddSC_Online_Time_DP();
+	//AddSC_Online_Time_DP();
 	AddSC_player_abuse();
 	//Bots
     AddSC_death_knight_bot();
@@ -1460,6 +1475,18 @@ void AddCustomScripts()
     AddSC_BotQuests_chapter1();
     //end Bots
 	AddSC_npc_glyph_template();
+	AddSC_vpredeem();
+	AddSC_The_Fallen();
+	//AddSC_Custom_Talent_Template();
+	AddSC_vip_set();
+	AddSC_refundvendor();
+	AddSC_Vote_releaser();
+	AddSC_Event_Vendor();
+
+	AddSC_city_conquest_boss();
+	AddSC_city_conquest_generic();
+	AddSC_city_conquest_portal();
+	AddSC_city_conquest_spawner();
 
 #endif
 }

@@ -103,8 +103,15 @@ public:
     beastmaster_creaturescript() : CreatureScript("beastmaster_creaturescript") { }
 
     void CreateNewPet(Player* player, Creature* npc, uint32 entry) {
-        //check for existing pets
-        if (player->GetPet()) {
+
+        if(player->getClass() != CLASS_HUNTER) {
+            npc->MonsterWhisper("You are not a Hunter!", player->GetGUID());
+            npc->MonsterWhisper("You are not a Hunter!", player->GetGUID(), true);
+            player->PlayerTalkClass->SendCloseGossip();
+            return;
+        }
+ 
+        if(player->GetPet()) {
             ChatHandler(player->GetSession()).PSendSysMessage("You already have a pet.");
             player->PlayerTalkClass->SendCloseGossip();
             return;

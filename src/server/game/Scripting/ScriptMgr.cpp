@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -32,6 +32,7 @@
 #include "CreatureAI.h"
 #include "Player.h"
 #include "WorldPacket.h"
+#include "CityConquestMgr.h"
 
 // This is the global static registry of scripts.
 template<class TScript>
@@ -176,6 +177,9 @@ void ScriptMgr::Initialize()
     uint32 oldMSTime = getMSTime();
 
     LoadDatabase();
+	
+	sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Initializing City Conquest Engine (c) SatriaWow");
+    CityConquest.LoadCities();
 
     sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Loading C++ scripts");
 
@@ -707,6 +711,25 @@ bool ScriptMgr::OnItemExpire(Player* player, ItemTemplate const* proto)
     GET_SCRIPT_RET(ItemScript, proto->ScriptId, tmpscript, false);
     return tmpscript->OnExpire(player, proto);
 }
+
+void ScriptMgr::OnGossipSelect(Player* player, Item* item, uint32 sender, uint32 action)
+{
+    ASSERT(player);
+    ASSERT(item);
+
+    GET_SCRIPT(ItemScript, item->GetScriptId(), tmpscript);
+    tmpscript->OnGossipSelect(player, item, sender, action);
+}
+
+void ScriptMgr::OnGossipSelectCode(Player* player, Item* item, uint32 sender, uint32 action, const char* code)
+{
+    ASSERT(player);
+    ASSERT(item);
+
+    GET_SCRIPT(ItemScript, item->GetScriptId(), tmpscript);
+    tmpscript->OnGossipSelectCode(player, item, sender, action, code);
+}
+
 
 bool ScriptMgr::OnDummyEffect(Unit* caster, uint32 spellId, SpellEffIndex effIndex, Creature* target)
 {
@@ -1341,6 +1364,21 @@ void ScriptMgr::OnPlayerUpdateZone(Player* player, uint32 newZone, uint32 newAre
 {
     FOREACH_SCRIPT(PlayerScript)->OnUpdateZone(player, newZone, newArea);
 }
+
+void ScriptMgr::OnGossipSelect(Player* player, uint32 menu_id, uint32 sender, uint32 action)
+{
+    ASSERT(player);
+
+    FOREACH_SCRIPT(PlayerScript)->OnGossipSelect(player, menu_id, sender, action);
+}
+
+void ScriptMgr::OnGossipSelectCode(Player* player, uint32 menu_id, uint32 sender, uint32 action, const char* code)
+{
+    ASSERT(player);
+
+    FOREACH_SCRIPT(PlayerScript)->OnGossipSelectCode(player, menu_id, sender, action, code);
+}
+
 
 // Guild
 void ScriptMgr::OnGuildAddMember(Guild* guild, Player* player, uint8& plRank)

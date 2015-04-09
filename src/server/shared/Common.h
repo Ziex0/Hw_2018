@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -155,9 +155,9 @@ enum AccountTypes
     SEC_GAMEMASTER     		= 3,
 	SEC_HEAD_GM		    	= 4,
 	SEC_DEV     			= 5,
-	SEC_HEAD_DEV    		= 6,
-    SEC_ADMINISTRATOR  		= 7,
-	SEC_HEAD_ADMIN	       	= 8,
+    SEC_ADMINISTRATOR  		= 6,
+	SEC_HEAD_ADMIN	       	= 7,
+	SEC_STAFF				= 8,
 	SEC_CO			     	= 9,
 	SEC_OWNER		   		= 10,
     SEC_CONSOLE        		= 11                                  // must be always last in list, accounts must have less security level always also

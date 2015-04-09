@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+/* Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  *
  * Thanks to the original authors: ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *

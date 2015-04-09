@@ -194,6 +194,7 @@ set(scripts_STAT_SRCS
   EasternKingdoms/Karazhan/instance_karazhan.cpp
   EasternKingdoms/Karazhan/boss_nightbane.cpp
   EasternKingdoms/Karazhan/karazhan.cpp
+  EasternKingdoms/Karazhan/chess_event.cpp
   EasternKingdoms/Karazhan/boss_curator.cpp
   EasternKingdoms/Karazhan/boss_shade_of_aran.cpp
   EasternKingdoms/Karazhan/boss_netherspite.cpp

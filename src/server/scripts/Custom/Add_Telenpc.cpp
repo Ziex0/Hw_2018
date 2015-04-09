@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Con/>
+ * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation; either version 2 of the License, or (at your
@@ -103,7 +103,7 @@ public:
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_FeatsOfStrength_Gladiator_10:24|t Quest Location ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 310);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t Fusion Item Drop Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3810);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Coin_03:24|t I want free Mounts ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 177);
-		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "[|cff00FFFFEvent Zone]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 810);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_FeatsOfStrength_Gladiator_10:24|t Event Zone->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 810);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Leveling Zone", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8000);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Farming Zone", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9000);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Custom Boss Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 710);
@@ -112,7 +112,7 @@ public:
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Professions ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 196);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Learn Spells ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 460);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Player Tools ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 450);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Chest_Plate13:24|t Combat Clear", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3526);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Chest_Plate13:24|t Combat Remover", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3526);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Buffs Me UP", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2500);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:30|t Learn me Pet Tame Beast Skill--", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 50000);
 		pPlayer->SEND_GOSSIP_MENU(907, pCreature->GetGUID());
@@ -844,6 +844,7 @@ public:
 			case GOSSIP_ACTION_INFO_DEF + 69:
 			case GOSSIP_ACTION_INFO_DEF + 70:
 			case GOSSIP_ACTION_INFO_DEF + 102:
+			case GOSSIP_ACTION_INFO_DEF + 43003:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(571, 9049.37f, -1282.35f, 1060.19f, 5.8395f);
 
@@ -855,7 +856,7 @@ public:
 				break;
 			case GOSSIP_ACTION_INFO_DEF + 75:
 			case GOSSIP_ACTION_INFO_DEF + 104:
-			case GOSSIP_ACTION_INFO_DEF +33026:
+			case GOSSIP_ACTION_INFO_DEF + 33026:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(571, 8515.89f, 629.25f, 547.396f, 1.5747f);
 
@@ -1483,7 +1484,10 @@ public:
 			case GOSSIP_ACTION_INFO_DEF + 710:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "SpiritStep", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 711);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Slithering Revenant", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 712);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Boss for OffSet Gear", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 713);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "OffSet Gear Boss", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 713);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The fallen Boss (PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 714);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shadow Moon ( Daily Star Coins)(PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 715);
+				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Slyverinx ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 716);
 				
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -1504,14 +1508,32 @@ public:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(571, 6899.4638f, -4586.5009f, 452.4584f, 2.370218f);  //Off Set
 				break;
+				
+			//fallen
+			case GOSSIP_ACTION_INFO_DEF + 714:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(571, 6197.58f, 2622.15f, 570.25f, 2.01217f);  //Off Set
+				break;
+				
+			//shadow moon
+			case GOSSIP_ACTION_INFO_DEF + 715:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(571, 4625.62f, -5627.06f, 109.938f, 4.84263f);  //Off Set
+				break;
+				
+			//shadow moon
+			case GOSSIP_ACTION_INFO_DEF + 716:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(533, 3598.00f, -4523.00f, 198.865f, 5.24257f);  //Off Set
+				break;
 
 				//mall
 			case GOSSIP_ACTION_INFO_DEF + 8910:
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo (0, 1610.99f, -5526.4f, 111.158f, 1.00078f);
+				pPlayer->TeleportTo (530, -266.10f, 921.734f, 84.3799f, 0.582604f);
 				break;
-
-								
+				
+											
 				//custom zones
 				case GOSSIP_ACTION_INFO_DEF + 310:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Armor", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33000);
@@ -1525,14 +1547,14 @@ public:
 				
 				case GOSSIP_ACTION_INFO_DEF + 33000://armor
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The Great Sea Wall", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33001);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "PyreWood", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33002);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Pyrewood", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33002);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Arathi Farm", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33003);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Quel Thalas", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33004);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Ragefire Chasm", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33005);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Blackfathom Deeps", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33006);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Zul Farrak", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33007);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Blackrock Depths", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33008);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shcolomance", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33009);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Scholomance", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33009);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Serpentshrine Cavern", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33010);
 				
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[More] ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33011);
@@ -1545,7 +1567,7 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Mana Tombs", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33012);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Auchenai Crypts", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33013);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Tempest Keep", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33014);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Magister Terrance", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33015);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Magisters' Terrace", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33015);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Zul Aman", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33016);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The Nexus", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33017);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The Forge of Souls", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33018);
@@ -1565,7 +1587,7 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Gruul Lair", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33025);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Trial of Crusader", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33026);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Black Temple", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33027);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "IceCrown Citadel", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33028);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "cecrown Citadel", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33028);
 
 				
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -1799,13 +1821,15 @@ public:
 				break;
 			case GOSSIP_ACTION_INFO_DEF + 246:
 				GiveRidingSkill(pPlayer, pCreature);
+				break;
 				
 				case GOSSIP_ACTION_INFO_DEF + 3526:
 				{
 					if(!pPlayer->duel) // Checks if a player is in a duel or not.
                         {
-                        pPlayer->ClearInCombat();
+                        pPlayer->CombatStop(true);
                         ChatHandler(pPlayer->GetSession()).SendSysMessage("Your combat is cleared!");
+						pPlayer->PlayerTalkClass->SendCloseGossip();
                         }
                             else
                             {
@@ -1814,6 +1838,7 @@ public:
                             }
                     return true;
                 };
+				break;
 
 				pPlayer->CLOSE_GOSSIP_MENU();
 				break;
@@ -2569,12 +2594,25 @@ case GOSSIP_ACTION_INFO_DEF + 3007:
 				
 				case GOSSIP_ACTION_INFO_DEF + 9001:
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(0, -5370.42f, -2540.19f, 484.979f, 0.4117f);
+				pPlayer->TeleportTo(1, -3750.06f, 934.779f, 160.982f, 6.18598f);
 				break;
 				
 				case GOSSIP_ACTION_INFO_DEF + 1110:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(0, -8254.06f, -107.952f, 238.931f, 6.03092f);
+				break;
+			
+			//custom events
+			case GOSSIP_ACTION_INFO_DEF + 810:
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Heaven Stair", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 850);
+				
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
+				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
+				break;
+			
+			case GOSSIP_ACTION_INFO_DEF + 850:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo (1, 2920.26f, 2974.38f, 1.61716f, 4.19481f);
 				break;
 		}
 
