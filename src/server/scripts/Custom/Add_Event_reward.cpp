@@ -23,7 +23,7 @@ class Event_Vendor : public CreatureScript
 			{
 				case 0:
 					name = pPlayer->GetName();
-					pPlayer->ADD_GOSSIP_ITEM(10, "Each Title costs 20 Love event token", GOSSIP_SENDER_MAIN, 8888);
+					pPlayer->ADD_GOSSIP_ITEM(10, "Each Title costs 1 event token", GOSSIP_SENDER_MAIN, 8888);
 					pPlayer->ADD_GOSSIP_ITEM(4, name + " Hand of A'dal", GOSSIP_SENDER_MAIN, 64);
 					pPlayer->ADD_GOSSIP_ITEM(4, name + " the Seeker", GOSSIP_SENDER_MAIN, 81);
 					pPlayer->ADD_GOSSIP_ITEM(4, name + " of the Ten Storms", GOSSIP_SENDER_MAIN, 86);
@@ -53,7 +53,7 @@ class Event_Vendor : public CreatureScript
 					OnGossipSelect(pPlayer, pCreature, GOSSIP_SENDER_MAIN, 0);
 					break;
 				default:
-					if(pPlayer->HasItemCount(EVENT_TOKEN, 20))
+					if(pPlayer->HasItemCount(EVENT_TOKEN, 1))
 					{
 						CharTitlesEntry const* titleInfo = sCharTitlesStore.LookupEntry(uiAction);
 						if(!titleInfo)
