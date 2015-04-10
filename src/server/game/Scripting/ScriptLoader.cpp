@@ -1393,6 +1393,7 @@ void AddBattlegroundScripts()
 	void AddSC_city_conquest_generic();
 	void AddSC_city_conquest_portal();
 	void AddSC_city_conquest_spawner();
+	void AddSC_vipmall_security();
 
 #endif
 
@@ -1489,6 +1490,7 @@ void AddCustomScripts()
 	AddSC_city_conquest_generic();
 	AddSC_city_conquest_portal();
 	AddSC_city_conquest_spawner();
+	AddSC_vipmall_security();
 
 #endif
 }

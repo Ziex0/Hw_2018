@@ -359,9 +359,14 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
 		*/
 			
 		// check if target's level is in level range
-			uint8 lvl = target->getLevel();
-			/*if (lvl < level_min || lvl > level_max)
-			continue; */
+		uint8 lvl = target->getLevel();
+		/*if (lvl < level_min || lvl > level_max)
+		continue; */
+
+		//Nothing to do with that:
+		// check if target is globally visible for player
+		if (!target->IsVisibleGloballyFor(_player))
+		continue; 
 
         // check if class matches classmask
         uint8 class_ = target->getClass();
@@ -446,7 +451,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
         ++displaycount;
     }
 
-    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 60)
+    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 49)
     {
         const char fake_players_db = (searchBool ? FAKE_CHAR_ONLINE_SEARCH : FAKE_CHAR_ONLINE);
         PreparedStatement* fake = CharacterDatabase.GetPreparedStatement(fake_players_db);
@@ -478,7 +483,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
                 data << uint8(gender);                      // player gender
                 data << uint32(pzoneid);                    // player zone id
 
-                if ((++matchcount) == 60)
+                if ((++matchcount) == 49)
                     break;
             } while (fakeresult->NextRow());
         }
