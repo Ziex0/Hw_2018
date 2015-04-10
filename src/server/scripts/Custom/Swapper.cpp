@@ -1,35 +1,60 @@
-#include "ScriptPCH.h"
+/*  
+	-Souls -
+	soul =	   60000
+	10.000	 = 60020
+	30.000	 = 60021
+	50.000	 = 60022
+	100.000 =  60027
 
+	-Unholy-
+    emblem =	60004
+	10.000	 =  60023
+	30.000	 =  60024
+	50.000	 =  60025
+	100.000 =	60026
+
+	-Demon head-
+	dem	 =     60005
+	50.000	 = 60033
+
+	Okay so i made this script to learn my friend sephox a bit C++,
+	So he is possible to add items in the future by himself
+	We hope it's going to be very usefull!
+*/
 struct tokenData {uint32 TAKE_ENTRY, TAKE_AMOUNT, GIVE_ENTRY, GIVE_AMOUNT; };
 struct tokenData Tokens[] =
 {
 //  {TAKE_ENTRY, TAKE_AMOUNT, GIVE_ENTRY, GIVE_AMOUNT},
-// Make a custom structure, so for example.
 
-    //this takes itemid 50 and gives itemid 62 in return
-		{50, 1, 62, 1},
-	//you can also take 5000 and give itemid 62 back 1000 times.
-        {50, 500, 62, 1000},
-	
-/*
-This is all up to you you can do whatever u want with it.
-Enjoy :)
-*/	
+	//Souls
+    {60000, 10000, 60020, 1},
+	{60000, 30000, 60021, 1},
+	{60000, 50000, 60022, 1},
+	{60000, 100000, 60027, 1},
+	//Unholy
+	{60004, 10000, 60023, 1},
+	{60004, 30000, 60024, 1},
+	{60004, 50000, 60025, 1},
+	{60004, 100000, 60026, 1},
+	//demon
+	{60005, 50000, 60033, 1},
+
 
 };
- 
+
 const uint32 tokensSize = sizeof Tokens/sizeof(*Tokens);
- 
+#include "ScriptPCH.h"
+
 class CustomSwapItems : public CreatureScript
 {
 public:
     CustomSwapItems() : CreatureScript("CustomSwapItems") { }
- 
+
     std::string GetName(uint32 entry)
     {
         return sObjectMgr->GetItemTemplate(entry)->Name1;
     }
- 
+
     bool OnGossipHello(Player* player, Creature* creature)
     {
         for (uint32 i = 0; i < tokensSize; ++i)
@@ -42,7 +67,7 @@ public:
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
- 
+
     bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 action)
     {
         player->PlayerTalkClass->ClearMenus();
@@ -63,7 +88,7 @@ public:
         return true;
     }
 };
- 
+
 void AddSC_CustomSwapItems()
 {
     new CustomSwapItems();
