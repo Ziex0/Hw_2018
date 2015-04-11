@@ -359,14 +359,9 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
 		*/
 			
 		// check if target's level is in level range
-		uint8 lvl = target->getLevel();
-		/*if (lvl < level_min || lvl > level_max)
-		continue; */
-
-		//Nothing to do with that:
-		// check if target is globally visible for player
-		if (!target->IsVisibleGloballyFor(_player))
-		continue; 
+			uint8 lvl = target->getLevel();
+			/*if (lvl < level_min || lvl > level_max)
+			continue; */
 
         // check if class matches classmask
         uint8 class_ = target->getClass();
@@ -451,21 +446,15 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
         ++displaycount;
     }
 
-    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 49)
-    {
-        const char fake_players_db = (searchBool ? FAKE_CHAR_ONLINE_SEARCH : FAKE_CHAR_ONLINE);
-        PreparedStatement* fake = CharacterDatabase.GetPreparedStatement(fake_players_db);
-
-        fake->setUInt32(0, sWorld->getIntConfig(CONFIG_FAKE_WHO_ONLINE_INTERVAL));
-        if (searchBool)
-            fake->setString(1, searchName);
-
-        PreparedQueryResult fakeresult = CharacterDatabase.Query(fake);
-        if (fakeresult)
-        {
-            do
-            {
-                Field *fields = fakeresult->Fetch();
+    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 49) 
+    { 
+        // Fake players on WHO LIST                            0,   1,    2,   3,    4,   5     6 
+        QueryResult result = CharacterDatabase.Query("SELECT guid,name,race,class,level,zone,gender FROM characters WHERE online>1 AND level > 3"); 
+        if (result) 
+        { 
+            do 
+            { 
+                Field *fields = result->Fetch(); 
 
                 std::string pname = fields[0].GetString();  // player name
                 std::string gname;                          // guild name
@@ -485,7 +474,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
 
                 if ((++matchcount) == 49)
                     break;
-            } while (fakeresult->NextRow());
+            } while (result->NextRow()); 
         }
     }
 
