@@ -265,9 +265,6 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
     uint32 level_min, level_max, racemask, classmask, zones_count, str_count;
     uint32 zoneids[10];                                     // 10 is client limit
     std::string player_name, guild_name;
-	
-	bool searchBool = false;
-    std::string searchName;
 
     recvData >> level_min;                                 // maximal player level, default 0
     recvData >> level_max;                                 // minimal player level, default 100 (MAX_LEVEL)
@@ -307,9 +304,6 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
             continue;
 
         wstrToLower(str[i]);
-		
-		searchBool = true;
-        searchName = temp.c_str();
 
         sLog->outDebug(LOG_FILTER_NETWORKIO, "String %u: %s", i, temp.c_str());
     }
@@ -353,15 +347,13 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
             continue;
 
         // check if target is globally visible for player
-		/* Remove check so Level 255 shows up in who list
-			if (!target->IsVisibleGloballyFor(_player))
-			continue;
-		*/
-			
-		// check if target's level is in level range
-			uint8 lvl = target->getLevel();
-			/*if (lvl < level_min || lvl > level_max)
-			continue; */
+        if (!target->IsVisibleGloballyFor(_player))
+            continue;
+
+        // check if target's level is in level range
+        uint8 lvl = target->getLevel();
+        if (lvl < level_min || lvl > level_max)
+            continue;
 
         // check if class matches classmask
         uint8 class_ = target->getClass();
@@ -440,51 +432,45 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
         data << uint32(lvl);                              // player level
         data << uint32(class_);                           // player class
         data << uint32(race);                             // player race
-        data << uint8(gender);                            // player gender
+        data << uint8(gender);                             // player gender
         data << uint32(pzoneid);                          // player zone id
 
         ++displaycount;
     }
-
-    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 60)
-    {
-        const char fake_players_db = (searchBool ? FAKE_CHAR_ONLINE_SEARCH : FAKE_CHAR_ONLINE);
-        PreparedStatement* fake = CharacterDatabase.GetPreparedStatement(fake_players_db);
-
-        fake->setUInt32(0, sWorld->getIntConfig(CONFIG_FAKE_WHO_ONLINE_INTERVAL));
-        if (searchBool)
-            fake->setString(1, searchName);
-
-        PreparedQueryResult fakeresult = CharacterDatabase.Query(fake);
-        if (fakeresult)
-        {
-            do
-            {
-                Field *fields = fakeresult->Fetch();
-
-                std::string pname = fields[0].GetString();  // player name
-                std::string gname;                          // guild name
-                uint32 lvl = fields[3].GetUInt32();         // player level
-                uint32 class_ = fields[2].GetUInt32();      // player class
-                uint32 race = fields[1].GetUInt32();        // player race
-                uint32 pzoneid = fields[4].GetUInt32();     // player zone id
-                uint8 gender = fields[5].GetUInt8();        // player gender
-
-                data << pname;                              // player name
-                data << gname;                              // guild name
-                data << uint32(lvl);                        // player level
-                data << uint32(class_);                     // player class
-                data << uint32(race);                       // player race
-                data << uint8(gender);                      // player gender
-                data << uint32(pzoneid);                    // player zone id
-
-                if ((++matchcount) == 60)
-                    break;
-            } while (fakeresult->NextRow());
-        }
-    }
-
-    data.put(0, matchcount);
+   	
+    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 49) 
+    { 
+        // Fake players on WHO LIST                            0,   1,    2,   3,    4,   5     6 
+        QueryResult result = CharacterDatabase.Query("SELECT guid,name,race,class,level,zone,gender FROM characters WHERE online>1 AND level > 3"); 
+        if (result) 
+        { 
+            do 
+            { 
+                Field *fields = result->Fetch(); 
+ 
+                std::string pname = fields[1].GetString();    // player name 
+                std::string gname;                                // guild name 
+                uint32 lvl = fields[4].GetUInt32();                // player level 
+                uint32 class_ = fields[3].GetUInt32();            // player class 
+                uint32 race = fields[2].GetUInt32();            // player race 
+                uint32 pzoneid = fields[5].GetUInt32();            // player zone id 
+                uint8 gender = fields[6].GetUInt8();            // player gender 
+ 
+                data << pname;                              // player name 
+                data << gname;                              // guild name 
+                data << uint32(lvl);                        // player level 
+                data << uint32(class_);                     // player class 
+                data << uint32(race);                       // player race 
+                data << uint8(gender);                      // player gender 
+                data << uint32(pzoneid);                    // player zone id 
+ 
+                if ((++matchcount) == 49) 
+                    break; 
+            } while (result->NextRow()); 
+        } 
+    } 
+ 
+    data.put(0, matchcount);                            // insert right count, count displayed
     data.put(4, matchcount);                              // insert right count, count of matches
 
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: Send SMSG_WHO Message");

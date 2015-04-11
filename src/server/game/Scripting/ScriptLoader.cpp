@@ -67,6 +67,8 @@ void AddSC_example_spell_scripts();
 void AddSC_holiday_spell_scripts();
 
 void AddSC_SmartSCripts();
+//Custom
+void AddSC_ArenaGambler();
 
 //Commands
 void AddSC_anticheat_commandscript();
@@ -1393,6 +1395,9 @@ void AddBattlegroundScripts()
 	void AddSC_city_conquest_generic();
 	void AddSC_city_conquest_portal();
 	void AddSC_city_conquest_spawner();
+	void AddSC_vipmall_security();
+	void AddSC_login_announcer();
+	void AddSC_ExchangeDPNPC();
 
 #endif
 
@@ -1489,6 +1494,10 @@ void AddCustomScripts()
 	AddSC_city_conquest_generic();
 	AddSC_city_conquest_portal();
 	AddSC_city_conquest_spawner();
+	AddSC_vipmall_security();
+	AddSC_ArenaGambler();
+	AddSC_login_announcer();
+	AddSC_ExchangeDPNPC();
 
 #endif
 }

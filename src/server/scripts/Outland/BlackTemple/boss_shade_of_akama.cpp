@@ -254,7 +254,30 @@ public:
             Sorcerers.clear();
             summons.DespawnAll();//despawn all adds
 
-            if (Creature* Akama = Unit::GetCreature(*me, AkamaGUID))
+	bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    {
+        player->PlayerTalkClass->ClearMenus();
+        if (action == GOSSIP_ACTION_INFO_DEF + 1)               //Fight time
+        {
+            player->CLOSE_GOSSIP_MENU();
+            //CAST_AI(npc_akama_shade::npc_akamaAI, creature->AI())->BeginEvent(player);
+        }
+
+        return true;
+    }
+
+    //bool OnGossipHello(Player* player, Creature* creature)
+	bool OnGossipHello(Player *player, Creature *creature)
+    {
+        if (player->IsAlive())
+        {
+            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+            player->SEND_GOSSIP_MENU(907, creature->GetGUID());
+        }
+
+        return true;
+    }
+	
             {
                 Akama->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);//turn gossip on so players can restart the event
                 if (Akama->isDead())
@@ -262,6 +285,9 @@ public:
                     Akama->Respawn();//respawn akama if dead
                     Akama->AI()->EnterEvadeMode();
                 }
+            StartChannel = true;
+            StartCombat = true;
+            HasYelledOnce = true;
             }
             SorcererCount = 0;
             DeathCount = 0;

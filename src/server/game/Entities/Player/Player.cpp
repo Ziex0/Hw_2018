@@ -8918,11 +8918,11 @@ void Player::UpdateZone(uint32 newZone, uint32 newArea)
 			{
 				if (newZone == 876 && AccountMgr::IsPlayerAccount(GetSession()->GetSecurity()))
 				{
-				uint32 map = 13;
+						uint32 map = 13;
 						double coords[4] = { 1.118799, 0.477914, -144.708650, 3.133046 }; // Jail Box
 						std::string config = ConfigMgr::GetStringDefault("GMIsland.TeleportTo", "");
 						if (config != "")
-					{
+				{
 			std::istringstream ss(config);
 			for (int i = 0; i < 5; ++i)
 					{
@@ -8941,7 +8941,7 @@ void Player::UpdateZone(uint32 newZone, uint32 newArea)
 						coords[0] = 1.118799; // x
 						coords[1] = 0.477914; // y
 						coords[2] = -144.708650; // z
-					coords[3] = 3.133046; // orientation
+						coords[3] = 3.133046; // orientation
 					}
 					 sLog->outError(LOG_FILTER_GENERAL,"Player (GUID: %u) tried to access GM Island.", GetGUIDLow());
 				TeleportTo(map, coords[0], coords[1], coords[2], coords[3]); // Tele to Jail Box

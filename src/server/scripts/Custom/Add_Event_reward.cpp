@@ -10,7 +10,7 @@ class Event_Vendor : public CreatureScript
 		bool OnGossipHello(Player * pPlayer, Creature * pCreature)
 		{
 			pPlayer->ADD_GOSSIP_ITEM(7, "I would like to view the titles.", GOSSIP_SENDER_MAIN, 0);
-			pPlayer->ADD_GOSSIP_ITEM(7, "Tata :D", GOSSIP_SENDER_MAIN, 1);
+			//pPlayer->ADD_GOSSIP_ITEM(7, "Tata :D", GOSSIP_SENDER_MAIN, 1);
 			pPlayer->PlayerTalkClass->SendGossipMenu(900, pCreature->GetGUID());
 			return true;
 		}
