@@ -1,23 +1,45 @@
-class player_login_announcer : public PlayerScript
+#include "ScriptPCH.h"
+
+#define CUSTOM_BLUE	 "|cff00479E"
+#define CUSTOM_RED       "|cffFF0000"
+#define CUSTOM_LIGHTRED  "|cffD63931"
+#define CUSTOM_WHITE     "|cffffffff"
+
+class announce_login : public PlayerScript
 {
 public:
-    player_login_announcer() : PlayerScript("player_login_announcer") { }
- 
-    void OnLogin(Player* player)
-    {
-        std::ostringstream ss;		
-        switch (player->GetSession()->GetSecurity())
-        {
-            case SEC_PLAYER:
-                ss << "[PLAYER] " << player->GetName() << " has logged in!";				
-                break;
-           
-        }
-        sWorld->SendGMText(LANG_SYSTEM_DEFAULT, ss.str().c_str());
-    }
+	announce_login() : PlayerScript("announce_login") { }
+
+	void OnPlayerLogin(Player* player, bool /*firstLogin*/)
+	{
+		char msg[500];
+		if (player->GetTeam() == ALLIANCE)
+		{
+			sprintf(msg, "[%sATT|r]: %s%s|r has logged in !! [%sA|r]", CUSTOM_LIGHTRED, CUSTOM_WHITE, player->GetName().c_str(), CUSTOM_BLUE);
+			sWorld->SendServerMessage(SERVER_MSG_STRING, msg);
+		}
+		else{
+			sprintf(msg, "[%sATT|r]: %s%s|r has logged in !! [%sH|r]", CUSTOM_LIGHTRED, CUSTOM_WHITE, player->GetName().c_str(), CUSTOM_RED);
+			sWorld->SendServerMessage(SERVER_MSG_STRING, msg);
+		}
+	}
+
+	void OnPlayerLogout(Player* player)
+	{
+		char msg[500];
+		if (player->GetTeam() == ALLIANCE)
+		{
+			sprintf(msg, "[%sATT|r]: %s%s|r has logged out ! [%sA|r]", CUSTOM_LIGHTRED, CUSTOM_WHITE, player->GetName().c_str(), CUSTOM_BLUE);
+			sWorld->SendServerMessage(SERVER_MSG_STRING, msg);
+		}
+		else{
+			sprintf(msg, "[%sATT|r]: %s%s|r has logged out ! [%sH|r]", CUSTOM_LIGHTRED, CUSTOM_WHITE, player->GetName().c_str(), CUSTOM_RED);
+			sWorld->SendServerMessage(SERVER_MSG_STRING, msg);
+		}
+	}
 };
- 
-void AddSC_login_announcer()
+
+void AddSC_announce_login()
 {
-    new player_login_announcer();
+	new announce_login();
 }
