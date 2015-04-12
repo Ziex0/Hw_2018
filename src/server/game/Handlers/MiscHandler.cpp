@@ -265,6 +265,9 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
     uint32 level_min, level_max, racemask, classmask, zones_count, str_count;
     uint32 zoneids[10];                                     // 10 is client limit
     std::string player_name, guild_name;
+	
+	bool searchBool = false;
+    std::string searchName;
 
     recvData >> level_min;                                 // maximal player level, default 0
     recvData >> level_max;                                 // minimal player level, default 100 (MAX_LEVEL)
@@ -304,6 +307,9 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
             continue;
 
         wstrToLower(str[i]);
+		
+		searchBool = true;
+        searchName = temp.c_str();
 
         sLog->outDebug(LOG_FILTER_NETWORKIO, "String %u: %s", i, temp.c_str());
     }
@@ -347,13 +353,15 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
             continue;
 
         // check if target is globally visible for player
-        if (!target->IsVisibleGloballyFor(_player))
-            continue;
-
-        // check if target's level is in level range
-        uint8 lvl = target->getLevel();
-        if (lvl < level_min || lvl > level_max)
-            continue;
+		/* Remove check so Level 255 shows up in who list
+			if (!target->IsVisibleGloballyFor(_player))
+			continue;
+		*/
+			
+		// check if target's level is in level range
+			uint8 lvl = target->getLevel();
+			/*if (lvl < level_min || lvl > level_max)
+			continue; */
 
         // check if class matches classmask
         uint8 class_ = target->getClass();
@@ -437,42 +445,43 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
 
         ++displaycount;
     }
-   	
-    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 49) 
-    { 
-        // Fake players on WHO LIST                            0,   1,    2,   3,    4,   5     6 
-        QueryResult result = CharacterDatabase.Query("SELECT guid,name,race,class,level,zone,gender FROM characters WHERE online>1 AND level > 3"); 
-        if (result) 
-        { 
-            do 
-            { 
-                Field *fields = result->Fetch(); 
- 
-                std::string pname = fields[1].GetString();    // player name 
-                std::string gname;                                // guild name 
-                uint32 lvl = fields[4].GetUInt32();                // player level 
-                uint32 class_ = fields[3].GetUInt32();            // player class 
-                uint32 race = fields[2].GetUInt32();            // player race 
-                uint32 pzoneid = fields[5].GetUInt32();            // player zone id 
-                uint8 gender = fields[6].GetUInt8();            // player gender 
- 
-                data << pname;                              // player name 
-                data << gname;                              // guild name 
-                data << uint32(lvl);                        // player level 
-                data << uint32(class_);                     // player class 
-                data << uint32(race);                       // player race 
-                data << uint8(gender);                      // player gender 
-                data << uint32(pzoneid);                    // player zone id 
- 
-                if ((++matchcount) == 49) 
-                    break; 
-            } while (result->NextRow()); 
-        } 
-    } 
- 
+
+    if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 255)
+    {
+        // Fake players on WHO LIST                            0,   1,    2,   3,    4,   5
+        QueryResult result = CharacterDatabase.Query("SELECT name,race,class,level,zone,gender FROM characters_fake WHERE HOUR(online) BETWEEN HOUR(NOW()) AND (HOUR(NOW())+3)");
+        if (result)
+        {
+            do
+            {
+                Field *fields = result->Fetch();
+
+                std::string pname = fields[0].GetString();  // player name
+                std::string gname;                          // guild name
+                uint32 lvl = fields[3].GetUInt32();         // player level
+                uint32 class_ = fields[2].GetUInt32();      // player class
+                uint32 race = fields[1].GetUInt32();        // player race
+                uint32 pzoneid = fields[4].GetUInt32();     // player zone id
+                uint8 gender = fields[5].GetUInt8();        // player gender
+
+                data << pname;                              // player name
+                data << gname;                              // guild name
+                data << uint32(lvl);                        // player level
+                data << uint32(class_);                     // player class
+                data << uint32(race);                       // player race
+                data << uint8(gender);                      // player gender
+                data << uint32(pzoneid);                    // player zone id
+
+                if ((++matchcount) == 49)
+                    break;
+            } while (result->NextRow());
+        }
+    }
+
     data.put(0, matchcount);                            // insert right count, count displayed
     data.put(4, matchcount);                              // insert right count, count of matches
 
+    SendPacket(&data);
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: Send SMSG_WHO Message");
 }
 
@@ -653,6 +662,26 @@ void WorldSession::HandleAddFriendOpcode(WorldPacket& recvData)
 
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: %s asked to add friend : '%s'",
         GetPlayer()->GetName().c_str(), friendName.c_str());
+	
+	if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
+    {
+        PreparedStatement* fake = CharacterDatabase.GetPreparedStatement(FAKE_CHAR_SEL_RACE_BY_NAME);
+        fake->setString(0, friendName);
+        PreparedQueryResult fakeresult = CharacterDatabase.Query(fake);
+
+        if (fakeresult)
+        {
+            Field* fields = fakeresult->Fetch();
+            uint32 team = Player::TeamForRace(fields[0].GetUInt8());
+
+			if (GetPlayer()->GetTeam() != team)
+                sSocialMgr->SendFriendStatus(_player, FRIEND_ENEMY, false, false);
+            else
+                ChatHandler(_player->GetSession()).PSendSysMessage(LANG_FAKE_NOT_DISTURB);
+
+            return;
+        }
+    }
 
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_GUID_RACE_ACC_BY_NAME);
 
@@ -710,6 +739,11 @@ void WorldSession::HandleAddFriendOpcodeCallBack(PreparedQueryResult result, std
             }
         }
     }
+	
+	else if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
+    {
+        friendResult = FRIEND_ENEMY;
+    }
 
     sSocialMgr->SendFriendStatus(GetPlayer(), friendResult, GUID_LOPART(friendGuid), false);
 
@@ -744,6 +778,20 @@ void WorldSession::HandleAddIgnoreOpcode(WorldPacket& recvData)
 
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: %s asked to Ignore: '%s'",
         GetPlayer()->GetName().c_str(), ignoreName.c_str());
+		
+	if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
+    {
+        PreparedStatement* fake = CharacterDatabase.GetPreparedStatement(FAKE_CHAR_SEL_RACE_BY_NAME_IS_ONLINE);
+        fake->setUInt32(0, sWorld->getIntConfig(CONFIG_FAKE_WHO_ONLINE_INTERVAL));
+        fake->setString(1, ignoreName.c_str());
+        PreparedQueryResult fakeresult = CharacterDatabase.Query(fake);
+
+        if (fakeresult)
+        {
+            ChatHandler(_player->GetSession()).PSendSysMessage(LANG_FAKE_NOT_DISTURB);
+            return;
+        }
+    }
 
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_GUID_BY_NAME);
 
@@ -1176,6 +1224,7 @@ void WorldSession::HandleMoveTimeSkippedOpcode(WorldPacket& recvData)
         recvData >> guid;
         recvData >> time_skipped;
         sLog->outDebug(LOG_FILTER_PACKETIO, "WORLD: CMSG_MOVE_TIME_SKIPPED");
+
         //// @todo
         must be need use in Trinity
         We substract server Lags to move time (AntiLags)
@@ -1199,14 +1248,18 @@ void WorldSession::HandleMoveUnRootAck(WorldPacket& recvData)
 /*
     uint64 guid;
     recvData >> guid;
+
     // now can skip not our packet
     if (_player->GetGUID() != guid)
     {
         recvData.rfinish();                   // prevent warnings spam
         return;
     }
+
     sLog->outDebug(LOG_FILTER_PACKETIO, "WORLD: CMSG_FORCE_MOVE_UNROOT_ACK");
+
     recvData.read_skip<uint32>();                          // unk
+
     MovementInfo movementInfo;
     movementInfo.guid = guid;
     ReadMovementInfo(recvData, &movementInfo);
@@ -1221,14 +1274,18 @@ void WorldSession::HandleMoveRootAck(WorldPacket& recvData)
 /*
     uint64 guid;
     recvData >> guid;
+
     // now can skip not our packet
     if (_player->GetGUID() != guid)
     {
         recvData.rfinish();                   // prevent warnings spam
         return;
     }
+
     sLog->outDebug(LOG_FILTER_PACKETIO, "WORLD: CMSG_FORCE_MOVE_ROOT_ACK");
+
     recvData.read_skip<uint32>();                          // unk
+
     MovementInfo movementInfo;
     ReadMovementInfo(recvData, &movementInfo);
 */
