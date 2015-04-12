@@ -432,7 +432,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
         data << uint32(lvl);                              // player level
         data << uint32(class_);                           // player class
         data << uint32(race);                             // player race
-        data << uint8(gender);                             // player gender
+        data << uint8(gender);                            // player gender
         data << uint32(pzoneid);                          // player zone id
 
         ++displaycount;
@@ -653,26 +653,6 @@ void WorldSession::HandleAddFriendOpcode(WorldPacket& recvData)
 
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: %s asked to add friend : '%s'",
         GetPlayer()->GetName().c_str(), friendName.c_str());
-	
-	if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
-    {
-        PreparedStatement* fake = CharacterDatabase.GetPreparedStatement(FAKE_CHAR_SEL_RACE_BY_NAME);
-        fake->setString(0, friendName);
-        PreparedQueryResult fakeresult = CharacterDatabase.Query(fake);
-
-        if (fakeresult)
-        {
-            Field* fields = fakeresult->Fetch();
-            uint32 team = Player::TeamForRace(fields[0].GetUInt8());
-
-			if (GetPlayer()->GetTeam() != team)
-                sSocialMgr->SendFriendStatus(_player, FRIEND_ENEMY, false, false);
-            else
-                ChatHandler(_player->GetSession()).PSendSysMessage(LANG_FAKE_NOT_DISTURB);
-
-            return;
-        }
-    }
 
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_GUID_RACE_ACC_BY_NAME);
 
@@ -730,11 +710,6 @@ void WorldSession::HandleAddFriendOpcodeCallBack(PreparedQueryResult result, std
             }
         }
     }
-	
-	else if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
-    {
-        friendResult = FRIEND_ENEMY;
-    }
 
     sSocialMgr->SendFriendStatus(GetPlayer(), friendResult, GUID_LOPART(friendGuid), false);
 
@@ -769,20 +744,6 @@ void WorldSession::HandleAddIgnoreOpcode(WorldPacket& recvData)
 
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: %s asked to Ignore: '%s'",
         GetPlayer()->GetName().c_str(), ignoreName.c_str());
-		
-	if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
-    {
-        PreparedStatement* fake = CharacterDatabase.GetPreparedStatement(FAKE_CHAR_SEL_RACE_BY_NAME_IS_ONLINE);
-        fake->setUInt32(0, sWorld->getIntConfig(CONFIG_FAKE_WHO_ONLINE_INTERVAL));
-        fake->setString(1, ignoreName.c_str());
-        PreparedQueryResult fakeresult = CharacterDatabase.Query(fake);
-
-        if (fakeresult)
-        {
-            ChatHandler(_player->GetSession()).PSendSysMessage(LANG_FAKE_NOT_DISTURB);
-            return;
-        }
-    }
 
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_GUID_BY_NAME);
 
@@ -1215,7 +1176,6 @@ void WorldSession::HandleMoveTimeSkippedOpcode(WorldPacket& recvData)
         recvData >> guid;
         recvData >> time_skipped;
         sLog->outDebug(LOG_FILTER_PACKETIO, "WORLD: CMSG_MOVE_TIME_SKIPPED");
-
         //// @todo
         must be need use in Trinity
         We substract server Lags to move time (AntiLags)
@@ -1239,18 +1199,14 @@ void WorldSession::HandleMoveUnRootAck(WorldPacket& recvData)
 /*
     uint64 guid;
     recvData >> guid;
-
     // now can skip not our packet
     if (_player->GetGUID() != guid)
     {
         recvData.rfinish();                   // prevent warnings spam
         return;
     }
-
     sLog->outDebug(LOG_FILTER_PACKETIO, "WORLD: CMSG_FORCE_MOVE_UNROOT_ACK");
-
     recvData.read_skip<uint32>();                          // unk
-
     MovementInfo movementInfo;
     movementInfo.guid = guid;
     ReadMovementInfo(recvData, &movementInfo);
@@ -1265,18 +1221,14 @@ void WorldSession::HandleMoveRootAck(WorldPacket& recvData)
 /*
     uint64 guid;
     recvData >> guid;
-
     // now can skip not our packet
     if (_player->GetGUID() != guid)
     {
         recvData.rfinish();                   // prevent warnings spam
         return;
     }
-
     sLog->outDebug(LOG_FILTER_PACKETIO, "WORLD: CMSG_FORCE_MOVE_ROOT_ACK");
-
     recvData.read_skip<uint32>();                          // unk
-
     MovementInfo movementInfo;
     ReadMovementInfo(recvData, &movementInfo);
 */

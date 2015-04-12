@@ -15,17 +15,13 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 #include "CharacterDatabase.h"
 
 void CharacterDatabaseConnection::DoPrepareStatements()
 {
     if (!m_reconnecting)
         m_stmts.resize(MAX_CHARACTERDATABASE_STATEMENTS);
-	
-	PrepareStatement(FAKE_CHAR_SEL_RACE_BY_NAME, "SELECT race FROM characters_fake WHERE name = ?", CONNECTION_SYNCH);
-    PrepareStatement(FAKE_CHAR_SEL_RACE_BY_NAME_IS_ONLINE, "SELECT race FROM characters_fake WHERE HOUR(online) BETWEEN HOUR(NOW()) AND (HOUR(NOW()) + ?) AND name = ?", CONNECTION_SYNCH);
-    PrepareStatement(FAKE_CHAR_ONLINE, "SELECT name,race,class,level,zone,gender FROM characters_fake WHERE HOUR(online) BETWEEN HOUR(NOW()) AND (HOUR(NOW()) + ?)", CONNECTION_SYNCH);
-    PrepareStatement(FAKE_CHAR_ONLINE_SEARCH, "SELECT name,race,class,level,zone,gender FROM characters_fake WHERE HOUR(online) BETWEEN HOUR(NOW()) AND (HOUR(NOW()) + ?) AND name = ?", CONNECTION_SYNCH);
 
     PrepareStatement(CHAR_DEL_QUEST_POOL_SAVE, "DELETE FROM pool_quest_save WHERE pool_id = ?", CONNECTION_ASYNC);
     PrepareStatement(CHAR_INS_QUEST_POOL_SAVE, "INSERT INTO pool_quest_save (pool_id, quest_id) VALUES (?, ?)", CONNECTION_ASYNC);
@@ -603,7 +599,7 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PrepareStatement(CHAR_UPD_CHAR_PET_SLOT_BY_ID, "UPDATE character_pet SET slot = ? WHERE owner = ? AND id = ?", CONNECTION_ASYNC);
     PrepareStatement(CHAR_DEL_CHAR_PET_BY_ID, "DELETE FROM character_pet WHERE id = ?", CONNECTION_ASYNC);
     PrepareStatement(CHAR_DEL_CHAR_PET_BY_SLOT, "DELETE FROM character_pet WHERE owner = ? AND (slot = ? OR slot > ?)", CONNECTION_ASYNC);
-	
+
 	//Guild-Level-System
     PrepareStatement(CHAR_SEL_GUILD_BONUS_INFO, "SELECT RequiredGuildLevel FROM guild_bonus_config WHERE BonusId = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_SEL_GUILD_LEVEL_INFO, "SELECT xp, level FROM guild WHERE guildid = ?", CONNECTION_SYNCH);
