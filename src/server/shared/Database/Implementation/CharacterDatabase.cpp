@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 
 #include "CharacterDatabase.h"
 
@@ -622,5 +621,11 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PrepareStatement(CHAR_UPD_NPCBOT_ACTIVE, "UPDATE character_npcbot SET active = ? WHERE owner = ? AND entry = ?", CONNECTION_ASYNC);
     PrepareStatement(CHAR_SEL_NPCBOT_EQUIP, "SELECT equipMhEx, equipOhEx, equipRhEx, "
         "equipHead, equipShoulders, equipChest, equipWaist, equipLegs, equipFeet, equipWrist, equipHands, equipBack, equipBody, equipFinger1, equipFinger2, equipTrinket1, equipTrinket2, equipNeck FROM character_npcbot WHERE owner = ? AND entry = ?", CONNECTION_SYNCH);
-
+	
+	//fake players
+	PrepareStatement(FAKE_CHAR_SEL_RACE_BY_NAME, "SELECT race FROM characters_fake WHERE name = ?", CONNECTION_SYNCH);
+    PrepareStatement(FAKE_CHAR_SEL_RACE_BY_NAME_IS_ONLINE, "SELECT race FROM characters_fake WHERE HOUR(online) BETWEEN HOUR(NOW()) AND (HOUR(NOW()) + ?) AND name = ?", CONNECTION_SYNCH);
+    PrepareStatement(FAKE_CHAR_ONLINE, "SELECT name,race,class,level,zone,gender FROM characters_fake WHERE HOUR(online) BETWEEN HOUR(NOW()) AND (HOUR(NOW()) + ?)", CONNECTION_SYNCH);
+    PrepareStatement(FAKE_CHAR_ONLINE_SEARCH, "SELECT name,race,class,level,zone,gender FROM characters_fake WHERE HOUR(online) BETWEEN HOUR(NOW()) AND (HOUR(NOW()) + ?) AND name = ?", CONNECTION_SYNCH);
+	
 }

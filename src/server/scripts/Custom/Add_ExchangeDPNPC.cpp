@@ -9,7 +9,7 @@ class ExchangeDPNPC : public CreatureScript
 	 {
 		uint32 points;
 
-		QueryResult result = LoginDatabase.PQuery("SELECT vp FROM fusion.account_data WHERE id = '%u' AND vp >= '0'", player->GetSession()->GetAccountId());
+		QueryResult result = LoginDatabase.PQuery("SELECT vp FROM web_db.account_data WHERE id = '%u' AND vp >= '0'", player->GetSession()->GetAccountId());
         if (result)
         {
             do 
@@ -28,7 +28,7 @@ class ExchangeDPNPC : public CreatureScript
 	 {
 		uint32 points;
 
-		QueryResult result = LoginDatabase.PQuery("SELECT dp FROM fusion.account_data WHERE id = '%u' AND dp >= '0'", player->GetSession()->GetAccountId());
+		QueryResult result = LoginDatabase.PQuery("SELECT dp FROM web_db.account_data WHERE id = '%u' AND dp >= '0'", player->GetSession()->GetAccountId());
         if (result)
         {
             do 
@@ -76,7 +76,7 @@ class ExchangeDPNPC : public CreatureScript
 		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cffFFD800 Exchange 500VP to 30DP *",			GOSSIP_SENDER_MAIN, 3, "|cffFFFFFF Change 500VP to 30DP|r", 0, false);
 		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff0094FF Exchange 600VP to 35DP *",			GOSSIP_SENDER_MAIN, 4, "|cffFFFFFF Change 600VP to 35DP|r", 0, false);
 		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cffFF0000 Exchange Massive 2200VP to 150DP *",	GOSSIP_SENDER_MAIN, 5, "|cffFFFFFF Change Massive 2200VP to 150DP|r", 0, false);
-		player->PlayerTalkClass->SendGossipMenu(85008, pCreature->GetGUID());
+		player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
         return true;
 	}
 

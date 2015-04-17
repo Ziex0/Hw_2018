@@ -59,7 +59,7 @@ class npc_changer : public CreatureScript
 					}
 					break;
 				case 2:
-					if(Player->HasItemCount(faction_token, 1))
+					if(Player->HasItemCount(customize_token, 1))
 					{
 						Player->DestroyItemCount(faction_token, 1, true, false);
 						Player->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);

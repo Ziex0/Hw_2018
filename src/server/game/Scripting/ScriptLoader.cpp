@@ -1397,7 +1397,6 @@ void AddBattlegroundScripts()
 	void AddSC_city_conquest_spawner();
 	void AddSC_vipmall_security();
 	void AddSC_ExchangeDPNPC();
-	void AddSC_announce_login();
 
 #endif
 
@@ -1497,7 +1496,7 @@ void AddCustomScripts()
 	AddSC_vipmall_security();
 	AddSC_ArenaGambler();
 	AddSC_ExchangeDPNPC();
-	AddSC_announce_login();
+
 
 #endif
 }

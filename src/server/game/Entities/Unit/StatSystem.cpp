@@ -24,6 +24,7 @@
 #include "SpellAuras.h"
 #include "SpellAuraEffects.h"
 #include "SpellMgr.h"
+#include "World.h"
 
 inline bool _ModifyUInt32(bool apply, uint32& baseValue, int32& amount)
 {
@@ -246,8 +247,9 @@ float Player::GetManaBonusFromIntellect()
     float baseInt = std::min(20.0f, intellect);
     float moreInt = intellect - baseInt;
 
-    return baseInt + (moreInt * 20.0f);
+    return baseInt + (moreInt * 15.0f);
 }
+
 
 void Player::UpdateMaxHealth()
 {
@@ -535,8 +537,8 @@ void Player::CalculateMinMaxDamage(WeaponAttackType attType, bool normalized, bo
 
 void Player::UpdateDamagePhysical(WeaponAttackType attType)
 {
-    float mindamage;
-    float maxdamage;
+    float mindamage = 0.0f;
+    float maxdamage = 0.0f;
 
     CalculateMinMaxDamage(attType, false, true, mindamage, maxdamage);
 

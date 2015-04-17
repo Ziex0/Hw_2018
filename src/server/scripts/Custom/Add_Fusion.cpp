@@ -104,7 +104,7 @@ class npc_Fusion : public CreatureScript
 			Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r I want Poison Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
 			Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r I want Fire Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
 			Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r I want Nature Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
-			Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r I want Extremis fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
+			Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r I want Extremis Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
 			Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r I want iron Knights Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 6);
 			Player->SEND_GOSSIP_MENU(85006, pCreature->GetGUID());
 			return true;
@@ -118,38 +118,38 @@ class npc_Fusion : public CreatureScript
 			switch(uiAction)
 			{
 			
-				case 1:		
+				case GOSSIP_ACTION_INFO_DEF + 1:		
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE,  "|TInterface/ICONS/INV_Chest_Plate13:24|t|r I want Lighting Fusion Armor  ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
-				//Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Lighting Armor Fusion", GOSSIP_SENDER_MAIN, 11, "Are you sure you want to fusion this item name?", 0, true);
+				//Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Lighting Armor Fusion", GOSSIP_SENDER_MAIN, 11, "Are you sure you want to Fusion this item name?", 0, true);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t|r I want Lighting Fusion Weapon  ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 12);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/INV_Misc_Gear_01:24|t|r I want Lighting Fusion Misc item ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 13);
 				break;
 			
-				case 2:
+				case GOSSIP_ACTION_INFO_DEF + 2:
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/INV_Chest_Plate13:24|t|r I want Poison Armor Fusion", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 21);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,   "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t|r I want Poison Weapon Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 22);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/INV_Misc_Gear_01:24|t|r I want Poison Armor Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 23);
 				break;
 					
-				case 3:	
+				case GOSSIP_ACTION_INFO_DEF + 3:	
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/INV_Chest_Plate13:24|t|r I want Fire Armor Fusion", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 31);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,   "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t|r I want Fire Weapon Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 32);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/INV_Misc_Gear_01:24|t|r I want Fire Armor Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33);
 				break;
 				
-				case 4:			
+				case GOSSIP_ACTION_INFO_DEF + 4:			
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/INV_Chest_Plate13:24|t|r I want Nature Armor Fusion", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 41);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,   "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t|r I want Nature Weapon Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 42);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/INV_Misc_Gear_01:24|t|r I want Nature Armor Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 43);
 				break;
 			//vote
-				case 5:
+				case GOSSIP_ACTION_INFO_DEF + 5:
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/INV_Chest_Plate13:24|t|r I want Extremis Armor Fusion", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 51);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,   "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t|r I want Extremis Weapon Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 52);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/INV_Misc_Gear_01:24|t|r I want Extremis Armor Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 53);
 				break;
 			//Donate 
-				case 6:
+				case GOSSIP_ACTION_INFO_DEF + 6:
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE,  "|TInterface/ICONS/INV_Chest_Plate13:24|t|r I want Iron Knights Armor Fusion", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 61);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE,  "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t|r I want Knights Weapon Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 62);
 				Player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE,  "|TInterface/ICONS/INV_Misc_Gear_01:24|t|r I want Knights Armor Fusion ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 63);

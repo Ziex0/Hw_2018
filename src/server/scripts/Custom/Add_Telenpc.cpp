@@ -1823,22 +1823,20 @@ public:
 				GiveRidingSkill(pPlayer, pCreature);
 				break;
 				
-				case GOSSIP_ACTION_INFO_DEF + 3526:
-				{
-					if(!pPlayer->duel) // Checks if a player is in a duel or not.
-                        {
-                        pPlayer->CombatStop(true);
+			case GOSSIP_ACTION_INFO_DEF + 3526:
+				if(!pPlayer->duel)
+                    {
+                      return false;
+                    }
+                    else
+                    {
+                        pPlayer->CLOSE_GOSSIP_MENU();
+						pPlayer->CombatStop(true);
+						pPlayer->CastSpell(pPlayer, 61456, false);
                         ChatHandler(pPlayer->GetSession()).SendSysMessage("Your combat is cleared!");
 						pPlayer->PlayerTalkClass->SendCloseGossip();
-                        }
-                            else
-                            {
-                        ChatHandler(pPlayer->GetSession()).SendSysMessage("You're in a duel! You can not use this!!");
-                        pPlayer->PlayerTalkClass->SendCloseGossip();
-                            }
-                    return true;
-                };
-				break;
+                    }
+                    break;
 
 				pPlayer->CLOSE_GOSSIP_MENU();
 				break;
