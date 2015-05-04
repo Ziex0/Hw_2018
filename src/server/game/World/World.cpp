@@ -602,6 +602,10 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_INTERVAL_DISCONNECT_TOLERANCE] = ConfigMgr::GetIntDefault("DisconnectToleranceInterval", 0);
     m_bool_configs[CONFIG_STATS_SAVE_ONLY_ON_LOGOUT] = ConfigMgr::GetBoolDefault("PlayerSave.Stats.SaveOnlyOnLogout", true);
 
+	m_bool_configs[CONFIG_FAKE_WHO_LIST] = ConfigMgr::GetBoolDefault("Fake.WHO.List", true);
+	m_int_configs[CONFIG_FAKE_WHO_ONLINE_INTERVAL]  = ConfigMgr::GetIntDefault("Fake.WHO.Online.Interval", 5);
+    m_int_configs[CONFIG_FAKE_WHO_LEVELUP_INTERVAL] = ConfigMgr::GetIntDefault("Fake.WHO.LevelUp.Interval", 2);
+
     m_int_configs[CONFIG_MIN_LEVEL_STAT_SAVE] = ConfigMgr::GetIntDefault("PlayerSave.Stats.MinLevel", 0);
     if (m_int_configs[CONFIG_MIN_LEVEL_STAT_SAVE] > MAX_LEVEL)
     {
@@ -676,8 +680,7 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_STRICT_CHARTER_NAMES]                = ConfigMgr::GetIntDefault ("StrictCharterNames", 0);
     m_int_configs[CONFIG_STRICT_PET_NAMES]                    = ConfigMgr::GetIntDefault ("StrictPetNames",     0);
 	
-	m_bool_configs[CONFIG_FAKE_WHO_LIST]                      = ConfigMgr::GetBoolDefault("Fake.WHO.List", false);
-    
+	  
     m_int_configs[CONFIG_MIN_PLAYER_NAME]                     = ConfigMgr::GetIntDefault ("MinPlayerName",  2);
     if (m_int_configs[CONFIG_MIN_PLAYER_NAME] < 1 || m_int_configs[CONFIG_MIN_PLAYER_NAME] > MAX_PLAYER_NAME)
     {

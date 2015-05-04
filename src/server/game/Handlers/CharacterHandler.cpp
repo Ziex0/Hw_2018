@@ -1101,6 +1101,10 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
             } while (result->NextRow());
         }
     }
+	
+	char msg[255];
+    snprintf(msg, 255, "|cffFFFFFFOnline |cff00FF00+%u|cffFFFFFF player(s).", sWorld->GetPlayerCount());
+    sWorld->SendGlobalText(msg, NULL);
 
     sScriptMgr->OnPlayerLogin(pCurrChar);
     delete holder;

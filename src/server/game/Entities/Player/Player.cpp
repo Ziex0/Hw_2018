@@ -81,8 +81,6 @@
 #include "World.h"
 #include "WorldPacket.h"
 #include "WorldSession.h"
-
-//Bot
 #include "Config.h"
 #include "bothelper.h"
 
@@ -916,6 +914,8 @@ Player::Player(WorldSession* session): Unit(true)
     _activeCheats = CHEAT_NONE;
     m_achievementMgr = new AchievementMgr(this);
     m_reputationMgr = new ReputationMgr(this);
+	
+	
 }
 
 Player::~Player()
@@ -2019,13 +2019,16 @@ void Player::Update(uint32 p_time)
             // m_nextSave reset in SaveToDB call
             sScriptMgr->OnPlayerSave(this);
             SaveToDB();
-            sLog->outDebug(LOG_FILTER_PLAYER, "Player '%s' (GUID: %u) saved", GetName().c_str(), GetGUIDLow());            
+            sLog->outDebug(LOG_FILTER_PLAYER, "Player '%s' (GUID: %u) saved", GetName().c_str(), GetGUIDLow());  
+			
+            
             // If Fake WHO List system on then change player position with every SavePlayer Interval (usually 15min)
             if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
             {
                 CharacterDatabase.PExecute("UPDATE characters_fake SET zone = (FLOOR(50 * RAND()) + 1)");
-                CharacterDatabase.PExecute("UPDATE characters_fake SET level = level+1, lastup = NOW() WHERE lastup < (NOW() - INTERVAL 5 HOUR) AND level < 255 AND HOUR(online) BETWEEN HOUR(NOW()) AND (HOUR(NOW())+3)");
+                CharacterDatabase.PExecute("UPDATE characters SET level=level+1 WHERE online > 1 AND level < 255");
             }
+            
        }
         else
             m_nextSave -= p_time;
@@ -6872,13 +6875,14 @@ void Player::RepopAtGraveyard()
     // stop countdown until repop
     m_deathTimer = 0;
 
-    // if no grave found, stay at the current location
+	// if no grave found, stay at the current location
 	// and don't show spirit healer location
 	if (ClosestGrave)
 	{
-		if(ConfigMgr::GetBoolDefault("Remove.Graveyard.Activation", 0))
+		if(ConfigMgr::GetBoolDefault("Remove.Graveyard.Activation", 1))
 		{
-			//TeleportTo(ClosestGrave->map_id, ClosestGrave->x, ClosestGrave->y, ClosestGrave->z, GetOrientation());
+			//ClosestGrave = sObjectMgr->GetClosestGraveYard(ClosestGrave->ID);
+			TeleportTo(ClosestGrave->map_id, ClosestGrave->x, ClosestGrave->y, ClosestGrave->z, GetOrientation());
 			if (isDead()) // not send if alive, because it used in TeleportTo()
 			{
 				WorldPacket data(SMSG_DEATH_RELEASE_LOC, 4*4); // show spirit healer position on minimap
@@ -6893,6 +6897,7 @@ void Player::RepopAtGraveyard()
 		{
 		if (GetBattleground() || GetInstanceScript())
 			{
+				//ClosestGrave = sObjectMgr->GetClosestGraveYard(ClosestGrave->ID);
 				TeleportTo(ClosestGrave->map_id, ClosestGrave->x, ClosestGrave->y, ClosestGrave->z, GetOrientation());
 			}
 			else if(isDead())                          // not send if alive, because it used in TeleportTo()
@@ -6906,9 +6911,10 @@ void Player::RepopAtGraveyard()
 			}	
 		}
 	}
-			else if (GetPositionZ() < -500.0f)
-			TeleportTo(m_homebindMapId, m_homebindX, m_homebindY, m_homebindZ, GetOrientation()); 
-}
+	else if (GetPositionZ() < 0.0f)
+		TeleportTo(m_homebindMapId, m_homebindX, m_homebindY, m_homebindZ, GetOrientation());
+ }
+
 
 bool Player::CanJoinConstantChannelInZone(ChatChannelsEntry const* channel, AreaTableEntry const* zone)
 {
@@ -7317,7 +7323,7 @@ void Player::ApplyRatingMod(CombatRating cr, int32 value, bool apply)
     UpdateRating(cr);
 }
 
-void Player::UpdateInstantHasteCap()
+/*void Player::UpdateInstantHasteCap()
 {	
 	if (sWorld->getIntConfig(CONFIG_PLAYER_HASTE_CAP) == -1)
 	{
@@ -7331,7 +7337,7 @@ void Player::UpdateInstantHasteCap()
 
 	if (m_baseRatingValue[CR_HASTE_MELEE] > sWorld->getIntConfig(CONFIG_PLAYER_HASTE_CAP))
 	{
-		SetFloatValue(UNIT_MOD_CAST_SPEED, 1);
+		SetFloatValue(UNIT_MOD_CAST_SPEED, 0);
 		SetFloatValue(UNIT_FIELD_BASEATTACKTIME + BASE_ATTACK, 1);
 		SetFloatValue(UNIT_FIELD_BASEATTACKTIME + OFF_ATTACK, 1);
 		SetFloatValue(UNIT_FIELD_BASEATTACKTIME + RANGED_ATTACK, 1);
@@ -7361,7 +7367,7 @@ void Player::UpdateInstantHasteCap()
 		UpdateDamagePhysical(OFF_ATTACK);
 		UpdateDamagePhysical(RANGED_ATTACK);
 	}
-}
+}*/
 
 
 void Player::UpdateRating(CombatRating cr)
@@ -12973,8 +12979,8 @@ InventoryResult Player::CanEquipItem(uint8 slot, uint16 &dest, Item* pItem, bool
         if (pProto)
         {
 			uint32 IvipLevel = pProto->vipLevel;
-		uint32 PvipLevel = GetSession()->GetSecurity();
-		if(IvipLevel  > PvipLevel)
+			uint32 PvipLevel = GetSession()->GetSecurity();
+			if(IvipLevel  > PvipLevel)
 		{
 			// can't equip item if vip level higher than your GM rank
 			return EQUIP_ERR_YOU_CAN_NEVER_USE_THAT_ITEM;
@@ -21896,6 +21902,21 @@ void Player::Whisper(const std::string& text, uint32 language, uint64 receiver)
         ChatHandler(GetSession()).PSendSysMessage(LANG_PLAYER_DND, rPlayer->GetName().c_str(), rPlayer->autoReplyMsg.c_str());
 }
 
+void Player::WhisperToRobot(const std::string& text, uint32 language)
+{
+   bool isAddonMessage = language == LANG_ADDON;
+
+    if (!isAddonMessage)                                    // if not addon data
+        language = LANG_UNIVERSAL;                          // whispers should always be readable
+
+    std::string _text(text);
+    sScriptMgr->OnPlayerChat(this, CHAT_MSG_WHISPER, language, _text, this);
+
+    WorldPacket data(SMSG_MESSAGECHAT, 200);
+    BuildPlayerChat(&data, CHAT_MSG_WHISPER, _text, language);
+    this->GetSession()->SendPacket(&data);
+}
+
 Item* Player::GetMItem(uint32 id)
 {
     ItemMap::const_iterator itr = mMitems.find(id);
@@ -22889,7 +22910,7 @@ inline bool Player::_StoreOrEquipNewItem(uint32 vendorslot, uint32 item, uint8 c
                 DestroyItemCount(iece->reqitem[i], (iece->reqitemcount[i] * count), true);
         }
     }
-
+	
     Item* it = bStore ?
         StoreNewItem(vDest, item, true) :
         EquipNewItem(uiDest, item, true);
@@ -23019,7 +23040,8 @@ bool Player::BuyItemFromVendorSlot(uint64 vendorguid, uint32 vendorslot, uint32 
                 return false;
             }
         }
-
+		
+		
         // check for personal arena rating requirement
         if (GetMaxPersonalArenaRatingRequirement(iece->reqarenaslot) < iece->reqpersonalarenarating)
         {

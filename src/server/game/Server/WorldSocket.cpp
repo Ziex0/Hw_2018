@@ -748,6 +748,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     std::string account;
 	bool isPremium = false;
     SHA1Hash sha;
+	uint32 m_viplevel;
     uint32 clientBuild;
     uint32 unk2, unk3, unk5, unk6, unk7;
     uint64 unk4;
@@ -878,7 +879,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     }
 	
     // Check premium
-   stmt = LoginDatabase.GetPreparedStatement(LOGIN_SEL_PREMIUM);
+    stmt = LoginDatabase.GetPreparedStatement(LOGIN_SEL_PREMIUM);
     stmt->setUInt32(0, id);
     PreparedQueryResult premresult = LoginDatabase.Query(stmt);
 
@@ -886,6 +887,9 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     {
         isPremium = true;
     }
+	
+	QueryResult q_accvip = LoginDatabase.PQuery("SELECT * FROM `account_vips` WHERE `acc`='%u' AND `active`='1'", id);
+    m_viplevel = q_accvip ? q_accvip->Fetch()[1].GetUInt32() : 0;
 
     // Check locked state for server
     AccountTypes allowedAccountType = sWorld->GetPlayerSecurityLimit();
@@ -942,7 +946,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     LoginDatabase.Execute(stmt);
 
     // NOTE ATM the socket is single-threaded, have this in mind ...
-    ACE_NEW_RETURN(m_Session, WorldSession(id, this, AccountTypes(security), isPremium, expansion, mutetime, locale, recruiter, isRecruiter), -1);
+	ACE_NEW_RETURN(m_Session, WorldSession(id, this, AccountTypes(security), isPremium, expansion, m_viplevel, mutetime, locale, recruiter, isRecruiter), -1);
 
     m_Crypt.Init(&k);
 

@@ -81,6 +81,8 @@ class ChatHandler
 
         bool isValidChatMessage(const char* msg);
         void SendGlobalSysMessage(const char *str);
+		
+		void SendCustomOfficerChat(const char* message);
 
         bool hasStringAbbr(const char* name, const char* part);
 

@@ -332,6 +332,9 @@ void MotionMaster::MoveKnockbackFrom(float srcX, float srcY, float speedXY, floa
     //this function may make players fall below map
     if (_owner->GetTypeId() == TYPEID_PLAYER)
         return;
+	
+	if (speedXY <= 0.1f)
+        return;
 
     float x, y, z;
     float moveTimeHalf = speedZ / Movement::gravity;
@@ -344,7 +347,8 @@ void MotionMaster::MoveKnockbackFrom(float srcX, float srcY, float speedXY, floa
     init.MoveTo(x, y, z);
     init.SetParabolic(max_height, 0);
     init.SetOrientationFixed(true);
-    init.SetVelocity(speedXY);
+    if (speedXY > 0.1f)
+        init.SetVelocity(speedXY);
     init.Launch();
     Mutate(new EffectMovementGenerator(0), MOTION_SLOT_CONTROLLED);
 }
@@ -366,6 +370,8 @@ void MotionMaster::MoveJumpTo(float angle, float speedXY, float speedZ)
 void MotionMaster::MoveJump(float x, float y, float z, float speedXY, float speedZ, uint32 id)
 {
     sLog->outDebug(LOG_FILTER_GENERAL, "Unit (GUID: %u) jump to point (X: %f Y: %f Z: %f)", _owner->GetGUIDLow(), x, y, z);
+	if (speedXY <= 0.1f)
+        return;
 
     float moveTimeHalf = speedZ / Movement::gravity;
     float max_height = -Movement::computeFallElevation(moveTimeHalf, false, -speedZ);
@@ -373,7 +379,8 @@ void MotionMaster::MoveJump(float x, float y, float z, float speedXY, float spee
     Movement::MoveSplineInit init(_owner);
     init.MoveTo(x, y, z, false);
     init.SetParabolic(max_height, 0);
-    init.SetVelocity(speedXY);
+    if (speedXY > 0.1f)
+        init.SetVelocity(speedXY);
     init.Launch();
     Mutate(new EffectMovementGenerator(id), MOTION_SLOT_CONTROLLED);
 }

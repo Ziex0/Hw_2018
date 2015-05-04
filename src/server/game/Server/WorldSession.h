@@ -223,7 +223,7 @@ struct NpcBotMap
 class WorldSession
 {
     public:
-        WorldSession(uint32 id, WorldSocket* sock, AccountTypes sec, bool ispremium, uint8 expansion, time_t mute_time, LocaleConstant locale, uint32 recruiter, bool isARecruiter);
+        WorldSession(uint32 id, WorldSocket* sock, AccountTypes sec, bool ispremium, uint8 expansion, uint8 viplevel, time_t mute_time, LocaleConstant locale, uint32 recruiter, bool isARecruiter);
         ~WorldSession();
 
         bool PlayerLoading() const { return m_playerLoading; }
@@ -270,6 +270,7 @@ class WorldSession
         std::string const& GetRemoteAddress() { return m_Address; }
         void SetPlayer(Player* player);
         uint8 Expansion() const { return m_expansion; }
+		uint32 GetVipLevel() const { return m_viplevel; }
 
         void InitWarden(BigNumber* k, std::string const& os);
 
@@ -976,6 +977,7 @@ class WorldSession
         AccountTypes _security;
         uint32 _accountId;
         uint8 m_expansion;
+		uint32 m_viplevel;
 		bool _ispremium;
 
         typedef std::list<AddonInfo> AddonsList;

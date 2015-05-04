@@ -112,7 +112,7 @@ public:
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Professions ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 196);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Learn Spells ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 460);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Player Tools ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 450);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Chest_Plate13:24|t Combat Remover", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3526);
+		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Chest_Plate13:24|t Combat Remover", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3526);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Buffs Me UP", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2500);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:30|t Learn me Pet Tame Beast Skill--", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 50000);
 		pPlayer->SEND_GOSSIP_MENU(907, pCreature->GetGUID());
@@ -1587,7 +1587,7 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Gruul Lair", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33025);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Trial of Crusader", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33026);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Black Temple", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33027);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "cecrown Citadel", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33028);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Icecrown Citadel", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 33028);
 
 				
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -1954,7 +1954,8 @@ public:
         pPlayer->learnSpell(57823, false);
         pPlayer->learnSpell(47488, false);
         break;
-				case GOSSIP_ACTION_INFO_DEF + 3001:
+		
+		case GOSSIP_ACTION_INFO_DEF + 3001:
 	    pPlayer->CLOSE_GOSSIP_MENU();
         pPlayer->learnSpell(48778, false);
         pPlayer->learnSpell(48266, false);
@@ -2044,7 +2045,7 @@ public:
         pPlayer->learnSpell(48572, false);
         pPlayer->learnSpell(48447, false);
 			break;
-			case GOSSIP_ACTION_INFO_DEF + 3003:
+		case GOSSIP_ACTION_INFO_DEF + 3003:
 				pPlayer->CLOSE_GOSSIP_MENU();
         pPlayer->learnSpell(75, false);
         pPlayer->learnSpell(1494, false);
@@ -2103,7 +2104,7 @@ public:
         pPlayer->learnSpell(49048, false);
         pPlayer->learnSpell(58434, false);
 				break;
-			case GOSSIP_ACTION_INFO_DEF + 3004:
+		case GOSSIP_ACTION_INFO_DEF + 3004:
 				pPlayer->CLOSE_GOSSIP_MENU();
         pPlayer->learnSpell(130, false);
         pPlayer->learnSpell(475, false);
@@ -2157,7 +2158,7 @@ public:
         pPlayer->learnSpell(42973, false);
         pPlayer->learnSpell(47610, false);
         pPlayer->learnSpell(58659, false);
-	if (pPlayer->GetTeam() == HORDE) {
+		if (pPlayer->GetTeam() == HORDE) {
 				pPlayer->learnSpell(11418, false);
 				pPlayer->learnSpell(11420, false);
 				pPlayer->learnSpell(11417, false);
@@ -2178,8 +2179,8 @@ public:
 				pPlayer->learnSpell(3561, false);	
 			}
 				break;
-				case GOSSIP_ACTION_INFO_DEF + 3005:
-					pPlayer->CLOSE_GOSSIP_MENU();
+		case GOSSIP_ACTION_INFO_DEF + 3005:
+		pPlayer->CLOSE_GOSSIP_MENU();
         pPlayer->learnSpell(21084, false);
         pPlayer->learnSpell(20271, false);
         pPlayer->learnSpell(498, false);
@@ -2230,9 +2231,18 @@ public:
         pPlayer->learnSpell(48782, false);
         pPlayer->learnSpell(53601, false);
         pPlayer->learnSpell(61411, false);
-					break;
-					case GOSSIP_ACTION_INFO_DEF + 3006:
-						pPlayer->CLOSE_GOSSIP_MENU();
+		if (pPlayer->GetTeam() == HORDE) 
+				{
+				pPlayer->learnSpell(53736, false);				
+				}
+			else 
+				{
+				pPlayer->learnSpell(31801, false);	
+				}
+		break;
+					
+		case GOSSIP_ACTION_INFO_DEF + 3006:
+		pPlayer->CLOSE_GOSSIP_MENU();
         pPlayer->learnSpell(586, false);
         pPlayer->learnSpell(2053, false);
         pPlayer->learnSpell(528, false);

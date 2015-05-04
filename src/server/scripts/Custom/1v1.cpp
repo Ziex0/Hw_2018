@@ -7,7 +7,7 @@
 #include "ArenaTeam.h"
 #include "Language.h"
 
-#define ARENA_1V1_MIN_LEVEL 80 // min level to create an arenateam
+#define ARENA_1V1_MIN_LEVEL 255 // min level to create an arenateam
 #define ARENA_1V1_COST 40 * 50000 // costs for create a team: 200 gold
 
 class npc_1v1arena : public CreatureScript  

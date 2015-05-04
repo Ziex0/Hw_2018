@@ -39,6 +39,7 @@
 #include "Util.h"
 #include "ScriptMgr.h"
 #include "AccountMgr.h"
+#include "Config.h"
 
 void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 {
@@ -238,7 +239,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 
     switch (type)
     {
-        case CHAT_MSG_SAY:					
+        case CHAT_MSG_SAY:
         case CHAT_MSG_EMOTE:
         case CHAT_MSG_YELL:
         {
@@ -247,72 +248,33 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
                 SendNotification(GetTrinityString(LANG_SAY_REQ), sWorld->getIntConfig(CONFIG_CHAT_SAY_LEVEL_REQ));
                 return;
             }
+			std::ostringstream getcolor_config;
+            std::ostringstream vipcolored_msg;
+            std::ostringstream gmcolored_msg;
+
+            getcolor_config << "Custom.Text.Color.Lv" << std::to_string(sender->GetSession()->GetVipLevel()).c_str();
+            vipcolored_msg << "|cFF" << ConfigMgr::GetStringDefault(getcolor_config.str().c_str(), "").c_str() << msg.c_str();
+            gmcolored_msg << "|cFF" << ConfigMgr::GetStringDefault("Custom.Text.Color.GM", "").c_str() << msg.c_str();
 			
-			if (type == CHAT_MSG_SAY)
-		{
-                switch (sender->GetSession()->GetSecurity())
-            {	
-				
-                /*case SEC_PLAYER:
-                    color = "|cffFFFFFF";
-                    break;*/
-
-				case SEC_VIP:
-                    color =  "|cffB6FF00";
-                    break;
-
-                case SEC_MODERATOR:
-				case SEC_GAMEMASTER:
-				case SEC_HEAD_GM:
-				if (GetPlayer()->isGameMaster()==TRUE)
-					{				
-                    color =  "|cff0094FF";
-					}
-					{
-					if (GetPlayer()->isGameMaster()==FALSE)
-					color = "|cffFFFFFF";
-					}
-                    break;
-
-                case SEC_DEV:
-				if (GetPlayer()->isGameMaster()==TRUE)
-					{				
-                    color =  "|cffB200FF";
-					if (GetPlayer()->isGameMaster()==FALSE)
-					color = "|cffFFFFFF";
-					}
-                    break;
-
-                case SEC_ADMINISTRATOR:
-				case SEC_HEAD_ADMIN:
-				if (GetPlayer()->isGameMaster()==TRUE)
-					{
-                    color =  "|cff00FFFF";
-					if (GetPlayer()->isGameMaster()==FALSE)
-					color = "|cffFFFFFF";
-					}
-                    break;
-				
-				case SEC_CO:
-				case SEC_STAFF:
-				case SEC_OWNER:
-				if (GetPlayer()->isGameMaster()==TRUE)
-					{
-                    color =  "|cffFF0000";
-					if (GetPlayer()->isGameMaster()==FALSE)
-					color = "|cffFFFFFF";
-					}
-                    break;				
-				
+            if (type == CHAT_MSG_SAY)
+                //sender->Say(msg, lang);
+			{
+                if (sender->isGMChat())
+                    sender->Say(gmcolored_msg.str(), lang);
+                else
+                    sender->Say(sender->GetSession()->GetVipLevel() > 0 ? vipcolored_msg.str() : msg, lang);
             }
-			sender->Say(color + msg, Language(lang));
-        }
-		
-			else if (type == CHAT_MSG_EMOTE)
+            else if (type == CHAT_MSG_EMOTE)
                 sender->TextEmote(msg);
             else if (type == CHAT_MSG_YELL)
-                sender->Yell(msg, Language(lang));
-		} break;
+                //sender->Yell(msg, lang);
+			{
+                if (sender->isGMChat())
+                    sender->Yell(gmcolored_msg.str(), lang);
+                else
+                    sender->Yell(sender->GetSession()->GetVipLevel() > 0 ? vipcolored_msg.str() : msg, lang);
+            }
+        } break;
         case CHAT_MSG_WHISPER:
         {
             if (!normalizePlayerName(to))
@@ -324,17 +286,9 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
             Player* receiver = sObjectAccessor->FindPlayerByName(to);
             if (!receiver || (!receiver->isAcceptWhispers() && receiver->GetSession()->HasPermission(RBAC_PERM_CAN_FILTER_WHISPERS) && !receiver->IsInWhisperWhiteList(sender->GetGUID())))
             {
-			// If Fake WHO List system on then show player DND
-                if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
-                {
-                    ChatHandler(sender->GetSession()).PSendSysMessage(LANG_FAKE_NOT_DISTURB);
-                }
-                else
-                {
-                    SendPlayerNotFoundNotice(to);
-                }
-                 return;
-             }
+                GetPlayer()->WhisperToRobot(msg, lang);
+				return;
+            }
             if (!sender->isGameMaster() && sender->getLevel() < sWorld->getIntConfig(CONFIG_CHAT_WHISPER_LEVEL_REQ) && !receiver->IsInWhisperWhiteList(sender->GetGUID()))
             {
                 SendNotification(GetTrinityString(LANG_WHISPER_REQ), sWorld->getIntConfig(CONFIG_CHAT_WHISPER_LEVEL_REQ));
@@ -359,7 +313,18 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
                 (HasPermission(RBAC_PERM_CAN_FILTER_WHISPERS) && !sender->isAcceptWhispers() && !sender->IsInWhisperWhiteList(receiver->GetGUID())))
                 sender->AddWhisperWhiteList(receiver->GetGUID());
 
-            GetPlayer()->Whisper(msg, lang, receiver->GetGUID());
+            std::ostringstream getcolor_config;
+            std::ostringstream vipcolored_msg;
+            std::ostringstream gmcolored_msg;
+
+            getcolor_config << "Custom.Text.Color.Lv" << std::to_string(GetPlayer()->GetSession()->GetVipLevel()).c_str();
+            vipcolored_msg << "|cFF" << ConfigMgr::GetStringDefault(getcolor_config.str().c_str(), "").c_str() << msg.c_str();
+            gmcolored_msg << "|cFF" << ConfigMgr::GetStringDefault("Custom.Text.Color.GM", "").c_str() << msg.c_str();
+
+            if (GetPlayer()->isGMChat())
+                GetPlayer()->Whisper(gmcolored_msg.str(), lang, receiver->GetGUID());
+            else
+                GetPlayer()->Whisper(GetPlayer()->GetSession()->GetVipLevel() > 0 ? vipcolored_msg.str() : msg, lang, receiver->GetGUID());
         } break;
         case CHAT_MSG_PARTY:
         case CHAT_MSG_PARTY_LEADER:
@@ -394,113 +359,20 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
                 }
             }
         } break;
+		
         case CHAT_MSG_OFFICER:
+    {
+        /*if (GetPlayer()->GetGuildId())
         {
-            char message[1024];
-			switch(GetPlayer()->GetSession()->GetSecurity())
-			{
-			case SEC_PLAYER: // normal player, non-vip	1				
-					snprintf(message, 1024, "|cffFF6549World |TInterface\\PvPRankBadges\\PvPRank01:13:13|t]|cff00E21A[ Player ]|cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());					
-					break;
+            if (Guild* guild = sGuildMgr->GetGuildById(GetPlayer()->GetGuildId()))
+            {
+                sScriptMgr->OnPlayerChat(GetPlayer(), type, lang, msg, guild);
 
-			case SEC_VIP: // VIP2
-					snprintf(message, 1024, "|cffFF6549World |TInterface\\PvPRankBadges\\PvPRank03:13:13|t]|cff00E21A[ V.I.P ]|cff00E2E2[%s]:|cffB6FF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					break;
-					
-			case SEC_MODERATOR: // TRIAL GM3
-					if (GetPlayer()->isGameMaster()==TRUE)
-					{
-					snprintf(message, 1024, "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Trial GM ]|cff00E2E2[%s]:|cff0094FF %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}{
-					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}
-					break;
-					
-			case SEC_GAMEMASTER: // GM/SGM4
-					if (GetPlayer()->isGameMaster()==TRUE)
-					{
-					snprintf(message, 1024, "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ GM ]|cff00E2E2[%s]:|cff0094FF %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}{
-					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}
-					break;
-					
-			 case SEC_HEAD_GM: // ADMIN5
-					if (GetPlayer()->isGameMaster()==TRUE)
-					{
-					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Head GM ]|cff00E2E2[%s]:|cff0094FF %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}{
-					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}
-					break;
-				
-			case SEC_DEV: // DEV6
-					if (GetPlayer()->isGameMaster()==TRUE)
-					{
-					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Developer ]|cff00E2E2[%s]:|cffB200FF %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}{
-					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}
-					break;
-			
-						
-			case SEC_ADMINISTRATOR: // ADMIN8
-					if (GetPlayer()->isGameMaster()==TRUE)
-					{
-					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Admin ]|cff00E2E2[%s]:|cff00FFFF %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}{
-					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}
-					break;
-					
-			case SEC_HEAD_ADMIN: // ADMIN9
-					if (GetPlayer()->isGameMaster()==TRUE)
-					{
-					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Head Admin ]|cff00E2E2[%s]:|cff00FFFF %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}{
-					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}
-					break;
-
-			case SEC_STAFF: // ADMIN10
-					if (GetPlayer()->isGameMaster()==TRUE)
-					{
-					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Head Of Staffs ]|cff00E2E2[%s]:|cffFF0000 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}{
-					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}
-					break;
-			
-			case SEC_CO: // ADMIN10
-					if (GetPlayer()->isGameMaster()==TRUE)
-					{
-					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Co-Owner ]|cff00E2E2[%s]:|cffFF0000 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}{
-					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}
-					break;			
-					
-			case SEC_OWNER: // ADMIN11
-					if (GetPlayer()->isGameMaster()==TRUE)
-					{
-					snprintf(message, 1024,  "|cffFF6549World |TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t |cff00E21A[ Owner ]|cff00E2E2[%s]:|cffFF0000 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}{
-					if (GetPlayer()->isGameMaster()==FALSE)
-					snprintf(message, 1024, "|cffFF6549World |cff00E2E2[%s]:|cffFFFF00 %s", GetPlayer()->GetName().c_str(), msg.c_str());
-					}
-					break;
-										
-			}
-			sWorld->SendGlobalText(message, NULL);
-        } break;
+                guild->BroadcastToGuild(this, true, msg, lang == LANG_ADDON ? LANG_ADDON : LANG_UNIVERSAL);
+            }
+        }*/
+		ChatHandler(GetPlayer()->GetSession()).SendCustomOfficerChat(msg.c_str());
+    } break;
 		
         case CHAT_MSG_RAID:
         {
@@ -590,8 +462,12 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
             {
                 if (Channel* chn = cMgr->GetChannel(channel, _player))
                 {
+					if (chn->GetFlags() == CHANNEL_FLAG_CUSTOM)
+                        chn->Say(sender->GetGUID(), msg.c_str(), lang);
+                    else
+                        ChatHandler(GetPlayer()->GetSession()).SendCustomOfficerChat(msg.c_str());
                     sScriptMgr->OnPlayerChat(_player, type, lang, msg, chn);
-                    chn->Say(_player->GetGUID(), msg.c_str(), lang);
+                    //chn->Say(_player->GetGUID(), msg.c_str(), lang);
                 }
             }
         } break;

@@ -30,8 +30,10 @@ public:
         static ChatCommand DoCommandTable[] =
 
         {
-				{ "talent",        SEC_PLAYER,  false, &HandleDoTalentsCommand,     			"", NULL },
-				{ NULL,             0,                  false, NULL,                                "", NULL }
+				{ "talent",         SEC_PLAYER,  false, &HandleDoTalentsCommand,     			"", NULL },
+				{ "Lk",        		SEC_PLAYER,  false, &HandleDoTeleCommand,     				"", NULL },
+				{ "song",        	SEC_VIP,  	 false, &HandleDoSongCommand,     				"", NULL },
+				{ NULL,             0,                  false, NULL,                            "", NULL }
 		
 		};
 		
@@ -51,7 +53,48 @@ public:
             me->Say("Do command?", LANG_UNIVERSAL);
             return true;
     }
+	
+	static bool HandleDoSongCommand(ChatHandler* handler, char const* args)
+    {
+        if (!*args)
+            return false;
+
+        uint32 soundId = atoi((char*)args);
+
+        if (!sSoundEntriesStore.LookupEntry(soundId))
+        {
+            handler->PSendSysMessage(LANG_SOUND_NOT_EXIST, soundId);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        WorldPacket data(SMSG_PLAY_SOUND, 4);
+        data << uint32(soundId) << handler->GetSession()->GetPlayer()->GetGUID();
+        sWorld->SendGlobalMessage(&data);
+
+        handler->PSendSysMessage(LANG_COMMAND_PLAYED_TO_ALL, soundId);
+        return true;
+    }
+	
+	static bool HandleDoTeleCommand(ChatHandler * handler, const char * args)
+    { 
+
+		Player* me = handler->GetSession()->GetPlayer();
+	
+		if (me->isInCombat())
+        {
+            handler->SendSysMessage(LANG_YOU_IN_COMBAT);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
 		
+		else
+            me->SaveRecallPosition();
+			me-> TeleportTo(631, 505.212006f, -2124.3500f, 840.9400f, 0.0000f);
+			//handler->PSendSysMessage("You Have Been Teleported to Lich King Place!");
+            return true;
+    }
+	
 	static bool HandleDoTalentsCommand(ChatHandler* handler, char const* /*args*/)
     {
         Player* player = handler->GetSession()->GetPlayer();

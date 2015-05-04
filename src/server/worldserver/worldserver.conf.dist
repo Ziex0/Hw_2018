@@ -63,7 +63,7 @@ RealmID = 1
 #        Example:     "@prefix@/share/trinitycore"
 #        Default:     "."
 
-DataDir = "."
+DataDir = "data"
 
 #
 #    LogsDir
@@ -72,7 +72,7 @@ DataDir = "."
 #                     Logs directory must exists, or log file creation will be disabled.
 #        Default:     "" - (Log files will be stored in the current path)
 
-LogsDir = ""
+LogsDir = "logs"
 
 #
 #    LoginDatabaseInfo
@@ -89,9 +89,9 @@ LogsDir = ""
 #                     "127.0.0.1;3306;trinity;trinity;world"      - (WorldDatabaseInfo)
 #                     "127.0.0.1;3306;trinity;trinity;characters" - (CharacterDatabaseInfo)
 
-LoginDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;auth"
-WorldDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;world"
-CharacterDatabaseInfo = "127.0.0.1;3306;trinity;trinity;characters"
+LoginDatabaseInfo     = "127.0.0.1;3306;root;050185!!;db_auth"
+WorldDatabaseInfo     = "127.0.0.1;3306;root;050185!!;db_world"
+CharacterDatabaseInfo = "127.0.0.1;3306;root;050185!!;db_char"
 
 #
 #    LoginDatabase.WorkerThreads
@@ -133,7 +133,7 @@ MaxPingTime = 30
 #        Description: TCP port to reach the world server.
 #        Default:     8085
 
-WorldServerPort = 8085
+WorldServerPort = 8070
 
 #
 #    BindIP
@@ -181,7 +181,7 @@ Compression = 1
 #                     1+  - (Enabled)
 #                     0   - (Disabled, No limit)
 
-PlayerLimit = 100
+PlayerLimit = 150
 
 #
 #    SaveRespawnTimeImmediately
@@ -251,7 +251,7 @@ ChangeWeatherInterval = 600000
 #        Description: Time (in milliseconds) for player save interval.
 #        Default:     900000 - (15 min)
 
-PlayerSaveInterval = 900000
+PlayerSaveInterval = 15000
 
 #
 #    PlayerSave.Stats.MinLevel
@@ -347,7 +347,7 @@ LogDB.Opt.ClearTime = 1209600
 #        Default:     0   - (Disabled)
 #                     10+ - (Enabled, Recommended 10+)
 
-MaxCoreStuckTime = 0
+MaxCoreStuckTime = 15
 
 #
 #    AddonChannel
@@ -678,7 +678,7 @@ CharacterCreating.Disabled.RaceMask = 0
 #                     2    - (Disabled, Paladin)
 #                     4    - (Disabled, Hunter)
 #                     8    - (Disabled, Rogue)
-#                     16   - (Disabled, Undead)
+#                     16   - (Disabled, Priest)
 #                     32   - (Disabled, Death Knight)
 #                     64   - (Disabled, Shaman)
 #                     128  - (Disabled, Mage)
@@ -728,7 +728,7 @@ CharacterCreating.MinLevelForHeroicCharacter = 55
 #                     1 - (Show intro only for first character of selected race)
 #                     2 - (Disable intro for all classes)
 
-SkipCinematics = 0
+SkipCinematics = 2
 
 #
 #    MaxPlayerLevel
@@ -737,7 +737,7 @@ SkipCinematics = 0
 #        Range:       1-255
 #        Default:     80
 
-MaxPlayerLevel = 80
+MaxPlayerLevel = 255
 
 #
 #    MinDualSpecLevel
@@ -768,7 +768,7 @@ StartHeroicPlayerLevel = 55
 #        Default:     0
 #                     100 - (1 Silver)
 
-StartPlayerMoney = 0
+StartPlayerMoney = 10000000
 
 #
 #    MaxHonorPoints
@@ -782,7 +782,7 @@ MaxHonorPoints = 75000
 #        Description: Amount of honor points that characters have after creation.
 #        Default:     0
 
-StartHonorPoints = 0
+StartHonorPoints = 2
 
 #
 #    MaxArenaPoints
@@ -849,7 +849,7 @@ InstantFlightPaths = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AlwaysMaxSkillForLevel = 0
+AlwaysMaxSkillForLevel = 1
 
 #
 #    ActivateWeather
@@ -1068,7 +1068,7 @@ BeepAtStart = 1
 #        Example:     "Welcome to John\'s Server@This server runs on Trinity Core."
 #        Default:     "Welcome to a Trinity Core server."
 
-Motd = "Welcome to a Trinity Core server."
+Motd = "Welcome to The Satria 3.3.5a Custom World."
 
 #
 #    Server.LoginInfo
@@ -1111,14 +1111,14 @@ DungeonFinder.OptionsMask = 1
 #        Default:     1 - (Enabled, Enforce DBC values)
 #                     0 - (Disabled, Use database values)
 
-DBC.EnforceItemAttributes = 1
+DBC.EnforceItemAttributes = 0
 
 #
 #   AccountInstancesPerHour
 #        Description: Controls the max amount of different instances player can enter within hour
 #        Default:     5
 
-AccountInstancesPerHour = 5
+AccountInstancesPerHour = 20
 
 #
 #   RBAC.DefaultGroups
@@ -1126,7 +1126,7 @@ AccountInstancesPerHour = 5
 #                     Check auth.rbac_groups for correct ids
 #        Default:     "" (No group)
 
-RBAC.DefaultGroups = ""
+RBAC.DefaultGroups = "1"
 
 #
 ###################################################################################################
@@ -1184,7 +1184,7 @@ Warden.ClientCheckHoldOff = 30
 #                     1 - (Kick)
 #                     2 - (Ban)
 
-Warden.ClientCheckFailAction = 0
+Warden.ClientCheckFailAction = 1
 
 #
 #    Warden.BanDuration
@@ -1207,7 +1207,7 @@ Warden.BanDuration = 86400
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AllowTwoSide.Interaction.Calendar = 0
+AllowTwoSide.Interaction.Calendar = 1
 
 #
 #    AllowTwoSide.Interaction.Channel
@@ -1215,7 +1215,7 @@ AllowTwoSide.Interaction.Calendar = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AllowTwoSide.Interaction.Channel = 0
+AllowTwoSide.Interaction.Channel = 1
 
 #
 #    AllowTwoSide.Interaction.Group
@@ -1223,7 +1223,7 @@ AllowTwoSide.Interaction.Channel = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AllowTwoSide.Interaction.Group = 0
+AllowTwoSide.Interaction.Group = 1
 
 #
 #    AllowTwoSide.Interaction.Guild
@@ -1231,7 +1231,7 @@ AllowTwoSide.Interaction.Group = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AllowTwoSide.Interaction.Guild = 0
+AllowTwoSide.Interaction.Guild = 1
 
 #
 #    AllowTwoSide.Interaction.Auction
@@ -1239,7 +1239,7 @@ AllowTwoSide.Interaction.Guild = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AllowTwoSide.Interaction.Auction = 0
+AllowTwoSide.Interaction.Auction = 1
 
 #
 #    AllowTwoSide.Trade
@@ -1247,7 +1247,7 @@ AllowTwoSide.Interaction.Auction = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AllowTwoSide.Trade = 0
+AllowTwoSide.Trade = 1
 
 #
 #    TalentsInspecting
@@ -1507,7 +1507,7 @@ ChatLevelReq.Channel = 1
 #        Description: Level requirement for characters to be able to whisper other characters.
 #        Default:     1
 
-ChatLevelReq.Whisper = 1
+ChatLevelReq.Whisper = 2
 
 #
 #    ChatLevelReq.Say
@@ -1741,15 +1741,15 @@ Rate.Skill.Discovery = 1
 #                     1 - (Rate.Drop.Item.Referenced)
 #                     1 - (Rate.Drop.Money)
 
-Rate.Drop.Item.Poor             = 1
-Rate.Drop.Item.Normal           = 1
-Rate.Drop.Item.Uncommon         = 1
-Rate.Drop.Item.Rare             = 1
-Rate.Drop.Item.Epic             = 1
+Rate.Drop.Item.Poor             = 15
+Rate.Drop.Item.Normal           = 10
+Rate.Drop.Item.Uncommon         = 5
+Rate.Drop.Item.Rare             = 3
+Rate.Drop.Item.Epic             = 2
 Rate.Drop.Item.Legendary        = 1
 Rate.Drop.Item.Artifact         = 1
 Rate.Drop.Item.Referenced       = 1
-Rate.Drop.Money                 = 1
+Rate.Drop.Money                 = 20
 
 #
 #    Rate.Drop.Item.ReferencedAmount
@@ -1771,9 +1771,11 @@ Rate.Drop.Item.ReferencedAmount = 1
 #					1.5 - (Rate.XP.Weekend)
 #                    65 - (Rate.XP.Weekend.EVID)
 
-Rate.XP.Kill    = 1
-Rate.XP.Quest   = 1
-Rate.XP.Explore = 1
+Rate.XP.Kill    = 500000
+Rate.XP.Quest   = 100
+Rate.XP.Explore = 50
+Rate.XP.Weekend = 750000
+Rate.XP.Weekend.EVID = 1650000
 
 #
 #    Rate.RepairCost
@@ -1835,7 +1837,7 @@ Rate.Talent = 1
 #        Description: Reputation gain rate.
 #        Default:     1
 
-Rate.Reputation.Gain = 1
+Rate.Reputation.Gain = 10
 
 #
 #    Rate.Reputation.LowLevel.Kill
@@ -1973,7 +1975,7 @@ DurabilityLossChance.Block = 0.05
 #                     MaxPlayerLevel+1 - (Disabled)
 #                     -10              - (Enabled, Level 1+ characters have 10 minute duration)
 
-Death.SicknessLevel = 11
+Death.SicknessLevel = 256
 
 #
 #    Death.CorpseReclaimDelay.PvP
@@ -1991,7 +1993,7 @@ Death.CorpseReclaimDelay.PvE = 0
 #        	Default:  0 - (Disabled || Default) 
 #                     1 - (Enabled)
 					
-Remove.Graveyard.Activation = 0
+Remove.Graveyard.Activation = 1
 
 #
 #    Death.Bones.World
@@ -2002,7 +2004,7 @@ Remove.Graveyard.Activation = 0
 #                     1 - (Enabled, Death.Bones.BattlegroundOrArena)
 #                     0 - (Disabled)
 
-Death.Bones.World               = 1
+Death.Bones.World               = 0
 Death.Bones.BattlegroundOrArena = 1
 
 #
@@ -2024,7 +2026,7 @@ Die.Command.Mode = 1
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AutoBroadcast.On = 0
+AutoBroadcast.On = 1
 
 #
 #    AutoBroadcast.Center
@@ -2040,7 +2042,7 @@ AutoBroadcast.Center = 0
 #        Description: Timer (in milliseconds) for auto broadcasts.
 #        Default:     60000 - (60 seconds)
 
-AutoBroadcast.Timer = 60000
+AutoBroadcast.Timer = 600000
 
 #
 ###################################################################################################
@@ -2053,7 +2055,7 @@ AutoBroadcast.Timer = 60000
 #        Default:     1 - (Enabled)
 #                     0 - (Disabled)
 
-Battleground.CastDeserter = 1
+Battleground.CastDeserter = 0
 
 #
 #    Battleground.QueueAnnouncer.Enable
@@ -2061,7 +2063,7 @@ Battleground.CastDeserter = 1
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-Battleground.QueueAnnouncer.Enable = 0
+Battleground.QueueAnnouncer.Enable = 1
 
 #
 #    Battleground.QueueAnnouncer.PlayerOnly
@@ -2324,7 +2326,7 @@ Console.Enable = 1
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-Ra.Enable = 0
+Ra.Enable = 1
 
 #
 #    Ra.IP
@@ -2338,7 +2340,7 @@ Ra.IP = "0.0.0.0"
 #        Description: TCP port to reach the remote console.
 #        Default:     3443
 
-Ra.Port = 3443
+Ra.Port = 3440
 
 #
 #    Ra.MinLevel
@@ -2405,11 +2407,13 @@ CharDelete.Heroic.MinLevel = 0
 #        Default:     30 - (Enabled)
 #                     0  - (Disabled, Don't delete any characters)
 
-CharDelete.KeepDays = 30
+CharDelete.KeepDays = 5
 
 #
 ###################################################################################################
- 
+
+###################################################################################################
+# CUSTOM PREMIUM RATE
 #    Rate.XP.Kill.Premium
 #    Rate.XP.Quest.Premium
 #    Rate.XP.Explore.Premium
@@ -2418,13 +2422,16 @@ CharDelete.KeepDays = 30
 #        XP rates Premium modifier
 #        Default: 1
 
-Rate.XP.Kill.Premium     = 1
-Rate.XP.Quest.Premium    = 1
-Rate.XP.Explore.Premium  = 1
-Rate.Honor.Premium       = 1
-Rate.Reputation.Premium  = 1
+Rate.XP.Kill.Premium     = 100
+Rate.XP.Quest.Premium    = 50
+Rate.XP.Explore.Premium  = 20
+Rate.Honor.Premium       = 3
+Rate.Reputation.Premium  = 20
 Command.Bank.Premium     = 1
 Command.Mail.Premium     = 1
+
+#
+###################################################################################################
 
 ###################################################################################################
 # CUSTOM SERVER OPTIONS
@@ -2454,7 +2461,7 @@ PlayerStart.AllSpells = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-PlayerStart.MapsExplored = 0
+PlayerStart.MapsExplored = 1
 
 #
 #    HonorPointsAfterDuel
@@ -2480,7 +2487,7 @@ AlwaysMaxWeaponSkill = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-PvPToken.Enable = 0
+PvPToken.Enable = 1
 
 #
 #    PvPToken.MapAllowType
@@ -2498,7 +2505,7 @@ PvPToken.MapAllowType = 4
 #                     system is enabled.
 #        Default:     29434 - (Badge of justice)
 
-PvPToken.ItemID = 29434
+PvPToken.ItemID = 320284
 
 #
 #    PvPToken.ItemCount
@@ -2571,7 +2578,7 @@ MinRecordUpdateTimeDiff = 100
 #        Description: String to be displayed at first login of newly created characters.
 #         Default:    "" - (Disabled)
 
-PlayerStart.String = ""
+PlayerStart.String = "Welcome To Satria..Enjoy your time to play."
 
 #
 #     LevelReq.Trade
@@ -2613,7 +2620,7 @@ Anticheat.Enable = 1
 #        Description: How many reports the player must have to notify to GameMasters ingame when he generates a new report.
 #        Default:     70
 
-Anticheat.ReportsForIngameWarnings = 70
+Anticheat.ReportsForIngameWarnings = 60
 
 #     Anticheat.DetectionsEnabled
 #        Description: It represents which detections are enabled.
@@ -2627,7 +2634,7 @@ Anticheat.ReportsForIngameWarnings = 70
 #
 #        Default:     31
 
-Anticheat.DetectionsEnabled = 31
+Anticheat.DetectionsEnabled = 23
 
 #     Anticheat.MaxReportsForDailyReport
 #        Description: How many reports must the player have to make a report that it is in DB for a day (not only during the player's session).
@@ -2658,7 +2665,6 @@ PlayerDump.DisallowOverwrite = 1
 
 Player.HasteCap = 6000
 
-
 # GMIsland.PlayersNoAccess.Enable
 # Prevent access for players to gm island
 # 			Default: 1 - Enable
@@ -2671,7 +2677,7 @@ GMIsland.PlayersNoAccess.Enable = 1
 # 		Teleport player to this coordinates (map, x, y, z, orientation)
 # 		Default: "13 1.118799 0.477914 -144.708650 3.133046" (Jailbox)
 
-GMIsland.TeleportTo = "13 1.118799 0.477914 -144.708650 3.133046"
+GMIsland.TeleportTo = "1 16228.2 16403.4 -64.3788 1.65007"
 
 #
 # GMIsland.Ban.Enable
@@ -2687,7 +2693,7 @@ GMIsland.Ban.Enable = 0
 #        Example: [13] Westfall Stew
 #        Default: 0 (do not show)
 
-UI.ShowQuestLevelsInDialogs = 0
+UI.ShowQuestLevelsInDialogs = 1
 
 #
 ###################################################################################################
@@ -2878,8 +2884,48 @@ Loggers=Root Chat DBErrors GM RA Warden Character Load WorldServer Opcodes
 
 Log.Async.Enable = 0
 
+#
 ###################################################################################################
-# MODIFICATION (THIS IS NOT BLIZZLIKE)
+
+###################################################################################################
+# CUSTOM VIP SETTINGS
+#
+#    Channel.Name.Color.Lv
+#       Description: Colorize the vip name in custom world channel
+#
+
+Channel.Name.Color.Lv1 = "FF0000"
+Channel.Name.Color.Lv2 = "FF00FF"
+Channel.Name.Color.Lv3 = "560DB7"
+
+#
+#    Channel.Name.Color.GM
+#       Description: Colorize the gm name in custom world channel used only when <GM> tag on
+#       Note: It will ignore the vip name color if used
+#       Default:     00CCFF - (cyan)
+#
+
+Channel.Name.Color.GM = "00CCFF"
+
+#
+#    Custom.Text.Color.Lv
+#       Description: Colorize the text string in say, yell and whisper chat
+#
+
+Custom.Text.Color.Lv1 = "FFA500"
+Custom.Text.Color.Lv2 = "FFA500"
+Custom.Text.Color.Lv3 = "FFA500"
+
+#
+#    Custom.Text.Color.GM
+#       Description: Colorize the text string in say, yell and whisper chat used only when <GM> chat badge on
+#       Note: It will ignore the vip text color if used
+#       Default:     00CCFF - (cyan)
+#
+
+Custom.Text.Color.GM = "00CCFF"
+
+#
 ###################################################################################################
 
 ###################################################################################################
@@ -2890,7 +2936,7 @@ Log.Async.Enable = 0
 #        Default:     0 = Disable
 #                     1 = Enable
 
-CharacterHistory.Enable = 0
+CharacterHistory.Enable = 1
 
 #
 #     CharacterHistory.Login
@@ -2922,7 +2968,7 @@ CharacterHistory.Create = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-CharacterHistory.Delete = 0
+CharacterHistory.Delete = 1
 
 #
 ###################################################################################################
@@ -2935,7 +2981,7 @@ CharacterHistory.Delete = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AutoLearn.Enable = 0
+AutoLearn.Enable = 1
 
 #   AutoLearn.Check.Level
 #        Description: Enabe/Disable Check Level For Spells.
@@ -2949,28 +2995,28 @@ AutoLearn.Check.Level = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AutoLearn.SpellClass = 0
+AutoLearn.SpellClass = 1
 
 #   AutoLearn.Spell.Riding
 #        Description: Enabe/Disable Learn Riding Spells.
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AutoLearn.SpellRiding = 0
+AutoLearn.SpellRiding = 1
 
 #   AutoLearn.Spell.Mount
 #        Description: Enabe/Disable Learn Mount Spells.
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AutoLearn.SpellMount = 0
+AutoLearn.SpellMount = 1
 
 #   AutoLearn.Spell.Weapon
 #        Description: Enabe/Disable Learn Weapon Spells.
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AutoLearn.SpellWeapon = 0
+AutoLearn.SpellWeapon = 1
 
 #   AutoLearn.Spell.Profession
 #        Description: Enabe/Disable Learn Profession Spells.
@@ -2991,17 +3037,17 @@ AutoLearn.DualSpec = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AutoLearn.Login.Spell = 0
+AutoLearn.Login.Spell = 1
 
 #   AutoLearn.Login.Skill
 #        Description: Check skills on login
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AutoLearn.Login.Skill = 0
+AutoLearn.Login.Skill = 1
 
-AutoLearn.Create.Spell = 0
-AutoLearn.Create.Skill = 0
+AutoLearn.Create.Spell = 1
+AutoLearn.Create.Skill = 1
 
 #
 ###################################################################################################
@@ -3014,7 +3060,7 @@ AutoLearn.Create.Skill = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-MultiKill.Enable = 0
+MultiKill.Enable = 1
 
 #    MultiKill.BattleGround.Only
 #        Description: System works only battlegrounds.
@@ -3047,7 +3093,7 @@ MultiKill.Time.Between = 15
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-Tournaments.Enable = 0
+Tournaments.Enable = 1
 
 #    Tournaments.Debug
 #        Description: Debug mode for Tournaments System.
@@ -3061,13 +3107,13 @@ Tournaments.Debug = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-Tournaments.Ladder = 0
+Tournaments.Ladder = 1
 
 #    Tournaments.LadderText
 #        Description: Trinity string for organizer gossip menu (default: "[%u] Next level").
 #        Default:     0
 
-Tournaments.LadderText = 0
+Tournaments.LadderText = 1
 
 #
 ###################################################################################################
@@ -3079,7 +3125,7 @@ Tournaments.LadderText = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-ArenaWatcher.Enable = 0
+ArenaWatcher.Enable = 1
 
 #   Gossip menu only for game master
 #        Default:     0 - (Disabled)
@@ -3097,13 +3143,13 @@ ArenaWatcher.OnlyRated = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-ArenaWatcher.ToPlayers = 0
+ArenaWatcher.ToPlayers = 1
 
 #   Need description
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-ArenaWatcher.Silence = 0
+ArenaWatcher.Silence = 1
 
 #   Need description
 #        Default:     0 - (Disabled)
@@ -3126,7 +3172,7 @@ ArenaWatcher.Speed = 3.0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-ItemUpgrade.Enable = 0
+ItemUpgrade.Enable = 1
 
 # String ID from `trinity_string` for gossip menu
 
@@ -3135,74 +3181,93 @@ ItemUpgrade.Text.NoEffect = 11301
 ItemUpgrade.Text.EffectNow = 11302
 ItemUpgrade.Text.EffectRemove = 11303
 
+#
 ###################################################################################################
-
+#
+###################################################################################################
 #on/off battleground history
-BattlegroundHistory.Enable = 0
+BattlegroundHistory.Enable = 1
 
-#######################################################################
-
+#
+###################################################################################################
+#
+###################################################################################################
 #on/off dynamic instance (warning, in dev!!!)
 DynamicDifficulty.Enable = 0
-DynamicDifficulty.DungeonOnly = 0
-DynamicDifficulty.WorldLevel = 80
+DynamicDifficulty.DungeonOnly = 100
+DynamicDifficulty.WorldLevel = 255
 
-#######################################################################
-
+#
+###################################################################################################
+#
+###################################################################################################
 #on/off dynamic rate
-DynamicRate.Enable = 0
+DynamicRate.Enable = 1
 #default rate
 DynamicRate.Default = 1
 #min set rate
-DynamicRate.Min = 0
+DynamicRate.Min = 1
 #max set rate
-DynamicRate.Max = 100
+DynamicRate.Max = 20
 #can set for account
 DynamicRate.Account = 0
 #can set for character
 DynamicRate.Character = 0
 #cd for set dynamic rate
-DynamicRate.Cooldown = 120
+DynamicRate.Cooldown = 100
 
-#######################################################################
-
+#
+###################################################################################################
+#
+###################################################################################################
 #on/off external mail
-ExternalMail = 0
+
+ExternalMail = 1
 #interval check(in minutes)
-ExternalMailInterval = 1
 
-#######################################################################
+ExternalMailInterval = 3
 
+#
+###################################################################################################
+#
+###################################################################################################
 #on/off friend chat
-FriendChat = 0
 
-#######################################################################
+FriendChat = 1
 
+#
+###################################################################################################
+#
+###################################################################################################
 #on/off honor rank
-HonorRank.Enable = 0
+HonorRank.Enable = 1
 #check on kill
-HonorRank.Check.Kill = 0
+HonorRank.Check.Kill = 1
 #check on login
 HonorRank.Check.Login = 0
 #set new rank
 HonorRank.SetNew = 0
 
-#######################################################################
-
+#
+###################################################################################################
+#
+###################################################################################################
 #on/off announce kill boss
-BossHistory.Enable = 0
+BossHistory.Enable = 1
 #annonce or log only boss in instance
-BossHistory.InstanceOnly = 0
+BossHistory.InstanceOnly = 1
 #annonuce when the guild killed boss
-BossHistory.Announce = 0
+BossHistory.Announce = 1
 #on/off log kill boss
 BossHistory.Log = 0
 #textid for announce
 BossHistory.NormalTextId = 11006
 BossHistory.HeroicTextId = 11007
 
-#######################################################################
-
+#
+###################################################################################################
+#
+###################################################################################################
 #on/off auctionhousebot
 AuctionHouseBot.Enable = 0
 #check interval(in minutes)
@@ -3234,13 +3299,13 @@ GuildDefault.ID = 0
 GuildDefault.Rank = 0
 
 # Achievements for account
-Account.Achievements = 0
+Account.Achievements = 1
 
 #
-CharacterModel.Enable = 0
+CharacterModel.Enable = 1
 
 #
-DefaultSpec.Enable = 0
+DefaultSpec.Enable = 1
 
 #on/off special code
 SpecialCode.Enable = 0
@@ -3255,8 +3320,8 @@ PlayerCreate.WithoutItems = 0
 CustomRewardPvP.Enable = 0
 
 #
- ###################################################################################################
- 
+###################################################################################################
+# Custom Speed game
 ###################################################################################################
 #
 # Custom.SpeedGame
@@ -3290,16 +3355,15 @@ Custom.NoCooldown = 0
 #
 
 Custom.HurtInRealTime = 0
-#
-###################################################################################################
 
+#
 ###################################################################################################
 #    Transmogrification config
 ###################################################################################################
 #
 #    SETTINGS
 #
-#    Transmogrification.EnableTransmogInfo
+#   Transmogrification.EnableTransmogInfo
 #        Description: Enables / Disables the info button for transmogrification
 #        Default:    1
 #
@@ -3351,7 +3415,7 @@ Transmogrification.NotAllowed = ""
 #
 #    Transmogrification.SetCopperCost
 #        Description: Cost added on top of other costs (can be negative)
-#        Default:    0
+#        Default:    100000000
 
 Transmogrification.EnableSets = 1
 Transmogrification.MaxSets = 10
@@ -3364,7 +3428,7 @@ Transmogrification.SetCopperCost = 0
 #
 #    Transmogrification.ScaledCostModifier
 #        Description: A multiplier for the default gold cost (change to 0 for no default cost)
-        Default:    1.0
+#        Default:    1.0
 #
 #    Transmogrification.CopperCost
 #        Description: Cost added on top of other costs (can be negative)
@@ -3435,44 +3499,28 @@ Transmogrification.TokenAmount = 1
 #        Description: Allow axe to be transmogrified with dagger for example
 #        Default:    0
 
-Transmogrification.AllowPoor = 0
-Transmogrification.AllowCommon = 0
+Transmogrification.AllowPoor = 1
+Transmogrification.AllowCommon = 1
 Transmogrification.AllowUncommon = 1
 Transmogrification.AllowRare = 1
 Transmogrification.AllowEpic = 1
-Transmogrification.AllowLegendary = 0
-Transmogrification.AllowArtifact = 0
+Transmogrification.AllowLegendary = 1
+Transmogrification.AllowArtifact = 1
 Transmogrification.AllowHeirloom = 1
 
-Transmogrification.AllowMixedArmorTypes = 0
-Transmogrification.AllowMixedWeaponTypes = 0
+Transmogrification.AllowMixedArmorTypes = 1
+Transmogrification.AllowMixedWeaponTypes = 1
 
 #
 ###################################################################################################
 
 ###################################################################################################
-#
 # Custom.RespawnSpeed
 # Set it to a number upper than 1 to speed up the respawn of mobs (and lower than 1 to slow down).
 # Default : 1.0 (Normal speed)
 #
 
 Custom.RespawnSpeed = 3.0
-
-#
-###################################################################################################
-
-###################################################################################################
-#
-#    Fake.WHO.List
-#        Add fake players to fill in WHO LIST (who is online list, "O" button) if there is less then
-#        49 real players online
-#        Default: 0 (disabled)
-#                 1 (enabled)
-
-Fake.WHO.List = 1
-Fake.WHO.Online.Interval = 7
-Fake.WHO.LevelUp.Interval = 2
 
 #
 ###################################################################################################
@@ -3504,6 +3552,7 @@ Permanent.Morph.Menu.Enable = 1
 #                0 - (Disabled)
  
 Permanent.Scale.Menu.Enable = 1 
+
 #
 ###################################################################################################
 
@@ -3521,8 +3570,8 @@ Bot.EnableNpcBots = 1
 #        Maximum number of Npc Bots allowed per character (disabled for GM accounts)
 #        Default: 1
 #        Recomended: 4
-#        Max: 9
-#        Absolute Max: 39
+#        Max: 5
+#        Absolute Max: 4
 
 Bot.MaxNpcBots = 1
 
@@ -3547,9 +3596,9 @@ Bot.BaseFollowDistance = 30
 #        Note: Minimum xp rate will be 10%
 #        Min: 0
 #        Max: 90
-#        Default: 0
+#        Default: 1
 
-Bot.XpReductionPercent = 0
+Bot.XpReductionPercent = 10
 
 #    Bot.HealTargetIconsMask
 #        Icon number bitmask which bots are using to search for additional targets to heal (out of party)
@@ -3567,7 +3616,7 @@ Bot.XpReductionPercent = 0
 #        Max: 255 (Any Icon)
 #        Default: 8 (Triangle)
 
-Bot.HealTargetIconsMask = 8
+Bot.HealTargetIconsMask = 1
 
 #    Bot.DamageMult
 #        Myltiplier for bot's damage dealt. Allows to balance bots' compared to players' damage
@@ -3591,8 +3640,8 @@ Bot.EnableInRaids = 1
 #        If set to 1 will apply instance players limitation to bots
 #        Default: false for all
 
-Bot.InstanceLimit.Dungeons = 0
-Bot.InstanceLimit.Raids = 0
+Bot.InstanceLimit.Dungeons = 1
+Bot.InstanceLimit.Raids = 1
 
 #    Bot.Cost
 #        Bot recruitment cost (in copper)
@@ -3605,7 +3654,209 @@ Bot.Cost = 0
 #        If set to 0 bots will not attack  players or other bots
 #        Default: 1
 
-Bot.PvP = 1
+Bot.PvP = 0
 
 #
 ###################################################################################################
+
+###################################################################################################
+# CHAT LOGGING AND LEXICS CUTTER
+#
+#    ChatLog.Enable
+#        Enable system of chat logging.
+#        Default: 1 - on
+#                 0 - off
+#
+
+ChatLog.Enable = 1
+
+#
+#    ChatLog.DateSplit
+#        Split log files by date (filename must include $d as date placeholder).
+#        Default: 1 - split
+#                 0 - do not split
+#
+
+ChatLog.DateSplit = 1
+
+#
+#    ChatLog.UTFHeader
+#        Add UTF8 header at the beginning of new file.
+#        Default: 1 - add
+#                 0 - do not add
+#
+
+ChatLog.UTFHeader = 1
+
+#
+#    ChatLog.Ignore.Unprintable
+#        Ignore messages with unprintable characters.
+#        Default: 1 - ignore
+#                 0 - do not ignore
+#
+
+ChatLog.Ignore.Unprintable = 1
+
+#
+#    ChatLog.Lexics.Enable
+#        Enable lexics cutter in chats.
+#        Default: 1 - on
+#                 0 - off
+#
+
+ChatLog.Lexics.Enable = 1
+
+#
+#    ChatLog.Lexics.Cut.Enable
+#        Cut innormative lexics in chat.
+#        Default: 1 - cut
+#                 0 - do not cut
+#
+
+ChatLog.Lexics.Cut.Enable = 1
+
+#
+#    ChatLog.Lexics.Cut.Replacement
+#        Text shown instead of message with innormative lexics.
+#
+
+ChatLog.Lexics.Cut.Replacement = &!@^%!^&*!!!
+
+#
+#    ChatLog.Lexics.WordsFile
+#        Path to the file with words considered as innormative.
+#
+
+ChatLog.Lexics.WordsFile = innormative_words.txt
+
+#
+#    ChatLog.Lexics.AnalogsFile
+#        Path to the file with letter analogs.
+#
+
+ChatLog.Lexics.AnalogsFile = letter_analogs.txt
+
+#
+#    ChatLog.Lexics.Ignore.Spaces
+#        Ignore spaces in filtered words. Example: W O R D
+#        Default: 1 - ignore
+#                 0 - do not ignore
+#
+
+ChatLog.Lexics.Ignore.Spaces = 1
+
+#
+#    ChatLog.Lexics.Ignore.Repeats
+#        Ignore repeating symbols in filtered words. Example: WWWOOOORRRRRRDDD
+#        Default: 1 - ignore
+#                 0 - do not ignore
+#
+
+ChatLog.Lexics.Ignore.Repeats = 1
+
+#
+#    ChatLog.Lexics.Ignore.GM
+#        Ignore (do not filter) messages from GM.
+#        Default: 1 - ignore
+#                 0 - do not ignore
+#
+
+ChatLog.Lexics.Ignore.GM = 1
+
+#
+#    ChatLog.Lexics.Action
+#        Action taken when bad lexics is found.
+#        Default: 0 - log only
+#                 1 - polymorph
+#                 2 - stun
+#                 3 - instant kill
+#                 4 - leave 5 health
+#                 5 - mute
+#                 6 - stuck (works as stun + 50% health) [by KAPATEJIb]
+#                 7 - resurrection sickness [by Koshei]
+#                 8 - shear [by Koshei]
+#
+
+ChatLog.Lexics.Action = 0
+
+#
+#    ChatLog.Lexics.Action.Duration
+#        Duration of action in milliseconds.
+#        Default: 0 - no duration
+#
+
+ChatLog.Lexics.Action.Duration = 0
+
+#
+#    SETTINGS FOR DIFFERENT CHAT TYPES
+#    Available types:
+#        * Chat - common chat
+#        * Party - party chat
+#        * Guild - guild chat
+#        * Whisper - whispers
+#        * Channel - channels
+#        * Raid - raid chat
+#        * BattleGround - battleground chat
+#        * Lexics.Innormative - messages filtered by lexics cutter
+#
+#    ChatLog.*.File
+#        Log file name for given chat type.
+#
+#    ChatLog.*.Screen
+#        Output message in server console for given chat type.
+#        Default: 0 - do not show
+#                 1 - show
+#
+#    ChatLog.Lexics.*.Cut
+#        Cut lexics for given chat type (except Innormative).
+#        Default: 1 - cut
+#                 0 - do not cut
+#
+
+ChatLog.Chat.File = "main_chat-$d.log"
+ChatLog.Chat.Screen = 0
+ChatLog.Lexics.Chat.Cut = 1
+
+ChatLog.Party.File = "party_chat-$d.log"
+ChatLog.Party.Screen = 0
+ChatLog.Lexics.Party.Cut = 1
+
+ChatLog.Guild.File = "guild_chat-$d.log"
+ChatLog.Guild.Screen = 0
+ChatLog.Lexics.Guild.Cut = 1
+
+ChatLog.Whisper.File = "whisper_chat-$d.log"
+ChatLog.Whisper.Screen = 0
+ChatLog.Lexics.Whisper.Cut = 1
+
+ChatLog.Channel.File = "channel_chat-$d.log"
+ChatLog.Channel.Screen = 0
+ChatLog.Lexics.Channel.Cut = 1
+
+ChatLog.Raid.File = "raid_chat-$d.log"
+ChatLog.Raid.Screen = 0
+ChatLog.Lexics.Raid.Cut = 1
+
+ChatLog.BattleGround.File = "bg_chat-$d.log"
+ChatLog.BattleGround.Screen = 0
+ChatLog.Lexics.BattleGround.Cut = 1
+
+ChatLog.Lexics.Innormative.File = "innormative-$d.log"
+ChatLog.Lexics.Innormative.Screen = 0
+
+#
+###############################################################################
+# FAKE Players
+###############################################################################
+#    Fake.WHO.List
+#        Add fake players to fill in WHO LIST (who is online list, "O" button) if there is less then
+#        49 real players online
+#        Default: 0 (disabled)
+#                 1 (enabled)
+
+Fake.WHO.List = 1
+Fake.WHO.Online.Interval = 7
+Fake.WHO.LevelUp.Interval = 2
+
+#
+###################################################################################################################

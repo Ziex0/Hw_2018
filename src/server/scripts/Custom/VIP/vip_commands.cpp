@@ -37,7 +37,7 @@ public:
 			{ "changefaction",		 SEC_VIP,  false, &HandleChangeFactionCommand,		"", NULL },
 			{ "maxskills",			 SEC_VIP,  false, &HandleMaxSkillsCommand,			"", NULL },
 			{ "customize",			 SEC_VIP,  false, &HandleCustomizeCommand,			"", NULL },
-			{ "buffs",      		 	 SEC_VIP,  false, &HandleBuffCommand,				"", NULL },
+			{ "buffs",      		 SEC_VIP,  false, &HandleBuffCommand,				"", NULL },
 			{ "getdrunk",   		 SEC_VIP,  false, &HandleGetDrunkCommand,     		"", NULL },
 			{ "soberup",    		 SEC_VIP,  false, &HandleSoberUpCommand,         	"", NULL },
 			{ "morph",           	 SEC_VIP,  false, &HandleVIPMorphCommand,          "", NULL },
@@ -46,7 +46,7 @@ public:
 			{ "scale",        		 SEC_VIP,  false, &HandleScaleCommand,           	"", NULL },
 			{ "repair",        		 SEC_VIP,  false, &HandleVIPrepairCommand,          "", NULL },
 			{ "heal", 				 SEC_VIP,  false, &HandleHealCommand, 				"", NULL },
-			{ "combat", 			 SEC_VIP,  false, &HandleCombatStopCommand, 		"", NULL },
+			{ "combat", 			 SEC_PLAYER,  false, &HandleCombatStopCommand, 		"", NULL },
 			//{ "appear", 			 SEC_VIP,  false, &HandleVIPAppearCommand, 		"", NULL },
 			//{ "summon", 			 SEC_VIP,  false, &HandleVIPSummonCommand, 		"", NULL },
 			
@@ -82,15 +82,14 @@ public:
 			handler->SetSentErrorMessage(true);
 			return false; 
 		}
-
-		//if (player->GetMap()->Instanceable())
 		else
-			player->CombatStop();
-			player->getHostileRefManager().deleteReferences();
-			handler->PSendSysMessage("you are no longer in combat!");
-		return true;
-		
-		
+		{
+			if (player->GetMap()->Instanceable())
+			player->CombatStop(true);
+			player->CastSpell(player, 61456, false);
+            ChatHandler(player->GetSession()).SendSysMessage("Your combat is cleared!");
+			return true;	
+		}
 	}
 	
 	static bool HandleHealCommand(ChatHandler * handler, char const* args)

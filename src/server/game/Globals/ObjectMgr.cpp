@@ -3537,7 +3537,7 @@ void ObjectMgr::LoadPlayerInfo()
             _playerXPperLevel[level] = 0;
 
         //                                                 0    1
-        QueryResult result  = WorldDatabase.Query("SELECT lvl, xp_for_next_level FROM player_xp_for_level");
+        QueryResult result = WorldDatabase.Query("SELECT lvl, xp_for_next_level FROM player_xp_for_level");
 
         if (!result)
         {

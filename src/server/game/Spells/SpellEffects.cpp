@@ -1094,7 +1094,8 @@ void Spell::EffectJump(SpellEffIndex effIndex)
 
     float speedXY, speedZ;
     CalculateJumpSpeeds(effIndex, m_caster->GetExactDist2d(x, y), speedXY, speedZ);
-    m_caster->GetMotionMaster()->MoveJump(x, y, z, speedXY, speedZ);
+    if (speedXY > 0.0f)
+        m_caster->GetMotionMaster()->MoveJump(x, y, z, speedXY, speedZ);
 }
 
 void Spell::EffectJumpDest(SpellEffIndex effIndex)
@@ -2175,7 +2176,7 @@ void Spell::EffectSummonChangeItem(SpellEffIndex effIndex)
             if (m_CastItem == m_targets.GetItemTarget())
                 m_targets.SetItemTarget(NULL);
 
-            m_CastItem = NULL;
+            m_castItemGUID = 0;
 
             player->StoreItem(dest, pNewItem, true);
             return;
@@ -2193,7 +2194,7 @@ void Spell::EffectSummonChangeItem(SpellEffIndex effIndex)
             if (m_CastItem == m_targets.GetItemTarget())
                 m_targets.SetItemTarget(NULL);
 
-            m_CastItem = NULL;
+            m_castItemGUID = 0;
 
             player->BankItem(dest, pNewItem, true);
             return;
@@ -2215,7 +2216,7 @@ void Spell::EffectSummonChangeItem(SpellEffIndex effIndex)
             if (m_CastItem == m_targets.GetItemTarget())
                 m_targets.SetItemTarget(NULL);
 
-            m_CastItem = NULL;
+            m_castItemGUID = 0;
 
             player->EquipItem(dest, pNewItem, true);
             player->AutoUnequipOffhandIfNeed();

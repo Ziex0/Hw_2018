@@ -63,7 +63,7 @@ enum Spells
 
     SPELL_BANISH                                = 44836,
     SPELL_TRANSFORM_KALEC                       = 44670,
-    SPELL_ENRAGE                                = 44807,
+    //SPELL_ENRAGE                                = 44807, // bugged shit
 
     SPELL_CORRUPTION_STRIKE                     = 45029,
     SPELL_AGONY_CURSE                           = 45032,
@@ -186,10 +186,10 @@ public:
         {
             switch (param)
             {
-                case DO_ENRAGE:
-                    isEnraged = true;
-                    me->CastSpell(me, SPELL_ENRAGE, true);
-                    break;
+                //case DO_ENRAGE:
+                    //isEnraged = true;
+                    //me->CastSpell(me, SPELL_ENRAGE, true);
+                    //break;
                 case DO_BANISH:
                     isBanished = true;
                     me->CastSpell(me, SPELL_BANISH, true);
@@ -695,10 +695,10 @@ public:
         {
             switch (param)
             {
-                case DO_ENRAGE:
-                    isEnraged = true;
-                    me->CastSpell(me, SPELL_ENRAGE, true);
-                    break;
+                //case DO_ENRAGE:
+                    //isEnraged = true;
+                    //me->CastSpell(me, SPELL_ENRAGE, true);
+                    //break;
                 case DO_BANISH:
                     isBanished = true;
                     me->CastSpell(me, SPELL_BANISH, true);

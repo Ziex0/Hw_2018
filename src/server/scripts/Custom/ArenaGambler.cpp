@@ -18,7 +18,7 @@ class ArenaGambler : public CreatureScript
         {
             switch (urand(0,6))
             {
-                case 0: pCreature->MonsterWhisper("|cffbbbbbbWelcome ye great warrior , fight to the last for the Lich King!",0,pPlayer->GetGUID());  break;
+                case 0: pCreature->MonsterSay("|cffbbbbbbWelcome ye great warrior , fight to the last for the Lich King!",0,pPlayer->GetGUID());  break;
                 case 1: pCreature->MonsterSay("|cffbbbbbbOnly great warriors are welcome!",0,pPlayer->GetGUID());  break;
                 case 2: pCreature->MonsterSay("|cffbbbbbbMere mortals cannot be gods!",0,pPlayer->GetGUID());  break;
                 case 3: pCreature->MonsterSay("|cffbbbbbbGreat warrior , you seek to duel!",0,pPlayer->GetGUID());  break;

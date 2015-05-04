@@ -35,6 +35,7 @@
 #include "SpellMgr.h"
 #include "ScriptMgr.h"
 #include "ChatLink.h"
+#include "Config.h"
 
 bool ChatHandler::load_command_table = true;
 
@@ -236,6 +237,69 @@ void ChatHandler::SendSysMessage(const char *str)
     }
 
     free(buf);
+}
+
+void ChatHandler::SendCustomOfficerChat(const char* message)
+{
+    Player* pPlayer = m_session->GetPlayer();
+
+    std::ostringstream nameLink;
+	std::ostringstream vipcolor_config;
+
+    char msg[1024];
+    char* classStr = "|TInterface\\ICONS\\INV_Misc_QuestionMark:14:14:0:-1|t";
+    char* raceStr = "|TInterface\\ICONS\\INV_Misc_QuestionMark:14:14:0:-2|t";
+    char* gmStr = pPlayer->isGameMaster() ? "|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:12:22:1:-1|t|r" : "";
+
+    if (pPlayer->getClass() == CLASS_WARRIOR)
+        classStr = "|TInterface\\ICONS\\inv_sword_27:14:14:0:-1|t";
+    else if (pPlayer->getClass() == CLASS_PALADIN)
+        classStr = "|TInterface\\ICONS\\ability_thunderbolt:14:14:0:-1|t";
+    else if(pPlayer->getClass() == CLASS_HUNTER)
+        classStr = "|TInterface\\ICONS\\inv_weapon_bow_07:14:14:0:-1|t";
+    else if(pPlayer->getClass() == CLASS_ROGUE)
+        classStr = "|TInterface\\ICONS\\inv_throwingknife_04:14:14:0:-1|t";
+    else if (pPlayer->getClass() == CLASS_PRIEST)
+        classStr = "|TInterface\\ICONS\\inv_staff_30:14:14:0:-1|t";
+    else if (pPlayer->getClass() == CLASS_DEATH_KNIGHT)
+        classStr = "|TInterface\\ICONS\\spell_deathknight_classicon:14:14:0:-1|t";
+    else if (pPlayer->getClass() == CLASS_SHAMAN)
+        classStr = "|TInterface\\ICONS\\spell_nature_bloodlust:14:14:0:-1|t";
+    else if (pPlayer->getClass() == CLASS_MAGE)
+        classStr = "|TInterface\\ICONS\\inv_staff_13.jpg:14:14:0:-1|t";
+    else if (pPlayer->getClass() == CLASS_WARLOCK)
+        classStr = "|TInterface\\ICONS\\spell_nature_drowsy:14:14:0:-1|t";
+    else if (pPlayer->getClass() == CLASS_DRUID)
+        classStr = "|TInterface\\ICONS\\Ability_Druid_Maul:14:14:0:-1|t";
+
+    if (pPlayer->getRace() == RACE_BLOODELF)
+        raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Bloodelf_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Bloodelf_Female:14:14:0:-1|t";
+    else if (pPlayer->getRace() == RACE_DRAENEI)
+        raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Draenei_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Draenei_Female:14:14:0:-1|t";
+    else if (pPlayer->getRace() == RACE_DWARF)
+        raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Dwarf_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Dwarf_Female:14:14:0:-1|t";
+    else if (pPlayer->getRace() == RACE_GNOME)
+        raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Gnome_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Gnome_Female:14:14:0:-1|t";
+    else if (pPlayer->getRace() == RACE_HUMAN)
+        raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Human_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Human_Female:14:14:0:-1|t";
+    else if (pPlayer->getRace() == RACE_NIGHTELF)
+        raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Nightelf_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Nightelf_Female:14:14:0:-1|t";
+    else if (pPlayer->getRace() == RACE_ORC)
+        raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Orc_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Orc_Female:14:14:0:-1|t";
+    else if (pPlayer->getRace() == RACE_TAUREN)
+        raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Tauren_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Tauren_Female:14:14:0:-1|t";
+    else if (pPlayer->getRace() == RACE_TROLL)
+        raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Troll_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Troll_Female:14:14:0:-1|t";
+    else if (pPlayer->getRace() == RACE_UNDEAD_PLAYER)
+        raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Undead_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Undead_Female:14:14:0:-1|t";
+
+	vipcolor_config << "Channel.Name.Color.Lv" << std::to_string(m_session->GetVipLevel()).c_str();
+    
+	nameLink << "|Hplayer:" << pPlayer->GetName().c_str() << "|h|cFF" << ConfigMgr::GetStringDefault(pPlayer->isGameMaster() ? "Channel.Name.Color.GM" : vipcolor_config.str().c_str(), "00FF00").c_str() << "[" << pPlayer->GetName().c_str() << "]|r|h";
+
+    snprintf(msg, 1024, "|cFF86FF00[World Channel]|r %s %s %s %s|cff00FF00: %s%s", raceStr, classStr, gmStr, nameLink.str().c_str(), m_session->GetVipLevel() > 0 ? "|cffFFA500" : "", message);
+
+    sWorld->SendGlobalText(msg, NULL);
 }
 
 void ChatHandler::SendGlobalSysMessage(const char *str)
