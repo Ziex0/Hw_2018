@@ -403,7 +403,7 @@ void ArenaTeam::Query(WorldSession* session)
     WorldPacket data(SMSG_ARENA_TEAM_QUERY_RESPONSE, 4*7+GetName().size()+1);
     data << uint32(GetId());                                // team id
     data << GetName();                                      // team name
-    data << uint32(GetType());                              // arena team type (2=2x2, 3=3x3 or 5=5x5)
+    data << uint32(GetType() == 1 ? 5 : GetType());
     data << uint32(BackgroundColor);                        // background color
     data << uint32(EmblemStyle);                            // emblem style
     data << uint32(EmblemColor);                            // emblem color
@@ -537,7 +537,6 @@ uint8 ArenaTeam::GetSlotByType(uint32 type)
         case ARENA_TEAM_2v2: return 0;
         case ARENA_TEAM_3v3: return 1;
         case ARENA_TEAM_5v5: return 2;
-		case ARENA_TEAM_1v1: return 3; // Custom 1v1 Arena Rated
         default:
             break;
     }
@@ -552,7 +551,6 @@ uint32 ArenaTeam::GetTypeBySlot(uint8 slot)
         case 0: return ARENA_TEAM_2v2;
         case 1: return ARENA_TEAM_3v3;
         case 2: return ARENA_TEAM_5v5;
-		case 3: return ARENA_TEAM_1v1;
         default:
             break;
     }
@@ -591,8 +589,8 @@ uint32 ArenaTeam::GetPoints(uint32 memberRating)
         points *= 0.76f;
     else if (Type == ARENA_TEAM_3v3)
         points *= 0.88f;
-	else if (Type == ARENA_TEAM_1v1) //Custom 1v1 Arena Rated
-        points *= 0.70f;
+	else if (Type == ARENA_TEAM_5v5) // 1v1 Arena
+        points *= sWorld->getFloatConfig(CONFIG_ARENA_1V1_ARENAPOINTS_MULTI);
 
     return (uint32) points;
 }

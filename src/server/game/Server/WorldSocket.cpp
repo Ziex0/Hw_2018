@@ -888,7 +888,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
         isPremium = true;
     }
 	
-	QueryResult q_accvip = LoginDatabase.PQuery("SELECT * FROM `account_vips` WHERE `acc`='%u' AND `active`='1'", id);
+	QueryResult q_accvip = LoginDatabase.PQuery("SELECT * FROM `account_vip` WHERE `acc_id`='%u' AND `active`='1'", id);
     m_viplevel = q_accvip ? q_accvip->Fetch()[1].GetUInt32() : 0;
 
     // Check locked state for server

@@ -1,21 +1,4 @@
-/*
-  _____                        ____               
- |  ___| __ ___ _______ _ __  / ___|___  _ __ ___ 
- | |_ | '__/ _ \_  / _ \ '_ \| |   / _ \| '__/ _ \
- |  _|| | | (_) / /  __/ | | | |__| (_) | | |  __/
- |_|  |_|  \___/___\___|_| |_|\____\___/|_|  \___|
-	 Lightning speed and strength
-		 conjured directly from the depths of logic!   
-			Infusion-WoW 2011 - 2012 (C)
-<--------------------------------------------------------------------------->
- - Developer(s): Styler
- - Complete: 80%
- - ScriptName: 'vip_npc' 
- - Comment: Allows VIPs to access the VIP vendors!
-<--------------------------------------------------------------------------->
-*/
-
-	#include "ScriptPCH.h"
+#include "ScriptPCH.h"
 
     class VIP_NPC : public CreatureScript 
     {

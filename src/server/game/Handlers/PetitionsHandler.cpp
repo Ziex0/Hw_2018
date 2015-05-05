@@ -953,7 +953,7 @@ void WorldSession::SendPetitionShowList(uint64 guid)
     }
     else
     {
-        data << uint8(3);                                   // count
+        data << uint8(2); 									// count
         // 2v2
         data << uint32(1);                                  // index
         data << uint32(ARENA_TEAM_CHARTER_2v2);             // charter entry
@@ -969,12 +969,12 @@ void WorldSession::SendPetitionShowList(uint64 guid)
         data << uint32(3);                                  // unknown
         data << uint32(3);                                  // required signs?
         // 5v5
-        data << uint32(3);                                  // index
+        /*data << uint32(3);                                  // index
         data << uint32(ARENA_TEAM_CHARTER_5v5);             // charter entry
         data << uint32(CHARTER_DISPLAY_ID);                 // charter display id
         data << uint32(ARENA_TEAM_CHARTER_5v5_COST);        // charter cost
         data << uint32(5);                                  // unknown
-        data << uint32(5);                                  // required signs?
+        data << uint32(5);                                  // required signs?*/
     }
 
     SendPacket(&data);
