@@ -15,7 +15,7 @@ class gm_active : public CreatureScript
         {
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Trial Gm", GOSSIP_SENDER_MAIN, 2000);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Gm", GOSSIP_SENDER_MAIN, 3000);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Head Gm", GOSSIP_SENDER_MAIN, 4000);
+			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Head Gm", GOSSIP_SENDER_MAIN, 4000);
 			
             pPlayer->PlayerTalkClass->SendGossipMenu(85005, pCreature->GetGUID());
             return true;
@@ -52,9 +52,10 @@ class gm_active : public CreatureScript
 				if(pPlayer->HasItemCount(320278, 1))
 		{
 			pPlayer->DestroyItemCount(320278, 1, true);
-			LoginDatabase.PExecute("REPLACE INTO account_access (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
+			LoginDatabase.PExecute("REPLACE INTO account_access (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '3', '1')", pPlayer->GetSession()->GetAccountId());
 			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
-			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
+			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());			
+			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '3', '1')", pPlayer->GetSession()->GetAccountId());
 			char str[200];
 			sprintf(str,"You are now Activated! please close your Wow and Re-login");
                 pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);
@@ -74,6 +75,8 @@ class gm_active : public CreatureScript
 			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
 			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '3', '1')", pPlayer->GetSession()->GetAccountId());
+			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '4', '1')", pPlayer->GetSession()->GetAccountId());
+			
 			char str[200];
 			sprintf(str,"You are now Activated! please close your Wow and Re-login");
                 pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);

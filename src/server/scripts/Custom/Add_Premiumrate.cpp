@@ -14,9 +14,9 @@ class premium_rate : public CreatureScript
         bool OnGossipHello(Player* pPlayer, Creature* pCreature)
         {
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Set me to Permanent Premium", GOSSIP_SENDER_MAIN, 2000);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Set me to 6 months Premium", GOSSIP_SENDER_MAIN, 3000);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Set me to 3 Months Premium", GOSSIP_SENDER_MAIN, 4000);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Set me to 1 Months Premium", GOSSIP_SENDER_MAIN, 5000);
+			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Set me to 6 months Premium", GOSSIP_SENDER_MAIN, 3000);
+			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Set me to 3 Months Premium", GOSSIP_SENDER_MAIN, 4000);
+			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Set me to 1 Months Premium", GOSSIP_SENDER_MAIN, 5000);
 			
             pPlayer->PlayerTalkClass->SendGossipMenu(85005, pCreature->GetGUID());
             return true;
