@@ -175,21 +175,21 @@ public:
         }
 
         if(player->InBattlegroundQueueForBattlegroundQueueType(BATTLEGROUND_QUEUE_5v5))
-                player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Leave queue 1v1 Arena", GOSSIP_SENDER_MAIN, 3, "Are you sure?", 0, false);
+                player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r Leave queue 1v1 Arena", GOSSIP_SENDER_MAIN, 3, "Are you sure?", 0, false);
         else
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Sign up 1v1 Arena (unrated)", GOSSIP_SENDER_MAIN, 20);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r Sign up 1v1 Arena (unrated)", GOSSIP_SENDER_MAIN, 20);
 
         if(player->GetArenaTeamId(ArenaTeam::GetSlotByType(ARENA_TEAM_5v5)) == NULL)
-            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Create new 1v1 Arenateam", GOSSIP_SENDER_MAIN, 1, "Create 1v1 Arenateam?", sWorld->getIntConfig(CONFIG_ARENA_1V1_COSTS), false);
+            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r Create new 1v1 Arenateam", GOSSIP_SENDER_MAIN, 1, "Create 1v1 Arenateam?", sWorld->getIntConfig(CONFIG_ARENA_1V1_COSTS), false);
         else
         {
             if(player->InBattlegroundQueueForBattlegroundQueueType(BATTLEGROUND_QUEUE_5v5) == false)
             {
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Sign up 1v1 Arena (rated)", GOSSIP_SENDER_MAIN, 2);
-                player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Disband Arenateam", GOSSIP_SENDER_MAIN, 5, "Are you sure?", 0, false);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r Sign up 1v1 Arena (rated)", GOSSIP_SENDER_MAIN, 2);
+                player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r Disband Arenateam", GOSSIP_SENDER_MAIN, 5, "Are you sure?", 0, false);
             }
 
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Show statistics", GOSSIP_SENDER_MAIN, 4);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r Show statistics", GOSSIP_SENDER_MAIN, 4);
         }
 
         //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Script Info", GOSSIP_SENDER_MAIN, 8);

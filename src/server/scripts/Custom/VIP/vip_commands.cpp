@@ -84,7 +84,7 @@ public:
 		}
 		else
 		{
-			if (player->GetMap()->Instanceable())
+			//if (player->GetMap()->Instanceable())
 			player->CombatStop(true);
 			player->CastSpell(player, 61456, false);
             ChatHandler(player->GetSession()).SendSysMessage("Your combat is cleared!");
