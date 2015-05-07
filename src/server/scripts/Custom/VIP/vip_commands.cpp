@@ -46,7 +46,7 @@ public:
 			{ "scale",        		 SEC_VIP,  false, &HandleScaleCommand,           	"", NULL },
 			{ "repair",        		 SEC_VIP,  false, &HandleVIPrepairCommand,          "", NULL },
 			{ "heal", 				 SEC_VIP,  false, &HandleHealCommand, 				"", NULL },
-			{ "combat", 			 SEC_PLAYER,  false, &HandleCombatStopCommand, 		"", NULL },
+			{ "combat", 			 SEC_VIP,  false, &HandleCombatStopCommand, 		"", NULL },
 			//{ "appear", 			 SEC_VIP,  false, &HandleVIPAppearCommand, 		"", NULL },
 			//{ "summon", 			 SEC_VIP,  false, &HandleVIPSummonCommand, 		"", NULL },
 			

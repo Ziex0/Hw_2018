@@ -26,7 +26,8 @@ public:
     bool OnGossipHello(Player* pPlayer, Creature* pCreature)
     {
         
-        pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Teleporter", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +1);
+        pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Main Teleporter", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +1);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Emerald Mall Teleporter", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +80);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Trainer", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +2);
         pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Transmorg NPC", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +3);
         pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Permanent Morph", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +4);
@@ -107,6 +108,10 @@ public:
 					
 			case GOSSIP_ACTION_INFO_DEF +9:               
 					pPlayer->SummonCreature(190113,pPlayer->GetPositionX() ,pPlayer->GetPositionY()+4, pPlayer->GetPositionZ(), 0,TEMPSUMMON_TIMED_DESPAWN,40000);
+					pPlayer->CLOSE_GOSSIP_MENU();
+					break;
+			case GOSSIP_ACTION_INFO_DEF +80:
+					pPlayer->SummonCreature(210200,pPlayer->GetPositionX()+2 ,pPlayer->GetPositionY(), pPlayer->GetPositionZ(), 0,TEMPSUMMON_TIMED_DESPAWN,40000);
 					pPlayer->CLOSE_GOSSIP_MENU();
 					break;
         }

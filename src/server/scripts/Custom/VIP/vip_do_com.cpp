@@ -31,7 +31,8 @@ public:
 
         {
 				{ "talent",         SEC_PLAYER,  false, &HandleDoTalentsCommand,     			"", NULL },
-				{ "Lk",        		SEC_PLAYER,  false, &HandleDoTeleCommand,     				"", NULL },
+				//{ "Lk",        	SEC_PLAYER,  false, &HandleDoTeleCommand,     				"", NULL },
+				{ "combat", 		SEC_PLAYER,  false, &HandleCombatStopCommand, 		"", NULL },
 				{ "song",        	SEC_VIP,  	 false, &HandleDoSongCommand,     				"", NULL },
 				{ NULL,             0,                  false, NULL,                            "", NULL }
 		
@@ -44,6 +45,26 @@ public:
         };
         return commandTable;
 	}	
+	
+	static bool HandleCombatStopCommand(ChatHandler* handler, const char* args)
+	{
+		Player* player = handler->GetSession()->GetPlayer();
+
+		if (player->GetMap()->IsBattlegroundOrArena())
+		{
+			handler->PSendSysMessage(LANG_YOU_IN_BATTLEGROUND);
+			handler->SetSentErrorMessage(true);
+			return false; 
+		}
+		else
+		{
+			//if (player->GetMap()->Instanceable())
+			player->CombatStop(true);
+			player->CastSpell(player, 61456, false);
+            ChatHandler(player->GetSession()).SendSysMessage("Your combat is cleared!");
+			return true;	
+		}
+	}
 		
 	static bool HandleDoCommand(ChatHandler* handler, const char* args)
     {

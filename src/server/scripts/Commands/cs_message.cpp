@@ -125,7 +125,7 @@ public:
         WorldPacket data(textLen + 40);
         data.Initialize(SMSG_MESSAGECHAT);
 
-        data << uint8(CHAT_MSG_RAID_WARNING) << uint32(LANG_UNIVERSAL);
+        //data << uint8(CHAT_MSG_RAID_WARNING) << uint32(LANG_UNIVERSAL);
         data << (uint64)0 << (uint32)0 << (uint64)0;
         data << textLen << rwmsg << uint8(0);
 

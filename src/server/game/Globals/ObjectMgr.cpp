@@ -3527,62 +3527,60 @@ void ObjectMgr::LoadPlayerInfo()
         sLog->outInfo(LOG_FILTER_SERVER_LOADING, ">> Loaded %u level stats definitions in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
     }
 
-// Loading xp per level data
-    sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Loading Player Create XP Data...");
-    {
-        uint32 oldMSTime = getMSTime();
+	sLog->outInfo(LOG_FILTER_SERVER_LOADING,"server.loading", "Loading Player Create XP Data...");
+	{
+		uint32 oldMSTime = getMSTime();
 
-        _playerXPperLevel.resize(sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL));
-        for (uint8 level = 0; level < sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL); ++level)
-            _playerXPperLevel[level] = 0;
+		_playerXPperLevel.resize(sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL));
+		for (uint8 level = 0; level < sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL); ++level)
+			_playerXPperLevel[level] = 0;
 
-        //                                                 0    1
-        QueryResult result = WorldDatabase.Query("SELECT lvl, xp_for_next_level FROM player_xp_for_level");
+		//                                                 0    1
+		QueryResult result = WorldDatabase.Query("SELECT lvl, xp_for_next_level FROM player_xp_for_level");
 
-        if (!result)
-        {
-            sLog->outError(LOG_FILTER_SERVER_LOADING, ">> Loaded 0 xp for level definitions. DB table `player_xp_for_level` is empty.");
-            exit(1);
-        }
+		if (!result)
+		{
+			sLog->outInfo(LOG_FILTER_SERVER_LOADING, "server.loading", ">> Loaded 0 xp for level definitions. DB table `player_xp_for_level` is empty.");
+			exit(1);
+		}
 
-        uint32 count = 0;
+		uint32 count = 0;
 
-        do
-        {
-            Field* fields = result->Fetch();
+		do
+		{
+			Field* fields = result->Fetch();
 
-            uint32 current_level = fields[0].GetUInt8();
-            uint32 current_xp    = fields[1].GetUInt32();
+			uint32 current_level = fields[0].GetUInt8();
+			uint32 current_xp = fields[1].GetUInt32();
 
-            if (current_level >= sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL))
-            {
-                if (current_level > STRONG_MAX_LEVEL)        // hardcoded level maximum
-                    sLog->outError(LOG_FILTER_SQL, "Wrong (> %u) level %u in `player_xp_for_level` table, ignoring.", STRONG_MAX_LEVEL, current_level);
-                else
-                {
-                    sLog->outInfo(LOG_FILTER_GENERAL, "Unused (> MaxPlayerLevel in worldserver.conf) level %u in `player_xp_for_levels` table, ignoring.", current_level);
-                    ++count;                                // make result loading percent "expected" correct in case disabled detail mode for example.
-                }
-                continue;
-            }
-            //PlayerXPperLevel
-            _playerXPperLevel[current_level] = current_xp;
-            ++count;
-        }
-        while (result->NextRow());
+			if (current_level >= sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL))
+			{
+				if (current_level > STRONG_MAX_LEVEL)        // hardcoded level maximum
+					sLog->outInfo(LOG_FILTER_SERVER_LOADING, "sql.sql", "Wrong (> %u) level %u in `player_xp_for_level` table, ignoring.", STRONG_MAX_LEVEL, current_level);
+				else
+				{
+					sLog->outInfo(LOG_FILTER_SERVER_LOADING, "misc", "Unused (> MaxPlayerLevel in worldserver.conf) level %u in `player_xp_for_levels` table, ignoring.", current_level);
+					++count;                                // make result loading percent "expected" correct in case disabled detail mode for example.
+				}
+				continue;
+			}
+			//PlayerXPperLevel
+			_playerXPperLevel[current_level] = current_xp;
+			++count;
+		} while (result->NextRow());
 
-        // fill level gaps
-        for (uint8 level = 1; level < sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL); ++level)
-        {
-            if (_playerXPperLevel[level] == 0)
-            {
-                sLog->outError(LOG_FILTER_SQL, "Level %i does not have XP for level data. Using data of level [%i] + 100.", level+1, level);
-                _playerXPperLevel[level] = _playerXPperLevel[level-1]+100;
-            }
-        }
+		// fill level gaps
+		for (uint8 level = 1; level < sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL); ++level)
+		{
+			if (_playerXPperLevel[level] == 0)
+			{
+				sLog->outInfo(LOG_FILTER_SERVER_LOADING, "sql.sql", "Level %i does not have XP for level data. Using data of level [%i] + 100.", level + 1, level);
+				_playerXPperLevel[level] = _playerXPperLevel[level - 1] + 100;
+			}
+		}
 
-        sLog->outInfo(LOG_FILTER_SERVER_LOADING, ">> Loaded %u xp for level definitions in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
-    }
+		sLog->outInfo(LOG_FILTER_SERVER_LOADING, "server.loading", ">> Loaded %u xp for level definitions in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
+	}
 }
 
 

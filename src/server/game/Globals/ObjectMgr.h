@@ -1344,8 +1344,8 @@ class ObjectMgr
 
         PlayerInfo* _playerInfo[MAX_RACES][MAX_CLASSES];
 
-        typedef std::vector<uint32> PlayerXPperLevel;       // [level]
-        PlayerXPperLevel _playerXPperLevel;
+		typedef std::vector<uint32> PlayerXPperLevel;       // [level]
+		PlayerXPperLevel _playerXPperLevel;
 
         typedef std::map<uint32, uint32> BaseXPContainer;          // [area level][base xp]
         BaseXPContainer _baseXPTable;
