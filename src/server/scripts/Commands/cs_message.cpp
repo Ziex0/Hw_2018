@@ -105,33 +105,14 @@ public:
 
     static bool HandleNameAnnounceCommand(ChatHandler* handler, char const* args)
     {
-        if (!*args || (uint32)strlen((char*)args) < 4 || strchr(args, '%'))
-        {
-            handler->PSendSysMessage("Announces cannot contain the %% character and must be at least 4 characters.");
-            handler->SetSentErrorMessage(true);
+        if (!*args)
             return false;
-			}
 
         std::string name("Console");
         if (WorldSession* session = handler->GetSession())
             name = session->GetPlayer()->GetName();
 
-        char rwmsg[1024];
-
-        snprintf(rwmsg, 1024, handler->GetTrinityString(LANG_ANNOUNCE_COLOR), name.c_str(), name.c_str(), args);
-
-        uint32 textLen = (uint32)strlen((char*)rwmsg) + 1;
-
-        WorldPacket data(textLen + 40);
-        data.Initialize(SMSG_MESSAGECHAT);
-
-        //data << uint8(CHAT_MSG_RAID_WARNING) << uint32(LANG_UNIVERSAL);
-        data << (uint64)0 << (uint32)0 << (uint64)0;
-        data << textLen << rwmsg << uint8(0);
-
-        sWorld->SendGlobalMessage(&data, NULL);
-
-        sWorld->SendWorldText(LANG_ANNOUNCE_COLOR, name.c_str(), name.c_str(), args);
+        sWorld->SendWorldText(LANG_ANNOUNCE_COLOR, name.c_str(), args);
         return true;
     }
 

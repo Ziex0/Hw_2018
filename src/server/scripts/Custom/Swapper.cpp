@@ -1,26 +1,5 @@
-/*  
-	-Souls -
-	soul =	   60000
-	10.000	 = 60020
-	30.000	 = 60021
-	50.000	 = 60022
-	100.000 =  60027
+#include "ScriptPCH.h"
 
-	-Unholy-
-    emblem =	60004
-	10.000	 =  60023
-	30.000	 =  60024
-	50.000	 =  60025
-	100.000 =	60026
-
-	-Demon head-
-	dem	 =     60005
-	50.000	 = 60033
-
-	Okay so i made this script to learn my friend sephox a bit C++,
-	So he is possible to add items in the future by himself
-	We hope it's going to be very usefull!
-*/
 struct tokenData {uint32 TAKE_ENTRY, TAKE_AMOUNT, GIVE_ENTRY, GIVE_AMOUNT; };
 struct tokenData Tokens[] =
 {
@@ -30,16 +9,9 @@ struct tokenData Tokens[] =
     {320286, 1000, 320287, 1},
 	{320286, 3000, 320288, 1},
 	{320286, 5000, 320289, 1},
-	{320286, 10000, 320290, 1},
-	//Unholy
-	/*{60004, 10000, 60023, 1},
-	{60004, 30000, 60024, 1},
-	{60004, 50000, 60025, 1},
-	{60004, 100000, 60026, 1},
-	//demon
-	{60005, 50000, 60033, 1},*/
-
-
+	{320286, 10000, 320290, 1},	
+	{320285, 600, 340006,  10},
+	
 };
 
 const uint32 tokensSize = sizeof Tokens/sizeof(*Tokens);
