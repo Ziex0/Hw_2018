@@ -155,7 +155,7 @@ class instance_magtheridons_lair : public InstanceMapScript
                             {
                                 if (Creature* Channeler = instance->GetCreature(*i))
                                 {
-                                    if (Channeler->IsAlive())
+                                    if (Channeler->isAlive())
                                         Channeler->AI()->EnterEvadeMode();
                                     else
                                         Channeler->Respawn();
@@ -173,12 +173,12 @@ class instance_magtheridons_lair : public InstanceMapScript
                             for (std::set<uint64>::const_iterator i = ChannelerGUID.begin(); i != ChannelerGUID.end(); ++i)
                             {
                                 Creature* Channeler = instance->GetCreature(*i);
-                                if (Channeler && Channeler->IsAlive())
+                                if (Channeler && Channeler->isAlive())
                                     Channeler->AI()->AttackStart(Channeler->SelectNearestTarget(999));
                             }
                             // Release Magtheridon after two minutes.
                             Creature* Magtheridon = instance->GetCreature(MagtheridonGUID);
-                            if (Magtheridon && Magtheridon->IsAlive())
+                            if (Magtheridon && Magtheridon->isAlive())
                             {
                                 Magtheridon->MonsterTextEmote(EMOTE_BONDS_WEAKEN, 0);
                                 CageTimer = 120000;
@@ -190,7 +190,7 @@ class instance_magtheridons_lair : public InstanceMapScript
                         for (std::set<uint64>::const_iterator i = ChannelerGUID.begin(); i != ChannelerGUID.end(); ++i)
                         {
                             Creature* Channeler = instance->GetCreature(*i);
-                            if (Channeler && Channeler->IsAlive())
+                            if (Channeler && Channeler->isAlive())
                             {
                                 //Channeler->CastSpell(Channeler, SPELL_SOUL_TRANSFER, true);
                                 data = IN_PROGRESS;
@@ -225,7 +225,7 @@ class instance_magtheridons_lair : public InstanceMapScript
                     if (CageTimer <= diff)
                     {
                         Creature* Magtheridon = instance->GetCreature(MagtheridonGUID);
-                        if (Magtheridon && Magtheridon->IsAlive())
+                        if (Magtheridon && Magtheridon->isAlive())
                         {
                             Magtheridon->ClearUnitState(UNIT_STATE_STUNNED);
                             Magtheridon->AI()->AttackStart(Magtheridon->SelectNearestTarget(999));
@@ -242,7 +242,7 @@ class instance_magtheridons_lair : public InstanceMapScript
                         {
                             if (Creature* Channeler = instance->GetCreature(*i))
                             {
-                                if (Channeler->IsAlive())
+                                if (Channeler->isAlive())
                                     Channeler->AI()->EnterEvadeMode();
                                 else
                                     Channeler->Respawn();

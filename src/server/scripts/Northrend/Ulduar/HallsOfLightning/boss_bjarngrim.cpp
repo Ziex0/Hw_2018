@@ -154,7 +154,7 @@ public:
             {
                 if (Creature* pStormforgedLieutenant = (Unit::GetCreature((*me), m_auiStormforgedLieutenantGUID[i])))
                 {
-                    if (!pStormforgedLieutenant->IsAlive())
+                    if (!pStormforgedLieutenant->isAlive())
                         pStormforgedLieutenant->Respawn();
                 }
             }
@@ -406,7 +406,7 @@ public:
             {
                 if (Creature* pBjarngrim = instance->instance->GetCreature(instance->GetData64(DATA_BJARNGRIM)))
                 {
-                    if (pBjarngrim->IsAlive() && !pBjarngrim->GetVictim())
+                    if (pBjarngrim->isAlive() && !pBjarngrim->GetVictim())
                         pBjarngrim->AI()->AttackStart(who);
                 }
             }
@@ -432,7 +432,7 @@ public:
                 {
                     if (Creature* pBjarngrim = instance->instance->GetCreature(instance->GetData64(DATA_BJARNGRIM)))
                     {
-                        if (pBjarngrim->IsAlive())
+                        if (pBjarngrim->isAlive())
                             DoCast(pBjarngrim, SPELL_RENEW_STEEL_N);
                     }
                 }

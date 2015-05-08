@@ -716,7 +716,7 @@ public:
             if (CheckTimer <= diff)
             {
                 Creature* Kalec = Unit::GetCreature(*me, KalecGUID);
-                if (!Kalec || (Kalec && !Kalec->IsAlive()))
+                if (!Kalec || (Kalec && !Kalec->isAlive()))
                 {
                     if (Creature* Kalecgos = Unit::GetCreature(*me, KalecgosGUID))
                         Kalecgos->AI()->EnterEvadeMode();

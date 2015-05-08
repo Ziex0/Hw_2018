@@ -180,7 +180,7 @@ void CreatureGroup::MemberAttackStart(Creature* member, Unit* target)
         if (itr->first == member)
             continue;
 
-        if (!itr->first->IsAlive())
+        if (!itr->first->isAlive())
             continue;
 
         if (itr->first->GetVictim())
@@ -195,7 +195,7 @@ void CreatureGroup::FormationReset(bool dismiss)
 {
     for (CreatureGroupMemberType::iterator itr = m_members.begin(); itr != m_members.end(); ++itr)
     {
-        if (itr->first != m_leader && itr->first->IsAlive())
+        if (itr->first != m_leader && itr->first->isAlive())
         {
             if (dismiss)
                 itr->first->GetMotionMaster()->Initialize();
@@ -219,7 +219,7 @@ void CreatureGroup::LeaderMoveTo(float x, float y, float z)
     for (CreatureGroupMemberType::iterator itr = m_members.begin(); itr != m_members.end(); ++itr)
     {
         Creature* member = itr->first;
-        if (member == m_leader || !member->IsAlive() || member->GetVictim())
+        if (member == m_leader || !member->isAlive() || member->GetVictim())
             continue;
 
         float angle = itr->second->follow_angle;

@@ -204,7 +204,7 @@ class npc_flash_freeze : public CreatureScript
                 if (checkDespawnTimer <= diff)
                 {
                     if (Unit* target = ObjectAccessor::GetUnit(*me, targetGUID))
-                        if (!target->IsAlive())
+                        if (!target->isAlive())
                             me->DisappearAndDie();
                     checkDespawnTimer = 2500;
                 }
@@ -484,7 +484,7 @@ class boss_hodir : public CreatureScript
                 for (std::list<Unit*>::iterator itr = TargetList.begin(); itr != TargetList.end(); ++itr)
                 {
                     Unit* target = *itr;
-                    if (!target || !target->IsAlive() || GetClosestCreatureWithEntry(target, NPC_SNOWPACKED_ICICLE, 5.0f))
+                    if (!target || !target->isAlive() || GetClosestCreatureWithEntry(target, NPC_SNOWPACKED_ICICLE, 5.0f))
                         continue;
 
                     if (target->HasAura(SPELL_FLASH_FREEZE_HELPER) || target->HasAura(SPELL_BLOCK_OF_ICE))

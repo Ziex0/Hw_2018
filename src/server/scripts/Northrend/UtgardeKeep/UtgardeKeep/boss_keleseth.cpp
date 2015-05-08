@@ -154,7 +154,7 @@ public:
             {
                 for (std::list<Creature*>::iterator itr = runemages.begin(); itr != runemages.end(); ++itr)
                 {
-                    if ((*itr)->IsAlive() && (*itr)->IsWithinLOSInMap(me))
+                    if ((*itr)->isAlive() && (*itr)->IsWithinLOSInMap(me))
                         (*itr)->AI()->AttackStart(who);
                 }
             }
@@ -165,7 +165,7 @@ public:
             {
                 for (std::list<Creature*>::iterator itr = strategists.begin(); itr != strategists.end(); ++itr)
                 {
-                    if ((*itr)->IsAlive() && (*itr)->IsWithinLOSInMap(me))
+                    if ((*itr)->isAlive() && (*itr)->IsWithinLOSInMap(me))
                         (*itr)->AI()->AttackStart(who);
                 }
             }
@@ -351,7 +351,7 @@ class spell_frost_tomb : public SpellScriptLoader
             {
                 if (GetTargetApplication()->GetRemoveMode() != AURA_REMOVE_BY_DEATH)
                     if (Unit* caster = GetCaster())
-                        if (caster->ToCreature() && caster->IsAlive())
+                        if (caster->ToCreature() && caster->isAlive())
                             caster->ToCreature()->DespawnOrUnsummon(1000);
             }
 

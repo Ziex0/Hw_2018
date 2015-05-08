@@ -84,12 +84,12 @@ public:
 
             if (Creature* pGuard1 = Unit::GetCreature(*me, instance ? instance->GetData64(DATA_EREKEM_GUARD_1) : 0))
             {
-                if (!pGuard1->IsAlive())
+                if (!pGuard1->isAlive())
                     pGuard1->Respawn();
             }
             if (Creature* pGuard2 = Unit::GetCreature(*me, instance ? instance->GetData64(DATA_EREKEM_GUARD_2) : 0))
             {
-                if (!pGuard2->IsAlive())
+                if (!pGuard2->isAlive())
                     pGuard2->Respawn();
             }
         }
@@ -157,7 +157,7 @@ public:
                 {
                     if (Creature* pGuard2 = Unit::GetCreature(*me, instance ? instance->GetData64(DATA_EREKEM_GUARD_2) : 0))
                     {
-                        if (!pGuard1->IsAlive() && !pGuard2->IsAlive())
+                        if (!pGuard1->isAlive() && !pGuard2->isAlive())
                             DoCast(me->GetVictim(), SPELL_STORMSTRIKE);
                     }
                 }
@@ -179,7 +179,7 @@ public:
                     //If one of the adds is dead spawn heals faster
                     Creature* pGuard1 = Unit::GetCreature(*me, instance ? instance->GetData64(DATA_EREKEM_GUARD_1) : 0);
                     Creature* pGuard2 = Unit::GetCreature(*me, instance ? instance->GetData64(DATA_EREKEM_GUARD_2) : 0);
-                    uiChainHealTimer = ((pGuard1 && !pGuard1->IsAlive()) || (pGuard2 && !pGuard2->IsAlive()) ? 3000 : 8000) + rand()%3000;
+                    uiChainHealTimer = ((pGuard1 && !pGuard1->isAlive()) || (pGuard2 && !pGuard2->isAlive()) ? 3000 : 8000) + rand()%3000;
                 }
             } else uiChainHealTimer -= diff;
 
@@ -237,11 +237,11 @@ public:
                 return me->GetGUID();
 
             Creature* pGuard1 = Unit::GetCreature(*me, instance ? instance->GetData64(DATA_EREKEM_GUARD_1) : 0);
-            if (pGuard1 && pGuard1->IsAlive() && !pGuard1->HealthAbovePct(75))
+            if (pGuard1 && pGuard1->isAlive() && !pGuard1->HealthAbovePct(75))
                 return pGuard1->GetGUID();
 
             Creature* pGuard2 = Unit::GetCreature(*me, instance ? instance->GetData64(DATA_EREKEM_GUARD_2) : 0);
-            if (pGuard2 && pGuard2->IsAlive() && !pGuard2->HealthAbovePct(75))
+            if (pGuard2 && pGuard2->isAlive() && !pGuard2->HealthAbovePct(75))
                 return pGuard2->GetGUID();
 
             return 0;

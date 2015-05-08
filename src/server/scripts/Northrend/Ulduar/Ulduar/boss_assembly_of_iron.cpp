@@ -194,11 +194,11 @@ class boss_steelbreaker : public CreatureScript
                     //DoCastAOE(SPELL_SUPERCHARGE, true);
 
                     if (Creature* Brundir = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_BRUNDIR)))
-                        if (Brundir->IsAlive())
+                        if (Brundir->isAlive())
                             Brundir->AI()->DoAction(ACTION_SUPERCHARGE);
 
                     if (Creature* Molgeim = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_MOLGEIM)))
-                        if (Molgeim->IsAlive())
+                        if (Molgeim->isAlive())
                             Molgeim->AI()->DoAction(ACTION_SUPERCHARGE);
                 }
             }
@@ -323,11 +323,11 @@ class boss_runemaster_molgeim : public CreatureScript
                     //DoCastAOE(SPELL_SUPERCHARGE, true);
 
                     if (Creature* Brundir = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_BRUNDIR)))
-                        if (Brundir->IsAlive())
+                        if (Brundir->isAlive())
                             Brundir->AI()->DoAction(ACTION_SUPERCHARGE);
 
                     if (Creature* Steelbreaker = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_STEELBREAKER)))
-                        if (Steelbreaker->IsAlive())
+                        if (Steelbreaker->isAlive())
                             Steelbreaker->AI()->DoAction(ACTION_SUPERCHARGE);
                 }
             }
@@ -364,12 +364,12 @@ class boss_runemaster_molgeim : public CreatureScript
                             {
                                 case 1:
                                     if (Creature* Steelbreaker = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_STEELBREAKER)))
-                                        if (Steelbreaker->IsAlive())
+                                        if (Steelbreaker->isAlive())
                                             target = Steelbreaker;
                                     break;
                                 case 2:
                                     if (Creature* Brundir = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_STEELBREAKER)))
-                                        if (Brundir->IsAlive())
+                                        if (Brundir->isAlive())
                                             target = Brundir;
                                     break;
                                 default:
@@ -480,11 +480,11 @@ class boss_stormcaller_brundir : public CreatureScript
                     //DoCastAOE(SPELL_SUPERCHARGE, true);
 
                     if (Creature* Molgeim = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_MOLGEIM)))
-                        if (Molgeim->IsAlive())
+                        if (Molgeim->isAlive())
                             Molgeim->AI()->DoAction(ACTION_SUPERCHARGE);
 
                     if (Creature* Steelbreaker = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_STEELBREAKER)))
-                        if (Steelbreaker->IsAlive())
+                        if (Steelbreaker->isAlive())
                             Steelbreaker->AI()->DoAction(ACTION_SUPERCHARGE);
                 }
 

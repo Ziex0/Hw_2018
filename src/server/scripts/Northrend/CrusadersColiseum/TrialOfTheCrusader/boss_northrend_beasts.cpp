@@ -353,7 +353,7 @@ class npc_snobold_vassal : public CreatureScript
             void JustDied(Unit* /*killer*/)
             {
                 if (Unit* target = ObjectAccessor::GetPlayer(*me, _targetGUID))
-                    if (target->IsAlive())
+                    if (target->isAlive())
                         target->RemoveAurasDueToSpell(SPELL_SNOBOLLED);
                 if (_instance)
                     _instance->SetData(DATA_SNOBOLD_COUNT, DECREASE);
@@ -381,12 +381,12 @@ class npc_snobold_vassal : public CreatureScript
 
                 if (Unit* target = ObjectAccessor::GetPlayer(*me, _targetGUID))
                 {
-                    if (!target->IsAlive())
+                    if (!target->isAlive())
                     {
                         if (_instance)
                         {
                             Unit* gormok = ObjectAccessor::GetCreature(*me, _instance->GetData64(NPC_GORMOK));
-                            if (gormok && gormok->IsAlive())
+                            if (gormok && gormok->isAlive())
                             {
                                 SetCombatMovement(false);
                                 _targetDied = true;
@@ -521,7 +521,7 @@ struct boss_jormungarAI : public BossAI
         {
             if (Creature* otherWorm = Unit::GetCreature(*me, instance->GetData64(OtherWormEntry)))
             {
-                if (!otherWorm->IsAlive())
+                if (!otherWorm->isAlive())
                 {
                     instance->SetData(TYPE_NORTHREND_BEASTS, SNAKES_DONE);
 
@@ -1091,7 +1091,7 @@ class boss_icehowl : public CreatureScript
                             {
                                 if (Unit* player = itr->getSource())
                                 {
-                                    if (player->IsAlive() && player->IsWithinDistInMap(me, 6.0f))
+                                    if (player->isAlive() && player->IsWithinDistInMap(me, 6.0f))
                                     {
                                         DoCastAOE(SPELL_TRAMPLE);
                                         events.ScheduleEvent(EVENT_TRAMPLE, 4*IN_MILLISECONDS);

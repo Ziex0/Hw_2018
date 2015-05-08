@@ -54,7 +54,7 @@ bool PetAI::_needToStop()
 
 void PetAI::_stopAttack()
 {
-    if (!me->IsAlive())
+    if (!me->isAlive())
     {
         sLog->outDebug(LOG_FILTER_GENERAL, "Creature stoped attacking cuz his dead [guid=%u]", me->GetGUIDLow());
         me->GetMotionMaster()->Clear();
@@ -75,7 +75,7 @@ void PetAI::_stopAttack()
 
 void PetAI::UpdateAI(uint32 diff)
 {
-    if (!me->IsAlive() || !me->GetCharmInfo())
+    if (!me->isAlive() || !me->GetCharmInfo())
         return;
 
     Unit* owner = me->GetCharmerOrOwner();
@@ -86,7 +86,7 @@ void PetAI::UpdateAI(uint32 diff)
     else
         m_updateAlliesTimer -= diff;
 
-    if (me->GetVictim() && me->GetVictim()->IsAlive())
+    if (me->GetVictim() && me->GetVictim()->isAlive())
     {
         // is only necessary to stop casting, the pet must not exit combat
         if (me->GetVictim()->HasBreakableByDamageCrowdControlAura(me))
@@ -345,7 +345,7 @@ void PetAI::OwnerAttackedBy(Unit* attacker)
         return;
 
     // Prevent pet from disengaging from current target
-    if (me->GetVictim() && me->GetVictim()->IsAlive())
+    if (me->GetVictim() && me->GetVictim()->isAlive())
         return;
 
     // Continue to evaluate and attack if necessary
@@ -366,7 +366,7 @@ void PetAI::OwnerAttacked(Unit* target)
         return;
 
     // Prevent pet from disengaging from current target
-    if (me->GetVictim() && me->GetVictim()->IsAlive())
+    if (me->GetVictim() && me->GetVictim()->isAlive())
         return;
 
     // Continue to evaluate and attack if necessary
@@ -527,7 +527,7 @@ bool PetAI::CanAttack(Unit* target)
     if (!target)
         return false;
 
-    if (!target->IsAlive())
+    if (!target->isAlive())
     {
         // Clear target to prevent getting stuck on dead targets
         me->AttackStop();
@@ -627,7 +627,7 @@ void PetAI::AttackedBy(Unit* attacker)
         return;
 
     // Prevent pet from disengaging from current target
-    if (me->GetVictim() && me->GetVictim()->IsAlive())
+    if (me->GetVictim() && me->GetVictim()->isAlive())
         return;
 
     // Continue to evaluate and attack if necessary

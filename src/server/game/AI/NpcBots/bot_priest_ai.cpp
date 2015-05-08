@@ -58,7 +58,7 @@ public:
                     Player* tPlayer = itr->getSource();
                     if (!tPlayer || !tPlayer->IsInWorld() || me->GetMap() != tPlayer->FindMap() ||
                         tPlayer->IsBeingTeleported() || tPlayer->isPossessed() || tPlayer->isCharmed()) continue;
-                    if (tPlayer->IsAlive())
+                    if (tPlayer->isAlive())
                     {
                         if (me->GetExactDist(tPlayer) > 35) continue;
                         uint8 pct = 50 + tPlayer->getAttackers().size()*10;
@@ -95,7 +95,7 @@ public:
                     Player* tPlayer = itr->getSource();
                     if (!tPlayer || !tPlayer->IsInWorld() || me->GetMap() != tPlayer->GetMap() ||
                         tPlayer->IsBeingTeleported() || tPlayer->isPossessed() || tPlayer->isCharmed()) continue;
-                    if (tPlayer->IsAlive())
+                    if (tPlayer->isAlive())
                     {
                         if (me->GetExactDist(tPlayer) > 25) continue;
                         if (GetHealthPCT(tPlayer) < 85)
@@ -302,7 +302,7 @@ public:
         {
             if (hp > 98)
                 return false;
-            if (!target || !target->IsAlive() || me->GetExactDist(target) > 40)
+            if (!target || !target->isAlive() || me->GetExactDist(target) > 40)
                 return false;
             if (Rand() > 50 + 20*target->isInCombat() + 50*master->GetMap()->IsRaid())
                 return false;

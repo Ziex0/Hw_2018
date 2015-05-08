@@ -107,7 +107,7 @@ void AggroAllPlayers(Creature* temp)
             if (player->isGameMaster())
                 continue;
 
-            if (player->IsAlive())
+            if (player->isAlive())
             {
                 temp->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_IMMUNE_TO_PC);
                 temp->SetReactState(REACT_AGGRESSIVE);

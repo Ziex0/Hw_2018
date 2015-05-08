@@ -324,7 +324,7 @@ class boss_gothik : public CreatureScript
                         bool checkdead = false;
                         for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
                         {
-                            if (i->getSource() && i->getSource()->IsAlive() &&
+                            if (i->getSource() && i->getSource()->isAlive() &&
                                 i->getSource()->GetPositionX() <= POS_X_NORTH &&
                                 i->getSource()->GetPositionX() >= POS_X_SOUTH &&
                                 i->getSource()->GetPositionY() <= POS_Y_GATE &&
@@ -332,7 +332,7 @@ class boss_gothik : public CreatureScript
                             {
                                 checklife = true;
                             }
-                            else if (i->getSource() && i->getSource()->IsAlive() &&
+                            else if (i->getSource() && i->getSource()->isAlive() &&
                                 i->getSource()->GetPositionX() <= POS_X_NORTH &&
                                 i->getSource()->GetPositionX() >= POS_X_SOUTH &&
                                 i->getSource()->GetPositionY() >= POS_Y_GATE &&
@@ -561,7 +561,7 @@ class mob_gothik_minion : public CreatureScript
                     {
                         for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
                         {
-                            if (i->getSource() && i->getSource()->IsAlive() && isOnSameSide(i->getSource()))
+                            if (i->getSource() && i->getSource()->isAlive() && isOnSameSide(i->getSource()))
                             {
                                 AttackStart(i->getSource());
                                 return;

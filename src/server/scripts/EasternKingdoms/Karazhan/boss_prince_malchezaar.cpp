@@ -276,7 +276,7 @@ public:
             //Infernal Cleanup
             for (std::vector<uint64>::const_iterator itr = infernals.begin(); itr != infernals.end(); ++itr)
                 if (Unit* pInfernal = Unit::GetUnit(*me, *itr))
-                    if (pInfernal->IsAlive())
+                    if (pInfernal->isAlive())
                     {
                         pInfernal->SetVisible(false);
                         pInfernal->setDeathState(JUST_DIED);
@@ -290,7 +290,7 @@ public:
             for (uint8 i = 0; i < 2; ++i)
             {
                 Unit* axe = Unit::GetUnit(*me, axes[i]);
-                if (axe && axe->IsAlive())
+                if (axe && axe->isAlive())
                     axe->Kill(axe);
                 axes[i] = 0;
             }
@@ -324,7 +324,7 @@ public:
             std::advance(itr, 1);
             for (; itr != t_list.end(); ++itr) //store the threat list in a different container
                 if (Unit* target = Unit::GetUnit(*me, (*itr)->getUnitGuid()))
-                    if (target->IsAlive() && target->GetTypeId() == TYPEID_PLAYER)
+                    if (target->isAlive() && target->GetTypeId() == TYPEID_PLAYER)
                         targets.push_back(target);
 
             //cut down to size if we have more than 5 targets
@@ -348,7 +348,7 @@ public:
             for (uint8 i = 0; i < 5; ++i)
             {
                 Unit* target = Unit::GetUnit(*me, enfeeble_targets[i]);
-                if (target && target->IsAlive())
+                if (target && target->isAlive())
                     target->SetHealth(enfeeble_health[i]);
                 enfeeble_targets[i] = 0;
                 enfeeble_health[i] = 0;
@@ -605,7 +605,7 @@ void netherspite_infernal::netherspite_infernalAI::Cleanup()
 {
     Creature* pMalchezaar = Unit::GetCreature(*me, malchezaar);
 
-    if (pMalchezaar && pMalchezaar->IsAlive())
+    if (pMalchezaar && pMalchezaar->isAlive())
         CAST_AI(boss_malchezaar::boss_malchezaarAI, pMalchezaar->AI())->Cleanup(me, point);
 }
 

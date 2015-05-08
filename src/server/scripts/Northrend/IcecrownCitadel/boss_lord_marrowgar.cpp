@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -245,7 +245,7 @@ class boss_lord_marrowgar : public CreatureScript
                         case EVENT_BONE_STORM_END:
                             if (me->GetMotionMaster()->GetCurrentMovementGeneratorType() == POINT_MOTION_TYPE)
                                 me->GetMotionMaster()->MovementExpired();
-                            me->GetMotionMaster()->MoveChase(me->GetVictim());
+                            me->GetMotionMaster()->MoveChase(me->getVictim());
                             me->SetSpeed(MOVE_RUN, _baseSpeed, true);
                             events.CancelEvent(EVENT_BONE_STORM_MOVE);
                             events.ScheduleEvent(EVENT_ENABLE_BONE_SLICE, 10000);

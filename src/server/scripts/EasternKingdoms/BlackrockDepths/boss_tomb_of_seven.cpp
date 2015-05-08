@@ -189,7 +189,7 @@ public:
             me->DeleteThreatList();
             me->CombatStop(true);
             me->LoadCreaturesAddon();
-            if (me->IsAlive())
+            if (me->isAlive())
                 me->GetMotionMaster()->MoveTargetedHome();
             me->SetLootRecipient(NULL);
             if (instance)

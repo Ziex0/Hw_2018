@@ -364,7 +364,7 @@ public:
 
             Unit* target = NULL;
 
-            if (master->IsAlive() && isMeleeClass(master->getClass()) && master->isInCombat() &&
+            if (master->isAlive() && isMeleeClass(master->getClass()) && master->isInCombat() &&
                 GetHealthPCT(master) > 80 && me->GetDistance(master) < 30 &&
                 master->getAttackers().empty() && !CCed(master, true))
             {
@@ -391,7 +391,7 @@ public:
                         Player* player = itr->getSource();
                         if (player == master) continue;
                         if (!player || !player->IsInWorld() || player->IsBeingTeleported()) continue;
-                        if (!player->IsAlive() || me->GetMap() != player->FindMap()) continue;
+                        if (!player->isAlive() || me->GetMap() != player->FindMap()) continue;
                         if (!isMeleeClass(player->getClass()) || !player->isInCombat()) continue;
                         if (GetHealthPCT(player) < 80 || me->GetDistance(player) > 30) continue;
                         if (!player->getAttackers().empty() || CCed(player, true)) continue;
@@ -440,7 +440,7 @@ public:
 
             for (AttackerSet::const_iterator itr = b_attackers.begin(); itr != b_attackers.end(); ++itr)
             {
-                if (!(*itr) || !(*itr)->IsAlive()) continue;
+                if (!(*itr) || !(*itr)->isAlive()) continue;
                 if (Spell* spell = (*itr)->GetCurrentSpell(CURRENT_GENERIC_SPELL))
                 {
                     if (spell->m_targets.GetUnitTargetGUID() == me->GetGUID())

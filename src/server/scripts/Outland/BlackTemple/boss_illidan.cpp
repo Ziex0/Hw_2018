@@ -692,7 +692,7 @@ public:
             if (MaievGUID)
             {
                 if (Creature* maiev = ObjectAccessor::GetCreature(*me, MaievGUID))
-                    if (maiev->IsAlive())
+                    if (maiev->isAlive())
                         maiev->AI()->DoAction(NextPhase);
             }
             Phase = NextPhase;
@@ -1791,7 +1791,7 @@ void boss_illidan_stormrage::boss_illidan_stormrageAI::Reset()
 
     if (Creature* akama = ObjectAccessor::GetCreature(*me, AkamaGUID))
     {
-        if (!akama->IsAlive())
+        if (!akama->isAlive())
             akama->Respawn();
         else
             akama->AI()->EnterEvadeMode();

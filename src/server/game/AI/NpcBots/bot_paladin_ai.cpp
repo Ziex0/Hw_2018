@@ -428,7 +428,7 @@ public:
             if (Feasting()) return;
 
             //aura
-            if (master->IsAlive() && me->GetExactDist(master) < 20)
+            if (master->isAlive() && me->GetExactDist(master) < 20)
             {
                 uint8 myAura;
                 if (me->HasAura(DEVOTION_AURA, me->GetGUID()))

@@ -153,7 +153,7 @@ class boss_akilzon : public CreatureScript
                 for (uint8 i = 0; i < 8; ++i)
                 {
                     Unit* bird = Unit::GetUnit(*me, BirdGUIDs[i]);
-                    if (bird && bird->IsAlive())
+                    if (bird && bird->isAlive())
                     {
                         bird->SetVisible(false);
                         bird->setDeathState(JUST_DIED);
@@ -248,7 +248,7 @@ class boss_akilzon : public CreatureScript
                 if (StormCount)
                 {
                     Unit* target = Unit::GetUnit(*me, CloudGUID);
-                    if (!target || !target->IsAlive())
+                    if (!target || !target->isAlive())
                     {
                         EnterEvadeMode();
                         return;

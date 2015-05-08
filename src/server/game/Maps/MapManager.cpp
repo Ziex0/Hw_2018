@@ -202,7 +202,7 @@ bool MapManager::CanPlayerEnter(uint32 mapid, Player* player, bool loginCheck)
         }
     }
 
-    if (!player->IsAlive())
+    if (!player->isAlive())
     {
         if (Corpse* corpse = player->GetCorpse())
         {

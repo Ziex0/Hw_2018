@@ -150,7 +150,7 @@ class boss_high_botanist_freywinn : public CreatureScript
                             {
                                 if (Unit* temp = Unit::GetUnit(*me, *itr))
                                 {
-                                    if (!temp->IsAlive())
+                                    if (!temp->isAlive())
                                     {
                                         Adds_List.erase(itr);
                                         ++DeadAddsCount;

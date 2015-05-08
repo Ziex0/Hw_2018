@@ -59,7 +59,7 @@ public:
         handler->SetSentErrorMessage(true);
         if (/*player->isInCombat() ||*/
             player->isDead() ||
-            !player->IsAlive() ||
+            !player->isAlive() ||
             player->isInFlight() ||
             player->isCharmed() ||
             bot_ai::CCed(player))
@@ -164,7 +164,7 @@ public:
             if (Unit* unit = bot_ai::GetBotGroupMainTank(group))
             {
                 bool bot = unit->GetTypeId() == TYPEID_UNIT && unit->ToCreature()->GetIAmABot();
-                handler->PSendSysMessage("Main tank is %s (%s%s).", unit->GetName().c_str(), (bot ? "npcbot" : "player"), (unit->IsAlive() ? "" : ", dead"));
+                handler->PSendSysMessage("Main tank is %s (%s%s).", unit->GetName().c_str(), (bot ? "npcbot" : "player"), (unit->isAlive() ? "" : ", dead"));
                 handler->SetSentErrorMessage(true);
                 return true;
             }
@@ -260,7 +260,7 @@ public:
                     if (cre->GetBotClass() == i)
                     {
                         ++count;
-                        if (cre->IsAlive())
+                        if (cre->isAlive())
                             ++alivecount;
                     }
                 }

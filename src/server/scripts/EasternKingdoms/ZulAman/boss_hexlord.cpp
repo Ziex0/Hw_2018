@@ -275,7 +275,7 @@ class boss_hexlord_malacrass : public CreatureScript
                 for (uint8 i = 0; i < 4; ++i)
                 {
                     Creature* creature = Unit::GetCreature(*me, AddGUID[i]);
-                    if (creature && creature->IsAlive())
+                    if (creature && creature->isAlive())
                         creature->AI()->AttackStart(me->GetVictim());
                     else
                     {
@@ -311,7 +311,7 @@ class boss_hexlord_malacrass : public CreatureScript
                 for (uint8 i = 0; i < 4; ++i)
                 {
                     Unit* Temp = Unit::GetUnit(*me, AddGUID[i]);
-                    if (Temp && Temp->IsAlive())
+                    if (Temp && Temp->isAlive())
                         Temp->DealDamage(Temp, Temp->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
                 }
             }
@@ -336,7 +336,7 @@ class boss_hexlord_malacrass : public CreatureScript
                 for (uint8 i = 0; i < 4; ++i)
                 {
                     Creature* creature = (Unit::GetCreature((*me), AddGUID[i]));
-                    if (!creature || !creature->IsAlive())
+                    if (!creature || !creature->isAlive())
                     {
                         if (creature) creature->setDeathState(DEAD);
                         creature = me->SummonCreature(AddEntry[i], Pos_X[i], POS_Y, POS_Z, ORIENT, TEMPSUMMON_DEAD_DESPAWN, 0);
@@ -370,7 +370,7 @@ class boss_hexlord_malacrass : public CreatureScript
                 {
                     for (uint8 i = 0; i < 4; ++i)
                         if (Creature* temp = Unit::GetCreature(*me, AddGUID[i]))
-                            if (temp->IsAlive() && !temp->GetVictim())
+                            if (temp->isAlive() && !temp->GetVictim())
                                 temp->AI()->AttackStart(me->GetVictim());
 
                     CheckAddState_Timer = 5000;
@@ -435,7 +435,7 @@ class boss_hexlord_malacrass : public CreatureScript
                 if (PlayerAbility_Timer <= diff)
                 {
                     //Unit* target = Unit::GetUnit(*me, PlayerGUID);
-                    //if (target && target->IsAlive())
+                    //if (target && target->isAlive())
                     //{
                         UseAbility();
                         PlayerAbility_Timer = urand(8000, 10000);

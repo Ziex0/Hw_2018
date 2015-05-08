@@ -267,7 +267,7 @@ class boss_magtheridon : public CreatureScript
             //function to interrupt channeling and debuff clicker with mind exh(used if second person clicks with same cube or after dispeling/ending shadow grasp DoT)
             void DebuffClicker(Unit* clicker)
             {
-                if (!clicker || !clicker->IsAlive())
+                if (!clicker || !clicker->isAlive())
                     return;
 
                 clicker->RemoveAurasDueToSpell(SPELL_SHADOW_GRASP); // cannot interrupt triggered spells
@@ -596,7 +596,7 @@ public:
         if (instance->GetData(DATA_MAGTHERIDON_EVENT) != IN_PROGRESS)
             return true;
         Creature* Magtheridon =Unit::GetCreature(*go, instance->GetData64(DATA_MAGTHERIDON));
-        if (!Magtheridon || !Magtheridon->IsAlive())
+        if (!Magtheridon || !Magtheridon->isAlive())
             return true;
 
         // if exhausted or already channeling return

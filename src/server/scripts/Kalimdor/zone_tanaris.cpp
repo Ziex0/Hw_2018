@@ -617,7 +617,7 @@ public:
                         PostEventTimer = 5000;
 
                         Creature* torta = Creature::GetCreature(*me, TortaGUID);
-                        if (!torta || !torta->IsAlive())
+                        if (!torta || !torta->isAlive())
                         {
                             //something happened, so just complete
                             SetFollowComplete();

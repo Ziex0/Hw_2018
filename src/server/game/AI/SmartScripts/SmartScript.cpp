@@ -1024,7 +1024,7 @@ void SmartScript::ProcessAction(SmartScriptHolder& e, Unit* unit, uint32 var0, u
                 break;
 
             // The AI is only updated if the creature is alive
-            if (me->IsAlive())
+            if (me->isAlive())
             {
                 CAST_AI(SmartAI, me->AI())->SetDespawnTime(e.action.forceDespawn.delay + 1); // Next tick
                 CAST_AI(SmartAI, me->AI())->StartDespawn();

@@ -84,7 +84,7 @@ void WorldSession::HandlePetAction(WorldPacket& recvData)
         return;
     }
 
-    if (!pet->IsAlive())
+    if (!pet->isAlive())
     {
         SpellInfo const* spell = (flag == ACT_ENABLED || flag == ACT_PASSIVE) ? sSpellMgr->GetSpellInfo(spellid) : NULL;
         if (!spell)
@@ -104,7 +104,7 @@ void WorldSession::HandlePetAction(WorldPacket& recvData)
         //If a pet is dismissed, m_Controlled will change
         std::vector<Unit*> controlled;
         for (Unit::ControlList::iterator itr = GetPlayer()->m_Controlled.begin(); itr != GetPlayer()->m_Controlled.end(); ++itr)
-            if ((*itr)->GetEntry() == pet->GetEntry() && (*itr)->IsAlive())
+            if ((*itr)->GetEntry() == pet->GetEntry() && (*itr)->isAlive())
                 controlled.push_back(*itr);
         for (std::vector<Unit*>::iterator itr = controlled.begin(); itr != controlled.end(); ++itr)
             HandlePetActionHelper(*itr, guid1, spellid, flag, guid2);
@@ -133,7 +133,7 @@ void WorldSession::HandlePetStopAttack(WorldPacket &recvData)
         return;
     }
 
-    if (!pet->IsAlive())
+    if (!pet->isAlive())
         return;
 
     pet->AttackStop();

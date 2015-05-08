@@ -499,7 +499,7 @@ public:
 
         void MoveInLineOfSight(Unit* who)
         {
-            if (!who || (!who->IsAlive()))
+            if (!who || (!who->isAlive()))
                 return;
 
             if (me->IsWithinDistInMap(who, 50.0f))

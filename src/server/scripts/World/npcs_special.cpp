@@ -180,7 +180,7 @@ public:
         {
             Creature* creature = Unit::GetCreature(*me, SpawnedGUID);
 
-            if (creature && creature->IsAlive())
+            if (creature && creature->isAlive())
                 return creature;
 
             return NULL;
@@ -762,7 +762,7 @@ public:
         void SpellHit(Unit* caster, SpellInfo const* spell)
         {
             Player* player = caster->ToPlayer();
-            if (!player || !me->IsAlive() || spell->Id != 20804)
+            if (!player || !me->isAlive() || spell->Id != 20804)
                 return;
 
             if (player->GetQuestStatus(6624) == QUEST_STATUS_INCOMPLETE || player->GetQuestStatus(6622) == QUEST_STATUS_INCOMPLETE)
@@ -802,10 +802,10 @@ public:
         void UpdateAI(uint32 /*diff*/)
         {
             //lower HP on every world tick makes it a useful counter, not officlone though
-            if (me->IsAlive() && me->GetHealth() > 6)
+            if (me->isAlive() && me->GetHealth() > 6)
                 me->ModifyHealth(-5);
 
-            if (me->IsAlive() && me->GetHealth() <= 6)
+            if (me->isAlive() && me->GetHealth() <= 6)
             {
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IN_COMBAT);
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
@@ -1832,7 +1832,7 @@ public:
         // Do not reload Creature templates on evade mode enter - prevent visual lost
         void EnterEvadeMode()
         {
-            if (me->IsInEvadeMode() || !me->IsAlive())
+            if (me->IsInEvadeMode() || !me->isAlive())
                 return;
 
             Unit* owner = me->GetCharmerOrOwner();
@@ -1894,7 +1894,7 @@ public:
         // Fly away when dismissed
         void SpellHit(Unit* source, SpellInfo const* spell)
         {
-            if (spell->Id != 50515 || !me->IsAlive())
+            if (spell->Id != 50515 || !me->isAlive())
                 return;
 
             Unit* owner = me->GetOwner();
@@ -1957,7 +1957,7 @@ class npc_lightwell : public CreatureScript
 
             void EnterEvadeMode()
             {
-                if (!me->IsAlive())
+                if (!me->isAlive())
                     return;
 
                 me->DeleteThreatList();

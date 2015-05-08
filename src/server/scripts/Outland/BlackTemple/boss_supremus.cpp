@@ -109,7 +109,7 @@ public:
         {
             if (instance)
             {
-                if (me->IsAlive())
+                if (me->isAlive())
                     instance->SetBossState(DATA_SUPREMUS, NOT_STARTED);
             }
 

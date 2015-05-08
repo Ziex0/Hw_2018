@@ -119,7 +119,7 @@ public:
                         for (; i != me->getThreatManager().getThreatList().end(); ++i)
                         {
                             Unit* target = (*i)->getTarget();
-                            if (target->IsAlive() && target != me->GetVictim() && target->GetHealth() > MostHP && me->IsWithinMeleeRange(target))
+                            if (target->isAlive() && target != me->GetVictim() && target->GetHealth() > MostHP && me->IsWithinMeleeRange(target))
                             {
                                 MostHP = target->GetHealth();
                                 pMostHPTarget = target;

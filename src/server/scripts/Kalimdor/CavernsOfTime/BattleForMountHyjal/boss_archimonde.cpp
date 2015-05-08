@@ -121,7 +121,7 @@ public:
             {
                 if (Unit* Archimonde = Unit::GetUnit(*me, ArchimondeGUID))
                 {
-                    if (Archimonde->HealthBelowPct(2) || !Archimonde->IsAlive())
+                    if (Archimonde->HealthBelowPct(2) || !Archimonde->isAlive())
                         DoCast(me, SPELL_DENOUEMENT_WISP);
                     else
                         DoCast(Archimonde, SPELL_ANCIENT_SPARK);
@@ -368,7 +368,7 @@ public:
             for (; itr != threatlist.end(); ++itr)
             {
                 Unit* unit = Unit::GetUnit(*me, (*itr)->getUnitGuid());
-                if (unit && unit->IsAlive())
+                if (unit && unit->isAlive())
                     targets.push_back(unit);
             }
 

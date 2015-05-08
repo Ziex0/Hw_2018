@@ -656,7 +656,7 @@ public:
         {
             if (GC_Timer > diff || Rand() > 20) return false;
             if (me->isInCombat() && !master->GetMap()->IsRaid()) return false;
-            if (target && target->IsAlive() && me->GetExactDist(target) < 30)
+            if (target && target->isAlive() && me->GetExactDist(target) < 30)
             {
                 if (!HasAuraName(target, MARK_OF_THE_WILD))
                     if (doCast(target, MARK_OF_THE_WILD))
@@ -797,7 +797,7 @@ public:
             if (!gr)
             {
                 Unit* target = master;
-                if (master->IsAlive()) return;
+                if (master->isAlive()) return;
                 if (master->isRessurectRequested()) return; //ressurected
                 if (master->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_GHOST))
                     target = (Unit*)master->GetCorpse();
@@ -823,7 +823,7 @@ public:
             {
                 Player* tPlayer = itr->getSource();
                 Unit* target = tPlayer;
-                if (!tPlayer || tPlayer->IsAlive()) continue;
+                if (!tPlayer || tPlayer->isAlive()) continue;
                 if (tPlayer->isRessurectRequested()) continue; //ressurected
                 if (tPlayer->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_GHOST))
                     target = (Unit*)tPlayer->GetCorpse();

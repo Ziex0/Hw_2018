@@ -411,7 +411,7 @@ class bot_minion_ai : public bot_ai
         void Follow(bool force = false, Position* newpos = NULL)
         {
             if (force ||
-                (me->IsAlive() && (!me->isInCombat() || !opponent) && m_botCommandState != COMMAND_STAY))
+                (me->isAlive() && (!me->isInCombat() || !opponent) && m_botCommandState != COMMAND_STAY))
                 SetBotCommandState(COMMAND_FOLLOW, force, newpos);
         }
 

@@ -2760,7 +2760,7 @@ namespace Trinity
 
                 float x, y, z;
 
-                if (!c->IsAlive() || c->HasUnitState(UNIT_STATE_ROOT | UNIT_STATE_STUNNED | UNIT_STATE_DISTRACTED) ||
+                if (!c->isAlive() || c->HasUnitState(UNIT_STATE_ROOT | UNIT_STATE_STUNNED | UNIT_STATE_DISTRACTED) ||
                     !c->GetMotionMaster()->GetDestination(x, y, z))
                 {
                     x = c->GetPositionX();

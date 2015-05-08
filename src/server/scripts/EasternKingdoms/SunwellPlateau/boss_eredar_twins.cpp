@@ -146,7 +146,7 @@ public:
             if (instance)
             {
                 Creature* temp = Unit::GetCreature(*me, instance->GetData64(DATA_ALYTHESS));
-                if (temp && temp->IsAlive() && !temp->GetVictim())
+                if (temp && temp->isAlive() && !temp->GetVictim())
                     temp->AI()->AttackStart(who);
             }
 
@@ -409,7 +409,7 @@ public:
             if (instance)
             {
                 Creature* temp = Unit::GetCreature(*me, instance->GetData64(DATA_SACROLASH));
-                if (temp && temp->IsAlive() && !temp->GetVictim())
+                if (temp && temp->isAlive() && !temp->GetVictim())
                     temp->AI()->AttackStart(who);
             }
 

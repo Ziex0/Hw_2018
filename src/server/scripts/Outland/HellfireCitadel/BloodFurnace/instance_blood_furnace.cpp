@@ -313,7 +313,7 @@ class instance_blood_furnace : public InstanceMapScript
 
             void ResetPrisoner(Creature* prisoner)
             {
-                if (!prisoner->IsAlive())
+                if (!prisoner->isAlive())
                     prisoner->Respawn(true);
                 prisoner->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC | UNIT_FLAG_NON_ATTACKABLE);
             }

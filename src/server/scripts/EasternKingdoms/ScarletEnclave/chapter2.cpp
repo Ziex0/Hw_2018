@@ -68,7 +68,7 @@ public:
 
         void SpellHit(Unit* caster, const SpellInfo* spell)
         {
-            if (spell->Id == SPELL_PERSUASIVE_STRIKE && caster->GetTypeId() == TYPEID_PLAYER && me->IsAlive() && !speechCounter)
+            if (spell->Id == SPELL_PERSUASIVE_STRIKE && caster->GetTypeId() == TYPEID_PLAYER && me->isAlive() && !speechCounter)
             {
                 if (Player* player = caster->ToPlayer())
                 {
@@ -309,7 +309,7 @@ public:
                         {
                             Creature* temp = Unit::GetCreature(*me, valrothGUID);
 
-                            if (!temp || !temp->IsAlive())
+                            if (!temp || !temp->isAlive())
                             {
                                 Talk(SAY_BREAKOUT8);
                                 waveTimer = 5000;
@@ -678,7 +678,7 @@ public:
 
         void UpdateAI(uint32 diff)
         {
-            if (PlayerGUID && !me->GetVictim() && me->IsAlive())
+            if (PlayerGUID && !me->GetVictim() && me->isAlive())
             {
                 if (ExecuteSpeech_Timer <= diff)
                 {

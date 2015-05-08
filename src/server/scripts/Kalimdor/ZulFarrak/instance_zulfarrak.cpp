@@ -314,7 +314,7 @@ public:
         {
            if (Creature* npc = instance->GetCreature(GetData64(entry)))
            {
-               if (npc->IsAlive())
+               if (npc->isAlive())
                {
                     npc->SetWalk(true);
                     npc->GetMotionMaster()->MovePoint(1, x, y, z);
@@ -343,7 +343,7 @@ public:
             {
                 if (Creature* add = instance->GetCreature((*itr)))
                 {
-                    if (add->IsAlive())
+                    if (add->isAlive())
                         return false;
                 }
             }
@@ -351,7 +351,7 @@ public:
             {
                 if (Creature* add = instance->GetCreature(((*itr))))
                 {
-                    if (add->IsAlive())
+                    if (add->isAlive())
                         return false;
                 }
             }

@@ -93,7 +93,7 @@ void CreatureAI::DoZoneInCombat(Creature* creature /*= NULL*/, float maxRangeToN
             if (player->isGameMaster())
                 continue;
 
-            if (player->IsAlive())
+            if (player->isAlive())
             {
                 creature->SetInCombatWith(player);
                 player->SetInCombatWith(creature);
@@ -224,7 +224,7 @@ bool CreatureAI::UpdateVictim()
 
 bool CreatureAI::_EnterEvadeMode()
 {
-    if (!me->IsAlive())
+    if (!me->isAlive())
         return false;
 
     // dont remove vehicle auras, passengers arent supposed to drop off the vehicle

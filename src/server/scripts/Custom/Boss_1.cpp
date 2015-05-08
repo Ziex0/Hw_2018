@@ -107,7 +107,7 @@ public:
             me->CombatStop(true);
             me->LoadCreaturesAddon();
 
-            if(me->IsAlive())
+            if(me->isAlive())
                 me->GetMotionMaster()->MoveTargetedHome(); //Q: should we avoid it? simply ScriptedAI::EnterEvadeMode
 
             me->SetLootRecipient(NULL);

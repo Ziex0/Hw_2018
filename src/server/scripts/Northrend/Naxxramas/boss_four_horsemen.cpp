@@ -166,16 +166,16 @@ public:
                 {
                     if (instance->GetBossState(BOSS_HORSEMEN) != NOT_STARTED)
                     {
-                        if (!Thane->IsAlive())
+                        if (!Thane->isAlive())
                             Thane->Respawn();
 
-                        if (!Lady->IsAlive())
+                        if (!Lady->isAlive())
                             Lady->Respawn();
 
-                        if (!Baron->IsAlive())
+                        if (!Baron->isAlive())
                             Baron->Respawn();
 
-                        if (!Sir->IsAlive())
+                        if (!Sir->isAlive())
                             Sir->Respawn();
 
                         CAST_AI(boss_four_horsemen::boss_four_horsemenAI, Thane->AI())->encounterActionReset = true;
@@ -191,7 +191,7 @@ public:
                 }
 
                 if (checkAllDead)
-                    return !Thane->IsAlive() && !Lady->IsAlive() && !Baron->IsAlive() && !Sir->IsAlive();
+                    return !Thane->isAlive() && !Lady->isAlive() && !Baron->isAlive() && !Sir->isAlive();
             }
             return false;
         }

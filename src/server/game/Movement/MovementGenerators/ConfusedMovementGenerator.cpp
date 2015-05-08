@@ -37,7 +37,7 @@ void ConfusedMovementGenerator<T>::DoInitialize(T* unit)
     unit->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_CONFUSED);
     unit->GetPosition(i_x, i_y, i_z);
 
-    if (!unit->IsAlive() || unit->IsStopped())
+    if (!unit->isAlive() || unit->IsStopped())
         return;
 
     unit->StopMoving();
@@ -49,7 +49,7 @@ void ConfusedMovementGenerator<T>::DoReset(T* unit)
 {
     i_nextMoveTime.Reset(0);
 
-    if (!unit->IsAlive() || unit->IsStopped())
+    if (!unit->isAlive() || unit->IsStopped())
         return;
 
     unit->StopMoving();

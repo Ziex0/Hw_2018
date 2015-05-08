@@ -147,7 +147,7 @@ public:
         {
           if(search_time < diff )
             {
-              if(me->GetDistance2d(unit_on_me) != 0 || unit_on_me->IsAlive())
+              if(me->GetDistance2d(unit_on_me) != 0 || unit_on_me->isAlive())
                 {
                   unit_on_me = NULL;
                 }

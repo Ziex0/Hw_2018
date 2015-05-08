@@ -236,7 +236,7 @@ public:
                     if (RingBossGUID)
                     {
                         Creature* boss = Unit::GetCreature(*me, RingBossGUID);
-                        if (boss && !boss->IsAlive() && boss->isDead())
+                        if (boss && !boss->isAlive() && boss->isDead())
                         {
                             RingBossGUID = 0;
                             Event_Timer = 5000;
@@ -249,7 +249,7 @@ public:
                     for (uint8 i = 0; i < MAX_MOB_AMOUNT; ++i)
                     {
                         Creature* mob = Unit::GetCreature(*me, RingMobGUID[i]);
-                        if (mob && !mob->IsAlive() && mob->isDead())
+                        if (mob && !mob->isAlive() && mob->isDead())
                         {
                             RingMobGUID[i] = 0;
                             --MobCount;

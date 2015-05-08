@@ -321,8 +321,8 @@ void WorldSession::HandleGossipHelloOpcode(WorldPacket& recvData)
         if (Creature* qBot = ObjectAccessor::GetCreatureOrPetOrVehicle(*_player, guid))
         {
             if (qBot->IsQuestBot() &&
-                (_player->IsAlive() || qBot->GetCreatureTemplate()->type_flags & CREATURE_TYPEFLAGS_GHOST) &&
-                (qBot->IsAlive() || (qBot->GetCreatureTemplate()->type_flags & CREATURE_TYPEFLAGS_DEAD_INTERACT)))
+                (_player->isAlive() || qBot->GetCreatureTemplate()->type_flags & CREATURE_TYPEFLAGS_GHOST) &&
+                (qBot->isAlive() || (qBot->GetCreatureTemplate()->type_flags & CREATURE_TYPEFLAGS_DEAD_INTERACT)))
             {
                 if (!sScriptMgr->OnGossipHello(_player, qBot))
                 {
@@ -478,7 +478,7 @@ void WorldSession::HandleBinderActivateOpcode(WorldPacket& recvData)
     uint64 npcGUID;
     recvData >> npcGUID;
 
-    if (!GetPlayer()->IsInWorld() || !GetPlayer()->IsAlive())
+    if (!GetPlayer()->IsInWorld() || !GetPlayer()->isAlive())
         return;
 
     Creature* unit = GetPlayer()->GetNPCIfCanInteractWith(npcGUID, UNIT_NPC_FLAG_INNKEEPER);
@@ -568,7 +568,7 @@ void WorldSession::SendStablePetCallback(PreparedQueryResult result, uint64 guid
     uint8 num = 0;                                          // counter for place holder
 
     // not let move dead pet in slot
-    if (pet && pet->IsAlive() && pet->getPetType() == HUNTER_PET)
+    if (pet && pet->isAlive() && pet->getPetType() == HUNTER_PET)
     {
         data << uint32(pet->GetCharmInfo()->GetPetNumber());
         data << uint32(pet->GetEntry());
@@ -614,7 +614,7 @@ void WorldSession::HandleStablePet(WorldPacket& recvData)
 
     recvData >> npcGUID;
 
-    if (!GetPlayer()->IsAlive())
+    if (!GetPlayer()->isAlive())
     {
         SendStableResult(STABLE_ERR_STABLE);
         return;
@@ -633,7 +633,7 @@ void WorldSession::HandleStablePet(WorldPacket& recvData)
     Pet* pet = _player->GetPet();
 
     // can't place in stable dead pet
-    if (!pet || !pet->IsAlive() || pet->getPetType() != HUNTER_PET)
+    if (!pet || !pet->isAlive() || pet->getPetType() != HUNTER_PET)
     {
         SendStableResult(STABLE_ERR_STABLE);
         return;
@@ -741,7 +741,7 @@ void WorldSession::HandleUnstablePetCallback(PreparedQueryResult result, uint32 
     }
 
     Pet* pet = _player->GetPet();
-    if (pet && pet->IsAlive())
+    if (pet && pet->isAlive())
     {
         SendStableResult(STABLE_ERR_STABLE);
         return;
@@ -880,7 +880,7 @@ void WorldSession::HandleStableSwapPetCallback(PreparedQueryResult result, uint3
     }
 
     // move alive pet to slot or delete dead pet
-    _player->RemovePet(pet, pet->IsAlive() ? PetSaveMode(slot) : PET_SAVE_AS_DELETED);
+    _player->RemovePet(pet, pet->isAlive() ? PetSaveMode(slot) : PET_SAVE_AS_DELETED);
 
     // summon unstabled pet
     Pet* newPet = new Pet(_player);

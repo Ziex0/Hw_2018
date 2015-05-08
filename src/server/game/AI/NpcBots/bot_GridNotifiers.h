@@ -66,7 +66,7 @@ class HostileDispelTargetCheck
             if (!PvP && (u->ToPlayer() || (u->ToCreature() && u->ToCreature()->GetBotAI())))
                 return false;
             if (u->IsWithinDistInMap(me, m_range) &&
-                u->IsAlive() &&
+                u->isAlive() &&
                 u->InSamePhase(me) &&
                 u->isInCombat() &&
                 u->isTargetableForAttack() &&
@@ -123,7 +123,7 @@ class AffectedTargetCheck
             if (needhostile == 2 && !(gr && gr->IsMember(u->GetGUID()))) return false;
             if (needhostile == 3 && !u->IsFriendlyTo(checker)) return false;
 
-            if (u->IsAlive() && checker->IsWithinDistInMap(u, m_range))
+            if (u->isAlive() && checker->IsWithinDistInMap(u, m_range))
             {
                 Unit::AuraMap const &Auras = u->GetOwnedAuras();
                 for (Unit::AuraMap::const_iterator itr = Auras.begin(); itr != Auras.end(); ++itr)
@@ -158,7 +158,7 @@ class PolyUnitCheck
                 return false;
             if (!me->IsWithinDistInMap(u, m_range))
                 return false;
-            if (!u->isInCombat() || !u->IsAlive() || !u->GetVictim())
+            if (!u->isInCombat() || !u->isAlive() || !u->GetVictim())
                 return false;
             if (u->GetCreatureType() != CREATURE_TYPE_HUMANOID &&
                 u->GetCreatureType() != CREATURE_TYPE_BEAST)
@@ -222,7 +222,7 @@ class FearUnitCheck
             if (u->GetCreatureType() != CREATURE_TYPE_BEAST &&
                 me->ToCreature()->GetBotClass() == CLASS_HUNTER)
                 return false;
-            if (!u->IsAlive())
+            if (!u->isAlive())
                 return false;
             if (!u->isTargetableForAttack())
                 return false;
@@ -274,7 +274,7 @@ class StunUnitCheck
                 return false;
             if (u->GetReactionTo(me) > REP_NEUTRAL)
                 return false;
-            if (!u->IsAlive())
+            if (!u->isAlive())
                 return false;
             if (!u->IsVisible())
                 return false;
@@ -337,7 +337,7 @@ class UndeadCCUnitCheck
                 return false;
             if (u->GetReactionTo(me) > REP_NEUTRAL)
                 return false;
-            if (!u->IsAlive())
+            if (!u->isAlive())
                 return false;
             if (!u->isTargetableForAttack())
                 return false;
@@ -388,7 +388,7 @@ class RootUnitCheck
                 return false;
             if (!me->IsWithinDistInMap(u, m_range))
                 return false;
-            if (!u->IsAlive())
+            if (!u->isAlive())
                 return false;
             if (!u->isInCombat())
                 return false;
@@ -437,7 +437,7 @@ class CastingUnitCheck
                 return false;
             if (!me->IsWithinDistInMap(u, max_range))
                 return false;
-            if (!u->IsAlive())
+            if (!u->isAlive())
                 return false;
             if (!u->InSamePhase(me))
                 return false;
@@ -520,7 +520,7 @@ class TranquilTargetCheck
             if (u != me->GetVictim() &&//check hunter_bot::hunter_botAI::CheckTranquil(uint32)
                 u->IsWithinDistInMap(me, max_range) &&
                 u->GetDistance(me) > min_range &&
-                u->IsAlive() &&
+                u->isAlive() &&
                 u->InSamePhase(me) &&
                 u->isInCombat() &&
                 u->isTargetableForAttack() &&

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -199,13 +199,7 @@ enum Actions
     ACTION_MARK_OF_THE_FALLEN_CHAMPION  = -72293,
 };
 
-
-
-enum Misc
-{
-	DATA_MADE_A_MESS = 45374613, // 4537, 4613 are achievement IDs
-	FACTION_SCOURGE = 974,
-};
+#define DATA_MADE_A_MESS 45374613 // 4537, 4613 are achievement IDs
 
 enum MovePoints
 {
@@ -441,8 +435,6 @@ class boss_deathbringer_saurfang : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_INTRO_ALLIANCE_2:
-							me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-							me->setFaction(FACTION_SCOURGE);
                             Talk(SAY_INTRO_ALLIANCE_2);
                             break;
                         case EVENT_INTRO_ALLIANCE_3:
@@ -454,8 +446,6 @@ class boss_deathbringer_saurfang : public CreatureScript
                             DoCast(me, SPELL_GRIP_OF_AGONY);
                             break;
                         case EVENT_INTRO_HORDE_2:
-							me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-							me->setFaction(FACTION_SCOURGE);
                             Talk(SAY_INTRO_HORDE_2);
                             break;
                         case EVENT_INTRO_HORDE_4:
@@ -535,7 +525,7 @@ class boss_deathbringer_saurfang : public CreatureScript
                             teleporter->SetFlag(GAMEOBJECT_FLAGS, GO_FLAG_IN_USE);
                         }
 
-                        //me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+                        me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                         // controls what events will execute
                         events.SetPhase(uint32(action));
 
@@ -1284,7 +1274,7 @@ class spell_deathbringer_boiling_blood : public SpellScriptLoader
 
             void FilterTargets(std::list<WorldObject*>& targets)
             {
-                targets.remove(GetCaster()->GetVictim());
+                targets.remove(GetCaster()->getVictim());
                 if (targets.empty())
                     return;
 

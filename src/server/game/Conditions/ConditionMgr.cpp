@@ -276,7 +276,7 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo)
         case CONDITION_ALIVE:
         {
             if (Unit* unit = object->ToUnit())
-                condMeets = unit->IsAlive();
+                condMeets = unit->isAlive();
             break;
         }
         case CONDITION_HP_VAL:

@@ -97,7 +97,7 @@ class boss_archaedas : public CreatureScript
             {
                 Unit* minion = Unit::GetUnit(*me, uiGuid);
 
-                if (minion && minion->IsAlive())
+                if (minion && minion->isAlive())
                 {
                     DoCast(minion, SPELL_AWAKEN_VAULT_WALKER, flag);
                     minion->CastSpell(minion, SPELL_ARCHAEDAS_AWAKEN, true);

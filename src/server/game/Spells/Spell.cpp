@@ -1169,7 +1169,7 @@ void Spell::SelectImplicitAreaTargets(SpellEffIndex effIndex, SpellImplicitTarge
                         case TYPEID_PLAYER:
                         {
                             Unit* unitTarget = (*itr)->ToUnit();
-                            if (unitTarget->IsAlive() || !playerCaster->isHonorOrXPTarget(unitTarget)
+                            if (unitTarget->isAlive() || !playerCaster->isHonorOrXPTarget(unitTarget)
                                 || ((unitTarget->GetCreatureTypeMask() & (1 << (CREATURE_TYPE_HUMANOID-1))) == 0)
                                 || (unitTarget->GetDisplayId() != unitTarget->GetNativeDisplayId()))
                                 break;
@@ -2150,7 +2150,7 @@ void Spell::AddUnitTarget(Unit* target, uint32 effectMask, bool checkIfValid /*=
     targetInfo.targetGUID = targetGUID;                         // Store target GUID
     targetInfo.effectMask = effectMask;                         // Store all effects not immune
     targetInfo.processed  = false;                              // Effects not apply on target
-    targetInfo.alive      = target->IsAlive();
+    targetInfo.alive      = target->isAlive();
     targetInfo.damage     = 0;
     targetInfo.crit       = false;
     targetInfo.scaleAura  = false;
@@ -2340,7 +2340,7 @@ void Spell::DoAllEffectOnTarget(TargetInfo* target)
         return;
     }
 
-    if (unit->IsAlive() != target->alive)
+    if (unit->isAlive() != target->alive)
         return;
 
     if (getState() == SPELL_STATE_DELAYED && !m_spellInfo->IsPositive() && (getMSTime() - target->timeDelay) <= unit->m_lastSanctuaryTime)
@@ -3170,7 +3170,7 @@ void Spell::cast(bool skipCheck)
         // This prevents spells such as Hunter's Mark from triggering pet attack
         if (this->GetSpellInfo()->DmgClass != SPELL_DAMAGE_CLASS_NONE)
             if (Pet* playerPet = playerCaster->GetPet())
-                if (playerPet->IsAlive() && playerPet->isControlled() && (m_targets.GetTargetMask() & TARGET_FLAG_UNIT))
+                if (playerPet->isAlive() && playerPet->isControlled() && (m_targets.GetTargetMask() & TARGET_FLAG_UNIT))
                     playerPet->AI()->OwnerAttacked(m_targets.GetObjectTarget()->ToUnit());
     }
 
@@ -4736,7 +4736,7 @@ SpellCastResult Spell::CheckCast(bool strict)
 				return SPELL_FAILED_NOT_IN_ARENA;
 				
     // check death state
-    if (!m_caster->IsAlive() && !(m_spellInfo->Attributes & SPELL_ATTR0_PASSIVE) && !((m_spellInfo->Attributes & SPELL_ATTR0_CASTABLE_WHILE_DEAD) || (IsTriggered() && !m_triggeredByAuraSpell)))
+    if (!m_caster->isAlive() && !(m_spellInfo->Attributes & SPELL_ATTR0_PASSIVE) && !((m_spellInfo->Attributes & SPELL_ATTR0_CASTABLE_WHILE_DEAD) || (IsTriggered() && !m_triggeredByAuraSpell)))
         return SPELL_FAILED_CASTER_DEAD;
 
     // check cooldowns to prevent cheating
@@ -5271,7 +5271,7 @@ SpellCastResult Spell::CheckCast(bool strict)
             {
                 Creature* pet = m_caster->GetGuardianPet();
 
-                if (pet && pet->IsAlive())
+                if (pet && pet->isAlive())
                     return SPELL_FAILED_ALREADY_HAVE_SUMMON;
 
                 break;
@@ -5501,7 +5501,7 @@ SpellCastResult Spell::CheckCast(bool strict)
             {
                 // not allow cast fly spells if not have req. skills  (all spells is self target)
                 // allow always ghost flight spells
-                if (m_originalCaster && m_originalCaster->GetTypeId() == TYPEID_PLAYER && m_originalCaster->IsAlive())
+                if (m_originalCaster && m_originalCaster->GetTypeId() == TYPEID_PLAYER && m_originalCaster->isAlive())
                 {
                     Battlefield* Bf = sBattlefieldMgr->GetBattlefieldToZoneId(m_originalCaster->GetZoneId());
                     if (AreaTableEntry const* area = GetAreaEntryByAreaID(m_originalCaster->GetAreaId()))
@@ -5571,7 +5571,7 @@ SpellCastResult Spell::CheckPetCast(Unit* target)
 
     // dead owner (pets still alive when owners ressed?)
     if (Unit* owner = m_caster->GetCharmerOrOwner())
-        if (!owner->IsAlive())
+        if (!owner->isAlive())
             return SPELL_FAILED_CASTER_DEAD;
 
     if (!target && m_targets.GetUnitTarget())
@@ -6730,7 +6730,7 @@ bool SpellEvent::IsDeletable() const
 
 bool Spell::IsValidDeadOrAliveTarget(Unit const* target) const
 {
-    if (target->IsAlive())
+    if (target->isAlive())
         return !m_spellInfo->IsRequiringDeadTarget();
     if (m_spellInfo->IsAllowingDeadTarget())
         return true;

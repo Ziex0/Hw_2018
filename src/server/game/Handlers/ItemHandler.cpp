@@ -709,7 +709,7 @@ void WorldSession::HandleListInventoryOpcode(WorldPacket& recvData)
 
     recvData >> guid;
 
-    if (!GetPlayer()->IsAlive())
+    if (!GetPlayer()->isAlive())
         return;
 
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: Recvd CMSG_LIST_INVENTORY");
@@ -992,7 +992,7 @@ void WorldSession::HandleAutoStoreBankItemOpcode(WorldPacket& recvPacket)
 
 void WorldSession::HandleSetAmmoOpcode(WorldPacket& recvData)
 {
-    if (!GetPlayer()->IsAlive())
+    if (!GetPlayer()->isAlive())
     {
         GetPlayer()->SendEquipError(EQUIP_ERR_YOU_ARE_DEAD, NULL, NULL);
         return;

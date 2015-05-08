@@ -328,7 +328,7 @@ public:
             {
                 Player* tPlayer = itr->getSource();
                 if (!tPlayer || !tPlayer->IsInWorld() || tPlayer->GetMapId() != me->GetMapId() ||
-                    (!tPlayer->IsAlive() && !tPlayer->HaveBot())) continue;
+                    (!tPlayer->isAlive() && !tPlayer->HaveBot())) continue;
                 if (me->GetExactDist(tPlayer) > 20) continue;
                 if (tPlayer->getPowerType() != POWER_MANA) continue;
                 if (GetManaPCT(tPlayer) < 35)
@@ -645,7 +645,7 @@ public:
             if (!WATER_WALKING && !WATER_BREATHING && !EARTH_SHIELD)
                 return false;
 
-            if (GC_Timer > diff || !target || !target->IsAlive() || Rand() > 40) return false;
+            if (GC_Timer > diff || !target || !target->isAlive() || Rand() > 40) return false;
             
             if (EARTH_SHIELD && Earthy == false && ((!tank && target == master) || target == tank) &&
                 (target->isInCombat() || !target->isMoving()) &&
@@ -706,7 +706,7 @@ public:
         {
             if (hp > 97)
                 return false;
-            if (!target || !target->IsAlive() || me->GetExactDist(target) > 40)
+            if (!target || !target->isAlive() || me->GetExactDist(target) > 40)
                 return false;
             if (Rand() > 50 + 20*target->isInCombat() + 50*master->GetMap()->IsRaid())
                 return false;

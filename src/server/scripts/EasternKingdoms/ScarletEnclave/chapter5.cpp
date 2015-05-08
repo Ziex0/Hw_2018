@@ -1302,7 +1302,7 @@ public:
                                 if (!PlayerList.isEmpty())
                                 {
                                     for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
-                                        if (i->getSource()->IsAlive() && me->IsWithinDistInMap(i->getSource(), 50))
+                                        if (i->getSource()->isAlive() && me->IsWithinDistInMap(i->getSource(), 50))
                                             i->getSource()->CastSpell(i->getSource(), SPELL_THE_LIGHT_OF_DAWN_Q, false);
                                 }
                             }
@@ -1515,9 +1515,9 @@ public:
         void NPCChangeTarget(uint64 ui_GUID)
         {
             if (Creature* temp = Unit::GetCreature(*me, ui_GUID))
-                if (temp->IsAlive())
+                if (temp->isAlive())
                     if (Unit* pTarger = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                        if (pTarger->IsAlive())
+                        if (pTarger->isAlive())
                         {
                             // temp->DeleteThreatList();
                             temp->AddThreat(pTarger, 0.0f);
@@ -1634,7 +1634,7 @@ public:
         void DespawnNPC(uint64 pGUID)
         {
             if (Creature* temp = Unit::GetCreature(*me, pGUID))
-                if (temp->IsAlive())
+                if (temp->isAlive())
                 {
                     temp->SetVisible(false);
                     temp->Kill(temp);

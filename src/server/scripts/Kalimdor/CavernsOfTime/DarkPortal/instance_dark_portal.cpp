@@ -183,7 +183,7 @@ public:
                     {
                         if (Creature* pMedivh = instance->GetCreature(MedivhGUID))
                         {
-                            if (pMedivh->IsAlive())
+                            if (pMedivh->isAlive())
                             {
                                 pMedivh->DealDamage(pMedivh, pMedivh->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
                                 m_auiEncounter[0] = FAIL;

@@ -330,7 +330,7 @@ class boss_freya : public CreatureScript
                 for (uint8 n = 0; n < 3; ++n)
                 {
                     Elder[n] = ObjectAccessor::GetCreature(*me, instance->GetData64(BOSS_BRIGHTLEAF + n));
-                    if (Elder[n] && Elder[n]->IsAlive())
+                    if (Elder[n] && Elder[n]->isAlive())
                     {
                         me->AddAura(SPELL_DRAINED_OF_POWER, Elder[n]);
                         Elder[n]->CastSpell(me, SPELL_IRONBRANCH_ESSENCE, true);
@@ -342,19 +342,19 @@ class boss_freya : public CreatureScript
                     }
                 }
 
-                if (Elder[0] && Elder[0]->IsAlive())
+                if (Elder[0] && Elder[0]->isAlive())
                 {
                     Elder[0]->CastSpell(me, SPELL_BRIGHTLEAF_ESSENCE, true);
                     events.ScheduleEvent(EVENT_UNSTABLE_ENERGY, urand(10000, 20000));
                 }
 
-                if (Elder[1] && Elder[1]->IsAlive())
+                if (Elder[1] && Elder[1]->isAlive())
                 {
                     Elder[1]->CastSpell(me, SPELL_STONEBARK_ESSENCE, true);
                     events.ScheduleEvent(EVENT_GROUND_TREMOR, urand(10000, 20000));
                 }
 
-                if (Elder[2] && Elder[2]->IsAlive())
+                if (Elder[2] && Elder[2]->isAlive())
                 {
                     Elder[2]->CastSpell(me, SPELL_IRONBRANCH_ESSENCE, true);
                     events.ScheduleEvent(EVENT_STRENGTHENED_IRON_ROOTS, urand(10000, 20000));
@@ -474,7 +474,7 @@ class boss_freya : public CreatureScript
                                 {
                                     for (uint8 n = 0; n < 3; ++n)
                                     {
-                                        if (Elemental[n][i]->IsAlive())
+                                        if (Elemental[n][i]->isAlive())
                                             Elemental[n][i]->SetHealth(Elemental[n][i]->GetMaxHealth());
                                         else
                                             Elemental[n][i]->Respawn();
@@ -605,7 +605,7 @@ class boss_freya : public CreatureScript
                 for (uint8 n = 0; n < 3; ++n)
                 {
                     Elder[n] = ObjectAccessor::GetCreature(*me, instance->GetData64(BOSS_BRIGHTLEAF + n));
-                    if (Elder[n] && Elder[n]->IsAlive())
+                    if (Elder[n] && Elder[n]->isAlive())
                     {
                         Elder[n]->RemoveAllAuras();
                         Elder[n]->AttackStop();

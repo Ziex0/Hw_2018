@@ -102,7 +102,7 @@ class boss_emalon : public CreatureScript
                     for (std::list<uint64>::const_iterator itr = summons.begin(); itr != summons.end(); ++itr)
                     {
                         Creature* minion = Unit::GetCreature(*me, *itr);
-                        if (minion && minion->IsAlive() && !minion->GetVictim() && minion->AI())
+                        if (minion && minion->isAlive() && !minion->GetVictim() && minion->AI())
                             minion->AI()->AttackStart(who);
                     }
                 }
@@ -142,7 +142,7 @@ class boss_emalon : public CreatureScript
                             if (!summons.empty())
                             {
                                 Creature* minion = Unit::GetCreature(*me, Trinity::Containers::SelectRandomContainerElement(summons));
-                                if (minion && minion->IsAlive())
+                                if (minion && minion->isAlive())
                                 {
                                     minion->CastSpell(me, SPELL_OVERCHARGED, true);
                                     minion->SetFullHealth();
@@ -195,7 +195,7 @@ class mob_tempest_minion : public CreatureScript
             {
                 if (Creature* emalon = Unit::GetCreature(*me, instance ? instance->GetData64(DATA_EMALON) : 0))
                 {
-                    if (emalon->IsAlive())
+                    if (emalon->isAlive())
                     {
                         emalon->SummonCreature(MOB_TEMPEST_MINION, 0, 0, 0, 0, TEMPSUMMON_CORPSE_DESPAWN, 0);
                         Talk(EMOTE_MINION_RESPAWN);

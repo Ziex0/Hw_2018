@@ -95,7 +95,7 @@ public:
             me->SetStandState(UNIT_STAND_STATE_STAND);
 
             if (instance)
-                if (me->IsAlive())
+                if (me->isAlive())
                     instance->SetData(TYPE_MOGRAINE_AND_WHITE_EVENT, NOT_STARTED);
 
             _bHasDied = false;
@@ -262,7 +262,7 @@ public:
             _bCanResurrect = false;
 
             if (instance)
-                if (me->IsAlive())
+                if (me->isAlive())
                     instance->SetData(TYPE_MOGRAINE_AND_WHITE_EVENT, NOT_STARTED);
         }
 
@@ -339,7 +339,7 @@ public:
                     if (Creature* mograine = Unit::GetCreature((*me), instance->GetData64(DATA_MOGRAINE)))
                     {
                         // checking _bCanResurrectCheck prevents her healing Mograine while he is "faking death"
-                        if (_bCanResurrectCheck && mograine->IsAlive() && !mograine->HealthAbovePct(75))
+                        if (_bCanResurrectCheck && mograine->isAlive() && !mograine->HealthAbovePct(75))
                             target = mograine;
                     }
                 }

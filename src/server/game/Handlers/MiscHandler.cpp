@@ -64,7 +64,7 @@ void WorldSession::HandleRepopRequestOpcode(WorldPacket& recvData)
 
     recvData.read_skip<uint8>();
 
-    if (GetPlayer()->IsAlive() || GetPlayer()->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_GHOST))
+    if (GetPlayer()->isAlive() || GetPlayer()->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_GHOST))
         return;
 
     if (GetPlayer()->HasAuraType(SPELL_AURA_PREVENT_RESURRECTION))
@@ -894,7 +894,7 @@ void WorldSession::HandleReclaimCorpseOpcode(WorldPacket& recvData)
     uint64 guid;
     recvData >> guid;
 
-    if (GetPlayer()->IsAlive())
+    if (GetPlayer()->isAlive())
         return;
 
     // do not allow corpse reclaim in arena
@@ -933,7 +933,7 @@ void WorldSession::HandleResurrectResponseOpcode(WorldPacket& recvData)
     recvData >> guid;
     recvData >> status;
 
-    if (GetPlayer()->IsAlive())
+    if (GetPlayer()->isAlive())
         return;
 
     if (status == 0)
@@ -1047,7 +1047,7 @@ void WorldSession::HandleAreaTriggerOpcode(WorldPacket& recvData)
     if (sScriptMgr->OnAreaTrigger(player, atEntry))
         return;
 
-    if (player->IsAlive())
+    if (player->isAlive())
         if (uint32 questId = sObjectMgr->GetQuestForAreaTrigger(triggerId))
             if (player->GetQuestStatus(questId) == QUEST_STATUS_INCOMPLETE)
                 player->AreaExploredOrEventHappens(questId);

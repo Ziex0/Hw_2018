@@ -102,7 +102,7 @@ class boss_jeklik : public CreatureScript //jeklik
                 if (!UpdateVictim())
                     return;
 
-                if (me->GetVictim() && me->IsAlive())
+                if (me->GetVictim() && me->isAlive())
                 {
                     if (HealthAbovePct(50))
                     {

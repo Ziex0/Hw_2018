@@ -205,7 +205,7 @@ public:
                 if (AddGUID[i])
                 {
                     Creature* temp = Creature::GetCreature((*me), AddGUID[i]);
-                    if (temp && temp->IsAlive())
+                    if (temp && temp->isAlive())
                         temp->DisappearAndDie();
                 }
             }
@@ -218,7 +218,7 @@ public:
                 if (AddGUID[i])
                 {
                     Creature* temp = Creature::GetCreature((*me), AddGUID[i]);
-                    if (temp && temp->IsAlive())
+                    if (temp && temp->isAlive())
                     {
                         temp->AI()->AttackStart(me->GetVictim());
                         DoZoneInCombat(temp);
@@ -252,7 +252,7 @@ public:
                     if (AddGUID[i])
                     {
                         Creature* temp = Unit::GetCreature((*me), AddGUID[i]);
-                        if (temp && temp->IsAlive())
+                        if (temp && temp->isAlive())
                             if (!temp->GetVictim())
                                 temp->AI()->AttackStart(me->GetVictim());
                     }
@@ -347,7 +347,7 @@ struct boss_moroes_guestAI : public ScriptedAI
         if (TempGUID)
         {
             Unit* unit = Unit::GetUnit(*me, TempGUID);
-            if (unit && unit->IsAlive())
+            if (unit && unit->isAlive())
                 return unit;
         }
 

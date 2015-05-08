@@ -661,7 +661,7 @@ public:
                 return false;
         }
 
-        if (target->IsAlive())
+        if (target->isAlive())
         {
             if (sWorld->getBoolConfig(CONFIG_DIE_COMMAND_MODE))
                 handler->GetSession()->GetPlayer()->Kill(target);
@@ -2074,7 +2074,7 @@ public:
                 return false;
         }
 
-        if (!target->IsAlive())
+        if (!target->isAlive())
             return true;
 
         char* damageStr = strtok((char*)args, " ");
@@ -2622,7 +2622,7 @@ public:
                 {
                     pet->SavePetToDB(PET_SAVE_AS_CURRENT);
                     // not let dismiss dead pet
-                    if (pet->IsAlive())
+                    if (pet->isAlive())
                         player->RemovePet(pet, PET_SAVE_NOT_IN_SLOT);
                 }
             }

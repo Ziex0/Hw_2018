@@ -63,7 +63,7 @@ public:
             FuriousAnger_Timer = 5000;
             AngerCount = 0;
 
-            if (me->IsAlive())
+            if (me->isAlive())
                 me->SetDisplayId(MODEL_NORMAL);
             else
                 me->SetDisplayId(MODEL_HUMAN);
