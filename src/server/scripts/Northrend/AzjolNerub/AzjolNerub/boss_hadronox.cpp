@@ -128,7 +128,7 @@ public:
                 uiCheckDistanceTimer -= uiDiff;
                 return;
             }
-            if (me->IsInEvadeMode() || !me->GetVictim())
+            if (me->IsInEvadeMode() || !me->getVictim())
                 return;
             if (me->GetDistance(x, y, z) > dist)
                 EnterEvadeMode();
@@ -153,7 +153,7 @@ public:
 
             if (uiPierceTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_PIERCE_ARMOR);
+                DoCast(me->getVictim(), SPELL_PIERCE_ARMOR);
                 uiPierceTimer = 8*IN_MILLISECONDS;
             } else uiPierceTimer -= diff;
 

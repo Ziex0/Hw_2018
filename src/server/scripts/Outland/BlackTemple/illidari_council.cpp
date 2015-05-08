@@ -357,7 +357,7 @@ public:
                             if (Creature* Member = (ObjectAccessor::GetCreature((*me), Council[i])))
                             {
                                 // This is the evade/death check.
-                                if (Member->isAlive() && !Member->GetVictim())
+                                if (Member->isAlive() && !Member->getVictim())
                                     ++EvadeCheck;                   //If all members evade, we reset so that players can properly reset the event
                                 else if (!Member->isAlive())         // If even one member dies, kill the rest, set instance data, and kill self.
                                 {
@@ -413,9 +413,9 @@ struct boss_illidari_councilAI : public ScriptedAI
         for (uint8 i = 0; i < 4; ++i)
         {
             if (Unit* unit = ObjectAccessor::GetUnit(*me, Council[i]))
-                if (unit != me && unit->GetVictim())
+                if (unit != me && unit->getVictim())
                 {
-                    AttackStart(unit->GetVictim());
+                    AttackStart(unit->getVictim());
                     return;
                 }
         }
@@ -878,7 +878,7 @@ public:
             {
                 if (VanishTimer <= diff)                          // Become attackable and poison current target
                 {
-                    Unit* target = me->GetVictim();
+                    Unit* target = me->getVictim();
                     DoCast(target, SPELL_DEADLY_POISON);
                     me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                     DoResetThreat();
@@ -892,7 +892,7 @@ public:
                 if (AppearEnvenomTimer <= diff)                   // Appear 2 seconds before becoming attackable (Shifting out of vanish)
                 {
                     me->GetMotionMaster()->Clear();
-                    me->GetMotionMaster()->MoveChase(me->GetVictim());
+                    me->GetMotionMaster()->MoveChase(me->getVictim());
                     me->SetVisible(true);
                     AppearEnvenomTimer = 6000;
                 } else AppearEnvenomTimer -= diff;

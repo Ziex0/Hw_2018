@@ -579,11 +579,11 @@ class mob_pummeller : public CreatureScript
                 if (!UpdateVictim())
                     return;
 
-                if (me->IsWithinMeleeRange(me->GetVictim()))
+                if (me->IsWithinMeleeRange(me->getVictim()))
                 {
                     if (_arcingSmashTimer <= diff)
                     {
-                        DoCast(me->GetVictim(), SPELL_ARCING_SMASH);
+                        DoCast(me->getVictim(), SPELL_ARCING_SMASH);
                         _arcingSmashTimer = TIMER_ARCING_SMASH;
                     }
                     else
@@ -591,7 +591,7 @@ class mob_pummeller : public CreatureScript
 
                     if (_trampleTimer <= diff)
                     {
-                        DoCast(me->GetVictim(), SPELL_TRAMPLE);
+                        DoCast(me->getVictim(), SPELL_TRAMPLE);
                         _trampleTimer = TIMER_TRAMPLE;
                     }
                     else
@@ -599,7 +599,7 @@ class mob_pummeller : public CreatureScript
 
                     if (_uppercutTimer <= diff)
                     {
-                        DoCast(me->GetVictim(), SPELL_UPPERCUT);
+                        DoCast(me->getVictim(), SPELL_UPPERCUT);
                         _uppercutTimer = TIMER_UPPERCUT;
                     }
                     else
@@ -753,9 +753,9 @@ class mob_life_spark : public CreatureScript
 
                 if (_shockTimer <= diff)
                 {
-                    if (me->IsWithinMeleeRange(me->GetVictim()))
+                    if (me->IsWithinMeleeRange(me->getVictim()))
                     {
-                        DoCast(me->GetVictim(), SPELL_SHOCK);
+                        DoCast(me->getVictim(), SPELL_SHOCK);
                         _shockTimer = TIMER_SHOCK;
                     }
                 }

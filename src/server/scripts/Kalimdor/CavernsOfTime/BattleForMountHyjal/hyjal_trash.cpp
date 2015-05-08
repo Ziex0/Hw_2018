@@ -528,7 +528,7 @@ public:
             }
             if (FlameBuffetTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_FLAME_BUFFET, true);
+                DoCast(me->getVictim(), SPELL_FLAME_BUFFET, true);
                 FlameBuffetTimer = 7000;
             } else FlameBuffetTimer -= diff;
             DoMeleeAttackIfReady();
@@ -630,7 +630,7 @@ public:
                 return;
             if (KnockDownTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_KNOCKDOWN);
+                DoCast(me->getVictim(), SPELL_KNOCKDOWN);
                 KnockDownTimer = 15000+rand()%10000;
             } else KnockDownTimer -= diff;
             DoMeleeAttackIfReady();
@@ -858,7 +858,7 @@ public:
 
             if (ShadowBoltTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_SHADOW_BOLT);
+                DoCast(me->getVictim(), SPELL_SHADOW_BOLT);
                 ShadowBoltTimer = 20000+rand()%10000;
             } else ShadowBoltTimer -= diff;
 
@@ -952,12 +952,12 @@ public:
                 return;
             if (CourseTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_BANSHEE_CURSE);
+                DoCast(me->getVictim(), SPELL_BANSHEE_CURSE);
                 CourseTimer = 20000+rand()%5000;
             } else CourseTimer -= diff;
             if (WailTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_BANSHEE_WAIL);
+                DoCast(me->getVictim(), SPELL_BANSHEE_WAIL);
                 WailTimer = 15000+rand()%5000;
             } else WailTimer -= diff;
             if (ShellTimer <= diff)
@@ -1052,7 +1052,7 @@ public:
                 return;
             if (WebTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_WEB);
+                DoCast(me->getVictim(), SPELL_WEB);
                 WebTimer = 20000+rand()%5000;
             } else WebTimer -= diff;
             DoMeleeAttackIfReady();
@@ -1142,7 +1142,7 @@ public:
                 return;
             if (ManaBurnTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_MANA_BURN);
+                DoCast(me->getVictim(), SPELL_MANA_BURN);
                 ManaBurnTimer = 9000+rand()%5000;
             } else ManaBurnTimer -= diff;
             DoMeleeAttackIfReady();
@@ -1240,19 +1240,19 @@ public:
             }
             if (!UpdateVictim())
                 return;
-            if (!me->IsWithinDist(me->GetVictim(), 25)){
+            if (!me->IsWithinDist(me->getVictim(), 25)){
                 if (MoveTimer <= diff)
                 {
-                    me->GetMotionMaster()->MoveChase(me->GetVictim());
+                    me->GetMotionMaster()->MoveChase(me->getVictim());
                     MoveTimer = 2000;
                 } else MoveTimer-=diff;
             }
 
             if (FrostBreathTimer <= diff)
             {
-                if (!me->IsWithinDist(me->GetVictim(), 25))
+                if (!me->IsWithinDist(me->getVictim(), 25))
                 {
-                    DoCast(me->GetVictim(), SPELL_FROST_BREATH);
+                    DoCast(me->getVictim(), SPELL_FROST_BREATH);
                     me->StopMoving();
                     me->GetMotionMaster()->Clear();
                     FrostBreathTimer = 4000;
@@ -1364,7 +1364,7 @@ public:
             }
             if (!UpdateVictim())
                 return;
-            if (!me->IsWithinDist(me->GetVictim(), 20) || forcemove)
+            if (!me->IsWithinDist(me->getVictim(), 20) || forcemove)
             {
                 forcemove = false;
                 if (forcemove)
@@ -1375,7 +1375,7 @@ public:
                 if (MoveTimer <= diff)
                 {
                     float x, y, z;
-                    me->GetVictim()->GetPosition(x, y, z);
+                    me->getVictim()->GetPosition(x, y, z);
                     me->GetMotionMaster()->MovePoint(0, x, y, z+Zpos);
                     Zpos -= 1.0f;
                     if (Zpos <= 0)
@@ -1385,9 +1385,9 @@ public:
             }
             if (StrikeTimer <= diff)
             {
-                if (me->IsWithinDist(me->GetVictim(), 20))
+                if (me->IsWithinDist(me->getVictim(), 20))
                 {
-                    DoCast(me->GetVictim(), SPELL_GARGOYLE_STRIKE);
+                    DoCast(me->getVictim(), SPELL_GARGOYLE_STRIKE);
                     me->StopMoving();
                     me->GetMotionMaster()->Clear();
                     StrikeTimer = 2000+rand()%1000;
@@ -1428,7 +1428,7 @@ public:
 
         void MoveInLineOfSight(Unit* who)
         {
-            if (!who || me->GetVictim())
+            if (!who || me->getVictim())
                 return;
 
             if (me->IsValidAttackTarget(who))
@@ -1450,13 +1450,13 @@ public:
                 return;
             if (ExplodeTimer <= diff)
             {
-                if (!me->IsWithinDistInMap(me->GetVictim(), 30))
+                if (!me->IsWithinDistInMap(me->getVictim(), 30))
                 {
                     EnterEvadeMode();
                     return;
                 }
                 int dmg = 500+rand()%700;
-                me->CastCustomSpell(me->GetVictim(), SPELL_EXPLODING_SHOT, &dmg, 0, 0, false);
+                me->CastCustomSpell(me->getVictim(), SPELL_EXPLODING_SHOT, &dmg, 0, 0, false);
                 ExplodeTimer = 5000+rand()%5000;
             } else ExplodeTimer -= diff;
             DoMeleeAttackIfReady();

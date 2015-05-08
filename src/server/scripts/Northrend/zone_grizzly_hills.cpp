@@ -75,7 +75,7 @@ public:
             if (Creature* Mrfloppy = GetClosestCreatureWithEntry(me, NPC_MRFLOPPY, 50.0f))
                 summoned->AI()->AttackStart(Mrfloppy);
             else
-                summoned->AI()->AttackStart(me->GetVictim());
+                summoned->AI()->AttackStart(me->getVictim());
         }
 
         void WaypointReached(uint32 waypointId)
@@ -664,7 +664,7 @@ class npc_venture_co_straggler : public CreatureScript
 
                 if (uiChopTimer <= uiDiff)
                 {
-                    DoCast(me->GetVictim(), SPELL_CHOP);
+                    DoCast(me->getVictim(), SPELL_CHOP);
                     uiChopTimer = urand(10000, 12000);
                 }
                 else

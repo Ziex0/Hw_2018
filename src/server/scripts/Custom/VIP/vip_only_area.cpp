@@ -14,7 +14,7 @@ class Vip_Access: public PlayerScript
 private:
     static const uint32 map = 0;
 	static const uint32 x = 1610.99f;
-	static const uint32 y = -5526.4f;
+	static const uint32 y = 5526.4f; //need add another gps w/out -
 	static const uint32 z = 111.158f;
 	static const uint32 o = 1.00078f;
 public:

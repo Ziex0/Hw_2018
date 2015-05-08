@@ -114,7 +114,7 @@ public:
                 return;
             }
 
-            if (Unit* u = me->GetVictim())
+            if (Unit* u = me->getVictim())
             {
                 Creature* cre = u->ToCreature();
                 if (u->GetMaxHealth() > me->GetHealth() * 2 ||
@@ -216,7 +216,7 @@ public:
                     }
                     else if (SEARING_TOTEM && Searing_Totem_Timer <= diff)
                     {
-                        if (Unit* u = me->GetVictim())
+                        if (Unit* u = me->getVictim())
                         {
                             if (me->GetExactDist(u) < (u->isMoving() ? 10 : 25))
                             {
@@ -375,7 +375,7 @@ public:
         {
             ReduceCD(diff);
             if (IAmDead()) return;
-            if (me->GetVictim())
+            if (me->getVictim())
             {
                 if (isTwoHander())
                     DoMeleeAttackIfReady();
@@ -440,7 +440,7 @@ public:
             if (!WIND_SHEAR || Wind_Shear_Timer > diff || Rand() > 60)
                 return;
 
-            Unit* u = me->GetVictim();
+            Unit* u = me->getVictim();
             if (u && u->IsNonMeleeSpellCasted(false))
             {
                 temptimer = GC_Timer;
@@ -467,7 +467,7 @@ public:
 
         void DoNormalAttack(uint32 diff)
         {
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
             if (opponent)
             {
                 if (!IsCasting())
@@ -580,9 +580,9 @@ public:
 
         void CheckHexy2(uint32 diff)
         {
-            if (HEX && Hexy == false && Hex_Timer < diff && me->GetVictim())
+            if (HEX && Hexy == false && Hex_Timer < diff && me->getVictim())
             {
-                if (Unit* target = FindPolyTarget(20, me->GetVictim()))
+                if (Unit* target = FindPolyTarget(20, me->getVictim()))
                 {
                     if (doCast(target, HEX))
                     {

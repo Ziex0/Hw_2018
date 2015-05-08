@@ -60,7 +60,7 @@ public:
                 rendTarget = 0;
             }
             if (IAmDead()) return;
-            if (me->GetVictim())
+            if (me->getVictim())
                 DoMeleeAttackIfReady();
             else
                 Evade();
@@ -212,7 +212,7 @@ public:
 
         void Attack(uint32 diff)
         {
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
             if (opponent)
             {
                 if (!IsCasting())
@@ -417,7 +417,7 @@ public:
                 }
             }
             //TAUNT
-            Unit* u = opponent->GetVictim();
+            Unit* u = opponent->getVictim();
             if (TAUNT && taunt_cd <= diff && u && u != me && u != tank && dist <= 30 &&
                 !CCed(opponent) && !isTankingClass(u->getClass()) && (IsInBotParty(u) || tank == me) &&
                 (defensiveStance || (stancetimer <= diff && stanceChange(diff, 2))))//No GCD
@@ -559,8 +559,8 @@ public:
             else {}//HEROIC STRIKE placeholder
             //DISARM DEPRECATED
             /*if (disarm_cd <= diff && meleedist < 5 &&
-                (opponent->GetVictim()->GetGUID() == master->GetGUID() ||
-                opponent->GetVictim()->GetGUID() == m_creature->GetGUID()) &&
+                (opponent->getVictim()->GetGUID() == master->GetGUID() ||
+                opponent->getVictim()->GetGUID() == m_creature->GetGUID()) &&
                 getrage() > 15 &&
                 !HasAuraName(opponent, GetSpellName(DISARM)) &&
                 GC_Timer <= diff)

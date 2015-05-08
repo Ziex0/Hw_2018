@@ -398,15 +398,15 @@ class boss_nalorakk : public CreatureScript
                 {
                     if (BrutalSwipe_Timer <= diff)
                     {
-                        DoCast(me->GetVictim(), SPELL_BRUTALSWIPE);
+                        DoCast(me->getVictim(), SPELL_BRUTALSWIPE);
                         BrutalSwipe_Timer = urand(7000, 12000);
                     } else BrutalSwipe_Timer -= diff;
 
                     if (Mangle_Timer <= diff)
                     {
-                        if (me->GetVictim() && !me->GetVictim()->HasAura(SPELL_MANGLEEFFECT))
+                        if (me->getVictim() && !me->getVictim()->HasAura(SPELL_MANGLEEFFECT))
                         {
-                            DoCast(me->GetVictim(), SPELL_MANGLE);
+                            DoCast(me->getVictim(), SPELL_MANGLE);
                             Mangle_Timer = 1000;
                         }
                         else Mangle_Timer = urand(10000, 15000);
@@ -426,19 +426,19 @@ class boss_nalorakk : public CreatureScript
                 {
                     if (LaceratingSlash_Timer <= diff)
                     {
-                        DoCast(me->GetVictim(), SPELL_LACERATINGSLASH);
+                        DoCast(me->getVictim(), SPELL_LACERATINGSLASH);
                         LaceratingSlash_Timer = urand(18000, 23000);
                     } else LaceratingSlash_Timer -= diff;
 
                     if (RendFlesh_Timer <= diff)
                     {
-                        DoCast(me->GetVictim(), SPELL_RENDFLESH);
+                        DoCast(me->getVictim(), SPELL_RENDFLESH);
                         RendFlesh_Timer = urand(5000, 10000);
                     } else RendFlesh_Timer -= diff;
 
                     if (DeafeningRoar_Timer <= diff)
                     {
-                        DoCast(me->GetVictim(), SPELL_DEAFENINGROAR);
+                        DoCast(me->getVictim(), SPELL_DEAFENINGROAR);
                         DeafeningRoar_Timer = urand(15000, 20000);
                     } else DeafeningRoar_Timer -= diff;
                 }

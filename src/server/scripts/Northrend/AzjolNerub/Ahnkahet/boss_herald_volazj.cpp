@@ -277,13 +277,13 @@ public:
 
             if (uiMindFlayTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_MIND_FLAY);
+                DoCast(me->getVictim(), SPELL_MIND_FLAY);
                 uiMindFlayTimer = 20*IN_MILLISECONDS;
             } else uiMindFlayTimer -= diff;
 
             if (uiShadowBoltVolleyTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_SHADOW_BOLT_VOLLEY);
+                DoCast(me->getVictim(), SPELL_SHADOW_BOLT_VOLLEY);
                 uiShadowBoltVolleyTimer = 5*IN_MILLISECONDS;
             } else uiShadowBoltVolleyTimer -= diff;
 

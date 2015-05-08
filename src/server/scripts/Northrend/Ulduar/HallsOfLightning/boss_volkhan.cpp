@@ -236,8 +236,8 @@ public:
                 if (m_uiPause_Timer <= uiDiff)
                 {
                     if (me->GetMotionMaster()->GetCurrentMovementGeneratorType() != CHASE_MOTION_TYPE)
-                        if (me->GetVictim())
-                            me->GetMotionMaster()->MoveChase(me->GetVictim());
+                        if (me->getVictim())
+                            me->GetMotionMaster()->MoveChase(me->getVictim());
 
                     m_bHasTemper = false;
                     m_bIsStriking = false;
@@ -443,7 +443,7 @@ public:
 
             if (m_uiImmolation_Timer <= uiDiff)
             {
-                DoCast(me->GetVictim(), SPELL_IMMOLATION_STRIKE_N);
+                DoCast(me->getVictim(), SPELL_IMMOLATION_STRIKE_N);
                 m_uiImmolation_Timer = 5000;
             }
             else

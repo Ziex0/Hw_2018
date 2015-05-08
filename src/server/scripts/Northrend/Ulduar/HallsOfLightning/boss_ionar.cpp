@@ -243,8 +243,8 @@ public:
                         uiSplitTimer = 25*IN_MILLISECONDS;
                         bIsSplitPhase = true;
 
-                        if (me->GetVictim())
-                            me->GetMotionMaster()->MoveChase(me->GetVictim());
+                        if (me->getVictim())
+                            me->GetMotionMaster()->MoveChase(me->getVictim());
                     }
                 }
                 else
@@ -265,7 +265,7 @@ public:
 
             if (uiBallLightningTimer <= uiDiff)
             {
-                DoCast(me->GetVictim(), SPELL_BALL_LIGHTNING);
+                DoCast(me->getVictim(), SPELL_BALL_LIGHTNING);
                 uiBallLightningTimer = urand(10*IN_MILLISECONDS, 11*IN_MILLISECONDS);
             }
             else

@@ -357,7 +357,7 @@ void Unit::Update(uint32 p_time)
         }
     }
     // update combat timer also for npcbots
-    if (isInCombat() && GetTypeId() == TYPEID_UNIT && !GetVictim() && (ToCreature()->GetIAmABot() || ToCreature()->GetIAmABotsPet()))
+    if (isInCombat() && GetTypeId() == TYPEID_UNIT && !getVictim() && (ToCreature()->GetIAmABot() || ToCreature()->GetIAmABotsPet()))
     {
         if (m_HostileRefManager.isEmpty())
         {
@@ -5263,7 +5263,7 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
                         // triggered at positive/self casts also, current attack target used then
                         if (target && IsFriendlyTo(target))
                         {
-                            target = GetVictim();
+                            target = getVictim();
                             if (!target)
                             {
                                 uint64 selected_guid = ToPlayer()->GetSelection();
@@ -7202,11 +7202,11 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
                         break;
                     }
 
-                if (pPet && pPet->GetVictim() && damage && procSpell)
+                if (pPet && pPet->getVictim() && damage && procSpell)
                 {
                     uint32 procDmg = damage / 2;
-                    pPet->SendSpellNonMeleeDamageLog(pPet->GetVictim(), procSpell->Id, procDmg, procSpell->GetSchoolMask(), 0, 0, false, 0, false);
-                    pPet->DealDamage(pPet->GetVictim(), procDmg, NULL, SPELL_DIRECT_DAMAGE, procSpell->GetSchoolMask(), procSpell, true);
+                    pPet->SendSpellNonMeleeDamageLog(pPet->getVictim(), procSpell->Id, procDmg, procSpell->GetSchoolMask(), 0, 0, false, 0, false);
+                    pPet->DealDamage(pPet->getVictim(), procDmg, NULL, SPELL_DIRECT_DAMAGE, procSpell->GetSchoolMask(), procSpell, true);
                     break;
                 }
                 else
@@ -8952,8 +8952,8 @@ void Unit::_removeAttacker(Unit* pAttacker)
 
 Unit* Unit::getAttackerForHelper() const                 // If someone wants to help, who to give them
 {
-    if (GetVictim() != NULL)
-        return GetVictim();
+    if (getVictim() != NULL)
+        return getVictim();
 
     if (!m_attackers.empty())
         return *(m_attackers.begin());
@@ -12597,7 +12597,7 @@ void Unit::TauntApply(Unit* taunter)
     if (creature->HasReactState(REACT_PASSIVE))
         return;
 
-    Unit* target = GetVictim();
+    Unit* target = getVictim();
     if (target && target == taunter)
         return;
 
@@ -12625,7 +12625,7 @@ void Unit::TauntFadeOut(Unit* taunter)
     if (creature->HasReactState(REACT_PASSIVE))
         return;
 
-    Unit* target = GetVictim();
+    Unit* target = getVictim();
     if (!target || target != taunter)
         return;
 
@@ -12663,7 +12663,7 @@ Unit* Creature::SelectVictim()
 
         // The last taunt aura caster is alive an we are happy to attack him
         if (caster && caster->isAlive())
-            return GetVictim();
+            return getVictim();
         else if (tauntAuras.size() > 1)
         {
             // We do not have last taunt aura caster but we have more taunt auras,
@@ -12683,7 +12683,7 @@ Unit* Creature::SelectVictim()
             } while (aura != tauntAuras.begin());
         }
         else
-            target = GetVictim();
+            target = getVictim();
     }
 
     if (CanHaveThreatList())
@@ -14704,8 +14704,8 @@ Unit* Unit::SelectNearbyTarget(Unit* exclude, float dist) const
     VisitNearbyObject(dist, searcher);
 
     // remove current target
-    if (GetVictim())
-        targets.remove(GetVictim());
+    if (getVictim())
+        targets.remove(getVictim());
 
     if (exclude)
         targets.remove(exclude);
@@ -15647,8 +15647,8 @@ void Unit::SetStunned(bool apply)
     }
     else
     {
-        if (isAlive() && GetVictim())
-            SetTarget(GetVictim()->GetGUID());
+        if (isAlive() && getVictim())
+            SetTarget(getVictim()->GetGUID());
 
         // don't remove UNIT_FLAG_STUNNED for pet when owner is mounted (disabled pet's interface)
         Unit* owner = GetOwner();
@@ -15738,8 +15738,8 @@ void Unit::SetFeared(bool apply)
         {
             if (GetMotionMaster()->GetCurrentMovementGeneratorType() == FLEEING_MOTION_TYPE)
                 GetMotionMaster()->MovementExpired();
-            if (GetVictim())
-                SetTarget(GetVictim()->GetGUID());
+            if (getVictim())
+                SetTarget(getVictim()->GetGUID());
         }
     }
 
@@ -15760,8 +15760,8 @@ void Unit::SetConfused(bool apply)
         {
             if (GetMotionMaster()->GetCurrentMovementGeneratorType() == CONFUSED_MOTION_TYPE)
                 GetMotionMaster()->MovementExpired();
-            if (GetVictim())
-                SetTarget(GetVictim()->GetGUID());
+            if (getVictim())
+                SetTarget(getVictim()->GetGUID());
         }
     }
 
@@ -17543,7 +17543,7 @@ void Unit::RewardRage(uint32 damage, uint32 weaponSpeedHitFactor, bool attacker)
 
 void Unit::StopAttackFaction(uint32 faction_id)
 {
-    if (Unit* victim = GetVictim())
+    if (Unit* victim = getVictim())
     {
         if (victim->getFactionTemplateEntry()->faction == faction_id)
         {
@@ -17886,7 +17886,7 @@ void Unit::ReleaseFocus(Spell const* focusSpell)
         return;
 
     _focusSpell = NULL;
-    if (Unit* victim = GetVictim())
+    if (Unit* victim = getVictim())
         SetUInt64Value(UNIT_FIELD_TARGET, victim->GetGUID());
     else
         SetUInt64Value(UNIT_FIELD_TARGET, 0);

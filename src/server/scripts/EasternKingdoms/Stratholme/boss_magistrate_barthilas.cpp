@@ -104,21 +104,21 @@ public:
             //DrainingBlow
             if (DrainingBlow_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_DRAININGBLOW);
+                DoCast(me->getVictim(), SPELL_DRAININGBLOW);
                 DrainingBlow_Timer = 15000;
             } else DrainingBlow_Timer -= diff;
 
             //CrowdPummel
             if (CrowdPummel_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_CROWDPUMMEL);
+                DoCast(me->getVictim(), SPELL_CROWDPUMMEL);
                 CrowdPummel_Timer = 15000;
             } else CrowdPummel_Timer -= diff;
 
             //MightyBlow
             if (MightyBlow_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_MIGHTYBLOW);
+                DoCast(me->getVictim(), SPELL_MIGHTYBLOW);
                 MightyBlow_Timer = 20000;
             } else MightyBlow_Timer -= diff;
 

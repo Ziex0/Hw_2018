@@ -219,7 +219,7 @@ public:
 		void UpdateAI(uint32 diff)
 
         {
-             if (!me->GetVictim())
+             if (!me->getVictim())
             {
                DoCast(me, SPELL_STEALTH);
             }
@@ -241,7 +241,7 @@ public:
 
             if (Slash_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_SLASH);
+                DoCast(me->getVictim(), SPELL_SLASH);
                 Slash_Timer = 5000;
             } else Slash_Timer -= diff;
 

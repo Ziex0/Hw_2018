@@ -118,11 +118,11 @@ public:
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                 // Invisible Model
                 me->SetDisplayId(11686);
-                SummonAdds(me->GetVictim());
-                SummonAdds(me->GetVictim());
-                SummonAdds(me->GetVictim());
-                SummonAdds(me->GetVictim());
-                SummonAdds(me->GetVictim());
+                SummonAdds(me->getVictim());
+                SummonAdds(me->getVictim());
+                SummonAdds(me->getVictim());
+                SummonAdds(me->getVictim());
+                SummonAdds(me->getVictim());
                 Invisible = true;
                 InvisibleTimer = 15000;
 

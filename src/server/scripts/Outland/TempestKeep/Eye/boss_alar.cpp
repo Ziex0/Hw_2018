@@ -383,7 +383,7 @@ class boss_alar : public CreatureScript
 
                     if (MeltArmor_Timer <= diff)
                     {
-                        DoCast(me->GetVictim(), SPELL_MELT_ARMOR);
+                        DoCast(me->getVictim(), SPELL_MELT_ARMOR);
                         MeltArmor_Timer = 60000;
                     }
                     else
@@ -431,9 +431,9 @@ class boss_alar : public CreatureScript
             {
                 if (me->isAttackReady() && !me->IsNonMeleeSpellCasted(false))
                 {
-                    if (me->IsWithinMeleeRange(me->GetVictim()))
+                    if (me->IsWithinMeleeRange(me->getVictim()))
                     {
-                        me->AttackerStateUpdate(me->GetVictim());
+                        me->AttackerStateUpdate(me->getVictim());
                         me->resetAttackTimer();
                     }
                     else

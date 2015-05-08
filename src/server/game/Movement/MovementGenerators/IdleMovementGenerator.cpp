@@ -40,8 +40,8 @@ void RotateMovementGenerator::Initialize(Unit* owner)
     if (!owner->IsStopped())
         owner->StopMoving();
 
-    if (owner->GetVictim())
-        owner->SetInFront(owner->GetVictim());
+    if (owner->getVictim())
+        owner->SetInFront(owner->getVictim());
 
     owner->AddUnitState(UNIT_STATE_ROTATING);
 

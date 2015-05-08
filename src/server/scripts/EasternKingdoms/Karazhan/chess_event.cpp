@@ -209,7 +209,7 @@ public:
 
       void MoveInLineOfSight(Unit *who)
       {
-        if (me->GetVictim() && who->isTargetableForAttack() && ( me->IsHostileTo( who )) && who->isInAccessiblePlaceFor(me) )
+        if (me->getVictim() && who->isTargetableForAttack() && ( me->IsHostileTo( who )) && who->isInAccessiblePlaceFor(me) )
           {
             if (!me->CanFly() && me->GetDistanceZ(who) > CREATURE_Z_ATTACK_RANGE)
               return;
@@ -495,7 +495,7 @@ std::list<Unit*> returnList;
                 else  move_timer -= diff;
               }
 
-            if(!me->GetVictim())
+            if(!me->getVictim())
               {
                 if(!canmove)
                   return;
@@ -545,7 +545,7 @@ std::list<Unit*> returnList;
               default:
                 break;
               }
-              if(me->GetVictim() || !me->IsWithinDistInMap(me->GetVictim(), NPC_ATTACK_RADIUS))
+              if(me->getVictim() || !me->IsWithinDistInMap(me->getVictim(), NPC_ATTACK_RADIUS))
                 {
                   me->CombatStop();
                   return;

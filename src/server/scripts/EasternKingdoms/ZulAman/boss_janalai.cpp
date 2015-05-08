@@ -654,7 +654,7 @@ class mob_janalai_hatchling : public CreatureScript
 
                 if (BuffetTimer <= diff)
                 {
-                    DoCast(me->GetVictim(), SPELL_FLAMEBUFFET, false);
+                    DoCast(me->getVictim(), SPELL_FLAMEBUFFET, false);
                     BuffetTimer = 10000;
                 } else BuffetTimer -= diff;
 

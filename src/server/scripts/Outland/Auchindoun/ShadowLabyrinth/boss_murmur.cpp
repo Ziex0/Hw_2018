@@ -144,7 +144,7 @@ public:
             } else MurmursTouch_Timer -= diff;
 
             // Resonance
-            if (!SonicBoom && !(me->IsWithinMeleeRange(me->GetVictim())))
+            if (!SonicBoom && !(me->IsWithinMeleeRange(me->getVictim())))
             {
                 if (Resonance_Timer <= diff)
                 {
@@ -192,7 +192,7 @@ public:
             // Select nearest most aggro target if top aggro too far
             if (!me->isAttackReady())
                 return;
-            if (!me->IsWithinMeleeRange(me->GetVictim()))
+            if (!me->IsWithinMeleeRange(me->getVictim()))
             {
                 ThreatContainer::StorageType threatlist = me->getThreatManager().getThreatList();
                 for (ThreatContainer::StorageType::const_iterator i = threatlist.begin(); i != threatlist.end(); ++i)

@@ -1877,7 +1877,7 @@ void Player::Update(uint32 p_time)
 
     if (HasUnitState(UNIT_STATE_MELEE_ATTACKING) && !HasUnitState(UNIT_STATE_CASTING))
     {
-        if (Unit* victim = GetVictim())
+        if (Unit* victim = getVictim())
         {
             // default combat reach 10
             /// @todo add weapon, skill check
@@ -7667,7 +7667,7 @@ bool Player::UpdateSkillPro(uint16 SkillId, int32 Chance, uint32 step)
 void Player::UpdateWeaponSkill(WeaponAttackType attType)
 {
     // no skill gain in pvp
-    Unit* victim = GetVictim();
+    Unit* victim = getVictim();
     if (victim && victim->GetTypeId() == TYPEID_PLAYER)
         return;
 
@@ -23869,8 +23869,8 @@ void Player::SendInitialVisiblePackets(Unit* target)
     SendAurasForTarget(target);
     if (target->isAlive())
     {
-        if (target->HasUnitState(UNIT_STATE_MELEE_ATTACKING) && target->GetVictim())
-            target->SendMeleeAttackStart(target->GetVictim());
+        if (target->HasUnitState(UNIT_STATE_MELEE_ATTACKING) && target->getVictim())
+            target->SendMeleeAttackStart(target->getVictim());
     }
 }
 
@@ -25883,7 +25883,7 @@ void Player::UpdateCharmedAI()
     if (!charmer->isInCombat())
         GetMotionMaster()->MoveFollow(charmer, PET_FOLLOW_DIST, PET_FOLLOW_ANGLE);
 
-    Unit* target = GetVictim();
+    Unit* target = getVictim();
     if (!target || !charmer->IsValidAttackTarget(target))
     {
         target = charmer->SelectNearestTarget();

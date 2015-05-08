@@ -305,7 +305,7 @@ public:
                         Unit* target = (*itr)->getTarget();
                         if (target
                                 && target->GetTypeId() == TYPEID_PLAYER
-                                && target->GetGUID() != me->GetVictim()->GetGUID()
+                                && target->GetGUID() != me->getVictim()->GetGUID()
                                 && target->GetPositionZ() > me->GetPositionZ() - 5
                                 && !target->HasAura(AURA_SPECTRAL_EXHAUSTION))
                         {
@@ -335,7 +335,7 @@ public:
             if (bJustReset)//boss is invisible, don't attack
                 return;
 
-            if (!me->GetVictim() && me->IsValidAttackTarget(who))
+            if (!me->getVictim() && me->IsValidAttackTarget(who))
             {
                 float attackRadius = me->GetAttackDistance(who);
                 if (me->IsWithinDistInMap(who, attackRadius))
@@ -528,7 +528,7 @@ public:
 
             if (HeroicStrikeTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_HEROIC_STRIKE);
+                DoCast(me->getVictim(), SPELL_HEROIC_STRIKE);
                 HeroicStrikeTimer = 2000;
             } else HeroicStrikeTimer -= diff;
 
@@ -782,7 +782,7 @@ public:
             {
                 Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
                 if (!target)
-                    target = me->GetVictim();
+                    target = me->getVictim();
                 DoCast(target, SPELL_AGONY_CURSE);
                 AgonyCurseTimer = 20000;
             } else AgonyCurseTimer -= diff;
@@ -790,7 +790,7 @@ public:
             if (CorruptionStrikeTimer <= diff)
             {
                 if (!(rand()%5))Talk(SAY_SATH_SPELL2);
-                DoCast(me->GetVictim(), SPELL_CORRUPTION_STRIKE);
+                DoCast(me->getVictim(), SPELL_CORRUPTION_STRIKE);
                 CorruptionStrikeTimer = 13000;
             } else CorruptionStrikeTimer -= diff;
 

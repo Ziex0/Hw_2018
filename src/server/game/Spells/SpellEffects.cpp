@@ -3162,7 +3162,7 @@ void Spell::EffectTaunt(SpellEffIndex /*effIndex*/)
     // this effect use before aura Taunt apply for prevent taunt already attacking target
     // for spell as marked "non effective at already attacking target"
     if (!unitTarget || !unitTarget->CanHaveThreatList()
-        || unitTarget->GetVictim() == m_caster)
+        || unitTarget->getVictim() == m_caster)
     {
         SendCastResult(SPELL_FAILED_DONT_REPORT);
         return;
@@ -4757,7 +4757,7 @@ void Spell::EffectAddExtraAttacks(SpellEffIndex effIndex)
     if (effectHandleMode != SPELL_EFFECT_HANDLE_HIT_TARGET)
         return;
 
-    if (!unitTarget || !unitTarget->isAlive() || !unitTarget->GetVictim())
+    if (!unitTarget || !unitTarget->isAlive() || !unitTarget->getVictim())
         return;
 
     if (unitTarget->m_extraAttacks)
@@ -4765,7 +4765,7 @@ void Spell::EffectAddExtraAttacks(SpellEffIndex effIndex)
 
     unitTarget->m_extraAttacks = damage;
 
-    ExecuteLogEffectExtraAttacks(effIndex, unitTarget->GetVictim(), damage);
+    ExecuteLogEffectExtraAttacks(effIndex, unitTarget->getVictim(), damage);
 }
 
 void Spell::EffectParry(SpellEffIndex /*effIndex*/)

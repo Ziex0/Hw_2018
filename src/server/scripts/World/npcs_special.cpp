@@ -225,7 +225,7 @@ public:
                             }
 
                             if (markAura->GetDuration() < AURA_DURATION_TIME_LEFT)
-                                if (!lastSpawnedGuard->GetVictim())
+                                if (!lastSpawnedGuard->getVictim())
                                     lastSpawnedGuard->AI()->AttackStart(who);
                         }
                         else
@@ -252,7 +252,7 @@ public:
                             return;
 
                         // ROOFTOP only triggers if the player is on the ground
-                        if (!playerTarget->IsFlying() && !lastSpawnedGuard->GetVictim())
+                        if (!playerTarget->IsFlying() && !lastSpawnedGuard->getVictim())
                             lastSpawnedGuard->AI()->AttackStart(who);
 
                         break;
@@ -1136,7 +1136,7 @@ public:
 
             if (me->isAttackReady())
             {
-                DoCast(me->GetVictim(), SPELL_DEATHTOUCH, true);
+                DoCast(me->getVictim(), SPELL_DEATHTOUCH, true);
                 me->resetAttackTimer();
             }
         }
@@ -1630,7 +1630,7 @@ public:
             me->SetStatFloatValue(UNIT_FIELD_RANGED_ATTACK_POWER, float(Info->attackpower));
 
             // Start attacking attacker of owner on first ai update after spawn - move in line of sight may choose better target
-            if (!me->GetVictim() && me->isSummon())
+            if (!me->getVictim() && me->isSummon())
                 if (Unit* Owner = me->ToTempSummon()->GetSummoner())
                     if (Owner->getAttackerForHelper())
                         AttackStart(Owner->getAttackerForHelper());
@@ -1639,7 +1639,7 @@ public:
         //Redefined for random target selection:
         void MoveInLineOfSight(Unit* who)
         {
-            if (!me->GetVictim() && me->canCreatureAttack(who))
+            if (!me->getVictim() && me->canCreatureAttack(who))
             {
                 if (me->GetDistanceZ(who) > CREATURE_Z_ATTACK_RANGE)
                     return;
@@ -1662,7 +1662,7 @@ public:
             if (!UpdateVictim())
                 return;
 
-            if (me->GetVictim()->HasBreakableByDamageCrowdControlAura(me))
+            if (me->getVictim()->HasBreakableByDamageCrowdControlAura(me))
             {
                 me->InterruptNonMeleeSpells(false);
                 return;
@@ -1680,7 +1680,7 @@ public:
                         else
                             spell = SPELL_CRIPPLING_POISON;
 
-                        DoCast(me->GetVictim(), spell);
+                        DoCast(me->getVictim(), spell);
                     }
 
                     SpellTimer = VIPER_TIMER;
@@ -1688,7 +1688,7 @@ public:
                 else //Venomous Snake
                 {
                     if (urand(0, 2) == 0) //33% chance to cast
-                        DoCast(me->GetVictim(), SPELL_DEADLY_POISON);
+                        DoCast(me->getVictim(), SPELL_DEADLY_POISON);
                     SpellTimer = VENOMOUS_SNAKE_TIMER + (rand() % 5) * 100;
                 }
             }
@@ -2123,7 +2123,7 @@ public:
 
             if (FireShield_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_FIRESHIELD);
+                DoCast(me->getVictim(), SPELL_FIRESHIELD);
                 FireShield_Timer = 2 * IN_MILLISECONDS;
             }
             else
@@ -2131,7 +2131,7 @@ public:
 
             if (FireBlast_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_FIREBLAST);
+                DoCast(me->getVictim(), SPELL_FIREBLAST);
                 FireBlast_Timer = 5000 + rand() % 15000; // 5-20 sec cd
             }
             else
@@ -2139,7 +2139,7 @@ public:
 
             if (FireNova_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_FIRENOVA);
+                DoCast(me->getVictim(), SPELL_FIRENOVA);
                 FireNova_Timer = 5000 + rand() % 15000; // 5-20 sec cd
             }
             else
@@ -2184,7 +2184,7 @@ public:
 
             if (AngeredEarth_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_ANGEREDEARTH);
+                DoCast(me->getVictim(), SPELL_ANGEREDEARTH);
                 AngeredEarth_Timer = 5000 + rand() % 15000; // 5-20 sec cd
             }
             else

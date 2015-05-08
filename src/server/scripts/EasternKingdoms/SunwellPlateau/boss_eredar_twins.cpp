@@ -118,8 +118,8 @@ public:
                 {
                     if (temp->isDead())
                         temp->Respawn();
-                    else if (temp->GetVictim())
-                        me->getThreatManager().addThreat(temp->GetVictim(), 0.0f);
+                    else if (temp->getVictim())
+                        me->getThreatManager().addThreat(temp->getVictim(), 0.0f);
                 }
             }
 
@@ -146,7 +146,7 @@ public:
             if (instance)
             {
                 Creature* temp = Unit::GetCreature(*me, instance->GetData64(DATA_ALYTHESS));
-                if (temp && temp->isAlive() && !temp->GetVictim())
+                if (temp && temp->isAlive() && !temp->getVictim())
                     temp->AI()->AttackStart(who);
             }
 
@@ -324,10 +324,10 @@ public:
             if (me->isAttackReady() && !me->IsNonMeleeSpellCasted(false))
             {
                 //If we are within range melee the target
-                if (me->IsWithinMeleeRange(me->GetVictim()))
+                if (me->IsWithinMeleeRange(me->getVictim()))
                 {
-                    HandleTouchedSpells(me->GetVictim(), SPELL_DARK_TOUCHED);
-                    me->AttackerStateUpdate(me->GetVictim());
+                    HandleTouchedSpells(me->getVictim(), SPELL_DARK_TOUCHED);
+                    me->AttackerStateUpdate(me->getVictim());
                     me->resetAttackTimer();
                 }
             }
@@ -380,8 +380,8 @@ public:
                 {
                     if (temp->isDead())
                         temp->Respawn();
-                    else if (temp->GetVictim())
-                        me->getThreatManager().addThreat(temp->GetVictim(), 0.0f);
+                    else if (temp->getVictim())
+                        me->getThreatManager().addThreat(temp->getVictim(), 0.0f);
                 }
             }
 
@@ -409,7 +409,7 @@ public:
             if (instance)
             {
                 Creature* temp = Unit::GetCreature(*me, instance->GetData64(DATA_SACROLASH));
-                if (temp && temp->isAlive() && !temp->GetVictim())
+                if (temp && temp->isAlive() && !temp->getVictim())
                     temp->AI()->AttackStart(who);
             }
 
@@ -425,7 +425,7 @@ public:
 
         void MoveInLineOfSight(Unit* who)
         {
-            if (!who || me->GetVictim())
+            if (!who || me->getVictim())
                 return;
 
             if (me->canCreatureAttack(who))
@@ -567,16 +567,16 @@ public:
                     }
                 }
             }
-            if (!me->GetVictim())
+            if (!me->getVictim())
             {
                 if (instance)
                 {
                     Creature* sisiter = Unit::GetCreature((*me), instance->GetData64(DATA_SACROLASH));
-                    if (sisiter && !sisiter->isDead() && sisiter->GetVictim())
+                    if (sisiter && !sisiter->isDead() && sisiter->getVictim())
                     {
-                        me->AddThreat(sisiter->GetVictim(), 0.0f);
-                        DoStartNoMovement(sisiter->GetVictim());
-                        me->Attack(sisiter->GetVictim(), false);
+                        me->AddThreat(sisiter->getVictim(), 0.0f);
+                        DoStartNoMovement(sisiter->getVictim());
+                        me->Attack(sisiter->getVictim(), false);
                     }
                 }
             }
@@ -645,7 +645,7 @@ public:
             {
                 if (!me->IsNonMeleeSpellCasted(false))
                 {
-                    DoCast(me->GetVictim(), SPELL_BLAZE);
+                    DoCast(me->getVictim(), SPELL_BLAZE);
                     BlazeTimer = 3800;
                 }
             } else BlazeTimer -= diff;
@@ -732,8 +732,8 @@ public:
                 if (!me->IsNonMeleeSpellCasted(false))
                 {
                     //If we are within range melee the target
-                    if (me->IsWithinMeleeRange(me->GetVictim()))
-                        DoCast(me->GetVictim(), SPELL_DARK_STRIKE);
+                    if (me->IsWithinMeleeRange(me->getVictim()))
+                        DoCast(me->getVictim(), SPELL_DARK_STRIKE);
                 }
                 DarkstrikeTimer = 3000;
             } else DarkstrikeTimer -= diff;

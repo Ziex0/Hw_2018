@@ -174,7 +174,7 @@ public:
         {
             ReduceCD(diff);
             if (IAmDead()) return;
-            if (!me->GetVictim())
+            if (!me->getVictim())
                 Evade();
             CheckAuras();
             if (wait == 0)
@@ -225,7 +225,7 @@ public:
                 !IsCasting())
                 //general rule
             {
-                opponent = me->GetVictim();
+                opponent = me->getVictim();
                 if (opponent)
                 {
                     if (!IsCasting())
@@ -398,7 +398,7 @@ public:
                 doCast(target, FLASH_HEAL))
                 return true;
             //maintain HoTs
-            Unit* u = target->GetVictim();
+            Unit* u = target->getVictim();
             Creature* boss = u && u->ToCreature() && u->ToCreature()->isWorldBoss() ? u->ToCreature() : NULL;
             bool tanking = tank == target && boss;
             //Renew

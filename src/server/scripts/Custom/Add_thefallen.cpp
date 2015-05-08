@@ -240,11 +240,11 @@ public:
 
             if (damage > 0) {
 
-                me->AddThreat(me->GetVictim(), 1.0f);
+                me->AddThreat(me->getVictim(), 1.0f);
 
                 if (_reflectdmg && attacker->HasAura(AURA_REFLECTION))
                 {	// When reflect avtive, cast 10% of damage done back to boss. 
-                    attacker->DealDamage(attacker->GetVictim(), damage * 0.1 ,0,DIRECT_DAMAGE,SPELL_SCHOOL_MASK_ALL,0,true);
+                    attacker->DealDamage(attacker->getVictim(), damage * 0.1 ,0,DIRECT_DAMAGE,SPELL_SCHOOL_MASK_ALL,0,true);
                     // me->MonsterSay("Debug: Aura Powered!..",LANG_UNIVERSAL,NULL);
                 }
                 /*
@@ -379,8 +379,8 @@ public:
                     _reflectdmg = true;	// Now reflecting big portion of damage back to LK.
 
                     // Our positive BUFF:
-                    me->AddAura(AURA_REFLECTION,me->GetVictim());
-                    me->GetVictim()->BuildAuraStateUpdateForTarget(me->GetVictim());
+                    me->AddAura(AURA_REFLECTION,me->getVictim());
+                    me->getVictim()->BuildAuraStateUpdateForTarget(me->getVictim());
 
                     // Bosses Negative buff:
                     me->RemoveAurasDueToSpell(SPELL_BERSERK);
@@ -459,7 +459,7 @@ public:
                 case EVENT_CHAIN_LIGHTNING:
                     if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
                         //me->CastCustomSpell(SPELL_CHAIN_LIGHTNING, SPELLVALUE_MAX_TARGETS, 1, target, false);
-                        DoCast(me->GetVictim(), SPELL_CHAIN_LIGHTNING);
+                        DoCast(me->getVictim(), SPELL_CHAIN_LIGHTNING);
                     events.ScheduleEvent(EVENT_CHAIN_LIGHTNING, urand(7000, 11000), 0, PHASE_ONE);
                     break;
 
@@ -484,7 +484,7 @@ public:
                         if (Creature *SummonedAdd = GetClosestCreatureWithEntry(me, ADD_ID_TOSPAWN, 3.0f))
                         {
                             Talk(RAND(SAY_LK_OUTRO_5, SAY_LK_BERSERK));			// Warning - Important.
-                            DoCast(me->GetVictim(), SPELL_BLISTERING_COLD);
+                            DoCast(me->getVictim(), SPELL_BLISTERING_COLD);
                             _chatter_timer = 0;
                         }
                         else
@@ -516,7 +516,7 @@ public:
                     break;
 
                 case EVENT_SINBEAM:
-                    DoCast(me->GetVictim(), SPELL_SINBEAM);
+                    DoCast(me->getVictim(), SPELL_SINBEAM);
                     events.ScheduleEvent(EVENT_SINBEAM, urand(4000, 6000), 0, PHASE_TWO);
                     break;
 

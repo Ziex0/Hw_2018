@@ -53,7 +53,7 @@ public:
             {
                 me->ModifyPower(POWER_MANA, - int32(info->CalcPowerCost(me, info->GetSchoolMask())));
                 mana = me->GetPower(POWER_MANA);
-                if (Unit* u = me->GetVictim())
+                if (Unit* u = me->getVictim())
                     GetInPosition(true, false, u);
             }
 
@@ -164,7 +164,7 @@ public:
                 }
             }//endif unitlist
 
-            Unit* u = master->GetVictim();
+            Unit* u = master->getVictim();
             if (master->getAttackers().size() > 4 ||
               (!master->getAttackers().empty() &&
                 u != NULL && u->GetHealth() > me->GetMaxHealth()*17))
@@ -211,7 +211,7 @@ public:
             if (GetHealthPCT(me) < 75)
                 if (HealTarget(me, GetHealthPCT(me), diff))
                     return;
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
             if (opponent)
                 StartAttack(opponent, true);
             else
@@ -240,7 +240,7 @@ public:
             if (GetHealthPCT(me) < 75)
                 if (HealTarget(me, GetHealthPCT(me), diff))
                     return;
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
             if (opponent)
                 StartAttack(opponent, true);
             else
@@ -285,7 +285,7 @@ public:
         void doBalanceActions(uint32 diff)
         {
             removeFeralForm(true, true);
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
             if (opponent)
             {
                 if (!IsCasting())
@@ -410,7 +410,7 @@ public:
             if (me->GetShapeshiftForm() == FORM_NONE && me->getPowerType() != POWER_MANA)
                 me->setPowerType(POWER_MANA);
             if (IAmDead()) return;
-            if (!me->GetVictim())
+            if (!me->getVictim())
                 Evade();
             else if (me->GetShapeshiftForm() == FORM_DIREBEAR ||
                 me->GetShapeshiftForm() == FORM_BEAR ||
@@ -489,7 +489,7 @@ public:
                 return;
 
             //debug
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
 
             if (GetHealthPCT(me) < 75)
             {
@@ -502,7 +502,7 @@ public:
 
             if (DamagePossible() && opponent != NULL)
             {
-                Unit* u = opponent->GetVictim();
+                Unit* u = opponent->getVictim();
                 //if the target is attacking us, we want to go bear
                 if (BEAR_FORM && !CCed(opponent) &&
                     ((u == me || (tank == me && IsInBotParty(u))) ||
@@ -522,7 +522,7 @@ public:
                         doBearActions(diff);
                 }
                 else
-                if (CAT_FORM && master->GetVictim() != opponent && tank &&
+                if (CAT_FORM && master->getVictim() != opponent && tank &&
                     u == tank && u != me &&
                     opponent->GetMaxHealth() < tank->GetMaxHealth()*3)
                 {
@@ -610,7 +610,7 @@ public:
                 }
             }
             //maintain HoTs
-            Unit* u = target->GetVictim();
+            Unit* u = target->getVictim();
             Creature* boss = u && u->ToCreature() && u->ToCreature()->isWorldBoss() ? u->ToCreature() : NULL;
             bool tanking = tank == target && boss;
             if (( (hp < 80 || GetLostHP(target) > 3500 || tanking) &&

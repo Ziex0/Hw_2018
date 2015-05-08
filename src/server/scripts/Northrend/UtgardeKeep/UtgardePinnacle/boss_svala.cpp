@@ -366,7 +366,7 @@ public:
 
                 if (sinsterStrikeTimer <= diff)
                 {
-                    DoCast(me->GetVictim(), SPELL_SINSTER_STRIKE);
+                    DoCast(me->getVictim(), SPELL_SINSTER_STRIKE);
                     sinsterStrikeTimer = urand(5 * IN_MILLISECONDS, 9 * IN_MILLISECONDS);
                 }
                 else
@@ -608,7 +608,7 @@ class npc_scourge_hulk : public CreatureScript
 
                 if (mightyBlow <= diff)
                 {
-                    if (Unit* victim = me->GetVictim())
+                    if (Unit* victim = me->getVictim())
                         if (!victim->HasUnitState(UNIT_STATE_STUNNED))    // Prevent knocking back a ritual player
                             DoCast(victim, SPELL_MIGHTY_BLOW);
                     mightyBlow = urand(12000, 17000);

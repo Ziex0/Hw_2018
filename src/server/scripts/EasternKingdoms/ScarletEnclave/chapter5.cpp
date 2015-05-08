@@ -1343,25 +1343,25 @@ public:
 
                 if (uiDeath_strike <= diff)
                 {
-                    DoCast(me->GetVictim(), SPELL_DEATH_STRIKE);
+                    DoCast(me->getVictim(), SPELL_DEATH_STRIKE);
                     uiDeath_strike = urand(5000, 10000);
                 } else uiDeath_strike -= diff;
 
                 if (uiDeath_embrace <= diff)
                 {
-                    DoCast(me->GetVictim(), SPELL_DEATH_EMBRACE);
+                    DoCast(me->getVictim(), SPELL_DEATH_EMBRACE);
                     uiDeath_embrace = urand(5000, 10000);
                 } else uiDeath_embrace -= diff;
 
                 if (uiIcy_touch <= diff)
                 {
-                    DoCast(me->GetVictim(), SPELL_ICY_TOUCH1);
+                    DoCast(me->getVictim(), SPELL_ICY_TOUCH1);
                     uiIcy_touch = urand(5000, 10000);
                 } else uiIcy_touch -= diff;
 
                 if (uiUnholy_blight <= diff)
                 {
-                    DoCast(me->GetVictim(), SPELL_UNHOLY_BLIGHT);
+                    DoCast(me->getVictim(), SPELL_UNHOLY_BLIGHT);
                     uiUnholy_blight = urand(5000, 10000);
                 } else uiUnholy_blight -= diff;
 

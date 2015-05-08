@@ -372,7 +372,7 @@ public:
                         CAST_AI(npc_shadowy_construct::npc_shadowy_constructAI, Construct->AI())->GhostGUID = GhostGUID;
                         Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
                         if (!target)                             // someone's trying to solo.
-                            target = me->GetVictim();
+                            target = me->getVictim();
 
                         if (target)
                             Construct->GetMotionMaster()->MoveChase(target);
@@ -424,7 +424,7 @@ public:
                     {
                         Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
                         if (!target)
-                            target = me->GetVictim();
+                            target = me->getVictim();
 
                         if (target)
                             Shadow->AI()->AttackStart(target);
@@ -459,7 +459,7 @@ public:
             {
                 Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
                 if (!target)
-                    target = me->GetVictim();
+                    target = me->getVictim();
 
                 if (target)
                 {
@@ -482,7 +482,7 @@ public:
                 Unit* target = SelectUnit(SELECT_TARGET_RANDOM, 1);
 
                 if (!target)
-                   target = me->GetVictim();
+                   target = me->getVictim();
 
                 if (target && target->isAlive() && target->GetTypeId() == TYPEID_PLAYER)
                 {

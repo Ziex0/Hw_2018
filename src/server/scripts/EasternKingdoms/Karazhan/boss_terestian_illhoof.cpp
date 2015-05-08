@@ -120,7 +120,7 @@ public:
             if (AmplifyTimer <= diff)
             {
                 me->InterruptNonMeleeSpells(false);
-                DoCast(me->GetVictim(), SPELL_AMPLIFY_FLAMES);
+                DoCast(me->getVictim(), SPELL_AMPLIFY_FLAMES);
 
                 AmplifyTimer = urand(10000, 20000);
             } else AmplifyTimer -= diff;
@@ -236,7 +236,7 @@ public:
 
             if (FireboltTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_FIREBOLT);
+                DoCast(me->getVictim(), SPELL_FIREBOLT);
                 FireboltTimer = 2200;
             } else FireboltTimer -= diff;
 
@@ -394,15 +394,15 @@ public:
             if (SummonTimer <= diff)
             {
                 if (!PortalGUID[0])
-                    DoCast(me->GetVictim(), SPELL_FIENDISH_PORTAL, false);
+                    DoCast(me->getVictim(), SPELL_FIENDISH_PORTAL, false);
 
                 if (!PortalGUID[1])
-                    DoCast(me->GetVictim(), SPELL_FIENDISH_PORTAL_1, false);
+                    DoCast(me->getVictim(), SPELL_FIENDISH_PORTAL_1, false);
 
                 if (PortalGUID[0] && PortalGUID[1])
                 {
                     if (Creature* pPortal = Unit::GetCreature(*me, PortalGUID[urand(0, 1)]))
-                        pPortal->CastSpell(me->GetVictim(), SPELL_SUMMON_FIENDISIMP, false);
+                        pPortal->CastSpell(me->getVictim(), SPELL_SUMMON_FIENDISIMP, false);
                     SummonTimer = 5000;
                 }
             } else SummonTimer -= diff;

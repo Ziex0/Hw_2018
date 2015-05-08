@@ -71,19 +71,19 @@ public:
 
             if (AvatarTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_AVATAR);
+                DoCast(me->getVictim(), SPELL_AVATAR);
                 AvatarTimer =  urand(15 * IN_MILLISECONDS, 20 * IN_MILLISECONDS);
             } else AvatarTimer -= diff;
 
             if (ThunderclapTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_THUNDERCLAP);
+                DoCast(me->getVictim(), SPELL_THUNDERCLAP);
                 ThunderclapTimer = urand(5 * IN_MILLISECONDS, 15 * IN_MILLISECONDS);
             } else ThunderclapTimer -= diff;
 
             if (StormboltTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_STORMBOLT);
+                DoCast(me->getVictim(), SPELL_STORMBOLT);
                 StormboltTimer = urand(10 * IN_MILLISECONDS, 25 * IN_MILLISECONDS);
             } else StormboltTimer -= diff;
 

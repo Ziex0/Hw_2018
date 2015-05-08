@@ -199,7 +199,7 @@ public:
 
             if (LightningBolt_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_LIGHTNING_BOLT);
+                DoCast(me->getVictim(), SPELL_LIGHTNING_BOLT);
                 LightningBolt_Timer = 5000;
             } else LightningBolt_Timer -= diff;
 

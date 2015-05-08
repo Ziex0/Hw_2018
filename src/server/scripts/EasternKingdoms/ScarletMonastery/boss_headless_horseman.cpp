@@ -320,7 +320,7 @@ public:
                 DoCast(me, SPELL_HEAD, false);
                 SaySound(SAY_LOST_HEAD);
                 me->GetMotionMaster()->Clear(false);
-                me->GetMotionMaster()->MoveFleeing(caster->GetVictim());
+                me->GetMotionMaster()->MoveFleeing(caster->getVictim());
             }
         }
 
@@ -332,10 +332,10 @@ public:
                 if (wait <= diff)
                 {
                     wait = 1000;
-                    if (!me->GetVictim())
+                    if (!me->getVictim())
                         return;
                     me->GetMotionMaster()->Clear(false);
-                    me->GetMotionMaster()->MoveFleeing(me->GetVictim());
+                    me->GetMotionMaster()->MoveFleeing(me->getVictim());
                 }
                 else wait -= diff;
 
@@ -544,7 +544,7 @@ public:
 
             std::list<Player*> temp;
             for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
-                if ((me->IsWithinLOSInMap(i->getSource()) || !checkLoS) && me->GetVictim() != i->getSource() &&
+                if ((me->IsWithinLOSInMap(i->getSource()) || !checkLoS) && me->getVictim() != i->getSource() &&
                     me->IsWithinDistInMap(i->getSource(), range) && i->getSource()->isAlive())
                     temp.push_back(i->getSource());
 
@@ -731,7 +731,7 @@ public:
                     DoMeleeAttackIfReady();
                     if (cleave <= diff)
                     {
-                        DoCast(me->GetVictim(), SPELL_CLEAVE);
+                        DoCast(me->getVictim(), SPELL_CLEAVE);
                         cleave = urand(2000, 6000);       //1 cleave per 2.0f-6.0fsec
                     }
                     else cleave -= diff;
@@ -825,7 +825,7 @@ public:
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_STUNNED);
                 DoCast(me, SPELL_SPROUT_BODY, true);
                 me->UpdateEntry(PUMPKIN_FIEND);
-                DoStartMovement(me->GetVictim());
+                DoStartMovement(me->getVictim());
             }
         }
 
@@ -850,7 +850,7 @@ public:
 
         void MoveInLineOfSight(Unit* who)
         {
-            if (!who || !me->IsValidAttackTarget(who) || me->GetVictim())
+            if (!who || !me->IsValidAttackTarget(who) || me->getVictim())
                 return;
 
             me->AddThreat(who, 0.0f);

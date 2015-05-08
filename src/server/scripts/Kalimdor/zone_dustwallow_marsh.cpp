@@ -366,7 +366,7 @@ public:
 
         void AttackedBy(Unit* pAttacker)
         {
-            if (me->GetVictim())
+            if (me->getVictim())
                 return;
 
             if (me->IsFriendlyTo(pAttacker))
@@ -446,7 +446,7 @@ public:
             SetCombatMovement(true);
 
             if (me->isInCombat())
-                if (Unit* unit = me->GetVictim())
+                if (Unit* unit = me->getVictim())
                     me->GetMotionMaster()->MoveChase(unit);
         }
 
