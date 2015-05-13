@@ -179,7 +179,7 @@ public:
                     for (std::set<uint64>::const_iterator itr = InitiandGUIDs.begin(); itr != InitiandGUIDs.end(); ++itr)
                     {
                         Creature* cr = instance->GetCreature(*itr);
-                        if (cr && cr->IsAlive())
+                        if (cr && cr->isAlive())
                             vInitiands.push_back(*itr);
                     }
                     if (vInitiands.empty())
@@ -212,7 +212,7 @@ public:
                         for (std::set<uint64>::const_iterator itr = InitiandGUIDs.begin(); itr != InitiandGUIDs.end(); ++itr)
                         {
                             Creature* cr = instance->GetCreature(*itr);
-                            if (cr && cr->IsAlive())
+                            if (cr && cr->isAlive())
                             {
                                 cr->SetVisible(false);
                                 cr->setDeathState(JUST_DIED);
@@ -267,7 +267,7 @@ public:
                     for (std::set<uint64>::const_iterator itr = InitiandGUIDs.begin(); itr != InitiandGUIDs.end(); ++itr)
                     {
                         Creature* cr = instance->GetCreature(*itr);
-                        if (!cr || (cr && cr->IsAlive()))
+                        if (!cr || (cr && cr->isAlive()))
                             return 0;
                     }
                     return 1;

@@ -379,7 +379,7 @@ public:
 
                     //If nef is dead then we die to so the players get out of combat
                     //and cannot repeat the event
-                    if (!Nefarian || !Nefarian->IsAlive())
+                    if (!Nefarian || !Nefarian->isAlive())
                     {
                         NefarianGUID = 0;
                         me->DespawnOrUnsummon();

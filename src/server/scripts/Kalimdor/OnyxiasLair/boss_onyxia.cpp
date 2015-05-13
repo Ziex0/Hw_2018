@@ -265,7 +265,7 @@ public:
                         }
                         break;
                     case 9:
-                        me->GetMotionMaster()->MoveChase(me->GetVictim());
+                        me->GetMotionMaster()->MoveChase(me->getVictim());
                         BellowingRoarTimer = 1000;
                         break;
                     case 10:

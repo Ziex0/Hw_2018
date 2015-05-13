@@ -89,7 +89,7 @@ class mod_BossHistory_AllCreatureScript : public AllCreatureScript
                     PeopleData << Temp->GetName() << DATA_SEPARATOR;
                     PeopleData << uint32(Temp->getLevel()) << DATA_SEPARATOR;
                     PeopleData << playerGuildId << DATA_SEPARATOR;
-                    PeopleData << uint32(Temp->IsAlive()) << DATA_SEPARATOR;
+                    PeopleData << uint32(Temp->isAlive()) << DATA_SEPARATOR;
                     PeopleData << uint32(Temp->IsAtGroupRewardDistance(creature)) << PEOPLE_SEPARATOR;
                     TeamKill += PeopleData.str();
                 }
@@ -116,7 +116,7 @@ class mod_BossHistory_AllCreatureScript : public AllCreatureScript
                 PeopleData << recipient->GetName() << DATA_SEPARATOR;
                 PeopleData << uint32(recipient->getLevel()) << DATA_SEPARATOR;
                 PeopleData << recipient->GetGuildId() << DATA_SEPARATOR;
-                PeopleData << uint32(recipient->IsAlive()) << DATA_SEPARATOR;
+                PeopleData << uint32(recipient->isAlive()) << DATA_SEPARATOR;
                 PeopleData << uint32(1) << PEOPLE_SEPARATOR;
                 TeamKill += PeopleData.str();
             }

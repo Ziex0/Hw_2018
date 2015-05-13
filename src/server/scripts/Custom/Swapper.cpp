@@ -1,95 +1,100 @@
-/*  
-	-Souls -
-	soul =	   60000
-	10.000	 = 60020
-	30.000	 = 60021
-	50.000	 = 60022
-	100.000 =  60027
-
-	-Unholy-
-    emblem =	60004
-	10.000	 =  60023
-	30.000	 =  60024
-	50.000	 =  60025
-	100.000 =	60026
-
-	-Demon head-
-	dem	 =     60005
-	50.000	 = 60033
-
-	Okay so i made this script to learn my friend sephox a bit C++,
-	So he is possible to add items in the future by himself
-	We hope it's going to be very usefull!
-*/
-struct tokenData {uint32 TAKE_ENTRY, TAKE_AMOUNT, GIVE_ENTRY, GIVE_AMOUNT; };
-struct tokenData Tokens[] =
-{
-//  {TAKE_ENTRY, TAKE_AMOUNT, GIVE_ENTRY, GIVE_AMOUNT},
-
-	//Souls
-    {320286, 1000, 320287, 1},
-	{320286, 3000, 320288, 1},
-	{320286, 5000, 320289, 1},
-	{320286, 10000, 320290, 1},
-	//Unholy
-	/*{60004, 10000, 60023, 1},
-	{60004, 30000, 60024, 1},
-	{60004, 50000, 60025, 1},
-	{60004, 100000, 60026, 1},
-	//demon
-	{60005, 50000, 60033, 1},*/
-
-
-};
-
-const uint32 tokensSize = sizeof Tokens/sizeof(*Tokens);
 #include "ScriptPCH.h"
+#include <cstring>
+#include "CharacterDatabaseCleaner.h"
+#include "DatabaseEnv.h"
+#include "ObjectMgr.h"
 
-class CustomSwapItems : public CreatureScript
+class DemonConvert : public CreatureScript
 {
 public:
-    CustomSwapItems() : CreatureScript("CustomSwapItems") { }
+    DemonConvert() : CreatureScript("DemonConvert") {}
 
-    std::string GetName(uint32 entry)
-    {
-        return sObjectMgr->GetItemTemplate(entry)->Name1;
-    }
-
-    bool OnGossipHello(Player* player, Creature* creature)
-    {
-        for (uint32 i = 0; i < tokensSize; ++i)
+        void RewardItem(Player* pPlayer, Creature* pCreature)
         {
-            std::ostringstream ss;
-            // Swap 50 x Token to 10 x token2 (names set automatically)
-            ss << "Swap " << Tokens[i].TAKE_AMOUNT << " x " << GetName(Tokens[i].TAKE_ENTRY) << " to " << Tokens[i].GIVE_AMOUNT << " x " << GetName(Tokens[i].GIVE_ENTRY);
-            player->ADD_GOSSIP_ITEM_EXTENDED(0, ss.str(), GOSSIP_SENDER_MAIN, i, "Are you sure?", 0, false);
-        }
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-        return true;
-    }
+	     char str[200];
 
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 action)
-    {
-        player->PlayerTalkClass->ClearMenus();
-        if(sender == GOSSIP_SENDER_MAIN && action < tokensSize)
-        {
-            if(player->HasItemCount(Tokens[action].TAKE_ENTRY, Tokens[action].TAKE_AMOUNT))
+            if (pPlayer->HasItemCount(320286, 600))
             {
-                if(player->AddItem(Tokens[action].GIVE_ENTRY, Tokens[action].GIVE_AMOUNT))
-                {
-                    player->DestroyItemCount(Tokens[action].TAKE_ENTRY, Tokens[action].TAKE_AMOUNT, true);
-                    player->GetSession()->SendAreaTriggerMessage("%u x %s swapped to %u x %s", Tokens[action].TAKE_AMOUNT, GetName(Tokens[action].TAKE_ENTRY).c_str(), Tokens[action].GIVE_AMOUNT, GetName(Tokens[action].GIVE_ENTRY).c_str());
-                }
+				pPlayer->DestroyItemCount(320286, 600, true);
+                pPlayer->AddItem(340006, 10);
+                sprintf(str,"Your DH was successfully converted to SC!");
+                pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);
             }
             else
-                player->GetSession()->SendNotification("You need at least %u x %ss", Tokens[action].TAKE_AMOUNT, GetName(Tokens[action].TAKE_ENTRY).c_str());
+            {
+                sprintf(str,"You don't have any DH Tokens!");
+                pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);
+            }
+            pPlayer->PlayerTalkClass->ClearMenus();
+            OnGossipHello(pPlayer, pCreature);
         }
-        OnGossipHello(player, creature);
-        return true;
-    }
+
+        /*void RewardItemArena(Player* pPlayer, Creature* pCreature)
+        {
+	     char str[200];
+
+            if (pPlayer->HasItemCount(29436, 1))
+            {
+		  pPlayer->DestroyItemCount(29436, 1, true);
+                pPlayer->ModifyArenaPoints(1000);
+                sprintf(str,"Your Arena Token was successfully converted to arena points!");
+                pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);
+            }
+            else
+            {
+                sprintf(str,"You don't have any Arena Tokens!");
+                pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);
+            }
+            pPlayer->PlayerTalkClass->ClearMenus();
+            OnGossipHello(pPlayer, pCreature);
+        }*/
+
+        bool OnGossipHello(Player* pPlayer, Creature* pCreature)
+        {
+            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Information about this system:", GOSSIP_SENDER_MAIN, 2000);
+            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Continue", GOSSIP_SENDER_MAIN, 1000);
+
+            pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
+
+            return true;
+        }
+
+        bool OnGossipSelect(Player* pPlayer, Creature* pCreature, uint32 /*uiSender*/, uint32 uiAction)
+        {
+            pPlayer->PlayerTalkClass->ClearMenus();
+
+	     char str[200];
+
+            switch (uiAction)
+            {
+            case 1000:
+                pPlayer->PlayerTalkClass->ClearMenus();
+                pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Convert 600 Demon Head", GOSSIP_SENDER_MAIN, 1001);
+                pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Return.", GOSSIP_SENDER_MAIN, 9999);
+                pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
+                return true;
+                break;
+            case 1001:
+                RewardItem(pPlayer, pCreature); 
+                break;
+			case 2000:
+                sprintf(str,"For 600 Demon Head you will receive 10 Star Coin!");
+                pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);
+                pPlayer->PlayerTalkClass->ClearMenus();
+                OnGossipHello(pPlayer, pCreature);
+                break;
+            case 9999:
+                pPlayer->PlayerTalkClass->ClearMenus();
+                OnGossipHello(pPlayer, pCreature);
+                break;
+            }
+
+            return true;
+        }
+
 };
 
-void AddSC_CustomSwapItems()
+void AddSC_DemonConvert()
 {
-    new CustomSwapItems();
+    new DemonConvert();
 }

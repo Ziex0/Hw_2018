@@ -67,7 +67,7 @@ public:
         {
             ReduceCD(diff);
             if (IAmDead()) return;
-            if (!me->GetVictim())
+            if (!me->getVictim())
                 Evade();
             if (wait == 0)
                 wait = GetWait();
@@ -112,7 +112,7 @@ public:
 
         void DoNormalAttack(uint32 diff)
         {
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
             if (opponent)
             {
                 if (!IsCasting())
@@ -446,7 +446,7 @@ public:
         {
             ReduceCD(diff);
             if (IAmDead()) return;
-            if (me->GetVictim())
+            if (me->getVictim())
                 DoMeleeAttackIfReady();
             CheckAuras();
             if (wait == 0)
@@ -468,7 +468,7 @@ public:
 
         void DoNormalAttack(uint32 diff)
         {
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
             if (opponent)
             {
                 if (!IsCasting())
@@ -483,7 +483,7 @@ public:
             float meleedist = me->GetDistance(opponent);
 
             //TORMENT
-            if (TORMENT && Torment_cd <= diff && meleedist < 5 && (!tank || tank == me || opponent->GetVictim() == m_creatureOwner))
+            if (TORMENT && Torment_cd <= diff && meleedist < 5 && (!tank || tank == me || opponent->getVictim() == m_creatureOwner))
             {
                 temptimer = GC_Timer;
                 if (doCast(opponent, TORMENT))

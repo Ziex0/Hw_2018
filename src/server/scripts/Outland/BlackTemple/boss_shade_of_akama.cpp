@@ -209,7 +209,7 @@ public:
             if (me->HasFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE))
             {
                 if (Creature* Akama = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_AKAMA_SHADE)))
-                    if (Akama->IsAlive())
+                    if (Akama->isAlive())
                         ScriptedAI::AttackStart(Akama);
             }
             else
@@ -269,7 +269,7 @@ public:
                     {
                         case EVENT_RESET_ENCOUNTER:
                             if (Creature* Akama = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_AKAMA_SHADE)))
-                                if (!Akama->IsAlive())
+                                if (!Akama->isAlive())
                                     Akama->Respawn();
                             break;
                         case EVENT_FIND_CHANNELERS_SPAWNERS:
@@ -439,7 +439,7 @@ public:
         void JustDied(Unit* /*killer*/) override
         {
             if (Creature* Shade = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_SHADE_OF_AKAMA)))
-                if (Shade->IsAlive())
+                if (Shade->isAlive())
                     CAST_AI(boss_shade_of_akama::boss_shade_of_akamaAI, Shade->AI())->HasKilledAkama = true;
             me->GetMotionMaster()->Clear(true);
             me->GetMotionMaster()->MoveIdle();

@@ -168,7 +168,7 @@ public:
             {
                 if (Creature* temp = Unit::GetCreature(*me, *itr))
                 {
-                    if (temp->IsAlive())
+                    if (temp->isAlive())
                         temp->DespawnOrUnsummon();
                 }
             }
@@ -186,7 +186,7 @@ public:
                 if (Creature* temp = Unit::GetCreature(*me, *itr))
                 {
                     // Only shatter brittle golems
-                    if (temp->IsAlive() && temp->GetEntry() == NPC_BRITTLE_GOLEM)
+                    if (temp->isAlive() && temp->GetEntry() == NPC_BRITTLE_GOLEM)
                     {
                         temp->CastSpell(temp, DUNGEON_MODE(SPELL_SHATTER_N, SPELL_SHATTER_H), false);
                         GolemsShattered += 1;
@@ -236,8 +236,8 @@ public:
                 if (m_uiPause_Timer <= uiDiff)
                 {
                     if (me->GetMotionMaster()->GetCurrentMovementGeneratorType() != CHASE_MOTION_TYPE)
-                        if (me->GetVictim())
-                            me->GetMotionMaster()->MoveChase(me->GetVictim());
+                        if (me->getVictim())
+                            me->GetMotionMaster()->MoveChase(me->getVictim());
 
                     m_bHasTemper = false;
                     m_bIsStriking = false;
@@ -443,7 +443,7 @@ public:
 
             if (m_uiImmolation_Timer <= uiDiff)
             {
-                DoCast(me->GetVictim(), SPELL_IMMOLATION_STRIKE_N);
+                DoCast(me->getVictim(), SPELL_IMMOLATION_STRIKE_N);
                 m_uiImmolation_Timer = 5000;
             }
             else

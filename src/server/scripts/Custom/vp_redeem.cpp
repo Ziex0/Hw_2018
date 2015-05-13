@@ -14,7 +14,7 @@ class vpredeem : public CreatureScript
         bool OnGossipHello(Player* pPlayer, Creature* pCreature)
         {
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Exchange my Star Coins", GOSSIP_SENDER_MAIN, 7000);
-			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Exchange my Vote Points", GOSSIP_SENDER_MAIN, 8000);
+			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Exchange my Demon Head", GOSSIP_SENDER_MAIN, 8000);
             
             pPlayer->PlayerTalkClass->SendGossipMenu(85007, pCreature->GetGUID());
 
@@ -39,10 +39,10 @@ class vpredeem : public CreatureScript
 				
 			case 8000:
                 pPlayer->PlayerTalkClass->ClearMenus();
-                pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Give me 1  Dp - 100 Vote Points", GOSSIP_SENDER_MAIN, 8001);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Give me 10 Dp - 200 Vote Points", GOSSIP_SENDER_MAIN, 8002);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Give me 15 Dp - 300 Vote Points", GOSSIP_SENDER_MAIN, 8003);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Give me 20 Dp - 400 Vote Points", GOSSIP_SENDER_MAIN, 8004);
+                pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Give me 1  SC - 500 DH", GOSSIP_SENDER_MAIN, 8001);
+				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Give me 10 Dp - 200 Vote Points", GOSSIP_SENDER_MAIN, 8002);
+				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Give me 15 Dp - 300 Vote Points", GOSSIP_SENDER_MAIN, 8003);
+				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Give me 20 Dp - 400 Vote Points", GOSSIP_SENDER_MAIN, 8004);
 				pPlayer->PlayerTalkClass->SendGossipMenu(85007, pCreature->GetGUID());
                 return true;
                 break;
@@ -97,8 +97,7 @@ class vpredeem : public CreatureScript
 
 		case 7004:
 			if(pPlayer->HasItemCount(340006, 400))
-		{
-			
+		{			
 			pPlayer->DestroyItemCount(340006, 400, true);
 			LoginDatabase.PQuery("Update web_db.account_data Set vp = vp + 40 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 			char str[200];
@@ -111,8 +110,8 @@ class vpredeem : public CreatureScript
 		  }
    		  break;		  
 	    }
-    
-            return true;
+		
+		return true;
 			
      }
 };

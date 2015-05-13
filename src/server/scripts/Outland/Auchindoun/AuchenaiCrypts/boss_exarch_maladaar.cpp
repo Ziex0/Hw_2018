@@ -82,39 +82,39 @@ public:
                 switch (myClass)
                 {
                     case CLASS_WARRIOR:
-                        DoCast(me->GetVictim(), SPELL_MORTAL_STRIKE);
+                        DoCast(me->getVictim(), SPELL_MORTAL_STRIKE);
                         Class_Timer = 6000;
                         break;
                     case CLASS_PALADIN:
-                        DoCast(me->GetVictim(), SPELL_HAMMER_OF_JUSTICE);
+                        DoCast(me->getVictim(), SPELL_HAMMER_OF_JUSTICE);
                         Class_Timer = 6000;
                         break;
                     case CLASS_HUNTER:
-                        DoCast(me->GetVictim(), SPELL_FREEZING_TRAP);
+                        DoCast(me->getVictim(), SPELL_FREEZING_TRAP);
                         Class_Timer = 20000;
                         break;
                     case CLASS_ROGUE:
-                        DoCast(me->GetVictim(), SPELL_HEMORRHAGE);
+                        DoCast(me->getVictim(), SPELL_HEMORRHAGE);
                         Class_Timer = 10000;
                         break;
                     case CLASS_PRIEST:
-                        DoCast(me->GetVictim(), SPELL_MIND_FLAY);
+                        DoCast(me->getVictim(), SPELL_MIND_FLAY);
                         Class_Timer = 5000;
                         break;
                     case CLASS_SHAMAN:
-                        DoCast(me->GetVictim(), SPELL_FROSTSHOCK);
+                        DoCast(me->getVictim(), SPELL_FROSTSHOCK);
                         Class_Timer = 8000;
                         break;
                     case CLASS_MAGE:
-                        DoCast(me->GetVictim(), SPELL_FIREBALL);
+                        DoCast(me->getVictim(), SPELL_FIREBALL);
                         Class_Timer = 5000;
                         break;
                     case CLASS_WARLOCK:
-                        DoCast(me->GetVictim(), SPELL_CURSE_OF_AGONY);
+                        DoCast(me->getVictim(), SPELL_CURSE_OF_AGONY);
                         Class_Timer = 20000;
                         break;
                     case CLASS_DRUID:
-                        DoCast(me->GetVictim(), SPELL_MOONFIRE);
+                        DoCast(me->getVictim(), SPELL_MOONFIRE);
                         Class_Timer = 10000;
                         break;
                 }
@@ -329,7 +329,7 @@ public:
 
             if (Mortal_Strike_timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_AV_MORTAL_STRIKE);
+                DoCast(me->getVictim(), SPELL_AV_MORTAL_STRIKE);
                 Mortal_Strike_timer = urand(10, 30) * 1000;
             } else Mortal_Strike_timer -= diff;
 

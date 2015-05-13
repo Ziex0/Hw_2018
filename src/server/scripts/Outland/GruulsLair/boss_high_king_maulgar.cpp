@@ -98,7 +98,7 @@ bool CheckAllBossDied(InstanceScript* instance, Creature* me)
     if (!Maulgar || !Kiggler || !Blindeye || !Olm || !Krosh)
         return false;
 
-    if (!Maulgar->IsAlive() && !Kiggler->IsAlive() && !Blindeye->IsAlive() && !Olm->IsAlive() && !Krosh->IsAlive())
+    if (!Maulgar->isAlive() && !Kiggler->isAlive() && !Blindeye->isAlive() && !Olm->isAlive() && !Krosh->isAlive())
         return true;
 
     return false;
@@ -154,7 +154,7 @@ public:
                 if (Council[i])
                 {
                     creature = (Unit::GetCreature((*me), Council[i]));
-                    if (creature && !creature->IsAlive())
+                    if (creature && !creature->isAlive())
                     {
                         creature->Respawn();
                         creature->AI()->EnterEvadeMode();
@@ -245,21 +245,21 @@ public:
             //ArcingSmash_Timer
             if (ArcingSmash_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_ARCING_SMASH);
+                DoCast(me->getVictim(), SPELL_ARCING_SMASH);
                 ArcingSmash_Timer = 10000;
             } else ArcingSmash_Timer -= diff;
 
             //Whirlwind_Timer
                    if (Whirlwind_Timer <= diff)
                    {
-                        DoCast(me->GetVictim(), SPELL_WHIRLWIND);
+                        DoCast(me->getVictim(), SPELL_WHIRLWIND);
                         Whirlwind_Timer = 55000;
                    } else Whirlwind_Timer -= diff;
 
             //MightyBlow_Timer
             if (MightyBlow_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_MIGHTY_BLOW);
+                DoCast(me->getVictim(), SPELL_MIGHTY_BLOW);
                 MightyBlow_Timer = 30000+rand()%10000;
             } else MightyBlow_Timer -= diff;
 
@@ -404,7 +404,7 @@ public:
             //DarkDecay_Timer
             if (DarkDecay_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_DARK_DECAY);
+                DoCast(me->getVictim(), SPELL_DARK_DECAY);
                 DarkDecay_Timer = 20000;
             } else DarkDecay_Timer -= diff;
 
@@ -528,21 +528,21 @@ public:
             //LightningBolt_Timer
             if (LightningBolt_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_LIGHTNING_BOLT);
+                DoCast(me->getVictim(), SPELL_LIGHTNING_BOLT);
                 LightningBolt_Timer = 15000;
             } else LightningBolt_Timer -= diff;
 
             //ArcaneShock_Timer
             if (ArcaneShock_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_ARCANE_SHOCK);
+                DoCast(me->getVictim(), SPELL_ARCANE_SHOCK);
                 ArcaneShock_Timer = 20000;
             } else ArcaneShock_Timer -= diff;
 
             //ArcaneExplosion_Timer
             if (ArcaneExplosion_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_ARCANE_EXPLOSION);
+                DoCast(me->getVictim(), SPELL_ARCANE_EXPLOSION);
                 ArcaneExplosion_Timer = 30000;
             } else ArcaneExplosion_Timer -= diff;
 
@@ -746,9 +746,9 @@ public:
             }
 
             //GreaterFireball_Timer
-            if (GreaterFireball_Timer < diff || me->IsWithinDist(me->GetVictim(), 30))
+            if (GreaterFireball_Timer < diff || me->IsWithinDist(me->getVictim(), 30))
             {
-                DoCast(me->GetVictim(), SPELL_GREATER_FIREBALL);
+                DoCast(me->getVictim(), SPELL_GREATER_FIREBALL);
                 GreaterFireball_Timer = 2000;
             } else GreaterFireball_Timer -= diff;
 
@@ -756,7 +756,7 @@ public:
             if (SpellShield_Timer <= diff)
             {
                 me->InterruptNonMeleeSpells(false);
-                DoCast(me->GetVictim(), SPELL_SPELLSHIELD);
+                DoCast(me->getVictim(), SPELL_SPELLSHIELD);
                 SpellShield_Timer = 30000;
             } else SpellShield_Timer -= diff;
 

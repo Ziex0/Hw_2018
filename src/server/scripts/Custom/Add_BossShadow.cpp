@@ -94,7 +94,7 @@ public:
                 for (Map::PlayerList::const_iterator i = players.begin(); i != players.end(); ++i)
                 {
                     Player* player = i->getSource();
-                    if (!player || !player->IsAlive())
+                    if (!player || !player->isAlive())
                         continue;
                     // Summon insanity
                     if (Unit* summon = me->SummonCreature(MOB_INSANITY, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), me->GetOrientation(), TEMPSUMMON_CORPSE_DESPAWN, 0))
@@ -219,7 +219,7 @@ public:
 		void UpdateAI(uint32 diff)
 
         {
-             if (!me->GetVictim())
+             if (!me->getVictim())
             {
                DoCast(me, SPELL_STEALTH);
             }
@@ -241,7 +241,7 @@ public:
 
             if (Slash_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_SLASH);
+                DoCast(me->getVictim(), SPELL_SLASH);
                 Slash_Timer = 5000;
             } else Slash_Timer -= diff;
 

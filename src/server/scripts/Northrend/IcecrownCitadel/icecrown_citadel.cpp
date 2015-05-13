@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -292,7 +292,7 @@ class FrostwingVrykulSearcher
 
         bool operator()(Unit* unit)
         {
-            if (!unit->IsAlive())
+            if (!unit->isAlive())
                 return false;
 
             switch (unit->GetEntry())
@@ -756,7 +756,7 @@ class boss_sister_svalna : public CreatureScript
                 {
                     if (Creature* crusader = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_CAPTAIN_ARNATH + i)))
                     {
-                        if (crusader->IsAlive() && crusader->GetEntry() == crusader->GetCreatureData()->id)
+                        if (crusader->isAlive() && crusader->GetEntry() == crusader->GetCreatureData()->id)
                         {
                             crusader->m_Events.AddEvent(new CaptainSurviveTalk(*crusader), crusader->m_Events.CalculateTime(delay));
                             delay += 6000;
@@ -960,7 +960,7 @@ class npc_crok_scourgebane : public CreatureScript
             {
                 if (action == ACTION_START_GAUNTLET)
                 {
-                    if (_isEventDone || !me->IsAlive())
+                    if (_isEventDone || !me->isAlive())
                         return;
 
                     _isEventActive = true;
@@ -1807,7 +1807,7 @@ class spell_icc_sprit_alarm : public SpellScriptLoader
                 wards.sort(Trinity::ObjectDistanceOrderPred(GetCaster()));
                 for (std::list<Creature*>::iterator itr = wards.begin(); itr != wards.end(); ++itr)
                 {
-                    if ((*itr)->IsAlive() && (*itr)->HasAura(SPELL_STONEFORM))
+                    if ((*itr)->isAlive() && (*itr)->HasAura(SPELL_STONEFORM))
                     {
                         (*itr)->AI()->Talk(SAY_TRAP_ACTIVATE);
                         (*itr)->RemoveAurasDueToSpell(SPELL_STONEFORM);
@@ -1954,7 +1954,7 @@ class AliveCheck
         bool operator()(WorldObject* object) const
         {
             if (Unit* unit = object->ToUnit())
-                return unit->IsAlive();
+                return unit->isAlive();
             return true;
         }
 };

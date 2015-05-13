@@ -41,7 +41,7 @@ class NearestHostileUnitCheck
             //        if (Spell* spell = u->GetCurrentSpell(i))
             //            if (ai->IsInBotParty(spell->m_targets.GetUnitTarget()))
             //                return true;
-            if (!ai->IsInBotParty(u->GetVictim()))
+            if (!ai->IsInBotParty(u->getVictim()))
                 return false;
 
             m_range = me->GetDistance(u);   // use found unit range as new range limit for next check
@@ -66,13 +66,13 @@ class HostileDispelTargetCheck
             if (!PvP && (u->ToPlayer() || (u->ToCreature() && u->ToCreature()->GetBotAI())))
                 return false;
             if (u->IsWithinDistInMap(me, m_range) &&
-                u->IsAlive() &&
+                u->isAlive() &&
                 u->InSamePhase(me) &&
                 u->isInCombat() &&
                 u->isTargetableForAttack() &&
                 u->IsVisible() &&
                 u->GetReactionTo(me) < REP_NEUTRAL &&
-                ai->IsInBotParty(u->GetVictim()))
+                ai->IsInBotParty(u->getVictim()))
             {
                 if (checksteal && u->IsImmunedToSpell(sSpellMgr->GetSpellInfo(30449))) return false;//immune to steal
                 if (!checksteal)
@@ -123,7 +123,7 @@ class AffectedTargetCheck
             if (needhostile == 2 && !(gr && gr->IsMember(u->GetGUID()))) return false;
             if (needhostile == 3 && !u->IsFriendlyTo(checker)) return false;
 
-            if (u->IsAlive() && checker->IsWithinDistInMap(u, m_range))
+            if (u->isAlive() && checker->IsWithinDistInMap(u, m_range))
             {
                 Unit::AuraMap const &Auras = u->GetOwnedAuras();
                 for (Unit::AuraMap::const_iterator itr = Auras.begin(); itr != Auras.end(); ++itr)
@@ -158,7 +158,7 @@ class PolyUnitCheck
                 return false;
             if (!me->IsWithinDistInMap(u, m_range))
                 return false;
-            if (!u->isInCombat() || !u->IsAlive() || !u->GetVictim())
+            if (!u->isInCombat() || !u->isAlive() || !u->getVictim())
                 return false;
             if (u->GetCreatureType() != CREATURE_TYPE_HUMANOID &&
                 u->GetCreatureType() != CREATURE_TYPE_BEAST)
@@ -222,13 +222,13 @@ class FearUnitCheck
             if (u->GetCreatureType() != CREATURE_TYPE_BEAST &&
                 me->ToCreature()->GetBotClass() == CLASS_HUNTER)
                 return false;
-            if (!u->IsAlive())
+            if (!u->isAlive())
                 return false;
             if (!u->isTargetableForAttack())
                 return false;
             if (!u->IsVisible())
                 return false;
-            if (u->getAttackers().size() > 1 && u->GetVictim() != me)
+            if (u->getAttackers().size() > 1 && u->getVictim() != me)
                 return false;
             if (u->HasUnitState(UNIT_STATE_CONFUSED | UNIT_STATE_STUNNED | UNIT_STATE_FLEEING | UNIT_STATE_DISTRACTED | UNIT_STATE_CONFUSED_MOVE | UNIT_STATE_FLEEING_MOVE))
                 return false;
@@ -264,17 +264,17 @@ class StunUnitCheck
                 return false;
             if (!u->isInCombat())
                 return false;
-            if (me->GetVictim() == u)
+            if (me->getVictim() == u)
                 return false;
             if (me->GetTypeId() == TYPEID_UNIT)
                 if (Player* mymaster = me->ToCreature()->GetBotOwner())
-                    if (mymaster->GetVictim() == u)
+                    if (mymaster->getVictim() == u)
                         return false;
             if (!u->InSamePhase(me))
                 return false;
             if (u->GetReactionTo(me) > REP_NEUTRAL)
                 return false;
-            if (!u->IsAlive())
+            if (!u->isAlive())
                 return false;
             if (!u->IsVisible())
                 return false;
@@ -337,13 +337,13 @@ class UndeadCCUnitCheck
                 return false;
             if (u->GetReactionTo(me) > REP_NEUTRAL)
                 return false;
-            if (!u->IsAlive())
+            if (!u->isAlive())
                 return false;
             if (!u->isTargetableForAttack())
                 return false;
             if (!u->IsVisible())
                 return false;
-            if (me->GetVictim() == u && u->GetVictim() == me)
+            if (me->getVictim() == u && u->getVictim() == me)
                 return false;
             if (!u->getAttackers().empty())
                 return false;
@@ -388,7 +388,7 @@ class RootUnitCheck
                 return false;
             if (!me->IsWithinDistInMap(u, m_range))
                 return false;
-            if (!u->IsAlive())
+            if (!u->isAlive())
                 return false;
             if (!u->isInCombat())
                 return false;
@@ -437,7 +437,7 @@ class CastingUnitCheck
                 return false;
             if (!me->IsWithinDistInMap(u, max_range))
                 return false;
-            if (!u->IsAlive())
+            if (!u->isAlive())
                 return false;
             if (!u->InSamePhase(me))
                 return false;
@@ -517,16 +517,16 @@ class TranquilTargetCheck
         {
             if (!PvP && (u->ToPlayer() || (u->ToCreature() && u->ToCreature()->GetBotAI())))
                 return false;
-            if (u != me->GetVictim() &&//check hunter_bot::hunter_botAI::CheckTranquil(uint32)
+            if (u != me->getVictim() &&//check hunter_bot::hunter_botAI::CheckTranquil(uint32)
                 u->IsWithinDistInMap(me, max_range) &&
                 u->GetDistance(me) > min_range &&
-                u->IsAlive() &&
+                u->isAlive() &&
                 u->InSamePhase(me) &&
                 u->isInCombat() &&
                 u->isTargetableForAttack() &&
                 u->IsVisible() &&
                 u->GetReactionTo(me) < REP_NEUTRAL &&
-                ai->IsInBotParty(u->GetVictim()))
+                ai->IsInBotParty(u->getVictim()))
             {
                 if (u->IsImmunedToSpell(sSpellMgr->GetSpellInfo(19801))) return false;//immune to tranquilizing shot
                 Unit::AuraMap const &Auras = u->GetOwnedAuras();
@@ -578,7 +578,7 @@ class NearbyHostileUnitCheck
             if (m_forCC && u->HasAuraType(SPELL_AURA_PERIODIC_DAMAGE))
                 return false;
 
-            if (ai->IsInBotParty(u->GetVictim()))
+            if (ai->IsInBotParty(u->getVictim()))
                 return true;
 
             return false;

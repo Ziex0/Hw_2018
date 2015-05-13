@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -373,7 +373,7 @@ class npc_precious_icc : public CreatureScript
             {
                 _summons.DespawnAll();
                 if (Creature* rotface = Unit::GetCreature(*me, _instance->GetData64(DATA_ROTFACE)))
-                    if (rotface->IsAlive())
+                    if (rotface->isAlive())
                         rotface->AI()->Talk(SAY_PRECIOUS_DIES);
             }
 
@@ -546,7 +546,7 @@ class spell_rotface_little_ooze_combine : public SpellScriptLoader
 
             void HandleScript(SpellEffIndex /*effIndex*/)
             {
-                if (!(GetHitCreature() && GetHitUnit()->IsAlive()))
+                if (!(GetHitCreature() && GetHitUnit()->isAlive()))
                     return;
 
                 GetCaster()->RemoveAurasDueToSpell(SPELL_LITTLE_OOZE_COMBINE);
@@ -578,7 +578,7 @@ class spell_rotface_large_ooze_combine : public SpellScriptLoader
 
             void HandleScript(SpellEffIndex /*effIndex*/)
             {
-                if (!(GetHitCreature() && GetHitCreature()->IsAlive()))
+                if (!(GetHitCreature() && GetHitCreature()->isAlive()))
                     return;
 
                 if (Aura* unstable = GetCaster()->GetAura(SPELL_UNSTABLE_OOZE))
@@ -620,7 +620,7 @@ class spell_rotface_large_ooze_buff_combine : public SpellScriptLoader
 
             void HandleScript(SpellEffIndex /*effIndex*/)
             {
-                if (!(GetHitCreature() && GetHitCreature()->IsAlive()))
+                if (!(GetHitCreature() && GetHitCreature()->isAlive()))
                     return;
 
                 if (Aura* unstable = GetCaster()->GetAura(SPELL_UNSTABLE_OOZE))
@@ -635,7 +635,7 @@ class spell_rotface_large_ooze_buff_combine : public SpellScriptLoader
                         GetCaster()->RemoveAurasDueToSpell(SPELL_LARGE_OOZE_COMBINE);
                         if (InstanceScript* instance = GetCaster()->GetInstanceScript())
                             if (Creature* rotface = Unit::GetCreature(*GetCaster(), instance->GetData64(DATA_ROTFACE)))
-                                if (rotface->IsAlive())
+                                if (rotface->isAlive())
                                 {
                                     rotface->AI()->Talk(EMOTE_UNSTABLE_EXPLOSION);
                                     rotface->AI()->Talk(SAY_UNSTABLE_EXPLOSION);

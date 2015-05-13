@@ -108,19 +108,19 @@ public:
                 switch (eventId)
                 {
                     case EVENT_BLAST_WAVE:
-                        DoCast(me->GetVictim(), SPELL_BLASTWAVE);
+                        DoCast(me->getVictim(), SPELL_BLASTWAVE);
                         events.ScheduleEvent(EVENT_BLAST_WAVE, 20 * IN_MILLISECONDS);
                         break;
                     case EVENT_SHOUT:
-                        DoCast(me->GetVictim(), SPELL_SHOUT);
+                        DoCast(me->getVictim(), SPELL_SHOUT);
                         events.ScheduleEvent(EVENT_SHOUT, 10 * IN_MILLISECONDS);
                         break;
                     case EVENT_CLEAVE:
-                        DoCast(me->GetVictim(), SPELL_CLEAVE);
+                        DoCast(me->getVictim(), SPELL_CLEAVE);
                         events.ScheduleEvent(EVENT_CLEAVE, 7 * IN_MILLISECONDS);
                         break;
                     case EVENT_KNOCK_AWAY:
-                        DoCast(me->GetVictim(), SPELL_KNOCKAWAY);
+                        DoCast(me->getVictim(), SPELL_KNOCKAWAY);
                         events.ScheduleEvent(EVENT_KNOCK_AWAY, 14 * IN_MILLISECONDS);
                         break;
                 }

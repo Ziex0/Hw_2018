@@ -98,7 +98,7 @@ public:
             //Knockout
             if (Knockout_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_KNOCKOUT);
+                DoCast(me->getVictim(), SPELL_KNOCKOUT);
                 Knockout_Timer = 10000;
             } else Knockout_Timer -= diff;
 

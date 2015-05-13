@@ -237,7 +237,7 @@ public:
                     case EVENT_JUST_TRANSFORMED:
                         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                         me->SetInCombatWithZone();
-                        me->GetMotionMaster()->MoveChase(me->GetVictim());
+                        me->GetMotionMaster()->MoveChase(me->getVictim());
                         ScheduleSecondPhase();
                         return;
                     case EVENT_SUMMON_BANSHEE:
@@ -380,7 +380,7 @@ public:
                         {
                             ingvar->RemoveAurasDueToSpell(SPELL_SCOURG_RESURRECTION_DUMMY);
 
-                            if (ingvar->GetVictim())
+                            if (ingvar->getVictim())
                                 if (boss_ingvar_the_plunderer::boss_ingvar_the_plundererAI* ai = CAST_AI(boss_ingvar_the_plunderer::boss_ingvar_the_plundererAI, ingvar->AI()))
                                     ai->StartZombiePhase();
 

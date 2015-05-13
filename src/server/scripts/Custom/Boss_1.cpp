@@ -55,7 +55,7 @@ public:
                 me->MonsterYell("Arise, my servant!",0, me->GetGUID());
                 elemental = DoSpawnCreature(100001, 0, 0, 0, 0.0f, 5, 1000);
                 elemental_summoned = true;
-                elemental->AddThreat(me->GetVictim(), 1.0f);
+                elemental->AddThreat(me->getVictim(), 1.0f);
             }
             if(int(me->GetHealth()*100/me->GetMaxHealth())==next_proc)
             {
@@ -90,7 +90,7 @@ public:
                     {
                         me->MonsterYell("Poison?! Dumn wrong label!",0, me->GetGUID());
                         int32 damage = 20000;
-                        me->CastCustomSpell(me->GetVictim(), SPELL_ACID, &damage, 0, 0, false);
+                        me->CastCustomSpell(me->getVictim(), SPELL_ACID, &damage, 0, 0, false);
                     }
                 }
                 next_proc-=5;
@@ -107,7 +107,7 @@ public:
             me->CombatStop(true);
             me->LoadCreaturesAddon();
 
-            if(me->IsAlive())
+            if(me->isAlive())
                 me->GetMotionMaster()->MoveTargetedHome(); //Q: should we avoid it? simply ScriptedAI::EnterEvadeMode
 
             me->SetLootRecipient(NULL);

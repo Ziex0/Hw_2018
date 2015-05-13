@@ -203,7 +203,7 @@ public:
             for (i = threatlist.begin(); i != threatlist.end(); ++i)
             {
                 Unit* unit = Unit::GetUnit(*me, (*i)->getUnitGuid());
-                if (unit && unit->IsAlive())
+                if (unit && unit->isAlive())
                 {
                     float threat = me->getThreatManager().getThreat(unit);
                     summonedUnit->AddThreat(unit, threat);
@@ -298,14 +298,14 @@ public:
                             me->InterruptSpell(CURRENT_CHANNELED_SPELL);
                             me->InterruptSpell(CURRENT_GENERIC_SPELL);
                             DoCast(me, SPELL_SHOCK_BARRIER, true);
-                            DoCast(me->GetVictim(), SPELL_PYROBLAST);
+                            DoCast(me->getVictim(), SPELL_PYROBLAST);
                             PyroblastTimer = 60000;
                         } else PyroblastTimer -= diff;
                     }
 
                     if (FireballTimer <= diff)
                     {
-                        DoCast(me->GetVictim(), SPELL_FIREBALL_NORMAL);
+                        DoCast(me->getVictim(), SPELL_FIREBALL_NORMAL);
                         FireballTimer = urand(2000, 6000);
                     } else FireballTimer -= diff;
 

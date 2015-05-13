@@ -193,7 +193,7 @@ public:
 
         void SummonedCreatureDespawn(Creature* summon)
         {
-            if (summon->IsAlive())
+            if (summon->isAlive())
                 return;
 
             if (summon->GetGUID() == uiFireMagusGUID)
@@ -313,7 +313,7 @@ public:
 
             if (uiGravityWellTimer <= diff)
             {
-                if (Unit* target = me->GetVictim())
+                if (Unit* target = me->getVictim())
                 {
                     DoCast(target, SPELL_GRAVITY_WELL);
                     uiCooldown = 6*IN_MILLISECONDS;

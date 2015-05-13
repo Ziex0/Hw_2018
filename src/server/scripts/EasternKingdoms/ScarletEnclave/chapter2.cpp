@@ -68,7 +68,7 @@ public:
 
         void SpellHit(Unit* caster, const SpellInfo* spell)
         {
-            if (spell->Id == SPELL_PERSUASIVE_STRIKE && caster->GetTypeId() == TYPEID_PLAYER && me->IsAlive() && !speechCounter)
+            if (spell->Id == SPELL_PERSUASIVE_STRIKE && caster->GetTypeId() == TYPEID_PLAYER && me->isAlive() && !speechCounter)
             {
                 if (Player* player = caster->ToPlayer())
                 {
@@ -309,7 +309,7 @@ public:
                         {
                             Creature* temp = Unit::GetCreature(*me, valrothGUID);
 
-                            if (!temp || !temp->IsAlive())
+                            if (!temp || !temp->isAlive())
                             {
                                 Talk(SAY_BREAKOUT8);
                                 waveTimer = 5000;
@@ -498,14 +498,14 @@ public:
             if (uiInquisitor_Penance_timer <= diff)
             {
                 Shout();
-                DoCast(me->GetVictim(), SPELL_INQUISITOR_PENANCE);
+                DoCast(me->getVictim(), SPELL_INQUISITOR_PENANCE);
                 uiInquisitor_Penance_timer = urand(2000, 7000);
             } else uiInquisitor_Penance_timer -= diff;
 
             if (uiValroth_Smite_timer <= diff)
             {
                 Shout();
-                DoCast(me->GetVictim(), SPELL_VALROTH_SMITE);
+                DoCast(me->getVictim(), SPELL_VALROTH_SMITE);
                 uiValroth_Smite_timer = urand(1000, 6000);
             } else uiValroth_Smite_timer -= diff;
 
@@ -678,7 +678,7 @@ public:
 
         void UpdateAI(uint32 diff)
         {
-            if (PlayerGUID && !me->GetVictim() && me->IsAlive())
+            if (PlayerGUID && !me->getVictim() && me->isAlive())
             {
                 if (ExecuteSpeech_Timer <= diff)
                 {

@@ -129,110 +129,109 @@ bool BattlegroundQueue::SelectionPool::AddGroup(GroupQueueInfo* ginfo, uint32 de
 // add group or player (grp == NULL) to bg queue with the given leader and bg specifications
 GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* grp, BattlegroundTypeId BgTypeId, PvPDifficultyEntry const*  bracketEntry, uint8 ArenaType, bool isRated, bool isPremade, uint32 ArenaRating, uint32 MatchmakerRating, uint32 arenateamid)
 {
-    BattlegroundBracketId bracketId = bracketEntry->GetBracketId();
+	BattlegroundBracketId bracketId = bracketEntry->GetBracketId();
 
-    // create new ginfo
-    GroupQueueInfo* ginfo            = new GroupQueueInfo;
-    ginfo->BgTypeId                  = BgTypeId;
-    ginfo->ArenaType                 = ArenaType;
-    ginfo->ArenaTeamId               = arenateamid;
-    ginfo->IsRated                   = isRated;
-    ginfo->IsInvitedToBGInstanceGUID = 0;
-    ginfo->JoinTime                  = getMSTime();
-    ginfo->RemoveInviteTime          = 0;
-    ginfo->Team                      = leader->GetTeam();
-    ginfo->ArenaTeamRating           = ArenaRating;
-    ginfo->ArenaMatchmakerRating     = MatchmakerRating;
-    ginfo->OpponentsTeamRating       = 0;
-    ginfo->OpponentsMatchmakerRating = 0;
+	// create new ginfo
+	GroupQueueInfo* ginfo = new GroupQueueInfo;
+	ginfo->BgTypeId = BgTypeId;
+	ginfo->ArenaType = ArenaType;
+	ginfo->ArenaTeamId = arenateamid;
+	ginfo->IsRated = isRated;
+	ginfo->IsInvitedToBGInstanceGUID = 0;
+	ginfo->JoinTime = getMSTime();
+	ginfo->RemoveInviteTime = 0;
+	ginfo->Team = leader->GetBGTeam();
+	ginfo->ArenaTeamRating = ArenaRating;
+	ginfo->ArenaMatchmakerRating = MatchmakerRating;
+	ginfo->OpponentsTeamRating = 0;
+	ginfo->OpponentsMatchmakerRating = 0;
 
-    ginfo->Players.clear();
+	ginfo->Players.clear();
 
-    //compute index (if group is premade or joined a rated match) to queues
-    uint32 index = 0;
-    if (!isRated && !isPremade)
-        index += BG_TEAMS_COUNT;
-    if (ginfo->Team == HORDE)
-        index++;
-    sLog->outDebug(LOG_FILTER_BATTLEGROUND, "Adding Group to BattlegroundQueue bgTypeId : %u, bracket_id : %u, index : %u", BgTypeId, bracketId, index);
+	//compute index (if group is premade or joined a rated match) to queues
+	uint32 index = 0;
+	if (!isRated && !isPremade)
+		index += BG_TEAMS_COUNT;
+	if (ginfo->Team == HORDE)
+		index++;
+	sLog->outDebug(LOG_FILTER_BATTLEGROUND, "Adding Group to BattlegroundQueue bgTypeId : %u, bracket_id : %u, index : %u", BgTypeId, bracketId, index);
 
-    uint32 lastOnlineTime = getMSTime();
+	uint32 lastOnlineTime = getMSTime();
 
-    //announce world (this don't need mutex)
-    if (isRated && sWorld->getBoolConfig(CONFIG_ARENA_QUEUE_ANNOUNCER_ENABLE))
-    {
-        ArenaTeam* Team = sArenaTeamMgr->GetArenaTeamById(arenateamid);
-        if (Team)
+	//announce world (this don't need mutex)
+	if (isRated && sWorld->getBoolConfig(CONFIG_ARENA_QUEUE_ANNOUNCER_ENABLE))
+	{
+		ArenaTeam* Team = sArenaTeamMgr->GetArenaTeamById(arenateamid);
+		if (Team)
 			if ((Team->GetType() == ARENA_TYPE_5v5 && sWorld->getBoolConfig(CONFIG_ARENA_1V1_ANNOUNCER)) || Team->GetType() != ARENA_TYPE_5v5)
-            sWorld->SendWorldText(LANG_ARENA_QUEUE_ANNOUNCE_WORLD_JOIN, Team->GetName().c_str(), ginfo->ArenaType, ginfo->ArenaType, ginfo->ArenaTeamRating);
-    }
+				sWorld->SendWorldText(LANG_ARENA_QUEUE_ANNOUNCE_WORLD_JOIN, Team->GetName().c_str(), ginfo->ArenaType, ginfo->ArenaType, ginfo->ArenaTeamRating);
+	}
 
-    //add players from group to ginfo
-    if (grp)
-    {
-        for (GroupReference* itr = grp->GetFirstMember(); itr != NULL; itr = itr->next())
-        {
-            Player* member = itr->getSource();
-            if (!member)
-                continue;   // this should never happen
-            PlayerQueueInfo& pl_info = m_QueuedPlayers[member->GetGUID()];
-            pl_info.LastOnlineTime   = lastOnlineTime;
-            pl_info.GroupInfo        = ginfo;
-            // add the pinfo to ginfo's list
-            ginfo->Players[member->GetGUID()]  = &pl_info;
-        }
-    }
-    else
-    {
-        PlayerQueueInfo& pl_info = m_QueuedPlayers[leader->GetGUID()];
-        pl_info.LastOnlineTime   = lastOnlineTime;
-        pl_info.GroupInfo        = ginfo;
-        ginfo->Players[leader->GetGUID()]  = &pl_info;
-    }
+	//add players from group to ginfo
+	if (grp)
+	{
+		for (GroupReference* itr = grp->GetFirstMember(); itr != NULL; itr = itr->next())
+		{
+			Player* member = itr->getSource();
+			if (!member)
+				continue;   // this should never happen
+			PlayerQueueInfo& pl_info = m_QueuedPlayers[member->GetGUID()];
+			pl_info.LastOnlineTime = lastOnlineTime;
+			pl_info.GroupInfo = ginfo;
+			// add the pinfo to ginfo's list
+			ginfo->Players[member->GetGUID()] = &pl_info;
+		}
+	}
+	else
+	{
+		PlayerQueueInfo& pl_info = m_QueuedPlayers[leader->GetGUID()];
+		pl_info.LastOnlineTime = lastOnlineTime;
+		pl_info.GroupInfo = ginfo;
+		ginfo->Players[leader->GetGUID()] = &pl_info;
+	}
 
-    //add GroupInfo to m_QueuedGroups
-    {
-        //ACE_Guard<ACE_Recursive_Thread_Mutex> guard(m_Lock);
-        m_QueuedGroups[bracketId][index].push_back(ginfo);
+	//add GroupInfo to m_QueuedGroups
+	{
+		//ACE_Guard<ACE_Recursive_Thread_Mutex> guard(m_Lock);
+		m_QueuedGroups[bracketId][index].push_back(ginfo);
 
-        //announce to world, this code needs mutex
-        if (!isRated && !isPremade && sWorld->getBoolConfig(CONFIG_BATTLEGROUND_QUEUE_ANNOUNCER_ENABLE))
-        {
-            if (Battleground* bg = sBattlegroundMgr->GetBattlegroundTemplate(ginfo->BgTypeId))
-            {
-                char const* bgName = bg->GetName();
-                uint32 MinPlayers = bg->GetMinPlayersPerTeam();
-                uint32 qHorde = 0;
-                uint32 qAlliance = 0;
-                uint32 q_min_level = bracketEntry->minLevel;
-                uint32 q_max_level = bracketEntry->maxLevel;
-                GroupsQueueType::const_iterator itr;
-                for (itr = m_QueuedGroups[bracketId][BG_QUEUE_NORMAL_ALLIANCE].begin(); itr != m_QueuedGroups[bracketId][BG_QUEUE_NORMAL_ALLIANCE].end(); ++itr)
-                    if (!(*itr)->IsInvitedToBGInstanceGUID)
-                        qAlliance += (*itr)->Players.size();
-                for (itr = m_QueuedGroups[bracketId][BG_QUEUE_NORMAL_HORDE].begin(); itr != m_QueuedGroups[bracketId][BG_QUEUE_NORMAL_HORDE].end(); ++itr)
-                    if (!(*itr)->IsInvitedToBGInstanceGUID)
-                        qHorde += (*itr)->Players.size();
+		//announce to world, this code needs mutex
+		if (!isRated && !isPremade && sWorld->getBoolConfig(CONFIG_BATTLEGROUND_QUEUE_ANNOUNCER_ENABLE))
+		{
+			if (Battleground* bg = sBattlegroundMgr->GetBattlegroundTemplate(ginfo->BgTypeId))
+			{
+				char const* bgName = bg->GetName();
+				uint32 MinPlayers = bg->GetMinPlayersPerTeam();
+				uint32 qHorde = 0;
+				uint32 qAlliance = 0;
+				uint32 q_min_level = bracketEntry->minLevel;
+				uint32 q_max_level = bracketEntry->maxLevel;
+				GroupsQueueType::const_iterator itr;
+				for (itr = m_QueuedGroups[bracketId][BG_QUEUE_NORMAL_ALLIANCE].begin(); itr != m_QueuedGroups[bracketId][BG_QUEUE_NORMAL_ALLIANCE].end(); ++itr)
+					if (!(*itr)->IsInvitedToBGInstanceGUID)
+						qAlliance += (*itr)->Players.size();
+				for (itr = m_QueuedGroups[bracketId][BG_QUEUE_NORMAL_HORDE].begin(); itr != m_QueuedGroups[bracketId][BG_QUEUE_NORMAL_HORDE].end(); ++itr)
+					if (!(*itr)->IsInvitedToBGInstanceGUID)
+						qHorde += (*itr)->Players.size();
 
-                // Show queue status to player only (when joining queue)
-                if (sWorld->getBoolConfig(CONFIG_BATTLEGROUND_QUEUE_ANNOUNCER_PLAYERONLY))
-                {
-                    ChatHandler(leader->GetSession()).PSendSysMessage(LANG_BG_QUEUE_ANNOUNCE_SELF, bgName, q_min_level, q_max_level,
-                        qAlliance, (MinPlayers > qAlliance) ? MinPlayers - qAlliance : (uint32)0, qHorde, (MinPlayers > qHorde) ? MinPlayers - qHorde : (uint32)0);
-                }
-                // System message
-                else
-                {
-                    //sWorld->SendWorldText(LANG_BG_QUEUE_ANNOUNCE_WORLD, bgName, q_min_level, q_max_level,
-                        //qAlliance, (MinPlayers > qAlliance) ? MinPlayers - qAlliance : (uint32)0, qHorde, (MinPlayers > qHorde) ? MinPlayers - qHorde : (uint32)0);
-					sWorld->SendWorldText(LANG_BG_QUEUE_ANNOUNCE_WORLD, bgName, (MinPlayers > qAlliance) ? MinPlayers - qAlliance : (uint32)0, (MinPlayers > qHorde) ? MinPlayers - qHorde : (uint32)0);
-                }
-            }
-        }
-        //release mutex
-    }
+				// Show queue status to player only (when joining queue)
+				if (sWorld->getBoolConfig(CONFIG_BATTLEGROUND_QUEUE_ANNOUNCER_PLAYERONLY))
+				{
+					ChatHandler(leader->GetSession()).PSendSysMessage(LANG_BG_QUEUE_ANNOUNCE_SELF, bgName, q_min_level, q_max_level,
+						qAlliance, (MinPlayers > qAlliance) ? MinPlayers - qAlliance : (uint32)0, qHorde, (MinPlayers > qHorde) ? MinPlayers - qHorde : (uint32)0);
+				}// System message
+				else
+				{
+					sWorld->SendWorldText(LANG_BG_QUEUE_ANNOUNCE_WORLD, bgName, q_min_level, q_max_level,
+						qAlliance, (MinPlayers > qAlliance) ? MinPlayers - qAlliance : (uint32)0, qHorde, (MinPlayers > qHorde) ? MinPlayers - qHorde : (uint32)0);
+				}
+			}
+		}
+	
+	//release mutex
+}
 
-    return ginfo;
+return ginfo;
 }
 
 void BattlegroundQueue::PlayerInvitedToBGUpdateAverageWaitTime(GroupQueueInfo* ginfo, BattlegroundBracketId bracket_id)

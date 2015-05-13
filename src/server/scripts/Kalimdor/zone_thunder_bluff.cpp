@@ -112,25 +112,25 @@ public:
 
             if (UppercutTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_UPPERCUT);
+                DoCast(me->getVictim(), SPELL_UPPERCUT);
                 UppercutTimer = 20000;
             } else UppercutTimer -= diff;
 
             if (ThunderclapTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_THUNDERCLAP);
+                DoCast(me->getVictim(), SPELL_THUNDERCLAP);
                 ThunderclapTimer = 15000;
             } else ThunderclapTimer -= diff;
 
             if (MortalStrikeTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_MORTAL_STRIKE);
+                DoCast(me->getVictim(), SPELL_MORTAL_STRIKE);
                 MortalStrikeTimer = 15000;
             } else MortalStrikeTimer -= diff;
 
             if (CleaveTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_CLEAVE);
+                DoCast(me->getVictim(), SPELL_CLEAVE);
                 CleaveTimer = 7000;
             } else CleaveTimer -= diff;
 

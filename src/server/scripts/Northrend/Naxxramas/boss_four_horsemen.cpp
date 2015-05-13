@@ -166,16 +166,16 @@ public:
                 {
                     if (instance->GetBossState(BOSS_HORSEMEN) != NOT_STARTED)
                     {
-                        if (!Thane->IsAlive())
+                        if (!Thane->isAlive())
                             Thane->Respawn();
 
-                        if (!Lady->IsAlive())
+                        if (!Lady->isAlive())
                             Lady->Respawn();
 
-                        if (!Baron->IsAlive())
+                        if (!Baron->isAlive())
                             Baron->Respawn();
 
-                        if (!Sir->IsAlive())
+                        if (!Sir->isAlive())
                             Sir->Respawn();
 
                         CAST_AI(boss_four_horsemen::boss_four_horsemenAI, Thane->AI())->encounterActionReset = true;
@@ -191,7 +191,7 @@ public:
                 }
 
                 if (checkAllDead)
-                    return !Thane->IsAlive() && !Lady->IsAlive() && !Baron->IsAlive() && !Sir->IsAlive();
+                    return !Thane->isAlive() && !Lady->isAlive() && !Baron->isAlive() && !Sir->isAlive();
             }
             return false;
         }
@@ -256,9 +256,9 @@ public:
         // switch to "who" if nearer than current target.
         void SelectNearestTarget(Unit* who)
         {
-            if (me->GetVictim() && me->GetDistanceOrder(who, me->GetVictim()) && me->IsValidAttackTarget(who))
+            if (me->getVictim() && me->GetDistanceOrder(who, me->getVictim()) && me->IsValidAttackTarget(who))
             {
-                me->getThreatManager().modifyThreatPercent(me->GetVictim(), -100);
+                me->getThreatManager().modifyThreatPercent(me->getVictim(), -100);
                 me->AddThreat(who, 1000000.0f);
             }
         }
@@ -362,7 +362,7 @@ public:
                                 DoCast(target, SPELL_PRIMARY(id));
                         }
                         else
-                            DoCast(me->GetVictim(), SPELL_PRIMARY(id));
+                            DoCast(me->getVictim(), SPELL_PRIMARY(id));
 
                         events.ScheduleEvent(EVENT_CAST, 15000);
                         break;
@@ -385,7 +385,7 @@ public:
 
             if (!caster)
                 DoMeleeAttackIfReady();
-            else if ((!DoSpellAttackIfReady(SPELL_SECONDARY(id)) || !me->IsWithinLOSInMap(me->GetVictim())) && movementCompleted && !doDelayPunish)
+            else if ((!DoSpellAttackIfReady(SPELL_SECONDARY(id)) || !me->IsWithinLOSInMap(me->getVictim())) && movementCompleted && !doDelayPunish)
                 doDelayPunish = true;
         }
     };

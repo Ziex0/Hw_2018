@@ -390,7 +390,7 @@ public:
         {
             if (Player* player = me->GetPlayer(*me, uiPlayerGUID))
             {
-                if (player->IsAlive())
+                if (player->isAlive())
                 {
                     summon->SetWalk(false);
                     summon->GetMotionMaster()->MovePoint(0, afCenter[0], afCenter[1], afCenter[2]);

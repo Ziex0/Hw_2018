@@ -99,7 +99,7 @@ public:
             if (waypointId == 7 && instance)
             {
                 Unit* target = Unit::GetUnit(*me, instance->GetData64(DATA_THRALL));
-                if (target && target->IsAlive())
+                if (target && target->isAlive())
                     me->AddThreat(target, 0.0f);
             }
         }
@@ -161,7 +161,7 @@ public:
 
             if (CleaveTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_CLEAVE);
+                DoCast(me->getVictim(), SPELL_CLEAVE);
                 CleaveTimer = 10000+rand()%5000;
             } else CleaveTimer -= diff;
 

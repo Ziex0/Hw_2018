@@ -544,7 +544,7 @@ void TournamentManager::updateTournament(uint32 entry, uint32 diff)
                         summon->SetHomePosition(move->x, move->y, move->z, move->o);
                         summon->GetMotionMaster()->MovePoint(0, move->x, move->y, move->z);
                     }
-                    else if (tournament->starter && tournament->starter->IsAlive())
+                    else if (tournament->starter && tournament->starter->isAlive())
                     {
                         summon->SetHomePosition(point->x, point->y, point->z, point->o);
                         summon->AI()->AttackStart(tournament->starter);
@@ -627,7 +627,7 @@ bool TournamentManager::existsAlive(uint32 entry)
         return false;
 
     for (CreatureList::const_iterator itr = tournament->creatures.begin(); itr != tournament->creatures.end(); ++itr)
-        if ((*itr)->IsAlive())
+        if ((*itr)->isAlive())
             return true;
             
     return false;

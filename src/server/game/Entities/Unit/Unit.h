@@ -852,7 +852,7 @@ public:
     void BlockDamage(uint32 amount);
 
     Unit* GetAttacker() const { return m_attacker; }
-    Unit* GetVictim() const { return m_victim; }
+    Unit* getVictim() const { return m_victim; }
     SpellInfo const* GetSpellInfo() const { return m_spellInfo; }
     SpellSchoolMask GetSchoolMask() const { return m_schoolMask; }
     DamageEffectType GetDamageType() const { return m_damageType; }
@@ -1309,7 +1309,7 @@ class Unit : public WorldObject
         void RemoveAllAttackers();
         AttackerSet const& getAttackers() const { return m_attackers; }
         bool isAttackingPlayer() const;
-        Unit* GetVictim() const { return m_attacking; }
+        Unit* getVictim() const { return m_attacking; }
 
         void CombatStop(bool includingCast = false);
         void CombatStopWithPets(bool includingCast = false);
@@ -1621,7 +1621,7 @@ class Unit : public WorldObject
 
         void BuildHeartBeatMsg(WorldPacket* data) const;
 
-        bool IsAlive() const { return (m_deathState == ALIVE); }
+        bool isAlive() const { return (m_deathState == ALIVE); }
         bool isDying() const { return (m_deathState == JUST_DIED); }
         bool isDead() const { return (m_deathState == DEAD || m_deathState == CORPSE); }
         DeathState getDeathState() const { return m_deathState; }

@@ -231,7 +231,7 @@ struct boss_twin_baseAI : public BossAI
         {
             if (Creature* pSister = GetSister())
             {
-                if (!pSister->IsAlive())
+                if (!pSister->isAlive())
                 {
                     me->SetFlag(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_LOOTABLE);
                     pSister->SetFlag(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_LOOTABLE);

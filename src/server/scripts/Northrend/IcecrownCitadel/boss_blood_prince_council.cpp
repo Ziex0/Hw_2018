@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -1336,7 +1336,7 @@ class npc_dark_nucleus : public CreatureScript
                 if (_targetAuraCheck <= diff)
                 {
                     _targetAuraCheck = 1000;
-                    if (Unit* victim = me->GetVictim())
+                    if (Unit* victim = me->getVictim())
                     {
                         if (me->GetDistance(victim) < 15.0f &&
                             !victim->HasAura(SPELL_SHADOW_RESONANCE_RESIST, me->GetGUID()))
@@ -1345,7 +1345,7 @@ class npc_dark_nucleus : public CreatureScript
                             me->ClearUnitState(UNIT_STATE_CASTING);
                         }
                         else
-                            MoveInLineOfSight(me->GetVictim());
+                            MoveInLineOfSight(me->getVictim());
                     }
                 }
                 else

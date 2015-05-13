@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -155,7 +155,7 @@ class RisenArchmageCheck
         // look for all permanently spawned Risen Archmages that are not yet in combat
         bool operator()(Creature* creature)
         {
-            return creature->IsAlive() && creature->GetEntry() == NPC_RISEN_ARCHMAGE &&
+            return creature->isAlive() && creature->GetEntry() == NPC_RISEN_ARCHMAGE &&
                 creature->GetDBTableGUIDLow() && !creature->isInCombat();
         }
 };
@@ -820,7 +820,7 @@ class npc_blazing_skeleton : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_FIREBALL:
-                            if (!me->IsWithinMeleeRange(me->GetVictim()))
+                            if (!me->IsWithinMeleeRange(me->getVictim()))
                                 DoCastVictim(SPELL_FIREBALL);
                             _events.ScheduleEvent(EVENT_FIREBALL, urand(2000, 4000));
                             break;
@@ -896,7 +896,7 @@ class npc_suppresser : public CreatureScript
                 }
 
                 // this creature has REACT_PASSIVE so it does not always have victim here
-                if (Unit* victim = me->GetVictim())
+                if (Unit* victim = me->getVictim())
                     if (victim->GetEntry() != NPC_VALITHRIA_DREAMWALKER)
                         DoMeleeAttackIfReady();
             }

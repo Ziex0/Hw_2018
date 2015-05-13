@@ -138,11 +138,11 @@ public:
             if (!UpdateVictim())
                 return;
 
-            if (me->GetVictim()->GetGUID() != victimGUID)
+            if (me->getVictim()->GetGUID() != victimGUID)
             {
-                DoModifyThreatPercent(me->GetVictim(), -100);
+                DoModifyThreatPercent(me->getVictim(), -100);
                 Unit* owner = Unit::GetUnit(*me, victimGUID);
-                if (owner && owner->IsAlive())
+                if (owner && owner->isAlive())
                 {
                     me->AddThreat(owner, 999999);
                     AttackStart(owner);
@@ -155,7 +155,7 @@ public:
 
             if (Link_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_SOUL_LINK, true);
+                DoCast(me->getVictim(), SPELL_SOUL_LINK, true);
                 Link_Timer = 1000;
             } else Link_Timer -= diff;
 
@@ -164,7 +164,7 @@ public:
 
             if (ShadowBolt_Timer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_SHADOWBOLT, false);
+                DoCast(me->getVictim(), SPELL_SHADOWBOLT, false);
                 ShadowBolt_Timer = 10000;
             } else ShadowBolt_Timer -= diff;
 
@@ -269,7 +269,7 @@ public:
             if (me->HasAura(AURA_BANISH))
                 return;
 
-            if (!me->GetVictim() && me->canCreatureAttack(who))
+            if (!me->getVictim() && me->canCreatureAttack(who))
             {
                 if (me->GetDistanceZ(who) > CREATURE_Z_ATTACK_RANGE)
                     return;
@@ -299,7 +299,7 @@ public:
             for (uint8 i = 0; i < 3; ++i)
             {
                 Unit* add = Unit::GetUnit(*me, SpellBinderGUID[i]);
-                if (add && add->IsAlive())
+                if (add && add->isAlive())
                     ++AliveChannelers;
             }
 
@@ -352,7 +352,7 @@ public:
                 {
                         //delete creature
                         Creature* creature = Unit::GetCreature((*me), InnderDemon[i]);
-                        if (creature && creature->IsAlive())
+                        if (creature && creature->isAlive())
                         {
                             creature->DespawnOrUnsummon();
                         }
@@ -370,10 +370,10 @@ public:
                 if (InnderDemon[i] > 0)
                 {
                     Creature* unit = Unit::GetCreature((*me), InnderDemon[i]);
-                    if (unit && unit->IsAlive())
+                    if (unit && unit->isAlive())
                     {
                         Unit* unit_target = Unit::GetUnit(*unit, unit->AI()->GetGUID(INNER_DEMON_VICTIM));
-                        if (unit_target && unit_target->IsAlive())
+                        if (unit_target && unit_target->isAlive())
                         {
                             unit->CastSpell(unit_target, SPELL_CONSUMING_MADNESS, true);
                             DoModifyThreatPercent(unit_target, -100);
@@ -452,7 +452,7 @@ public:
                 NeedThreatReset = false;
                 DoResetThreat();
                 me->GetMotionMaster()->Clear();
-                me->GetMotionMaster()->MoveChase(me->GetVictim());
+                me->GetMotionMaster()->MoveChase(me->getVictim());
             }
 
             //Enrage_Timer (10 min)
@@ -498,18 +498,18 @@ public:
             else
             {
                 //ChaosBlast_Timer
-                if (!me->GetVictim())
+                if (!me->getVictim())
                     return;
-                if (me->IsWithinDist(me->GetVictim(), 30))
+                if (me->IsWithinDist(me->getVictim(), 30))
                     me->StopMoving();
                 if (ChaosBlast_Timer <= diff)
                 {
                     // will cast only when in range of spell
-                    if (me->IsWithinDist(me->GetVictim(), 30))
+                    if (me->IsWithinDist(me->getVictim(), 30))
                     {
-                        //DoCast(me->GetVictim(), SPELL_CHAOS_BLAST, true);
+                        //DoCast(me->getVictim(), SPELL_CHAOS_BLAST, true);
                         int damage = 100;
-                        me->CastCustomSpell(me->GetVictim(), SPELL_CHAOS_BLAST, &damage, NULL, NULL, false, NULL, NULL, me->GetGUID());
+                        me->CastCustomSpell(me->getVictim(), SPELL_CHAOS_BLAST, &damage, NULL, NULL, false, NULL, NULL, me->GetGUID());
                     }
                     ChaosBlast_Timer = 3000;
                 } else ChaosBlast_Timer -= diff;
@@ -521,13 +521,13 @@ public:
                     for (ThreatContainer::StorageType::const_iterator itr = ThreatList.begin(); itr != ThreatList.end(); ++itr)
                     {
                         Unit* tempTarget = Unit::GetUnit(*me, (*itr)->getUnitGuid());
-                        if (tempTarget && tempTarget->GetTypeId() == TYPEID_PLAYER && tempTarget->GetGUID() != me->GetVictim()->GetGUID() && TargetList.size()<5)
+                        if (tempTarget && tempTarget->GetTypeId() == TYPEID_PLAYER && tempTarget->GetGUID() != me->getVictim()->GetGUID() && TargetList.size()<5)
                             TargetList.push_back(tempTarget);
                     }
                     //SpellInfo* spell = GET_SPELL(SPELL_INSIDIOUS_WHISPER);
                     for (std::vector<Unit*>::const_iterator itr = TargetList.begin(); itr != TargetList.end(); ++itr)
                     {
-                        if ((*itr) && (*itr)->IsAlive())
+                        if ((*itr) && (*itr)->isAlive())
                         {
                             Creature* demon = me->SummonCreature(INNER_DEMON_ID, (*itr)->GetPositionX()+10, (*itr)->GetPositionY()+10, (*itr)->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
                             if (demon)
@@ -580,8 +580,8 @@ public:
                 if (Copy)
                  {
                      Demon = Copy->GetGUID();
-                    if (me->GetVictim())
-                        Copy->AI()->AttackStart(me->GetVictim());
+                    if (me->getVictim())
+                        Copy->AI()->AttackStart(me->getVictim());
                 }
                 //set nightelf final form
                 IsFinalForm = true;
@@ -649,17 +649,17 @@ public:
             if (!UpdateVictim())
                 return;
             //ChaosBlast_Timer
-            if (me->IsWithinDist(me->GetVictim(), 30))
+            if (me->IsWithinDist(me->getVictim(), 30))
                 me->StopMoving();
 
             if (ChaosBlast_Timer <= diff)
              {
                 // will cast only when in range od spell
-                if (me->IsWithinDist(me->GetVictim(), 30))
+                if (me->IsWithinDist(me->getVictim(), 30))
                 {
-                    //DoCast(me->GetVictim(), SPELL_CHAOS_BLAST, true);
+                    //DoCast(me->getVictim(), SPELL_CHAOS_BLAST, true);
                     int damage = 100;
-                    me->CastCustomSpell(me->GetVictim(), SPELL_CHAOS_BLAST, &damage, NULL, NULL, false, NULL, NULL, me->GetGUID());
+                    me->CastCustomSpell(me->getVictim(), SPELL_CHAOS_BLAST, &damage, NULL, NULL, false, NULL, NULL, me->GetGUID());
                     ChaosBlast_Timer = 3000;
                 }
              } else ChaosBlast_Timer -= diff;
@@ -706,7 +706,7 @@ public:
             {
                 instance->SetData64(DATA_LEOTHERAS_EVENT_STARTER, 0);
                 Creature* leotheras = Unit::GetCreature(*me, leotherasGUID);
-                if (leotheras && leotheras->IsAlive())
+                if (leotheras && leotheras->isAlive())
                     CAST_AI(boss_leotheras_the_blind::boss_leotheras_the_blindAI, leotheras->AI())->CheckChannelers(/*false*/);
             }
         }
@@ -731,7 +731,7 @@ public:
                 if (leotherasGUID)
                 {
                     Creature* leotheras = Unit::GetCreature(*me, leotherasGUID);
-                    if (leotheras && leotheras->IsAlive())
+                    if (leotheras && leotheras->isAlive())
                         DoCast(leotheras, BANISH_BEAM);
                 }
             }

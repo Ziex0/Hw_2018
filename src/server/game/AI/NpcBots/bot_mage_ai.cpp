@@ -70,7 +70,7 @@ public:
 
         void Counter()
         {
-            Unit* u = me->GetVictim();
+            Unit* u = me->getVictim();
             bool cSpell = COUNTERSPELL && CounterSpell_cd <= 5000;
             bool blast = FIREBLAST && FireBlast_cd <= 3000 && !(u && u->ToCreature() && (u->ToCreature()->isWorldBoss() || u->ToCreature()->IsDungeonBoss())) && me->HasAura(IMPACT_BUFF);
             if (!cSpell && !blast) return;
@@ -140,7 +140,7 @@ public:
         {
             ReduceCD(diff);
             if (IAmDead()) return;
-            if (!me->GetVictim())
+            if (!me->getVictim())
                 Evade();
             if (clearcast && me->HasAura(CLEARCASTBUFF) && !me->IsNonMeleeSpellCasted(false))
             {
@@ -185,7 +185,7 @@ public:
 
         void DoNormalAttack(uint32 diff)
         {
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
             if (opponent)
             {
                 if (!IsCasting())
@@ -199,7 +199,7 @@ public:
 
             Unit* u = me->SelectNearestTarget(20);
             //ICE_BARRIER
-            if (ICE_BARRIER && Ice_Barrier_cd <= diff && u && u->GetVictim() == me &&
+            if (ICE_BARRIER && Ice_Barrier_cd <= diff && u && u->getVictim() == me &&
                 u->GetDistance(me) < 8 && !me->HasAura(ICE_BARRIER))
             {
                 if (me->IsNonMeleeSpellCasted(true))
@@ -212,7 +212,7 @@ public:
                 }
             }
             if ((!ICE_BARRIER || Ice_Barrier_cd > diff) &&
-                BLINK && Blink_cd < 3000 && u && u->GetVictim() == me &&
+                BLINK && Blink_cd < 3000 && u && u->getVictim() == me &&
                 u->GetDistance(me) < 6 && !me->HasAura(ICE_BARRIER))
             {
                 if (me->IsNonMeleeSpellCasted(true))
@@ -283,7 +283,7 @@ public:
             }
             //nova //TODO: SEPARATE
             u = me->SelectNearestTarget(6.3f);
-            if (NOVA && Nova_cd <= diff && u && Rand() < 75 && !CCed(u, true) && IsInBotParty(u->GetVictim()))
+            if (NOVA && Nova_cd <= diff && u && Rand() < 75 && !CCed(u, true) && IsInBotParty(u->getVictim()))
             {
                 if (doCast(me, NOVA))
                 {
@@ -315,7 +315,7 @@ public:
             //dragon's breath
             if (DRAGONBREATH && DragonBreath_cd <= diff && GC_Timer <= diff && !CCed(opponent, true) &&
                 ((me->HasInArc(M_PI*0.75f, opponent) && dist < 7) ||
-                (u && u != opponent && me->HasInArc(M_PI*0.75f, u) && IsInBotParty(u->GetVictim()))) &&
+                (u && u != opponent && me->HasInArc(M_PI*0.75f, u) && IsInBotParty(u->getVictim()))) &&
                 doCast(/*opponent*/me, DRAGONBREATH))
             {
                 DragonBreath_cd = 25000;
@@ -396,7 +396,7 @@ public:
         {
             if (POLYMORPH && Polymorph == false && GC_Timer < 500)
             {
-                if (Unit* target = FindPolyTarget(30, me->GetVictim()))
+                if (Unit* target = FindPolyTarget(30, me->getVictim()))
                 {
                     if (doCast(target, POLYMORPH))
                     {
@@ -456,7 +456,7 @@ public:
             {
                 if (Unit* op = me->SelectNearestTarget(7))
                 {
-                    if (op->GetVictim() == me)
+                    if (op->getVictim() == me)
                     {
                         me->SetFacingTo(me->GetAngle(master));
                         temptimer = GC_Timer;

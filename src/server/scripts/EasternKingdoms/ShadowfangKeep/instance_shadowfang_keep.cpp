@@ -138,7 +138,7 @@ public:
             Creature* pAda = instance->GetCreature(uiAdaGUID);
             Creature* pAsh = instance->GetCreature(uiAshGUID);
 
-            if (pAda && pAda->IsAlive() && pAsh && pAsh->IsAlive())
+            if (pAda && pAda->isAlive() && pAsh && pAsh->isAlive())
             {
                 pAda->AI()->Talk(SAY_BOSS_DIE_AD);
                 pAsh->AI()->Talk(SAY_BOSS_DIE_AS);
@@ -243,7 +243,7 @@ public:
 
             Creature* pArchmage = instance->GetCreature(uiArchmageArugalGUID);
 
-            if (!pArchmage || !pArchmage->IsAlive())
+            if (!pArchmage || !pArchmage->isAlive())
                 return;
 
             if (uiPhase)

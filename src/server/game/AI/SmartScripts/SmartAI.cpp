@@ -446,7 +446,7 @@ void SmartAI::RemoveAuras()
 
 void SmartAI::EnterEvadeMode()
 {
-    if (!me->IsAlive() || me->IsInEvadeMode())
+    if (!me->isAlive() || me->IsInEvadeMode())
         return;
 
     RemoveAuras();
@@ -498,7 +498,7 @@ void SmartAI::MoveInLineOfSight(Unit* who)
         float fAttackRadius = me->GetAttackDistance(who);
         if (me->IsWithinDistInMap(who, fAttackRadius) && me->IsWithinLOSInMap(who))
         {
-            if (!me->GetVictim())
+            if (!me->getVictim())
             {
                 who->RemoveAurasByType(SPELL_AURA_MOD_STEALTH);
                 AttackStart(who);
@@ -521,7 +521,7 @@ bool SmartAI::CanAIAttack(const Unit* /*who*/) const
 
 bool SmartAI::AssistPlayerInCombat(Unit* who)
 {
-    if (!who || !who->GetVictim())
+    if (!who || !who->getVictim())
         return false;
 
     //experimental (unknown) flag not present
@@ -529,7 +529,7 @@ bool SmartAI::AssistPlayerInCombat(Unit* who)
         return false;
 
     //not a player
-    if (!who->GetVictim()->GetCharmerOrOwnerPlayerOrPlayerItself())
+    if (!who->getVictim()->GetCharmerOrOwnerPlayerOrPlayerItself())
         return false;
 
     //never attack friendly
@@ -540,7 +540,7 @@ bool SmartAI::AssistPlayerInCombat(Unit* who)
     if (me->IsWithinDistInMap(who, SMART_MAX_AID_DIST) && me->IsWithinLOSInMap(who))
     {
         //already fighting someone?
-        if (!me->GetVictim())
+        if (!me->getVictim())
         {
             AttackStart(who);
             return true;
@@ -784,12 +784,12 @@ void SmartAI::SetCombatMove(bool on)
     mCanCombatMove = on;
     if (!HasEscortState(SMART_ESCORT_ESCORTING))
     {
-        if (on && me->GetVictim())
+        if (on && me->getVictim())
         {
             if (me->GetMotionMaster()->GetCurrentMovementGeneratorType() == IDLE_MOTION_TYPE)
             {
                 SetRun(mRun);
-                me->GetMotionMaster()->MoveChase(me->GetVictim());
+                me->GetMotionMaster()->MoveChase(me->getVictim());
                 me->CastStop();
             }
         }
@@ -936,7 +936,7 @@ class SmartTrigger : public AreaTriggerScript
 
         bool OnTrigger(Player* player, AreaTriggerEntry const* trigger)
         {
-            if (!player->IsAlive())
+            if (!player->isAlive())
                 return false;
 
             sLog->outDebug(LOG_FILTER_DATABASE_AI, "AreaTrigger %u is using SmartTrigger script", trigger->id);

@@ -242,7 +242,7 @@ void Object::BuildCreateUpdateBlockForPlayer(UpdateData* data, Player* target) c
 
         if (isType(TYPEMASK_UNIT))
         {
-            if (ToUnit()->GetVictim())
+            if (ToUnit()->getVictim())
                 flags |= UPDATEFLAG_HAS_TARGET;
         }
     }
@@ -485,7 +485,7 @@ void Object::_BuildMovementUpdate(ByteBuffer* data, uint16 flags) const
     // 0x4
     if (flags & UPDATEFLAG_HAS_TARGET)
     {
-        if (Unit* victim = unit->GetVictim())
+        if (Unit* victim = unit->getVictim())
             data->append(victim->GetPackGUID());
         else
             *data << uint8(0);
@@ -2760,7 +2760,7 @@ namespace Trinity
 
                 float x, y, z;
 
-                if (!c->IsAlive() || c->HasUnitState(UNIT_STATE_ROOT | UNIT_STATE_STUNNED | UNIT_STATE_DISTRACTED) ||
+                if (!c->isAlive() || c->HasUnitState(UNIT_STATE_ROOT | UNIT_STATE_STUNNED | UNIT_STATE_DISTRACTED) ||
                     !c->GetMotionMaster()->GetDestination(x, y, z))
                 {
                     x = c->GetPositionX();

@@ -178,7 +178,7 @@ class mob_abyssal : public CreatureScript
 
                 if (FireBlast_Timer <= diff)
                 {
-                    DoCast(me->GetVictim(), SPELL_FIRE_BLAST);
+                    DoCast(me->getVictim(), SPELL_FIRE_BLAST);
                     FireBlast_Timer = 5000+rand()%10000;
                 }
                 else FireBlast_Timer -= diff;
@@ -267,7 +267,7 @@ class boss_magtheridon : public CreatureScript
             //function to interrupt channeling and debuff clicker with mind exh(used if second person clicks with same cube or after dispeling/ending shadow grasp DoT)
             void DebuffClicker(Unit* clicker)
             {
-                if (!clicker || !clicker->IsAlive())
+                if (!clicker || !clicker->isAlive())
                     return;
 
                 clicker->RemoveAurasDueToSpell(SPELL_SHADOW_GRASP); // cannot interrupt triggered spells
@@ -368,7 +368,7 @@ class boss_magtheridon : public CreatureScript
 
                 if (Cleave_Timer <= diff)
                 {
-                    DoCast(me->GetVictim(), SPELL_CLEAVE);
+                    DoCast(me->getVictim(), SPELL_CLEAVE);
                     Cleave_Timer = 10000;
                 }
                 else
@@ -513,7 +513,7 @@ class mob_hellfire_channeler : public CreatureScript
 
             void JustSummoned(Creature* summon)
             {
-                summon->AI()->AttackStart(me->GetVictim());
+                summon->AI()->AttackStart(me->getVictim());
             }
 
             void DamageTaken(Unit*, uint32 &damage)
@@ -596,7 +596,7 @@ public:
         if (instance->GetData(DATA_MAGTHERIDON_EVENT) != IN_PROGRESS)
             return true;
         Creature* Magtheridon =Unit::GetCreature(*go, instance->GetData64(DATA_MAGTHERIDON));
-        if (!Magtheridon || !Magtheridon->IsAlive())
+        if (!Magtheridon || !Magtheridon->isAlive())
             return true;
 
         // if exhausted or already channeling return

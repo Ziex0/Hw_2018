@@ -364,11 +364,11 @@ public:
 
             Unit* target = NULL;
 
-            if (master->IsAlive() && isMeleeClass(master->getClass()) && master->isInCombat() &&
+            if (master->isAlive() && isMeleeClass(master->getClass()) && master->isInCombat() &&
                 GetHealthPCT(master) > 80 && me->GetDistance(master) < 30 &&
                 master->getAttackers().empty() && !CCed(master, true))
             {
-                if (Unit* u = master->GetVictim())
+                if (Unit* u = master->getVictim())
                     if (u->GetHealth() > me->GetMaxHealth() / 2)
                         target = master;
             }
@@ -376,7 +376,7 @@ public:
             if (!target && isMeleeClass(me->GetBotClass()) && GetHealthPCT(me) > 80 &&
                 me->getAttackers().empty() && !CCed(me, true))
             {
-                if (Unit* u = me->GetVictim())
+                if (Unit* u = me->getVictim())
                     if (u->GetHealth() > me->GetMaxHealth() / 2)
                         target = me;
             }
@@ -391,11 +391,11 @@ public:
                         Player* player = itr->getSource();
                         if (player == master) continue;
                         if (!player || !player->IsInWorld() || player->IsBeingTeleported()) continue;
-                        if (!player->IsAlive() || me->GetMap() != player->FindMap()) continue;
+                        if (!player->isAlive() || me->GetMap() != player->FindMap()) continue;
                         if (!isMeleeClass(player->getClass()) || !player->isInCombat()) continue;
                         if (GetHealthPCT(player) < 80 || me->GetDistance(player) > 30) continue;
                         if (!player->getAttackers().empty() || CCed(player, true)) continue;
-                        if (Unit* u = player->GetVictim())
+                        if (Unit* u = player->getVictim())
                         {
                             if (u->GetHealth() > (me->GetMaxHealth() * 2) / 3)
                             {
@@ -440,7 +440,7 @@ public:
 
             for (AttackerSet::const_iterator itr = b_attackers.begin(); itr != b_attackers.end(); ++itr)
             {
-                if (!(*itr) || !(*itr)->IsAlive()) continue;
+                if (!(*itr) || !(*itr)->isAlive()) continue;
                 if (Spell* spell = (*itr)->GetCurrentSpell(CURRENT_GENERIC_SPELL))
                 {
                     if (spell->m_targets.GetUnitTargetGUID() == me->GetGUID())
@@ -533,7 +533,7 @@ public:
         {
             ReduceCD(diff);
             if (IAmDead()) return;
-            if (me->GetVictim())
+            if (me->getVictim())
                 DoMeleeAttackIfReady();
             else
                 Evade();
@@ -646,7 +646,7 @@ public:
 
         void Attack(uint32 diff)
         {
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
             if (opponent)
             {
                 if (!IsCasting())
@@ -702,7 +702,7 @@ public:
             //END SELFHEAL
 
             //MARK OF BLOOD
-            Unit* u = opponent->GetVictim();
+            Unit* u = opponent->getVictim();
             if (MARK_OF_BLOOD && MarkOfBlood_cd <= diff && GC_Timer <= diff && HaveRune(RUNE_BLOOD) &&
                 u && GetHealthPCT(u) < 85 && opponent->GetHealth() > u->GetMaxHealth() / 3 &&
                 (u == tank || u->GetTypeId() == TYPEID_PLAYER) &&
@@ -743,7 +743,7 @@ public:
                 Strangulate_cd = 500; //fail
             }
             //DARK COMMAND
-            if (DARK_COMMAND && DarkCommand_cd <= diff && dist < 30 && tank == me && opponent->GetVictim() != me &&
+            if (DARK_COMMAND && DarkCommand_cd <= diff && dist < 30 && tank == me && opponent->getVictim() != me &&
                 Rand() < 70)
             {
                 temptimer = GC_Timer;
@@ -756,8 +756,8 @@ public:
             }
             ////DEATH GRIP - DISABLED
             //if (DEATH_GRIP && DeathGrip_cd <= diff && dist < 30 &&
-            //    (tank == me && opponent->GetVictim() != me) ||
-            //    (opponent->GetVictim() == me && opponent->ToPlayer() && opponent->IsNonMeleeSpellCasted(false)) &&
+            //    (tank == me && opponent->getVictim() != me) ||
+            //    (opponent->getVictim() == me && opponent->ToPlayer() && opponent->IsNonMeleeSpellCasted(false)) &&
             //    Rand() < 75)
             //{
             //    temptimer = GC_Timer;
@@ -772,7 +772,7 @@ public:
             //}
             //CHAINS OF ICE
             if (CHAINS_OF_ICE && GC_Timer <= diff && dist < 20 && HaveRune(RUNE_FROST) && opponent->isMoving() &&
-                !CCed(opponent) && opponent->GetVictim() != tank && IsInBotParty(opponent->GetVictim()) && Rand() < 25)
+                !CCed(opponent) && opponent->getVictim() != tank && IsInBotParty(opponent->getVictim()) && Rand() < 25)
             {
                 Aura* chains = opponent->GetAura(CHAINS_OF_ICE);
                 if (!chains || chains->GetDuration() < chains->GetMaxDuration() / 4)

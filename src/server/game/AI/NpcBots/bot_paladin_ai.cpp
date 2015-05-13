@@ -303,7 +303,7 @@ public:
                 }
             }
             if (GC_Timer > diff) return false;
-            Unit* u = target->GetVictim();
+            Unit* u = target->getVictim();
             if (SACRED_SHIELD && SSH_Timer <= diff && target->GetTypeId() == TYPEID_PLAYER &&
                 (hp < 65 || target->getAttackers().size() > 1 || (u && u->GetMaxHealth() > target->GetMaxHealth()*10 && target->isInCombat())) &&
                 !target->HasAura(SACRED_SHIELD) &&
@@ -356,7 +356,7 @@ public:
                 HOFGuid = 0;
             }
             if (IAmDead()) return;
-            if (me->GetVictim())
+            if (me->getVictim())
                 DoMeleeAttackIfReady();
             else
                 Evade();
@@ -428,7 +428,7 @@ public:
             if (Feasting()) return;
 
             //aura
-            if (master->IsAlive() && me->GetExactDist(master) < 20)
+            if (master->isAlive() && me->GetExactDist(master) < 20)
             {
                 uint8 myAura;
                 if (me->HasAura(DEVOTION_AURA, me->GetGUID()))
@@ -538,7 +538,7 @@ public:
             if (REPENTANCE && Repentance_Timer <= diff)
             {
                 Unit* u = FindStunTarget();
-                if (u && u->GetVictim() != me && doCast(u, REPENTANCE))
+                if (u && u->getVictim() != me && doCast(u, REPENTANCE))
                     Repentance_Timer = 45000;
             }
         }
@@ -584,7 +584,7 @@ public:
                 return;
             Unit* target = FindUndeadCCTarget(20, TURN_EVIL);
             if (target &&
-                (target != me->GetVictim() || GetHealthPCT(me) < 70 || target->GetVictim() == master) &&
+                (target != me->getVictim() || GetHealthPCT(me) < 70 || target->getVictim() == master) &&
                 doCast(target, TURN_EVIL, true))
             {
                 Turn_Evil_Timer = 3000;
@@ -593,7 +593,7 @@ public:
             else
             if ((opponent->GetCreatureType() == CREATURE_TYPE_UNDEAD || opponent->GetCreatureType() == CREATURE_TYPE_DEMON) &&
                 !CCed(opponent) &&
-                opponent->GetVictim() && tank && opponent->GetVictim() != tank && opponent->GetVictim() != me &&
+                opponent->getVictim() && tank && opponent->getVictim() != tank && opponent->getVictim() != me &&
                 GetHealthPCT(me) < 90 &&
                 doCast(opponent, TURN_EVIL, true))
                 Turn_Evil_Timer = 3000;
@@ -616,7 +616,7 @@ public:
 
         void DoNormalAttack(uint32 diff)
         {
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
             if (opponent)
             {
                 if (!IsCasting())
@@ -643,7 +643,7 @@ public:
                 }
             }
 
-            Unit* u = opponent->GetVictim();
+            Unit* u = opponent->getVictim();
             if (Rand() < 50 && HANDOFRECKONING && Hand_Of_Reckoning_Timer <= diff && me->GetExactDist(opponent) < 30 &&
                 u && u != me && u != tank && (IsInBotParty(u) || tank == me)) //No GCD
             {
@@ -706,7 +706,7 @@ public:
             }
 
             if (EXORCISM && Exorcism_Timer <= diff && GC_Timer <= diff && me->GetExactDist(opponent) < 30 &&
-                (tank != me || opponent->GetVictim() == me || opponent->IsVehicle() || opponent->ToPlayer()))
+                (tank != me || opponent->getVictim() == me || opponent->IsVehicle() || opponent->ToPlayer()))
             {
                 if (doCast(opponent, EXORCISM, me->HasAura(THE_ART_OF_WAR_BUFF)))
                 {

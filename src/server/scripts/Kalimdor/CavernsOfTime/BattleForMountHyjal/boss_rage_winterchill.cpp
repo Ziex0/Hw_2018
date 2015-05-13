@@ -90,7 +90,7 @@ public:
             if (waypointId == 7 && instance)
             {
                 Unit* target = Unit::GetUnit(*me, instance->GetData64(DATA_JAINAPROUDMOORE));
-                if (target && target->IsAlive())
+                if (target && target->isAlive())
                     me->AddThreat(target, 0.0f);
             }
         }
@@ -139,13 +139,13 @@ public:
             } else FrostArmorTimer -= diff;
             if (DecayTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_DEATH_AND_DECAY);
+                DoCast(me->getVictim(), SPELL_DEATH_AND_DECAY);
                 DecayTimer = 60000+rand()%20000;
                 Talk(SAY_DECAY);
             } else DecayTimer -= diff;
             if (NovaTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_FROST_NOVA);
+                DoCast(me->getVictim(), SPELL_FROST_NOVA);
                 NovaTimer = 30000+rand()%15000;
                 Talk(SAY_NOVA);
             } else NovaTimer -= diff;

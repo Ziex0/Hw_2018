@@ -264,7 +264,7 @@ public:
                 if (!pMember)
                     continue;
 
-                if (!pMember->IsAlive())
+                if (!pMember->isAlive())
                 {
                     pMember->RemoveCorpse();
                     pMember->Respawn();
@@ -288,7 +288,7 @@ public:
 
         void StartEvent(Unit* target)
         {
-            if (target && target->IsAlive())
+            if (target && target->isAlive())
             {
                 Council[0] = instance->GetData(DATA_GATHIOS_THE_SHATTERER);
                 Council[1] = instance->GetData(DATA_HIGH_NETHERMANCER_ZEREVOR);
@@ -307,7 +307,7 @@ public:
                     if (!Council[i])
                     {
                         if (Creature* member = ObjectAccessor::GetCreature(*me, Council[i]))
-                            if (member->IsAlive())
+                            if (member->isAlive())
                                 member->AI()->AttackStart(target);
                     }
                 }
@@ -338,7 +338,7 @@ public:
                     }
 
                     Creature* pMember = (ObjectAccessor::GetCreature(*me, Council[DeathCount]));
-                    if (pMember && pMember->IsAlive())
+                    if (pMember && pMember->isAlive())
                         pMember->DealDamage(pMember, pMember->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
                     ++DeathCount;
                     EndEventTimer = 1500;
@@ -357,9 +357,9 @@ public:
                             if (Creature* Member = (ObjectAccessor::GetCreature((*me), Council[i])))
                             {
                                 // This is the evade/death check.
-                                if (Member->IsAlive() && !Member->GetVictim())
+                                if (Member->isAlive() && !Member->getVictim())
                                     ++EvadeCheck;                   //If all members evade, we reset so that players can properly reset the event
-                                else if (!Member->IsAlive())         // If even one member dies, kill the rest, set instance data, and kill self.
+                                else if (!Member->isAlive())         // If even one member dies, kill the rest, set instance data, and kill self.
                                 {
                                     EndEventTimer = 1000;
                                     CheckTimer = 0;
@@ -413,9 +413,9 @@ struct boss_illidari_councilAI : public ScriptedAI
         for (uint8 i = 0; i < 4; ++i)
         {
             if (Unit* unit = ObjectAccessor::GetUnit(*me, Council[i]))
-                if (unit != me && unit->GetVictim())
+                if (unit != me && unit->getVictim())
                 {
-                    AttackStart(unit->GetVictim());
+                    AttackStart(unit->getVictim());
                     return;
                 }
         }
@@ -878,7 +878,7 @@ public:
             {
                 if (VanishTimer <= diff)                          // Become attackable and poison current target
                 {
-                    Unit* target = me->GetVictim();
+                    Unit* target = me->getVictim();
                     DoCast(target, SPELL_DEADLY_POISON);
                     me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                     DoResetThreat();
@@ -892,7 +892,7 @@ public:
                 if (AppearEnvenomTimer <= diff)                   // Appear 2 seconds before becoming attackable (Shifting out of vanish)
                 {
                     me->GetMotionMaster()->Clear();
-                    me->GetMotionMaster()->MoveChase(me->GetVictim());
+                    me->GetMotionMaster()->MoveChase(me->getVictim());
                     me->SetVisible(true);
                     AppearEnvenomTimer = 6000;
                 } else AppearEnvenomTimer -= diff;

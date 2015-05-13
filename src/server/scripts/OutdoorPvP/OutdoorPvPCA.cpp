@@ -187,7 +187,7 @@ bool OutdoorPvPCA::UpdateCreatureInfo(Creature* creature)
        case CREATURE_TOWER:
 		case CREATURE_OTHER:
 		case CREATURE_CREEPS:
-			if (!creature->IsAlive())
+			if (!creature->isAlive())
 			{
 				creature->Respawn(true);
 				creature->SetVisible(true);

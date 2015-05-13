@@ -176,7 +176,7 @@ void DIRemoveData(uint32 instanceid)
 */
 bool DICreatureCalcStats(Creature* creature)
 {
-    if (!DDEnable || !creature->IsAlive())
+    if (!DDEnable || !creature->isAlive())
         return false;
 
     if (creature->isTotem() || creature->isTrigger() || creature->GetCreatureType() == CREATURE_TYPE_CRITTER || creature->isSpiritService())

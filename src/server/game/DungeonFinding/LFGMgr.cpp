@@ -1327,7 +1327,7 @@ void LFGMgr::TeleportPlayer(Player* player, bool out, bool fromOpcode /*= false*
 
     LfgTeleportError error = LFG_TELEPORTERROR_OK;
 
-    if (!player->IsAlive())
+    if (!player->isAlive())
         error = LFG_TELEPORTERROR_PLAYER_DEAD;
     else if (player->IsFalling() || player->HasUnitState(UNIT_STATE_JUMPING))
         error = LFG_TELEPORTERROR_FALLING;

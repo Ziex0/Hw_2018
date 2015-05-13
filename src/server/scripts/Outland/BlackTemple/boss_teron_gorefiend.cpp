@@ -96,7 +96,7 @@ public:
                     DoZoneInCombat();
 
                     Creature* Teron = (Unit::GetCreature((*me), TeronGUID));
-                    if ((Teron) && (!Teron->IsAlive() || Teron->IsInEvadeMode()))
+                    if ((Teron) && (!Teron->isAlive() || Teron->IsInEvadeMode()))
                         Despawn();
                 }
                 else
@@ -154,7 +154,7 @@ public:
         void MoveInLineOfSight(Unit* who) override
 
         {
-            if (!who || (!who->IsAlive()) || (who->GetGUID() == GhostGUID))
+            if (!who || (!who->isAlive()) || (who->GetGUID() == GhostGUID))
                 return;
 
             ScriptedAI::MoveInLineOfSight(who);
@@ -178,7 +178,7 @@ public:
             for (; itr != threatlist.end(); ++itr)
             {
                 Unit* unit = Unit::GetUnit(*me, (*itr)->getUnitGuid());
-                if (unit && unit->IsAlive())
+                if (unit && unit->isAlive())
                     targets.push_back(unit);
             }
             targets.sort(Trinity::ObjectDistanceOrderPred(me));
@@ -201,7 +201,7 @@ public:
             if (CheckTeronTimer <= diff)
             {
                 Creature* Teron = (Unit::GetCreature((*me), TeronGUID));
-                if (!Teron || !Teron->IsAlive() || Teron->IsInEvadeMode())
+                if (!Teron || !Teron->isAlive() || Teron->IsInEvadeMode())
                     me->DealDamage(me, me->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
 
                 CheckTeronTimer = 5000;
@@ -328,7 +328,7 @@ public:
             for (i = threatlist.begin(); i != threatlist.end(); ++i)
             {
                 Unit* unit = Unit::GetUnit(*me, (*i)->getUnitGuid());
-                if (unit && unit->IsAlive())
+                if (unit && unit->isAlive())
                 {
                     float threat = DoGetThreat(unit);
                     blossom->AddThreat(unit, threat);
@@ -348,7 +348,7 @@ public:
             Unit* ghost = NULL;
             if (GhostGUID)
                 ghost = Unit::GetUnit(*me, GhostGUID);
-            if (ghost && ghost->IsAlive() && ghost->HasAura(SPELL_SHADOW_OF_DEATH))
+            if (ghost && ghost->isAlive() && ghost->HasAura(SPELL_SHADOW_OF_DEATH))
             {
                 /*float x, y, z;
                 ghost->GetPosition(x, y, z);
@@ -372,7 +372,7 @@ public:
                         CAST_AI(npc_shadowy_construct::npc_shadowy_constructAI, Construct->AI())->GhostGUID = GhostGUID;
                         Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
                         if (!target)                             // someone's trying to solo.
-                            target = me->GetVictim();
+                            target = me->getVictim();
 
                         if (target)
                             Construct->GetMotionMaster()->MoveChase(target);
@@ -424,7 +424,7 @@ public:
                     {
                         Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
                         if (!target)
-                            target = me->GetVictim();
+                            target = me->getVictim();
 
                         if (target)
                             Shadow->AI()->AttackStart(target);
@@ -459,7 +459,7 @@ public:
             {
                 Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
                 if (!target)
-                    target = me->GetVictim();
+                    target = me->getVictim();
 
                 if (target)
                 {
@@ -482,9 +482,9 @@ public:
                 Unit* target = SelectUnit(SELECT_TARGET_RANDOM, 1);
 
                 if (!target)
-                   target = me->GetVictim();
+                   target = me->getVictim();
 
-                if (target && target->IsAlive() && target->GetTypeId() == TYPEID_PLAYER)
+                if (target && target->isAlive() && target->GetTypeId() == TYPEID_PLAYER)
                 {
                     DoCast(target, SPELL_SHADOW_OF_DEATH);
                     GhostGUID = target->GetGUID();

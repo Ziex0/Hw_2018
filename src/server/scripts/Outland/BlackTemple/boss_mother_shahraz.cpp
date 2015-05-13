@@ -165,7 +165,7 @@ public:
             for (uint8 i = 0; i < 3; ++i)
             {
                 Unit* unit = SelectTarget(SELECT_TARGET_RANDOM, 1);
-                if (unit && unit->IsAlive() && (unit->GetTypeId() == TYPEID_PLAYER))
+                if (unit && unit->isAlive() && (unit->GetTypeId() == TYPEID_PLAYER))
                 {
                     TargetGUID[i] = unit->GetGUID();
                     unit->CastSpell(unit, SPELL_TELEPORT_VISUAL, true);
@@ -190,7 +190,7 @@ public:
             if (BeamTimer <= diff)
             {
                 Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0);
-                if (!target || !target->IsAlive())
+                if (!target || !target->isAlive())
                     return;
 
                 BeamTimer = 9000;

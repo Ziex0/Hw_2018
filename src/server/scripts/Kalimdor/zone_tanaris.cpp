@@ -124,15 +124,15 @@ public:
             {
                 if (SendItemTimer <= diff)
                 {
-                    if (me->GetVictim()->GetTypeId() == TYPEID_PLAYER)
-                        SendItem(me->GetVictim());
+                    if (me->getVictim()->GetTypeId() == TYPEID_PLAYER)
+                        SendItem(me->getVictim());
                     SendItemTimer = 5000;
                 } else SendItemTimer -= diff;
             }
 
             if (FrostShockTimer <= diff)
             {
-                DoCast(me->GetVictim(), SPELL_FROST_SHOCK);
+                DoCast(me->getVictim(), SPELL_FROST_SHOCK);
                 FrostShockTimer = 15000;
             } else FrostShockTimer -= diff;
 
@@ -580,7 +580,7 @@ public:
         {
             FollowerAI::MoveInLineOfSight(who);
 
-            if (!me->GetVictim() && !HasFollowState(STATE_FOLLOW_COMPLETE | STATE_FOLLOW_POSTEVENT) && who->GetEntry() == NPC_TORTA)
+            if (!me->getVictim() && !HasFollowState(STATE_FOLLOW_COMPLETE | STATE_FOLLOW_POSTEVENT) && who->GetEntry() == NPC_TORTA)
             {
                 if (me->IsWithinDistInMap(who, INTERACTION_DISTANCE))
                 {
@@ -617,7 +617,7 @@ public:
                         PostEventTimer = 5000;
 
                         Creature* torta = Creature::GetCreature(*me, TortaGUID);
-                        if (!torta || !torta->IsAlive())
+                        if (!torta || !torta->isAlive())
                         {
                             //something happened, so just complete
                             SetFollowComplete();

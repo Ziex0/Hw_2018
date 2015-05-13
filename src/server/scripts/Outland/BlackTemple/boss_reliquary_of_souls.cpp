@@ -298,7 +298,7 @@ public:
                     Timer = 1000;
                     if (Phase == 3)
                     {
-                        if (!Essence->IsAlive())
+                        if (!Essence->isAlive())
                             DoCast(me, 7, true);
                         else return;
                     }
@@ -452,7 +452,7 @@ public:
             for (; itr != threatlist.end(); ++itr)
             {
                 Unit* unit = Unit::GetUnit(*me, (*itr)->getUnitGuid());
-                if (unit && unit->IsAlive() && (unit->GetTypeId() == TYPEID_PLAYER)) // Only alive players
+                if (unit && unit->isAlive() && (unit->GetTypeId() == TYPEID_PLAYER)) // Only alive players
                     targets.push_back(unit);
             }
             if (targets.empty())
@@ -670,17 +670,17 @@ public:
 
             if (!CheckedAggro)
             {
-                AggroTargetGUID = me->GetVictim()->GetGUID();
+                AggroTargetGUID = me->getVictim()->GetGUID();
                 CheckedAggro = true;
             }
 
             if (CheckTankTimer <= diff)
             {
-                if (me->GetVictim()->GetGUID() != AggroTargetGUID)
+                if (me->getVictim()->GetGUID() != AggroTargetGUID)
                 {
                     Talk(ANGER_SAY_BEFORE);
                     DoCast(me, SPELL_SELF_SEETHE, true);
-                    AggroTargetGUID = me->GetVictim()->GetGUID();
+                    AggroTargetGUID = me->getVictim()->GetGUID();
                 }
                 CheckTankTimer = 2000;
             } else CheckTankTimer -= diff;

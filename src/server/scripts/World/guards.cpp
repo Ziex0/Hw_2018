@@ -79,7 +79,7 @@ public:
                 globalCooldown = 0;
 
             //Buff timer (only buff when we are alive and not in combat
-            if (me->IsAlive() && !me->isInCombat())
+            if (me->isAlive() && !me->isInCombat())
             {
                 if (buffTimer <= diff)
                 {
@@ -109,7 +109,7 @@ public:
             if (me->isAttackReady() && !me->IsNonMeleeSpellCasted(false))
             {
                 //If we are within range melee the target
-                if (me->IsWithinMeleeRange(me->GetVictim()))
+                if (me->IsWithinMeleeRange(me->getVictim()))
                 {
                     bool healing = false;
                     SpellInfo const* info = NULL;
@@ -122,7 +122,7 @@ public:
                     if (info)
                         healing = true;
                     else
-                        info = SelectSpell(me->GetVictim(), 0, 0, SELECT_TARGET_ANY_ENEMY, 0, 0, 0, 0, SELECT_EFFECT_DONTCARE);
+                        info = SelectSpell(me->getVictim(), 0, 0, SELECT_TARGET_ANY_ENEMY, 0, 0, 0, 0, SELECT_EFFECT_DONTCARE);
 
                     //20% chance to replace our white hit with a spell
                     if (info && urand(0, 99) < 20 && !globalCooldown)
@@ -131,13 +131,13 @@ public:
                         if (healing)
                             DoCast(me, info->Id);
                         else
-                            DoCast(me->GetVictim(), info->Id);
+                            DoCast(me->getVictim(), info->Id);
 
                         //Set our global cooldown
                         globalCooldown = GENERIC_CREATURE_COOLDOWN;
                     }
                     else
-                        me->AttackerStateUpdate(me->GetVictim());
+                        me->AttackerStateUpdate(me->getVictim());
 
                     me->resetAttackTimer();
                 }
@@ -158,7 +158,7 @@ public:
                     if (info)
                         healing = true;
                     else
-                        info = SelectSpell(me->GetVictim(), 0, 0, SELECT_TARGET_ANY_ENEMY, 0, 0, NOMINAL_MELEE_RANGE, 0, SELECT_EFFECT_DONTCARE);
+                        info = SelectSpell(me->getVictim(), 0, 0, SELECT_TARGET_ANY_ENEMY, 0, 0, NOMINAL_MELEE_RANGE, 0, SELECT_EFFECT_DONTCARE);
 
                     //Found a spell, check if we arn't on cooldown
                     if (info && !globalCooldown)
@@ -174,7 +174,7 @@ public:
                         if (healing)
                             DoCast(me, info->Id);
                         else
-                            DoCast(me->GetVictim(), info->Id);
+                            DoCast(me->getVictim(), info->Id);
 
                         //Set our global cooldown
                         globalCooldown = GENERIC_CREATURE_COOLDOWN;
@@ -184,7 +184,7 @@ public:
                         //Cancel our current spell and then mutate new movement generator
                         me->InterruptNonMeleeSpells(false);
                         me->GetMotionMaster()->Clear(false);
-                        me->GetMotionMaster()->MoveChase(me->GetVictim());
+                        me->GetMotionMaster()->MoveChase(me->getVictim());
                     }
                 }
             }
@@ -294,7 +294,7 @@ public:
             }
             else if (banishTimer <= diff)
             {
-                Unit* temp = me->GetVictim();
+                Unit* temp = me->getVictim();
                 if (temp && temp->GetTypeId() == TYPEID_PLAYER)
                 {
                     DoCast(temp, SPELL_BANISHED_SHATTRATH_A);
@@ -359,7 +359,7 @@ public:
             }
             else if (banishTimer <= diff)
             {
-                Unit* temp = me->GetVictim();
+                Unit* temp = me->getVictim();
                 if (temp && temp->GetTypeId() == TYPEID_PLAYER)
                 {
                     DoCast(temp, SPELL_BANISHED_SHATTRATH_S);

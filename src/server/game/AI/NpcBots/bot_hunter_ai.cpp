@@ -188,9 +188,9 @@ public:
             if (!FROST_TRAP || Trap_cd > diff || IsCasting() || Rand() > 90)
                 return;
 
-            Unit* target = me->GetVictim();
+            Unit* target = me->getVictim();
             if (!(target && me->GetDistance(target) < 6 && me->HasInArc(M_PI, target) &&
-                IsInBotParty(target->GetVictim())))
+                IsInBotParty(target->getVictim())))
                 target = NULL;
             if (!target)
                 target = FindAOETarget(3.f, true);
@@ -336,7 +336,7 @@ public:
             //if (!AUTO_SHOT)
             //    return;
 
-            Unit* target = me->GetVictim();
+            Unit* target = me->getVictim();
             if (!target)
                 return;
 
@@ -375,7 +375,7 @@ public:
                 return;
 
             //First check current target
-            Unit* target = me->GetVictim();
+            Unit* target = me->getVictim();
             if (target)
             {
                 Unit::AuraMap const &auras = target->GetOwnedAuras();
@@ -420,7 +420,7 @@ public:
             if (!SILENCING_SHOT || SilencingShot_cd > diff || IsCasting() || Rand() > 50) //No GCD
                 return;
 
-            Unit* target = me->GetVictim();
+            Unit* target = me->getVictim();
             if (target && target->IsNonMeleeSpellCasted(false))
             {
                 temptimer = GC_Timer;
@@ -453,7 +453,7 @@ public:
         {
             ReduceCD(diff);
             if (IAmDead()) return;
-            if (me->GetVictim())
+            if (me->getVictim())
                 DoMeleeAttackIfReady();
             else
                 Evade();
@@ -513,7 +513,7 @@ public:
 
         void DoRangedAttack(uint32 diff)
         {
-            opponent = me->GetVictim();
+            opponent = me->getVictim();
             if (opponent)
             {
                 if (!IsCasting())
@@ -642,7 +642,7 @@ public:
                 }
             }
             //DISTRACTING SHOT
-            if (Unit* u = opponent->GetVictim())
+            if (Unit* u = opponent->getVictim())
             {
                 if (DISTRACTING_SHOT && DistractingShot_cd <= diff && tank == me && u != me && Rand() < 75 &&
                     !CCed(opponent) && IsInBotParty(u))

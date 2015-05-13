@@ -31,7 +31,7 @@ public:
 
         {
 				{ "talent",         SEC_PLAYER,  false, &HandleDoTalentsCommand,     			"", NULL },
-				//{ "Lk",        	SEC_PLAYER,  false, &HandleDoTeleCommand,     				"", NULL },
+				{ "Lk",        	SEC_PLAYER,  false, &HandleDoTeleCommand,     				"", NULL },
 				{ "combat", 		SEC_PLAYER,  false, &HandleCombatStopCommand, 		"", NULL },
 				{ "song",        	SEC_VIP,  	 false, &HandleDoSongCommand,     				"", NULL },
 				{ NULL,             0,                  false, NULL,                            "", NULL }

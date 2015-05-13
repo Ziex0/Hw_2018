@@ -155,7 +155,7 @@ public:
             {
                 Unit* target = Unit::GetUnit(*me, (*itr)->getUnitGuid());
                                                                 //only on alive players
-                if (target && target->IsAlive() && target->GetTypeId() == TYPEID_PLAYER)
+                if (target && target->isAlive() && target->GetTypeId() == TYPEID_PLAYER)
                     targets.push_back(target);
             }
 
@@ -227,7 +227,7 @@ public:
                 if (BewilderingStrikeTimer <= diff)
                 {
                     DoCastVictim(SPELL_BEWILDERING_STRIKE);
-                    float mt_threat = DoGetThreat(me->GetVictim());
+                    float mt_threat = DoGetThreat(me->getVictim());
                     if (Unit* target = SelectTarget(SELECT_TARGET_TOPAGGRO, 1))
                         me->AddThreat(target, mt_threat);
                     BewilderingStrikeTimer = 20000;
@@ -236,7 +236,7 @@ public:
                 if (EjectTimer <= diff)
                 {
                     DoCastVictim(SPELL_EJECT1);
-                    DoModifyThreatPercent(me->GetVictim(), -40);
+                    DoModifyThreatPercent(me->getVictim(), -40);
                     EjectTimer = 15000;
                 } else EjectTimer -= diff;
 
