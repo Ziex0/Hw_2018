@@ -601,7 +601,6 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_INTERVAL_SAVE] = ConfigMgr::GetIntDefault("PlayerSaveInterval", 15 * MINUTE * IN_MILLISECONDS);
     m_int_configs[CONFIG_INTERVAL_DISCONNECT_TOLERANCE] = ConfigMgr::GetIntDefault("DisconnectToleranceInterval", 0);
     m_bool_configs[CONFIG_STATS_SAVE_ONLY_ON_LOGOUT] = ConfigMgr::GetBoolDefault("PlayerSave.Stats.SaveOnlyOnLogout", true);
-
 	m_bool_configs[CONFIG_FAKE_WHO_LIST] = ConfigMgr::GetBoolDefault("Fake.WHO.List", true);
 	m_int_configs[CONFIG_FAKE_WHO_ONLINE_INTERVAL]  = ConfigMgr::GetIntDefault("Fake.WHO.Online.Interval", 5);
     m_int_configs[CONFIG_FAKE_WHO_LEVELUP_INTERVAL] = ConfigMgr::GetIntDefault("Fake.WHO.LevelUp.Interval", 2);

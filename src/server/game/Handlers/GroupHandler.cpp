@@ -81,7 +81,7 @@ void WorldSession::HandleGroupInviteOpcode(WorldPacket& recvData)
     // no player
     if (!player)
     {
-        if (CONFIG_FAKE_WHO_LIST)
+        if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
         {
            ChatHandler(player->GetSession()).PSendSysMessage(LANG_FAKE_NOT_DISTURB);
         }
