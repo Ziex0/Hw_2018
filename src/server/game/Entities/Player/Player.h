@@ -1228,7 +1228,7 @@ class Player : public Unit, public GridObject<Player>
         void BuildPlayerChat(WorldPacket* data, uint8 msgtype, std::string const& text, uint32 language) const;
 		void WhisperToRobot(std::string const& text, const uint32 language);
         /// Constructs the player Chat data for the specific functions to use
-        void BuildPlayerChat(WorldPacket* data, uint8 msgtype, std::string const& text, uint32 language) const;
+        //void BuildPlayerChat(WorldPacket* data, uint8 msgtype, std::string const& text, uint32 language) const;
 
         /*********************************************************/
         /***                    STORAGE SYSTEM                 ***/
@@ -1925,7 +1925,7 @@ class Player : public Unit, public GridObject<Player>
         void CheckAreaExploreAndOutdoor(void);
 
         static uint32 TeamForRace(uint8 race);
-        uint32 GetTeam() const { return m_team; }
+        //uint32 GetTeam() const { return m_team; }
         TeamId GetTeamId() const { return GetTeam() == ALLIANCE ? TEAM_ALLIANCE : TEAM_HORDE; }
         void setFactionForRace(uint8 race);
 

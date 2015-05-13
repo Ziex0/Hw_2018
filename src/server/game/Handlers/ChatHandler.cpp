@@ -268,7 +268,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
             vipcolored_msg << "|cFF" << ConfigMgr::GetStringDefault(getcolor_config.str().c_str(), "").c_str() << msg.c_str();
             gmcolored_msg << "|cFF" << ConfigMgr::GetStringDefault("Custom.Text.Color.GM", "").c_str() << msg.c_str();
 			
-			if (!GetPlayer()->IsGameMaster())
+			if (!GetPlayer()->isGameMaster())
                 if (GetPlayer()->SendBattleGroundChat(type, msg))
                     return;
 			

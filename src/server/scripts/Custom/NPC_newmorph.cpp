@@ -15,10 +15,10 @@ public:
     }
     bool OnGossipHello(Player* pPlayer, Creature* pCreature)
     {
-        if (pPlayer->IsInCombat())
+        if (pPlayer->isInCombat())
         {
             pPlayer->CLOSE_GOSSIP_MENU();
-            pCreature->MonsterWhisper("You're in combat,to activate Morph you should not be in combat !", pPlayer, true);
+			pPlayer->GetSession()->SendAreaTriggerMessage("|cffff0000You are in combat!|r");
             return true;
         }
 
