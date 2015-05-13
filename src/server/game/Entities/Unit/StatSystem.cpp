@@ -246,7 +246,7 @@ float Player::GetManaBonusFromIntellect()
     float baseInt = std::min(20.0f, intellect);
     float moreInt = intellect - baseInt;
 
-    return baseInt + (moreInt * 15.0f);
+    return baseInt + (moreInt * 20.0f);
 }
 
 
@@ -1156,7 +1156,7 @@ bool Guardian::UpdateStats(Stats stat)
     {
         if (owner->getClass() == CLASS_WARLOCK || owner->getClass() == CLASS_MAGE)
         {
-            ownersBonus = CalculatePct(owner->GetStat(stat), 30);
+            ownersBonus = CalculatePct(owner->GetStat(stat), 40);
             value += ownersBonus;
         }
     }
@@ -1265,7 +1265,7 @@ void Guardian::UpdateMaxPower(Powers power)
     UnitMods unitMod = UnitMods(UNIT_MOD_POWER_START + power);
 
     float addValue = (power == POWER_MANA) ? GetStat(STAT_INTELLECT) - GetCreateStat(STAT_INTELLECT) : 0.0f;
-    float multiplicator = 15.0f;
+    float multiplicator = 17.0f;
 
     switch (GetEntry())
     {
