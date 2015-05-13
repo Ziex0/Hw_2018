@@ -48,6 +48,18 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
 
     recvData >> type;
     recvData >> lang;
+	
+	if (sWorld->getBoolConfig(BATTLEGROUND_CROSSFACTION_ENABLED) && lang != LANG_ADDON)
+    {
+        switch (type)
+        {
+        case CHAT_MSG_BATTLEGROUND:
+        case CHAT_MSG_BATTLEGROUND_LEADER:
+            lang = LANG_UNIVERSAL;
+        default:
+            break;
+        }
+    }
 
     if (type >= MAX_CHAT_MSG_TYPE)
     {
@@ -255,6 +267,10 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
             getcolor_config << "Custom.Text.Color.Lv" << std::to_string(sender->GetSession()->GetVipLevel()).c_str();
             vipcolored_msg << "|cFF" << ConfigMgr::GetStringDefault(getcolor_config.str().c_str(), "").c_str() << msg.c_str();
             gmcolored_msg << "|cFF" << ConfigMgr::GetStringDefault("Custom.Text.Color.GM", "").c_str() << msg.c_str();
+			
+			if (!GetPlayer()->IsGameMaster())
+                if (GetPlayer()->SendBattleGroundChat(type, msg))
+                    return;
 			
             if (type == CHAT_MSG_SAY)
                 //sender->Say(msg, lang);

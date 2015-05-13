@@ -601,7 +601,6 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_INTERVAL_SAVE] = ConfigMgr::GetIntDefault("PlayerSaveInterval", 15 * MINUTE * IN_MILLISECONDS);
     m_int_configs[CONFIG_INTERVAL_DISCONNECT_TOLERANCE] = ConfigMgr::GetIntDefault("DisconnectToleranceInterval", 0);
     m_bool_configs[CONFIG_STATS_SAVE_ONLY_ON_LOGOUT] = ConfigMgr::GetBoolDefault("PlayerSave.Stats.SaveOnlyOnLogout", true);
-
 	m_bool_configs[CONFIG_FAKE_WHO_LIST] = ConfigMgr::GetBoolDefault("Fake.WHO.List", true);
 	m_int_configs[CONFIG_FAKE_WHO_ONLINE_INTERVAL]  = ConfigMgr::GetIntDefault("Fake.WHO.Online.Interval", 5);
     m_int_configs[CONFIG_FAKE_WHO_LEVELUP_INTERVAL] = ConfigMgr::GetIntDefault("Fake.WHO.LevelUp.Interval", 2);
@@ -1064,7 +1063,7 @@ void World::LoadConfigSettings(bool reload)
     m_bool_configs[CONFIG_ARENA_1V1_VENDOR_RATING]                   = ConfigMgr::GetBoolDefault("Arena.1v1.VendorRating", false);
     m_float_configs[CONFIG_ARENA_1V1_ARENAPOINTS_MULTI]              = ConfigMgr::GetFloatDefault("Arena.1v1.ArenaPointsMulti", 0.64f);
     m_bool_configs[CONFIG_ARENA_1V1_BLOCK_FORBIDDEN_TALENTS]         = ConfigMgr::GetBoolDefault("Arena.1v1.BlockForbiddenTalents", true);
-
+	m_bool_configs[BATTLEGROUND_CROSSFACTION_ENABLED]                = ConfigMgr::GetBoolDefault("CrossfactionBG.enable", true);
     m_bool_configs[CONFIG_OFFHAND_CHECK_AT_SPELL_UNLEARN]            = ConfigMgr::GetBoolDefault("OffhandCheckAtSpellUnlearn", true);
 
     if (int32 clientCacheId = ConfigMgr::GetIntDefault("ClientCacheVersion", 0))
