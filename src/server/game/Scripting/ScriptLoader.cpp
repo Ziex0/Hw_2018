@@ -1397,6 +1397,7 @@ void AddBattlegroundScripts()
 	void AddSC_city_conquest_spawner();
 	void AddSC_vipmall_security();
 	void AddSC_ExchangeDPNPC();
+	void AddSC_DemonConvert();
 
 #endif
 
@@ -1496,6 +1497,7 @@ void AddCustomScripts()
 	AddSC_vipmall_security();
 	AddSC_ArenaGambler();
 	AddSC_ExchangeDPNPC();
+	AddSC_DemonConvert();
 
 
 #endif

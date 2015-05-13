@@ -297,7 +297,7 @@ void ChatHandler::SendCustomOfficerChat(const char* message)
     
 	nameLink << "|Hplayer:" << pPlayer->GetName().c_str() << "|h|cFF" << ConfigMgr::GetStringDefault(pPlayer->isGameMaster() ? "Channel.Name.Color.GM" : vipcolor_config.str().c_str(), "00FF00").c_str() << "[" << pPlayer->GetName().c_str() << "]|r|h";
 
-    snprintf(msg, 1024, "|cFF86FF00[World Channel]|r %s %s %s %s|cff00FF00: %s%s", raceStr, classStr, gmStr, nameLink.str().c_str(), m_session->GetVipLevel() > 0 ? "|cffFFA500" : "", message);
+    snprintf(msg, 1024, "|cffFF006E[World Channel]|r %s %s %s %s|cff00FF00: %s%s", raceStr, classStr, gmStr, nameLink.str().c_str(), m_session->GetVipLevel() > 0 ? "|cffFFA500" : "", message);
 
     sWorld->SendGlobalText(msg, NULL);
 }
