@@ -27,7 +27,7 @@ public:
     {
         
         pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Main Teleporter", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +1);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Emerald Mall Teleporter", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +80);
+		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Emerald Mall Teleporter", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +80);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Trainer", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +2);
         pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Transmorg NPC", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +3);
         pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Permanent Morph", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +4);

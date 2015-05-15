@@ -1398,6 +1398,8 @@ void AddBattlegroundScripts()
 	void AddSC_vipmall_security();
 	void AddSC_ExchangeDPNPC();
 	void AddSC_DemonConvert();
+	void AddSC_npc_legion_master();
+	void AddSC_BountyHunter();
 
 #endif
 
@@ -1498,7 +1500,8 @@ void AddCustomScripts()
 	AddSC_ArenaGambler();
 	AddSC_ExchangeDPNPC();
 	AddSC_DemonConvert();
-
+	AddSC_npc_legion_master();
+	AddSC_BountyHunter();
 
 #endif
 }
