@@ -1492,7 +1492,7 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "OffSet Gear Boss", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 713);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The fallen Boss (PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 714);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shadow Moon ( Daily Star Coins)(PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 715);
-				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Slyverinx ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 716);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shibuya ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 716);
 				
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -1526,10 +1526,10 @@ public:
 				pPlayer->TeleportTo(571, 4625.62f, -5627.06f, 109.938f, 4.84263f);  //Off Set
 				break;
 				
-			//shadow moon
+			//hibuya
 			case GOSSIP_ACTION_INFO_DEF + 716:
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(533, 3598.00f, -4523.00f, 198.865f, 5.24257f);  //Off Set
+				pPlayer->TeleportTo(0, -201.985f, 1687.84f, 79.7626f, 4.29892f);  //Off Set
 				break;
 
 				//mall

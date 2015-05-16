@@ -916,7 +916,11 @@ Player::Player(WorldSession* session): Unit(true)
     m_SeasonalQuestChanged = false;
 
     SetPendingBind(0, 0);
-
+	
+	m_toggleAppear = false;
+    m_toggleSummon = false;
+    m_hideVip = true;
+   
     _activeCheats = CHEAT_NONE;
     m_achievementMgr = new AchievementMgr(this);
     m_reputationMgr = new ReputationMgr(this);
@@ -27844,6 +27848,26 @@ void Player::SendMovementSetFeatherFall(bool apply)
     data.append(GetPackGUID());
     data << uint32(0);          //! movement counter
     SendDirectMessage(&data);
+}
+
+void Player::ToggleCommand(int command)
+{
+    switch (command)
+    {
+        case TOGGLE_APPEAR: 
+            m_toggleAppear = !m_toggleAppear;
+            break;
+        case TOGGLE_SUMMON: 
+            m_toggleSummon = !m_toggleSummon;
+            break;       
+        case HIDE_VIP: 
+            m_hideVip = !m_hideVip;
+            break;      
+        default:
+            break;
+    }
+
+    return;
 }
 
 float Player::GetCollisionHeight(bool mounted) const

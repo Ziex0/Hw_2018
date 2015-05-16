@@ -416,7 +416,7 @@ public:
             bool in_flight;
             if (!Player::LoadPositionFromDB(map, x, y, z, o, in_flight, targetGuid))
                 return false;
-
+					
             // stop flight if need
             if (_player->isInFlight())
             {

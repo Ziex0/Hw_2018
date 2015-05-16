@@ -893,6 +893,14 @@ enum PlayerRestState
     REST_STATE_RAF_LINKED                            = 0x06
 };
 
+enum CommandNames
+{
+    TOGGLE_APPEAR       = 1,
+    TOGGLE_SUMMON       = 2,
+    HIDE_VIP            = 3,
+ 
+};
+
 enum PlayerCommandStates
 {
     CHEAT_NONE      = 0x00,
@@ -2151,6 +2159,18 @@ class Player : public Unit, public GridObject<Player>
         void   SaveRecallPosition();
 
         void SetHomebind(WorldLocation const& loc, uint32 areaId);
+		
+		// GM Command Values
+        bool m_toggleAppear;
+        bool m_toggleSummon;
+		//bool m_cheatPower;
+		//bool m_cheatGod;
+		//bool m_hideWorld;
+		bool m_hideVip;
+		//bool m_CheatCooldown;
+		//bool m_CheatCastTime;
+        void ToggleCommand(int command);
+        bool GetCommandStatus(int command);
 
         // Homebind coordinates
         uint32 m_homebindMapId;
@@ -2318,7 +2338,7 @@ class Player : public Unit, public GridObject<Player>
         bool isDebugAreaTriggers;
 		
 		/********************************************************************/
-        /***                 ANTICHEAT SYSTEM       SymbolixDEV           ***/
+        /***                 ANTICHEAT SYSTEM                             ***/
         /********************************************************************/
         uint32 GetLastPacketTime() { return uiLastPacketTime;}
         uint32 GetLastOpcode() { return uiLastOpcode; }

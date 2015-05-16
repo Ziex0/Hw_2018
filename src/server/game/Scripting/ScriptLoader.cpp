@@ -1400,6 +1400,8 @@ void AddBattlegroundScripts()
 	void AddSC_DemonConvert();
 	void AddSC_npc_legion_master();
 	void AddSC_BountyHunter();
+	void AddSC_on_login();
+	//void AddSC_enables_commandscript();
 
 #endif
 
@@ -1502,6 +1504,8 @@ void AddCustomScripts()
 	AddSC_DemonConvert();
 	AddSC_npc_legion_master();
 	AddSC_BountyHunter();
+	AddSC_on_login();
+	//AddSC_enables_commandscript();
 
 #endif
 }

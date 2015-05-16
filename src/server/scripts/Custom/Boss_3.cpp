@@ -63,8 +63,8 @@ enum Summons
 
 enum Models
 {
-    MODEL_BOY = 20544,
-    MODEL_MONSTER = 14173
+    MODEL_BOY = 4641,
+    MODEL_MONSTER = 19679
 };
 
 # define LM_YELL_AGGRO "Send them to Hell!"

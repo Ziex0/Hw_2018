@@ -213,8 +213,7 @@ void WorldSession::HandleGossipSelectOptionOpcode(WorldPacket& recvData)
         else if (_player->PlayerTalkClass->GetGossipMenu().GetMenuId() == menuId)
         {
             sScriptMgr->OnGossipSelectCode(_player, menuId, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId), code.c_str());
-        }
-		
+        }		
     }
     else
     {

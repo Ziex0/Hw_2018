@@ -1,15 +1,7 @@
 /*
-  _____                        ____               
- |  ___| __ ___ _______ _ __  / ___|___  _ __ ___ 
- | |_ | '__/ _ \_  / _ \ '_ \| |   / _ \| '__/ _ \
- |  _|| | | (_) / /  __/ | | | |__| (_) | | |  __/
- |_|  |_|  \___/___\___|_| |_|\____\___/|_|  \___|
-	 Lightning speed and strength
-		 conjured directly from the depths of logic!   
-			Infusion-WoW 2011 - 2012 (C)
 <--------------------------------------------------------------------------->
- - Developer(s): Styler
- - Complete: 90%
+ - Developer(s): Zie
+ - Complete: 100%
  - ScriptName: 'vipcommands' 
  - Comment: VIP commands for VIPS -> GM rank 1+
 <--------------------------------------------------------------------------->
@@ -47,19 +39,156 @@ public:
 			{ "repair",        		 SEC_VIP,  false, &HandleVIPrepairCommand,          "", NULL },
 			{ "heal", 				 SEC_VIP,  false, &HandleHealCommand, 				"", NULL },
 			{ "combat", 			 SEC_VIP,  false, &HandleCombatStopCommand, 		"", NULL },
-			//{ "appear", 			 SEC_VIP,  false, &HandleVIPAppearCommand, 		"", NULL },
-			//{ "summon", 			 SEC_VIP,  false, &HandleVIPSummonCommand, 		"", NULL },
-			
+			{ "vadd",            	 SEC_VIP_2,     false, &HandleTiAddCommand,            "", NULL },
+			{ "announce",     		 SEC_VIP_2,     false,  &HandleVIPannounceCommand,           "", NULL },
+						
             { NULL,             0,             false, NULL,                         	"", NULL }
         };
 		
-				
+		static ChatCommand toggleCommandTable[] =
+        {
+            { "summon",         SEC_PLAYER,      false, &HandleToggleSummonCommand,         "", NULL },
+            { "appear",         SEC_PLAYER,      false, &HandleToggleAppearCommand,         "", NULL },
+            { "status",         SEC_PLAYER,      false, &HandleToggleStatusCommand,         "", NULL },
+            { NULL,             0,               false, NULL,                               "", NULL }
+        };
+		
         static ChatCommand commandTable[] =
         {
-            { "vip",	    		 SEC_VIP,   true, NULL,      "",  vipCommandTable},
+			{ "toggle",						SEC_PLAYER,			false, NULL, "", toggleCommandTable },
+            { "vip",	    				SEC_VIP,			true, NULL,      "",  vipCommandTable},
 	        { NULL,             0,                  false, NULL,                               "", NULL }
         };
         return commandTable;
+		
+    }
+	
+	static bool HandleToggleAppearCommand(ChatHandler* handler, const char* args)
+    {
+	    if (!handler->GetSession() && !handler->GetSession()->GetPlayer())
+		    return false;
+
+	    std::string argstr = (char*)args;
+
+	    if (!*args)
+	    {
+		    if (handler->GetSession()->GetPlayer()->GetCommandStatus(TOGGLE_APPEAR))
+			    argstr = "off";	
+		    else
+			    argstr = "on";
+	    }
+
+	    if (argstr == "on")
+	    {
+		    handler->GetSession()->GetPlayer()->m_toggleAppear = true;
+			handler->PSendSysMessage("| cff00FFFFYou have | cffFF0000enabled | cff00FFFFappearing.You can be appeared.");
+		    return true;
+	    }
+	    else if (argstr == "off")
+	    {
+		    handler->GetSession()->GetPlayer()->m_toggleAppear = false;
+			handler->PSendSysMessage("| cff00FFFFYou have | cffFF0000disabled | cff00FFFFappearing.You can't be appeared.");
+		    return true;
+	    }
+
+        return false;
+    }
+
+    static bool HandleToggleSummonCommand(ChatHandler* handler, const char* args)
+    {
+	    if (!handler->GetSession() && !handler->GetSession()->GetPlayer())
+		    return false;
+
+	    std::string argstr = (char*)args;
+
+	    if (!*args)
+	    {
+		    if (handler->GetSession()->GetPlayer()->GetCommandStatus(TOGGLE_SUMMON))
+			    argstr = "off";	
+		    else
+			    argstr = "on";
+	    }
+
+	    if (argstr == "on")
+	    {
+		    handler->GetSession()->GetPlayer()->m_toggleSummon = true;
+		    handler->PSendSysMessage("|cff00FFFFYou have |cffFF0000enabled |cff00FFFFsummoning. You can be summoned.");
+		    return true;
+	    }
+	    else if (argstr == "off")
+	    {
+		    handler->GetSession()->GetPlayer()->m_toggleSummon = false;
+		    handler->PSendSysMessage("|cff00FFFFYou have |cffFF0000disabled |cff00FFFFsummoning. You can't be summoned.");
+		    return true;
+	    }
+
+        return false;
+    }
+
+    static bool HandleToggleStatusCommand(ChatHandler* handler, char const* /*args*/)
+    {
+	    if (!handler->GetSession() && !handler->GetSession()->GetPlayer())
+		    return false;
+
+	    Player* player = handler->GetSession()->GetPlayer();
+
+	    if(player->GetCommandStatus(TOGGLE_APPEAR))
+	       handler->PSendSysMessage("|cffFF0000Status: |cff00FFFFCurrently you can be appeared.");
+	    if(player->GetCommandStatus(TOGGLE_SUMMON))
+	       handler->PSendSysMessage("|cffFF0000Status: |cff00FFFFCurrently you can be summoned.");
+
+	    if(!player->GetCommandStatus(TOGGLE_APPEAR))
+	       handler->PSendSysMessage("|cffFF0000Status: |cff00FFFFCurrently you can't be appeared.");
+	    if(!player->GetCommandStatus(TOGGLE_SUMMON))
+	       handler->PSendSysMessage("|cffFF0000Status: |cff00FFFFCurrently you can't be summoned.");
+
+        return true;
+    }
+	
+	static bool HandleTiAddCommand(ChatHandler* handler, char const* args)
+    {
+        // number or [name] Shift-click form |color|Htitle:title_id|h[name]|h|r
+        char* id_p = handler->extractKeyFromLink((char*)args, "Htitle");
+        if (!id_p)
+            return false;
+
+        int32 id = atoi(id_p);
+        if (id <= 0)
+        {
+            handler->PSendSysMessage(LANG_INVALID_TITLE_ID, id);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        Player* target = handler->getSelectedPlayer();
+        if (!target)
+        {
+            handler->SendSysMessage(LANG_NO_CHAR_SELECTED);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        // check online security
+        if (handler->HasLowerSecurity(target, 0))
+            return false;
+
+        CharTitlesEntry const* titleInfo = sCharTitlesStore.LookupEntry(id);
+        if (!titleInfo)
+        {
+            handler->PSendSysMessage(LANG_INVALID_TITLE_ID, id);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        std::string tNameLink = handler->GetNameLink(target);
+
+        char titleNameStr[80];
+        snprintf(titleNameStr, 80, titleInfo->name[handler->GetSessionDbcLocale()], target->GetName().c_str());
+
+        target->SetTitle(titleInfo);
+        handler->PSendSysMessage(LANG_TITLE_ADD_RES, id, titleNameStr, tNameLink.c_str());
+
+        return true;
     }
 
 		
@@ -71,6 +200,7 @@ public:
             me->Say("vip command?", LANG_UNIVERSAL);
             return true;
     }
+
 	
 	static bool HandleCombatStopCommand(ChatHandler* handler, const char* args)
 	{
@@ -339,6 +469,19 @@ public:
 		handler->PSendSysMessage("Relog to customize your character.");
         return true;
     }
+	
+	static bool HandleVIPannounceCommand(ChatHandler* handler, const char* args)
+	{
+		Player* player = handler->GetSession()->GetPlayer();
+
+		WorldPacket data;
+		if (!*args)
+			return false;
+
+		sWorld->SendVIPText(LANG_VIP_NAME_ANNOUNCE, handler->GetNameLink(player).c_str(), args);
+
+		return true;
+	}
 
 	static bool HandleVipMallCommand(ChatHandler* handler, const char* args)
     {
@@ -368,7 +511,7 @@ public:
         else
             me->SaveRecallPosition();
 
-		me->TeleportTo (0, 1569.49f, -5606.73f, 114.19f, 1.13505f);
+		me->TeleportTo (530, -266.10f, 921.734f, 84.3799f, 0.582604f);
 		handler->PSendSysMessage("You Have Been Teleported!");
         return true;
     }
