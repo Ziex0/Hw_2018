@@ -276,7 +276,7 @@ public:
         int move_lenght = 2*rand()%10;
         float new_x = pos_x + move_lenght * cos(angle);
         float new_y = pos_y + move_lenght * sin(angle);
-        me->Relocate(new_x,new_y,221,2.24);
+        me->Relocate(new_x,new_y,221.00f,2.24f);
         me->CombatStop();
         me->SetFlag(UNIT_FIELD_FLAGS,UNIT_FLAG_NOT_SELECTABLE);
       }

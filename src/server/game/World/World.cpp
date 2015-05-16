@@ -2311,16 +2311,22 @@ void World::SendVIPText(int32 string_id, ...)
     Trinity::LocalizedPacketListDo<Trinity::WorldWorldTextBuilder> wt_do(wt_builder);
     for (SessionMap::iterator itr = m_sessions.begin(); itr != m_sessions.end(); ++itr)
     {
-        if (!itr->second || !itr->second->GetPlayer() || !itr->second->GetPlayer()->IsInWorld())
-            continue;
+		WorldSession* session = itr->second;
+		//if (!session || !session->HasPermission(RBAC_PERM_RECEIVE_GLOBAL_GM_TEXTMESSAGE))
+			continue;
 
-	 if (itr->second->GetPlayer()->GetCommandStatus(HIDE_VIP) == false)
+		// Player should be in world
+		Player* player = session->GetPlayer();
+		if (!player || !player->IsInWorld())
+			continue;
+
+		/*if (itr->second->GetPlayer()->GetCommandStatus(HIDE_VIP) == false)
 	     continue;
 
-        if (itr->second->GetSecurity() <= SEC_VIP)
-            continue;
+        if (itr->second->GetSecurity() >= SEC_VIP)
+            continue;*/
 
-        wt_do(itr->second->GetPlayer());
+		wt_do(player);
     }
 
     va_end(ap);

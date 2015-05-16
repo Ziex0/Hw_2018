@@ -428,6 +428,12 @@ public:
                 _player->SaveRecallPosition();
 
             _player->TeleportTo(map, x, y, z, _player->GetOrientation());
+			
+			if (!target->GetCommandStatus(TOGGLE_APPEAR))
+			{
+				handler->PSendSysMessage(LANG_CANNOT_APPEAR_TO_PLAYER, nameLink.c_str());
+				return true;
+			}
         }
 
         return true;
@@ -535,13 +541,19 @@ public:
             handler->PSendSysMessage(LANG_SUMMONING, nameLink.c_str(), handler->GetTrinityString(LANG_OFFLINE));
 
             // in point where GM stay
-            Player::SavePositionInDB(handler->GetSession()->GetPlayer()->GetMapId(),
+				Player::SavePositionInDB(handler->GetSession()->GetPlayer()->GetMapId(),
                 handler->GetSession()->GetPlayer()->GetPositionX(),
                 handler->GetSession()->GetPlayer()->GetPositionY(),
                 handler->GetSession()->GetPlayer()->GetPositionZ(),
                 handler->GetSession()->GetPlayer()->GetOrientation(),
                 handler->GetSession()->GetPlayer()->GetZoneId(),
                 targetGuid);
+				
+			if (!target->GetCommandStatus(TOGGLE_SUMMON))
+			{
+				handler->PSendSysMessage(LANG_CANNOT_SUMMON_PLAYER, nameLink.c_str());
+				return true;
+			}
         }
 
         return true;

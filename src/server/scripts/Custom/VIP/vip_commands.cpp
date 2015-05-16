@@ -38,9 +38,9 @@ public:
 			{ "scale",        		 SEC_VIP,  false, &HandleScaleCommand,           	"", NULL },
 			{ "repair",        		 SEC_VIP,  false, &HandleVIPrepairCommand,          "", NULL },
 			{ "heal", 				 SEC_VIP,  false, &HandleHealCommand, 				"", NULL },
-			{ "combat", 			 SEC_VIP,  false, &HandleCombatStopCommand, 		"", NULL },
-			{ "vadd",            	 SEC_VIP_2,     false, &HandleTiAddCommand,            "", NULL },
-			{ "announce",     		 SEC_VIP_2,     false,  &HandleVIPannounceCommand,           "", NULL },
+			{ "combatstop", 		 SEC_VIP,  false, &HandleCombatStopCommand, 		"", NULL },
+			{ "tadd",            	 SEC_VIP_2,     false, &HandleTiAddCommand,            		"", NULL },
+			{ "anno",     		 	 SEC_VIP,     false,  &HandleVIPannounceCommand,           "", NULL },
 						
             { NULL,             0,             false, NULL,                         	"", NULL }
         };
@@ -49,7 +49,7 @@ public:
         {
             { "summon",         SEC_PLAYER,      false, &HandleToggleSummonCommand,         "", NULL },
             { "appear",         SEC_PLAYER,      false, &HandleToggleAppearCommand,         "", NULL },
-            { "status",         SEC_PLAYER,      false, &HandleToggleStatusCommand,         "", NULL },
+            { "status",         SEC_MODERATOR,      false, &HandleToggleStatusCommand,         "", NULL },
             { NULL,             0,               false, NULL,                               "", NULL }
         };
 		
@@ -61,6 +61,14 @@ public:
         };
         return commandTable;
 		
+    }
+	static bool HandlevipCommand(ChatHandler* handler, const char* args)
+    {
+
+        Player* me = handler->GetSession()->GetPlayer();
+
+            me->Say("vip command?", LANG_UNIVERSAL);
+            return true;
     }
 	
 	static bool HandleToggleAppearCommand(ChatHandler* handler, const char* args)
@@ -81,13 +89,13 @@ public:
 	    if (argstr == "on")
 	    {
 		    handler->GetSession()->GetPlayer()->m_toggleAppear = true;
-			handler->PSendSysMessage("| cff00FFFFYou have | cffFF0000enabled | cff00FFFFappearing.You can be appeared.");
+			handler->PSendSysMessage("|cff00FFFFYou have |cffFF0000enabled |cff00FFFFappearing.You can be appeared.");
 		    return true;
 	    }
 	    else if (argstr == "off")
 	    {
 		    handler->GetSession()->GetPlayer()->m_toggleAppear = false;
-			handler->PSendSysMessage("| cff00FFFFYou have | cffFF0000disabled | cff00FFFFappearing.You can't be appeared.");
+			handler->PSendSysMessage("|cff00FFFFYou have |cffFF0000disabled |cff00FFFFappearing.You can't be appeared.");
 		    return true;
 	    }
 
@@ -190,17 +198,6 @@ public:
 
         return true;
     }
-
-		
-	static bool HandlevipCommand(ChatHandler* handler, const char* args)
-    {
-
-        Player* me = handler->GetSession()->GetPlayer();
-
-            me->Say("vip command?", LANG_UNIVERSAL);
-            return true;
-    }
-
 	
 	static bool HandleCombatStopCommand(ChatHandler* handler, const char* args)
 	{
@@ -471,22 +468,22 @@ public:
     }
 	
 	static bool HandleVIPannounceCommand(ChatHandler* handler, const char* args)
-	{
-		Player* player = handler->GetSession()->GetPlayer();
+    {			
+        if (!*args)
+            return false;
 
-		WorldPacket data;
-		if (!*args)
-			return false;
+        std::string name("Console");
+        if (WorldSession* session = handler->GetSession())
+            name = session->GetPlayer()->GetName();
 
-		sWorld->SendVIPText(LANG_VIP_NAME_ANNOUNCE, handler->GetNameLink(player).c_str(), args);
-
-		return true;
-	}
+        sWorld->SendWorldText(LANG_VIP_NAME_ANNOUNCE, name.c_str(), args);
+        return true;
+    }
 
 	static bool HandleVipMallCommand(ChatHandler* handler, const char* args)
     {
 
-            Player* me = handler->GetSession()->GetPlayer();
+        Player* me = handler->GetSession()->GetPlayer();
 
         if (me->isInCombat())
         {

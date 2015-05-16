@@ -2163,14 +2163,8 @@ class Player : public Unit, public GridObject<Player>
 		// GM Command Values
         bool m_toggleAppear;
         bool m_toggleSummon;
-		//bool m_cheatPower;
-		//bool m_cheatGod;
-		//bool m_hideWorld;
 		bool m_hideVip;
-		//bool m_CheatCooldown;
-		//bool m_CheatCastTime;
         void ToggleCommand(int command);
-        bool GetCommandStatus(int command);
 
         // Homebind coordinates
         uint32 m_homebindMapId;
