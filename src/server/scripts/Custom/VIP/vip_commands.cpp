@@ -40,6 +40,8 @@ public:
 			{ "heal", 				 SEC_VIP,  false, &HandleHealCommand, 				"", NULL },
 			{ "combatstop", 		 SEC_VIP,  false, &HandleCombatStopCommand, 		"", NULL },
 			{ "tadd",            	 SEC_VIP_2,     false, &HandleTiAddCommand,            		"", NULL },
+			//{ "vsummon",            	 SEC_VIP_2,     false, &HandleVipSummonCommand,            		"", NULL },
+			//{ "vappear",            	 SEC_VIP_2,     false, &HandleVipAppearCommand,            		"", NULL },
 			{ "anno",     		 	 SEC_VIP,     false,  &HandleVIPannounceCommand,           "", NULL },
 						
             { NULL,             0,             false, NULL,                         	"", NULL }
