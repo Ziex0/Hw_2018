@@ -71,7 +71,7 @@ class gm_active : public CreatureScript
 				if(pPlayer->HasItemCount(320279, 1))
 		{
 			pPlayer->DestroyItemCount(320279, 1, true);
-			LoginDatabase.PExecute("REPLACE INTO account_access (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '3', '1')", pPlayer->GetSession()->GetAccountId());
+			LoginDatabase.PExecute("REPLACE INTO account_access (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '4', '1')", pPlayer->GetSession()->GetAccountId());
 			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
 			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '3', '1')", pPlayer->GetSession()->GetAccountId());
