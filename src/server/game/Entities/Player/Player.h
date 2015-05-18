@@ -893,13 +893,6 @@ enum PlayerRestState
     REST_STATE_RAF_LINKED                            = 0x06
 };
 
-enum CommandNames
-{
-    TOGGLE_APPEAR       = 1,
-    TOGGLE_SUMMON       = 2,
-    HIDE_VIP            = 3,
- 
-};
 
 enum PlayerCommandStates
 {

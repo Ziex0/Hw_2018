@@ -27850,25 +27850,6 @@ void Player::SendMovementSetFeatherFall(bool apply)
     SendDirectMessage(&data);
 }
 
-void Player::ToggleCommand(int command)
-{
-    switch (command)
-    {
-        case TOGGLE_APPEAR: 
-            m_toggleAppear = !m_toggleAppear;
-            break;
-        case TOGGLE_SUMMON: 
-            m_toggleSummon = !m_toggleSummon;
-            break;       
-        case HIDE_VIP: 
-            m_hideVip = !m_hideVip;
-            break;      
-        default:
-            break;
-    }
-
-    return;
-}
 
 float Player::GetCollisionHeight(bool mounted) const
 {
