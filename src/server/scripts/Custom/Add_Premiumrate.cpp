@@ -15,10 +15,6 @@ class premium_rate : public CreatureScript
         {
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tPremium Permanent Rank 1", GOSSIP_SENDER_MAIN, 2000);
 			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2", GOSSIP_SENDER_MAIN, 6000);
-			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to Temporary ( 1 Day) Premium", GOSSIP_SENDER_MAIN, 1000);
-			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to 1 months Premium", GOSSIP_SENDER_MAIN, 3000);
-			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to 3 Months Premium", GOSSIP_SENDER_MAIN, 4000);
-			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to 6 Months Premium", GOSSIP_SENDER_MAIN, 5000);
 			
             pPlayer->PlayerTalkClass->SendGossipMenu(85005, pCreature->GetGUID());
             return true;
@@ -37,24 +33,7 @@ class premium_rate : public CreatureScript
 				pPlayer->PlayerTalkClass->SendGossipMenu(85005, pCreature->GetGUID());
                 return true;
                 break;
-			case 3000:
-                pPlayer->PlayerTalkClass->ClearMenus();
-                pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Activate Now", GOSSIP_SENDER_MAIN, 3001);
-				pPlayer->PlayerTalkClass->SendGossipMenu(85005, pCreature->GetGUID());
-                return true;
-                break;
-			case 4000:
-                pPlayer->PlayerTalkClass->ClearMenus();
-                pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Activate Now", GOSSIP_SENDER_MAIN, 4001);
-				pPlayer->PlayerTalkClass->SendGossipMenu(85005, pCreature->GetGUID());
-                return true;
-                break;
-			case 5000:
-                pPlayer->PlayerTalkClass->ClearMenus();
-                pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Activate Now", GOSSIP_SENDER_MAIN, 5001);
-				pPlayer->PlayerTalkClass->SendGossipMenu(85005, pCreature->GetGUID());
-                return true;
-                break;
+			
 			case 6000:
                 pPlayer->PlayerTalkClass->ClearMenus();
                 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Activate Now", GOSSIP_SENDER_MAIN, 5001);
@@ -69,7 +48,7 @@ class premium_rate : public CreatureScript
 			pPlayer->DestroyItemCount(320265, 1, true);
 			LoginDatabase.PExecute("REPLACE INTO account_premium (`id`, `setdate`, `unsetdate`, `Premium_type`, `active`) VALUES ('%u', '%u', '0', '1', '1')", pPlayer->GetSession()->GetAccountId());			
 			LoginDatabase.PExecute("REPLACE INTO account_access (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
-			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
+			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (`accountId`, `groupId`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 			LoginDatabase.PExecute("REPLACE INTO account_vip (`acc_id`, `viplevel`, `active`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 			char str[200];
 			sprintf(str,"Your now Permanent PREMIUM member, thank you for supporting our server! please close your Wow and Re-login");
@@ -89,7 +68,7 @@ class premium_rate : public CreatureScript
 			pPlayer->DestroyItemCount(320265, 1, true);
 			LoginDatabase.PExecute("REPLACE INTO account_premium (`id`, `setdate`, `unsetdate`, `Premium_type`, `active`) VALUES ('%u', '%u', '0', '1', '1')", pPlayer->GetSession()->GetAccountId());			
 			LoginDatabase.PExecute("REPLACE INTO account_access (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
-			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (accountId, groupId, RealmID) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
+			LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (`accountId`, `groupId`, `RealmID`) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
 			LoginDatabase.PExecute("REPLACE INTO account_vip (`acc_id`, `viplevel`, `active`) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
 			char str[200];
 			sprintf(str,"Your now Permanent PREMIUM member, thank you for supporting our server! please close your Wow and Re-login");

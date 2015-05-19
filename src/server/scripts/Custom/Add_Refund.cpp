@@ -13,8 +13,8 @@ class refundvendor : public CreatureScript
 		
 	bool OnGossipHello(Player* pPlayer, Creature* pCreature)
         {
-            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Weapons", GOSSIP_SENDER_MAIN, 2000);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Rings/Trinkets/Amulets", GOSSIP_SENDER_MAIN, 3000);
+            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/icons/Spell_Shadow_Shadowform:25|tRefund: Donor Weapons", GOSSIP_SENDER_MAIN, 2000);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/icons/INV_Axe_113:25|tRefund: Rings/Trinkets/Amulets", GOSSIP_SENDER_MAIN, 3000);
 			
 			 pPlayer->PlayerTalkClass->SendGossipMenu(85006, pCreature->GetGUID());
 
