@@ -57,21 +57,21 @@ public:
 
 		// Purchase VIP Account for one month
 		if (SelectDPoints(pPlayer) < oneMonthVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Purchase |cffFF0000Premium|r Account for one month (|cff980000Locked|r / Click for Information)", GOSSIP_SENDER_MAIN, 1);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for one month (|cff980000Locked|r / Information)", GOSSIP_SENDER_MAIN, 1);
 		else if (SelectDPoints(pPlayer) >= oneMonthVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Purchase |cffFF0000Premium|r Account for one month (|cff009900Unlocked|r / Click to use)", GOSSIP_SENDER_MAIN, 2);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for one month (|cff009900Unlocked|r / Click to use)", GOSSIP_SENDER_MAIN, 2);
 
 		// Purchase VIP Account for three months
 		if (SelectDPoints(pPlayer) < threeMonthsVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Purchase |cffFF0000Premium|r Account for three months (|cff980000Locked|r / Click for Information)", GOSSIP_SENDER_MAIN, 1);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for three months (|cff980000Locked|r / Information)", GOSSIP_SENDER_MAIN, 1);
 		else if (SelectDPoints(pPlayer) >= threeMonthsVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Purchase |cffFF0000Premium|r Account for three months (|cff009900Unlocked|r / Click to use)", GOSSIP_SENDER_MAIN, 3);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for three months (|cff009900Unlocked|r / Click to use)", GOSSIP_SENDER_MAIN, 3);
 		
 		// Purchase VIP Account for 9 months
 		if (SelectDPoints(pPlayer) < nineMonthsVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Purchase |cffFF0000Premium|r Account for nine months (|cff980000Locked|r / Click for Information)", GOSSIP_SENDER_MAIN, 1);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for nine months (|cff980000Locked|r / Information)", GOSSIP_SENDER_MAIN, 1);
 		else if (SelectDPoints(pPlayer) >= nineMonthsVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Purchase |cffFF0000Premium|r Account for nine months (|cff009900Unlocked|r / Click to use)", GOSSIP_SENDER_MAIN, 4);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for nine months (|cff009900Unlocked|r / Click to use)", GOSSIP_SENDER_MAIN, 4);
 
 		
 		// Show Donate and Voting Points when GossipHello
@@ -93,7 +93,7 @@ public:
 		switch(uiAction)
 		{
 		case 1: // Vip accounts - LOCKED
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "This |cffFF0000Premium|r rank same like |cffFF0000Premium|r permanent.. Custom Commands.. Free |cffFF0000Premium|r set..diffrent his |cffFF0000Premium|r use timer.. There you can choose how long you want be Premium rank on Server.", GOSSIP_SENDER_MAIN, 1000);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "This |cffFF0000Premium|r rank same like |cffFF0000Premium|r permanent.. Custom Commands.. Free |cffFF0000Premium|r set..diffrent his |cffFF0000Premium|r use timer.. There you can choose how long you want be Premium rank on Server.", GOSSIP_SENDER_MAIN, 1000);
 			pPlayer->SEND_GOSSIP_MENU(60032, pCreature->GetGUID());
 			break;
 
