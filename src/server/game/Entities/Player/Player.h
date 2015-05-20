@@ -2153,12 +2153,6 @@ class Player : public Unit, public GridObject<Player>
 
         void SetHomebind(WorldLocation const& loc, uint32 areaId);
 		
-		// GM Command Values
-        bool m_toggleAppear;
-        bool m_toggleSummon;
-		bool m_hideVip;
-        void ToggleCommand(int command);
-
         // Homebind coordinates
         uint32 m_homebindMapId;
         uint16 m_homebindAreaId;
