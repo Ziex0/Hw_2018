@@ -15,8 +15,8 @@
 static std::string website = "web_db";       // FusionCMS database name
 
 // DONATION POINTS PRICES:
-static uint32 oneMonthVipPrice = 10;               // VIP account price for 1 month (in donation points) (Default: 30 donate points)
-static uint32 threeMonthsVipPrice = 27;            // VIP account price for 3 months (in donation points) (Default: 50 donate points)
+static uint32 oneMonthVipPrice = 7;               // VIP account price for 1 month (in donation points) (Default: 30 donate points)
+static uint32 threeMonthsVipPrice = 17;            // VIP account price for 3 months (in donation points) (Default: 50 donate points)
 static uint32 nineMonthsVipPrice = 40;            // VIP account price for 3 months (in donation points) (Default: 50 donate points)
 
 
@@ -57,21 +57,21 @@ public:
 
 		// Purchase VIP Account for one month
 		if (SelectDPoints(pPlayer) < oneMonthVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for one month (|cff980000Locked|r / Information)", GOSSIP_SENDER_MAIN, 1);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for one month (|cff980000Locked|r / Information) 7 Dp", GOSSIP_SENDER_MAIN, 1);
 		else if (SelectDPoints(pPlayer) >= oneMonthVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for one month (|cff009900Unlocked|r / Click to use)", GOSSIP_SENDER_MAIN, 2);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for one month (|cff009900Unlocked|r / Click to use) 7 Dp", GOSSIP_SENDER_MAIN, 2);
 
 		// Purchase VIP Account for three months
 		if (SelectDPoints(pPlayer) < threeMonthsVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for three months (|cff980000Locked|r / Information)", GOSSIP_SENDER_MAIN, 1);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for three months (|cff980000Locked|r / Information) 17 Dp", GOSSIP_SENDER_MAIN, 1);
 		else if (SelectDPoints(pPlayer) >= threeMonthsVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for three months (|cff009900Unlocked|r / Click to use)", GOSSIP_SENDER_MAIN, 3);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for three months (|cff009900Unlocked|r / Click to use) 17 Dp", GOSSIP_SENDER_MAIN, 3);
 		
 		// Purchase VIP Account for 9 months
 		if (SelectDPoints(pPlayer) < nineMonthsVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for nine months (|cff980000Locked|r / Information)", GOSSIP_SENDER_MAIN, 1);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for nine months (|cff980000Locked|r / Information)40 Dp", GOSSIP_SENDER_MAIN, 1);
 		else if (SelectDPoints(pPlayer) >= nineMonthsVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for nine months (|cff009900Unlocked|r / Click to use)", GOSSIP_SENDER_MAIN, 4);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for nine months (|cff009900Unlocked|r / Click to use) 40 Dp", GOSSIP_SENDER_MAIN, 4);
 
 		
 		// Show Donate and Voting Points when GossipHello
@@ -113,7 +113,7 @@ public:
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (`accountId`, `groupId`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 
-				LoginDatabase.PQuery("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`) VALUES ('%u', '%s',)", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
+				LoginDatabase.PQuery("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
 				// Set the correct date timestamp and start the 1 month counter
 				CharacterDatabase.PExecute("DELETE FROM `vip_conditions` WHERE `accountId` = '%u'", pPlayer->GetSession()->GetAccountId()); // Overwrite
 				CharacterDatabase.PExecute("REPLACE INTO `vip_conditions` (`accountId`, `purchaseTime`) VALUES ('%u', '%u')", pPlayer->GetSession()->GetAccountId(), (purchaseTime + purchaseDays));
@@ -140,7 +140,8 @@ public:
 				LoginDatabase.PExecute("DELETE FROM account_access WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (`accountId`, `groupId`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
-
+				
+				LoginDatabase.PQuery("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
 				// Set the correct date timestamp and start the 1 month counter
 				CharacterDatabase.PExecute("DELETE FROM `vip_conditions` WHERE `accountId` = '%u'", pPlayer->GetSession()->GetAccountId()); // Overwrite
 				CharacterDatabase.PExecute("REPLACE INTO `vip_conditions` (`accountId`, `purchaseTime`) VALUES ('%u', '%u')", pPlayer->GetSession()->GetAccountId(), (purchaseTime + purchaseDays));
@@ -169,6 +170,7 @@ public:
 				LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (`accountId`, `groupId`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 
 				// Set the correct date timestamp and start the 1 month counter
+				LoginDatabase.PQuery("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
 				CharacterDatabase.PExecute("DELETE FROM `vip_conditions` WHERE `accountId` = '%u'", pPlayer->GetSession()->GetAccountId()); // Overwrite
 				CharacterDatabase.PExecute("REPLACE INTO `vip_conditions` (`accountId`, `purchaseTime`) VALUES ('%u', '%u')", pPlayer->GetSession()->GetAccountId(), (purchaseTime + purchaseDays));
 
