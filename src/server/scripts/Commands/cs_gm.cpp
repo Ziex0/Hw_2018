@@ -63,7 +63,7 @@ public:
         {
             if (!*args)
             {
-                if (!AccountMgr::IsPlayerAccount(session->GetSecurity()) && session->GetPlayer()->isGMChat())
+                if (!AccountMgr::IsPlayerAccount(session->GetSecurity() >= SEC_PLAYER) && session->GetPlayer()->isGMChat())
                     session->SendNotification(LANG_GM_CHAT_ON);
                 else
                     session->SendNotification(LANG_GM_CHAT_OFF);

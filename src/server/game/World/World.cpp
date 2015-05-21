@@ -2309,7 +2309,7 @@ void World::SendVIPText(int32 string_id, ...)
     for (SessionMap::iterator itr = m_sessions.begin(); itr != m_sessions.end(); ++itr)
     {
 		WorldSession* session = itr->second;
-		//if (!session || !session->HasPermission(RBAC_PERM_RECEIVE_GLOBAL_GM_TEXTMESSAGE))
+		if (!itr->second || !itr->second->GetPlayer() || !itr->second->GetPlayer()->IsInWorld())
 			continue;
 
 		// Player should be in world
