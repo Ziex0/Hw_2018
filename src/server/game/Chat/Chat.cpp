@@ -422,7 +422,7 @@ bool ChatHandler::ExecuteCommandInTable(ChatCommand* table, const char* text, co
                             zoneName = zone->area_name[locale];
                     }
 
-                    sLog->outCommand(m_session->GetAccountId(), "Command: %s [Player: %s (Guid: %u) (Account: %u) X: %f Y: %f Z: %f Map: %u (%s) Area: %u (%s) Zone: %s Selected %s: %s (GUID: %u)]",
+						sLog->outCommand(m_session->GetAccountId(), "Command: %s [Player: %s (Guid: %u) (Account: %u) X: %f Y: %f Z: %f Map: %u (%s) Area: %u (%s) Zone: %s Selected %s: %s (GUID: %u)]",
                         fullcmd.c_str(), p->GetName().c_str(), GUID_LOPART(p->GetGUID()), m_session->GetAccountId(), p->GetPositionX(), p->GetPositionY(), p->GetPositionZ(), p->GetMapId(), p->GetMap() ? p->GetMap()->GetMapName() : "Unknown", areaId, areaName.c_str(), zoneName.c_str(),
                         GetLogNameForGuid(sel_guid), (p->GetSelectedUnit()) ? p->GetSelectedUnit()->GetName().c_str() : "", GUID_LOPART(sel_guid));
                 }
@@ -505,7 +505,7 @@ bool ChatHandler::ParseCommands(char const* text)
 
     std::string fullcmd = text;
 
-    if (m_session && AccountMgr::IsPlayerAccount(m_session->GetSecurity()));
+    if (m_session && AccountMgr::IsPlayerAccount(m_session->GetSecurity()))
        return false;
 
     /// chat case (.command or !command format)
@@ -530,7 +530,7 @@ bool ChatHandler::ParseCommands(char const* text)
 
     if (!ExecuteCommandInTable(getCommandTable(), text, fullcmd))
     {
-        if (m_session && AccountMgr::IsPlayerAccount(m_session->GetSecurity()));
+        if (m_session && AccountMgr::IsPlayerAccount(m_session->GetSecurity()))
             return false;
 
         SendSysMessage(LANG_NO_CMD);
