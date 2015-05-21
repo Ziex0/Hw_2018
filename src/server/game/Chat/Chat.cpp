@@ -123,28 +123,7 @@ const char *ChatHandler::GetTrinityString(int32 entry) const
 
 bool ChatHandler::isAvailable(ChatCommand const& cmd) const
 {
-    uint32 permission = 0;
-
-    ///@Workaround:: Fast adaptation to RBAC system till all commands are moved to permissions
-    switch (AccountTypes(cmd.SecurityLevel))
-    {
-        case SEC_ADMINISTRATOR:
-            permission = RBAC_PERM_ADMINISTRATOR_COMMANDS;
-            break;
-        case SEC_GAMEMASTER:
-            permission = RBAC_PERM_GAMEMASTER_COMMANDS;
-            break;
-        case SEC_MODERATOR:
-            permission = RBAC_PERM_MODERATOR_COMMANDS;
-            break;
-        case SEC_PLAYER:
-            permission = RBAC_PERM_PLAYER_COMMANDS;
-            break;
-        default: // Allow custom security levels for commands
-            return m_session->GetSecurity() >= AccountTypes(cmd.SecurityLevel);
-    }
-
-    return m_session->HasPermission(permission);
+    return m_session->GetSecurity() >= AccountTypes(cmd.SecurityLevel);
 }
 
 bool ChatHandler::HasLowerSecurity(Player* target, uint64 guid, bool strong)
@@ -176,7 +155,7 @@ bool ChatHandler::HasLowerSecurityAccount(WorldSession* target, uint32 target_ac
         return false;
 
     // ignore only for non-players for non strong checks (when allow apply command at least to same sec level)
-    if (m_session->HasPermission(RBAC_PERM_CHECK_FOR_LOWER_SECURITY) && !strong && !sWorld->getBoolConfig(CONFIG_GM_LOWER_SECURITY))
+    if (!AccountMgr::IsPlayerAccount(m_session->GetSecurity()) && !strong && !sWorld->getBoolConfig(CONFIG_GM_LOWER_SECURITY))
         return false;
 
     if (target)
@@ -425,7 +404,6 @@ bool ChatHandler::ExecuteCommandInTable(ChatCommand* table, const char* text, co
         // table[i].Name == "" is special case: send original command to handler
         if ((table[i].Handler)(this, table[i].Name[0] != '\0' ? text : oldtext))
         {
-            // FIXME: When Command system is moved to RBAC this check must be changed
             if (!AccountMgr::IsPlayerAccount(table[i].SecurityLevel))
             {
                 // chat case
@@ -527,7 +505,7 @@ bool ChatHandler::ParseCommands(char const* text)
 
     std::string fullcmd = text;
 
-    if (m_session && !m_session->HasPermission(RBAC_PERM_PLAYER_COMMANDS))
+    if (m_session && AccountMgr::IsPlayerAccount(m_session->GetSecurity()));
        return false;
 
     /// chat case (.command or !command format)
@@ -552,7 +530,7 @@ bool ChatHandler::ParseCommands(char const* text)
 
     if (!ExecuteCommandInTable(getCommandTable(), text, fullcmd))
     {
-        if (m_session && !m_session->HasPermission(RBAC_PERM_COMMANDS_NOTIFY_COMMAND_NOT_FOUND_ERROR))
+        if (m_session && AccountMgr::IsPlayerAccount(m_session->GetSecurity()));
             return false;
 
         SendSysMessage(LANG_NO_CMD);

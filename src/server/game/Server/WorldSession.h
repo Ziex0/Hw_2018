@@ -39,7 +39,6 @@ class LoginQueryHolder;
 class Object;
 class Player;
 class Quest;
-class RBACData;
 class SpellCastTargets;
 class Unit;
 class Warden;
@@ -249,10 +248,6 @@ class WorldSession
         void SendAuthResponse(uint8 code, bool shortForm, uint32 queuePos = 0);
         void SendClientCacheVersion(uint32 version);
 
-        RBACData* GetRBACData();
-        bool HasPermission(uint32 permissionId);
-        void LoadPermissions();
-        void InvalidateRBACData(); // Used to force LoadPermissions at next HasPermission check
 		uint32 protectedPacketsCounter[MAX_PROTECTED_PACKETS];
 
         AccountTypes GetSecurity() const { return _security; }
@@ -1002,7 +997,7 @@ class WorldSession
         bool isRecruiter;
         ACE_Based::LockedQueue<WorldPacket*, ACE_Thread_Mutex> _recvQueue;
         time_t timeLastWhoCommand;
-        RBACData* _RBACData;
+
 };
 #endif
 /// @}

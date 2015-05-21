@@ -263,7 +263,7 @@ void WorldSession::HandleAuctionSellItem(WorldPacket& recvData)
         // Required stack size of auction matches to current item stack size, just move item to auctionhouse
         if (itemsCount == 1 && item->GetCount() == count[i])
         {
-            if (HasPermission(RBAC_PERM_LOG_GM_TRADE))
+            if (_player->GetSession()->GetSecurity() >= SEC_PLAYER)
             {
                 sLog->outCommand(GetAccountId(), "GM %s (Account: %u) create auction: %s (Entry: %u Count: %u)",
                     GetPlayerName().c_str(), GetAccountId(), item->GetTemplate()->Name1.c_str(), item->GetEntry(), item->GetCount());
@@ -309,7 +309,7 @@ void WorldSession::HandleAuctionSellItem(WorldPacket& recvData)
                 return;
             }
 
-            if (HasPermission(RBAC_PERM_LOG_GM_TRADE))
+            if (_player->GetSession()->GetSecurity() >= SEC_PLAYER)
             {
                 sLog->outCommand(GetAccountId(), "GM %s (Account: %u) create auction: %s (Entry: %u Count: %u)",
                     GetPlayerName().c_str(), GetAccountId(), newItem->GetTemplate()->Name1.c_str(), newItem->GetEntry(), newItem->GetCount());

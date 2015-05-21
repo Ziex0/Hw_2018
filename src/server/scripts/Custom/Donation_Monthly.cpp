@@ -111,8 +111,7 @@ public:
 				LoginDatabase.PExecute("UPDATE %s.account_data SET dp = '%u' -%u WHERE id = '%u'", website.c_str(), dp, oneMonthVipPrice, pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("DELETE FROM account_access WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
-				LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (`accountId`, `groupId`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
-
+				
 				LoginDatabase.PQuery("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
 				// Set the correct date timestamp and start the 1 month counter
 				CharacterDatabase.PExecute("DELETE FROM `vip_conditions` WHERE `accountId` = '%u'", pPlayer->GetSession()->GetAccountId()); // Overwrite
@@ -139,7 +138,6 @@ public:
 				LoginDatabase.PExecute("UPDATE %s.account_data SET dp = '%u' -%u WHERE id = '%u'", website.c_str(), dp, oneMonthVipPrice, pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("DELETE FROM account_access WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
-				LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (`accountId`, `groupId`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 				
 				LoginDatabase.PQuery("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
 				// Set the correct date timestamp and start the 1 month counter
@@ -167,8 +165,7 @@ public:
 				LoginDatabase.PExecute("UPDATE %s.account_data SET dp = '%u' -%u WHERE id = '%u'", website.c_str(), dp, oneMonthVipPrice, pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("DELETE FROM account_access WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
-				LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (`accountId`, `groupId`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
-
+				
 				// Set the correct date timestamp and start the 1 month counter
 				LoginDatabase.PQuery("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
 				CharacterDatabase.PExecute("DELETE FROM `vip_conditions` WHERE `accountId` = '%u'", pPlayer->GetSession()->GetAccountId()); // Overwrite
@@ -230,7 +227,6 @@ public:
 
 			// Delete DB entries also
 			LoginDatabase.PExecute("DELETE FROM account_access WHERE id = '%u'", player->GetSession()->GetAccountId());
-			LoginDatabase.PExecute("DELETE FROM rbac_account_groups WHERE id = '%u'", player->GetSession()->GetAccountId());
 			CharacterDatabase.PExecute("DELETE FROM vip_conditions WHERE accountId = '%u'", player->GetSession()->GetAccountId());
 		}
 	}
