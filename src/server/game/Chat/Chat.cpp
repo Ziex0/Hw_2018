@@ -35,7 +35,6 @@
 #include "SpellMgr.h"
 #include "ScriptMgr.h"
 #include "ChatLink.h"
-#include "Config.h"
 
 bool ChatHandler::load_command_table = true;
 
@@ -505,8 +504,8 @@ bool ChatHandler::ParseCommands(char const* text)
 
     std::string fullcmd = text;
 
-    if (m_session && AccountMgr::IsPlayerAccount(m_session->GetSecurity()))
-       return false;
+    //if (m_session && AccountMgr::IsPlayerAccount(m_session->GetSecurity()))
+       //return false;
 
     /// chat case (.command or !command format)
     if (m_session)

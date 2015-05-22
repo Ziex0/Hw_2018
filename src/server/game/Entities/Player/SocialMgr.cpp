@@ -302,10 +302,10 @@ void SocialMgr::BroadcastToFriendListers(Player* player, WorldPacket* packet)
                 continue;
 
             WorldSession* session = target->GetSession();
-            if (!session->GetSecurity()>= SEC_PLAYER && player->GetSession()->GetSecurity() > gmSecLevel)
+            if (!session->GetSecurity() && player->GetSession()->GetSecurity() > gmSecLevel)
                 continue;
 
-            if (target->GetTeam() != player->GetTeam() && !session->GetSecurity()>= SEC_PLAYER)
+            if (target->GetTeam() != player->GetTeam() && !session->GetSecurity())
                 continue;
 
             if (player->IsVisibleGloballyFor(target))
