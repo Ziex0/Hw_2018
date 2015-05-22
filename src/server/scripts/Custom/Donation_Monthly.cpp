@@ -113,7 +113,7 @@ public:
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (`accountId`, `groupId`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 
-				LoginDatabase.PQuery("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
+				LoginDatabase.PExecute("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
 				// Set the correct date timestamp and start the 1 month counter
 				CharacterDatabase.PExecute("DELETE FROM `vip_conditions` WHERE `accountId` = '%u'", pPlayer->GetSession()->GetAccountId()); // Overwrite
 				CharacterDatabase.PExecute("REPLACE INTO `vip_conditions` (`accountId`, `purchaseTime`) VALUES ('%u', '%u')", pPlayer->GetSession()->GetAccountId(), (purchaseTime + purchaseDays));
@@ -141,7 +141,7 @@ public:
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (`accountId`, `groupId`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 				
-				LoginDatabase.PQuery("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
+				LoginDatabase.PExecute("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
 				// Set the correct date timestamp and start the 1 month counter
 				CharacterDatabase.PExecute("DELETE FROM `vip_conditions` WHERE `accountId` = '%u'", pPlayer->GetSession()->GetAccountId()); // Overwrite
 				CharacterDatabase.PExecute("REPLACE INTO `vip_conditions` (`accountId`, `purchaseTime`) VALUES ('%u', '%u')", pPlayer->GetSession()->GetAccountId(), (purchaseTime + purchaseDays));
@@ -170,7 +170,7 @@ public:
 				LoginDatabase.PExecute("REPLACE INTO rbac_account_groups (`accountId`, `groupId`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 
 				// Set the correct date timestamp and start the 1 month counter
-				LoginDatabase.PQuery("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
+				LoginDatabase.PExecute("INSERT INTO web_db.vip_monthly_report (`account_id`, `char_use`, `RealmID`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
 				CharacterDatabase.PExecute("DELETE FROM `vip_conditions` WHERE `accountId` = '%u'", pPlayer->GetSession()->GetAccountId()); // Overwrite
 				CharacterDatabase.PExecute("REPLACE INTO `vip_conditions` (`accountId`, `purchaseTime`) VALUES ('%u', '%u')", pPlayer->GetSession()->GetAccountId(), (purchaseTime + purchaseDays));
 

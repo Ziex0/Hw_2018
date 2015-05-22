@@ -12,11 +12,11 @@
 const uint32 FORBIDDEN_TALENTS_IN_1V1_ARENA[] = 
 {
     // Healer
-    201, // PriestDiscipline
-    202, // PriestHoly
-    382, // PaladinHoly
-    262, // ShamanRestoration
-    282, // DruidRestoration
+    //201, // PriestDiscipline
+    //202, // PriestHoly
+    //382, // PaladinHoly
+    //262, // ShamanRestoration
+    //282, // DruidRestoration
 
     // Tanks
     //383, // PaladinProtection
@@ -57,7 +57,7 @@ static bool Arena1v1CheckTalents(Player* player)
         }
     }
 
-    if(count >= 36)
+    if(count >= 300)
     {
         ChatHandler(player->GetSession()).SendSysMessage("You can't join, because you have invested too many points in a forbidden talent. Please edit your talents.");
         return false;
