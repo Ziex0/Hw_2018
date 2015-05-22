@@ -917,10 +917,6 @@ Player::Player(WorldSession* session): Unit(true)
 
     SetPendingBind(0, 0);
 	
-	m_toggleAppear = false;
-    m_toggleSummon = false;
-    m_hideVip = true;
-   
     _activeCheats = CHEAT_NONE;
     m_achievementMgr = new AchievementMgr(this);
     m_reputationMgr = new ReputationMgr(this);

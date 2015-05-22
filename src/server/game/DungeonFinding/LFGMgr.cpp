@@ -379,7 +379,7 @@ void LFGMgr::InitializeLockedDungeons(Player* player, uint8 level /* = 0 */)
     uint8 expansion = player->GetSession()->Expansion();
     LfgDungeonSet const& dungeons = GetDungeonsByRandom(0);
     LfgLockMap lock;
-    bool denyJoin = !player->GetSession()->GetSecurity() >= SEC_PLAYER;
+    bool denyJoin = !player->GetSession()->GetSecurity();
 
     for (LfgDungeonSet::const_iterator it = dungeons.begin(); it != dungeons.end(); ++it)
     {

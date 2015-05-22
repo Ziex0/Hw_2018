@@ -35,6 +35,7 @@
 #include "SpellMgr.h"
 #include "ScriptMgr.h"
 #include "ChatLink.h"
+#include "Config.h"
 
 bool ChatHandler::load_command_table = true;
 
