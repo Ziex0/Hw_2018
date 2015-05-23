@@ -121,8 +121,7 @@ WorldSession::WorldSession(uint32 id, WorldSocket* sock, AccountTypes sec, bool 
     recruiterId(recruiter),
     isRecruiter(isARecruiter),
     timeLastWhoCommand(0),
-	m_CurrentVendor(0),
-     _RBACData(NULL)
+	m_CurrentVendor(0)
 {
     if (sock)
     {
@@ -151,7 +150,6 @@ WorldSession::~WorldSession()
     }
 
     delete _warden;
-    delete _RBACData;
 
     ///- empty incoming packet queue
     WorldPacket* packet = NULL;
@@ -1190,42 +1188,4 @@ void WorldSession::InitWarden(BigNumber* k, std::string const& os)
         // _warden = new WardenMac();
         // _warden->Init(this, k);
     }
-}
-
-void WorldSession::LoadPermissions()
-{
-    uint32 id = GetAccountId();
-    std::string name;
-    AccountMgr::GetName(id, name);
-
-    _RBACData = new RBACData(id, name, realmID);
-    _RBACData->LoadFromDB();
-
-    sLog->outDebug(LOG_FILTER_RBAC, "WorldSession::LoadPermissions [AccountId: %u, Name: %s, realmId: %d]",
-                   id, name.c_str(), realmID);
-}
-
-RBACData* WorldSession::GetRBACData()
-{
-    return _RBACData;
-}
-
-bool WorldSession::HasPermission(uint32 permission)
-{
-    if (!_RBACData)
-        LoadPermissions();
-
-    bool hasPermission = _RBACData->HasPermission(permission);
-    sLog->outDebug(LOG_FILTER_RBAC, "WorldSession::HasPermission [AccountId: %u, Name: %s, realmId: %d]",
-                   _RBACData->GetId(), _RBACData->GetName().c_str(), realmID);
-
-    return hasPermission;
-}
-
-void WorldSession::InvalidateRBACData()
-{
-    sLog->outDebug(LOG_FILTER_RBAC, "WorldSession::InvalidateRBACData [AccountId: %u, Name: %s, realmId: %d]",
-                   _RBACData->GetId(), _RBACData->GetName().c_str(), realmID);
-    delete _RBACData;
-    _RBACData = NULL;
 }

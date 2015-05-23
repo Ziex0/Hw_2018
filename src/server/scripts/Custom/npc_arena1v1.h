@@ -57,7 +57,7 @@ static bool Arena1v1CheckTalents(Player* player)
         }
     }
 
-    if(count >= 300)
+    if(count >= 256)
     {
         ChatHandler(player->GetSession()).SendSysMessage("You can't join, because you have invested too many points in a forbidden talent. Please edit your talents.");
         return false;

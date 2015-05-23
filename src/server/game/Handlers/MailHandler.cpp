@@ -174,7 +174,7 @@ void WorldSession::HandleSendMail(WorldPacket& recvData)
         }
     }
 
-    if (!accountBound && player->GetTeam() != receiverTeam && !HasPermission(RBAC_PERM_TWO_SIDE_INTERACTION_MAIL))
+    if (!accountBound && player->GetTeam() != receiverTeam && sWorld->getIntConfig(CONFIG_MAIL_LEVEL_REQ))
     {
         player->SendMailResult(0, MAIL_SEND, MAIL_ERR_NOT_YOUR_TEAM);
         return;
@@ -251,13 +251,11 @@ void WorldSession::HandleSendMail(WorldPacket& recvData)
 
     if (items_count > 0 || money > 0)
     {
-        bool log = HasPermission(RBAC_PERM_LOG_GM_TRADE);
         if (items_count > 0)
         {
             for (uint8 i = 0; i < items_count; ++i)
             {
                 Item* item = items[i];
-                if (log)
                 {
                     sLog->outCommand(GetAccountId(), "GM %s (Account: %u) mail item: %s (Entry: %u Count: %u) "
                         "to player: %s (Account: %u)", GetPlayerName().c_str(), GetAccountId(),
@@ -279,7 +277,7 @@ void WorldSession::HandleSendMail(WorldPacket& recvData)
             needItemDelay = player->GetSession()->GetAccountId() != receiverAccountId;
         }
 
-        if (log && money > 0)
+        if (money > 0)
         {
             sLog->outCommand(GetAccountId(), "GM %s (Account: %u) mail money: %u to player: %s (Account: %u)",
                 GetPlayerName().c_str(), GetAccountId(), money, receiverName.c_str(), receiverAccountId);
@@ -460,7 +458,7 @@ void WorldSession::HandleMailTakeItem(WorldPacket& recvData)
 
             uint32 sender_accId = 0;
 
-            if (HasPermission(RBAC_PERM_LOG_GM_TRADE))
+           if (!AccountMgr::IsPlayerAccount(GetSecurity()) && sWorld->getIntConfig(CONFIG_MAIL_LEVEL_REQ))
             {
                 std::string sender_name;
                 if (receiver)
