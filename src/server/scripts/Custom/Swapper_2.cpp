@@ -21,8 +21,8 @@ public:
             player->ADD_GOSSIP_ITEM( 7, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rConvert 1000 Golden Pearl to 100 Black Diamond" , GOSSIP_SENDER_MAIN, 5); //Change the stats below
             player->ADD_GOSSIP_ITEM( 5, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rConvert 1000 Black Diamond to 100 Magic Card"   , GOSSIP_SENDER_MAIN, 6); //Change the stats below
             player->ADD_GOSSIP_ITEM( 6, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rConvert 1000 Magic Card to 1 Donation Points"   , GOSSIP_SENDER_MAIN, 7);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Return.", GOSSIP_SENDER_MAIN, 9999);
-			pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Return.", GOSSIP_SENDER_MAIN, 9999);
+			player->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
         }
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, _creature->GetGUID());         
@@ -99,8 +99,8 @@ public:
                 break;
 				
 			case 9999:
-                pPlayer->PlayerTalkClass->ClearMenus();
-                OnGossipHello(pPlayer, pCreature);
+                player->PlayerTalkClass->ClearMenus();
+                OnGossipHello(player, _creature);
                 break;
             } 
         } 

@@ -323,17 +323,18 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
 
     // client send in case not set max level value 100 but Trinity supports 255 max level,
     // update it to show GMs with characters after 100 level
-    if (level_max >= MAX_LEVEL)
-        level_max = STRONG_MAX_LEVEL;
+	if (level_max >= MAX_LEVEL)
+		level_max = STRONG_MAX_LEVEL;
 
-    uint32 team = _player->GetTeam();
+	uint32 team = _player->GetTeam();
+	uint32 security = GetSecurity();
+	bool allowTwoSideWhoList = sWorld->getBoolConfig(CONFIG_GM_LEVEL_IN_WHO_LIST);
+	uint32 gmLevelInWhoList = sWorld->getIntConfig(CONFIG_GM_LEVEL_IN_WHO_LIST);
+	uint32 displaycount = 0;
 
-    uint32 gmLevelInWhoList  = sWorld->getIntConfig(CONFIG_GM_LEVEL_IN_WHO_LIST);
-    uint32 displaycount = 0;
-
-    WorldPacket data(SMSG_WHO, 50);                       // guess size
-    data << uint32(matchcount);                           // placeholder, count of players matching criteria
-    data << uint32(displaycount);                         // placeholder, count of players displayed
+	WorldPacket data(SMSG_WHO, 50);                       // guess size
+	data << uint32(matchcount);                           // placeholder, count of players matching criteria
+	data << uint32(displaycount);                         // placeholder, count of players displayed
 
     TRINITY_READ_GUARD(HashMapHolder<Player>::LockType, *HashMapHolder<Player>::GetLock());
     HashMapHolder<Player>::MapType const& m = sObjectAccessor->GetPlayers();
@@ -341,8 +342,8 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
     {
         Player* target = itr->second;
         // player can see member of other team only if CONFIG_ALLOW_TWO_SIDE_WHO_LIST
-        if (itr->second->GetSession()->GetSecurity() >= SEC_PLAYER)
-            continue;
+		if (itr->second->GetSession()->GetSecurity() || sWorld->getBoolConfig(CONFIG_GM_LEVEL_IN_WHO_LIST))
+            continue;////
 
         // player can see MODERATOR, GAME MASTER, ADMINISTRATOR only if CONFIG_GM_IN_WHO_LIST
         if ((itr->second->GetSession()->GetSecurity() > AccountTypes(gmLevelInWhoList)))
