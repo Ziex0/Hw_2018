@@ -255,19 +255,11 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
 {
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: Recvd CMSG_WHO Message");
 
-    time_t now = time(NULL);
-    if (now - timeLastWhoCommand < 5)
-        return;
-    else timeLastWhoCommand = now;
-
     uint32 matchcount = 0;
 
     uint32 level_min, level_max, racemask, classmask, zones_count, str_count;
     uint32 zoneids[10];                                     // 10 is client limit
     std::string player_name, guild_name;
-	
-	bool searchBool = false;
-    std::string searchName;
 
     recvData >> level_min;                                 // maximal player level, default 0
     recvData >> level_max;                                 // minimal player level, default 100 (MAX_LEVEL)
@@ -307,10 +299,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
             continue;
 
         wstrToLower(str[i]);
-		
-		searchBool = true;
-        searchName = temp.c_str();
-		
+
         sLog->outDebug(LOG_FILTER_NETWORKIO, "String %u: %s", i, temp.c_str());
     }
 
@@ -323,59 +312,59 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
 
     // client send in case not set max level value 100 but Trinity supports 255 max level,
     // update it to show GMs with characters after 100 level
-	if (level_max >= MAX_LEVEL)
-		level_max = STRONG_MAX_LEVEL;
+    if (level_max >= MAX_LEVEL)
+        level_max = STRONG_MAX_LEVEL;
 
-	uint32 team = _player->GetTeam();
-	uint32 security = GetSecurity();
-	bool allowTwoSideWhoList = sWorld->getBoolConfig(CONFIG_GM_LEVEL_IN_WHO_LIST);
-	uint32 gmLevelInWhoList = sWorld->getIntConfig(CONFIG_GM_LEVEL_IN_WHO_LIST);
-	uint32 displaycount = 0;
+    uint32 team = _player->GetTeam();
+    uint32 security = GetSecurity();
+    bool allowTwoSideWhoList = sWorld->getBoolConfig(CONFIG_ALLOW_TWO_SIDE_WHO_LIST);
+    uint32 gmLevelInWhoList  = sWorld->getIntConfig(CONFIG_GM_LEVEL_IN_WHO_LIST);
+    uint32 displaycount = 0;
 
-	WorldPacket data(SMSG_WHO, 50);                       // guess size
-	data << uint32(matchcount);                           // placeholder, count of players matching criteria
-	data << uint32(displaycount);                         // placeholder, count of players displayed
+    WorldPacket data(SMSG_WHO, 50);                       // guess size
+    data << uint32(matchcount);                           // placeholder, count of players matching criteria
+    data << uint32(displaycount);                         // placeholder, count of players displayed
 
     TRINITY_READ_GUARD(HashMapHolder<Player>::LockType, *HashMapHolder<Player>::GetLock());
     HashMapHolder<Player>::MapType const& m = sObjectAccessor->GetPlayers();
     for (HashMapHolder<Player>::MapType::const_iterator itr = m.begin(); itr != m.end(); ++itr)
     {
-        Player* target = itr->second;
-        // player can see member of other team only if CONFIG_ALLOW_TWO_SIDE_WHO_LIST
-		if (itr->second->GetSession()->GetSecurity() || sWorld->getBoolConfig(CONFIG_GM_LEVEL_IN_WHO_LIST))
-            continue;////
+        if (AccountMgr::IsPlayerAccount(security))
+        {
+            // player can see member of other team only if CONFIG_ALLOW_TWO_SIDE_WHO_LIST
+            if (itr->second->GetTeam() != team && !allowTwoSideWhoList)
+                continue;
 
-        // player can see MODERATOR, GAME MASTER, ADMINISTRATOR only if CONFIG_GM_IN_WHO_LIST
-        if ((itr->second->GetSession()->GetSecurity() > AccountTypes(gmLevelInWhoList)))
-            continue;
+            // player can see MODERATOR, GAME MASTER, ADMINISTRATOR only if CONFIG_GM_IN_WHO_LIST
+            if ((itr->second->GetSession()->GetSecurity() > AccountTypes(gmLevelInWhoList)))
+                continue;
+        }
 
-        // do not process players which are not in world
-        if (!target->IsInWorld())
+        //do not process players which are not in world
+        if (!(itr->second->IsInWorld()))
             continue;
 
         // check if target is globally visible for player
-		/* Remove check so Level 255 shows up in who list
-			if (!target->IsVisibleGloballyFor(_player))
-			continue;
-		*/
-			
-		// check if target's level is in level range
-			uint8 lvl = target->getLevel();
-			/*if (lvl < level_min || lvl > level_max)
-			continue; */
+        if (!(itr->second->IsVisibleGloballyFor(_player)))
+            continue;
+
+        // check if target's level is in level range
+        uint8 lvl = itr->second->getLevel();
+        //if (lvl < level_min || lvl > level_max)
+            //continue;
 
         // check if class matches classmask
-        uint8 class_ = target->getClass();
+        uint32 class_ = itr->second->getClass();
         if (!(classmask & (1 << class_)))
             continue;
 
         // check if race matches racemask
-        uint32 race = target->getRace();
+        uint32 race = itr->second->getRace();
         if (!(racemask & (1 << race)))
             continue;
 
-        uint32 pzoneid = target->GetZoneId();
-        uint8 gender = target->getGender();
+        uint32 pzoneid = itr->second->GetZoneId();
+        uint8 gender = itr->second->getGender();
 
         bool z_show = true;
         for (uint32 i = 0; i < zones_count; ++i)
@@ -391,7 +380,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
         if (!z_show)
             continue;
 
-        std::string pname = target->GetName();
+        std::string pname = itr->second->GetName();
         std::wstring wpname;
         if (!Utf8toWStr(pname, wpname))
             continue;
@@ -400,7 +389,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
         if (!(wplayer_name.empty() || wpname.find(wplayer_name) != std::wstring::npos))
             continue;
 
-        std::string gname = sGuildMgr->GetGuildNameById(target->GetGuildId());
+        std::string gname = sGuildMgr->GetGuildNameById(itr->second->GetGuildId());
         std::wstring wgname;
         if (!Utf8toWStr(gname, wgname))
             continue;
@@ -410,7 +399,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
             continue;
 
         std::string aname;
-        if (AreaTableEntry const* areaEntry = GetAreaEntryByAreaID(pzoneid))
+        if (AreaTableEntry const* areaEntry = GetAreaEntryByAreaID(itr->second->GetZoneId()))
             aname = areaEntry->area_name[GetSessionDbcLocale()];
 
         bool s_show = true;
@@ -719,7 +708,7 @@ void WorldSession::HandleAddFriendOpcodeCallBack(PreparedQueryResult result, std
             {
                 if (friendGuid == GetPlayer()->GetGUID())
                     friendResult = FRIEND_SELF;
-                else if (GetPlayer()->GetTeam() != team && !sWorld->getBoolConfig(CONFIG_ALLOW_GM_GROUP) && AccountMgr::IsPlayerAccount(GetSecurity()))
+                else if (GetPlayer()->GetTeam() != team && !sWorld->getBoolConfig(CONFIG_ALLOW_TWO_SIDE_ADD_FRIEND)  && AccountMgr::IsPlayerAccount(GetSecurity()))
                     friendResult = FRIEND_ENEMY;
                 else if (GetPlayer()->GetSocial()->HasFriend(GUID_LOPART(friendGuid)))
                     friendResult = FRIEND_ALREADY;
