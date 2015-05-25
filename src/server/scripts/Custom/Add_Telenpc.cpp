@@ -1493,6 +1493,10 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The fallen Boss (PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 714);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shadow Moon ( Daily Star Coins)(PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 715);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shibuya ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 716);
+				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Iron Colossus ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 717);
+				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Raz the unforgiven ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 718);
+				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Clyde the colossus ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 719);
+
 				
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -1531,6 +1535,54 @@ public:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(0, -201.985f, 1687.84f, 79.7626f, 4.29892f);  //Off Set
 				break;
+				
+			//demonsoul
+			case GOSSIP_ACTION_INFO_DEF + 717:
+				if (pPlayer->HasItemCount( 320287, 1000, false ))
+					{
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(0, -201.985f, 1687.84f, 79.7626f, 4.29892f);  //Off Set
+				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
+					}
+				else
+                {
+                    pPlayer->CLOSE_GOSSIP_MENU();
+                    pCreature->MonsterWhisper("You need collect at last 500 Demon Soul to get teleport", pPlayer->GetGUID());
+                    return false;
+                }
+                break;
+			
+			//golden
+			case GOSSIP_ACTION_INFO_DEF + 718:
+				if (pPlayer->HasItemCount( 320288, 500, false ))
+					{
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(0, -201.985f, 1687.84f, 79.7626f, 4.29892f);  //Off Set
+				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
+					}
+				else
+                {
+                    pPlayer->CLOSE_GOSSIP_MENU();
+                    pCreature->MonsterWhisper("You need collect at last 500 Golden pearl to get teleport", pPlayer->GetGUID());
+                    return false;
+                }
+                break;
+				
+			//golden
+			case GOSSIP_ACTION_INFO_DEF + 719:
+				if (pPlayer->HasItemCount( 320289, 500, false ))
+					{
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(0, -201.985f, 1687.84f, 79.7626f, 4.29892f);  //Off Set
+				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
+					}
+				else
+                {
+                    pPlayer->CLOSE_GOSSIP_MENU();
+                    pCreature->MonsterWhisper("You need collect at last 500 Black Diamond to get teleport", pPlayer->GetGUID());
+                    return false;
+                }
+                break;
 
 				//mall
 			case GOSSIP_ACTION_INFO_DEF + 8910:

@@ -1395,11 +1395,12 @@ void AddBattlegroundScripts()
 	void AddSC_city_conquest_spawner();
 	void AddSC_vipmall_security();
 	void AddSC_ExchangeDPNPC();
-	void AddSC_DemonConvert();
+	void AddSC_npc_exchanger();
 	void AddSC_npc_legion_master();
 	void AddSC_BountyHunter();
 	void AddSC_on_login();
 	void AddSC_Donation_NPC();
+	void AddSc_PointTele();
 
 #endif
 
@@ -1499,11 +1500,12 @@ void AddCustomScripts()
 	AddSC_vipmall_security();
 	AddSC_ArenaGambler();
 	AddSC_ExchangeDPNPC();
-	AddSC_DemonConvert();
+	AddSC_npc_exchanger();
 	AddSC_npc_legion_master();
 	AddSC_BountyHunter();
 	AddSC_on_login();
 	AddSC_Donation_NPC();
+	AddSc_PointTele();
 
 
 #endif
