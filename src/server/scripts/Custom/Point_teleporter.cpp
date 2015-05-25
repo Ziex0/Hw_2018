@@ -79,7 +79,7 @@ public:
 				if (pPlayer->HasItemCount( 320287, 1000, false ))
 					{
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(0, -201.985f, 1687.84f, 79.7626f, 4.29892f);  //Off Set
+				pPlayer->TeleportTo(571, 8515.120117f, 792.216003f, 557.715027f, 1.537250f);
 				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
 					}
 				else
@@ -95,7 +95,7 @@ public:
 				if (pPlayer->HasItemCount( 320288, 500, false ))
 					{
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(0, -201.985f, 1687.84f, 79.7626f, 4.29892f);  //Off Set
+				pPlayer->TeleportTo(1,-8628.698242f, 1973.565308f, 102.240532f , 0.356536f);
 				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
 					}
 				else
@@ -111,7 +111,7 @@ public:
 				if (pPlayer->HasItemCount( 320289, 500, false ))
 					{
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(0, -201.985f, 1687.84f, 79.7626f, 4.29892f);  //Off Set
+				pPlayer->TeleportTo(533, 3598.094727f, -4522.896484f ,200.513214f , 4.330854f);
 				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
 					}
 				else

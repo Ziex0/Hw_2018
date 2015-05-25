@@ -1492,10 +1492,11 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "OffSet Gear Boss", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 713);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The fallen Boss (PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 714);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shadow Moon ( Daily Star Coins)(PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 715);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shibuya ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 716);
-				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Iron Colossus ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 717);
-				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Raz the unforgiven ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 718);
-				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Clyde the colossus ( World Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 719);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shibuya ( World farm Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 716);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Iron Colossus ( World farm  Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 717);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Raz the unforgiven ( World farm Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 718);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Clyde the colossus ( World farm Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 719);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Frostfire General( World farm illusion Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 720);
 
 				
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
@@ -1541,7 +1542,7 @@ public:
 				if (pPlayer->HasItemCount( 320287, 1000, false ))
 					{
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(0, -201.985f, 1687.84f, 79.7626f, 4.29892f);  //Off Set
+				pPlayer->TeleportTo(571, 8515.120117f, 792.216003f, 557.715027f, 1.537250f);
 				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
 					}
 				else
@@ -1557,7 +1558,7 @@ public:
 				if (pPlayer->HasItemCount( 320288, 500, false ))
 					{
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(0, -201.985f, 1687.84f, 79.7626f, 4.29892f);  //Off Set
+				pPlayer->TeleportTo(1,-8628.698242f, 1973.565308f, 102.240532f , 0.356536f);
 				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
 					}
 				else
@@ -1573,7 +1574,7 @@ public:
 				if (pPlayer->HasItemCount( 320289, 500, false ))
 					{
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(0, -201.985f, 1687.84f, 79.7626f, 4.29892f);  //Off Set
+				pPlayer->TeleportTo(533, 3598.094727f, -4522.896484f ,200.513214f , 4.330854f);
 				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
 					}
 				else
@@ -1583,6 +1584,12 @@ public:
                     return false;
                 }
                 break;
+				
+			//mall
+			case GOSSIP_ACTION_INFO_DEF + 720:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo (571, 8213.403320f,-1916.334473f, 1741.118774f ,4.304713f );
+				break;
 
 				//mall
 			case GOSSIP_ACTION_INFO_DEF + 8910:

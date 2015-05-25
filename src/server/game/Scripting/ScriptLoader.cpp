@@ -1401,6 +1401,7 @@ void AddBattlegroundScripts()
 	void AddSC_on_login();
 	void AddSC_Donation_NPC();
 	void AddSc_PointTele();
+	void AddSC_romeo();
 
 #endif
 
@@ -1506,6 +1507,7 @@ void AddCustomScripts()
 	AddSC_on_login();
 	AddSC_Donation_NPC();
 	AddSc_PointTele();
+	AddSC_romeo();
 
 
 #endif
