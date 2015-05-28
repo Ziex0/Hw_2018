@@ -219,7 +219,7 @@ void Player::UpdateArmor()
             value += CalculatePct(GetStat(Stats((*i)->GetMiscValueB())), (*i)->GetAmount());
     }
 
-    value *= GetModifierValue(unitMod, TOTAL_PCT);
+    value *= GetModifierValue(unitMod, TOTAL_PCT) / 2.0f;
 
     SetArmor(int32(value));
 
@@ -630,9 +630,9 @@ void Player::UpdateAllCritPercentages()
 {
     float value = GetMeleeCritFromAgility();
 
-    SetBaseModValue(CRIT_PERCENTAGE, PCT_MOD, value);
-    SetBaseModValue(OFFHAND_CRIT_PERCENTAGE, PCT_MOD, value);
-    SetBaseModValue(RANGED_CRIT_PERCENTAGE, PCT_MOD, value);
+    SetBaseModValue(CRIT_PERCENTAGE, PCT_MOD, value / 2.0f);
+	SetBaseModValue(OFFHAND_CRIT_PERCENTAGE, PCT_MOD, value / 2.0f);
+	SetBaseModValue(RANGED_CRIT_PERCENTAGE, PCT_MOD, value / 2.0f);
 
     UpdateCritPercentage(BASE_ATTACK);
     UpdateCritPercentage(OFF_ATTACK);

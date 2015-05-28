@@ -352,12 +352,12 @@ public:
                   }
                   break;*/
               case NPC_KING_H:
-                //              npc_medivh->Say(SAY_MEDIVH_WIN,LANG_UNIVERSAL,NULL);
+                //npc_medivh->Say(SAY_MEDIVH_WIN,LANG_UNIVERSAL,NULL);
                 instance->SetData(TYPE_CHESS,FAIL);
                 break;
 
                  case NPC_KING_A:
-                //      npc_medivh->Say(SAY_PLAYER_WIN,LANG_UNIVERSAL,NULL);
+                //npc_medivh->Say(SAY_PLAYER_WIN,LANG_UNIVERSAL,NULL);
                 instance->SetData(TYPE_CHESS,DONE);
                 npc_medivh->SummonGameObject(DUST_COVERED_CHEST,-11058,-1903,221,2.24,0,0,0,0,7200000);
                 break;
@@ -393,7 +393,7 @@ public:
                   }
                   break;*/
               case NPC_KING_A:
-                //              npc_medivh->Say(SAY_MEDIVH_WIN,LANG_UNIVERSAL,NULL);
+                /npc_medivh->Say(SAY_MEDIVH_WIN,LANG_UNIVERSAL,NULL);
                 instance->SetData(TYPE_CHESS,FAIL);
                 break;
               case NPC_KING_H:

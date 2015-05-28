@@ -41,7 +41,7 @@ public:
             player->ADD_GOSSIP_ITEM( 8, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Demon Soul to 100 Golden Pearl"    , GOSSIP_SENDER_MAIN, 4); //Change the ID below
             player->ADD_GOSSIP_ITEM( 7, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Golden Pearl to 100 Black Diamond" , GOSSIP_SENDER_MAIN, 5); //Change the stats below
             player->ADD_GOSSIP_ITEM( 5, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Black Diamond to 100 Magic Card"   , GOSSIP_SENDER_MAIN, 6); //Change the stats below
-            player->ADD_GOSSIP_ITEM( 6, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Magic Card to 1 Donation Points"   , GOSSIP_SENDER_MAIN, 7);
+            player->ADD_GOSSIP_ITEM( 6, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Magic Card to 2 Donation Points"   , GOSSIP_SENDER_MAIN, 7);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Return.", GOSSIP_SENDER_MAIN, 9999);
 			player->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
         }
@@ -78,7 +78,7 @@ public:
                 {
                     player->CLOSE_GOSSIP_MENU();
                     player->DestroyItemCount(320287, 1000, true, false);
-                    player->AddItem(320288, 50);
+                    player->AddItem(320288, 100);
                     _creature->MonsterWhisper("Your DS was successfully converted to GP!", player->GetGUID());
                 }
                 else
@@ -93,7 +93,7 @@ public:
                 {
                     player->CLOSE_GOSSIP_MENU();
                     player->DestroyItemCount(320288, 1000, true, false);
-                    player->AddItem(320289, 50);
+                    player->AddItem(320289, 100);
                     _creature->MonsterWhisper("You exchanged successfully converted to BD!", player->GetGUID());
                 }
                 else
@@ -108,7 +108,7 @@ public:
                 {
                     player->CLOSE_GOSSIP_MENU();
                     player->DestroyItemCount(320288, 1000, true, false);
-                    player->AddItem(320290, 50);
+                    player->AddItem(320290, 100);
                     _creature->MonsterWhisper("You exchanged successfully converted to MC!", player->GetGUID());
                 }
                 else

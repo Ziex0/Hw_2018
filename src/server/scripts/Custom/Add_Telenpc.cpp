@@ -1539,7 +1539,7 @@ public:
 				
 			//demonsoul
 			case GOSSIP_ACTION_INFO_DEF + 717:
-				if (pPlayer->HasItemCount( 320287, 1000, false ))
+				if (pPlayer->HasItemCount( 320287, 500, false ))
 					{
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(571, 8515.120117f, 792.216003f, 557.715027f, 1.537250f);
