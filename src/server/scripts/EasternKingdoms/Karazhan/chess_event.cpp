@@ -393,7 +393,7 @@ public:
                   }
                   break;*/
               case NPC_KING_A:
-                /npc_medivh->Say(SAY_MEDIVH_WIN,LANG_UNIVERSAL,NULL);
+                //npc_medivh->Say(SAY_MEDIVH_WIN,LANG_UNIVERSAL,NULL);
                 instance->SetData(TYPE_CHESS,FAIL);
                 break;
               case NPC_KING_H:

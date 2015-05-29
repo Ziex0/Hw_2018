@@ -604,7 +604,6 @@ void Channel::Say(uint64 guid, std::string const& what, uint32 lang)
     if (Player* player = ObjectAccessor::FindPlayer(guid))
         chatTag = player->GetChatTag();
 
-    // TODO: Add proper RBAC check
     if (sWorld->getBoolConfig(CONFIG_ALLOW_TWO_SIDE_INTERACTION_CHANNEL))
         lang = LANG_UNIVERSAL;
 

@@ -2741,7 +2741,7 @@ float Unit::GetUnitParryChance() const
 
 float Unit::GetUnitMissChance(WeaponAttackType attType) const
 {
-    float miss_chance = 4.00f;
+    float miss_chance = 3.00f;
 
     if (Player const* player = ToPlayer())
         miss_chance += player->GetMissPercentageFromDefence();
