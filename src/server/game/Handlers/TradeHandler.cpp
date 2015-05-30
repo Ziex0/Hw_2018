@@ -152,7 +152,7 @@ void WorldSession::moveItems(Item* myItems[], Item* hisItems[])
             {
                 // logging
                 sLog->outDebug(LOG_FILTER_NETWORKIO, "partner storing: %u", myItems[i]->GetGUIDLow());
-                if (!AccountMgr::IsPlayerAccount(_player->GetSession()->GetSecurity()) >= SEC_PLAYER)
+				if (!AccountMgr::IsPlayerAccount(_player->GetSession()->GetSecurity()) && sWorld->getBoolConfig(CONFIG_GM_LOG_TRADE))
                 {
                     sLog->outCommand(_player->GetSession()->GetAccountId(), "GM %s (Account: %u) trade: %s (Entry: %d Count: %u) to player: %s (Account: %u)",
                         _player->GetName().c_str(), _player->GetSession()->GetAccountId(),
@@ -170,7 +170,7 @@ void WorldSession::moveItems(Item* myItems[], Item* hisItems[])
             {
                 // logging
                 sLog->outDebug(LOG_FILTER_NETWORKIO, "player storing: %u", hisItems[i]->GetGUIDLow());
-                 if (!AccountMgr::IsPlayerAccount(_player->GetSession()->GetSecurity()) >= SEC_PLAYER)
+				if (!AccountMgr::IsPlayerAccount(trader->GetSession()->GetSecurity()) && sWorld->getBoolConfig(CONFIG_GM_LOG_TRADE))
                 {
                     sLog->outCommand(trader->GetSession()->GetAccountId(), "GM %s (Account: %u) trade: %s (Entry: %d Count: %u) to player: %s (Account: %u)",
                         trader->GetName().c_str(), trader->GetSession()->GetAccountId(),
@@ -473,7 +473,7 @@ void WorldSession::HandleAcceptTradeOpcode(WorldPacket& /*recvPacket*/)
         moveItems(myItems, hisItems);
 
         // logging money
-         if (!AccountMgr::IsPlayerAccount(_player->GetSession()->GetSecurity()) >= SEC_PLAYER)
+		if (!AccountMgr::IsPlayerAccount(trader->GetSession()->GetSecurity()) && sWorld->getBoolConfig(CONFIG_GM_LOG_TRADE))
         {
             if (my_trade->GetMoney() > 0)
             {
