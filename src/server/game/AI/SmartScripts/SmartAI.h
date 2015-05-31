@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -197,7 +197,7 @@ class SmartAI : public CreatureAI
 
         void RemoveAuras();
 
-        void OnSpellClick(Unit* clicker);
+        void OnSpellClick(Unit* clicker, bool& result);
 
     private:
         uint32 mFollowCreditType;

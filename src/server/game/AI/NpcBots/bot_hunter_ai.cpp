@@ -348,7 +348,7 @@ public:
                 if (shot->GetSpellInfo()->Id != AUTO_SHOT)
                 {
                     ////casting some other autorepeat spell, wtf?
-                    //TC_LOG_ERROR("entities.player", "CheckAutoShot(): Bot %s is casting autorepeatable spell %u (%s) during check!",
+                    //sLog->outError("entities.player", "CheckAutoShot(): Bot %s is casting autorepeatable spell %u (%s) during check!",
                     //    me->GetName().c_str(), shot->GetSpellInfo()->Id, shot->GetSpellInfo()->SpellName[0]);
 
                     return;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -312,7 +312,7 @@ void SmartAI::UpdatePath(const uint32 diff)
             mWPReached = false;
         }
     }
-    if (me->isInCombat() || HasEscortState(SMART_ESCORT_PAUSED | SMART_ESCORT_RETURNING))
+    if ((!me->HasReactState(REACT_PASSIVE) && me->isInCombat()) || HasEscortState(SMART_ESCORT_PAUSED | SMART_ESCORT_RETURNING))
         return;
     // handle next wp
     if (mWPReached)//reached WP
@@ -343,7 +343,7 @@ void SmartAI::UpdateAI(uint32 diff)
         {
             if (me->FindNearestCreature(mFollowArrivedEntry, INTERACTION_DISTANCE, true))
             {
-                if (Player* player = me->GetPlayer(*me, mFollowGuid))
+                if (Player* player = ObjectAccessor::GetPlayer(*me, mFollowGuid))
                 {
                     if (!mFollowCreditType)
                         player->RewardPlayerAndGroupAtEvent(mFollowCredit, me);
@@ -365,7 +365,9 @@ void SmartAI::UpdateAI(uint32 diff)
                 return;
             }
             mFollowArrivedTimer = 1000;
-        } else mFollowArrivedTimer -= diff;
+        }
+        else
+            mFollowArrivedTimer -= diff;
     }
 
     if (!UpdateVictim())
@@ -433,11 +435,12 @@ void SmartAI::MovementInform(uint32 MovementType, uint32 Data)
 
 void SmartAI::RemoveAuras()
 {
+    /// @fixme: duplicated logic in CreatureAI::_EnterEvadeMode (could use RemoveAllAurasExceptType)
     Unit::AuraApplicationMap& appliedAuras = me->GetAppliedAuras();
     for (Unit::AuraApplicationMap::iterator iter = appliedAuras.begin(); iter != appliedAuras.end();)
     {
         Aura const* aura = iter->second->GetBase();
-        if (!aura->IsPassive() && !aura->HasEffectType(SPELL_AURA_CONTROL_VEHICLE) && aura->GetCasterGUID() != me->GetGUID())
+        if (!aura->IsPassive() && !aura->HasEffectType(SPELL_AURA_CONTROL_VEHICLE) && !aura->HasEffectType(SPELL_AURA_CLONE_CASTER) && aura->GetCasterGUID() != me->GetGUID())
             me->RemoveAura(iter);
         else
             ++iter;
@@ -724,18 +727,13 @@ uint64 SmartAI::GetGUID(int32 /*id*/) const
 
 void SmartAI::SetRun(bool run)
 {
-    if (run)
-        me->SetWalk(false);
-    else
-        me->SetWalk(true);
-
+    me->SetWalk(!run);
     mRun = run;
 }
 
 void SmartAI::SetFly(bool fly)
 {
     me->SetDisableGravity(fly);
-    me->SendMovementFlagUpdate();
 }
 
 void SmartAI::SetSwim(bool swim)
@@ -828,8 +826,11 @@ void SmartAI::sOnGameEvent(bool start, uint16 eventId)
     GetScript()->ProcessEventsFor(start ? SMART_EVENT_GAME_EVENT_START : SMART_EVENT_GAME_EVENT_END, NULL, eventId);
 }
 
-void SmartAI::OnSpellClick(Unit* clicker)
+void SmartAI::OnSpellClick(Unit* clicker, bool& result)
 {
+    if (!result)
+        return;
+
     GetScript()->ProcessEventsFor(SMART_EVENT_ON_SPELLCLICK, clicker);
 }
 

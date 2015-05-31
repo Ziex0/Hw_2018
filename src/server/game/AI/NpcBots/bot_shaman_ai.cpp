@@ -151,7 +151,7 @@ public:
                         if (!to)
                         {
                             _totems[i].first = 0;
-                            //TC_LOG_ERROR("entities.player", "%s has lost totem in slot %u! Despawned normally?", me->GetName().c_str(), i);
+                            //sLog->outError("entities.player", "%s has lost totem in slot %u! Despawned normally?", me->GetName().c_str(), i);
                             continue;
                         }
 
@@ -938,7 +938,7 @@ public:
             _totems[slot].second.pos.Relocate(*summon);
             _totems[slot].second.effradius = std::max<float>(radius, 20.f) + 5.f;
 
-            //TC_LOG_ERROR("entities.player", "shaman bot: summoned %s (type %u) at x='%f', y='%f', z='%f'",
+            //sLog->outError("entities.player", "shaman bot: summoned %s (type %u) at x='%f', y='%f', z='%f'",
             //    summon->GetName().c_str(), slot, _totems[slot].second.GetPositionX(), _totems[slot].second.GetPositionY(), _totems[slot].second.GetPositionZ());
 
             summon->SetDisplayId(me->GetModelForTotem(PlayerTotemType(totem->m_Properties->Id)));
@@ -1084,7 +1084,7 @@ public:
                     Unit* to = sObjectAccessor->FindUnit(_totems[i].first);
                     if (!to)
                     {
-                        //TC_LOG_ERROR("entities.player", "%s has no totem in slot %u during remove!", me->GetName().c_str(), i);
+                        //sLog->outError("entities.player", "%s has no totem in slot %u during remove!", me->GetName().c_str(), i);
                         continue;
                     }
                     to->ToTotem()->UnSummon();

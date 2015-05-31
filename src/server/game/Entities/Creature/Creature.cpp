@@ -2833,7 +2833,7 @@ bool Creature::GetIAmABot() const
 
 bool Creature::GetIAmABotsPet() const
 {
-    return bot_AI && bot_AI->IsPetAI();
+    return bot_AI && bot_AI->isPetAI();
 }
 
 bot_minion_ai* Creature::GetBotMinionAI() const
@@ -2843,7 +2843,7 @@ bot_minion_ai* Creature::GetBotMinionAI() const
 
 bot_pet_ai* Creature::GetBotPetAI() const
 {
-    return IsAIEnabled && bot_AI && bot_AI->IsPetAI() ? const_cast<bot_pet_ai*>(bot_AI->GetPetAI()) : NULL;
+    return IsAIEnabled && bot_AI && bot_AI->isPetAI() ? const_cast<bot_pet_ai*>(bot_AI->GetPetAI()) : NULL;
 }
 
 void Creature::InitBotAI(bool asPet)

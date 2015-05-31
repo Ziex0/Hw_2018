@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -134,7 +134,7 @@ void CreatureAI::MoveInLineOfSight(Unit* who)
         AttackStart(who);
     //else if (who->getVictim() && me->IsFriendlyTo(who)
     //    && me->IsWithinDistInMap(who, sWorld->getIntConfig(CONFIG_CREATURE_FAMILY_ASSISTANCE_RADIUS))
-    //    && me->canStartAttack(who->getVictim(), true)) /// @todo if we use true, it will not attack it when it arrives
+    //    && me->CanStartAttack(who->getVictim(), true)) /// @todo if we use true, it will not attack it when it arrives
     //    me->GetMotionMaster()->MoveChase(who->getVictim());
 }
 
@@ -143,7 +143,7 @@ void CreatureAI::EnterEvadeMode()
     if (!_EnterEvadeMode())
         return;
 
-    sLog->outDebug(LOG_FILTER_UNITS, "Creature %u enters evade mode.", me->GetEntry());
+    sLog->outError(LOG_FILTER_UNITS, "Creature %u enters evade mode.", me->GetEntry());
 
     if (!me->GetVehicle()) // otherwise me will be in evade mode forever
     {
@@ -165,8 +165,6 @@ void CreatureAI::EnterEvadeMode()
 
     if (me->IsVehicle()) // use the same sequence of addtoworld, aireset may remove all summons!
         me->GetVehicleKit()->Reset(true);
-
-    me->SetLastDamagedTime(0);
 }
 
 /*void CreatureAI::AttackedBy(Unit* attacker)
@@ -227,7 +225,8 @@ bool CreatureAI::_EnterEvadeMode()
     if (!me->isAlive())
         return false;
 
-    // dont remove vehicle auras, passengers arent supposed to drop off the vehicle
+    // don't remove vehicle auras, passengers aren't supposed to drop off the vehicle
+    // don't remove clone caster on evade (to be verified)
     me->RemoveAllAurasExceptType(SPELL_AURA_CONTROL_VEHICLE);
 
     // sometimes bosses stuck in combat?
@@ -236,6 +235,7 @@ bool CreatureAI::_EnterEvadeMode()
     me->LoadCreaturesAddon();
     me->SetLootRecipient(NULL);
     me->ResetPlayerDamageReq();
+    me->SetLastDamagedTime(0);
 
     if (me->IsInEvadeMode())
         return false;

@@ -935,7 +935,7 @@ void bot_ai::listAuras(Player* player, Unit* unit) const
         }
 
         //debug
-        //if (IsPetAI()) GetPetAI()->ListSpells(&ch);
+        //if (isPetAI()) GetPetAI()->ListSpells(&ch);
     }
 }
 //SETSTATS
@@ -1324,7 +1324,7 @@ void bot_pet_ai::setStats(uint8 mylevel, uint8 petType, bool force)
 {
     if (petType == PET_TYPE_NONE || petType >= MAX_PET_TYPES) return;
     if (!shouldUpdateStats && !force) return;
-    //TC_LOG_ERROR("entities.player", "setStats(): Updating pet bot %s, type: %u, level %u, owner: %s, master: %s", me->GetName().c_str(), petType, mylevel, m_creatureOwner->GetName().c_str(), master->GetName().c_str());
+    //sLog->outError("entities.player", "setStats(): Updating pet bot %s, type: %u, level %u, owner: %s, master: %s", me->GetName().c_str(), petType, mylevel, m_creatureOwner->GetName().c_str(), master->GetName().c_str());
 
     //LEVEL
     if (me->getLevel() != mylevel)
@@ -1653,14 +1653,14 @@ bool bot_ai::RefreshAura(uint32 spell, int8 count, Unit* target) const
         return false;
     //if (!spellInfo->IsPassive())
     //{
-    //    TC_LOG_ERROR("entities.player", "bot_ai::RefreshAura(): %s received spell %u (%s) which is not a passive spell!", target->GetName().c_str(), spell, spellInfo->SpellName[0]);
+    //    sLog->outError("entities.player", "bot_ai::RefreshAura(): %s received spell %u (%s) which is not a passive spell!", target->GetName().c_str(), spell, spellInfo->SpellName[0]);
     //    //return false;
     //}
     if (target->HasAura(spell))
         target->RemoveAurasDueToSpell(spell);
 
     //if (count > 15)
-    //    TC_LOG_ERROR("entities.player", "bot_ai::RefreshAura(): %s's aura count for spell %u (%s) is greater than 15... (%i)", target->GetName().c_str(), spell, spellInfo->SpellName, count);
+    //    sLog->outError("entities.player", "bot_ai::RefreshAura(): %s's aura count for spell %u (%s) is greater than 15... (%i)", target->GetName().c_str(), spell, spellInfo->SpellName, count);
 
     for (uint8 i = 0; i < count; ++i)
         target->AddAura(spellInfo, MAX_EFFECT_MASK, target);
@@ -1839,11 +1839,11 @@ Unit* bot_ai::getTarget(bool byspell, bool ranged, bool &reset) const
         if (Creature* pet = me->GetBotsPet())
             mytar = pet->getVictim();
 
-    //TC_LOG_ERROR("entities.player", "bot_ai::getTarget(): bot: %s, PvP = %u", me->GetName().c_str(), PvP);
+    //sLog->outError("entities.player", "bot_ai::getTarget(): bot: %s, PvP = %u", me->GetName().c_str(), PvP);
 
     if (u && u == mytar)
     {
-        //TC_LOG_ERROR("entities.player", "bot %s continues attack common target %s", me->GetName().c_str(), u->GetName().c_str());
+        //sLog->outError("entities.player", "bot %s continues attack common target %s", me->GetName().c_str(), u->GetName().c_str());
         return u;//forced
     }
     //Follow if...
@@ -1851,19 +1851,19 @@ Unit* bot_ai::getTarget(bool byspell, bool ranged, bool &reset) const
     float foldist = _getAttackDistance(float(followdist));
     if (!u && master->isAlive() && (me->GetDistance(master) > foldist || (mytar && master->GetDistance(mytar) > foldist && me->GetDistance(master) > foldist)))
     {
-        //TC_LOG_ERROR("entities.player", "bot %s cannot attack target %s, too far away", me->GetName().c_str(), mytar ? mytar->GetName().c_str() : "");
+        //sLog->outError("entities.player", "bot %s cannot attack target %s, too far away", me->GetName().c_str(), mytar ? mytar->GetName().c_str() : "");
         return NULL;
     }
 
     if (u && (master->isInCombat() || u->isInCombat()) && !InDuel(u) && !IsInBotParty(u) && !(!PvP && (u->ToPlayer() || (u->ToCreature() && u->ToCreature()->GetBotAI()))))
     {
-        //TC_LOG_ERROR("entities.player", "bot %s starts attack master's target %s", me->GetName().c_str(), u->GetName().c_str());
+        //sLog->outError("entities.player", "bot %s starts attack master's target %s", me->GetName().c_str(), u->GetName().c_str());
         return u;
     }
 
     if (CanBotAttack(mytar, byspell) && !InDuel(mytar))
     {
-        //TC_LOG_ERROR("entities.player", "bot %s continues attack its target %s", me->GetName().c_str(), mytar->GetName().c_str());
+        //sLog->outError("entities.player", "bot %s continues attack its target %s", me->GetName().c_str(), mytar->GetName().c_str());
         if (me->GetDistance(mytar) > (ranged ? 20.f : 5.f) && m_botCommandState != COMMAND_STAY && m_botCommandState != COMMAND_FOLLOW)
             reset = true;
         return mytar;
@@ -1885,7 +1885,7 @@ Unit* bot_ai::getTarget(bool byspell, bool ranged, bool &reset) const
                 (bot->isInCombat() || u->isInCombat()) &&
                 (master->isDead() || master->GetDistance(u) < foldist))
             {
-                //TC_LOG_ERROR("entities.player", "bot %s hooked %s's victim %s", me->GetName().c_str(), bot->GetName().c_str(), u->GetName().c_str());
+                //sLog->outError("entities.player", "bot %s hooked %s's victim %s", me->GetName().c_str(), bot->GetName().c_str(), u->GetName().c_str());
                 return u;
             }
             Creature* pet = bot->GetIAmABot() ? bot->GetBotsPet() : NULL;
@@ -1895,7 +1895,7 @@ Unit* bot_ai::getTarget(bool byspell, bool ranged, bool &reset) const
                 (pet->isInCombat() || u->isInCombat()) &&
                 (master->isDead() || master->GetDistance(u) < foldist))
             {
-                //TC_LOG_ERROR("entities.player", "bot %s hooked %s's victim %s", me->GetName().c_str(), pet->GetName().c_str(), u->GetName().c_str());
+                //sLog->outError("entities.player", "bot %s hooked %s's victim %s", me->GetName().c_str(), pet->GetName().c_str(), u->GetName().c_str());
                 return u;
             }
         }
@@ -1912,7 +1912,7 @@ Unit* bot_ai::getTarget(bool byspell, bool ranged, bool &reset) const
                 (pl->isInCombat() || u->isInCombat()) &&
                 (master->isDead() || master->GetDistance(u) < foldist))
             {
-                //TC_LOG_ERROR("entities.player", "bot %s hooked %s's victim %s", me->GetName().c_str(), pl->GetName().c_str(), u->GetName().c_str());
+                //sLog->outError("entities.player", "bot %s hooked %s's victim %s", me->GetName().c_str(), pl->GetName().c_str(), u->GetName().c_str());
                 return u;
             }
             if (!pl->HaveBot()) continue;
@@ -1927,7 +1927,7 @@ Unit* bot_ai::getTarget(bool byspell, bool ranged, bool &reset) const
                     (bot->isInCombat() || u->isInCombat()) &&
                     (master->isDead() || master->GetDistance(u) < foldist))
                 {
-                    //TC_LOG_ERROR("entities.player", "bot %s hooked %s's victim %s", me->GetName().c_str(), bot->GetName().c_str(), u->GetName().c_str());
+                    //sLog->outError("entities.player", "bot %s hooked %s's victim %s", me->GetName().c_str(), bot->GetName().c_str(), u->GetName().c_str());
                     return u;
                 }
                 Creature* pet = bot->GetIAmABot() ? bot->GetBotsPet() : NULL;
@@ -1939,7 +1939,7 @@ Unit* bot_ai::getTarget(bool byspell, bool ranged, bool &reset) const
                     (pet->isInCombat() || u->isInCombat()) &&
                     (master->isDead() || master->GetDistance(u) < foldist))
                 {
-                    //TC_LOG_ERROR("entities.player", "bot %s hooked %s's victim %s", me->GetName().c_str(), pet->GetName().c_str(), u->GetName().c_str());
+                    //sLog->outError("entities.player", "bot %s hooked %s's victim %s", me->GetName().c_str(), pet->GetName().c_str(), u->GetName().c_str());
                     return u;
                 }
             }
@@ -1968,7 +1968,7 @@ Unit* bot_ai::getTarget(bool byspell, bool ranged, bool &reset) const
 
     if (t && opponent && t != opponent)
     {
-        //TC_LOG_ERROR("entities.player", "bot %s has Found new target %s", me->GetName().c_str(), t->GetName().c_str());
+        //sLog->outError("entities.player", "bot %s has Found new target %s", me->GetName().c_str(), t->GetName().c_str());
         reset = true;
     }
     return t;
@@ -2746,10 +2746,10 @@ uint32 bot_ai::InitSpell(Unit* caster, uint32 spell)
 //Including health calcs, set and regeneration
 void bot_minion_ai::_OnHealthUpdate(uint8 myclass, uint8 mylevel) const
 {
-    //TC_LOG_ERROR("entities.player", "_OnHealthUpdate(): updating bot %s", me->GetName().c_str());
+    //sLog->outError("entities.player", "_OnHealthUpdate(): updating bot %s", me->GetName().c_str());
     float pct = me->GetHealthPct();// needs for regeneration
     uint32 m_basehp = classinfo.basehealth;
-    //TC_LOG_ERROR("entities.player", "class base health: %u", m_basehp);
+    //sLog->outError("entities.player", "class base health: %u", m_basehp);
     me->SetCreateHealth(m_basehp);
     float stammod;
     switch (myclass)
@@ -2810,7 +2810,7 @@ void bot_minion_ai::_OnHealthUpdate(uint8 myclass, uint8 mylevel) const
     }
     stammod -= 0.3f;
     stammod *= 0.75f;
-    //TC_LOG_ERROR("entities.player", "stammod: %f", stammod);
+    //sLog->outError("entities.player", "stammod: %f", stammod);
 
     //manually pick up stamina from bot's buffs
     float stamValue = me->GetTotalStatValue(STAT_STAMINA);
@@ -2819,7 +2819,7 @@ void bot_minion_ai::_OnHealthUpdate(uint8 myclass, uint8 mylevel) const
     for (uint8 i = 0; i != BOT_INVENTORY_SIZE; ++i)
         stamValue += 1.f * (static_cast<BotStat>(_stats[i])[ITEM_MOD_STAMINA]);
 
-    //TC_LOG_ERROR("entities.player", "bot's stats to health add: Stamina (%f), value: %f", stamValue, stamValue * 10.f);
+    //sLog->outError("entities.player", "bot's stats to health add: Stamina (%f), value: %f", stamValue, stamValue * 10.f);
     int32 hp_add = int32(stamValue * 10.f);
 
     for (uint8 i = 0; i != BOT_INVENTORY_SIZE; ++i)
@@ -2830,7 +2830,7 @@ void bot_minion_ai::_OnHealthUpdate(uint8 myclass, uint8 mylevel) const
     float base_stam = master->GetModifierValue(UNIT_MOD_STAT_STAMINA, BASE_VALUE);
     base_stam = std::max(base_stam - 18.f, 0.f); //remove base stamina (not calculated into health)
     stamValue = base_stam * master->GetModifierValue(UNIT_MOD_STAT_STAMINA, BASE_PCT) * total_pct;
-    //TC_LOG_ERROR("entities.player", "stat to health add: Stamina (%f), value: %f", stamValue, stamValue*stammod);
+    //sLog->outError("entities.player", "stat to health add: Stamina (%f), value: %f", stamValue, stamValue*stammod);
     hp_add += int32(stamValue * stammod);
     //float stamstat = stat * 0.5f;
     //if (stamValue > stamstat)
@@ -2845,19 +2845,19 @@ void bot_minion_ai::_OnHealthUpdate(uint8 myclass, uint8 mylevel) const
     //}
     //sLog->outBasic("health to add after master's stat mod: %i", hp_add);
     int32 miscVal = me->getGender() * mylevel;
-    //TC_LOG_ERROR("entities.player", "health to remove from gender mod: %i", -miscVal);
+    //sLog->outError("entities.player", "health to remove from gender mod: %i", -miscVal);
     hp_add -= miscVal;//less hp for females lol
-    //TC_LOG_ERROR("entities.player", "health to add after gender mod: %i", hp_add);
+    //sLog->outError("entities.player", "health to add after gender mod: %i", hp_add);
     //miscVal = myrace*(mylevel/5);
-    //TC_LOG_ERROR("entities.player", "health to add from race mod: %i", miscVal);
+    //sLog->outError("entities.player", "health to add from race mod: %i", miscVal);
     //hp_add += miscVal;//draenei tanks lol
-    //TC_LOG_ERROR("entities.player", "health to add after race mod: %i", hp_add);
+    //sLog->outError("entities.player", "health to add after race mod: %i", hp_add);
     miscVal = master->GetNpcBotSlot(me->GetGUID()) * (mylevel / 5);
-    //TC_LOG_ERROR("entities.player", "health to remove from slot mod: %i", -miscVal);
+    //sLog->outError("entities.player", "health to remove from slot mod: %i", -miscVal);
     hp_add -= miscVal;
-    //TC_LOG_ERROR("entities.player", "health to add after slot mod: %i", hp_add);
+    //sLog->outError("entities.player", "health to add after slot mod: %i", hp_add);
     uint32 m_totalhp = m_basehp + hp_add; //m_totalhp = uint32(float(m_basehp + hp_add) * stammod);
-    //TC_LOG_ERROR("entities.player", "total base health: %u", m_totalhp);
+    //sLog->outError("entities.player", "total base health: %u", m_totalhp);
     uint32 bonuspct = 0;
     bonuspct += 35 * (master->GetBotTankGuid() == me->GetGUID());
     bonuspct += 8 * (GetBotStance() == DEATH_KNIGHT_FROST_PRESENCE);
@@ -2865,7 +2865,7 @@ void bot_minion_ai::_OnHealthUpdate(uint8 myclass, uint8 mylevel) const
         m_totalhp = (m_totalhp * (100 + bonuspct)) / 100;
     me->SetModifierValue(UNIT_MOD_HEALTH, BASE_VALUE, float(m_totalhp)); //replaces base hp at max lvl
     me->UpdateMaxHealth();//will use our values we just set (update base health and buffs)
-    //TC_LOG_ERROR("entities.player", "overall hp: %u", me->GetMaxHealth());
+    //sLog->outError("entities.player", "overall hp: %u", me->GetMaxHealth());
     me->SetHealth(uint32(0.5f + float(me->GetMaxHealth()) * pct / 100.f)); //restore pct
     if (!me->isInCombat())
         me->SetHealth(me->GetHealth() + m_basehp / 100 + me->getLevel() / 2); //regenerate
@@ -2876,10 +2876,10 @@ void bot_minion_ai::_OnManaUpdate(uint8 myclass, uint8 mylevel, bool shapeshift)
 {
     if (me->getPowerType() != POWER_MANA)
         return;
-    //TC_LOG_ERROR("entities.player", "_OnManaUpdate(): updating bot %s", me->GetName().c_str());
+    //sLog->outError("entities.player", "_OnManaUpdate(): updating bot %s", me->GetName().c_str());
     float pct = (float(me->GetPower(POWER_MANA)) * 100.f) / float(me->GetMaxPower(POWER_MANA));
     float m_basemana = classinfo.basemana > 0 ? classinfo.basemana : me->GetCreateMana();
-    //TC_LOG_ERROR("entities.player", "classinfo base mana = %f", m_basemana);
+    //sLog->outError("entities.player", "classinfo base mana = %f", m_basemana);
     me->SetCreateMana(m_basemana); //set base mana, critical
     float manamod = 15.f; //here we set mana multiplier from intellect as we gain mana from MASTER's stats mostly
     switch (myclass)
@@ -2895,7 +2895,7 @@ void bot_minion_ai::_OnManaUpdate(uint8 myclass, uint8 mylevel, bool shapeshift)
 
     manamod *= 0.75f; //custom
 
-    //TC_LOG_ERROR("entities.player", "Manamod: %f", manamod);
+    //sLog->outError("entities.player", "Manamod: %f", manamod);
     float intValue = me->GetTotalStatValue(STAT_INTELLECT);
     intValue = std::max(intValue - 18.f, 1.f); //remove base int (not calculated into mana)
 
@@ -2905,7 +2905,7 @@ void bot_minion_ai::_OnManaUpdate(uint8 myclass, uint8 mylevel, bool shapeshift)
         m_basemana += 3.f * (static_cast<BotStat>(_stats[i])[ITEM_MOD_MANA]);
     }
 
-    //TC_LOG_ERROR("entities.player", "bot's stats to mana add: Int (%f), value: %f", intValue, intValue * manamod);
+    //sLog->outError("entities.player", "bot's stats to mana add: Int (%f), value: %f", intValue, intValue * manamod);
     m_basemana += intValue * 15.f;
     //pick up master's intellect from items if master has mana
     if (master->getPowerType() == POWER_MANA)
@@ -2916,26 +2916,26 @@ void bot_minion_ai::_OnManaUpdate(uint8 myclass, uint8 mylevel, bool shapeshift)
     }
     else // pick up maxstat
         intValue = stat * 0.5f;
-    //TC_LOG_ERROR("entities.player", "mana add from master's stat: %f", intValue * manamod);
+    //sLog->outError("entities.player", "mana add from master's stat: %f", intValue * manamod);
     m_basemana += intValue * manamod;
-    //TC_LOG_ERROR("entities.player", "base mana + mana from master's intellect or stat: %f", m_basemana);
+    //sLog->outError("entities.player", "base mana + mana from master's intellect or stat: %f", m_basemana);
     //intValue = me->GetTotalAuraModValue(UNIT_MOD_STAT_INTELLECT);
     //sLog->outBasic("Intellect from buffs: %f", intValue);
     //m_basemana += uint32(intValue) * manamod;
     //sLog->outBasic("base mana + mana from intellect + mana from buffs: %u", m_basemana);
     uint8 otherVal = me->getGender() * 3 * mylevel;
-    //TC_LOG_ERROR("entities.player", "mana to add from gender mod: %u", otherVal);
+    //sLog->outError("entities.player", "mana to add from gender mod: %u", otherVal);
     m_basemana += float(otherVal); //more mana for females lol
-    //TC_LOG_ERROR("entities.player", "base mana after gender mod: %f", m_basemana);
+    //sLog->outError("entities.player", "base mana after gender mod: %f", m_basemana);
     otherVal = master->GetNpcBotSlot(me->GetGUID()) * (mylevel / 5); //only to make mana unique
-    //TC_LOG_ERROR("entities.player", "mana to remove from slot mod: %i", -int8(otherVal));
+    //sLog->outError("entities.player", "mana to remove from slot mod: %i", -int8(otherVal));
     m_basemana -= otherVal;
-    //TC_LOG_ERROR("entities.player", "base mana after slot mod: %f", m_basemana);
+    //sLog->outError("entities.player", "base mana after slot mod: %f", m_basemana);
     float m_totalmana = m_basemana;
-    //TC_LOG_ERROR("entities.player", "total mana to set: %f", m_totalmana);
+    //sLog->outError("entities.player", "total mana to set: %f", m_totalmana);
     me->SetModifierValue(UNIT_MOD_MANA, BASE_VALUE, m_totalmana);
     me->UpdateMaxPower(POWER_MANA);
-    //TC_LOG_ERROR("entities.player", "Overall mana to set: %u", me->GetMaxPower(POWER_MANA));
+    //sLog->outError("entities.player", "Overall mana to set: %u", me->GetMaxPower(POWER_MANA));
     if (tempMana)
     {
         me->SetPower(POWER_MANA, tempMana);
@@ -3614,7 +3614,7 @@ bool bot_minion_ai::OnGossipSelect(Player* player, Creature* creature, uint32 se
 
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "BACK", 6100, GOSSIP_ACTION_INFO_DEF + 2);
 
-            //TC_LOG_ERROR("entities.player", "OnGossipSelect(bot): added %u item(s) to list of %s (requester: %s)",
+            //sLog->outError("entities.player", "OnGossipSelect(bot): added %u item(s) to list of %s (requester: %s)",
             //    counter, me->GetName().c_str(), player->GetName().c_str());
 
             break;

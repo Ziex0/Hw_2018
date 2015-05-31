@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+/* Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * Thanks to the original authors: ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *

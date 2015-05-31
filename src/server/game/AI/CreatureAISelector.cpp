@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -95,7 +95,7 @@ namespace FactorySelector
         // select NullCreatureAI if not another cases
         ainame = (ai_factory == NULL) ? "NullCreatureAI" : ai_factory->key();
 
-        sLog->outDebug(LOG_FILTER_TSCR, "Creature %u used AI is %s.", creature->GetGUIDLow(), ainame.c_str());
+        sLog->outDebug(LOG_FILTER_TSCR, "Creature %s (Entry: %u GUID: %u DB GUID: %u) is using AI type: %s.", creature->GetName().c_str(), creature->GetEntry(), creature->GetGUIDLow(), creature->GetDBTableGUIDLow(), ainame.c_str());
         return (ai_factory == NULL ? new NullCreatureAI(creature) : ai_factory->Create(creature));
     }
 

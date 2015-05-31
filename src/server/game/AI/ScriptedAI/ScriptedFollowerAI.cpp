@@ -16,7 +16,7 @@ EndScriptData */
 
 const float MAX_PLAYER_DISTANCE = 100.0f;
 
-enum ePoints
+enum Points
 {
     POINT_COMBAT_START  = 0xFFFFFF
 };
@@ -311,7 +311,7 @@ void FollowerAI::StartFollow(Player* player, uint32 factionForFollower, const Qu
 
 Player* FollowerAI::GetLeaderForFollower()
 {
-    if (Player* player = Unit::GetPlayer(*me, m_uiLeaderGUID))
+    if (Player* player = ObjectAccessor::GetPlayer(*me, m_uiLeaderGUID))
     {
         if (player->isAlive())
             return player;
