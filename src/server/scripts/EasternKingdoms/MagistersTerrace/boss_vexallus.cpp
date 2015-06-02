@@ -179,7 +179,7 @@ class boss_vexallus : public CreatureScript
 
         CreatureAI* GetAI(Creature* creature) const override
         {
-            return GetInstanceAI<boss_vexallusAI>(creature);
+            return new boss_vexallusAI(creature);
         };
 };
 

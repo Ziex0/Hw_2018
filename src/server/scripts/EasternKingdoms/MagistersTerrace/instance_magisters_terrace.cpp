@@ -45,7 +45,7 @@ class instance_magisters_terrace : public InstanceMapScript
         {
             instance_magisters_terrace_InstanceMapScript(Map* map) : InstanceScript(map)
             {
-                SetHeaders(DataHeader);
+                //SetHeaders(DataHeader);
                 SetBossNumber(EncounterCount);
                 LoadDoorData(doorData);
 
@@ -156,7 +156,7 @@ class instance_magisters_terrace : public InstanceMapScript
                 return true;
             }
 
-            ObjectGuid GetGuidData(uint32 type) const override
+            uint64 GetData64(uint32 type) const override
             {
                 switch (type)
                 {
@@ -173,14 +173,14 @@ class instance_magisters_terrace : public InstanceMapScript
                     default:
                         break;
                 }
-                return ObjectGuid::Empty;
+                return false;
             }
 
         protected:
-            ObjectGuid SelinGUID;
-            ObjectGuid DelrissaGUID;
-            ObjectGuid KaelStatue[2];
-            ObjectGuid EscapeOrbGUID;
+            uint32 SelinGUID;
+            uint32 DelrissaGUID;
+            uint32 KaelStatue[2];
+            uint32 EscapeOrbGUID;
             uint32 DelrissaDeathCount;
         };
 
