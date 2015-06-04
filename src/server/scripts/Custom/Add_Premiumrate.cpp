@@ -48,7 +48,7 @@ class premium_rate : public CreatureScript
 			pPlayer->DestroyItemCount(320265, 1, true);
 			LoginDatabase.PExecute("REPLACE INTO account_premium (`id`, `setdate`, `unsetdate`, `Premium_type`, `active`) VALUES ('%u', '%u', '0', '1', '1')", pPlayer->GetSession()->GetAccountId());			
 			LoginDatabase.PExecute("REPLACE INTO account_access (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
-			LoginDatabase.PExecute("REPLACE INTO account_vip (`acc_id`, `viplevel`, `active`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
+			//LoginDatabase.PExecute("REPLACE INTO account_vip (`acc_id`, `viplevel`, `active`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 			char str[200];
 			sprintf(str,"Your now Permanent PREMIUM member, thank you for supporting our server! please close your Wow and Re-login");
                 pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);                
@@ -67,7 +67,7 @@ class premium_rate : public CreatureScript
 			pPlayer->DestroyItemCount(320265, 1, true);
 			LoginDatabase.PExecute("REPLACE INTO account_premium (`id`, `setdate`, `unsetdate`, `Premium_type`, `active`) VALUES ('%u', '%u', '0', '1', '1')", pPlayer->GetSession()->GetAccountId());			
 			LoginDatabase.PExecute("REPLACE INTO account_access (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
-			LoginDatabase.PExecute("REPLACE INTO account_vip (`acc_id`, `viplevel`, `active`) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
+			//LoginDatabase.PExecute("REPLACE INTO account_vip (`acc_id`, `viplevel`, `active`) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
 			char str[200];
 			sprintf(str,"Your now Permanent PREMIUM member, thank you for supporting our server! please close your Wow and Re-login");
                 pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);                

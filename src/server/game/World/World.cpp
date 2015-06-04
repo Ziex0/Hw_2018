@@ -2302,23 +2302,23 @@ void World::SendGMText(int32 string_id, ...)
     va_end(ap);
 }
 
-void World::SendVIPText(int32 string_id, ...)
-{
-    va_list ap;
-    va_start(ap, string_id);
+//void World::SendVIPText(int32 string_id, ...)
+//{
+    //va_list ap;
+    //va_start(ap, string_id);
 
-    Trinity::WorldWorldTextBuilder wt_builder(string_id, &ap);
-    Trinity::LocalizedPacketListDo<Trinity::WorldWorldTextBuilder> wt_do(wt_builder);
-    for (SessionMap::iterator itr = m_sessions.begin(); itr != m_sessions.end(); ++itr)
-    {
-		WorldSession* session = itr->second;
-		if (!itr->second || !itr->second->GetPlayer() || !itr->second->GetPlayer()->IsInWorld())
-			continue;
+    //Trinity::WorldWorldTextBuilder wt_builder(string_id, &ap);
+    //Trinity::LocalizedPacketListDo<Trinity::WorldWorldTextBuilder> wt_do(wt_builder);
+    //for (SessionMap::iterator itr = m_sessions.begin(); itr != m_sessions.end(); ++itr)
+    //{
+		//WorldSession* session = itr->second;
+		//if (!itr->second || !itr->second->GetPlayer() || !itr->second->GetPlayer()->IsInWorld())
+			//continue;
 
 		// Player should be in world
-		Player* player = session->GetPlayer();
-		if (!player || !player->IsInWorld())
-			continue;
+		//Player* player = session->GetPlayer();
+		//if (!player || !player->IsInWorld())
+			//continue;
 
 		/*if (itr->second->GetPlayer()->GetCommandStatus(HIDE_VIP) == false)
 	     continue;
@@ -2326,11 +2326,11 @@ void World::SendVIPText(int32 string_id, ...)
         if (itr->second->GetSecurity() >= SEC_VIP)
             continue;*/
 
-		wt_do(player);
-    }
+		//wt_do(player);
+    //}
 
-    va_end(ap);
-}
+    //va_end(ap);
+//}
 
 /// DEPRECATED, only for debug purpose. Send a System Message to all players (except self if mentioned)
 void World::SendGlobalText(const char* text, WorldSession* self)

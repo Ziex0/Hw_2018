@@ -360,7 +360,7 @@ struct boss_priestess_lackey_commonAI : public ScriptedAI
     {
         Initialize();
         instance = creature->GetInstanceScript();
-        AcquireGUIDs();
+        //AcquireGUIDs();
     }
 
     void Initialize()
@@ -455,14 +455,14 @@ struct boss_priestess_lackey_commonAI : public ScriptedAI
             Delrissa->AI()->KilledUnit(victim);
     }
 
-    void AcquireGUIDs()
+    /*void AcquireGUIDs()
     {
         if (Creature* Delrissa = (ObjectAccessor::GetCreature(*me, instance->GetData(DATA_DELRISSA))))
         {
             for (uint8 i = 0; i < MAX_ACTIVE_LACKEY; ++i)
                 m_auiLackeyGUIDs[i] = CAST_AI(boss_priestess_delrissa::boss_priestess_delrissaAI, Delrissa->AI())->m_auiLackeyGUID[i];
         }
-    }
+    }*/
 
     void UpdateAI(uint32 diff) override
     {
@@ -590,7 +590,7 @@ public:
         }
     };
 };
-
+/*
 enum WarlockSpells
 {
     SPELL_IMMOLATE              = 44267,
@@ -642,7 +642,7 @@ public:
             boss_priestess_lackey_commonAI::Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void EnterCombat(Unit* who) override
         {
             DoCast(me, SPELL_SUMMON_IMP);
         }
@@ -694,7 +694,7 @@ public:
         }
     };
 };
-
+*/
 enum KickDown
 {
     SPELL_KNOCKDOWN     = 11428,
@@ -1358,7 +1358,7 @@ void AddSC_boss_priestess_delrissa()
 {
     new boss_priestess_delrissa();
     new boss_kagani_nightstrike();
-    new boss_ellris_duskhallow();
+    // new boss_ellris_duskhallow();
     new boss_eramas_brightblaze();
     new boss_yazzai();
     new boss_warlord_salaris();
