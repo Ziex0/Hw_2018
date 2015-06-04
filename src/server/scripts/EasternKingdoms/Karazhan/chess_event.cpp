@@ -5,28 +5,28 @@
 #define HORDE_CREATURE_FACTION 1689
 #define DUST_COVERED_CHEST  185119
 
-#define GOSSIP_POSSES "I take !" //need correction                                                                                 
+#define GOSSIP_POSSES "Ich übernehme!" //need correction                                                                                 
 
-#define EVENT_START "Let's play chess !"
+#define EVENT_START "Lasst uns Schach spielen!"
 #define NPC_ATTACK_RADIUS 7
 
-#define SAY_AT_EVENT_START "Very gutw . Let's start the game"
+#define SAY_AT_EVENT_START "Sehr gutw. Lasst das Spiel beginnen."
 #define SOUND_START 10338
 
 #define SAY_LOSE_KNIGHT_P "Yes...all according to plan."
 #define SOUND_KNIGHT_LOSE_P 10349
-#define SAY_LOSE_KNIGHT_M "Yes of course."
+#define SAY_LOSE_KNIGHT_M "Ja... natürlich."
 #define SOUND_KNIGHT_LOSE_M 10350
 
 #define SAY_LOSE_PAWN_P_1 "A transparent stratagem."
 #define SOUND_LOSE_PAWN_P_1 10339
-#define SAY_LOSE_PAWN_P_2 "Let's see."
+#define SAY_LOSE_PAWN_P_2 "Sehen wir mal."
 #define SOUND_LOSE_PAWN_P_2 10340
 #define SAY_LOSE_PAWN_P_3 "Ah, the wheels have begun to turn."
 #define SOUND_LOSE_PAWN_P_3 10341
 #define SAY_LOSE_PAWN_M_1 "Hmm."
 #define SOUND_LOSE_PAWN_M_1 10342
-#define SAY_LOSE_PAWN_M_2 "all the same!"
+#define SAY_LOSE_PAWN_M_2 "Egal!"
 #define SOUND_LOSE_PAWN_M_2 10344
 #define SAY_LOSE_PAWN_M_3 "Interesting."
 #define SOUND_LOSE_PAWN_M_3 10343
@@ -158,7 +158,7 @@ public:
         }
     }
 
-    void SpellHit(Unit* caster, SpellInfo const* spell)
+    void SpellHit(Unit* caster, SpellInfo const*spell)
     {
       if(spell->Id == SPELL_CHANGE_FACING)
         caster->SetInFront(me);
@@ -276,7 +276,7 @@ public:
         int move_lenght = 2*rand()%10;
         float new_x = pos_x + move_lenght * cos(angle);
         float new_y = pos_y + move_lenght * sin(angle);
-        me->Relocate(new_x,new_y,221.00f,2.24f);
+        me->Relocate(new_x,new_y,221,2.24);
         me->CombatStop();
         me->SetFlag(UNIT_FIELD_FLAGS,UNIT_FLAG_NOT_SELECTABLE);
       }
@@ -351,13 +351,12 @@ public:
                   case 1:npc_medivh->Say(SAY_LOSE_PAWN_M_2,LANG_UNIVERSAL,NULL);break;
                   }
                   break;*/
-              case NPC_KING_H:
-                //npc_medivh->Say(SAY_MEDIVH_WIN,LANG_UNIVERSAL,NULL);
+			 case NPC_KING_H:
+                //              npc_medivh->Say(SAY_MEDIVH_WIN,LANG_UNIVERSAL,NULL);
                 instance->SetData(TYPE_CHESS,FAIL);
                 break;
-
-                 case NPC_KING_A:
-                //npc_medivh->Say(SAY_PLAYER_WIN,LANG_UNIVERSAL,NULL);
+              case NPC_KING_A:
+                //      npc_medivh->Say(SAY_PLAYER_WIN,LANG_UNIVERSAL,NULL);
                 instance->SetData(TYPE_CHESS,DONE);
                 npc_medivh->SummonGameObject(DUST_COVERED_CHEST,-11058,-1903,221,2.24,0,0,0,0,7200000);
                 break;
@@ -393,7 +392,7 @@ public:
                   }
                   break;*/
               case NPC_KING_A:
-                //npc_medivh->Say(SAY_MEDIVH_WIN,LANG_UNIVERSAL,NULL);
+                //              npc_medivh->Say(SAY_MEDIVH_WIN,LANG_UNIVERSAL,NULL);
                 instance->SetData(TYPE_CHESS,FAIL);
                 break;
               case NPC_KING_H:
