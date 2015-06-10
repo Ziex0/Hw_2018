@@ -13,7 +13,6 @@ COLLATE='latin1_swedish_ci'
 ENGINE=MyISAM
 ;
 */
-
 #include "ScriptPCH.h"
 #include <cstring>
 #include "ObjectMgr.h"
@@ -30,12 +29,12 @@ class donorrewarder : public CreatureScript
         void RewardItem(Player* player, Creature* pCreature, int item , int count, int cost)
         {
             QueryResult result;
-            result = CharacterDatabase.PQuery("SELECT dp FROM web_db.account_data WHERE id = '%u' AND dp >= '0'", player->GetSession()->GetAccountId());
+            result = CharacterDatabase.PQuery("SELECT dp FROM Web_db.account_data WHERE id = '%u' AND dp >= '0'", player->GetSession()->GetAccountId());
             char str[200];
             if (!result) // check
             {
                 sprintf(str,"Your have abused our systems and gotten a negative balance on your Donation Points. Your points are set to 0.");
-				LoginDatabase.PQuery("UPDATE web_db.account_data set dp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("UPDATE Web_db.account_data set dp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
                 player->PlayerTalkClass->ClearMenus();
                 OnGossipHello(player, pCreature);
                 pCreature->MonsterSay(str, LANG_UNIVERSAL, player->GetGUID());
@@ -52,7 +51,7 @@ class donorrewarder : public CreatureScript
             }
             else
             {
-                if (points < cost)
+                if (points <cost)
                 {
                      sprintf(str,"You broke now,you must Donate on www.TheSatria.com!");
                      player->MonsterWhisper(str,player->GetGUID(),true);
@@ -63,8 +62,8 @@ class donorrewarder : public CreatureScript
                     {
   			   std::string DateTime = "%Y-%m-%d %H:%M:%S";
 			   ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
-               CharacterDatabase.PQuery("Update web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
-               LoginDatabase.PQuery("INSERT INTO web_db.donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
+               CharacterDatabase.PQuery("Update Web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
+               //LoginDatabase.PQuery("INSERT INTO Web_db.donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
                sprintf(str,"Your points are taken and your item is given!!!");
                player->MonsterWhisper(str,player->GetGUID(),true);
 			   player->SaveToDB();
@@ -80,34 +79,11 @@ class donorrewarder : public CreatureScript
             player->PlayerTalkClass->ClearMenus();
             OnGossipHello(player, pCreature);
         }
-
-bool HasCheatCooldown(Player* player)
-{
-	QueryResult result = CharacterDatabase.PQuery("SELECT * FROM character_cooldown WHERE guid = '%u' AND cooldown=1", player->GetGUIDLow());
-	if(result)
-		return true;
-	return false;
-}
-bool HasCheatCasttime(Player* player)
-{
-	QueryResult result = CharacterDatabase.PQuery("SELECT * FROM character_casttime WHERE guid = '%u' AND casttime=1", player->GetGUIDLow());
-	if(result)
-		return true;
-	return false;
-}
-bool HasCheatPower(Player* player)
-{
-	QueryResult result = CharacterDatabase.PQuery("SELECT * FROM character_cheatpower WHERE guid = '%u' AND cheatpower=1", player->GetGUIDLow());
-	if(result)
-		return true;
-	return false;
-}
-
-        bool OnGossipHello(Player* player, Creature* pCreature)
+		
+    bool OnGossipHello(Player* player, Creature* pCreature)
         {
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
-			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "NEW: Cheats", GOSSIP_SENDER_MAIN, 5400);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "How much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
+            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:35:35|tHow much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Weapons", GOSSIP_SENDER_MAIN, 2000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorArmors and Shirts", GOSSIP_SENDER_MAIN, 300);
@@ -128,7 +104,6 @@ bool HasCheatPower(Player* player)
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Heaven Gems 5 DP - 3 Gems", GOSSIP_SENDER_MAIN, 5100);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Portable Mailbox - 10 DP", GOSSIP_SENDER_MAIN, 5200);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Multi Vendor - 10 DP", GOSSIP_SENDER_MAIN, 5300);
-
             player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
 
             return true;
@@ -139,39 +114,27 @@ bool HasCheatPower(Player* player)
             player->PlayerTalkClass->ClearMenus();
 
             switch (uiAction)
-            {
-            case 5400:
-                player->PlayerTalkClass->ClearMenus();
-		  if(!HasCheatCooldown(player))
-                	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Cooldown Cheat - 15 DP", GOSSIP_SENDER_MAIN, 5401);
-		  if(!HasCheatCasttime(player))
-                	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Casttime Cheat - 15 DP", GOSSIP_SENDER_MAIN, 5402);
-		  if(!HasCheatPower(player))
-                	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Power Cheat - 10 DP", GOSSIP_SENDER_MAIN, 5403);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
-                return true;
-                break;
-            case 5401:
-		RewardItem(player, pCreature,24,1,15);
-		break;
-			case 19000:
-        RewardItem(player, pCreature, 0, 0, 0);
-				break;
-            case 5402:
-		RewardItem(player, pCreature,25,1,15);
-				break;
-            case 5403:
-		RewardItem(player, pCreature,26,1,10);
-				break;
-            case 5200:
-		RewardItem(player, pCreature,40768,1,10);
-				break;
-	     case 5300:
-		RewardItem(player, pCreature,37298,1,10);
-				break;
-            case 5100:
-		RewardItem(player, pCreature,29765,3,5);
+            {            
+				case 5401:
+					RewardItem(player, pCreature,24,1,15);
+						break;
+				case 19000:
+					RewardItem(player, pCreature, 0, 0, 0);
+						break;
+				case 5402:
+					RewardItem(player, pCreature,25,1,15);
+						break;
+				case 5403:
+					RewardItem(player, pCreature,26,1,10);
+						break;
+				case 5200:
+					RewardItem(player, pCreature,40768,1,10);
+						break;
+				case 5300:
+					RewardItem(player, pCreature,37298,1,10);
+						break;
+				case 5100:
+					RewardItem(player, pCreature,29765,3,5);
 				break;
             case 300:
                 player->PlayerTalkClass->ClearMenus();
@@ -181,23 +144,23 @@ bool HasCheatPower(Player* player)
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Donor Steel Shield - 7 DP", GOSSIP_SENDER_MAIN, 304);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Donor Ultimate Speed Shirt ->>", GOSSIP_SENDER_MAIN, 310);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
             case 1303:
                 if(player->getClass() != CLASS_HUNTER) {
-		  char str[200];
-		  sprintf(str,"Your not a Hunter, so you cant buy this item!");
-                player->MonsterWhisper(str,player->GetGUID(),true);
-                player->PlayerTalkClass->SendCloseGossip();
-                } else {
-                RewardItem(player, pCreature,7278,1,10);
-                player->PlayerTalkClass->SendCloseGossip();
-		  }
-                break;
-            case 12:
-		RewardItem(player, pCreature,24368,1,20);
-		break;
+				  char str[200];
+				  sprintf(str,"Your not a Hunter, so you cant buy this item!");
+						player->MonsterWhisper(str,player->GetGUID(),true);
+						player->PlayerTalkClass->SendCloseGossip();
+						} else {
+						RewardItem(player, pCreature,7278,1,10);
+						player->PlayerTalkClass->SendCloseGossip();
+				  }
+						break;
+			case 12:
+				RewardItem(player, pCreature,24368,1,20);
+				break;
             case 301:
                 RewardItem(player, pCreature,100105,1,6);
                 break;
@@ -218,7 +181,7 @@ bool HasCheatPower(Player* player)
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Ultimate Shirt IV - 20 Dp", GOSSIP_SENDER_MAIN, 314);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Ultimate Shirt V - 30 Dp", GOSSIP_SENDER_MAIN, 315);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
 			case 311:
@@ -237,43 +200,43 @@ bool HasCheatPower(Player* player)
                 RewardItem(player, pCreature,100129,1,30);
                 break;
 				
-	     case 305: // invincible off set
-		  switch(player->getClass())
-		  {
-		  case CLASS_WARRIOR:
-                RewardItem(player, pCreature, 66073,1,35);
-   		  break;
-		  case CLASS_PALADIN:
-                RewardItem(player, pCreature, 66077,1,35);
-     		  break;
-		  case CLASS_HUNTER:
-                RewardItem(player, pCreature, 66071,1,35);
-	         break;
-		  case CLASS_ROGUE:
-                RewardItem(player, pCreature, 66072,1,35);
- 	         break;
-	 	  case CLASS_PRIEST:
-                RewardItem(player, pCreature, 66074,1,35);
-       	  break;
-		  case CLASS_DEATH_KNIGHT:
-                RewardItem(player, pCreature, 66070,1,35);
-      	         break;
-		  case CLASS_SHAMAN:
-                RewardItem(player, pCreature, 66078,1,35);
-      	 	  break;
-		  case CLASS_MAGE:
-                RewardItem(player, pCreature, 66079,1,35);
-       	  break;
-		  case CLASS_WARLOCK:
-                RewardItem(player, pCreature, 66076,1,35);
-        	  break;
-		  case CLASS_DRUID:
-                RewardItem(player, pCreature, 66075,1,35);
-                break;
+			case 305: // invincible off set
+			  switch(player->getClass())
+			  {
+			case CLASS_WARRIOR:
+					RewardItem(player, pCreature, 66073,1,35);
+			  break;
+			case CLASS_PALADIN:
+					RewardItem(player, pCreature, 66077,1,35);
+				  break;
+			case CLASS_HUNTER:
+					RewardItem(player, pCreature, 66071,1,35);
+				 break;
+			case CLASS_ROGUE:
+					RewardItem(player, pCreature, 66072,1,35);
+				 break;
+			case CLASS_PRIEST:
+					RewardItem(player, pCreature, 66074,1,35);
+			  break;
+			case CLASS_DEATH_KNIGHT:
+					RewardItem(player, pCreature, 66070,1,35);
+					 break;
+			case CLASS_SHAMAN:
+					RewardItem(player, pCreature, 66078,1,35);
+				  break;
+			case CLASS_MAGE:
+					RewardItem(player, pCreature, 66079,1,35);
+			  break;
+			case CLASS_WARLOCK:
+					RewardItem(player, pCreature, 66076,1,35);
+				  break;
+			case CLASS_DRUID:
+					RewardItem(player, pCreature, 66075,1,35);
+					break;
 
-		  default: break;
-		  }
-		  break;
+			  default: break;
+			  }
+			  break;
             case 1000:
                 RewardItem(player, pCreature, 0, 0, 0);
                 break;
@@ -294,10 +257,9 @@ bool HasCheatPower(Player* player)
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement One Hand Axe of Donation - 9 DP", GOSSIP_SENDER_MAIN, 2102);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement One Hand Mace of Donation- 9 DP", GOSSIP_SENDER_MAIN, 2103);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement Melee Dagger of Donation - 9 DP", GOSSIP_SENDER_MAIN, 2104);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement Spell Dagger of Donation - 9 DP", GOSSIP_SENDER_MAIN, 2105);
-				
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement Spell Dagger of Donation - 9 DP", GOSSIP_SENDER_MAIN, 2105);				
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
             case 2101:
@@ -324,7 +286,7 @@ bool HasCheatPower(Player* player)
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement Two Hand Mace of Donation - 15 DP", GOSSIP_SENDER_MAIN, 2203);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement Polearm of Donation - 15 DP", GOSSIP_SENDER_MAIN, 2204);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
             case 2201:
@@ -346,7 +308,7 @@ bool HasCheatPower(Player* player)
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement Spell Staff of Donation- 15 DP", GOSSIP_SENDER_MAIN, 2301);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement Feral Staff of Donation- 15 DP", GOSSIP_SENDER_MAIN, 2303);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
             case 2301:
@@ -378,7 +340,7 @@ bool HasCheatPower(Player* player)
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement Gun of Donation- 9 DP", GOSSIP_SENDER_MAIN, 2402);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Reaper Wand of Donators - 7 DP", GOSSIP_SENDER_MAIN, 2403);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
             case 2401:
@@ -403,7 +365,7 @@ bool HasCheatPower(Player* player)
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement Tank Shield of Donation - 7 DP", GOSSIP_SENDER_MAIN, 2501);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Final Achievement Spell Shield of Donation - 7 DP", GOSSIP_SENDER_MAIN, 2502);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
             case 2501:
@@ -425,7 +387,7 @@ bool HasCheatPower(Player* player)
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Fallen Dragon Donor Bag - 5 DP", GOSSIP_SENDER_MAIN, 3009);
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Fallen Dragon Donor Caster Bag - 6 DP", GOSSIP_SENDER_MAIN, 3010);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
             
@@ -468,7 +430,7 @@ bool HasCheatPower(Player* player)
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Signet of Berserking - 10 DP", GOSSIP_SENDER_MAIN, 14010);
                 
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
 			case 4032:
@@ -534,7 +496,7 @@ bool HasCheatPower(Player* player)
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Ranged & shields", GOSSIP_SENDER_MAIN, 32004);
                 
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
 				
@@ -546,7 +508,7 @@ bool HasCheatPower(Player* player)
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal Dagger - 21 Dp", GOSSIP_SENDER_MAIN, 52003);
 				
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 break;
 				
 				case 52000:
@@ -570,7 +532,7 @@ bool HasCheatPower(Player* player)
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal Two Hand Polearm - 32 Dp", GOSSIP_SENDER_MAIN, 52007);
 								
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 break;
 				
 				case 52004:
@@ -591,7 +553,7 @@ bool HasCheatPower(Player* player)
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal One Hand Armageddon Staff - 21 Dp", GOSSIP_SENDER_MAIN, 52008);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal Two Hand Armageddon Staff - 32 Dp", GOSSIP_SENDER_MAIN, 52009);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 break;
 				
 				break;
@@ -608,7 +570,7 @@ bool HasCheatPower(Player* player)
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal Wand - 17 Dp", GOSSIP_SENDER_MAIN, 52011);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal Steel Shield - 30 Dp", GOSSIP_SENDER_MAIN, 52015);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 break;
 				
 				break;
@@ -630,213 +592,213 @@ bool HasCheatPower(Player* player)
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Donors Sigil - 6 DP", GOSSIP_SENDER_MAIN, 5004);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Donors Libram - 6 DP", GOSSIP_SENDER_MAIN, 5005);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
             case 5001:
                 if(player->getClass() != CLASS_DRUID) {
-		  char str[200];
-		  sprintf(str,"Your not a Druid, so you cant buy this item!");
-                player->MonsterWhisper(str,player->GetGUID(),true);
-                player->PlayerTalkClass->SendCloseGossip();
-                } else {
-                RewardItem(player, pCreature, 100107,1,6);
-		  } 
-                break;
-            case 5002:
-                if(player->getClass() != CLASS_ROGUE) {
-		  char str[200];
-		  sprintf(str,"Your not a Rogue, so you cant buy this item!");
-                player->MonsterWhisper(str,player->GetGUID(),true);
-                player->PlayerTalkClass->SendCloseGossip();
-                } else {
-                RewardItem(player, pCreature, 30025,1,6);
-		  } 
-                break;
-            case 5003:
-                if(player->getClass() != CLASS_SHAMAN) {
-		  char str[200];
-		  sprintf(str,"Your not a Shaman, so you cant buy this item!");
-                player->MonsterWhisper(str,player->GetGUID(),true);
-                player->PlayerTalkClass->SendCloseGossip();
-                } else {
-                RewardItem(player, pCreature, 100103,1,6);
-		  } 
-                break;
-            case 5004:
-                if(player->getClass() != 6) {
-		  char str[200];
-		  sprintf(str,"Your not a Death Knight, so you cant buy this item!");
-                player->MonsterWhisper(str,player->GetGUID(),true);
-                player->PlayerTalkClass->SendCloseGossip();
-                } else {
-                RewardItem(player, pCreature, 100104,1,6);
-		  } 
-                break;
-            case 5005:
-                if(player->getClass() != CLASS_PALADIN) {
-		  char str[200];
-		  sprintf(str,"Your not a Paladin, so you cant buy this item!");
-                player->MonsterWhisper(str,player->GetGUID(),true);
-                player->PlayerTalkClass->SendCloseGossip();
-                } else {
-                RewardItem(player, pCreature, 100106,1,6);
-		  } 
-                break;
-            case 5006:
-                RewardItem(player, pCreature, 4633,1,2);
-                break;
-	     case 10000: // tabard
-		  switch(player->getClass())
-		  {
-		  case CLASS_WARRIOR:
-                RewardItem(player, pCreature, 100093,1,7);
-   		  break;
-		  case CLASS_PALADIN:
-                RewardItem(player, pCreature, 100098,1,7);
-     		  break;
-		  case CLASS_HUNTER:
-                RewardItem(player, pCreature, 100100,1,7);
-	         break;
-		  case CLASS_ROGUE:
-                RewardItem(player, pCreature, 100096,1,7);
- 	         break;
-	 	  case CLASS_PRIEST:
-                RewardItem(player, pCreature, 100097,1,7);
-       	  break;
-		  case CLASS_DEATH_KNIGHT:
-                RewardItem(player, pCreature, 100102,1,7);
-      	         break;
-		  case CLASS_SHAMAN:
-                RewardItem(player, pCreature, 100095,1,7);
-      	 	  break;
-		  case CLASS_MAGE:
-                RewardItem(player, pCreature, 100099,1,7);
-       	  break;
-		  case CLASS_WARLOCK:
-                RewardItem(player, pCreature, 100094,1,7);
-        	  break;
-		  case CLASS_DRUID:
-                RewardItem(player, pCreature, 100101,1,7);
-                break;
-
-		  default: break;
-		  }
-		  break;
-	     case 11000: // donors cloak
-		  switch(player->getClass())
-		  {
-		  case CLASS_WARRIOR:
-                RewardItem(player, pCreature, 100112,1,10);
-   		  break;
-		  case CLASS_PALADIN:
-                RewardItem(player, pCreature, 100117,1,10);
-     		  break;
-		  case CLASS_HUNTER:
-                RewardItem(player, pCreature, 100119,1,10);
-	         break;
-		  case CLASS_ROGUE:
-                RewardItem(player, pCreature, 100115,1,10);
- 	         break;
-	 	  case CLASS_PRIEST:
-                RewardItem(player, pCreature, 100116,1,10);
-       	  break;
-		  case CLASS_DEATH_KNIGHT:
-                RewardItem(player, pCreature, 100121,1,10);
-      	         break;
-		  case CLASS_SHAMAN:
-                RewardItem(player, pCreature, 100114,1,10);
-      	 	  break;
-		  case CLASS_MAGE:
-                RewardItem(player, pCreature, 100118,1,10);
-       	  break;
-		  case CLASS_WARLOCK:
-                RewardItem(player, pCreature, 100113,1,10);
-        	  break;
-		  case CLASS_DRUID:
-                RewardItem(player, pCreature, 100120,1,10);
-                break;
-
-		  default: break;
-		  }
-		  break;
-	     case 12000: // donors set
-		  switch(player->getClass())
-		  {
-		  case CLASS_WARRIOR:
-                RewardItem(player, pCreature, 68,1,46);
-   		  break;
-		  case CLASS_PALADIN:
-                RewardItem(player, pCreature, 69,1,46);
-     		  break;
-		  case CLASS_HUNTER:
-                RewardItem(player, pCreature, 70,1,46);
-	         break;
-		  case CLASS_ROGUE:
-                RewardItem(player, pCreature, 71,1,46);
- 	         break;
-	 	  case CLASS_PRIEST:
-                RewardItem(player, pCreature, 72,1,46);
+			  char str[200];
+			  sprintf(str,"Your not a Druid, so you cant buy this item!");
+					player->MonsterWhisper(str,player->GetGUID(),true);
+					player->PlayerTalkClass->SendCloseGossip();
+					} else {
+					RewardItem(player, pCreature, 100107,1,6);
+			  } 
+					break;
+				case 5002:
+					if(player->getClass() != CLASS_ROGUE) {
+			  char str[200];
+			  sprintf(str,"Your not a Rogue, so you cant buy this item!");
+					player->MonsterWhisper(str,player->GetGUID(),true);
+					player->PlayerTalkClass->SendCloseGossip();
+					} else {
+					RewardItem(player, pCreature, 30025,1,6);
+			  } 
+					break;
+				case 5003:
+					if(player->getClass() != CLASS_SHAMAN) {
+			  char str[200];
+			  sprintf(str,"Your not a Shaman, so you cant buy this item!");
+					player->MonsterWhisper(str,player->GetGUID(),true);
+					player->PlayerTalkClass->SendCloseGossip();
+					} else {
+					RewardItem(player, pCreature, 100103,1,6);
+			  } 
+					break;
+				case 5004:
+					if(player->getClass() != 6) {
+			  char str[200];
+			  sprintf(str,"Your not a Death Knight, so you cant buy this item!");
+					player->MonsterWhisper(str,player->GetGUID(),true);
+					player->PlayerTalkClass->SendCloseGossip();
+					} else {
+					RewardItem(player, pCreature, 100104,1,6);
+			  } 
+					break;
+				case 5005:
+					if(player->getClass() != CLASS_PALADIN) {
+			  char str[200];
+			  sprintf(str,"Your not a Paladin, so you cant buy this item!");
+					player->MonsterWhisper(str,player->GetGUID(),true);
+					player->PlayerTalkClass->SendCloseGossip();
+					} else {
+					RewardItem(player, pCreature, 100106,1,6);
+			  } 
+					break;
+				case 5006:
+					RewardItem(player, pCreature, 4633,1,2);
+					break;
+			 case 10000: // tabard
+			  switch(player->getClass())
+			  {
+			  case CLASS_WARRIOR:
+					RewardItem(player, pCreature, 100093,1,7);
 			  break;
-		  case CLASS_DEATH_KNIGHT:
-                RewardItem(player, pCreature, 73,1,46);
-      	         break;
-		  case CLASS_SHAMAN:
-                RewardItem(player, pCreature, 74,1,46);
-      	 	  break;
-		  case CLASS_MAGE:
-                RewardItem(player, pCreature, 75,1,46);
-       	  break;
-		  case CLASS_WARLOCK:
-                RewardItem(player, pCreature, 76,1,46);
-        	  break;
-		  case CLASS_DRUID:
-                RewardItem(player, pCreature, 78,1,46);
-                break;
-
-		  default: break;
-		  }
-		  break;
-		  
-		  case 13000: // donors set
-		  switch(player->getClass())
-		  {
-		  case CLASS_WARRIOR:
-                RewardItem(player, pCreature, 7,8,62);
-   		  break;
-		  case CLASS_PALADIN:
-                RewardItem(player, pCreature, 7,8,62);
-     		  break;
-		  case CLASS_HUNTER:
-                RewardItem(player, pCreature, 7,8,62);
-	         break;
-		  case CLASS_ROGUE:
-                RewardItem(player, pCreature, 7,8,62);
- 	         break;
-	 	  case CLASS_PRIEST:
-                RewardItem(player, pCreature, 7,8,62);
+			  case CLASS_PALADIN:
+					RewardItem(player, pCreature, 100098,1,7);
+				  break;
+			  case CLASS_HUNTER:
+					RewardItem(player, pCreature, 100100,1,7);
+				 break;
+			  case CLASS_ROGUE:
+					RewardItem(player, pCreature, 100096,1,7);
+				 break;
+			  case CLASS_PRIEST:
+					RewardItem(player, pCreature, 100097,1,7);
 			  break;
-		  case CLASS_DEATH_KNIGHT:
-                RewardItem(player, pCreature, 7,8,62);
-      	         break;
-		  case CLASS_SHAMAN:
-                RewardItem(player, pCreature, 7,8,62);
-      	 	  break;
-		  case CLASS_MAGE:
-                RewardItem(player, pCreature, 7,8,62);
-       	  break;
-		  case CLASS_WARLOCK:
-                RewardItem(player, pCreature, 7,8,62);
-        	  break;
-		  case CLASS_DRUID:
-                RewardItem(player, pCreature, 7,8,62);
-                break;
+			  case CLASS_DEATH_KNIGHT:
+					RewardItem(player, pCreature, 100102,1,7);
+					 break;
+			  case CLASS_SHAMAN:
+					RewardItem(player, pCreature, 100095,1,7);
+				  break;
+			  case CLASS_MAGE:
+					RewardItem(player, pCreature, 100099,1,7);
+			  break;
+			  case CLASS_WARLOCK:
+					RewardItem(player, pCreature, 100094,1,7);
+				  break;
+			  case CLASS_DRUID:
+					RewardItem(player, pCreature, 100101,1,7);
+					break;
 
-		  default: break;
-		  }
-		  break;
+			  default: break;
+			  }
+			  break;
+			 case 11000: // donors cloak
+			  switch(player->getClass())
+			  {
+			  case CLASS_WARRIOR:
+					RewardItem(player, pCreature, 100112,1,10);
+			  break;
+			  case CLASS_PALADIN:
+					RewardItem(player, pCreature, 100117,1,10);
+				  break;
+			  case CLASS_HUNTER:
+					RewardItem(player, pCreature, 100119,1,10);
+				 break;
+			  case CLASS_ROGUE:
+					RewardItem(player, pCreature, 100115,1,10);
+				 break;
+			  case CLASS_PRIEST:
+					RewardItem(player, pCreature, 100116,1,10);
+			  break;
+			  case CLASS_DEATH_KNIGHT:
+					RewardItem(player, pCreature, 100121,1,10);
+					 break;
+			  case CLASS_SHAMAN:
+					RewardItem(player, pCreature, 100114,1,10);
+				  break;
+			  case CLASS_MAGE:
+					RewardItem(player, pCreature, 100118,1,10);
+			  break;
+			  case CLASS_WARLOCK:
+					RewardItem(player, pCreature, 100113,1,10);
+				  break;
+			  case CLASS_DRUID:
+					RewardItem(player, pCreature, 100120,1,10);
+					break;
+
+			  default: break;
+			  }
+			  break;
+			 case 12000: // donors set
+			  switch(player->getClass())
+			  {
+			  case CLASS_WARRIOR:
+					RewardItem(player, pCreature, 68,1,46);
+			  break;
+			  case CLASS_PALADIN:
+					RewardItem(player, pCreature, 69,1,46);
+				  break;
+			  case CLASS_HUNTER:
+					RewardItem(player, pCreature, 70,1,46);
+				 break;
+			  case CLASS_ROGUE:
+					RewardItem(player, pCreature, 71,1,46);
+				 break;
+			  case CLASS_PRIEST:
+					RewardItem(player, pCreature, 72,1,46);
+				  break;
+			  case CLASS_DEATH_KNIGHT:
+					RewardItem(player, pCreature, 73,1,46);
+					 break;
+			  case CLASS_SHAMAN:
+					RewardItem(player, pCreature, 74,1,46);
+				  break;
+			  case CLASS_MAGE:
+					RewardItem(player, pCreature, 75,1,46);
+			  break;
+			  case CLASS_WARLOCK:
+					RewardItem(player, pCreature, 76,1,46);
+				  break;
+			  case CLASS_DRUID:
+					RewardItem(player, pCreature, 78,1,46);
+					break;
+
+			  default: break;
+			  }
+			  break;
+			  
+			  case 13000: // donors set
+			  switch(player->getClass())
+			  {
+			  case CLASS_WARRIOR:
+					RewardItem(player, pCreature, 7,8,62);
+			  break;
+			  case CLASS_PALADIN:
+					RewardItem(player, pCreature, 7,8,62);
+				  break;
+			  case CLASS_HUNTER:
+					RewardItem(player, pCreature, 7,8,62);
+				 break;
+			  case CLASS_ROGUE:
+					RewardItem(player, pCreature, 7,8,62);
+				 break;
+			  case CLASS_PRIEST:
+					RewardItem(player, pCreature, 7,8,62);
+				  break;
+			  case CLASS_DEATH_KNIGHT:
+					RewardItem(player, pCreature, 7,8,62);
+					 break;
+			  case CLASS_SHAMAN:
+					RewardItem(player, pCreature, 7,8,62);
+				  break;
+			  case CLASS_MAGE:
+					RewardItem(player, pCreature, 7,8,62);
+			  break;
+			  case CLASS_WARLOCK:
+					RewardItem(player, pCreature, 7,8,62);
+				  break;
+			  case CLASS_DRUID:
+					RewardItem(player, pCreature, 7,8,62);
+					break;
+
+			  default: break;
+			  }
+			  break;
 		  
-		  case 14000:
+			case 14000:
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Donor Melee Ring - 9 DP", GOSSIP_SENDER_MAIN, 14001);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Caster Ring - 9 DP", GOSSIP_SENDER_MAIN, 14909);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Melee Trinket - 9 DP", GOSSIP_SENDER_MAIN, 14003);
@@ -847,22 +809,22 @@ bool HasCheatPower(Player* player)
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Caster Bag - 9 DP", GOSSIP_SENDER_MAIN, 14008);
 			
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
-	    case 9997:
+			case 9997:
                 player->PlayerTalkClass->ClearMenus();
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Are you sure you wish to buy Immune Ring misc' Item?", GOSSIP_SENDER_MAIN, 9997);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Yes.", GOSSIP_SENDER_MAIN, 9996);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "No.", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
-		case 21070:
+			case 21070:
 				player->PlayerTalkClass->ClearMenus();
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Are you sure you wish to buy Immune Trinket misc' Item?", GOSSIP_SENDER_MAIN, 21070);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Yes.", GOSSIP_SENDER_MAIN, 99960);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "No.", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(85002, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
                 return true;
                 break;
 				case 14001:
@@ -897,7 +859,7 @@ bool HasCheatPower(Player* player)
 				RewardItem(player, pCreature, 22,1,50);
 				break;
 				
-	     case 9996:
+			case 9996:
                 if(player->HasItemCount(56808, 1))
                 {
                 char str[200];
@@ -909,7 +871,7 @@ bool HasCheatPower(Player* player)
                 player->PlayerTalkClass->SendCloseGossip();
                 }
                 break;
-		case 99960:
+			case 99960:
                 if(player->HasItemCount(56809, 1))
                 {
                 char str[200];
