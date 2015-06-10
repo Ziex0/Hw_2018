@@ -169,7 +169,7 @@ public:
 				uint32 purchaseTime = sWorld->GetGameTime() / DAY;
 				purchaseDays = 90;
 
-				LoginDatabase.PExecute("UPDATE %s.account_data SET dp = '%u' -%u WHERE id = '%u'", website.c_str(), dp, oneMonthVipPrice, pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("UPDATE %s.account_data SET dp = '%u' -%u WHERE id = '%u'", website.c_str(), dp, threeMonthsVipPrice, pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("DELETE FROM account_access WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 				
@@ -196,7 +196,7 @@ public:
 				uint32 purchaseTime = sWorld->GetGameTime() / DAY;
 				purchaseDays = 270;
 
-				LoginDatabase.PExecute("UPDATE %s.account_data SET dp = '%u' -%u WHERE id = '%u'", website.c_str(), dp, oneMonthVipPrice, pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("UPDATE %s.account_data SET dp = '%u' -%u WHERE id = '%u'", website.c_str(), dp, nineMonthsVipPrice, pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("DELETE FROM account_access WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 				
@@ -223,7 +223,7 @@ public:
 				//uint32 purchaseTime = sWorld->GetGameTime() / DAY;
 				//purchaseDays = 270;
 
-				LoginDatabase.PExecute("UPDATE %s.account_data SET dp = '%u' -%u WHERE id = '%u'", website.c_str(), dp, oneMonthVipPrice, pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("UPDATE %s.account_data SET dp = '%u' -%u WHERE id = '%u'", website.c_str(), dp, permaMonthsVipPrice, pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("DELETE FROM account_access WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '1')", pPlayer->GetSession()->GetAccountId());
 				

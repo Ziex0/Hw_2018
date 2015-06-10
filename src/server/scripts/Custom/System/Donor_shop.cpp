@@ -64,8 +64,8 @@ class donorrewarder : public CreatureScript
                     {
   			   std::string DateTime = "%Y-%m-%d %H:%M:%S";
 			   ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
-               LoginDatabase.PExecute("UPDATE Web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
-               LoginDatabase.PQuery("INSERT INTO db_char.donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
+               CharacterDatabase.PQuery("Update Web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
+               //LoginDatabase.PQuery("INSERT INTO Web_db.donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
                sprintf(str,"Your points are taken Thank you for your Support!!");
                player->MonsterWhisper(str,player->GetGUID(),true);
 			   player->SaveToDB();
@@ -85,7 +85,7 @@ class donorrewarder : public CreatureScript
     bool OnGossipHello(Player* player, Creature* pCreature)
         {
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:30|tHow much Donation points do I have?", GOSSIP_SENDER_MAIN, 19000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:35:35|tHow much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Weapons", GOSSIP_SENDER_MAIN, 2000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorArmors and Shirts", GOSSIP_SENDER_MAIN, 300);
@@ -117,23 +117,25 @@ class donorrewarder : public CreatureScript
             switch (uiAction)
             {            
 				case 5401:
-					AddItem(player, pCreature,24,1,15);
+					RewardItem(player, pCreature,24,1,15);
 						break;
 				case 19000:
-					AddItem(player, pCreature, 0, 0, 0);
+					RewardItem(player, pCreature, 0, 0, 0);
 						break;
 				case 5402:
-					AddItem(player, pCreature,25,1,15);
+					RewardItem(player, pCreature,25,1,15);
 						break;
 				case 5403:
-					AddItem(player, pCreature,26,1,10);
+					RewardItem(player, pCreature,26,1,10);
 						break;
 				case 5200:
-					AddItem(player, pCreature,40768,1,10);
+					RewardItem(player, pCreature,40768,1,10);
 						break;
-				
+				case 5300:
+					RewardItem(player, pCreature,37298,1,10);
+						break;
 				case 5100:
-					AddItem(player, pCreature,29765,3,5);
+					RewardItem(player, pCreature,29765,3,5);
 				break;
             case 300:
                 player->PlayerTalkClass->ClearMenus();
@@ -153,12 +155,12 @@ class donorrewarder : public CreatureScript
 						player->MonsterWhisper(str,player->GetGUID(),true);
 						player->PlayerTalkClass->SendCloseGossip();
 						} else {
-						AddItem(player, pCreature,7278,1,10);
+						RewardItem(player, pCreature,7278,1,10);
 						player->PlayerTalkClass->SendCloseGossip();
 				  }
 						break;
 			case 12:
-				AddItem(player, pCreature,24368,1,20);
+				RewardItem(player, pCreature,24368,1,20);
 				break;
             case 301:
                 AddItem(player, pCreature,100105,1,6);
@@ -203,34 +205,34 @@ class donorrewarder : public CreatureScript
 			  switch(player->getClass())
 			  {
 			case CLASS_WARRIOR:
-					AddItem(player, pCreature, 66073,1,35);
+					RewardItem(player, pCreature, 66073,1,35);
 			  break;
 			case CLASS_PALADIN:
-					AddItem(player, pCreature, 66077,1,35);
+					RewardItem(player, pCreature, 66077,1,35);
 				  break;
 			case CLASS_HUNTER:
-					AddItem(player, pCreature, 66071,1,35);
+					RewardItem(player, pCreature, 66071,1,35);
 				 break;
 			case CLASS_ROGUE:
-					AddItem(player, pCreature, 66072,1,35);
+					RewardItem(player, pCreature, 66072,1,35);
 				 break;
 			case CLASS_PRIEST:
-					AddItem(player, pCreature, 66074,1,35);
+					RewardItem(player, pCreature, 66074,1,35);
 			  break;
 			case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 66070,1,35);
+					RewardItem(player, pCreature, 66070,1,35);
 					 break;
 			case CLASS_SHAMAN:
-					AddItem(player, pCreature, 66078,1,35);
+					RewardItem(player, pCreature, 66078,1,35);
 				  break;
 			case CLASS_MAGE:
-					AddItem(player, pCreature, 66079,1,35);
+					RewardItem(player, pCreature, 66079,1,35);
 			  break;
 			case CLASS_WARLOCK:
-					AddItem(player, pCreature, 66076,1,35);
+					RewardItem(player, pCreature, 66076,1,35);
 				  break;
 			case CLASS_DRUID:
-					AddItem(player, pCreature, 66075,1,35);
+					RewardItem(player, pCreature, 66075,1,35);
 					break;
 
 			  default: break;
@@ -601,7 +603,7 @@ class donorrewarder : public CreatureScript
 					player->MonsterWhisper(str,player->GetGUID(),true);
 					player->PlayerTalkClass->SendCloseGossip();
 					} else {
-					AddItem(player, pCreature, 100107,1,6);
+					RewardItem(player, pCreature, 100107,1,6);
 			  } 
 					break;
 				case 5002:
@@ -611,7 +613,7 @@ class donorrewarder : public CreatureScript
 					player->MonsterWhisper(str,player->GetGUID(),true);
 					player->PlayerTalkClass->SendCloseGossip();
 					} else {
-					AddItem(player, pCreature, 30025,1,6);
+					RewardItem(player, pCreature, 30025,1,6);
 			  } 
 					break;
 				case 5003:
@@ -621,7 +623,7 @@ class donorrewarder : public CreatureScript
 					player->MonsterWhisper(str,player->GetGUID(),true);
 					player->PlayerTalkClass->SendCloseGossip();
 					} else {
-					AddItem(player, pCreature, 100103,1,6);
+					RewardItem(player, pCreature, 100103,1,6);
 			  } 
 					break;
 				case 5004:
@@ -631,7 +633,7 @@ class donorrewarder : public CreatureScript
 					player->MonsterWhisper(str,player->GetGUID(),true);
 					player->PlayerTalkClass->SendCloseGossip();
 					} else {
-					AddItem(player, pCreature, 100104,1,6);
+					RewardItem(player, pCreature, 100104,1,6);
 			  } 
 					break;
 				case 5005:
@@ -641,44 +643,44 @@ class donorrewarder : public CreatureScript
 					player->MonsterWhisper(str,player->GetGUID(),true);
 					player->PlayerTalkClass->SendCloseGossip();
 					} else {
-					AddItem(player, pCreature, 100106,1,6);
+					RewardItem(player, pCreature, 100106,1,6);
 			  } 
 					break;
 				case 5006:
-					AddItem(player, pCreature, 4633,1,2);
+					RewardItem(player, pCreature, 4633,1,2);
 					break;
 			 case 10000: // tabard
 			  switch(player->getClass())
 			  {
 			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 100093,1,7);
+					RewardItem(player, pCreature, 100093,1,7);
 			  break;
 			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 100098,1,7);
+					RewardItem(player, pCreature, 100098,1,7);
 				  break;
 			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 100100,1,7);
+					RewardItem(player, pCreature, 100100,1,7);
 				 break;
 			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 100096,1,7);
+					RewardItem(player, pCreature, 100096,1,7);
 				 break;
 			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 100097,1,7);
+					RewardItem(player, pCreature, 100097,1,7);
 			  break;
 			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 100102,1,7);
+					RewardItem(player, pCreature, 100102,1,7);
 					 break;
 			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 100095,1,7);
+					RewardItem(player, pCreature, 100095,1,7);
 				  break;
 			  case CLASS_MAGE:
-					AddItem(player, pCreature, 100099,1,7);
+					RewardItem(player, pCreature, 100099,1,7);
 			  break;
 			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 100094,1,7);
+					RewardItem(player, pCreature, 100094,1,7);
 				  break;
 			  case CLASS_DRUID:
-					AddItem(player, pCreature, 100101,1,7);
+					RewardItem(player, pCreature, 100101,1,7);
 					break;
 
 			  default: break;
@@ -688,34 +690,34 @@ class donorrewarder : public CreatureScript
 			  switch(player->getClass())
 			  {
 			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 100112,1,10);
+					RewardItem(player, pCreature, 100112,1,10);
 			  break;
 			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 100117,1,10);
+					RewardItem(player, pCreature, 100117,1,10);
 				  break;
 			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 100119,1,10);
+					RewardItem(player, pCreature, 100119,1,10);
 				 break;
 			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 100115,1,10);
+					RewardItem(player, pCreature, 100115,1,10);
 				 break;
 			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 100116,1,10);
+					RewardItem(player, pCreature, 100116,1,10);
 			  break;
 			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 100121,1,10);
+					RewardItem(player, pCreature, 100121,1,10);
 					 break;
 			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 100114,1,10);
+					RewardItem(player, pCreature, 100114,1,10);
 				  break;
 			  case CLASS_MAGE:
-					AddItem(player, pCreature, 100118,1,10);
+					RewardItem(player, pCreature, 100118,1,10);
 			  break;
 			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 100113,1,10);
+					RewardItem(player, pCreature, 100113,1,10);
 				  break;
 			  case CLASS_DRUID:
-					AddItem(player, pCreature, 100120,1,10);
+					RewardItem(player, pCreature, 100120,1,10);
 					break;
 
 			  default: break;
@@ -725,34 +727,34 @@ class donorrewarder : public CreatureScript
 			  switch(player->getClass())
 			  {
 			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 68,1,46);
+					RewardItem(player, pCreature, 68,1,46);
 			  break;
 			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 69,1,46);
+					RewardItem(player, pCreature, 69,1,46);
 				  break;
 			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 70,1,46);
+					RewardItem(player, pCreature, 70,1,46);
 				 break;
 			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 71,1,46);
+					RewardItem(player, pCreature, 71,1,46);
 				 break;
 			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 72,1,46);
+					RewardItem(player, pCreature, 72,1,46);
 				  break;
 			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 73,1,46);
+					RewardItem(player, pCreature, 73,1,46);
 					 break;
 			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 74,1,46);
+					RewardItem(player, pCreature, 74,1,46);
 				  break;
 			  case CLASS_MAGE:
-					AddItem(player, pCreature, 75,1,46);
+					RewardItem(player, pCreature, 75,1,46);
 			  break;
 			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 76,1,46);
+					RewardItem(player, pCreature, 76,1,46);
 				  break;
 			  case CLASS_DRUID:
-					AddItem(player, pCreature, 78,1,46);
+					RewardItem(player, pCreature, 78,1,46);
 					break;
 
 			  default: break;
@@ -763,34 +765,34 @@ class donorrewarder : public CreatureScript
 			  switch(player->getClass())
 			  {
 			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 7,8,62);
+					RewardItem(player, pCreature, 7,8,62);
 			  break;
 			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 7,8,62);
+					RewardItem(player, pCreature, 7,8,62);
 				  break;
 			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 7,8,62);
+					RewardItem(player, pCreature, 7,8,62);
 				 break;
 			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 7,8,62);
+					RewardItem(player, pCreature, 7,8,62);
 				 break;
 			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 7,8,62);
+					RewardItem(player, pCreature, 7,8,62);
 				  break;
 			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 7,8,62);
+					RewardItem(player, pCreature, 7,8,62);
 					 break;
 			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 7,8,62);
+					RewardItem(player, pCreature, 7,8,62);
 				  break;
 			  case CLASS_MAGE:
-					AddItem(player, pCreature, 7,8,62);
+					RewardItem(player, pCreature, 7,8,62);
 			  break;
 			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 7,8,62);
+					RewardItem(player, pCreature, 7,8,62);
 				  break;
 			  case CLASS_DRUID:
-					AddItem(player, pCreature, 7,8,62);
+					RewardItem(player, pCreature, 7,8,62);
 					break;
 
 			  default: break;
