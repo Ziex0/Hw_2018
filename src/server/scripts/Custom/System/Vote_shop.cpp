@@ -1,11 +1,11 @@
 /*
-CREATE TABLE `donation_purchases` (
+CREATE TABLE `vote_purchases` (
 	`account_id` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Account Identifier',
 	`character_name` VARCHAR(12) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
 	`character_guid` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
-	`donation_item_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-	`donation_item_name` VARCHAR(60) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
-	`donation_item_amount` INT(10) UNSIGNED NOT NULL DEFAULT '1',
+	`vote_item_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`vote_item_name` VARCHAR(60) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`vote_item_amount` INT(10) UNSIGNED NOT NULL DEFAULT '1',
 	`date` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00'
 )
 COMMENT='Write here a comment if this has been refunded or not.'
@@ -16,27 +16,25 @@ ENGINE=MyISAM
 #include "ScriptPCH.h"
 #include <cstring>
 #include "ObjectMgr.h"
-#include "Language.h"
-#include "Chat.h"
 
-class donorrewarder : public CreatureScript
+class Vote_rewarder : public CreatureScript
 {
     public:
 
-        donorrewarder()
-            : CreatureScript("donorrewarder")
+        Vote_rewarder()
+            : CreatureScript("Vote_rewarder")
         {
         }
 
         void AddItem(Player* player, Creature* pCreature, int item , int count, int cost)
         {
             QueryResult result;
-            result = CharacterDatabase.PQuery("SELECT dp FROM Web_db.account_data WHERE id = '%u' AND dp >= '0'", player->GetSession()->GetAccountId());
+            result = CharacterDatabase.PQuery("SELECT vp FROM Web_db.account_data WHERE id = '%u' AND vp >= '0'", player->GetSession()->GetAccountId());
             char str[200];
             if (!result) // check
             {
                 sprintf(str,"Your have abused our systems and gotten a negative balance on your Donation Points. Your points are set to 0.");
-				LoginDatabase.PQuery("UPDATE Web_db.account_data set dp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("UPDATE Web_db.account_data set vp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
                 player->PlayerTalkClass->ClearMenus();
                 OnGossipHello(player, pCreature);
                 pCreature->MonsterSay(str, LANG_UNIVERSAL, player->GetGUID());
@@ -48,14 +46,14 @@ class donorrewarder : public CreatureScript
  
             if (item == 0)
             {
-                sprintf(str,"You got %u Donation points!", points);
+                sprintf(str,"You got %u Vote points!", points);
                 player->MonsterWhisper(str,player->GetGUID(),true);
             }
             else
             {
                 if (points <cost)
                 {
-                     sprintf(str,"You broke now,you must Donate on www.TheSatria.com!");
+                     sprintf(str,"You dont have Vote Points,you must Update your Voting on www.TheSatria.com!");
                      player->MonsterWhisper(str,player->GetGUID(),true);
                 }
                 else
@@ -64,8 +62,8 @@ class donorrewarder : public CreatureScript
                     {
   			   std::string DateTime = "%Y-%m-%d %H:%M:%S";
 			   ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
-               LoginDatabase.PExecute("UPDATE Web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
-               LoginDatabase.PQuery("INSERT INTO db_char.donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
+               LoginDatabase.PExecute("UPDATE Web_db.account_data Set vp = vp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
+               LoginDatabase.PExecute("INSERT INTO Web_db.vote_purchases (account_id, character_name, vote_item_id, vote_item_name, vote_item_amount, date) VALUES ('%u', '%s', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), itemTemplate->Name1.c_str(), count, DateTime.c_str());
                sprintf(str,"Your points are taken Thank you for your Support!!");
                player->MonsterWhisper(str,player->GetGUID(),true);
 			   player->SaveToDB();
@@ -85,9 +83,9 @@ class donorrewarder : public CreatureScript
     bool OnGossipHello(Player* player, Creature* pCreature)
         {
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:30|tHow much Donation points do I have?", GOSSIP_SENDER_MAIN, 19000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Weapons", GOSSIP_SENDER_MAIN, 2000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:30:30|tHow much Vote points do I have?", GOSSIP_SENDER_MAIN, 19000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tVote Weapons", GOSSIP_SENDER_MAIN, 2000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tVote Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorArmors and Shirts", GOSSIP_SENDER_MAIN, 300);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorTitan_Grip (Paladin cant use ) - 10 DP (can't use for 2H Staff)", GOSSIP_SENDER_MAIN, 20000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tSpecial Items", GOSSIP_SENDER_MAIN, 5000);
@@ -99,12 +97,7 @@ class donorrewarder : public CreatureScript
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tUltimate Misc Item", GOSSIP_SENDER_MAIN, 14000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Royal Weapons", GOSSIP_SENDER_MAIN, 32000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tCosmetic 50% Immune Stun Ring - 30 DP", GOSSIP_SENDER_MAIN, 9997);
-			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Cosmetic 50% Immune Stun Trinket - 30 DP", GOSSIP_SENDER_MAIN, 21070);
-			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Full Berserk Spell - 50 DP", GOSSIP_SENDER_MAIN, 22070);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Invincible Offset - 35 DP", GOSSIP_SENDER_MAIN, 305);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Emblem of Voting x2 - 1 DP", GOSSIP_SENDER_MAIN, 4005);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Heaven Gems 5 DP - 3 Gems", GOSSIP_SENDER_MAIN, 5100);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Portable Mailbox - 10 DP", GOSSIP_SENDER_MAIN, 5200);
+
             player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
 
             return true;
@@ -897,7 +890,7 @@ class donorrewarder : public CreatureScript
 
 };
 
-void AddSC_donorrewarder()
+void AddSC_Vote_rewarder()
 {
-    new donorrewarder();
+    new Vote_rewarder();
 }
