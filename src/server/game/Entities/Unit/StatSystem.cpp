@@ -233,7 +233,7 @@ void Player::UpdateArmor()
 float Player::GetHealthBonusFromStamina()
 {
     float stamina = GetStat(STAT_STAMINA);
-    float baseStam = std::min(20.0f, stamina);
+    float baseStam = std::min(16.0f, stamina);
     float moreStam = stamina - baseStam;
 
     return baseStam + (moreStam*10.0f);
@@ -243,10 +243,10 @@ float Player::GetManaBonusFromIntellect()
 {
     float intellect = GetStat(STAT_INTELLECT);
 
-    float baseInt = std::min(20.0f, intellect);
+    float baseInt = std::min(25.0f, intellect);
     float moreInt = intellect - baseInt;
 
-    return baseInt + (moreInt * 20.0f);
+    return baseInt + (moreInt * 25.0f);
 }
 
 
@@ -401,7 +401,7 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
                 break;
             }
             case CLASS_MAGE:
-                val2 = GetStat(STAT_STRENGTH) - 30.0f;
+                val2 = GetStat(STAT_STRENGTH) - 40.0f;
                 break;
             case CLASS_PRIEST:
                 val2 = GetStat(STAT_STRENGTH) - 40.0f;
