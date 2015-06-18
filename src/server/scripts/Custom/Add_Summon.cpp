@@ -34,7 +34,7 @@ public:
         pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Npc Enchancher", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +5);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon NPC Quest", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +6);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Armor Reward Vendor", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +70);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Weapon Reward Vendor", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +71);
+		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Weapon Reward Vendor", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +71);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Misc Reward Vendor", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +72);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon Offset Reward Vendor", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +73);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|cff00ff00|TInterface\\icons\\Ability_FiegnDead:24|t|r Summon NPC Glyph", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8);
