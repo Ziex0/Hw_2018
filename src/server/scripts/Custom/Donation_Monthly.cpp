@@ -17,8 +17,8 @@ static std::string website = "web_db";       // FusionCMS database name
 // DONATION POINTS PRICES:
 static uint32 oneMonthVipPrice = 7;               // VIP account price for 1 month (in donation points) (Default: 30 donate points)
 static uint32 threeMonthsVipPrice = 17;            // VIP account price for 3 months (in donation points) (Default: 50 donate points)
-static uint32 nineMonthsVipPrice = 40;            // VIP account price for 3 months (in donation points) (Default: 50 donate points)
-static uint32 permaMonthsVipPrice = 60;
+static uint32 nineMonthsVipPrice = 28;            // VIP account price for 3 months (in donation points) (Default: 50 donate points)
+static uint32 permaMonthsVipPrice = 40;
 
 
 static uint32 purchaseDays;                   
@@ -70,15 +70,15 @@ public:
 		
 		// Purchase VIP Account for 9 months
 		if (SelectDPoints(pPlayer) < nineMonthsVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for nine months (|cff980000Locked|r / Information)40 Dp", GOSSIP_SENDER_MAIN, 1);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for nine months (|cff980000Locked|r / Information 28 Dp", GOSSIP_SENDER_MAIN, 1);
 		else if (SelectDPoints(pPlayer) >= nineMonthsVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for nine months (|cff009900Unlocked|r / Click to use) 40 Dp", GOSSIP_SENDER_MAIN, 4);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r Account for nine months (|cff009900Unlocked|r / Click to use) 28 Dp", GOSSIP_SENDER_MAIN, 4);
 		
 		// Purchase VIP Accountpermanent
 		if (SelectDPoints(pPlayer) < permaMonthsVipPrice)
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r permanent (|cff980000Locked|r / Information)40 Dp", GOSSIP_SENDER_MAIN, 1);
 		else if (SelectDPoints(pPlayer) >= permaMonthsVipPrice)
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r permanent (|cff009900Unlocked|r / Click to use) 60 Dp", GOSSIP_SENDER_MAIN, 5);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface/icons/Spell_Shadow_Shadowform:25|tPurchase |cffFF0000Premium|r permanent (|cff009900Unlocked|r / Click to use) 40 Dp", GOSSIP_SENDER_MAIN, 5);
 
 
 		
