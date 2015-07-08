@@ -1103,7 +1103,7 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
     }
 	
 	char msg[255];
-    snprintf(msg, 255, "|cffFFFFFFOnline |cff00FF00+%u|cffFFFFFF player(s).", sWorld->GetPlayerCount());
+    snprintf(msg, 255, "|cffFFFFFF Going Online |cff00FF00+%u|cffFFFFFF player(s).", sWorld->GetPlayerCount());
     sWorld->SendGlobalText(msg, NULL);
 
     sScriptMgr->OnPlayerLogin(pCurrChar);
