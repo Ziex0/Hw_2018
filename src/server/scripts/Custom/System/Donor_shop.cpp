@@ -85,10 +85,10 @@ class donorrewarder : public CreatureScript
     bool OnGossipHello(Player* player, Creature* pCreature)
         {
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Spell_Frost_ChillingBlast:35:35|tHow much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Weapons", GOSSIP_SENDER_MAIN, 2000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorArmors and Shirts", GOSSIP_SENDER_MAIN, 300);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Spell_Frost_ChillingBlast:30|tHow much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Weapons", GOSSIP_SENDER_MAIN, 2000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Shirts / Cloak / Tabard", GOSSIP_SENDER_MAIN, 300);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorTitan_Grip (Paladin cant use ) - 10 DP (can't use for 2H Staff)", GOSSIP_SENDER_MAIN, 20000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tSpecial Items", GOSSIP_SENDER_MAIN, 5000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tSpecial Tokens", GOSSIP_SENDER_MAIN, 4000);
@@ -140,36 +140,168 @@ class donorrewarder : public CreatureScript
             case 300:
                 player->PlayerTalkClass->ClearMenus();
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt - 6 DP", GOSSIP_SENDER_MAIN, 301);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Tabard - 20 DP", GOSSIP_SENDER_MAIN, 302);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt - 6 DP", GOSSIP_SENDER_MAIN, 1303);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donor Steel Shield - 7 DP", GOSSIP_SENDER_MAIN, 304);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donor Ultimate Speed Shirt ->>", GOSSIP_SENDER_MAIN, 310);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Tabard - 6 DP", GOSSIP_SENDER_MAIN, 302);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Cloak - 6 DP", GOSSIP_SENDER_MAIN, 303);
+                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donor Steel Shield - 7 DP", GOSSIP_SENDER_MAIN, 304);
+				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donor Ultimate Speed Shirt ->>", GOSSIP_SENDER_MAIN, 310);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
                 return true;
                 break;
-            case 1303:
-                if(player->getClass() != CLASS_HUNTER) {
+            case 301:
+				player->PlayerTalkClass->ClearMenus();
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Paladin", 		GOSSIP_SENDER_MAIN, 70001);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Warrior", 		GOSSIP_SENDER_MAIN, 70002);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Death Knight", 	GOSSIP_SENDER_MAIN, 70003);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Hunter", 		GOSSIP_SENDER_MAIN, 70004);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Rogue", 		GOSSIP_SENDER_MAIN, 70005);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Warlock", 		GOSSIP_SENDER_MAIN, 70006);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Druid", 		GOSSIP_SENDER_MAIN, 70007);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Mage", 			GOSSIP_SENDER_MAIN, 70008);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Shaman", 		GOSSIP_SENDER_MAIN, 70009);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Priest", 		GOSSIP_SENDER_MAIN, 70010);
+				
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
+                return true;
+                break;
+			
+			case 70001:
+                if(player->getClass() != CLASS_PALADIN) 
+				{
 				  char str[200];
-				  sprintf(str,"Your not a Hunter, so you cant buy this item!");
+				  sprintf(str,"Your not a paladin, so you cant buy this item!");
 						player->MonsterWhisper(str,player->GetGUID(),true);
 						player->PlayerTalkClass->SendCloseGossip();
-						} else {
-						AddItem(player, pCreature,7278,1,10);
+				} else 
+					{
+						AddItem(player, pCreature,200224,1,6);
 						player->PlayerTalkClass->SendCloseGossip();
-				  }
+					}
 						break;
-			case 12:
-				AddItem(player, pCreature,24368,1,20);
+			case 70002:
+                if(player->getClass() != CLASS_WARRIOR) 
+				{
+				  char str[200];
+				  sprintf(str,"Your not a warrior, so you cant buy this item!");
+						player->MonsterWhisper(str,player->GetGUID(),true);
+						player->PlayerTalkClass->SendCloseGossip();
+				} else 
+					{
+						AddItem(player, pCreature,200227,1,6);
+						player->PlayerTalkClass->SendCloseGossip();
+					}
+						break;
+			case 70003:
+                if(player->getClass() != CLASS_DEATH_KNIGHT) 
+				{
+				  char str[200];
+				  sprintf(str,"Your not a DK, so you cant buy this item!");
+						player->MonsterWhisper(str,player->GetGUID(),true);
+						player->PlayerTalkClass->SendCloseGossip();
+				} else 
+					{
+						AddItem(player, pCreature,200223,1,6);
+						player->PlayerTalkClass->SendCloseGossip();
+					}
+						break;
+			case 70004:
+                if(player->getClass() != CLASS_HUNTER) 
+				{
+				  char str[200];
+				  sprintf(str,"Your not a hunter, so you cant buy this item!");
+						player->MonsterWhisper(str,player->GetGUID(),true);
+						player->PlayerTalkClass->SendCloseGossip();
+				} else 
+					{
+						AddItem(player, pCreature,200222,1,6);
+						player->PlayerTalkClass->SendCloseGossip();
+					}
 				break;
-            case 301:
-                AddItem(player, pCreature,100105,1,6);
-                break;
+			case 70005:
+                if(player->getClass() != CLASS_ROGUE) 
+				{
+				  char str[200];
+				  sprintf(str,"Your not a rogue, so you cant buy this item!");
+						player->MonsterWhisper(str,player->GetGUID(),true);
+						player->PlayerTalkClass->SendCloseGossip();
+				} else 
+					{
+						AddItem(player, pCreature,200221,1,6);
+						player->PlayerTalkClass->SendCloseGossip();
+					}
+				break;
+			case 70006:
+                if(player->getClass() != CLASS_WARLOCK) 
+				{
+				  char str[200];
+				  sprintf(str,"Your not a warlock, so you cant buy this item!");
+						player->MonsterWhisper(str,player->GetGUID(),true);
+						player->PlayerTalkClass->SendCloseGossip();
+				} else 
+					{
+						AddItem(player, pCreature,200220,1,6);
+						player->PlayerTalkClass->SendCloseGossip();
+					}
+				break;
+			case 70007:
+                if(player->getClass() != CLASS_DRUID) 
+				{
+				  char str[200];
+				  sprintf(str,"Your not a Druid, so you cant buy this item!");
+						player->MonsterWhisper(str,player->GetGUID(),true);
+						player->PlayerTalkClass->SendCloseGossip();
+				} else 
+					{
+						AddItem(player, pCreature,200219,1,6);
+						player->PlayerTalkClass->SendCloseGossip();
+					}
+				break;
+			case 70008:
+                if(player->getClass() != CLASS_MAGE) 
+				{
+				  char str[200];
+				  sprintf(str,"Your not a Mage, so you cant buy this item!");
+						player->MonsterWhisper(str,player->GetGUID(),true);
+						player->PlayerTalkClass->SendCloseGossip();
+				} else 
+					{
+						AddItem(player, pCreature,200225,1,6);
+						player->PlayerTalkClass->SendCloseGossip();
+					}
+				break;
+			case 70009:
+                if(player->getClass() != CLASS_SHAMAN) 
+				{
+				  char str[200];
+				  sprintf(str,"Your not a Shaman, so you cant buy this item!");
+						player->MonsterWhisper(str,player->GetGUID(),true);
+						player->PlayerTalkClass->SendCloseGossip();
+				} else 
+					{
+						AddItem(player, pCreature,200218,1,6);
+						player->PlayerTalkClass->SendCloseGossip();
+					}
+				break;
+			case 70010:
+                if(player->getClass() != CLASS_PRIEST) 
+				{
+				  char str[200];
+				  sprintf(str,"Your not a priest, so you cant buy this item!");
+						player->MonsterWhisper(str,player->GetGUID(),true);
+						player->PlayerTalkClass->SendCloseGossip();
+				} else 
+					{
+						AddItem(player, pCreature,200226,1,6);
+						player->PlayerTalkClass->SendCloseGossip();
+					}
+				break;
+            
             case 302:
-                AddItem(player, pCreature,20131,1,20);
+                AddItem(player, pCreature,200165,1,6);
                 break;
             case 303:
-                AddItem(player, pCreature,20400,1,5);
+                AddItem(player, pCreature,200166,1,6);
                 break;
             case 304:
                 AddItem(player, pCreature,100130,1,7);

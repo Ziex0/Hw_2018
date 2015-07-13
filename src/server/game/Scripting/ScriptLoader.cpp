@@ -1401,6 +1401,7 @@ void AddBattlegroundScripts()
 	void AddSC_Donation_NPC();
 	void AddSC_romeo();
 	void AddSC_donorrewarder();
+	void AddSC_custom_CongratsOnLevel();
 
 #endif
 
@@ -1506,7 +1507,7 @@ void AddCustomScripts()
 	AddSC_Donation_NPC();
 	AddSC_romeo();
 	AddSC_donorrewarder();
-
+	AddSC_custom_CongratsOnLevel()
 
 #endif
 }

@@ -48,7 +48,7 @@ public:
 		std::stringstream points;
 
 		// Prevent exploiting the FusionCMS donate points
-		if (pPlayer->GetSession()->GetSecurity() < 3 && SelectDPoints(pPlayer) > 100)
+		if (pPlayer->GetSession()->GetSecurity() < 3 && SelectDPoints(pPlayer) > 200)
 		{
 			pPlayer->GetSession()->SendAreaTriggerMessage("You have large amount of Donation points: %u. This is probably a website related problem, please "
 				"immediately contact the administrator via ticket about this issue.", SelectDPoints(pPlayer));
