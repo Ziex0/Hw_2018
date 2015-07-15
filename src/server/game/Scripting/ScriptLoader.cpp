@@ -1507,6 +1507,5 @@ void AddCustomScripts()
 	AddSC_romeo();
 	AddSC_donorrewarder();
 
-
 #endif
 }

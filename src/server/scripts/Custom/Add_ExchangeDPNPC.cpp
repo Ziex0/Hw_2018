@@ -69,13 +69,14 @@ class ExchangeDPNPC : public CreatureScript
 
 	bool OnGossipHello(Player* player, Creature* pCreature)
 	{
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00FF21 Exchange 200VP to 1DP",			GOSSIP_SENDER_MAIN, 1, "|cffFFFFFF Change 200VP to 1DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00FF21 Exchange 500VP to 5DP *",			GOSSIP_SENDER_MAIN, 2, "|cffFFFFFF Change 500VP to 5DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00FF21 Exchange 800VP to 10DP *",			GOSSIP_SENDER_MAIN, 3, "|cffFFFFFF Change 800VP to 10DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00FF21 Exchange 1100VP to 15DP *",			GOSSIP_SENDER_MAIN, 4, "|cffFFFFFF Change 1100VP to 15DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cffFFD800 Exchange 1400VP to 20DP *",			GOSSIP_SENDER_MAIN, 5, "|cffFFFFFF Change 1400VP to 20DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff0094FF Exchange 2000VP to 25DP *",			GOSSIP_SENDER_MAIN, 6, "|cffFFFFFF Change 2000VP to 25DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cffFF0000 Exchange Massive 5000VP to 100DP *",	GOSSIP_SENDER_MAIN, 7, "|cffFFFFFF Change Massive 5000VP to 100DP|r", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 200VP to 1DP",				GOSSIP_SENDER_MAIN, 1, "|cffFFFFFF Change 200VP to 1DP|r", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 500VP to 5DP *",				GOSSIP_SENDER_MAIN, 2, "|cffFFFFFF Change 500VP to 5DP|r", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 800VP to 10DP *",				GOSSIP_SENDER_MAIN, 3, "|cffFFFFFF Change 800VP to 10DP|r", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 1100VP to 15DP *",			GOSSIP_SENDER_MAIN, 4, "|cffFFFFFF Change 1100VP to 15DP|r", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 1400VP to 20DP *",			GOSSIP_SENDER_MAIN, 5, "|cffFFFFFF Change 1400VP to 20DP|r", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_chargenegative:30|t|r Exchange 2000VP to 25DP *",				GOSSIP_SENDER_MAIN, 6, "|cffFFFFFF Change 2000VP to 25DP|r", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_chargenegative:30|t|r Exchange Massive 5000VP to 100DP *",	GOSSIP_SENDER_MAIN, 7, "|cffFFFFFF Change Massive 5000VP to 100DP|r", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|t Exchange 5 Dp to 100 vp *",		GOSSIP_SENDER_MAIN, 8, "|cffFFFFFF Exchange 5 Dp to 100 Vp|r", 0, false);
 		player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
         return true;
 	}
@@ -152,10 +153,20 @@ class ExchangeDPNPC : public CreatureScript
 				ReturnToMainMenu(player, creature);
 				break;
 			case 7:
-				if(!ExchangeToDP(player, 6000, 100))
+				if(!ExchangeToDP(player, 5000, 100))
 					sprintf(str, "You dont have enough vote points");
 				else
 					sprintf(str, "You have changed 5000VP to 100DP, congratulations Hero !!");
+
+				player->MonsterWhisper(str, player->GetGUID(), true);
+				ReturnToMainMenu(player, creature);
+				break;
+			
+			case 8:
+				if(!ExchangeToVP(player, 5, 100))
+					sprintf(str, "You dont have enough Donor points");
+				else
+					sprintf(str, "You have changed 5Dp to 100VP, congratulations Hero !!");
 
 				player->MonsterWhisper(str, player->GetGUID(), true);
 				ReturnToMainMenu(player, creature);

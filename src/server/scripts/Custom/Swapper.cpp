@@ -38,10 +38,10 @@ public:
         {
 			//player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|t Raids|rShow me How much DP I have"         , GOSSIP_SENDER_MAIN, 8);
             player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 600 Demon Head to 10 Star Coin"         , GOSSIP_SENDER_MAIN, 3); //Change the ID below
-            player->ADD_GOSSIP_ITEM( 8, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Demon Soul to 100 Golden Pearl"    , GOSSIP_SENDER_MAIN, 4); //Change the ID below
-            player->ADD_GOSSIP_ITEM( 7, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Golden Pearl to 100 Black Diamond" , GOSSIP_SENDER_MAIN, 5); //Change the stats below
-            player->ADD_GOSSIP_ITEM( 5, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Black Diamond to 100 Magic Card"   , GOSSIP_SENDER_MAIN, 6); //Change the stats below
-            player->ADD_GOSSIP_ITEM( 6, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Magic Card to 2 Donation Points"   , GOSSIP_SENDER_MAIN, 7);
+            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Demon Soul to 100 Golden Pearl"    , GOSSIP_SENDER_MAIN, 4); //Change the ID below
+            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Golden Pearl to 100 Black Diamond" , GOSSIP_SENDER_MAIN, 5); //Change the stats below
+            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Black Diamond to 100 Magic Card"   , GOSSIP_SENDER_MAIN, 6); //Change the stats below
+            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Magic Card to 2 Donation Points"   , GOSSIP_SENDER_MAIN, 7);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Return.", GOSSIP_SENDER_MAIN, 9999);
 			player->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
         }
@@ -84,7 +84,7 @@ public:
                 else
                 {
                     player->CLOSE_GOSSIP_MENU();
-                    _creature->MonsterWhisper("You don't have any Demon soull!!", player->GetGUID());
+                    _creature->MonsterWhisper("You don't have any Demon Soul !!", player->GetGUID());
                     return false;
                 }
                 break;
@@ -107,7 +107,7 @@ public:
                 if (player->HasItemCount( 320289, 1000, false ))
                 {
                     player->CLOSE_GOSSIP_MENU();
-                    player->DestroyItemCount(320288, 1000, true, false);
+                    player->DestroyItemCount(320289, 1000, true, false);
                     player->AddItem(320290, 100);
                     _creature->MonsterWhisper("You exchanged successfully converted to MC!", player->GetGUID());
                 }
@@ -123,7 +123,7 @@ public:
                 if (player->HasItemCount( 320290, 1000, false ))
                 {
                     player->CLOSE_GOSSIP_MENU();
-                    player->DestroyItemCount(320288, 1000, true, false);
+                    player->DestroyItemCount(320290, 1000, true, false);
                     LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 2 WHERE id = '%u'", player->GetSession()->GetAccountId());
                     _creature->MonsterWhisper("You exchanged successfully, now you got more 2 Donation point, Check your Points At menu!", player->GetGUID());
                 }
