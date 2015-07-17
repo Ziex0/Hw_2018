@@ -2690,6 +2690,7 @@ case GOSSIP_ACTION_INFO_DEF + 3007:
 			//custom events
 			case GOSSIP_ACTION_INFO_DEF + 810:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Heaven Stair", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 850);
+				//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON-BATTLE, "cRAzy mAZe( fail ) ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 851);
 				
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -2698,6 +2699,10 @@ case GOSSIP_ACTION_INFO_DEF + 3007:
 			case GOSSIP_ACTION_INFO_DEF + 850:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo (1, 2920.26f, 2974.38f, 1.61716f, 4.19481f);
+				break;
+			case GOSSIP_ACTION_INFO_DEF+ 851:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo (0,);
 				break;
 		}
 
