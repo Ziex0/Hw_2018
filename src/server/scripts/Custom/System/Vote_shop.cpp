@@ -83,22 +83,22 @@ class Vote_rewarder : public CreatureScript
     bool OnGossipHello(Player* player, Creature* pCreature)
         {
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:30:30|tHow much Vote points do I have?", GOSSIP_SENDER_MAIN, 19000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tVote Weapons", GOSSIP_SENDER_MAIN, 2000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tVote Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:24|tHow much Vote points do I have?", GOSSIP_SENDER_MAIN, 19000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Weapons", GOSSIP_SENDER_MAIN, 2000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorArmors and Shirts", GOSSIP_SENDER_MAIN, 300);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorTitan_Grip (Paladin cant use ) - 10 VP (can't use for 2H Staff)", GOSSIP_SENDER_MAIN, 20000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tSpecial Items", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSpecial Items", GOSSIP_SENDER_MAIN, 5000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tSpecial Tokens", GOSSIP_SENDER_MAIN, 4000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Tabard - 7 VP", GOSSIP_SENDER_MAIN, 10000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Cloak - 10 VP", GOSSIP_SENDER_MAIN, 11000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Set - 46 VP ( 8 Pieces )", GOSSIP_SENDER_MAIN, 12000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tRoyal Donor Set, 8 Coin - 62 VP", GOSSIP_SENDER_MAIN, 13000);
-			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tUltimate Misc Item", GOSSIP_SENDER_MAIN, 14000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Royal Weapons", GOSSIP_SENDER_MAIN, 32000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tCosmetic 50% Immune Stun Ring - 30 VP", GOSSIP_SENDER_MAIN, 9997);
 
-            player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+            player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
 
             return true;
         }
@@ -136,7 +136,7 @@ class Vote_rewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Donor Steel Shield - 7 VP", GOSSIP_SENDER_MAIN, 304);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Donor Ultimate Speed Shirt ->>", GOSSIP_SENDER_MAIN, 310);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
             case 1303:
@@ -173,7 +173,7 @@ class Vote_rewarder : public CreatureScript
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Ultimate Shirt IV - 20 VP", GOSSIP_SENDER_MAIN, 314);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Ultimate Shirt V - 30 VP", GOSSIP_SENDER_MAIN, 315);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
 			case 311:
@@ -251,7 +251,7 @@ class Vote_rewarder : public CreatureScript
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Melee Dagger  - 33 VP", GOSSIP_SENDER_MAIN, 2104);
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Spell Dagger  - 33 VP", GOSSIP_SENDER_MAIN, 2105);				
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
             case 2101:
@@ -278,7 +278,7 @@ class Vote_rewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Two Hand Mace - 50 VP", GOSSIP_SENDER_MAIN, 2203);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Polearm  - 50 VP", GOSSIP_SENDER_MAIN, 2204);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
             case 2201:
@@ -300,7 +300,7 @@ class Vote_rewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Spell Staff - 50 VP", GOSSIP_SENDER_MAIN, 2301);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Feral Staff - 50 VP", GOSSIP_SENDER_MAIN, 2303);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
             case 2301:
@@ -332,7 +332,7 @@ class Vote_rewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Gun - 33 VP", GOSSIP_SENDER_MAIN, 2402);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Wand  - 7 VP", GOSSIP_SENDER_MAIN, 2403);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
             case 2401:
@@ -357,7 +357,7 @@ class Vote_rewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Tank Shield - 25 VP", GOSSIP_SENDER_MAIN, 2501);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Spell Shield  - 25 VP", GOSSIP_SENDER_MAIN, 2502);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
             case 2501:
@@ -379,7 +379,7 @@ class Vote_rewarder : public CreatureScript
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Voters Bag - 27 VP", GOSSIP_SENDER_MAIN, 3009);
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Fallen Dragon Donor Caster Bag - 6 VP", GOSSIP_SENDER_MAIN, 3010);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
             
@@ -419,7 +419,7 @@ class Vote_rewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Signet of Berserking - 10 VP", GOSSIP_SENDER_MAIN, 14010);
                 
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
 			case 4032:
@@ -485,7 +485,7 @@ class Vote_rewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Ranged & shields", GOSSIP_SENDER_MAIN, 32004);
                 
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
 				
@@ -497,7 +497,7 @@ class Vote_rewarder : public CreatureScript
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal Dagger - 21 VP", GOSSIP_SENDER_MAIN, 52003);
 				
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 break;
 				
 				case 52000:
@@ -521,7 +521,7 @@ class Vote_rewarder : public CreatureScript
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal Two Hand Polearm - 32 VP", GOSSIP_SENDER_MAIN, 52007);
 								
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 break;
 				
 				case 52004:
@@ -542,7 +542,7 @@ class Vote_rewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal One Hand Armageddon Staff - 21 VP", GOSSIP_SENDER_MAIN, 52008);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal Two Hand Armageddon Staff - 32 VP", GOSSIP_SENDER_MAIN, 52009);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 break;
 				
 				break;
@@ -559,7 +559,7 @@ class Vote_rewarder : public CreatureScript
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal Wand - 17 VP", GOSSIP_SENDER_MAIN, 52011);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Royal Steel Shield - 30 VP", GOSSIP_SENDER_MAIN, 52015);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 break;
 				
 				break;
@@ -581,7 +581,7 @@ class Vote_rewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Sigil -25 VP", GOSSIP_SENDER_MAIN, 5004);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Libram - 25 VP", GOSSIP_SENDER_MAIN, 5005);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
             case 5001:
@@ -785,65 +785,60 @@ class Vote_rewarder : public CreatureScript
 			  }
 			  break;
 		  
-			case 14000:
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Donor Melee Ring - 9 VP", GOSSIP_SENDER_MAIN, 14001);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Caster Ring - 9 VP", GOSSIP_SENDER_MAIN, 14909);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Melee Trinket - 9 VP", GOSSIP_SENDER_MAIN, 14003);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Caster Trinket - 9 VP", GOSSIP_SENDER_MAIN, 14004);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Melee Celestial Amulet - 9 VP", GOSSIP_SENDER_MAIN, 14005);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Caster Celestial Amulet - 9 VP", GOSSIP_SENDER_MAIN, 14006);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Melee Bag - 9 VP", GOSSIP_SENDER_MAIN, 14007);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supreme Caster Bag - 9 VP", GOSSIP_SENDER_MAIN, 14008);
+			case 14000: // cross weapon skill
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Sword Weapon Skill - 415 VP", GOSSIP_SENDER_MAIN, 14001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Sword Weapon Skill - 830 VP", GOSSIP_SENDER_MAIN, 14909);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Axe Weapon Skill - 415 VP", GOSSIP_SENDER_MAIN, 14003);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Axe Weapon Skill - 830 VP", GOSSIP_SENDER_MAIN, 14004);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Mace Weapon Skill - 415 VP", GOSSIP_SENDER_MAIN, 14005);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Mace Weapon Skill - 830 VP", GOSSIP_SENDER_MAIN, 14006);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Staff Weapon Skill - 830 VP ", GOSSIP_SENDER_MAIN, 14007);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Polearm Hand Sword Weapon Skill - 830 VP", GOSSIP_SENDER_MAIN, 14008);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Dagger Weapon Skill - 415 VP", GOSSIP_SENDER_MAIN, 14009);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Bow Weapon Skill - 415 VP", GOSSIP_SENDER_MAIN, 14010);
+				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Gun Hand Sword Weapon Skill - 15 VP", GOSSIP_SENDER_MAIN, 14011);
+				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Wand Weapon Skill - 15 VP", GOSSIP_SENDER_MAIN, 14012);
 			
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(90702, pCreature->GetGUID());
                 return true;
                 break;
-			case 9997:
-                player->PlayerTalkClass->ClearMenus();
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Are you sure you wish to buy Immune Ring misc' Item?", GOSSIP_SENDER_MAIN, 9997);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Yes.", GOSSIP_SENDER_MAIN, 9996);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "No.", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
-                return true;
-			case 21070:
-				player->PlayerTalkClass->ClearMenus();
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Are you sure you wish to buy Immune Trinket misc' Item?", GOSSIP_SENDER_MAIN, 21070);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Yes.", GOSSIP_SENDER_MAIN, 99960);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "No.", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90000, pCreature->GetGUID());
-                return true;
-                break;
+			
 				case 14001:
-				AddItem(player, pCreature, 130110,1,11);
+				AddItem(player, pCreature, 340014,1,415);
 				break;
 				case 14909:
-				AddItem(player, pCreature, 130131,1,11);
+				AddItem(player, pCreature, 340015,1,830);
 				break;
 				case 14003:
-				AddItem(player, pCreature, 130109,1,11);
+				AddItem(player, pCreature, 340016,1,415);
 				break;
 				case 14004:
-				AddItem(player, pCreature, 130132,1,11);
+				AddItem(player, pCreature, 340017,1,830);
 				break;
 				case 14005:
-				AddItem(player, pCreature, 130111,1,11);
+				AddItem(player, pCreature, 340018,1,415);
 				break;
 				case 14006:
-				AddItem(player, pCreature, 130133,1,11);
+				AddItem(player, pCreature, 340019,1,830);
 				break;
 				case 14007:
-				AddItem(player, pCreature, 130108,1,11);
+				AddItem(player, pCreature, 340020,1,830);
 				break;
 				case 14008:
-				AddItem(player, pCreature, 130134,1,11);
+				AddItem(player, pCreature, 340021,1,830);
 				break;
-				case 20000:
-				AddItem(player, pCreature, 10,1,10);
+				case 14009:
+				AddItem(player, pCreature, 340022,1,415);
 				break;
-				
-				case 22070:
-				AddItem(player, pCreature, 22,1,50);
+				case 140010:
+				AddItem(player, pCreature, 340023,1,415);
+				break;
+				case 140011:
+				AddItem(player, pCreature, 1,1,215);
+				break;
+				case 140012:
+				AddItem(player, pCreature, 1,1,215);
 				break;
 				
 			case 9996:
