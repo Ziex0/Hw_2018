@@ -134,7 +134,7 @@ void CreatureAI::MoveInLineOfSight(Unit* who)
         AttackStart(who);
     //else if (who->getVictim() && me->IsFriendlyTo(who)
     //    && me->IsWithinDistInMap(who, sWorld->getIntConfig(CONFIG_CREATURE_FAMILY_ASSISTANCE_RADIUS))
-    //    && me->CanStartAttack(who->getVictim(), true)) /// @todo if we use true, it will not attack it when it arrives
+    //    && me->canStartAttack(who->getVictim(), true)) /// @todo if we use true, it will not attack it when it arrives
     //    me->GetMotionMaster()->MoveChase(who->getVictim());
 }
 
@@ -143,7 +143,7 @@ void CreatureAI::EnterEvadeMode()
     if (!_EnterEvadeMode())
         return;
 
-    sLog->outError(LOG_FILTER_UNITS, "Creature %u enters evade mode.", me->GetEntry());
+    sLog->outDebug(LOG_FILTER_UNITS, "Creature %u enters evade mode.", me->GetEntry());
 
     if (!me->GetVehicle()) // otherwise me will be in evade mode forever
     {
@@ -165,6 +165,8 @@ void CreatureAI::EnterEvadeMode()
 
     if (me->IsVehicle()) // use the same sequence of addtoworld, aireset may remove all summons!
         me->GetVehicleKit()->Reset(true);
+
+    me->SetLastDamagedTime(0);
 }
 
 /*void CreatureAI::AttackedBy(Unit* attacker)
@@ -225,8 +227,7 @@ bool CreatureAI::_EnterEvadeMode()
     if (!me->isAlive())
         return false;
 
-    // don't remove vehicle auras, passengers aren't supposed to drop off the vehicle
-    // don't remove clone caster on evade (to be verified)
+    // dont remove vehicle auras, passengers arent supposed to drop off the vehicle
     me->RemoveAllAurasExceptType(SPELL_AURA_CONTROL_VEHICLE);
 
     // sometimes bosses stuck in combat?
@@ -235,7 +236,6 @@ bool CreatureAI::_EnterEvadeMode()
     me->LoadCreaturesAddon();
     me->SetLootRecipient(NULL);
     me->ResetPlayerDamageReq();
-    me->SetLastDamagedTime(0);
 
     if (me->IsInEvadeMode())
         return false;

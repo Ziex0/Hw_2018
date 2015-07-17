@@ -14,7 +14,7 @@ EndScriptData */
 #include "Group.h"
 #include "Player.h"
 
-enum Points
+enum ePoints
 {
     POINT_LAST_POINT    = 0xFFFFFF,
     POINT_HOME          = 0xFFFFFE

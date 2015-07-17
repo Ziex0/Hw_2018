@@ -731,7 +731,7 @@ class boss_flame_leviathan_overload_device : public CreatureScript
             {
             }
 
-            virtual void OnSpellClick(Unit* /*clicker*/, bool& /*result*/)
+			virtual void OnSpellClick(Unit* /*clicker*/)
             {
                 if (me->GetVehicle())
                 {

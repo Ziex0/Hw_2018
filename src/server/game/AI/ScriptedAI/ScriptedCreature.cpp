@@ -387,7 +387,7 @@ void ScriptedAI::SetCombatMovement(bool allowMovement)
     _isCombatMovementAllowed = allowMovement;
 }
 
-enum NPCs
+enum eNPCs
 {
     NPC_BROODLORD   = 12017,
     NPC_VOID_REAVER = 19516,

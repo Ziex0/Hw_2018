@@ -197,7 +197,7 @@ class SmartAI : public CreatureAI
 
         void RemoveAuras();
 
-        void OnSpellClick(Unit* clicker, bool& result);
+        void OnSpellClick(Unit* clicker);
 
     private:
         uint32 mFollowCreditType;
