@@ -86,6 +86,7 @@ class donorrewarder : public CreatureScript
         {
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/INV_Chest_Plate13:24|tHow much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSatria Donation Armor Token - 5 DP", GOSSIP_SENDER_MAIN, 4005);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Weapons", GOSSIP_SENDER_MAIN, 2000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Shirts / Cloak / Tabard", GOSSIP_SENDER_MAIN, 300);
@@ -95,13 +96,9 @@ class donorrewarder : public CreatureScript
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tSpecial Tokens", GOSSIP_SENDER_MAIN, 4000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Tabard - 7 Dp", GOSSIP_SENDER_MAIN, 10000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Cloak - 10 DP", GOSSIP_SENDER_MAIN, 11000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Set - 46 DP ( 8 Pieces )", GOSSIP_SENDER_MAIN, 12000);
-			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tRoyal Donor Set, 8 Coin - 62 DP", GOSSIP_SENDER_MAIN, 13000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Set - 30 DP ( 8 Pieces )", GOSSIP_SENDER_MAIN, 12000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Royal Weapons", GOSSIP_SENDER_MAIN, 32000);
-			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Cosmetic 50% Immune Stun Trinket - 30 DP", GOSSIP_SENDER_MAIN, 21070);
-			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Invincible Offset - 35 DP", GOSSIP_SENDER_MAIN, 305);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Emblem of Voting x2 - 1 DP", GOSSIP_SENDER_MAIN, 4005);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Heaven Gems 5 DP - 3 Gems", GOSSIP_SENDER_MAIN, 5100);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Portable Mailbox - 10 DP", GOSSIP_SENDER_MAIN, 5200);
             player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
@@ -332,43 +329,7 @@ class donorrewarder : public CreatureScript
                 AddItem(player, pCreature,100129,1,30);
                 break;
 				
-			case 305: // invincible off set
-			  switch(player->getClass())
-			  {
-			case CLASS_WARRIOR:
-					AddItem(player, pCreature, 66073,1,35);
-			  break;
-			case CLASS_PALADIN:
-					AddItem(player, pCreature, 66077,1,35);
-				  break;
-			case CLASS_HUNTER:
-					AddItem(player, pCreature, 66071,1,35);
-				 break;
-			case CLASS_ROGUE:
-					AddItem(player, pCreature, 66072,1,35);
-				 break;
-			case CLASS_PRIEST:
-					AddItem(player, pCreature, 66074,1,35);
-			  break;
-			case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 66070,1,35);
-					 break;
-			case CLASS_SHAMAN:
-					AddItem(player, pCreature, 66078,1,35);
-				  break;
-			case CLASS_MAGE:
-					AddItem(player, pCreature, 66079,1,35);
-			  break;
-			case CLASS_WARLOCK:
-					AddItem(player, pCreature, 66076,1,35);
-				  break;
-			case CLASS_DRUID:
-					AddItem(player, pCreature, 66075,1,35);
-					break;
-
-			  default: break;
-			  }
-			  break;
+			
             case 1000:
                 AddItem(player, pCreature, 0, 0, 0);
                 break;
@@ -604,8 +565,8 @@ class donorrewarder : public CreatureScript
             case 4004:
                 AddItem(player, pCreature, 313370,1,55);
                 break;
-            case 4005:
-                AddItem(player, pCreature, 40753,2,1);
+            case 4005: //donation armor token
+                AddItem(player, pCreature, 27,1,5);
                 break;
             case 4006:
                 AddItem(player, pCreature, 13,1,75);
@@ -858,78 +819,40 @@ class donorrewarder : public CreatureScript
 			  switch(player->getClass())
 			  {
 			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 68,1,46);
-			  break;
+					AddItem(player, pCreature, 320268,1,30);
+				  break;
 			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 69,1,46);
+					AddItem(player, pCreature, 320267,1,30);
 				  break;
 			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 70,1,46);
+					AddItem(player, pCreature, 320271,1,30);
 				 break;
 			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 71,1,46);
+					AddItem(player, pCreature, 320270,1,30);
 				 break;
 			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 72,1,46);
+					AddItem(player, pCreature, 320273,1,30);
 				  break;
 			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 73,1,46);
+					AddItem(player, pCreature, 320269,1,30);
 					 break;
 			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 74,1,46);
+					AddItem(player, pCreature, 320275,1,30);
 				  break;
 			  case CLASS_MAGE:
-					AddItem(player, pCreature, 75,1,46);
-			  break;
+					AddItem(player, pCreature, 320272,1,30);
+				  break;
 			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 76,1,46);
+					AddItem(player, pCreature, 320274,1,30);
 				  break;
 			  case CLASS_DRUID:
-					AddItem(player, pCreature, 78,1,46);
-					break;
+					AddItem(player, pCreature, 320276,1,30);
+				   break;
 
 			  default: break;
 			  }
 			  break;
 			  
-			  case 13000: // donors set
-			  switch(player->getClass())
-			  {
-			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 7,8,62);
-			  break;
-			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 7,8,62);
-				  break;
-			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 7,8,62);
-				 break;
-			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 7,8,62);
-				 break;
-			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 7,8,62);
-				  break;
-			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 7,8,62);
-					 break;
-			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 7,8,62);
-				  break;
-			  case CLASS_MAGE:
-					AddItem(player, pCreature, 7,8,62);
-			  break;
-			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 7,8,62);
-				  break;
-			  case CLASS_DRUID:
-					AddItem(player, pCreature, 7,8,62);
-					break;
-
-			  default: break;
-			  }
-			  break;
-		  
 			case 14000: // cross weapon skill
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Sword Weapon Skill - 15 DP", GOSSIP_SENDER_MAIN, 14001);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Sword Weapon Skill - 30 DP", GOSSIP_SENDER_MAIN, 14909);
