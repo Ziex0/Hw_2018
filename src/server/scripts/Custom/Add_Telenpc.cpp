@@ -2702,7 +2702,7 @@ case GOSSIP_ACTION_INFO_DEF + 3007:
 				break;
 			case GOSSIP_ACTION_INFO_DEF+ 851:
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo (0,);
+				pPlayer->TeleportTo (0, 123.00f, 123.00f, 123.00f, 123.00f);
 				break;
 		}
 
