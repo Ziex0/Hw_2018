@@ -84,6 +84,8 @@ class Vote_rewarder : public CreatureScript
         {
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:24|tHow much Vote points do I have?", GOSSIP_SENDER_MAIN, 19000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSatria Vote Armor Token - 35 VP", GOSSIP_SENDER_MAIN, 4005);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSatria Vote Armor Token - 35 VP", GOSSIP_SENDER_MAIN, 4006);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Weapons", GOSSIP_SENDER_MAIN, 2000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorArmors and Shirts", GOSSIP_SENDER_MAIN, 300);
@@ -414,8 +416,6 @@ class Vote_rewarder : public CreatureScript
                 //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Scroll of Titan Grip's - 6 VP", GOSSIP_SENDER_MAIN, 4009);
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Cata / MoP Token - 5 VP", GOSSIP_SENDER_MAIN, 5040);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "VIP Rank - 55 VP", GOSSIP_SENDER_MAIN, 4004);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "VIP II Token - 75 VP", GOSSIP_SENDER_MAIN, 4006);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Upgrade to VIP II (This Work if you have VIP 1)- 311 VP", GOSSIP_SENDER_MAIN, 4007);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Signet of Berserking - 10 VP", GOSSIP_SENDER_MAIN, 14010);
                 
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
@@ -461,11 +461,11 @@ class Vote_rewarder : public CreatureScript
             case 4004:
                 AddItem(player, pCreature, 313370,1,55);
                 break;
-            case 4005:
-                AddItem(player, pCreature, 40753,2,1);
+            case 4005://vote token armor
+                AddItem(player, pCreature, 28,1,35);
                 break;
-            case 4006:
-                AddItem(player, pCreature, 13,1,75);
+            case 4006:// vote releaser
+                AddItem(player, pCreature, 985467,1,60);
                 break;
             case 4007:
                 AddItem(player, pCreature, 14,1,15);
