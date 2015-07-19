@@ -796,7 +796,7 @@ class Vote_rewarder : public CreatureScript
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Polearm Hand Sword Weapon Skill - 830 VP", GOSSIP_SENDER_MAIN, 14008);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Dagger Weapon Skill - 415 VP", GOSSIP_SENDER_MAIN, 14009);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Bow Weapon Skill - 415 VP", GOSSIP_SENDER_MAIN, 14010);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Gun Hand Sword Weapon Skill - 15 VP", GOSSIP_SENDER_MAIN, 14011);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Shield Skill - 415 VP", GOSSIP_SENDER_MAIN, 14011);
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Wand Weapon Skill - 15 VP", GOSSIP_SENDER_MAIN, 14012);
 			
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
@@ -835,7 +835,7 @@ class Vote_rewarder : public CreatureScript
 				AddItem(player, pCreature, 340023,1,415);
 				break;
 				case 140011:
-				AddItem(player, pCreature, 1,1,215);
+				AddItem(player, pCreature, 340024,1,215);
 				break;
 				case 140012:
 				AddItem(player, pCreature, 1,1,215);
