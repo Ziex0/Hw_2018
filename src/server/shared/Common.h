@@ -152,10 +152,10 @@ enum AccountTypes
     SEC_PLAYER         		= 0,
 	SEC_VIP			   		= 1,
 	SEC_VIP_2				= 2,
-	SEC_VIP_3				= 3,
-    SEC_MODERATOR      		= 4,
-    SEC_GAMEMASTER     		= 5,
-    SEC_ADMINISTRATOR  		= 6,
+    SEC_MODERATOR      		= 3, // trial
+    SEC_GAMEMASTER     		= 4, // gm
+	SEC_HEADGM				= 5, //head gm
+    SEC_ADMINISTRATOR  		= 6, // admin
 	SEC_HEAD_ADMIN	       	= 7,
 	SEC_CO			     	= 8,
 	SEC_OWNER		   		= 9,

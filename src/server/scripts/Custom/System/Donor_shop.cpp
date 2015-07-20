@@ -93,7 +93,7 @@ class donorrewarder : public CreatureScript
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDual Wield - 10 DP", GOSSIP_SENDER_MAIN, 30000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rTitan_Grip - 20 DP", GOSSIP_SENDER_MAIN, 20000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tSpecial Items", GOSSIP_SENDER_MAIN, 5000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tSpecial Tokens", GOSSIP_SENDER_MAIN, 4000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rPremium Rank 2 Token", GOSSIP_SENDER_MAIN, 4000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Tabard - 7 Dp", GOSSIP_SENDER_MAIN, 10000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Cloak - 10 DP", GOSSIP_SENDER_MAIN, 11000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Set - 30 DP ( 8 Pieces )", GOSSIP_SENDER_MAIN, 12000);
@@ -511,16 +511,15 @@ class donorrewarder : public CreatureScript
 			
             case 4000:
                 player->PlayerTalkClass->ClearMenus();
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Transmogrification Token - 1 DP", GOSSIP_SENDER_MAIN, 4001);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Re-Customize Token - 3 DP", GOSSIP_SENDER_MAIN, 14002);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Scroll of Dual Wield - 4 DP", GOSSIP_SENDER_MAIN, 4002);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Item Transfer/Exchange Token - 5 DP", GOSSIP_SENDER_MAIN, 4003);
-                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Scroll of Titan Grip's - 6 DP", GOSSIP_SENDER_MAIN, 4009);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Premium Rank 2 for 1 Month - 11 DP", GOSSIP_SENDER_MAIN, 4001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Premium Rank 2 for 1 Month - 21 DP", GOSSIP_SENDER_MAIN, 4002);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Premium Rank 2 for 1 Month - 33 DP", GOSSIP_SENDER_MAIN, 4003);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Premium Rank 2 for 1 Month - 45 DP", GOSSIP_SENDER_MAIN, 4009);
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Cata / MoP Token - 5 DP", GOSSIP_SENDER_MAIN, 5040);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "VIP Rank - 55 DP", GOSSIP_SENDER_MAIN, 4004);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "VIP II Token - 75 DP", GOSSIP_SENDER_MAIN, 4006);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Upgrade to VIP II (This Work if you have VIP 1)- 311 DP", GOSSIP_SENDER_MAIN, 4007);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Signet of Berserking - 10 DP", GOSSIP_SENDER_MAIN, 14010);
+                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "VIP Rank - 55 DP", GOSSIP_SENDER_MAIN, 4004);
+                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "VIP II Token - 75 DP", GOSSIP_SENDER_MAIN, 4006);
+                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Upgrade to VIP II (This Work if you have VIP 1)- 311 DP", GOSSIP_SENDER_MAIN, 4007);
+                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Signet of Berserking - 10 DP", GOSSIP_SENDER_MAIN, 14010);
                 
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
@@ -553,8 +552,19 @@ class donorrewarder : public CreatureScript
 			case 14010:
 				AddItem(player, pCreature, 361805,1,10);
 				break;
-            case 4001:
-                AddItem(player, pCreature, 361800,1,1);
+            case 4001: // vip token
+				if (player->GetSession()->GetSecurity() >= 1)
+				{
+				player->GetSession()->SendAreaTriggerMessage("Now you can upgrade your Premium to Rank 2, go to Updater Premium Rank NPC in mall");
+				AddItem(player, pCreature, 320264,1,11);
+				player->CLOSE_GOSSIP_MENU();
+				}
+				else
+					if (player->GetSession()->GetSecurity() >= 0)
+				{
+					player->GetSession()->SendAreaTriggerMessage("update your rank to |cffFF0000Premium|r rank 1 first before update to rank 2 !!");
+					player->CLOSE_GOSSIP_MENU();
+				}
                 break;
             case 4002:
                 AddItem(player, pCreature, 270002,1,4);
