@@ -4,8 +4,8 @@
 #include "Player.h"
 
 #define UPDATE_TIME_EVERY 3600 // updates every 1 minute i recommend you this not less than 60 seconds
-#define EQUIRED_ONLINE_TIME 43200 // in seconds '3600' = 1hour
-#define REWARD_AMOUNT 1 // how much vp gives if player meets online time
+#define EQUIRED_ONLINE_TIME 21600 // in seconds '3600' = 1hour
+#define REWARD_AMOUNT 0.5 // how much vp gives if player meets online time
 
 // database config
 #define DATABASE "web_db"
