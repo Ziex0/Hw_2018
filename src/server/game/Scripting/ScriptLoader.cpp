@@ -1402,7 +1402,7 @@ void AddBattlegroundScripts()
 	void AddSC_romeo();
 	void AddSC_donorrewarder();
 	void AddSC_Vote_rewarder();
-	void AddSC_Online_Time_DP();
+	//void AddSC_Online_Time_DP();
 
 #endif
 
@@ -1509,7 +1509,7 @@ void AddCustomScripts()
 	AddSC_romeo();
 	AddSC_donorrewarder();
 	AddSC_Vote_rewarder();
-	AddSC_Online_Time_DP();
+	//AddSC_Online_Time_DP();
 
 #endif
 }
