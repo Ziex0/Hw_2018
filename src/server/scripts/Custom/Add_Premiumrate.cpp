@@ -74,8 +74,9 @@ class premium_rate : public CreatureScript
 				pPlayer->PlayerTalkClass->SendGossipMenu(60031, pCreature->GetGUID());
 					}
 				else 
+					if (pPlayer->GetSession()->GetSecurity() >= 0)
 					{
-					pPlayer->GetSession()->SendNotification("Failed. Make sure you have Premium Rank 1");
+					pPlayer->GetSession()->SendNotification("Failed. Make sure you already Premium Rank 1");
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					}
                 return true;					
@@ -84,7 +85,7 @@ class premium_rate : public CreatureScript
 			case 6001:
 						if (pPlayer->GetSession()->GetSecurity() >= 2)
 					{
-						pPlayer->GetSession()->SendAreaTriggerMessage("You're already |cffFF0000Premium|r");
+						pPlayer->GetSession()->SendAreaTriggerMessage("You're already |cffFF0000Premium|r Rank II");
 						pPlayer->CLOSE_GOSSIP_MENU();
 					}
 						else
@@ -103,11 +104,6 @@ class premium_rate : public CreatureScript
 						pPlayer->SaveToDB();
 						pPlayer->CLOSE_GOSSIP_MENU();           
 					} 
-				else 
-					{
-					pPlayer->GetSession()->SendNotification("Failed. Make sure you have the desired item");
-					pPlayer->PlayerTalkClass->SendCloseGossip();
-					}
 			break;				
 	    
 		}
