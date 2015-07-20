@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -107,7 +107,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(const uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -117,7 +117,9 @@ public:
             {
                 if (PartingSorrowTimer <= diff)
                 {
-                    if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
+                    Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0);
+
+                    if (target)
                         DoCast(target, SPELL_PARTING_SORROW);
 
                     PartingSorrowTimer = urand(30000, 40000);
@@ -126,7 +128,7 @@ public:
 
             if (StormOfGriefTimer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_STORM_OF_GRIEF_N, true);
+                DoCastVictim(SPELL_STORM_OF_GRIEF_N, true);
                 StormOfGriefTimer = urand(15000, 20000);
             } else StormOfGriefTimer -= diff;
 
@@ -145,7 +147,7 @@ public:
                 if (target)
                     DoCast(target, SPELL_PILLAR_OF_WOE_N);
                 else
-                    DoCast(me->getVictim(), SPELL_PILLAR_OF_WOE_N);
+                    DoCastVictim(SPELL_PILLAR_OF_WOE_N);
 
                 PillarOfWoeTimer = urand(5000, 25000);
             } else PillarOfWoeTimer -= diff;

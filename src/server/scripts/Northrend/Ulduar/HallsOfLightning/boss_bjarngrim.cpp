@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -206,7 +206,7 @@ public:
                 instance->SetData(TYPE_BJARNGRIM, DONE);
         }
 
-        /// @todo remove when removal is done by the core
+        //TODO: remove when removal is done by the core
         void DoRemoveStanceAura(uint8 uiStance)
         {
             switch (uiStance)
@@ -223,7 +223,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 uiDiff)
+        void UpdateAI(const uint32 uiDiff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -295,7 +295,7 @@ public:
 
                     if (m_uiPummel_Timer <= uiDiff)
                     {
-                        DoCast(me->getVictim(), SPELL_PUMMEL);
+                        DoCastVictim(SPELL_PUMMEL);
                         m_uiPummel_Timer = urand(10000, 11000);
                     }
                     else
@@ -316,7 +316,7 @@ public:
                     if (m_uiIntercept_Timer <= uiDiff)
                     {
                         //not much point is this, better random target and more often?
-                        DoCast(me->getVictim(), SPELL_INTERCEPT);
+                        DoCastVictim(SPELL_INTERCEPT);
                         m_uiIntercept_Timer = urand(45000, 46000);
                     }
                     else
@@ -332,7 +332,7 @@ public:
 
                     if (m_uiCleave_Timer <= uiDiff)
                     {
-                        DoCast(me->getVictim(), SPELL_CLEAVE);
+                        DoCastVictim(SPELL_CLEAVE);
                         m_uiCleave_Timer = urand(8000, 9000);
                     }
                     else
@@ -344,7 +344,7 @@ public:
                 {
                     if (m_uiMortalStrike_Timer <= uiDiff)
                     {
-                        DoCast(me->getVictim(), SPELL_MORTAL_STRIKE);
+                        DoCastVictim(SPELL_MORTAL_STRIKE);
                         m_uiMortalStrike_Timer = urand(20000, 21000);
                     }
                     else
@@ -352,7 +352,7 @@ public:
 
                     if (m_uiSlam_Timer <= uiDiff)
                     {
-                        DoCast(me->getVictim(), SPELL_SLAM);
+                        DoCastVictim(SPELL_SLAM);
                         m_uiSlam_Timer = urand(15000, 16000);
                     }
                     else
@@ -406,13 +406,13 @@ public:
             {
                 if (Creature* pBjarngrim = instance->instance->GetCreature(instance->GetData64(DATA_BJARNGRIM)))
                 {
-                    if (pBjarngrim->isAlive() && !pBjarngrim->getVictim())
+                    if (pBjarngrim->isAlive() && !pBjarngrim->GetVictim())
                         pBjarngrim->AI()->AttackStart(who);
                 }
             }
         }
 
-        void UpdateAI(uint32 uiDiff)
+        void UpdateAI(const uint32 uiDiff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -420,7 +420,7 @@ public:
 
             if (m_uiArcWeld_Timer <= uiDiff)
             {
-                DoCast(me->getVictim(), SPELL_ARC_WELD);
+                DoCastVictim(SPELL_ARC_WELD);
                 m_uiArcWeld_Timer = urand(20000, 21000);
             }
             else

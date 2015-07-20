@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -135,7 +135,7 @@ class boss_general_vezax : public CreatureScript
                 events.ScheduleEvent(EVENT_BERSERK, 600000);
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 const diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -250,7 +250,7 @@ class boss_general_vezax : public CreatureScript
                 return 0;
             }
 
-            void DoAction(int32 action)
+            void DoAction(int32 const action)
             {
                 switch (action)
                 {
@@ -333,7 +333,7 @@ class boss_saronite_animus : public CreatureScript
                     Vezax->AI()->DoAction(ACTION_ANIMUS_DIE);
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 const diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -390,10 +390,13 @@ class npc_saronite_vapors : public CreatureScript
             {
                 events.Reset();
                 events.ScheduleEvent(EVENT_RANDOM_MOVE, urand(5000, 7500));
+                stopMoving = false;
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 const diff)
             {
+                if (stopMoving)
+                    return ;
                 events.Update(diff);
 
                 while (uint32 eventId = events.ExecuteEvent())
@@ -426,12 +429,15 @@ class npc_saronite_vapors : public CreatureScript
 
                     if (Creature* Vezax = me->GetCreature(*me, instance->GetData64(BOSS_VEZAX)))
                         Vezax->AI()->DoAction(ACTION_VAPORS_DIE);
+                    stopMoving = true;
+                    me->StopMoving();
                 }
             }
 
         private:
             InstanceScript* instance;
             EventMap events;
+            bool stopMoving;
         };
 
         CreatureAI* GetAI(Creature* creature) const

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -147,7 +147,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(const uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -168,7 +168,7 @@ public:
 
             if (uiStaticChargeTimer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_STATIC_CHARGE);
+                DoCastVictim(SPELL_STATIC_CHARGE);
                 uiStaticChargeTimer = urand(20000, 25000);
             } uiStaticChargeTimer -= diff;
 
@@ -228,7 +228,7 @@ public:
             Talk(SAY_SLAY);
         }
 
-        void DoAction(int32 action)
+        void DoAction(int32 const action)
         {
             if (action == ACTION_OOZE_DEAD)
                 ++abuseTheOoze;
@@ -266,7 +266,7 @@ public:
             uiMergeTimer = 10000;
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(const uint32 diff)
         {
             if (uiMergeTimer <= diff)
             {

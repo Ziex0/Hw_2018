@@ -51,35 +51,34 @@ enum DoomBlossom
     CREATURE_SHADOWY_CONSTRUCT      = 23111
 };
 
-class npc_doom_blossom : public CreatureScript
+class mob_doom_blossom : public CreatureScript
 {
 public:
-    npc_doom_blossom() : CreatureScript("npc_doom_blossom") { }
+    mob_doom_blossom() : CreatureScript("mob_doom_blossom") { }
 
-    CreatureAI* GetAI(Creature* creature) const override
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_doom_blossomAI(creature);
+        return new mob_doom_blossomAI(creature);
     }
 
-    struct npc_doom_blossomAI : public ScriptedAI
+    struct mob_doom_blossomAI : public ScriptedAI
     {
-        npc_doom_blossomAI(Creature* creature) : ScriptedAI(creature) {}
+        mob_doom_blossomAI(Creature* creature) : ScriptedAI(creature) {}
 
         uint32 CheckTeronTimer;
         uint32 ShadowBoltTimer;
         uint64 TeronGUID;
 
-        void Reset() override
+        void Reset()
         {
             CheckTeronTimer = 5000;
             ShadowBoltTimer = 12000;
             TeronGUID = 0;
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
-        void AttackStart(Unit* /*who*/) override {}
-        void MoveInLineOfSight(Unit* /*who*/) override {}
-
+        void EnterCombat(Unit* /*who*/) { }
+        void AttackStart(Unit* /*who*/) {}
+        void MoveInLineOfSight(Unit* /*who*/) {}
 
         void Despawn()
         {
@@ -87,7 +86,7 @@ public:
             me->RemoveCorpse();
         }
 
-        void UpdateAI(uint32 diff) override
+        void UpdateAI(const uint32 diff)
         {
             if (CheckTeronTimer <= diff)
             {
@@ -120,19 +119,19 @@ public:
     };
 };
 
-class npc_shadowy_construct : public CreatureScript
+class mob_shadowy_construct : public CreatureScript
 {
 public:
-    npc_shadowy_construct() : CreatureScript("npc_shadowy_construct") { }
+    mob_shadowy_construct() : CreatureScript("mob_shadowy_construct") { }
 
-    CreatureAI* GetAI(Creature* creature) const override
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_shadowy_constructAI(creature);
+        return new mob_shadowy_constructAI(creature);
     }
 
-    struct npc_shadowy_constructAI : public ScriptedAI
+    struct mob_shadowy_constructAI : public ScriptedAI
     {
-        npc_shadowy_constructAI(Creature* creature) : ScriptedAI(creature) {}
+        mob_shadowy_constructAI(Creature* creature) : ScriptedAI(creature) {}
 
         uint64 GhostGUID;
         uint64 TeronGUID;
@@ -140,7 +139,7 @@ public:
         uint32 CheckPlayerTimer;
         uint32 CheckTeronTimer;
 
-        void Reset() override
+        void Reset()
         {
             GhostGUID = 0;
             TeronGUID = 0;
@@ -149,10 +148,9 @@ public:
             CheckTeronTimer = 5000;
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void EnterCombat(Unit* /*who*/) {}
 
-        void MoveInLineOfSight(Unit* who) override
-
+        void MoveInLineOfSight(Unit* who)
         {
             if (!who || (!who->isAlive()) || (who->GetGUID() == GhostGUID))
                 return;
@@ -161,7 +159,7 @@ public:
         }
 
     /* Comment it out for now. NOTE TO FUTURE DEV: UNCOMMENT THIS OUT ONLY AFTER MIND CONTROL IS IMPLEMENTED
-        void DamageTaken(Unit* done_by, uint32 &damage) override
+        void DamageTaken(Unit* done_by, uint32 &damage)
         {
             if (done_by->GetGUID() != GhostGUID)
             damage = 0;                                         // Only the ghost can deal damage.
@@ -190,7 +188,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff) override
+        void UpdateAI(const uint32 diff)
         {
             if (CheckPlayerTimer <= diff)
             {
@@ -215,9 +213,9 @@ class boss_teron_gorefiend : public CreatureScript
 public:
     boss_teron_gorefiend() : CreatureScript("boss_teron_gorefiend") { }
 
-    CreatureAI* GetAI(Creature* creature) const override
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new boss_teron_gorefiendAI(creature);
+        return new boss_teron_gorefiendAI (creature);
     }
 
     struct boss_teron_gorefiendAI : public ScriptedAI
@@ -244,10 +242,10 @@ public:
         bool Intro;
         bool Done;
 
-        void Reset() override
+        void Reset()
         {
             if (instance)
-                instance->SetBossState(DATA_TERON_GOREFIEND, NOT_STARTED);
+                instance->SetData(DATA_TERONGOREFIENDEVENT, NOT_STARTED);
 
             IncinerateTimer = urand(20000, 31000);
             SummonDoomBlossomTimer = 12000;
@@ -266,17 +264,16 @@ public:
             Done = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void EnterCombat(Unit* /*who*/) {}
 
-        void MoveInLineOfSight(Unit* who) override
-
+        void MoveInLineOfSight(Unit* who)
         {
             if (!Intro && who->GetTypeId() == TYPEID_PLAYER && me->canCreatureAttack(who))
             {
                 if (me->IsWithinDistInMap(who, VISIBLE_RANGE) && me->IsWithinLOSInMap(who))
                 {
                     if (instance)
-                        instance->SetBossState(DATA_TERON_GOREFIEND, IN_PROGRESS);
+                        instance->SetData(DATA_TERONGOREFIENDEVENT, IN_PROGRESS);
 
                     me->GetMotionMaster()->Clear(false);
                     me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
@@ -290,15 +287,15 @@ public:
                 ScriptedAI::MoveInLineOfSight(who);
         }
 
-        void KilledUnit(Unit* /*victim*/) override
+        void KilledUnit(Unit* /*victim*/)
         {
             Talk(SAY_SLAY);
         }
 
-        void JustDied(Unit* /*killer*/) override
+        void JustDied(Unit* /*killer*/)
         {
             if (instance)
-                instance->SetBossState(DATA_TERON_GOREFIEND, DONE);
+                instance->SetData(DATA_TERONGOREFIENDEVENT, DONE);
 
             Talk(SAY_DEATH);
         }
@@ -352,10 +349,10 @@ public:
             {
                 /*float x, y, z;
                 ghost->GetPosition(x, y, z);
-                if (Creature* control = me->SummonCreature(CREATURE_GHOST, x, y, z, 0, TEMPSUMMON_TIMED_DESAWN, 30000))
+                Creature* control = me->SummonCreature(CREATURE_GHOST, x, y, z, 0, TEMPSUMMON_TIMED_DESAWN, 30000);
+                if (control)
                 {
-                    if (Player* player = ghost->ToPlayer())
-                        player->Possess(control);
+                    CAST_PLR(ghost)->Possess(control);
                     ghost->DealDamage(ghost, ghost->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL,
                 false);
                 }*/
@@ -369,10 +366,10 @@ public:
                     {
                         Construct->CastSpell(Construct, SPELL_PASSIVE_SHADOWFORM, true);
                         SetThreatList(Construct);               // Use same function as Doom Blossom to set Threat List.
-                        CAST_AI(npc_shadowy_construct::npc_shadowy_constructAI, Construct->AI())->GhostGUID = GhostGUID;
+                        CAST_AI(mob_shadowy_construct::mob_shadowy_constructAI, Construct->AI())->GhostGUID = GhostGUID;
                         Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
                         if (!target)                             // someone's trying to solo.
-                            target = me->getVictim();
+                            target = me->GetVictim();
 
                         if (target)
                             Construct->GetMotionMaster()->MoveChase(target);
@@ -381,7 +378,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff) override
+        void UpdateAI(const uint32 diff)
         {
             if (Intro && !Done)
             {
@@ -424,7 +421,7 @@ public:
                     {
                         Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
                         if (!target)
-                            target = me->getVictim();
+                            target = me->GetVictim();
 
                         if (target)
                             Shadow->AI()->AttackStart(target);
@@ -447,7 +444,7 @@ public:
                         DoomBlossom->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                         DoomBlossom->setFaction(me->getFaction());
                         DoomBlossom->AddThreat(target, 1.0f);
-                        CAST_AI(npc_doom_blossom::npc_doom_blossomAI, DoomBlossom->AI())->SetTeronGUID(me->GetGUID());
+                        CAST_AI(mob_doom_blossom::mob_doom_blossomAI, DoomBlossom->AI())->SetTeronGUID(me->GetGUID());
                         target->CombatStart(DoomBlossom);
                         SetThreatList(DoomBlossom);
                         SummonDoomBlossomTimer = 35000;
@@ -459,7 +456,7 @@ public:
             {
                 Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
                 if (!target)
-                    target = me->getVictim();
+                    target = me->GetVictim();
 
                 if (target)
                 {
@@ -471,7 +468,8 @@ public:
 
             if (CrushingShadowsTimer <= diff)
             {
-                if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
+                Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0);
+                if (target && target->isAlive())
                     DoCast(target, SPELL_CRUSHING_SHADOWS);
                 CrushingShadowsTimer = urand(10, 26) * 1000;
             } else CrushingShadowsTimer -= diff;
@@ -482,7 +480,7 @@ public:
                 Unit* target = SelectUnit(SELECT_TARGET_RANDOM, 1);
 
                 if (!target)
-                   target = me->getVictim();
+                   target = me->GetVictim();
 
                 if (target && target->isAlive() && target->GetTypeId() == TYPEID_PLAYER)
                 {
@@ -515,7 +513,7 @@ public:
 
 void AddSC_boss_teron_gorefiend()
 {
-    new npc_doom_blossom();
-    new npc_shadowy_construct();
+    new mob_doom_blossom();
+    new mob_shadowy_construct();
     new boss_teron_gorefiend();
 }

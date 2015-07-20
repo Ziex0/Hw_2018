@@ -63,7 +63,7 @@ enum ScriptTexts
     SAY_INTRO_ALLIANCE_1            = 0,
     SAY_INTRO_ALLIANCE_4            = 1,
     SAY_INTRO_ALLIANCE_5            = 2,
-    SAY_OUTRO_ALLIANCE_1            = 3, /// @todo ALLIANCE OUTRO
+    SAY_OUTRO_ALLIANCE_1            = 3, // TODO ALLIANCE OUTRO
     SAY_OUTRO_ALLIANCE_2            = 4,
     SAY_OUTRO_ALLIANCE_3            = 5,
     SAY_OUTRO_ALLIANCE_4            = 6,
@@ -420,9 +420,9 @@ class boss_deathbringer_saurfang : public CreatureScript
                         bloodPower->RecalculateAmountOfEffects();
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 const diff)
             {
-                if (!UpdateVictim() && !(events.IsInPhase(PHASE_INTRO_A) || events.IsInPhase(PHASE_INTRO_H)))
+                if (!UpdateVictim() && (!events.IsInPhase(PHASE_INTRO_A) || events.IsInPhase(PHASE_INTRO_H)))
                     return;
 
                 events.Update(diff);
@@ -512,7 +512,7 @@ class boss_deathbringer_saurfang : public CreatureScript
             }
 
             // intro setup
-            void DoAction(int32 action)
+            void DoAction(int32 const action)
             {
                 switch (action)
                 {
@@ -603,7 +603,7 @@ class npc_high_overlord_saurfang_icc : public CreatureScript
                 _events.Reset();
             }
 
-            void DoAction(int32 action)
+            void DoAction(int32 const action)
             {
                 switch (action)
                 {
@@ -708,7 +708,7 @@ class npc_high_overlord_saurfang_icc : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 const diff)
             {
                 _events.Update(diff);
                 while (uint32 eventId = _events.ExecuteEvent())
@@ -812,7 +812,7 @@ class npc_muradin_bronzebeard_icc : public CreatureScript
                 _events.Reset();
             }
 
-            void DoAction(int32 action)
+            void DoAction(int32 const action)
             {
                 switch (action)
                 {
@@ -888,7 +888,7 @@ class npc_muradin_bronzebeard_icc : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 const diff)
             {
                 _events.Update(diff);
                 while (uint32 eventId = _events.ExecuteEvent())
@@ -970,7 +970,7 @@ class npc_saurfang_event : public CreatureScript
                 }
             }
 
-            void DoAction(int32 action)
+            void DoAction(int32 const action)
             {
                 if (action == ACTION_CHARGE && _index)
                     me->GetMotionMaster()->MoveCharge(chargePos[_index].GetPositionX(), chargePos[_index].GetPositionY(), chargePos[_index].GetPositionZ(), 13.0f, POINT_CHARGE);
@@ -1274,7 +1274,7 @@ class spell_deathbringer_boiling_blood : public SpellScriptLoader
 
             void FilterTargets(std::list<WorldObject*>& targets)
             {
-                targets.remove(GetCaster()->getVictim());
+                targets.remove(GetCaster()->GetVictim());
                 if (targets.empty())
                     return;
 

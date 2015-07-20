@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -15,7 +15,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/// @todo Harpoon chain from 62505 should not get removed when other chain is applied
+//TODO: Harpoon chain from 62505 should not get removed when other chain is applied
 
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
@@ -224,7 +224,7 @@ class boss_razorscale_controller : public CreatureScript
                 _JustDied();
             }
 
-            void DoAction(int32 action)
+            void DoAction(int32 const action)
             {
                 if (instance->GetBossState(BOSS_RAZORSCALE) != IN_PROGRESS)
                     return;
@@ -243,7 +243,7 @@ class boss_razorscale_controller : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 Diff)
+            void UpdateAI(uint32 const Diff)
             {
                 events.Update(Diff);
 
@@ -394,7 +394,7 @@ class boss_razorscale : public CreatureScript
                 return 0;
             }
 
-            void UpdateAI(uint32 Diff)
+            void UpdateAI(uint32 const Diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -494,7 +494,7 @@ class boss_razorscale : public CreatureScript
                                 events.CancelEvent(EVENT_BUFFET);
                                 return;
                             case EVENT_FUSE:
-                                DoCast(me->getVictim(), SPELL_FUSEARMOR);
+                                DoCastVictim(SPELL_FUSEARMOR);
                                 events.ScheduleEvent(EVENT_FUSE, 10000, 0, PHASE_PERMAGROUND);
                                 return;
                         }
@@ -562,7 +562,7 @@ class boss_razorscale : public CreatureScript
                 }
             }
 
-            void DoAction(int32 action)
+            void DoAction(int32 const action)
             {
                 switch (action)
                 {
@@ -625,7 +625,7 @@ class npc_expedition_commander : public CreatureScript
                 summons.push_back(summoned->GetGUID());
             }
 
-            void DoAction(int32 action)
+            void DoAction(int32 const action)
             {
                 switch (action)
                 {
@@ -639,7 +639,7 @@ class npc_expedition_commander : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 Diff)
+            void UpdateAI(uint32 const Diff)
             {
                 if (AttackStartTimer <= Diff)
                 {
@@ -739,11 +739,10 @@ class npc_mole_machine_trigger : public CreatureScript
     public:
         npc_mole_machine_trigger() : CreatureScript("npc_mole_machine_trigger") { }
 
-        struct npc_mole_machine_triggerAI : public ScriptedAI
+        struct npc_mole_machine_triggerAI : public Scripted_NoMovementAI
         {
-            npc_mole_machine_triggerAI(Creature* creature) : ScriptedAI(creature)
+            npc_mole_machine_triggerAI(Creature* creature) : Scripted_NoMovementAI(creature)
             {
-                SetCombatMovement(false);
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PACIFIED);
             }
 
@@ -762,7 +761,7 @@ class npc_mole_machine_trigger : public CreatureScript
                 NpcSummoned = false;
             }
 
-            void UpdateAI(uint32 Diff)
+            void UpdateAI(uint32 const Diff)
             {
                 if (!GobSummoned && SummonGobTimer <= Diff)
                 {
@@ -819,11 +818,10 @@ class npc_devouring_flame : public CreatureScript
     public:
         npc_devouring_flame() : CreatureScript("npc_devouring_flame") { }
 
-        struct npc_devouring_flameAI : public ScriptedAI
+        struct npc_devouring_flameAI : public Scripted_NoMovementAI
         {
-            npc_devouring_flameAI(Creature* creature) : ScriptedAI(creature)
+            npc_devouring_flameAI(Creature* creature) : Scripted_NoMovementAI(creature)
             {
-                SetCombatMovement(false);
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PACIFIED);
             }
 
@@ -857,14 +855,14 @@ class npc_darkrune_watcher : public CreatureScript
                 LightTimer = urand(1000, 3000);
             }
 
-            void UpdateAI(uint32 Diff)
+            void UpdateAI(uint32 const Diff)
             {
                 if (!UpdateVictim())
                     return;
 
                 if (ChainTimer <= Diff)
                 {
-                    DoCast(me->getVictim(), SPELL_CHAIN_LIGHTNING);
+                    DoCastVictim(SPELL_CHAIN_LIGHTNING);
                     ChainTimer = urand(10000, 15000);
                 }
                 else
@@ -917,14 +915,14 @@ class npc_darkrune_guardian : public CreatureScript
             }
 
 
-            void UpdateAI(uint32 Diff)
+            void UpdateAI(uint32 const Diff)
             {
                 if (!UpdateVictim())
                     return;
 
                 if (StormTimer <= Diff)
                 {
-                    DoCast(me->getVictim(), SPELL_STORMSTRIKE);
+                    DoCastVictim(SPELL_STORMSTRIKE);
                     StormTimer = urand(4000, 8000);
                 }
                 else
@@ -963,14 +961,14 @@ class npc_darkrune_sentinel : public CreatureScript
                 ShoutTimer = urand(15000, 30000);
             }
 
-            void UpdateAI(uint32 Diff)
+            void UpdateAI(uint32 const Diff)
             {
                 if (!UpdateVictim())
                     return;
 
                 if (HeroicTimer <= Diff)
                 {
-                    DoCast(me->getVictim(), SPELL_HEROIC_STRIKE);
+                    DoCastVictim(SPELL_HEROIC_STRIKE);
                     HeroicTimer = urand(4000, 6000);
                 }
                 else
@@ -978,7 +976,7 @@ class npc_darkrune_sentinel : public CreatureScript
 
                 if (WhirlTimer <= Diff)
                 {
-                    DoCast(me->getVictim(), SPELL_WHIRLWIND);
+                    DoCastVictim(SPELL_WHIRLWIND);
                     WhirlTimer = urand(20000, 25000);
                 }
                 else

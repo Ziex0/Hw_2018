@@ -82,9 +82,9 @@ class boss_mother_shahraz : public CreatureScript
 public:
     boss_mother_shahraz() : CreatureScript("boss_mother_shahraz") { }
 
-    CreatureAI* GetAI(Creature* creature) const override
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new boss_shahrazAI(creature);
+        return new boss_shahrazAI (creature);
     }
 
     struct boss_shahrazAI : public ScriptedAI
@@ -111,10 +111,10 @@ public:
 
         bool Enraged;
 
-        void Reset() override
+        void Reset()
         {
             if (instance)
-                instance->SetBossState(DATA_MOTHER_SHAHRAZ, NOT_STARTED);
+                instance->SetData(DATA_MOTHERSHAHRAZEVENT, NOT_STARTED);
 
             for (uint8 i = 0; i<3; ++i)
                 TargetGUID[i] = 0;
@@ -134,24 +134,24 @@ public:
             Enraged = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void EnterCombat(Unit* /*who*/)
         {
             if (instance)
-                instance->SetBossState(DATA_MOTHER_SHAHRAZ, IN_PROGRESS);
+                instance->SetData(DATA_MOTHERSHAHRAZEVENT, IN_PROGRESS);
 
             DoZoneInCombat();
             Talk(SAY_AGGRO);
         }
 
-        void KilledUnit(Unit* /*victim*/) override
+        void KilledUnit(Unit* /*victim*/)
         {
             Talk(SAY_SLAY);
         }
 
-        void JustDied(Unit* /*killer*/) override
+        void JustDied(Unit* /*killer*/)
         {
             if (instance)
-                instance->SetBossState(DATA_MOTHER_SHAHRAZ, DONE);
+                instance->SetData(DATA_MOTHERSHAHRAZEVENT, DONE);
 
             Talk(SAY_DEATH);
         }
@@ -174,7 +174,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff) override
+        void UpdateAI(const uint32 diff)
         {
             if (!UpdateVictim())
                 return;

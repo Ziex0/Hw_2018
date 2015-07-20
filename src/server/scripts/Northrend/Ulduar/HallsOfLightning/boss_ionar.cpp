@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 TheSatriaCore <http://www.TheSatria.Com>
+ * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -198,7 +198,8 @@ public:
 
                 summoned->CastSpell(summoned, DUNGEON_MODE(SPELL_SPARK_VISUAL_TRIGGER, H_SPELL_SPARK_VISUAL_TRIGGER), true);
 
-                if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
+                Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0);
+                if (target)
                 {
                     summoned->SetInCombatWith(target);
                     summoned->GetMotionMaster()->Clear();
@@ -213,7 +214,7 @@ public:
                 lSparkList.Despawn(summoned);
         }
 
-        void UpdateAI(uint32 uiDiff)
+        void UpdateAI(const uint32 uiDiff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -243,8 +244,8 @@ public:
                         uiSplitTimer = 25*IN_MILLISECONDS;
                         bIsSplitPhase = true;
 
-                        if (me->getVictim())
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                        if (me->GetVictim())
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                     }
                 }
                 else
@@ -265,7 +266,7 @@ public:
 
             if (uiBallLightningTimer <= uiDiff)
             {
-                DoCast(me->getVictim(), SPELL_BALL_LIGHTNING);
+                DoCastVictim(SPELL_BALL_LIGHTNING);
                 uiBallLightningTimer = urand(10*IN_MILLISECONDS, 11*IN_MILLISECONDS);
             }
             else
@@ -335,7 +336,7 @@ public:
             uiDamage = 0;
         }
 
-        void UpdateAI(uint32 uiDiff)
+        void UpdateAI(const uint32 uiDiff)
         {
             // Despawn if the encounter is not running
             if (instance && instance->GetData(TYPE_IONAR) != IN_PROGRESS)

@@ -29,44 +29,32 @@ EndScriptData */
 #include "Player.h"
 #include "SpellInfo.h"
 
-enum Yells
+enum eEnums
 {
     SAY_AGGRO                       = 0,
     SAY_NEEDLE                      = 1,
     SAY_SLAY                        = 2,
     SAY_SPECIAL                     = 3,
     SAY_ENRAGE                      = 4,
-    SAY_DEATH                       = 5
-};
+    SAY_DEATH                       = 5,
 
-enum Spells
-{
+    //Spells
     SPELL_NEEDLE_SPINE              = 39992,
     SPELL_TIDAL_BURST               = 39878,
     SPELL_TIDAL_SHIELD              = 39872,
     SPELL_IMPALING_SPINE            = 39837,
     SPELL_CREATE_NAJENTUS_SPINE     = 39956,
     SPELL_HURL_SPINE                = 39948,
-    SPELL_BERSERK                   = 26662
+    SPELL_BERSERK                   = 26662,
 
-};
+    GOBJECT_SPINE                   = 185584,
 
-enum GameObjects
-{
-    GOBJECT_SPINE                   = 185584
-};
-
-enum Events
-{
     EVENT_BERSERK                   = 1,
     EVENT_YELL                      = 2,
     EVENT_NEEDLE                    = 3,
     EVENT_SPINE                     = 4,
-    EVENT_SHIELD                    = 5
-};
+    EVENT_SHIELD                    = 5,
 
-enum Misc
-{
     GCD_CAST                        = 1,
     GCD_YELL                        = 2
 };
@@ -76,9 +64,9 @@ class boss_najentus : public CreatureScript
 public:
     boss_najentus() : CreatureScript("boss_najentus") { }
 
-    CreatureAI* GetAI(Creature* creature) const override
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new boss_najentusAI(creature);
+        return new boss_najentusAI (creature);
     }
 
     struct boss_najentusAI : public ScriptedAI
@@ -93,31 +81,31 @@ public:
 
         uint64 SpineTargetGUID;
 
-        void Reset() override
+        void Reset()
         {
             events.Reset();
 
             SpineTargetGUID = 0;
 
             if (instance)
-                instance->SetBossState(DATA_HIGH_WARLORD_NAJENTUS, NOT_STARTED);
+                instance->SetData(DATA_HIGHWARLORDNAJENTUSEVENT, NOT_STARTED);
         }
 
-        void KilledUnit(Unit* /*victim*/) override
+        void KilledUnit(Unit* /*victim*/)
         {
             Talk(SAY_SLAY);
             events.DelayEvents(5000, GCD_YELL);
         }
 
-        void JustDied(Unit* /*killer*/) override
+        void JustDied(Unit* /*killer*/)
         {
             if (instance)
-                instance->SetBossState(DATA_HIGH_WARLORD_NAJENTUS, DONE);
+                instance->SetData(DATA_HIGHWARLORDNAJENTUSEVENT, DONE);
 
             Talk(SAY_DEATH);
         }
 
-        void SpellHit(Unit* /*caster*/, const SpellInfo* spell) override
+        void SpellHit(Unit* /*caster*/, const SpellInfo* spell)
         {
             if (spell->Id == SPELL_HURL_SPINE && me->HasAura(SPELL_TIDAL_SHIELD))
             {
@@ -127,10 +115,10 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void EnterCombat(Unit* /*who*/)
         {
             if (instance)
-                instance->SetBossState(DATA_HIGH_WARLORD_NAJENTUS, IN_PROGRESS);
+                instance->SetData(DATA_HIGHWARLORDNAJENTUSEVENT, IN_PROGRESS);
 
             Talk(SAY_AGGRO);
             DoZoneInCombat();
@@ -158,7 +146,7 @@ public:
             events.RescheduleEvent(EVENT_SHIELD, 60000 + inc);
         }
 
-        void UpdateAI(uint32 diff) override
+        void UpdateAI(const uint32 diff)
         {
             if (!UpdateVictim())
                 return;
@@ -181,7 +169,7 @@ public:
                     case EVENT_SPINE:
                     {
                         Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1);
-                        if (!target) target = me->getVictim();
+                        if (!target) target = me->GetVictim();
                         if (target)
                         {
                             DoCast(target, SPELL_IMPALING_SPINE, true);
@@ -225,10 +213,10 @@ class go_najentus_spine : public GameObjectScript
 public:
     go_najentus_spine() : GameObjectScript("go_najentus_spine") { }
 
-    bool OnGossipHello(Player* player, GameObject* go) override
+    bool OnGossipHello(Player* player, GameObject* go)
     {
         if (InstanceScript* instance = go->GetInstanceScript())
-            if (Creature* Najentus = ObjectAccessor::GetCreature(*go, instance->GetData64(DATA_HIGH_WARLORD_NAJENTUS)))
+            if (Creature* Najentus = Unit::GetCreature(*go, instance->GetData64(DATA_HIGHWARLORDNAJENTUS)))
                 if (CAST_AI(boss_najentus::boss_najentusAI, Najentus->AI())->RemoveImpalingSpine())
                 {
                     player->CastSpell(player, SPELL_CREATE_NAJENTUS_SPINE, true);

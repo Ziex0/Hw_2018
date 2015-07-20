@@ -65,7 +65,7 @@ public:
     {
         npc_spirit_of_olumAI(Creature* creature) : ScriptedAI(creature) {}
 
-        void sGossipSelect(Player* player, uint32 /*sender*/, uint32 action) override
+        void sGossipSelect(Player* player, uint32 /*sender*/, uint32 action)
         {
             if (action == 1)
             {
@@ -76,7 +76,7 @@ public:
         }
     };
 
-    CreatureAI* GetAI(Creature* creature) const override
+    CreatureAI* GetAI(Creature* creature) const
     {
         return new npc_spirit_of_olumAI(creature);
     }
@@ -98,22 +98,22 @@ public:
             instance = creature->GetInstanceScript();
         }
 
-        void Reset() override
+        void Reset()
         {
             events.ScheduleEvent(EVENT_GET_CHANNELERS, 3000);
             enteredCombat = false;
         }
 
-        void JustDied(Unit* /*killer*/) override { }
+        void JustDied(Unit* /*killer*/) { }
 
-        void EnterCombat(Unit* /*who*/) override
+        void EnterCombat(Unit* /*who*/)
         {
             events.ScheduleEvent(EVENT_CLEAVE, 5000);
             events.ScheduleEvent(EVENT_IGNORED, 7000);
             enteredCombat = true;
         }
 
-        void UpdateAI(uint32 diff) override
+        void UpdateAI(uint32 const diff)
         {
 
             if (!enteredCombat)
@@ -205,7 +205,7 @@ public:
             bool enteredCombat;
     };
 
-    CreatureAI* GetAI(Creature* creature) const override
+    CreatureAI* GetAI(Creature* creature) const
     {
         return new npc_wrathbone_flayerAI(creature);
     }

@@ -62,9 +62,9 @@ class boss_gurtogg_bloodboil : public CreatureScript
 public:
     boss_gurtogg_bloodboil() : CreatureScript("boss_gurtogg_bloodboil") { }
 
-    CreatureAI* GetAI(Creature* creature) const override
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new boss_gurtogg_bloodboilAI(creature);
+        return new boss_gurtogg_bloodboilAI (creature);
     }
 
     struct boss_gurtogg_bloodboilAI : public ScriptedAI
@@ -93,10 +93,10 @@ public:
 
         bool Phase1;
 
-        void Reset() override
+        void Reset()
         {
             if (instance)
-                instance->SetBossState(DATA_GURTOGG_BLOODBOIL, NOT_STARTED);
+                instance->SetData(DATA_GURTOGGBLOODBOILEVENT, NOT_STARTED);
 
             TargetGUID = 0;
 
@@ -119,23 +119,23 @@ public:
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_ATTACK_ME, false);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void EnterCombat(Unit* /*who*/)
         {
             DoZoneInCombat();
             Talk(SAY_AGGRO);
             if (instance)
-                instance->SetBossState(DATA_GURTOGG_BLOODBOIL, IN_PROGRESS);
+                instance->SetData(DATA_GURTOGGBLOODBOILEVENT, IN_PROGRESS);
         }
 
-        void KilledUnit(Unit* /*victim*/) override
+        void KilledUnit(Unit* /*victim*/)
         {
             Talk(SAY_SLAY);
         }
 
-        void JustDied(Unit* /*killer*/) override
+        void JustDied(Unit* /*killer*/)
         {
             if (instance)
-                instance->SetBossState(DATA_GURTOGG_BLOODBOIL, DONE);
+                instance->SetData(DATA_GURTOGGBLOODBOILEVENT, DONE);
 
             Talk(SAY_DEATH);
         }
@@ -187,7 +187,9 @@ public:
 
         void RevertThreatOnTarget(uint64 guid)
         {
-            if (Unit* unit = Unit::GetUnit(*me, guid))
+            Unit* unit = NULL;
+            unit = Unit::GetUnit(*me, guid);
+            if (unit)
             {
                 if (DoGetThreat(unit))
                     DoModifyThreatPercent(unit, -100);
@@ -196,7 +198,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff) override
+        void UpdateAI(const uint32 diff)
         {
             if (!UpdateVictim())
                 return;
@@ -227,7 +229,7 @@ public:
                 if (BewilderingStrikeTimer <= diff)
                 {
                     DoCastVictim(SPELL_BEWILDERING_STRIKE);
-                    float mt_threat = DoGetThreat(me->getVictim());
+                    float mt_threat = DoGetThreat(me->GetVictim());
                     if (Unit* target = SelectTarget(SELECT_TARGET_TOPAGGRO, 1))
                         me->AddThreat(target, mt_threat);
                     BewilderingStrikeTimer = 20000;
@@ -236,7 +238,7 @@ public:
                 if (EjectTimer <= diff)
                 {
                     DoCastVictim(SPELL_EJECT1);
-                    DoModifyThreatPercent(me->getVictim(), -40);
+                    DoModifyThreatPercent(me->GetVictim(), -40);
                     EjectTimer = 15000;
                 } else EjectTimer -= diff;
 
@@ -277,7 +279,8 @@ public:
             {
                 if (Phase1)
                 {
-                    if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
+                    Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0);
+                    if (target && target->isAlive())
                     {
                         Phase1 = false;
 
@@ -305,8 +308,7 @@ public:
                         AcidGeyserTimer = 1000;
                         PhaseChangeTimer = 30000;
                     }
-                }
-                else                                           // Encounter is a loop pretty much. Phase 1 -> Phase 2 -> Phase 1 -> Phase 2 till death or enrage
+                } else                                           // Encounter is a loop pretty much. Phase 1 -> Phase 2 -> Phase 1 -> Phase 2 till death or enrage
                 {
                     if (TargetGUID)
                         RevertThreatOnTarget(TargetGUID);
