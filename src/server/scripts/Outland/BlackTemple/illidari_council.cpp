@@ -169,7 +169,7 @@ public:
         void AttackStart(Unit* /*who*/) {}
         void MoveInLineOfSight(Unit* /*who*/) {}
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             if (!EventStarted)
                 return;
@@ -303,9 +303,9 @@ public:
                 {
                     if (Council[i])
                     {
-                        Unit* member = Unit::GetUnit(*me, Council[i]);
-                        if (member && member->isAlive())
-                            CAST_CRE(member)->AI()->AttackStart(target);
+                        if (Creature* member = ObjectAccessor::GetCreature(*me, Council[i]))
+                            if (member->isAlive())
+                                member->AI()->AttackStart(target);
                     }
                 }
 
@@ -315,7 +315,7 @@ public:
             }
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             if (!EventBegun)
                 return;
@@ -357,7 +357,7 @@ public:
                             if (Creature* Member = (Unit::GetCreature((*me), Council[i])))
                             {
                                 // This is the evade/death check.
-                                if (Member->isAlive() && !Member->GetVictim())
+                                if (Member->isAlive() && !Member->getVictim())
                                     ++EvadeCheck;                   //If all members evade, we reset so that players can properly reset the event
                                 else if (!Member->isAlive())         // If even one member dies, kill the rest, set instance data, and kill self.
                                 {
@@ -425,9 +425,9 @@ struct boss_illidari_councilAI : public ScriptedAI
         for (uint8 i = 0; i < 4; ++i)
         {
             if (Unit* unit = Unit::GetUnit(*me, Council[i]))
-                if (unit != me && unit->GetVictim())
+                if (unit != me && unit->getVictim())
                 {
-                    AttackStart(unit->GetVictim());
+                    AttackStart(unit->getVictim());
                     return;
                 }
         }
@@ -536,7 +536,7 @@ public:
             }
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             if (!UpdateVictim())
                 return;
@@ -641,7 +641,7 @@ public:
             Talk(SAY_ZERE_DEATH);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             if (!UpdateVictim())
                 return;
@@ -741,7 +741,7 @@ public:
             Talk(SAY_MALA_DEATH);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             if (!UpdateVictim())
                 return;
@@ -827,7 +827,7 @@ public:
             Talk(SAY_VERA_DEATH);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             if (!UpdateVictim())
                 return;
@@ -868,7 +868,7 @@ public:
             {
                 if (VanishTimer <= diff)                          // Become attackable and poison current target
                 {
-                    Unit* target = me->GetVictim();
+                    Unit* target = me->getVictim();
                     DoCast(target, SPELL_DEADLY_POISON);
                     me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                     DoResetThreat();
@@ -882,7 +882,7 @@ public:
                 if (AppearEnvenomTimer <= diff)                   // Appear 2 seconds before becoming attackable (Shifting out of vanish)
                 {
                     me->GetMotionMaster()->Clear();
-                    me->GetMotionMaster()->MoveChase(me->GetVictim());
+                    me->GetMotionMaster()->MoveChase(me->getVictim());
                     me->SetVisible(true);
                     AppearEnvenomTimer = 6000;
                 } else AppearEnvenomTimer -= diff;

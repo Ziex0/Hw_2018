@@ -248,7 +248,7 @@ public:
                 instance->SetData(DATA_RELIQUARYOFSOULSEVENT, DONE);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             if (!Phase)
                 return;
@@ -469,7 +469,7 @@ public:
             me->AddThreat(target, 1000000);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             if (me->isInCombat())
             {
@@ -574,7 +574,7 @@ public:
             Talk(DESI_SAY_SLAY);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             if (!UpdateVictim())
                 return;
@@ -665,7 +665,7 @@ public:
             Talk(ANGER_SAY_SLAY);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -673,17 +673,17 @@ public:
 
             if (!CheckedAggro)
             {
-                AggroTargetGUID = me->GetVictim()->GetGUID();
+                AggroTargetGUID = me->getVictim()->GetGUID();
                 CheckedAggro = true;
             }
 
             if (CheckTankTimer <= diff)
             {
-                if (me->GetVictim()->GetGUID() != AggroTargetGUID)
+                if (me->getVictim()->GetGUID() != AggroTargetGUID)
                 {
                     Talk(ANGER_SAY_BEFORE);
                     DoCast(me, SPELL_SELF_SEETHE, true);
-                    AggroTargetGUID = me->GetVictim()->GetGUID();
+                    AggroTargetGUID = me->getVictim()->GetGUID();
                 }
                 CheckTankTimer = 2000;
             } else CheckTankTimer -= diff;

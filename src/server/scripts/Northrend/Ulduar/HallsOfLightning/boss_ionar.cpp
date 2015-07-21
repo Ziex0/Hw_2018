@@ -214,7 +214,7 @@ public:
                 lSparkList.Despawn(summoned);
         }
 
-        void UpdateAI(const uint32 uiDiff)
+        void UpdateAI( uint32 uiDiff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -244,8 +244,8 @@ public:
                         uiSplitTimer = 25*IN_MILLISECONDS;
                         bIsSplitPhase = true;
 
-                        if (me->GetVictim())
-                            me->GetMotionMaster()->MoveChase(me->GetVictim());
+                        if (me->getVictim())
+                            me->GetMotionMaster()->MoveChase(me->getVictim());
                     }
                 }
                 else
@@ -336,7 +336,7 @@ public:
             uiDamage = 0;
         }
 
-        void UpdateAI(const uint32 uiDiff)
+        void UpdateAI(uint32 uiDiff)
         {
             // Despawn if the encounter is not running
             if (instance && instance->GetData(TYPE_IONAR) != IN_PROGRESS)

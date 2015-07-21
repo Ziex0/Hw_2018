@@ -611,7 +611,7 @@ class npc_rotting_frost_giant : public CreatureScript
                 _events.Reset();
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -664,13 +664,13 @@ class npc_frost_freeze_trap : public CreatureScript
     public:
         npc_frost_freeze_trap() : CreatureScript("npc_frost_freeze_trap") { }
 
-        struct npc_frost_freeze_trapAI: public Scripted_NoMovementAI
+        struct npc_frost_freeze_trapAI: public ScriptedAI
         {
-            npc_frost_freeze_trapAI(Creature* creature) : Scripted_NoMovementAI(creature)
+            npc_frost_freeze_trapAI(Creature* creature) : ScriptedAI(creature)
             {
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 switch (action)
                 {
@@ -807,7 +807,7 @@ class boss_sister_svalna : public CreatureScript
                 me->SetHover(false);
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 switch (action)
                 {
@@ -955,7 +955,7 @@ class npc_crok_scourgebane : public CreatureScript
                 _wipeCheckTimer = 1000;
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 if (action == ACTION_START_GAUNTLET)
                 {
@@ -1237,7 +1237,7 @@ struct npc_argent_captainAI : public ScriptedAI
                 Talk(SAY_CAPTAIN_KILL);
         }
 
-        void DoAction(int32 const action)
+        void DoAction(int32 action)
         {
             if (action == ACTION_START_GAUNTLET)
             {

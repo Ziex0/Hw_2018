@@ -316,7 +316,7 @@ class boss_valithria_dreamwalker : public CreatureScript
             {
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 if (action != ACTION_ENTER_COMBAT)
                     return;
@@ -423,7 +423,7 @@ class boss_valithria_dreamwalker : public CreatureScript
                         ++_missedPortals;
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 // does not enter combat
                 if (_instance->GetBossState(DATA_VALITHRIA_DREAMWALKER) != IN_PROGRESS)
@@ -536,7 +536,7 @@ class npc_green_dragon_combat_trigger : public CreatureScript
                 DoAction(ACTION_DEATH);
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 if (action == ACTION_DEATH)
                 {
@@ -624,7 +624,7 @@ class npc_the_lich_king_controller : public CreatureScript
                         summon->AI()->AttackStart(target);
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -716,7 +716,7 @@ class npc_risen_archmage : public CreatureScript
                 }
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 if (action != ACTION_ENTER_COMBAT)
                     return;
@@ -734,7 +734,7 @@ class npc_risen_archmage : public CreatureScript
                     summon->DespawnOrUnsummon(36000);
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!me->isInCombat())
                     if (me->GetDBTableGUIDLow())
@@ -805,7 +805,7 @@ class npc_blazing_skeleton : public CreatureScript
                 _events.ScheduleEvent(EVENT_LEY_WASTE, urand(15000, 20000));
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -820,7 +820,7 @@ class npc_blazing_skeleton : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_FIREBALL:
-                            if (!me->IsWithinMeleeRange(me->GetVictim()))
+                            if (!me->IsWithinMeleeRange(me->getVictim()))
                                 DoCastVictim(SPELL_FIREBALL);
                             _events.ScheduleEvent(EVENT_FIREBALL, urand(2000, 4000));
                             break;
@@ -871,7 +871,7 @@ class npc_suppresser : public CreatureScript
                     AttackStart(valithria);
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -896,7 +896,7 @@ class npc_suppresser : public CreatureScript
                 }
 
                 // this creature has REACT_PASSIVE so it does not always have victim here
-                if (Unit* victim = me->GetVictim())
+                if (Unit* victim = me->getVictim())
                     if (victim->GetEntry() != NPC_VALITHRIA_DREAMWALKER)
                         DoMeleeAttackIfReady();
             }
@@ -965,7 +965,7 @@ class npc_gluttonous_abomination : public CreatureScript
                 DoCast(me, SPELL_ROT_WORM_SPAWNER, true);
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -1059,7 +1059,7 @@ class npc_dream_cloud : public CreatureScript
                 me->LoadCreaturesAddon(true);
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 // trigger
                 if (_instance->GetBossState(DATA_VALITHRIA_DREAMWALKER) != IN_PROGRESS)

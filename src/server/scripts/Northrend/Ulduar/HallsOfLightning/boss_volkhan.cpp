@@ -236,8 +236,8 @@ public:
                 if (m_uiPause_Timer <= uiDiff)
                 {
                     if (me->GetMotionMaster()->GetCurrentMovementGeneratorType() != CHASE_MOTION_TYPE)
-                        if (me->GetVictim())
-                            me->GetMotionMaster()->MoveChase(me->GetVictim());
+                        if (me->getVictim())
+                            me->GetMotionMaster()->MoveChase(me->getVictim());
 
                     m_bHasTemper = false;
                     m_bIsStriking = false;

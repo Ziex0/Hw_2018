@@ -148,7 +148,7 @@ class boss_lord_marrowgar : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim() || !CheckInRoom())
                     return;
@@ -205,7 +205,7 @@ class boss_lord_marrowgar : public CreatureScript
                         case EVENT_BONE_STORM_END:
                             if (me->GetMotionMaster()->GetCurrentMovementGeneratorType() == POINT_MOTION_TYPE)
                                 me->GetMotionMaster()->MovementExpired();
-                            DoStartMovement(me->GetVictim());
+                            DoStartMovement(me->getVictim());
                             me->SetSpeed(MOVE_RUN, _baseSpeed, true);
                             events.CancelEvent(EVENT_BONE_STORM_MOVE);
                             events.ScheduleEvent(EVENT_ENABLE_BONE_SLICE, 10000);
@@ -239,7 +239,7 @@ class boss_lord_marrowgar : public CreatureScript
                     return;
 
                 // lock movement
-                DoStartNoMovement(me->GetVictim());
+                DoStartNoMovement(me->getVictim());
             }
 
             Position const* GetLastColdflamePosition() const
@@ -325,7 +325,7 @@ class npc_coldflame : public CreatureScript
                 _events.ScheduleEvent(EVENT_COLDFLAME_TRIGGER, 450);
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 _events.Update(diff);
 
@@ -354,9 +354,9 @@ class npc_bone_spike : public CreatureScript
     public:
         npc_bone_spike() : CreatureScript("npc_bone_spike") { }
 
-        struct npc_bone_spikeAI : public Scripted_NoMovementAI
+        struct npc_bone_spikeAI : public ScriptedAI
         {
-            npc_bone_spikeAI(Creature* creature) : Scripted_NoMovementAI(creature), _hasTrappedUnit(false)
+            npc_bone_spikeAI(Creature* creature) : ScriptedAI(creature), _hasTrappedUnit(false)
             {
                 ASSERT(creature->GetVehicleKit());
             }
@@ -384,7 +384,7 @@ class npc_bone_spike : public CreatureScript
                 _hasTrappedUnit = true;
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!_hasTrappedUnit)
                     return;

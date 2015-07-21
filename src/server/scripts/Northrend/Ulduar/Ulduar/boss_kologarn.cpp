@@ -219,7 +219,7 @@ class boss_kologarn : public CreatureScript
                         summon->CastSpell(me, SPELL_FOCUSED_EYEBEAM_VISUAL_RIGHT, true);
                         break;
                     case NPC_RUBBLE:
-                        summons.push_back(summon->GetGUID());
+                        summons.Despawn(summon);
                         // absence of break intended
                     default:
                         return;
@@ -242,7 +242,7 @@ class boss_kologarn : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -257,7 +257,7 @@ class boss_kologarn : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_MELEE_CHECK:
-                            if (!me->IsWithinMeleeRange(me->GetVictim()))
+                            if (!me->IsWithinMeleeRange(me->getVictim()))
                                 DoCast(SPELL_PETRIFY_BREATH);
                             events.ScheduleEvent(EVENT_MELEE_CHECK, 1 * IN_MILLISECONDS);
                             break;
@@ -397,7 +397,7 @@ class spell_ulduar_stone_grip_cast_target : public SpellScriptLoader
             void FilterTargetsInitial(std::list<WorldObject*>& unitList)
             {
                 // Remove "main tank" and non-player targets
-                unitList.remove_if(StoneGripTargetSelector(GetCaster()->ToCreature(), GetCaster()->GetVictim()));
+                unitList.remove_if(StoneGripTargetSelector(GetCaster()->ToCreature(), GetCaster()->getVictim()));
                 // Maximum affected targets per difficulty mode
                 uint32 maxTargets = 1;
                 if (GetSpellInfo()->Id == 63981)

@@ -175,12 +175,12 @@ class boss_ignis : public CreatureScript
                     summon->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_PACIFIED | UNIT_FLAG_STUNNED | UNIT_FLAG_DISABLE_MOVE);
                 }
 
-                summon->AI()->AttackStart(me->GetVictim());
+                summon->AI()->AttackStart(me->getVictim());
                 summon->AI()->DoZoneInCombat();
                 summons.Summon(summon);
             }
 
-            void DoAction(const int32 action)
+            void DoAction(int32 action)
             {
                 if (action != ACTION_REMOVE_BUFF)
                     return;
@@ -193,7 +193,7 @@ class boss_ignis : public CreatureScript
                 _firstConstructKill = secondKill;
             }
 
-            void UpdateAI(const uint32 diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -251,7 +251,7 @@ class boss_ignis : public CreatureScript
                             break;
                         case EVENT_SCORCH:
                             Talk(SAY_SCORCH);
-                            if (Unit* target = me->GetVictim())
+                            if (Unit* target = me->getVictim())
                                 me->SummonCreature(NPC_GROUND_SCORCH, target->GetPositionX(), target->GetPositionY(), target->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN, 45000);
                             DoCast(SPELL_SCORCH);
                             events.ScheduleEvent(EVENT_SCORCH, 25000);
@@ -319,7 +319,7 @@ class npc_iron_construct : public CreatureScript
                 }
             }
 
-            void UpdateAI(const uint32 /*uiDiff*/)
+            void UpdateAI(uint32 /*uiDiff*/)
             {
                 if (!UpdateVictim())
                     return;
@@ -392,7 +392,7 @@ class npc_scorch_ground : public CreatureScript
                 _heatTimer = 0;
             }
 
-            void UpdateAI(const uint32 uiDiff)
+            void UpdateAI(uint32 uiDiff)
             {
                 if (_heat)
                 {

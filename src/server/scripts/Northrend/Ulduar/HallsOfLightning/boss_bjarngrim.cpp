@@ -406,7 +406,7 @@ public:
             {
                 if (Creature* pBjarngrim = instance->instance->GetCreature(instance->GetData64(DATA_BJARNGRIM)))
                 {
-                    if (pBjarngrim->isAlive() && !pBjarngrim->GetVictim())
+                    if (pBjarngrim->isAlive() && !pBjarngrim->getVictim())
                         pBjarngrim->AI()->AttackStart(who);
                 }
             }

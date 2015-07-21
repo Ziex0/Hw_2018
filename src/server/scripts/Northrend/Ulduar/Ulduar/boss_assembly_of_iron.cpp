@@ -212,7 +212,7 @@ class boss_steelbreaker : public CreatureScript
                     DoCast(me, SPELL_ELECTRICAL_CHARGE);
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -232,7 +232,7 @@ class boss_steelbreaker : public CreatureScript
                             events.CancelEvent(EVENT_BERSERK);
                             break;
                         case EVENT_FUSION_PUNCH:
-                            if (me->IsWithinMeleeRange(me->GetVictim()))
+                            if (me->IsWithinMeleeRange(me->getVictim()))
                                 DoCastVictim(SPELL_FUSION_PUNCH);
                             events.ScheduleEvent(EVENT_FUSION_PUNCH, urand(13000, 22000));
                             break;
@@ -338,7 +338,7 @@ class boss_runemaster_molgeim : public CreatureScript
                     Talk(SAY_MOLGEIM_SLAY);
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -499,7 +499,7 @@ class boss_stormcaller_brundir : public CreatureScript
                     Talk(SAY_BRUNDIR_SLAY);
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -568,12 +568,12 @@ class boss_stormcaller_brundir : public CreatureScript
                             //me->SetLevitate(false);
                             me->RemoveAurasDueToSpell(RAID_MODE(SPELL_LIGHTNING_TENDRILS_10M, SPELL_LIGHTNING_TENDRILS_25M));
                             me->RemoveAurasDueToSpell(SPELL_LIGHTNING_TENDRILS_VISUAL);
-                            DoStartMovement(me->GetVictim());
+                            DoStartMovement(me->getVictim());
                             events.CancelEvent(EVENT_GROUND);
                             me->getThreatManager().resetAllAggro();
                             break;
                         case EVENT_MOVE_POSITION:
-                            if (me->IsWithinMeleeRange(me->GetVictim()))
+                            if (me->IsWithinMeleeRange(me->getVictim()))
                             {
                                 float x = float(irand(-25, 25));
                                 float y = float(irand(-25, 25));

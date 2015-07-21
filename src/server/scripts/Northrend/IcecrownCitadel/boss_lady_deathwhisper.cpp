@@ -359,7 +359,7 @@ class boss_lady_deathwhisper : public CreatureScript
                 {
                     Talk(SAY_PHASE_2);
                     Talk(EMOTE_PHASE_2);
-                    DoStartMovement(me->GetVictim());
+                    DoStartMovement(me->getVictim());
                     damage -= me->GetPower(POWER_MANA);
                     me->SetPower(POWER_MANA, 0);
                     me->RemoveAurasDueToSpell(SPELL_MANA_BARRIER);
@@ -401,7 +401,7 @@ class boss_lady_deathwhisper : public CreatureScript
                     summon->CastSpell(summon, SPELL_ADHERENT_S_DETERMINATION, true);
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if ((!UpdateVictim() && !events.IsInPhase(PHASE_INTRO)) || !CheckInRoom())
                     return;
@@ -656,7 +656,7 @@ class npc_cult_fanatic : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -734,7 +734,7 @@ class npc_cult_adherent : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 const diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -889,7 +889,7 @@ class npc_darnavan : public CreatureScript
                 if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
 
-                if (_canShatter && me->GetVictim() && me->GetVictim()->IsImmunedToDamage(SPELL_SCHOOL_MASK_NORMAL))
+                if (_canShatter && me->getVictim() && me->getVictim()->IsImmunedToDamage(SPELL_SCHOOL_MASK_NORMAL))
                 {
                     DoCastVictim(SPELL_SHATTERING_THROW);
                     _canShatter = false;
@@ -897,7 +897,7 @@ class npc_darnavan : public CreatureScript
                     return;
                 }
 
-                if (_canCharge && !me->IsWithinMeleeRange(me->GetVictim()))
+                if (_canCharge && !me->IsWithinMeleeRange(me->getVictim()))
                 {
                     DoCastVictim(SPELL_CHARGE);
                     _canCharge = false;

@@ -99,7 +99,7 @@ public:
                 instance->SetData(DATA_KRYSTALLUS_EVENT, IN_PROGRESS);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -173,8 +173,8 @@ public:
                     //and correct movement, if not already
                     if (me->GetMotionMaster()->GetCurrentMovementGeneratorType() != CHASE_MOTION_TYPE)
                     {
-                        if (me->GetVictim())
-                            me->GetMotionMaster()->MoveChase(me->GetVictim());
+                        if (me->getVictim())
+                            me->GetMotionMaster()->MoveChase(me->getVictim());
                     }
                 }
             }
