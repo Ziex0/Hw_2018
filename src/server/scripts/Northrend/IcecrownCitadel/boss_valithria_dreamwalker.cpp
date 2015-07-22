@@ -545,7 +545,7 @@ class npc_green_dragon_combat_trigger : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 const /*diff*/)
+            void UpdateAI(uint32 /*diff*/)
             {
                 if (!me->isInCombat())
                     return;
@@ -928,7 +928,7 @@ class npc_blistering_zombie : public CreatureScript
                 DoCast(me, SPELL_ACID_BURST, true);
             }
 
-            void UpdateAI(uint32 const /*diff*/)
+            void UpdateAI(uint32 /*diff*/)
             {
                 if (!UpdateVictim())
                     return;
@@ -1024,7 +1024,7 @@ class npc_dream_portal : public CreatureScript
                 return (type == MISSED_PORTALS && _used) ? 0 : 1;
             }
 
-            void UpdateAI(uint32 const /*diff*/)
+            void UpdateAI(uint32 /*diff*/)
             {
                 UpdateVictim();
             }

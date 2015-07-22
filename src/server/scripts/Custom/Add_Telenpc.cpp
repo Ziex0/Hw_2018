@@ -93,7 +93,7 @@ public:
 
 	void MainMenu(Player *pPlayer, Creature *pCreature)
 	{
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t Mall Non PVP", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8910);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t Mall ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8910);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Coin_03:24|t Home Cities ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 12);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Coin_03:24|t Neutral Cities ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 21);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:24|t Arenas ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 28);

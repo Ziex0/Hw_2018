@@ -477,7 +477,7 @@ class boss_prince_keleseth_icc : public CreatureScript
                     Talk(SAY_KELESETH_KILL);
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 switch (action)
                 {
@@ -695,7 +695,7 @@ class boss_prince_taldaram_icc : public CreatureScript
                     Talk(SAY_TALDARAM_KILL);
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 switch (action)
                 {
@@ -933,7 +933,7 @@ class boss_prince_valanar_icc : public CreatureScript
                     Talk(SAY_VALANAR_KILL);
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 switch (action)
                 {
@@ -1168,7 +1168,7 @@ class npc_ball_of_flame : public CreatureScript
                 _chaseGUID = guid;
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 if (action == ACTION_FLAME_BALL_CHASE)
                     if (Player* target = ObjectAccessor::GetPlayer(*me, _chaseGUID))
@@ -1236,7 +1236,7 @@ class npc_kinetic_bomb : public CreatureScript
                 _groundZ = me->GetMap()->GetHeight(me->GetPhaseMask(), _x, _y, _groundZ, true, 500.0f);
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 if (action == SPELL_KINETIC_BOMB_EXPLOSION)
                     _events.ScheduleEvent(EVENT_BOMB_DESPAWN, 1000);

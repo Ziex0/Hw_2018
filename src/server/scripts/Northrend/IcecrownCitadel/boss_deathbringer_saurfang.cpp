@@ -512,7 +512,7 @@ class boss_deathbringer_saurfang : public CreatureScript
             }
 
             // intro setup
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 switch (action)
                 {
