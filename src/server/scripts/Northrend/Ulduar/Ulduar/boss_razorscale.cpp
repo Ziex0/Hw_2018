@@ -245,7 +245,7 @@ class boss_razorscale_controller : public CreatureScript
 
             void UpdateAI(uint32 diff)
             {
-                events.Update(Diff);
+                events.Update(diff);
 
                 while (uint32 eventId = events.ExecuteEvent())
                 {
@@ -399,18 +399,18 @@ class boss_razorscale : public CreatureScript
                 if (!UpdateVictim())
                     return;
 
-                events.Update(Diff);
+                events.Update(diff);
 
                 if (HealthBelowPct(50) && !PermaGround)
                     EnterPermaGround();
 
-                if (EnrageTimer <= Diff && !Enraged)
+                if (EnrageTimer <= diff && !Enraged)
                 {
                     DoCast(me, SPELL_BERSERK);
                     Enraged = true;
                 }
                 else
-                    EnrageTimer -= Diff;
+                    EnrageTimer -= diff;
 
                 if (HarpoonCounter == RAID_MODE(2, 4))
                 {
@@ -641,7 +641,7 @@ class npc_expedition_commander : public CreatureScript
 
             void UpdateAI(uint32 diff)
             {
-                if (AttackStartTimer <= Diff)
+                if (AttackStartTimer <= diff)
                 {
                     switch (Phase)
                     {
@@ -695,7 +695,7 @@ class npc_expedition_commander : public CreatureScript
                     }
                 }
                 else
-                    AttackStartTimer -= Diff;
+                    AttackStartTimer -= diff;
             }
         };
 
@@ -763,15 +763,15 @@ class npc_mole_machine_trigger : public CreatureScript
 
             void UpdateAI(uint32 diff)
             {
-                if (!GobSummoned && SummonGobTimer <= Diff)
+                if (!GobSummoned && SummonGobTimer <= diff)
                 {
                     DoCast(SPELL_SUMMON_MOLE_MACHINE);
                     GobSummoned = true;
                 }
                 else
-                    SummonGobTimer -= Diff;
+                    SummonGobTimer -= diff;
 
-                if (!NpcSummoned && SummonNpcTimer <= Diff)
+                if (!NpcSummoned && SummonNpcTimer <= diff)
                 {
                     switch (urand(0, 1 ))
                     {
@@ -788,9 +788,9 @@ class npc_mole_machine_trigger : public CreatureScript
                     NpcSummoned = true;
                 }
                 else
-                    SummonNpcTimer -= Diff;
+                    SummonNpcTimer -= diff;
 
-                if (DissapearTimer <= Diff)
+                if (DissapearTimer <= diff)
                 {
                     if (GameObject* molemachine = me->FindNearestGameObject(GO_MOLE_MACHINE, 1))
                         molemachine->Delete();
@@ -798,7 +798,7 @@ class npc_mole_machine_trigger : public CreatureScript
                     me->DisappearAndDie();
                 }
                 else
-                    DissapearTimer -= Diff;
+                    DissapearTimer -= diff;
             }
 
             void JustSummoned(Creature* summoned)
@@ -860,21 +860,21 @@ class npc_darkrune_watcher : public CreatureScript
                 if (!UpdateVictim())
                     return;
 
-                if (ChainTimer <= Diff)
+                if (ChainTimer <= diff)
                 {
                     DoCastVictim(SPELL_CHAIN_LIGHTNING);
                     ChainTimer = urand(10000, 15000);
                 }
                 else
-                    ChainTimer -= Diff;
+                    ChainTimer -= diff;
 
-                if (LightTimer <= Diff)
+                if (LightTimer <= diff)
                 {
                     DoCastVictim(SPELL_LIGHTNING_BOLT);
                     LightTimer = urand(5000, 7000);
                 }
                 else
-                    LightTimer -= Diff;
+                    LightTimer -= diff;
 
                 DoMeleeAttackIfReady();
             }
@@ -920,13 +920,13 @@ class npc_darkrune_guardian : public CreatureScript
                 if (!UpdateVictim())
                     return;
 
-                if (StormTimer <= Diff)
+                if (StormTimer <= diff)
                 {
                     DoCastVictim(SPELL_STORMSTRIKE);
                     StormTimer = urand(4000, 8000);
                 }
                 else
-                    StormTimer -= Diff;
+                    StormTimer -= diff;
 
                 DoMeleeAttackIfReady();
             }
@@ -966,29 +966,29 @@ class npc_darkrune_sentinel : public CreatureScript
                 if (!UpdateVictim())
                     return;
 
-                if (HeroicTimer <= Diff)
+                if (HeroicTimer <= diff)
                 {
                     DoCastVictim(SPELL_HEROIC_STRIKE);
                     HeroicTimer = urand(4000, 6000);
                 }
                 else
-                    HeroicTimer -= Diff;
+                    HeroicTimer -= diff;
 
-                if (WhirlTimer <= Diff)
+                if (WhirlTimer <= diff)
                 {
                     DoCastVictim(SPELL_WHIRLWIND);
                     WhirlTimer = urand(20000, 25000);
                 }
                 else
-                    WhirlTimer -= Diff;
+                    WhirlTimer -= diff;
 
-                if (ShoutTimer <= Diff)
+                if (ShoutTimer <= diff)
                 {
                     DoCast(me, SPELL_BATTLE_SHOUT);
                     ShoutTimer = urand(30000, 40000);
                 }
                 else
-                    ShoutTimer -= Diff;
+                    ShoutTimer -= diff;
 
                 DoMeleeAttackIfReady();
             }

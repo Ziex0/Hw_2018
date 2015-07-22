@@ -1507,7 +1507,7 @@ class npc_valkyr_shadowguard : public CreatureScript
                             {
                                 std::list<Creature*> triggers;
                                 GetCreatureListWithEntryInGrid(triggers, me, NPC_WORLD_TRIGGER, 150.0f);
-                                //triggers.remove_if(heightDifferenceCheck(platform, 5.0f, false));
+                                //triggers.remove_if(heightdifferenceCheck(platform, 5.0f, false));
                                 if (triggers.empty())
                                     return;
 
@@ -2296,8 +2296,8 @@ class spell_the_lich_king_quake : public SpellScriptLoader
 
             void FilterTargets(std::list<WorldObject*>& targets)
             {
-                if (GameObject* platform = ObjectAccessor::GetGameObject(*GetCaster(), GetCaster()->GetInstanceScript()->GetData64(DATA_ARTHAS_PLATFORM)))
-                    targets.remove_if(HeightDifferenceCheck(PLATFORM, 3.0f, false));
+                //if (GameObject* platform = ObjectAccessor::GetGameObject(*GetCaster(), GetCaster()->GetInstanceScript()->GetData64(DATA_ARTHAS_PLATFORM)))
+                    //targets.remove_if(HeightdifferenceCheck(PLATFORM, 3.0f, false));
             }
 
             void HandleSendEvent(SpellEffIndex /*effIndex*/)
