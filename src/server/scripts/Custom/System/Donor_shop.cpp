@@ -870,7 +870,7 @@ class donorrewarder : public CreatureScript
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Axe Weapon Skill - 30 DP", GOSSIP_SENDER_MAIN, 14004);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Mace Weapon Skill - 15 DP", GOSSIP_SENDER_MAIN, 14005);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Mace Weapon Skill - 30 DP", GOSSIP_SENDER_MAIN, 14006);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Staff Weapon Skill - 30 DP ", GOSSIP_SENDER_MAIN, 14007);
+				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Staff Weapon Skill - 30 DP ", GOSSIP_SENDER_MAIN, 14007);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Polearm Hand Sword Weapon Skill - 30 DP", GOSSIP_SENDER_MAIN, 14008);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Dagger Weapon Skill - 15 DP", GOSSIP_SENDER_MAIN, 14009);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Bow Weapon Skill - 15 DP", GOSSIP_SENDER_MAIN, 14010);
