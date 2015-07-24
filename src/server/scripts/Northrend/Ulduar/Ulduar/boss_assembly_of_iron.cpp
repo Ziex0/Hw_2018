@@ -158,7 +158,7 @@ class boss_steelbreaker : public CreatureScript
                 events.ScheduleEvent(EVENT_FUSION_PUNCH, 15000);
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 switch (action)
                 {
@@ -287,7 +287,7 @@ class boss_runemaster_molgeim : public CreatureScript
                 events.ScheduleEvent(EVENT_RUNE_OF_POWER, 20000);
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 switch (action)
                 {
@@ -440,7 +440,7 @@ class boss_stormcaller_brundir : public CreatureScript
                 events.ScheduleEvent(EVENT_OVERLOAD, urand(60000, 120000));
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 action)
             {
                 switch (action)
                 {

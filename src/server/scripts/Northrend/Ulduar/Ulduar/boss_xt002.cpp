@@ -458,7 +458,7 @@ class mob_xt002_heart : public CreatureScript
             {
             }
 
-            void UpdateAI(uint32 const /*diff*/) { }
+            void UpdateAI(uint32 /*diff*/) { }
 
             void JustDied(Unit* /*killer*/)
             {
