@@ -724,7 +724,67 @@ public:
                                     return;
                             }
                             break;
+							case RACE_ICE_TROLL:
+                            switch (ExecuteSpeech_Counter)
+                            {
+                                case 0: Talk(SAY_EXEC_START_1, player->GetGUID()); break;
+                                case 1: me->SetStandState(UNIT_STAND_STATE_STAND); break;
+                                case 2: Talk(SAY_EXEC_PROG_5, player->GetGUID()); break;
+                                case 3: Talk(SAY_EXEC_NAME_1, player->GetGUID()); break;
+                                case 4: Talk(SAY_EXEC_RECOG_1, player->GetGUID()); break;
+                                case 5: Talk(SAY_EXEC_NOREM_5, player->GetGUID()); break;
+                                case 6: Talk(SAY_EXEC_THINK_7, player->GetGUID()); break;
+                                case 7: Talk(SAY_EXEC_LISTEN_1, player->GetGUID()); break;
+                                case 8:
+                                    if (Creature* Plaguefist = GetClosestCreatureWithEntry(me, NPC_PLAGUEFIST, 85.0f))
+                                        Plaguefist->AI()->Talk(SAY_PLAGUEFIST, player->GetGUID());
+                                    break;
+                                case 9:
+                                    Talk(SAY_EXEC_TIME_6, player->GetGUID());
+                                    me->SetStandState(UNIT_STAND_STATE_KNEEL);
+                                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+                                    break;
+                                case 10:
+                                    Talk(SAY_EXEC_WAITING, player->GetGUID());
+                                    break;
+                                case 11:
+                                    Talk(EMOTE_DIES);
+                                    me->setDeathState(JUST_DIED);
+                                    me->SetHealth(0);
+                                    return;
+                            }
+                            break;
                         case RACE_ORC:
+                            switch (ExecuteSpeech_Counter)
+                            {
+                                case 0: Talk(SAY_EXEC_START_1, player->GetGUID()); break;
+                                case 1: me->SetStandState(UNIT_STAND_STATE_STAND); break;
+                                case 2: Talk(SAY_EXEC_PROG_6, player->GetGUID()); break;
+                                case 3: Talk(SAY_EXEC_NAME_1, player->GetGUID()); break;
+                                case 4: Talk(SAY_EXEC_RECOG_1, player->GetGUID()); break;
+                                case 5: Talk(SAY_EXEC_NOREM_7, player->GetGUID()); break;
+                                case 6: Talk(SAY_EXEC_THINK_8, player->GetGUID()); break;
+                                case 7: Talk(SAY_EXEC_LISTEN_1, player->GetGUID()); break;
+                                case 8:
+                                    if (Creature* Plaguefist = GetClosestCreatureWithEntry(me, NPC_PLAGUEFIST, 85.0f))
+                                        Plaguefist->AI()->Talk(SAY_PLAGUEFIST, player->GetGUID());
+                                    break;
+                                case 9:
+                                    Talk(SAY_EXEC_TIME_8, player->GetGUID());
+                                    me->SetStandState(UNIT_STAND_STATE_KNEEL);
+                                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+                                    break;
+                                case 10:
+                                    Talk(SAY_EXEC_WAITING, player->GetGUID());
+                                    break;
+                                case 11:
+                                    Talk(EMOTE_DIES);
+                                    me->setDeathState(JUST_DIED);
+                                    me->SetHealth(0);
+                                    return;
+                            }
+                            break;
+							case RACE_GOBLIN:
                             switch (ExecuteSpeech_Counter)
                             {
                                 case 0: Talk(SAY_EXEC_START_1, player->GetGUID()); break;

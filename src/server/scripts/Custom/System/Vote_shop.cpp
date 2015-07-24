@@ -250,7 +250,7 @@ class Vote_rewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote One Hand Sword - 33 VP", GOSSIP_SENDER_MAIN, 2101);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote One Hand Axe  - 33 VP", GOSSIP_SENDER_MAIN, 2102);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote One Hand Mace - 33 VP", GOSSIP_SENDER_MAIN, 2103);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Melee Dagger  - 33 VP", GOSSIP_SENDER_MAIN, 2104);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Melee Dagger  - 33 VP", GOSSIP_SENDER_MAIN, 2104);
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Spell Dagger  - 33 VP", GOSSIP_SENDER_MAIN, 2105);				
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
@@ -266,7 +266,7 @@ class Vote_rewarder : public CreatureScript
                 AddItem(player, pCreature,200061,1,33);
                 break;
 			case 2104:
-                AddItem(player, pCreature,200180,1,33);
+                AddItem(player, pCreature,200070,1,33);
                 break;
 			case 2105:
                 AddItem(player, pCreature,200228,1,33);

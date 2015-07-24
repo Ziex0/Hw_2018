@@ -1646,8 +1646,14 @@ public:
             case RACE_HUMAN:
                 raceStr = "Human";
                 break;
+			case RACE_ICE_TROLL:
+                raceStr = "Human";
+                break;
             case RACE_ORC:
                 raceStr = "Orc";
+                break;
+			case RACE_GOBLIN:
+                raceStr = "Goblin";
                 break;
             case RACE_DWARF:
                 raceStr = "Dwarf";

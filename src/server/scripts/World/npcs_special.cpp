@@ -1172,7 +1172,7 @@ public:
             case 1460:                                          //Unger Statforth
             case 2357:                                          //Merideth Carlson
             case 4885:                                          //Gregor MacVince
-                if (player->GetReputationRank(72) != REP_EXALTED && race != RACE_HUMAN)
+                if (player->GetReputationRank(72) != REP_EXALTED && race != RACE_HUMAN && race != RACE_ICE_TROLL)
                     player->SEND_GOSSIP_MENU(5855, creature->GetGUID());
                 else canBuy = true;
                 break;
@@ -1182,7 +1182,7 @@ public:
                 else canBuy = true;
                 break;
             case 3362:                                          //Ogunaro Wolfrunner
-                if (player->GetReputationRank(76) != REP_EXALTED && race != RACE_ORC)
+                if (player->GetReputationRank(76) != REP_EXALTED && race != RACE_ORC && race != RACE_GOBLIN)
                     player->SEND_GOSSIP_MENU(5841, creature->GetGUID());
                 else canBuy = true;
                 break;

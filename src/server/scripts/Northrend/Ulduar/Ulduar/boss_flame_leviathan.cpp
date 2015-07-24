@@ -1046,7 +1046,7 @@ class npc_freyas_ward : public CreatureScript
                 summonTimer = 5000;
             }
 
-            void UpdateAI(uint32diff)
+            void UpdateAI(uint32 diff)
             {
                 if (summonTimer <= diff)
                 {
