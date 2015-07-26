@@ -41,11 +41,11 @@ class refundvendor : public CreatureScript
 			break;
 		case 2001:
 			pPlayer->PlayerTalkClass->ClearMenus();
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Sword - 5 Dp", GOSSIP_SENDER_MAIN, 2101);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Axe - 5 Dp", GOSSIP_SENDER_MAIN, 2102);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Melee Dagger - 5 Dp", GOSSIP_SENDER_MAIN, 2103);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Spell Dagger - 5 Dp", GOSSIP_SENDER_MAIN, 2104);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Mace  - 5 Dp", GOSSIP_SENDER_MAIN, 2105);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Sword - 8 Dp", GOSSIP_SENDER_MAIN, 2101);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Axe - 8 Dp", GOSSIP_SENDER_MAIN, 2102);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Melee Dagger - 8 Dp", GOSSIP_SENDER_MAIN, 2103);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Spell Dagger - 8 Dp", GOSSIP_SENDER_MAIN, 2104);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Mace  - 8 Dp", GOSSIP_SENDER_MAIN, 2105);
 
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: [Main Menu]", GOSSIP_SENDER_MAIN, 9999);
 			pPlayer->PlayerTalkClass->SendGossipMenu(85006, pCreature->GetGUID());
@@ -56,7 +56,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200169, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200169);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 8 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -72,7 +72,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200170, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200170);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 8 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -88,7 +88,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200180, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200180);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 8 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -104,7 +104,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200228, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200228);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 8 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -119,7 +119,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200171, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200171);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 8 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -134,10 +134,10 @@ class refundvendor : public CreatureScript
 
 		case 2002:
 			pPlayer->PlayerTalkClass->ClearMenus();
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Dual Axe  - 12 Dp", GOSSIP_SENDER_MAIN, 2208);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Dual Sword  - 12 Dp", GOSSIP_SENDER_MAIN, 2209);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Dual Mace  - 12 Dp", GOSSIP_SENDER_MAIN, 2210);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Polearm  - 12 Dp", GOSSIP_SENDER_MAIN, 2214);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Dual Axe  - 14 Dp", GOSSIP_SENDER_MAIN, 2208);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Dual Sword  - 14 Dp", GOSSIP_SENDER_MAIN, 2209);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Dual Mace  - 14 Dp", GOSSIP_SENDER_MAIN, 2210);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Polearm  - 14 Dp", GOSSIP_SENDER_MAIN, 2214);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: [Main Menu]", GOSSIP_SENDER_MAIN, 9999);
 			pPlayer->PlayerTalkClass->SendGossipMenu(85006, pCreature->GetGUID());
 			return true;
@@ -147,7 +147,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200178, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200178);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 12 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 14 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -163,7 +163,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200176, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200176);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 12 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 14 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -179,7 +179,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200177, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200177);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 12 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 14 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -194,7 +194,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200230, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200230);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 12 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 14 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -208,8 +208,8 @@ class refundvendor : public CreatureScript
 
 		case 2003:
 			pPlayer->PlayerTalkClass->ClearMenus();
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Spell Staff  - 12 Dp", GOSSIP_SENDER_MAIN, 2312);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Feral Staff  - 12 Dp", GOSSIP_SENDER_MAIN, 2313);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Spell Staff  - 14 Dp", GOSSIP_SENDER_MAIN, 2312);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Feral Staff  - 14 Dp", GOSSIP_SENDER_MAIN, 2313);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: [Main Menu]", GOSSIP_SENDER_MAIN, 9999);
 			pPlayer->PlayerTalkClass->SendGossipMenu(85006, pCreature->GetGUID());
 			return true;
@@ -219,7 +219,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200179, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200179);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 12 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 14 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -235,7 +235,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200229, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200229);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 12 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 14 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -248,9 +248,9 @@ class refundvendor : public CreatureScript
 			//end staves
 		case 2004:
 			pPlayer->PlayerTalkClass->ClearMenus();
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Bow  - 5 Dp", GOSSIP_SENDER_MAIN, 2005);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Gun  - 5 Dp", GOSSIP_SENDER_MAIN, 2006);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Wand  - 5 Dp", GOSSIP_SENDER_MAIN, 2007);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Bow  - 8 Dp", GOSSIP_SENDER_MAIN, 2005);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Gun  - 8 Dp", GOSSIP_SENDER_MAIN, 2006);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Wand  - 6 Dp", GOSSIP_SENDER_MAIN, 2007);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: [Main Menu]", GOSSIP_SENDER_MAIN, 9999);
 			pPlayer->PlayerTalkClass->SendGossipMenu(85006, pCreature->GetGUID());
 			return true;
@@ -260,7 +260,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200172, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200172);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 8 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -276,7 +276,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200173, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200173);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 8 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -292,7 +292,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200181, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200181);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -305,12 +305,12 @@ class refundvendor : public CreatureScript
 			//end of range
 		case 3000: // ringand trinket
 			pPlayer->PlayerTalkClass->ClearMenus();
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Melee Ring 3 DP", GOSSIP_SENDER_MAIN, 3001);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Melee Trinket 3 DP", GOSSIP_SENDER_MAIN, 3002);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Melee Amulet/Neck 3 DP", GOSSIP_SENDER_MAIN, 3003);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Caster Ring 3 DP", GOSSIP_SENDER_MAIN, 3004);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Caster Trinket 3 DP", GOSSIP_SENDER_MAIN, 3005);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Caster Amulet/Neck 3 DP", GOSSIP_SENDER_MAIN, 3006);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Melee Ring 5 DP", GOSSIP_SENDER_MAIN, 3001);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Melee Trinket 5 DP", GOSSIP_SENDER_MAIN, 3002);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Melee Amulet/Neck 5 DP", GOSSIP_SENDER_MAIN, 3003);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Caster Ring 5 DP", GOSSIP_SENDER_MAIN, 3004);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Caster Trinket 5 DP", GOSSIP_SENDER_MAIN, 3005);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Caster Amulet/Neck 5 DP", GOSSIP_SENDER_MAIN, 3006);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: [Main Menu]", GOSSIP_SENDER_MAIN, 9999);
 			pPlayer->PlayerTalkClass->SendGossipMenu(85006, pCreature->GetGUID());
 			return true;
@@ -321,7 +321,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200161, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200161);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 3 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -336,7 +336,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200162, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200162);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 3 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -351,7 +351,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200163, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200163);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 3 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -366,7 +366,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200216, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200216);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 3 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -381,7 +381,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200217, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200217);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 3 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -396,7 +396,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200215, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200215);
-				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 3 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();

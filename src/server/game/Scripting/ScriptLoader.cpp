@@ -1394,7 +1394,7 @@ void AddBattlegroundScripts()
 	void AddSC_city_conquest_spawner();
 	void AddSC_vipmall_security();
 	void AddSC_ExchangeDPNPC();
-	void AddSC_npc_exchanger();
+	//void AddSC_npc_exchanger();
 	void AddSC_npc_legion_master();
 	void AddSC_BountyHunter();
 	//void AddSC_on_login();
@@ -1403,6 +1403,7 @@ void AddBattlegroundScripts()
 	void AddSC_donorrewarder();
 	void AddSC_Vote_rewarder();
 	//void AddSC_Online_Time_DP();
+	void AddSC_RaceChanger();
 
 #endif
 
@@ -1501,7 +1502,7 @@ void AddCustomScripts()
 	AddSC_vipmall_security();
 	AddSC_ArenaGambler();
 	AddSC_ExchangeDPNPC();
-	AddSC_npc_exchanger();
+	//AddSC_npc_exchanger();
 	AddSC_npc_legion_master();
 	AddSC_BountyHunter();
 	//AddSC_on_login();
@@ -1510,6 +1511,7 @@ void AddCustomScripts()
 	AddSC_donorrewarder();
 	AddSC_Vote_rewarder();
 	//AddSC_Online_Time_DP();
+	AddSC_RaceChanger();
 
 #endif
 }
