@@ -1078,6 +1078,8 @@ void Unit::CalculateSpellDamageTaken(SpellNonMeleeDamage* damageInfo, int32 dama
 		damage = 0;
 
 	damageInfo->damage = damage;
+	//Hook For CalculateSpellDamageTaken
+    sScriptMgr->CalculateSpellDamageTaken(damageInfo, damage, spellInfo, attackType, crit);
 }
 
 void Unit::DealSpellDamage(SpellNonMeleeDamage* damageInfo, bool durabilityLoss)
@@ -1312,6 +1314,8 @@ void Unit::CalculateMeleeDamage(Unit* victim, uint32 damage, CalcDamageInfo* dam
 	}
 	else // Impossible get negative result but....
 		damageInfo->damage = 0;
+		//Hook For CalculateMeleeDamage
+    sScriptMgr->CalculateMeleeDamage(victim, damage, damageInfo, attackType);
 }
 
 void Unit::DealMeleeDamage(CalcDamageInfo* damageInfo, bool durabilityLoss)
@@ -16638,85 +16642,208 @@ uint32 Unit::GetModelForForm(ShapeshiftForm form) const
 
 uint32 Unit::GetModelForTotem(PlayerTotemType totemType)
 {
-	switch (getRace())
-	{
-	case RACE_ORC:
-	{
-		switch (totemType)
-		{
-		case SUMMON_TYPE_TOTEM_FIRE:    // fire
-			return 30758;
-		case SUMMON_TYPE_TOTEM_EARTH:   // earth
-			return 30757;
-		case SUMMON_TYPE_TOTEM_WATER:   // water
-			return 30759;
-		case SUMMON_TYPE_TOTEM_AIR:     // air
-			return 30756;
-		}
-		break;
-	}
-	case RACE_DWARF:
-	{
-		switch (totemType)
-		{
-		case SUMMON_TYPE_TOTEM_FIRE:    // fire
-			return 30754;
-		case SUMMON_TYPE_TOTEM_EARTH:   // earth
-			return 30753;
-		case SUMMON_TYPE_TOTEM_WATER:   // water
-			return 30755;
-		case SUMMON_TYPE_TOTEM_AIR:     // air
-			return 30736;
-		}
-		break;
-	}
-	case RACE_TROLL:
-	{
-		switch (totemType)
-		{
-		case SUMMON_TYPE_TOTEM_FIRE:    // fire
-			return 30762;
-		case SUMMON_TYPE_TOTEM_EARTH:   // earth
-			return 30761;
-		case SUMMON_TYPE_TOTEM_WATER:   // water
-			return 30763;
-		case SUMMON_TYPE_TOTEM_AIR:     // air
-			return 30760;
-		}
-		break;
-	}
-	case RACE_TAUREN:
-	{
-		switch (totemType)
-		{
-		case SUMMON_TYPE_TOTEM_FIRE:    // fire
-			return 4589;
-		case SUMMON_TYPE_TOTEM_EARTH:   // earth
-			return 4588;
-		case SUMMON_TYPE_TOTEM_WATER:   // water
-			return 4587;
-		case SUMMON_TYPE_TOTEM_AIR:     // air
-			return 4590;
-		}
-		break;
-	}
-	case RACE_DRAENEI:
-	{
-		switch (totemType)
-		{
-		case SUMMON_TYPE_TOTEM_FIRE:    // fire
-			return 19074;
-		case SUMMON_TYPE_TOTEM_EARTH:   // earth
-			return 19073;
-		case SUMMON_TYPE_TOTEM_WATER:   // water
-			return 19075;
-		case SUMMON_TYPE_TOTEM_AIR:     // air
-			return 19071;
-		}
-		break;
-	}
-	}
-	return 0;
+    switch (getRace())
+    {
+        case RACE_ORC:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 30758;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 30757;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 30759;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 30756;
+            }
+            break;
+        }
+		
+		case RACE_GOBLIN:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 30758;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 30757;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 30759;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 30756;
+            }
+            break;
+        }
+        case RACE_DWARF:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 30754;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 30753;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 30755;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 30736;
+            }
+            break;
+        }
+        case RACE_TROLL:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 30762;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 30761;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 30763;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 30760;
+            }
+            break;
+        }
+        case RACE_TAUREN:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 4589;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 4588;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 4587;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 4590;
+            }
+            break;
+        }
+		        case RACE_BLOODELF:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 4589;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 4588;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 4587;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 4590;
+            }
+            break;
+        }
+		        case RACE_NIGHTELF:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 4589;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 4588;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 4587;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 4590;
+            }
+            break;
+        }
+		case RACE_UNDEAD_PLAYER:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 4589;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 4588;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 4587;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 4590;
+            }
+            break;
+        }
+		        case RACE_GNOME:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 4589;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 4588;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 4587;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 4590;
+            }
+            break;
+        }
+		        case RACE_HUMAN:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 4589;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 4588;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 4587;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 4590;
+            }
+            break;
+        }
+        case RACE_DRAENEI:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 19074;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 19073;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 19075;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 19071;
+            }
+            break;
+        }
+		
+		case RACE_ICE_TROLL:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 19074;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 19073;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 19075;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 19071;
+            }
+            break;
+        }
+		
+		case RACE_ICE_TROLL:
+        {
+            switch (totemType)
+            {
+                case SUMMON_TYPE_TOTEM_FIRE:    // fire
+                    return 19074;
+                case SUMMON_TYPE_TOTEM_EARTH:   // earth
+                    return 19073;
+                case SUMMON_TYPE_TOTEM_WATER:   // water
+                    return 19075;
+                case SUMMON_TYPE_TOTEM_AIR:     // air
+                    return 19071;
+            }
+            break;
+        }
+    }
+    return 0;
 }
 
 void Unit::JumpTo(float speedXY, float speedZ, bool forward)
