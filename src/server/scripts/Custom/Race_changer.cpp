@@ -52,9 +52,9 @@ public:
 			// Set gender
 			Plr->SetByteValue(UNIT_FIELD_BYTES_0, 2, gender);
 			Plr->SetByteValue(PLAYER_BYTES_3, 0, gender);
-			break;
+			break;	
+					default:
 			
-		default:
 			if(Plr->GetSession() && Plr->HasItemCount(token_id, token_count, false))
 			{
             //remove token
