@@ -16825,7 +16825,7 @@ uint32 Unit::GetModelForTotem(PlayerTotemType totemType)
             break;
         }
 		
-		case RACE_ICE_TROLL:
+		case RACE_WORGEN:
         {
             switch (totemType)
             {
