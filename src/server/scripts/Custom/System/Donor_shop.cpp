@@ -864,17 +864,17 @@ class donorrewarder : public CreatureScript
 			  break;
 			  
 			case 14000: // cross weapon skill
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Sword Weapon Skill - 15 DP", GOSSIP_SENDER_MAIN, 14001);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Sword Weapon Skill - 30 DP", GOSSIP_SENDER_MAIN, 14909);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Axe Weapon Skill - 15 DP", GOSSIP_SENDER_MAIN, 14003);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Axe Weapon Skill - 30 DP", GOSSIP_SENDER_MAIN, 14004);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Mace Weapon Skill - 15 DP", GOSSIP_SENDER_MAIN, 14005);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Mace Weapon Skill - 30 DP", GOSSIP_SENDER_MAIN, 14006);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Sword Weapon Skill - 10 DP", GOSSIP_SENDER_MAIN, 14001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Sword Weapon Skill - 18 DP", GOSSIP_SENDER_MAIN, 14909);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Axe Weapon Skill - 10 DP", GOSSIP_SENDER_MAIN, 14003);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Axe Weapon Skill - 18 DP", GOSSIP_SENDER_MAIN, 14004);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Mace Weapon Skill - 10 DP", GOSSIP_SENDER_MAIN, 14005);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Two Hand Mace Weapon Skill - 18 DP", GOSSIP_SENDER_MAIN, 14006);
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Staff Weapon Skill - 30 DP ", GOSSIP_SENDER_MAIN, 14007);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Polearm Hand Sword Weapon Skill - 30 DP", GOSSIP_SENDER_MAIN, 14008);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Dagger Weapon Skill - 15 DP", GOSSIP_SENDER_MAIN, 14009);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Bow Weapon Skill - 15 DP", GOSSIP_SENDER_MAIN, 14010);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Shield Skill - 15 DP", GOSSIP_SENDER_MAIN, 14011);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Polearm Hand Sword Weapon Skill - 18 DP", GOSSIP_SENDER_MAIN, 14008);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Dagger Weapon Skill - 10 DP", GOSSIP_SENDER_MAIN, 14009);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Bow Weapon Skill - 10 DP", GOSSIP_SENDER_MAIN, 14010);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Shield Skill - 10 DP", GOSSIP_SENDER_MAIN, 14011);
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Wand Weapon Skill - 15 DP", GOSSIP_SENDER_MAIN, 14012);
 			
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
@@ -883,40 +883,40 @@ class donorrewarder : public CreatureScript
                 break;
 			
 				case 14001:
-				AddItem(player, pCreature, 340014,1,15);
+				AddItem(player, pCreature, 340014,1,10);
 				break;
 				case 14909:
-				AddItem(player, pCreature, 340015,1,30);
+				AddItem(player, pCreature, 340015,1,18);
 				break;
 				case 14003:
-				AddItem(player, pCreature, 340016,1,15);
+				AddItem(player, pCreature, 340016,1,10);
 				break;
 				case 14004:
-				AddItem(player, pCreature, 340017,1,30);
+				AddItem(player, pCreature, 340017,1,18);
 				break;
 				case 14005:
-				AddItem(player, pCreature, 340018,1,15);
+				AddItem(player, pCreature, 340018,1,10);
 				break;
 				case 14006:
-				AddItem(player, pCreature, 340019,1,30);
+				AddItem(player, pCreature, 340019,1,18);
 				break;
 				case 14007:
-				AddItem(player, pCreature, 340020,1,30);
+				AddItem(player, pCreature, 340020,1,18);
 				break;
 				case 14008:
-				AddItem(player, pCreature, 340021,1,30);
+				AddItem(player, pCreature, 340021,1,18);
 				break;
 				case 14009:
-				AddItem(player, pCreature, 340022,1,15);
+				AddItem(player, pCreature, 340022,1,10);
 				break;
 				case 140010:
-				AddItem(player, pCreature, 340023,1,15);
+				AddItem(player, pCreature, 340023,1,10);
 				break;
 				case 140011: //shield
-				AddItem(player, pCreature, 340024,1,15);
+				AddItem(player, pCreature, 340024,1,10);
 				break;
 				case 140012:
-				AddItem(player, pCreature, 130134,1,15);
+				AddItem(player, pCreature, 130134,1,10);
 				break;
 				
 				case 20000:  //Titans grip
