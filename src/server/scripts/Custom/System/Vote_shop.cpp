@@ -92,9 +92,9 @@ class Vote_rewarder : public CreatureScript
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorTitan_Grip (Paladin cant use ) - 10 VP (can't use for 2H Staff)", GOSSIP_SENDER_MAIN, 20000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSpecial Items", GOSSIP_SENDER_MAIN, 5000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tSpecial Tokens", GOSSIP_SENDER_MAIN, 4000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Tabard - 7 VP", GOSSIP_SENDER_MAIN, 10000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Cloak - 10 VP", GOSSIP_SENDER_MAIN, 11000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Set - 46 VP ( 8 Pieces )", GOSSIP_SENDER_MAIN, 12000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Tabard - 40 VP", GOSSIP_SENDER_MAIN, 10000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Cloak - 40 VP", GOSSIP_SENDER_MAIN, 11000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Shirt - 40 VP ", GOSSIP_SENDER_MAIN, 12000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tRoyal Donor Set, 8 Coin - 62 VP", GOSSIP_SENDER_MAIN, 13000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Royal Weapons", GOSSIP_SENDER_MAIN, 32000);
@@ -639,113 +639,114 @@ class Vote_rewarder : public CreatureScript
 			  switch(player->getClass())
 			  {
 			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 100093,1,7);
+					AddItem(player, pCreature, 200055,1,40);
 			  break;
 			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 100098,1,7);
+					AddItem(player, pCreature, 200055,1,40);
 				  break;
 			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 100100,1,7);
+					AddItem(player, pCreature, 200055,1,40);
 				 break;
 			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 100096,1,7);
+					AddItem(player, pCreature, 200055,1,40);
 				 break;
 			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 100097,1,7);
-			  break;
+					AddItem(player, pCreature, 2000055,1,40);
+					break;
 			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 100102,1,7);
+					AddItem(player, pCreature, 200055,1,40);
 					 break;
 			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 100095,1,7);
+					AddItem(player, pCreature, 2000055,1,40);
 				  break;
 			  case CLASS_MAGE:
-					AddItem(player, pCreature, 100099,1,7);
-			  break;
+					AddItem(player, pCreature, 2000055,1,40);
+					break;
 			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 100094,1,7);
+					AddItem(player, pCreature, 2000055,1,40);
 				  break;
 			  case CLASS_DRUID:
-					AddItem(player, pCreature, 100101,1,7);
+					AddItem(player, pCreature, 200055,1,40);
 					break;
 
 			  default: break;
 			  }
-			  break;
+					break;
+			  
 			 case 11000: // Vote cloak
 			  switch(player->getClass())
 			  {
 			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 100112,1,10);
+					AddItem(player, pCreature, 200056,1,40);
 			  break;
 			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 100117,1,10);
+					AddItem(player, pCreature, 200056,1,40);
 				  break;
 			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 100119,1,10);
+					AddItem(player, pCreature, 200056,1,40);
 				 break;
 			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 100115,1,10);
+					AddItem(player, pCreature, 200056,1,40);
 				 break;
 			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 100116,1,10);
-			  break;
+					AddItem(player, pCreature, 2000056,1,40);
+					break;
 			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 100121,1,10);
+					AddItem(player, pCreature, 200056,1,40);
 					 break;
 			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 100114,1,10);
+					AddItem(player, pCreature, 2000056,1,40);
 				  break;
 			  case CLASS_MAGE:
-					AddItem(player, pCreature, 100118,1,10);
-			  break;
+					AddItem(player, pCreature, 2000056,1,40);
+					break;
 			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 100113,1,10);
+					AddItem(player, pCreature, 2000056,1,40);
 				  break;
 			  case CLASS_DRUID:
-					AddItem(player, pCreature, 100120,1,10);
+					AddItem(player, pCreature, 200056,1,40);
 					break;
 
 			  default: break;
-			  }
-			  break;
-			 case 12000: // Vote set
+			  }			  
+						break;
+			 case 12000: // Vote shirt
 			  switch(player->getClass())
 			  {
 			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 68,1,46);
+					AddItem(player, pCreature, 200054,1,40);
 			  break;
 			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 69,1,46);
+					AddItem(player, pCreature, 200054,1,40);
 				  break;
 			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 70,1,46);
+					AddItem(player, pCreature, 200054,1,40);
 				 break;
 			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 71,1,46);
+					AddItem(player, pCreature, 200054,1,40);
 				 break;
 			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 72,1,46);
-				  break;
+					AddItem(player, pCreature, 2000054,1,40);
+					break;
 			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 73,1,46);
+					AddItem(player, pCreature, 200054,1,40);
 					 break;
 			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 74,1,46);
+					AddItem(player, pCreature, 2000054,1,40);
 				  break;
 			  case CLASS_MAGE:
-					AddItem(player, pCreature, 75,1,46);
-			  break;
+					AddItem(player, pCreature, 2000054,1,40);
+					break;
 			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 76,1,46);
+					AddItem(player, pCreature, 2000054,1,40);
 				  break;
 			  case CLASS_DRUID:
-					AddItem(player, pCreature, 78,1,46);
+					AddItem(player, pCreature, 200054,1,40);
 					break;
 
 			  default: break;
-			  }
-			  break;
+			  }			  
+						break;
 			  
 			  case 13000: // Vote set
 			  switch(player->getClass())
