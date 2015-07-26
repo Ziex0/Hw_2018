@@ -243,10 +243,10 @@ float Player::GetManaBonusFromIntellect()
 {
     float intellect = GetStat(STAT_INTELLECT);
 
-    float baseInt = std::min(25.0f, intellect);
+    float baseInt = std::min(20.0f, intellect);
     float moreInt = intellect - baseInt;
 
-    return baseInt + (moreInt * 25.0f);
+    return baseInt + (moreInt * 15.0f);
 }
 
 
@@ -385,14 +385,14 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
                 switch (GetShapeshiftForm())
                 {
                     case FORM_CAT:
-                        val2 = getLevel() * (mLevelMult + 2.0f) + GetStat(STAT_STRENGTH) * 2.0f + GetStat(STAT_AGILITY) - 20.0f + weapon_bonus + m_baseFeralAP;
+                        val2 = getLevel() * (mLevelMult + 3.0f) + GetStat(STAT_STRENGTH) * 2.0f + GetStat(STAT_AGILITY) - 20.0f + weapon_bonus + m_baseFeralAP;
                         break;
                     case FORM_BEAR:
                     case FORM_DIREBEAR:
-                        val2 = getLevel() * (mLevelMult + 3.0f) + GetStat(STAT_STRENGTH) * 2.0f - 20.0f + weapon_bonus + m_baseFeralAP;
+                        val2 = getLevel() * (mLevelMult + 4.0f) + GetStat(STAT_STRENGTH) * 2.0f - 20.0f + weapon_bonus + m_baseFeralAP;
                         break;
                     case FORM_MOONKIN:
-                        val2 = getLevel() * (mLevelMult + 1.5f) + GetStat(STAT_STRENGTH) * 2.0f - 20.0f + m_baseFeralAP;
+                        val2 = getLevel() * (mLevelMult + 2.0f) + GetStat(STAT_STRENGTH) * 2.0f - 20.0f + m_baseFeralAP;
                         break;
                     default:
                         val2 = GetStat(STAT_STRENGTH) * 2.0f - 20.0f;
@@ -401,7 +401,7 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
                 break;
             }
             case CLASS_MAGE:
-                val2 = GetStat(STAT_STRENGTH) - 40.0f;
+                val2 = GetStat(STAT_STRENGTH) - 35.0f;
                 break;
             case CLASS_PRIEST:
                 val2 = GetStat(STAT_STRENGTH) - 40.0f;
@@ -761,7 +761,7 @@ void Player::UpdateSpellCritChance(uint32 school)
     // For normal school set zero crit chance
     if (school == SPELL_SCHOOL_NORMAL)
     {
-        SetFloatValue(PLAYER_SPELL_CRIT_PERCENTAGE1, 0.0f);
+        SetFloatValue(PLAYER_SPELL_CRIT_PERCENTAGE1, 1.0f);
         return;
     }
     // For others recalculate it from:
