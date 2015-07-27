@@ -590,7 +590,7 @@ public:
             if (instance)
                 instance->SetBossState(DATA_MALYGOS_EVENT, FAIL);
 
-            SendLightOverride(LIGHT_GET_DEFAULT_FOR_MAP, 1*IN_MILLISECONDS);
+            SendLightoverride(LIGHT_GET_DEFAULT_FOR_MAP, 1*IN_MILLISECONDS);
 
             if (_phase == PHASE_THREE)
                 me->SetControlled(false, UNIT_STATE_ROOT);
@@ -729,7 +729,7 @@ public:
                 case POINT_PHASE_ONE_TO_TWO_TRANSITION:
                     me->SetDisableGravity(true);
                     me->SetFacingToObject(me->GetMap()->GetCreature(instance->GetData64(DATA_ALEXSTRASZA_BUNNY_GUID)));
-                    SendLightOverride(LIGHT_ARCANE_RUNES, 5*IN_MILLISECONDS);
+                    SendLightoverride(LIGHT_ARCANE_RUNES, 5*IN_MILLISECONDS);
                     events.ScheduleEvent(EVENT_FLY_OUT_OF_PLATFORM, 18*IN_MILLISECONDS, 0, PHASE_TWO);
                     break;
                 case POINT_SURGE_OF_POWER_P_TWO:
@@ -741,7 +741,7 @@ public:
                     }
                     break;
                 case POINT_DESTROY_PLATFORM_P_TWO:
-                    SendLightOverride(LIGHT_OBSCURE_SPACE, 1*IN_MILLISECONDS);
+                    SendLightoverride(LIGHT_OBSCURE_SPACE, 1*IN_MILLISECONDS);
                     DoCast(me, SPELL_DESTROY_PLATFORM_CHANNEL);
                     events.ScheduleEvent(EVENT_MOVE_TO_P_THREE_POINT, 11*IN_MILLISECONDS, 0, PHASE_TWO);
                     break;
@@ -933,7 +933,7 @@ public:
                         }
                         break;
                     case EVENT_LIGHT_DIMENSION_CHANGE:
-                        SendLightOverride(LIGHT_CHANGE_DIMENSIONS, 2*IN_MILLISECONDS);
+                        SendLightoverride(LIGHT_CHANGE_DIMENSIONS, 2*IN_MILLISECONDS);
                         break;
                     case EVENT_DELAY_MOVE_TO_DESTROY_P:
                         me->GetMotionMaster()->MovePoint(POINT_DESTROY_PLATFORM_P_TWO, MalygosPositions[0]);
@@ -943,7 +943,7 @@ public:
                         me->GetMotionMaster()->MovePoint(POINT_IDLE_P_THREE, MalygosPositions[4]);
                         break;
                     case EVENT_START_P_THREE:
-                        SendLightOverride(LIGHT_OBSCURE_ARCANE_RUNES, 1*IN_MILLISECONDS);
+                        SendLightoverride(LIGHT_OBSCURE_ARCANE_RUNES, 1*IN_MILLISECONDS);
                         DoCast(me, SPELL_CLEAR_ALL_DEBUFFS);
                         DoCast(me, SPELL_IMMUNE_CURSES);
                         _canAttack = true;
@@ -1031,7 +1031,7 @@ public:
         }
 
         // Function that will change lights of map for all players on map.
-        void SendLightOverride(uint32 overrideId, uint32 fadeInTime) const
+        void SendLightoverride(uint32 overrideId, uint32 fadeInTime) const
         {
             WorldPacket data(SMSG_OVERRIDE_LIGHT, 12);
             data << uint32(1773);       // Light.dbc entry (map default)
