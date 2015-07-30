@@ -224,7 +224,7 @@ class premium_rate : public CreatureScript
 						LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '2', '1')", pPlayer->GetSession()->GetAccountId());
 						// Set the correct date timestamp and start the 1 month counter
 						CharacterDatabase.PExecute("DELETE FROM `vip_conditions` WHERE `accountId` = '%u'", pPlayer->GetSession()->GetAccountId()); // Overwrite
-						//CharacterDatabase.PExecute("REPLACE INTO `vip_conditions` (`accountId`, `purchaseTime`) VALUES ('%u', '%u')", pPlayer->GetSession()->GetAccountId(), (purchaseTime + purchaseDays));
+						CharacterDatabase.PExecute("REPLACE INTO `vip_conditions` (`accountId`) VALUES ('%u')", pPlayer->GetSession()->GetAccountId());
 
 						pPlayer->GetSession()->SendAreaTriggerMessage("Successfully upgraded your account to |cffFF0000Premium|r RANK II Permanent use. "
 							"Close the game and login again for changes to take effect! Thanks for the support!");

@@ -93,7 +93,7 @@ public:
 
 	void MainMenu(Player *pPlayer, Creature *pCreature)
 	{
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t Mall ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8910);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t Mall -> ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8910);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Coin_03:24|t Home Cities ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 12);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Coin_03:24|t Neutral Cities ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 21);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:24|t Arenas ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 28);
@@ -104,7 +104,7 @@ public:
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t Fusion Item Drop Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3810);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Coin_03:24|t I want free Mounts ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 177);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_FeatsOfStrength_Gladiator_10:24|t Event Zone->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 810);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Leveling Zone", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8000);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Leveling Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8000);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Gold Farming", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9000);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Custom Boss Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 710);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "--|cffFF0000Advance Summon Boss Area--", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9710);
@@ -1502,6 +1502,7 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Raz the unforgiven ( World farm Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 718);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Clyde the colossus ( World farm Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 719);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Frostfire General( World farm illusion Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 720);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Zealot ( Patch M required )", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 721);
 
 				
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
@@ -1590,16 +1591,30 @@ public:
                 }
                 break;
 				
-			//mall
+			
 			case GOSSIP_ACTION_INFO_DEF + 720:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo (571, 8213.403320f,-1916.334473f, 1741.118774f ,4.304713f );
 				break;
+			case GOSSIP_ACTION_INFO_DEF + 721:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo (582, 4062.510f, -2205.79f, 52.1483f , 4.79503f );
+				break;
 
 				//mall
 			case GOSSIP_ACTION_INFO_DEF + 8910:
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Starter Mall", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8911);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Tanaan Jungle Mall ( Patch M required)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8912);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
+				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
+				break;
+			case GOSSIP_ACTION_INFO_DEF + 8911:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo (530, -266.10f, 921.734f, 84.3799f, 0.582604f);
+				break;
+			case GOSSIP_ACTION_INFO_DEF + 8912:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo (582, 3942.000f, -493.135f, 38.9563f, 1.55163f);
 				break;
 				
 											

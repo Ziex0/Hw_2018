@@ -1,172 +1,169 @@
-#include "ScriptPCH.h"
+/*
+Coded by Lionzero, Respect my Code and do not remove my Copyright !
+*/
 
-    enum Spells
+#include "ScriptMgr.h"
+#include "ScriptedCreature.h"
+
+enum Spells
+{
+    VISUAL_NETHER_PORTAL = 30490,
+    SPELL_BEBENDE_ERDE = 6524,
+    SPELL_BLADESTORM = 9632,
+    SPELL_BERSERK = 26662,
+    SPELL_ENRAGE = 64487
+};
+
+enum Events
+{
+    EVENT_VISUAL_NETHER_PORTAL = 1,
+    EVENT_BEBENDE_ERDE = 2,
+    EVENT_BLADESTORM = 3,
+    EVENT_SUMMONS = 4,
+    EVENT_BERSERK = 5,
+    EVENT_ENRAGE = 6
+};
+
+enum Phases
+{
+    PHASE_ONE = 1,
+    PHASE_TWO = 2,
+    PHASE_THREE = 3
+};
+
+enum Summons
+{
+    NPC_FEUERTEUFEL = 150004
+};
+
+enum Texts
+{
+    SAY_AGGRO = 0,
+    SAY_RANDOM = 1,
+    SAY_HELP = 2,
+    SAY_BERSERK = 3,
+    SAY_ENRAGE = 4,
+    SAY_DEAD = 5
+};
+
+class boss_two : public CreatureScript
+{
+public:
+    boss_two() : CreatureScript("boss_two") { }
+
+    struct boss_twoAI : public ScriptedAI
     {
-        SPELL_COUNTDOWN         = 99516,        // Phase One
-        SPELL_MAGMA_RIFT        = 99840,        // Phase One
-        SPELL_TOXIN_RAIN        = 99333,        // Phase One
-        SPELL_HAND_OF_RAGNAROS  = 98237,        // Phase One
-        SPELL_MAGMA_BEAT        = 98313,        //Phase One
-        SPELL_BLADE_DANCE       = 105784,       //Phase Two
-        SPELL_LIGHTNING_BOMB    = 109541,       // Phase Two
-        SPELL_FEEDBACK          = 108934,       // Phase Two
-        SPELL_SHOCKWAVE         = 108046,       // Phase Two
-        SPELL_MENTAL_WITHRAWAL  = 104322,       // Phase Two
-        SPELL_FINGER_OF_DEATH   = 31984, // Phase Three
-    };
-         
-    enum Events
-    {
-        EVENT_NONE,
-        EVENT_COUNTDOWN,
-        EVENT_MAGMA_RIFT,
-        EVENT_TOXIN_RAIN,
-        EVENT_HAND_OF_RAGNAROS,
-        EVENT_MAGMA_BEAT,
-        EVENT_BLADE_DANCE,
-        EVENT_LIGHTNING_BOMB,
-        EVENT_FEEDBACK,
-        EVENT_SHOCKWAVE,
-        EVENT_MENTAL_WITHRAWAL,
-        EVENT_FINGER_OF_DEATH,
-        EVENT_CHECK
-    };
-         
-    class boss_test_script : public CreatureScript
-    {
-    public:
-        boss_test_script() : CreatureScript("boss_test_script") { }
-         
-        struct boss_test_scriptAI : public ScriptedAI
+        boss_twoAI(Creature* creature) : ScriptedAI(creature), Summons(me) { }
+
+        void Reset() override
         {
-            boss_test_scriptAI(Creature* creature) : ScriptedAI(creature) { }
-         
-            void Reset() override
-            {
-                events.Reset();
-                phase = 1;
-            }
-     
-            void EnterCombat(Unit* /* who */) override
-            {
-                events.ScheduleEvent(EVENT_COUNTDOWN, 30000);
-                events.ScheduleEvent(EVENT_MAGMA_RIFT, 26000);
-                events.ScheduleEvent(EVENT_TOXIN_RAIN, 22000);
-                events.ScheduleEvent(EVENT_HAND_OF_RAGNAROS, 40000);
-                events.ScheduleEvent(EVENT_MAGMA_BEAT, 18000);
-                events.ScheduleEvent(EVENT_CHECK, 1500);
-                me->MonsterYell("This is the beginning of the end!", LANG_UNIVERSAL, NULL);
-            }
-     
-            void JustDied(Unit* /* victim */) override
-            {
-                me->MonsterYell("How did this happen ? That's impossible ....", LANG_UNIVERSAL, NULL);
-            }
-     
-            void UpdateAI(uint32 diff) override
-            {
-                if (!UpdateVictim())
-                    return;
-     
-                events.Update(diff);
-     
-                while (uint32 eventId = events.ExecuteEvent())
-                {
-                    switch (eventId)
-                    {
-                        case EVENT_CHECK:
-                            if (phase == 1 && me->GetHealthPct() <= 60)
-                            {
-                                me->MonsterYell("You can't defeat me !!", LANG_UNIVERSAL, NULL);
-                                events.Reset();
-                                events.ScheduleEvent(EVENT_BLADE_DANCE, 45000);
-                                events.ScheduleEvent(EVENT_LIGHTNING_BOMB, 20000);
-                                events.ScheduleEvent(EVENT_FEEDBACK, 75000);
-                                events.ScheduleEvent(EVENT_SHOCKWAVE, 36000);
-                                events.ScheduleEvent(EVENT_MENTAL_WITHRAWAL, 16000);
-                                phase = 2;
-                            }
-         
-                            if (phase == 2 && me->GetHealthPct() <= 15)
-                            {
-                                me->MonsterYell("It 's enough for me !", LANG_UNIVERSAL, NULL);
-                                events.ScheduleEvent(EVENT_FINGER_OF_DEATH, 10000);
-                                phase = 3;
-                            }
-                            events.ScheduleEvent(EVENT_CHECK, 1500);
-                            break;
-                        case EVENT_COUNTDOWN:
-                            if (Unit *target = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                                DoCast(target, SPELL_COUNTDOWN);
-                            events.ScheduleEvent(EVENT_COUNTDOWN, 30000);
-                            break;
-                        case EVENT_MAGMA_RIFT:
-                            if (Unit *target = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                                DoCast(target, SPELL_MAGMA_RIFT);
-                            events.ScheduleEvent(EVENT_MAGMA_RIFT, 26000);
-                            break;
-                        case EVENT_TOXIN_RAIN:
-                            DoCastVictim(SPELL_TOXIN_RAIN);
-                            events.ScheduleEvent(EVENT_TOXIN_RAIN, 22000);
-                            break;
-                        case EVENT_HAND_OF_RAGNAROS:
-                            if (Unit *target = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                                DoCast(target, SPELL_HAND_OF_RAGNAROS);
-                            me->MonsterYell("Feel my Power", LANG_UNIVERSAL, NULL);
-                            events.ScheduleEvent(EVENT_HAND_OF_RAGNAROS, 40000);
-                            break;
-                        case EVENT_MAGMA_BEAT:
-                            DoCastVictim(SPELL_MAGMA_BEAT);
-                            events.ScheduleEvent(EVENT_MAGMA_BEAT, 18000);
-                            break;
-                        case EVENT_BLADE_DANCE:
-                            if (Unit *target = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                                DoCast(target, SPELL_BLADE_DANCE);
-                            me->MonsterYell("DIE!!!", LANG_UNIVERSAL, NULL);
-                            events.ScheduleEvent(EVENT_BLADE_DANCE, 45000);
-                            break;
-                        case EVENT_LIGHTNING_BOMB:
-                            if (Unit *target = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                                DoCast(target, SPELL_LIGHTNING_BOMB);
-                            events.ScheduleEvent(EVENT_LIGHTNING_BOMB, 20000);
-                            break;
-                        case EVENT_FEEDBACK:
-                            DoCast(me, SPELL_FEEDBACK);
-                            events.ScheduleEvent(EVENT_FEEDBACK, 75000);
-                            break;
-                        case EVENT_SHOCKWAVE:
-                            if (Unit *target = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                                DoCast(target, SPELL_SHOCKWAVE);
-                            me->MonsterYell("Silence !!!", LANG_UNIVERSAL, NULL);
-                            events.ScheduleEvent(EVENT_SHOCKWAVE, 36000);
-                            break;
-                        case EVENT_MENTAL_WITHRAWAL:
-                            if (Unit *target = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                                DoCast(target, SPELL_MENTAL_WITHRAWAL);
-                            events.ScheduleEvent(EVENT_MENTAL_WITHRAWAL, 16000);
-                            break;
-                        case EVENT_FINGER_OF_DEATH:
-                            if (Unit *target = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                                DoCast(target, SPELL_FINGER_OF_DEATH);
-                            events.ScheduleEvent(EVENT_FINGER_OF_DEATH, 10000);
-                            break;
-                    }
-                }
-                DoMeleeAttackIfReady();
-            }
-            private:
-                EventMap events;
-                uint8 phase;
-        };
-         
-        CreatureAI* GetAI(Creature* creature) const override
-        {
-            return new boss_test_scriptAI(creature);
+            _events.Reset();
+            Summons.DespawnAll();
         }
-    };
-         
-    void AddSC_boss_test_script()
-    {
-        new boss_test_script();
-    }
 
+        void EnterCombat(Unit* /*who*/) override
+        {
+            Talk(SAY_AGGRO);
+            _events.SetPhase(PHASE_ONE);
+            _events.ScheduleEvent(EVENT_VISUAL_NETHER_PORTAL, 1000);
+            _events.ScheduleEvent(EVENT_BEBENDE_ERDE, 30000);
+        }
+
+        void DamageTaken(Unit* /*attacker*/, uint32& damage) override
+        {
+            if (me->HealthBelowPctDamaged(75, damage) && _events.IsInPhase(PHASE_ONE))
+            {
+                _events.SetPhase(PHASE_TWO);
+                _events.ScheduleEvent(EVENT_BLADESTORM, 10000);
+            }
+
+            if (me->HealthBelowPctDamaged(35, damage) && _events.IsInPhase(PHASE_TWO))
+            {
+                _events.SetPhase(PHASE_THREE);
+                _events.ScheduleEvent(EVENT_SUMMONS, 5000);
+                _events.ScheduleEvent(EVENT_BERSERK, 10000);
+                _events.ScheduleEvent(EVENT_ENRAGE, 120000); //In phase 3 the player have 2 minutes to defeat the Boss or all will die !
+            }
+        }
+
+        void JustSummoned(Creature* summon) override
+        {
+            Summons.Summon(summon);
+
+            switch (summon->GetEntry())
+            {
+            case NPC_FEUERTEUFEL:
+                if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 300.0f))
+                    summon->AI()->AttackStart(target); // I think it means the Tank !
+                break;
+            }
+        }
+
+        void JustDied(Unit* /*killer*/) override
+        {
+            Talk(SAY_DEAD);
+            Summons.DespawnAll();
+        }
+
+        void UpdateAI(uint32 diff) override
+        {
+            if (!UpdateVictim())
+                return;
+
+            _events.Update(diff);
+
+            while (uint32 eventId = _events.ExecuteEvent())
+            {
+                switch (eventId)
+                {
+                case EVENT_VISUAL_NETHER_PORTAL:
+                    DoCast(me, VISUAL_NETHER_PORTAL);
+                    break;
+                case EVENT_BEBENDE_ERDE:
+                    DoCastVictim(SPELL_BEBENDE_ERDE);
+                    _events.ScheduleEvent(EVENT_BEBENDE_ERDE, 8000);
+                    break;
+                case EVENT_BLADESTORM:
+                    Talk(SAY_RANDOM);
+                    DoCastVictim(SPELL_BLADESTORM);
+                    _events.ScheduleEvent(EVENT_BLADESTORM, 30000);
+                    break;
+                case EVENT_SUMMONS:
+                    Talk(SAY_HELP);
+                    me->SummonCreature(NPC_FEUERTEUFEL, me->GetPositionX() + 5, me->GetPositionY(), me->GetPositionZ() + 5, 0, TEMPSUMMON_CORPSE_DESPAWN, 600000);
+                    me->SummonCreature(NPC_FEUERTEUFEL, me->GetPositionX() + 5, me->GetPositionY(), me->GetPositionZ() + 5, 0, TEMPSUMMON_CORPSE_DESPAWN, 600000);
+                    me->SummonCreature(NPC_FEUERTEUFEL, me->GetPositionX() + 5, me->GetPositionY(), me->GetPositionZ() + 5, 0, TEMPSUMMON_CORPSE_DESPAWN, 600000);
+                    break;
+                case EVENT_BERSERK:
+                    Talk(SAY_BERSERK);
+                    DoCast(me, SPELL_BERSERK);
+                    _events.ScheduleEvent(EVENT_BERSERK, 120000);
+                    break;
+                case EVENT_ENRAGE:
+                    Talk(SAY_ENRAGE);
+                    DoCast(me, SPELL_ENRAGE);
+                    _events.ScheduleEvent(EVENT_ENRAGE, 10000);
+                    break;
+                default:
+                    break;
+                }
+            }
+
+            DoMeleeAttackIfReady();
+        }
+
+    private:
+        EventMap _events;
+        SummonList Summons;
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new boss_twoAI(creature);
+    }
+};
+
+void AddSC_boss_two()
+{
+    new boss_two();
+}  

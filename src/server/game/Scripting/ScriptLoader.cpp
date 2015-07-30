@@ -1360,7 +1360,7 @@ void AddBattlegroundScripts()
 	void AddSC_npc_gurubashi_theme();
 	void AddSC_npc_morpher();
 	void AddSC_boss_nazaryan();
-	void AddSC_boss_test_script();
+	void AddSC_boss_two();
 	void AddSC_Online_Time_DP();
 	void AddSC_player_abuse();
 	//Bots
@@ -1468,7 +1468,7 @@ void AddCustomScripts()
 	AddSC_npc_gurubashi_theme();
 	AddSC_npc_morpher();
 	AddSC_boss_nazaryan();
-	AddSC_boss_test_script();
+	AddSC_boss_two();
 	AddSC_Online_Time_DP();
 	AddSC_player_abuse();
 	//Bots

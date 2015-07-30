@@ -38,8 +38,8 @@ enum Spells
     SPELL_ARM_SWEEP                     = 63766,
     SPELL_STONE_SHOUT                   = 63716,
     SPELL_PETRIFY_BREATH                = 62030,
-    SPELL_STONE_GRIP                    = 62166,
-    SPELL_STONE_GRIP_CANCEL             = 65594,
+    //SPELL_STONE_GRIP                    = 62166,
+    //SPELL_STONE_GRIP_CANCEL             = 65594,
     SPELL_SUMMON_RUBBLE                 = 63633,
     SPELL_FALLING_RUBBLE                = 63821,
     SPELL_ARM_ENTER_VEHICLE             = 65343,
@@ -296,7 +296,7 @@ class boss_kologarn : public CreatureScript
                         {
                             if (right)
                             {
-                                DoCast(SPELL_STONE_GRIP);
+                                //DoCast(SPELL_STONE_GRIP);
                                 Talk(SAY_GRAB_PLAYER);
                                 Talk(EMOTE_STONE_GRIP);
                             }
@@ -537,8 +537,8 @@ class spell_ulduar_stone_grip_absorb : public SpellScriptLoader
 
                 uint32 rubbleStalkerEntry = (GetOwner()->GetMap()->GetDifficulty() == DUNGEON_DIFFICULTY_NORMAL ? 33809 : 33942);
                 Creature* rubbleStalker = GetOwner()->FindNearestCreature(rubbleStalkerEntry, 200.0f, true);
-                if (rubbleStalker)
-                    rubbleStalker->CastSpell(rubbleStalker, SPELL_STONE_GRIP_CANCEL, true);
+                //if (rubbleStalker)
+                    //rubbleStalker->CastSpell(rubbleStalker, SPELL_STONE_GRIP_CANCEL, true);
             }
 
             void Register()
