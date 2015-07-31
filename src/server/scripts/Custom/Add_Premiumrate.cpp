@@ -6,10 +6,10 @@
 static std::string website = "web_db";       // FusionCMS database name
 
 // DONATION POINTS PRICES:
-static uint32 oneMonthVipPrice = 11;               // VIP account price for 1 month (in donation points) (Default: 30 donate points)
-static uint32 threeMonthsVipPrice = 21;            // VIP account price for 3 months (in donation points) (Default: 50 donate points)
-static uint32 nineMonthsVipPrice = 33;            // VIP account price for 3 months (in donation points) (Default: 50 donate points)
-static uint32 permaMonthsVipPrice = 45;
+static uint32 oneMonthVipPrice = 5;               // VIP account price for 1 month (in donation points) (Default: 30 donate points)
+static uint32 threeMonthsVipPrice = 11;            // VIP account price for 3 months (in donation points) (Default: 50 donate points)
+static uint32 nineMonthsVipPrice = 17;            // VIP account price for 3 months (in donation points) (Default: 50 donate points)
+static uint32 permaMonthsVipPrice = 28;
 
 static uint32 purchaseDays;   
 
@@ -52,8 +52,8 @@ class premium_rate : public CreatureScript
 		}
 			
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2 for 1 month - 11 DP", GOSSIP_SENDER_MAIN, 6000);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2 for 3 month - 21 DP", GOSSIP_SENDER_MAIN, 7000);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2 for 9 month -  33 DP", GOSSIP_SENDER_MAIN, 8000);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2 for 3 months - 21 DP", GOSSIP_SENDER_MAIN, 7000);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2 for 9 months -  33 DP", GOSSIP_SENDER_MAIN, 8000);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2 Permanent -  45 DP", GOSSIP_SENDER_MAIN, 9000);
 			
 			// Show Donate and Voting Points when GossipHello

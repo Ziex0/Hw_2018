@@ -20,7 +20,7 @@
 
 // Custom mods: START
 void AddSC_Mod_ArenaWatcher(); // by FrozenSouL (version by Codels)
-void AddSC_Mod_AuctionHouseBot(); // by Codels
+//void AddSC_Mod_AuctionHouseBot(); // by Codels
 void AddSC_Mod_AutoLearn(); // by Codels
 void AddSC_Mod_BattlegroundHistory(); // by Codels
 void AddSC_Mod_BossHistory(); // by Codels
@@ -35,10 +35,10 @@ void AddSC_Mod_Tournaments(); // by Codels
 void AddSC_Mod_GuildDefault(); // by s@m
 void AddSC_Mod_HonorRank(); // by Codels
 void AddSC_Mod_ItemUpgrade(); // by Codels
-void AddSC_Mod_MailHistory(); // by Codels
+//void AddSC_Mod_MailHistory(); // by Codels
 void AddSC_Mod_Multikill(); // by Codels
 void AddSC_Mod_SpecialCode(); // by Codels
-void AddSC_Mod_LexicsCutter(); // by ???
+//void AddSC_Mod_LexicsCutter(); // by ???
 // Custom mods: END
 
 //examples
@@ -1412,7 +1412,7 @@ void AddCustomScripts()
 #ifdef SCRIPTS
     /* This is where custom scripts should be added. */
     AddSC_Mod_ArenaWatcher();
-    AddSC_Mod_AuctionHouseBot();
+    //AddSC_Mod_AuctionHouseBot();
     AddSC_Mod_AutoLearn();
     AddSC_Mod_BattlegroundHistory();
     AddSC_Mod_BossHistory();
@@ -1427,10 +1427,10 @@ void AddCustomScripts()
     AddSC_Mod_GuildDefault();
     AddSC_Mod_HonorRank();
     AddSC_Mod_ItemUpgrade();
-    AddSC_Mod_MailHistory();
+    //AddSC_Mod_MailHistory();
     AddSC_Mod_Multikill();
     AddSC_Mod_SpecialCode();
-    AddSC_Mod_LexicsCutter();
+    //AddSC_Mod_LexicsCutter();
 
 	// Zie
 	AddSc_Script_UTeleporter();
