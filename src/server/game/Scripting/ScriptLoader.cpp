@@ -1404,6 +1404,7 @@ void AddBattlegroundScripts()
 	void AddSC_Vote_rewarder();
 	//void AddSC_Online_Time_DP();
 	void AddSC_RaceChanger();
+	void AddSC_guildmaster();
 
 #endif
 
@@ -1512,6 +1513,7 @@ void AddCustomScripts()
 	AddSC_Vote_rewarder();
 	//AddSC_Online_Time_DP();
 	AddSC_RaceChanger();
+	AddSC_guildmaster();
 
 #endif
 }
