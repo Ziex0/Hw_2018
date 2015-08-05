@@ -92,7 +92,7 @@ class donorrewarder : public CreatureScript
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Shirts / Cloak / Tabard", GOSSIP_SENDER_MAIN, 300);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDual Wield - 10 DP", GOSSIP_SENDER_MAIN, 30000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rTitan_Grip - 20 DP", GOSSIP_SENDER_MAIN, 20000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tSpecial Items", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSpecial Items", GOSSIP_SENDER_MAIN, 5000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rPremium Rank 2 Token", GOSSIP_SENDER_MAIN, 4000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Tabard - 7 Dp", GOSSIP_SENDER_MAIN, 10000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Cloak - 10 DP", GOSSIP_SENDER_MAIN, 11000);
@@ -689,46 +689,25 @@ class donorrewarder : public CreatureScript
 				
             case 5000:
                 player->PlayerTalkClass->ClearMenus();
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Idol - 6 DP", GOSSIP_SENDER_MAIN, 5001);
-                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Thrown - 15 DP", GOSSIP_SENDER_MAIN, 5002);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Totem - 6 DP", GOSSIP_SENDER_MAIN, 5003);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Sigil - 6 DP", GOSSIP_SENDER_MAIN, 5004);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Libram - 6 DP", GOSSIP_SENDER_MAIN, 5005);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Characters item Transfer Token - 6 DP", GOSSIP_SENDER_MAIN, 5001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Custom Mount Token - 3 DP", GOSSIP_SENDER_MAIN, 5002);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Instance Booster - 3 DP", GOSSIP_SENDER_MAIN, 5003);
+                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Sigil - 6 DP", GOSSIP_SENDER_MAIN, 5004);
+                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Libram - 6 DP", GOSSIP_SENDER_MAIN, 5005);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
                 return true;
                 break;
             case 5001:
-                if(player->getClass() != CLASS_DRUID) {
-			  char str[200];
-			  sprintf(str,"Your not a Druid, so you cant buy this item!");
-					player->MonsterWhisper(str,player->GetGUID(),true);
-					player->PlayerTalkClass->SendCloseGossip();
-					} else {
-					AddItem(player, pCreature, 100107,1,6);
-			  } 
-					break;
-				case 5002:
-					if(player->getClass() != CLASS_ROGUE) {
-			  char str[200];
-			  sprintf(str,"Your not a Rogue, so you cant buy this item!");
-					player->MonsterWhisper(str,player->GetGUID(),true);
-					player->PlayerTalkClass->SendCloseGossip();
-					} else {
-					AddItem(player, pCreature, 30025,1,6);
-			  } 
-					break;
-				case 5003:
-					if(player->getClass() != CLASS_SHAMAN) {
-			  char str[200];
-			  sprintf(str,"Your not a Shaman, so you cant buy this item!");
-					player->MonsterWhisper(str,player->GetGUID(),true);
-					player->PlayerTalkClass->SendCloseGossip();
-					} else {
-					AddItem(player, pCreature, 100103,1,6);
-			  } 
-					break;
-				case 5004:
+                AddItem(player, pCreature, 340007,1,6);
+                break;
+			case 5002:
+				AddItem(player, pCreature, 340009,1,3);
+                break;
+			case 5003:
+				AddItem(player, pCreature, 985468,1,3);
+                break;
+			case 5004:
 					if(player->getClass() != 6) {
 			  char str[200];
 			  sprintf(str,"Your not a Death Knight, so you cant buy this item!");

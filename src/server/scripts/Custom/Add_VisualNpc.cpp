@@ -163,5 +163,5 @@ public:
 
 void AddSC_NPC_VisualWeapon()
 {
-    new NPC_VisualWeapon;
+    new NPC_VisualWeapon();
 }

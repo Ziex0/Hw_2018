@@ -89,9 +89,9 @@ class Vote_rewarder : public CreatureScript
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Weapons", GOSSIP_SENDER_MAIN, 2000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorArmors and Shirts", GOSSIP_SENDER_MAIN, 300);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDual Wield Scroll - 120 VP", GOSSIP_SENDER_MAIN, 20000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tDual Wield Scroll - 120 VP", GOSSIP_SENDER_MAIN, 20000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSpecial Items", GOSSIP_SENDER_MAIN, 5000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tSpecial Tokens", GOSSIP_SENDER_MAIN, 4000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSpecial Tokens", GOSSIP_SENDER_MAIN, 4000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Tabard - 40 VP", GOSSIP_SENDER_MAIN, 10000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Cloak - 40 VP", GOSSIP_SENDER_MAIN, 11000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Shirt - 40 VP ", GOSSIP_SENDER_MAIN, 12000);
@@ -411,29 +411,25 @@ class Vote_rewarder : public CreatureScript
                 AddItem(player, pCreature, 210009,1,27);
                 break;
 			
-            case 4000:
+             case 4000:
                 player->PlayerTalkClass->ClearMenus();
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Transmogrification Token - 1 VP", GOSSIP_SENDER_MAIN, 4001);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Re-Customize Token - 3 VP", GOSSIP_SENDER_MAIN, 14002);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Scroll of Dual Wield - 4 VP", GOSSIP_SENDER_MAIN, 4002);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Item Transfer/Exchange Token - 5 VP", GOSSIP_SENDER_MAIN, 4003);
-                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Scroll of Titan Grip's - 6 VP", GOSSIP_SENDER_MAIN, 4009);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Cata / MoP Token - 5 VP", GOSSIP_SENDER_MAIN, 5040);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "VIP Rank - 55 VP", GOSSIP_SENDER_MAIN, 4004);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Signet of Berserking - 10 VP", GOSSIP_SENDER_MAIN, 14010);
-                
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Vote Releaser - 55 VP", GOSSIP_SENDER_MAIN, 4901);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Custom Mount Token - 45 VP", GOSSIP_SENDER_MAIN, 4902);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Instance Booster - 80 VP", GOSSIP_SENDER_MAIN, 4903);
+                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Sigil - 6 DP", GOSSIP_SENDER_MAIN, 5004);
+                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Libram - 6 DP", GOSSIP_SENDER_MAIN, 5005);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
                 return true;
                 break;
-			case 4032:
-				AddItem(player, pCreature, 985410,1,8);
-				break;
-			case 4031:
-				AddItem(player, pCreature, 41596,1,7);
-				break;
-            case 5040:
-                AddItem(player, pCreature, 11,1,5);
+            case 4901:
+                AddItem(player, pCreature, 340007,1,55);
+                break;
+			case 4902:
+				AddItem(player, pCreature, 340009,1,45);
+                break;
+			case 4903:
+				AddItem(player, pCreature, 985468,1,80);
                 break;
             case 4030:
                 AddItem(player, pCreature, 9850100,2,1);

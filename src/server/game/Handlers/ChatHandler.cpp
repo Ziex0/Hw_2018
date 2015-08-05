@@ -264,7 +264,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
             std::ostringstream vipcolored_msg;
             std::ostringstream gmcolored_msg;
 
-            getcolor_config << "Custom.Text.Color.Lv" << std::to_string(sender->GetSession()->GetVipLevel()).c_str();
+            getcolor_config << "Channel.Name.Color.Lv" << std::to_string(sender->GetSession()->GetVipLevel()).c_str();
             vipcolored_msg << "|cFF" << ConfigMgr::GetStringDefault(getcolor_config.str().c_str(), "").c_str() << msg.c_str();
             gmcolored_msg << "|cFF" << ConfigMgr::GetStringDefault("Custom.Text.Color.GM", "").c_str() << msg.c_str();
 			
@@ -341,7 +341,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
             std::ostringstream vipcolored_msg;
             std::ostringstream gmcolored_msg;
 
-            getcolor_config << "Custom.Text.Color.Lv" << std::to_string(GetPlayer()->GetSession()->GetVipLevel()).c_str();
+            getcolor_config << "Channel.Name.Color.Lv" << std::to_string(GetPlayer()->GetSession()->GetVipLevel()).c_str();
             vipcolored_msg << "|cFF" << ConfigMgr::GetStringDefault(getcolor_config.str().c_str(), "").c_str() << msg.c_str();
             gmcolored_msg << "|cFF" << ConfigMgr::GetStringDefault("Custom.Text.Color.GM", "").c_str() << msg.c_str();
 

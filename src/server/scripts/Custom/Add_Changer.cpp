@@ -34,7 +34,7 @@ class npc_changer : public CreatureScript
 					{
 						Player->DestroyItemCount(race_token, 1, true, false);
 						Player->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
-						Player->GetSession()->SendNotification("You need to relog, to change your race!");
+						Player->GetSession()->SendNotification("You need to re - login, to change your race!");
 						Player->PlayerTalkClass->SendCloseGossip();
 					}
 					else
@@ -48,7 +48,7 @@ class npc_changer : public CreatureScript
 					{
 						Player->DestroyItemCount(faction_token, 1, true, false);
 						Player->SetAtLoginFlag(AT_LOGIN_CHANGE_FACTION);
-						Player->GetSession()->SendNotification("You need to relog, to change your faction!");
+						Player->GetSession()->SendNotification("You need to re - login, to change your faction!");
 						Player->PlayerTalkClass->SendCloseGossip();
 					}
 					else
@@ -62,7 +62,7 @@ class npc_changer : public CreatureScript
 					{
 						Player->DestroyItemCount(faction_token, 1, true, false);
 						Player->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);
-						Player->GetSession()->SendNotification("relog to do your customizer!");
+						Player->GetSession()->SendNotification("re - login to do your customizer!");
 						Player->PlayerTalkClass->SendCloseGossip();
 					}
 					else

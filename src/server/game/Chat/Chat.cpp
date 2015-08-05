@@ -275,6 +275,8 @@ void ChatHandler::SendCustomOfficerChat(const char* message)
         raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Goblin_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Goblin_Female:14:14:0:-1|t";
 	 else if (pPlayer->getRace() == RACE_WORGEN)
         raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Worgen_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Worgen_Female:14:14:0:-1|t";
+	 else if (pPlayer->getRace() == RACE_ICE_TROLL)
+        raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Worgen_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Worgen_Female:14:14:0:-1|t";
 
 	vipcolor_config << "Channel.Name.Color.Lv" << std::to_string(m_session->GetVipLevel()).c_str();
     
