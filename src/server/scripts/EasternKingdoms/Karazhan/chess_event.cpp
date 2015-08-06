@@ -276,7 +276,7 @@ public:
         int move_lenght = 2*rand()%10;
         float new_x = pos_x + move_lenght * cos(angle);
         float new_y = pos_y + move_lenght * sin(angle);
-        me->Relocate(new_x,new_y,221,2.24);
+        me->Relocate(new_x,new_y,221.00f,2.24f);
         me->CombatStop();
         me->SetFlag(UNIT_FIELD_FLAGS,UNIT_FLAG_NOT_SELECTABLE);
       }
@@ -358,7 +358,7 @@ public:
               case NPC_KING_A:
                 //      npc_medivh->Say(SAY_PLAYER_WIN,LANG_UNIVERSAL,NULL);
                 instance->SetData(TYPE_CHESS,DONE);
-                npc_medivh->SummonGameObject(DUST_COVERED_CHEST,-11058,-1903,221,2.24,0,0,0,0,7200000);
+                npc_medivh->SummonGameObject(DUST_COVERED_CHEST,-11058.00f,-1903.00f,221.00f,2.24f,0,0,0,0,7200000);
                 break;
               default:
                 break;

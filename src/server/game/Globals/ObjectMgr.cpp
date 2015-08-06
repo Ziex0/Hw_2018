@@ -7058,6 +7058,33 @@ void ObjectMgr::LoadQuestPOI()
     sLog->outInfo(LOG_FILTER_SERVER_LOADING, ">> Loaded %u quest POI definitions in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
 }
 
+void ObjectMgr::LoadChatFilter()
+{
+    uint32 oldMSTime = getMSTime();
+
+    _chatFilterStore.clear();
+
+    QueryResult result = CharacterDatabase.Query("SELECT word, punishment FROM chat_filter");
+
+    if (!result)
+    {
+        sLog->outInfo(LOG_FILTER_CHATSYS, ">> Loaded 0 ChatFilter words. DB table `chat_filter` is empty.");
+        return;
+    }
+
+    uint32 count = 0;
+
+    do
+    {
+        _chatFilterStore.push_back(std::make_pair((*result)[0].GetString(), (*result)[1].GetUInt32()));
+        count++;
+    }
+    while (result->NextRow());
+
+    sLog->outInfo(LOG_FILTER_CHATSYS, ">> Loaded %u chat filter words in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
+}
+
+
 void ObjectMgr::LoadNPCSpellClickSpells()
 {
     uint32 oldMSTime = getMSTime();

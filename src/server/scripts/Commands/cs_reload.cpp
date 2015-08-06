@@ -158,7 +158,7 @@ public:
             { "waypoint_data",                SEC_ADMINISTRATOR, true,  &HandleReloadWpCommand,                         "", NULL },
             { "vehicle_accessory",            SEC_ADMINISTRATOR, true,  &HandleReloadVehicleAccessoryCommand,           "", NULL },
             { "vehicle_template_accessory",   SEC_ADMINISTRATOR, true,  &HandleReloadVehicleTemplateAccessoryCommand,   "", NULL },
-			//{ "chat_filter",                  SEC_ADMINISTRATOR, true,  &HandleReloadLoadChatFilterCommand,             "", NULL }, //Zie
+			{ "chat_filter",                  SEC_ADMINISTRATOR, true,  &HandleReloadLoadChatFilterCommand,             "", NULL }, //Zie
 			{ "item_template",				  SEC_ADMINISTRATOR, true,  &HandleReloadItemTemplateCommand,				"", NULL }, // Difer
             { NULL,                           0,                 false, NULL,                                           "", NULL }
         };
@@ -205,6 +205,8 @@ public:
         HandleReloadVehicleTemplateAccessoryCommand(handler, "");
 
         HandleReloadAutobroadcastCommand(handler, "");
+		
+		HandleReloadLoadChatFilterCommand(handler, "");
         return true;
     }
 	
@@ -213,6 +215,15 @@ public:
 	    
         sObjectMgr->LoadItemTemplates();
         handler->SendGlobalGMSysMessage("Item_template has been reloaded!");
+        return true;
+    }
+	
+	
+    static bool HandleReloadLoadChatFilterCommand(ChatHandler* handler, char const* /*args*/)
+    {
+        //sLog->outInfo("Reloading chat_filter table...");
+        sObjectMgr->LoadChatFilter();
+        handler->SendGlobalGMSysMessage("Chat Filter words reloaded.");
         return true;
     }
 

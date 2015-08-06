@@ -690,6 +690,8 @@ class ObjectMgr
         typedef UNORDERED_MAP<uint32, PointOfInterest> PointOfInterestContainer;
 
         typedef std::vector<std::string> ScriptNameContainer;
+		
+		typedef std::vector<std::pair<std::string, uint32> > ChatFilterContainer;
 
         typedef std::map<uint32, uint32> CharacterConversionMap;
 		
@@ -979,6 +981,9 @@ class ObjectMgr
         void LoadQuestPOI();
 
         void LoadNPCSpellClickSpells();
+		
+		void LoadChatFilter();
+        ChatFilterContainer& GetCensoredWords() { return _chatFilterStore; }
 
         void LoadCreatureOutfits();
         void LoadGameTele();
@@ -1311,6 +1316,8 @@ class ObjectMgr
         ScriptNameContainer _scriptNamesStore;
 
         SpellClickInfoContainer _spellClickInfoStore;
+		
+		ChatFilterContainer _chatFilterStore;
 
         SpellScriptsContainer _spellScriptsStore;
 
