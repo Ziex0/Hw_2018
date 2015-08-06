@@ -423,7 +423,7 @@ class Vote_rewarder : public CreatureScript
                 return true;
                 break;
             case 4901:
-                AddItem(player, pCreature, 340007,1,55);
+                AddItem(player, pCreature, 985467,1,55);
                 break;
 			case 4902:
 				AddItem(player, pCreature, 340009,1,45);
