@@ -54,7 +54,7 @@ class premium_rate : public CreatureScript
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2 for 1 month - 11 DP", GOSSIP_SENDER_MAIN, 6000);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2 for 3 months - 21 DP", GOSSIP_SENDER_MAIN, 7000);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2 for 9 months -  33 DP", GOSSIP_SENDER_MAIN, 8000);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2 Permanent -  45 DP", GOSSIP_SENDER_MAIN, 9000);
+			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSet me to premium Rank 2 Permanent -  45 DP", GOSSIP_SENDER_MAIN, 9000);
 			
 			// Show Donate and Voting Points when GossipHello
 				points << "My Donation Points: " << SelectDPoints(pPlayer);
