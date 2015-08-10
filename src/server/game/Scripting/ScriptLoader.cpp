@@ -1406,6 +1406,7 @@ void AddBattlegroundScripts()
 	void AddSC_RaceChanger();
 	void AddSC_guildmaster();
 	void AddSC_chat_filter_playerscript();
+	void AddSC_Vip_Access();
 
 #endif
 
@@ -1516,6 +1517,7 @@ void AddCustomScripts()
 	AddSC_RaceChanger();
 	AddSC_guildmaster();
 	AddSC_chat_filter_playerscript();
+	AddSC_Vip_Access();
 
 #endif
 }
