@@ -2622,7 +2622,6 @@ public:
             player->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
 
             // if player class = hunter || warlock remove pet if alive
-            // Custom - Allow Druid, Paladin and Warrior to have / tame pets like Hunters
             if ((player->getClass() == CLASS_HUNTER) || (player->getClass() == CLASS_WARLOCK) || (player->getClass() == CLASS_DRUID) || (player->getClass() == CLASS_PALADIN) || (player->getClass() == CLASS_WARRIOR))
             {
                 if (Pet* pet = player->GetPet())
