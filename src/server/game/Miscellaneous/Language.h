@@ -1209,6 +1209,7 @@ enum TrinityStrings
     LANG_OPVP_CA_KILLED_N_BOSS_A       		= 16006,
     LANG_OPVP_CA_KILLED_N_BOSS_H        	= 16007,
 	LANG_SPELL_NOT_ALLOWED        			= 16008,
+	LANG_VIP_TIME			       			= 16009,
 	
 
 

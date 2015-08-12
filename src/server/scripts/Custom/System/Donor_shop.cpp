@@ -96,7 +96,7 @@ class donorrewarder : public CreatureScript
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rPremium Rank 2 Token", GOSSIP_SENDER_MAIN, 4000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Tabard - 7 Dp", GOSSIP_SENDER_MAIN, 10000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Cloak - 10 DP", GOSSIP_SENDER_MAIN, 11000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Set - 30 DP ( 8 Pieces )", GOSSIP_SENDER_MAIN, 12000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Set - 23 DP ( 8 Pieces )", GOSSIP_SENDER_MAIN, 12000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Royal Weapons", GOSSIP_SENDER_MAIN, 32000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Heaven Gems 5 DP - 3 Gems", GOSSIP_SENDER_MAIN, 5100);
@@ -804,43 +804,60 @@ class donorrewarder : public CreatureScript
 			  default: break;
 			  }
 			  break;
-			 case 12000: // donors set
+			  
+			case 12000: // donors set
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Druid Melee Set", GOSSIP_SENDER_MAIN, 12001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Druid Caster Set", GOSSIP_SENDER_MAIN, 12002);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Melee Set", GOSSIP_SENDER_MAIN, 12003);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Caster Set", GOSSIP_SENDER_MAIN, 12004);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(90702, pCreature->GetGUID());
+                return true;
+                break;
+				
+				case 12001:
+							AddItem(player, pCreature, 320276,1,23);
+						   break;
+				case 12002:
+							AddItem(player, pCreature, 320293,1,23);
+						   break;
+				case 12003:
+							AddItem(player, pCreature, 320275,1,23);
+							break;
+				case 12004:
+							AddItem(player, pCreature, 320294,1,23);
+							break;
+							
 			  switch(player->getClass())
-			  {
-			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 320268,1,30);
-				  break;
-			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 320267,1,30);
-				  break;
-			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 320271,1,30);
-				 break;
-			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 320270,1,30);
-				 break;
-			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 320273,1,30);
-				  break;
-			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 320269,1,30);
-					 break;
-			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 320275,1,30);
-				  break;
-			  case CLASS_MAGE:
-					AddItem(player, pCreature, 320272,1,30);
-				  break;
-			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 320274,1,30);
-				  break;
-			  case CLASS_DRUID:
-					AddItem(player, pCreature, 320276,1,30);
-				   break;
-
-			  default: break;
-			  }
-			  break;
+				{
+					  case CLASS_WARRIOR:
+							AddItem(player, pCreature, 320268,1,23);
+						  break;
+					  case CLASS_PALADIN:
+							AddItem(player, pCreature, 320267,1,23);
+						  break;
+					  case CLASS_HUNTER:
+							AddItem(player, pCreature, 320271,1,23);
+						 break;
+					  case CLASS_ROGUE:
+							AddItem(player, pCreature, 320270,1,23);
+						 break;
+					  case CLASS_PRIEST:
+							AddItem(player, pCreature, 320273,1,23);
+						  break;
+					  case CLASS_DEATH_KNIGHT:
+							AddItem(player, pCreature, 320269,1,23);
+							 break;
+					  case CLASS_MAGE:
+							AddItem(player, pCreature, 320272,1,23);
+						  break;
+					  case CLASS_WARLOCK:
+							AddItem(player, pCreature, 320274,1,23);
+						  break;
+					  
+					default: break;
+				}
+				break;
 			  
 			case 14000: // cross weapon skill
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Sword Weapon Skill - 10 DP", GOSSIP_SENDER_MAIN, 14001);

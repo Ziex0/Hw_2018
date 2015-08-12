@@ -34,6 +34,7 @@ public:
 				{ "lk",        		SEC_PLAYER,  false, &HandleDoTeleCommand,     				"", NULL },
 				{ "combat", 		SEC_PLAYER,  false, &HandleCombatStopCommand, 				"", NULL },
 				{ "song",        	SEC_VIP,  	 false, &HandleDoSongCommand,     				"", NULL },
+				//( "time",			SEC_VIP,  	 false, &HandleVIPTimeCommand,     				"", NULL },
 				{ NULL,             0,                  false, NULL,                            "", NULL }
 		
 		};
@@ -72,6 +73,11 @@ public:
         Player* me = handler->GetSession()->GetPlayer();
 
             me->Say("Do command?", LANG_UNIVERSAL);
+            return true;
+    }
+	
+	static bool HandleVIPTimeCommand(ChatHandler* handler, const char* args)
+    {
             return true;
     }
 	

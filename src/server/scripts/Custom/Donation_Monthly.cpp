@@ -1,18 +1,8 @@
-/////////////////////////////////////////////////////////////////////////////
-//        ____        __  __  __     ___                                   //
-//       / __ )____ _/ /_/ /_/ /__  /   |  ________  ____  ____ ______     //
-//      / __  / __ `/ __/ __/ / _ \/ /| | / ___/ _ \/ __ \/ __ `/ ___/     //
-//     / /_/ / /_/ / /_/ /_/ /  __/ ___ |/ /  /  __/ / / / /_/ (__  )      //
-//    /_____/\__,_/\__/\__/_/\___/_/  |_/_/   \___/_/ /_/\__,_/____/       //
-//         Developed by Natureknight for BattleArenas.no-ip.org            //
-//             Copyright (C) 2015 Natureknight/JessiqueBA                  //
-//                      battlearenas.no-ip.org                             //
-/////////////////////////////////////////////////////////////////////////////
-
 #include "ScriptPCH.h"
 
 // IMPORTANT: Write your definitions here:
-static std::string website = "web_db";       // FusionCMS database name
+static std::string website = "web_db"; 
+static std::string times = "db_char";    // FusionCMS database name
 
 // DONATION POINTS PRICES:
 static uint32 oneMonthVipPrice = 7;               // VIP account price for 1 month (in donation points) (Default: 30 donate points)
@@ -42,10 +32,26 @@ public:
 
 		return dp;
 	}
+	
+	uint32 SelectTime(Player* pPlayer)
+	{
+		QueryResult select = LoginDatabase.PQuery("SELECT purchaseTime FROM %s.vip_conditions WHERE accountId = '%u'", times.c_str(), pPlayer->GetSession()->GetAccountId());
+		if (!select) // Just in case, but should not happen
+		{
+			pPlayer->CLOSE_GOSSIP_MENU();
+			return 0;
+		}
+
+		Field* fields = select->Fetch();
+		uint32 purchaseTime = fields[0].GetUInt32();
+
+		return purchaseTime;
+	}
 
 	bool OnGossipHello(Player * pPlayer, Creature * pCreature)
 	{
 		std::stringstream points;
+		std::stringstream times;
 
 		// Prevent exploiting the FusionCMS donate points
 		if (pPlayer->GetSession()->GetSecurity() < 3 && SelectDPoints(pPlayer) > 200)
@@ -87,6 +93,11 @@ public:
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, points.str().c_str(), GOSSIP_SENDER_MAIN, 100);
 		pPlayer->SEND_GOSSIP_MENU(60031, pCreature->GetGUID());
 		return true;
+		
+		times << "My V.I.P Remaining: " << SelectTime(pPlayer);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, times.str().c_str(), GOSSIP_SENDER_MAIN, 101);
+		pPlayer->SEND_GOSSIP_MENU(60031, pCreature->GetGUID());
+		return true;
 	}
 
 	bool OnGossipSelect(Player * pPlayer, Creature * pCreature, uint32 sender, uint32 uiAction)
@@ -97,6 +108,7 @@ public:
 			return false;
 
 		uint32 dp = SelectDPoints(pPlayer);
+		uint32 purchaseTime = SelectTime(pPlayer);
 
 		switch(uiAction)
 		{
@@ -126,10 +138,10 @@ public:
                 return true;
                 break;
 				
-		case 1: // Vip accounts - LOCKED
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "This |cffFF0000Premium|r rank same like |cffFF0000Premium|r permanent.. Custom Commands.. Free |cffFF0000Premium|r set.. |cffFF0000Premium|r use timer.. There you can choose how long you want be Premium rank on Server, or you can Get Permanent :)", GOSSIP_SENDER_MAIN, 1000);
-			pPlayer->SEND_GOSSIP_MENU(60032, pCreature->GetGUID());
-			break;
+			case 1: // Vip accounts - LOCKED
+					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "This |cffFF0000Premium|r rank same like |cffFF0000Premium|r permanent.. Custom Commands.. Free |cffFF0000Premium|r set.. |cffFF0000Premium|r use timer.. There you can choose how long you want be Premium rank on Server, or you can Get Permanent :)", GOSSIP_SENDER_MAIN, 1000);
+					pPlayer->SEND_GOSSIP_MENU(60032, pCreature->GetGUID());
+					break;
 
 		case 21: // Vip account one month - unlocked
 			if (pPlayer->GetSession()->GetSecurity() >= 1)
