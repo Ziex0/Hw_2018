@@ -13,10 +13,10 @@ class Vip_Access: public PlayerScript
 {
 private:
     static const uint32 map = 530;
-	static const uint32 x = -266.1f;
-	static const uint32 y = 921.734f; //need add another gps w/out -
-	static const uint32 z = 84.3799f;
-	static const uint32 o = 0.582604f;
+	static const uint32 x = 6119.060059f;
+	static const uint32 y = 5665.311523f; //need add another gps w/out -
+	static const uint32 z = 5.151441f;
+	static const uint32 o = 1.027398f;
 	
 public:
     Vip_Access() : PlayerScript("Vip_Access") {}
