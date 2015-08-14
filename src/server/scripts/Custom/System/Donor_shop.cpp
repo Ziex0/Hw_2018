@@ -93,6 +93,7 @@ class donorrewarder : public CreatureScript
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDual Wield - 10 DP", GOSSIP_SENDER_MAIN, 30000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rTitan_Grip - 20 DP", GOSSIP_SENDER_MAIN, 20000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSpecial Items", GOSSIP_SENDER_MAIN, 5000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rRelics", GOSSIP_SENDER_MAIN, 6000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rPremium Rank 2 Token", GOSSIP_SENDER_MAIN, 4000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Tabard - 7 Dp", GOSSIP_SENDER_MAIN, 10000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Cloak - 10 DP", GOSSIP_SENDER_MAIN, 11000);
@@ -371,6 +372,29 @@ class donorrewarder : public CreatureScript
                 AddItem(player, pCreature,200228,1,9);
                 break;
 			
+			case 6000:
+                player->PlayerTalkClass->ClearMenus();
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen of Dragon Idol - 9 DP", GOSSIP_SENDER_MAIN, 6001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen of Dragon Totem - 9 DP", GOSSIP_SENDER_MAIN, 6002);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen of Dragon Sigil - 9 DP", GOSSIP_SENDER_MAIN, 6003);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen of Dragon Libram - 9 DP", GOSSIP_SENDER_MAIN, 6004);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
+                return true;
+                break;
+			
+			case 6001:
+                AddItem(player, pCreature,210004,1,9);
+                break;
+            case 6002:
+                AddItem(player, pCreature,210006,1,9);
+                break;
+            case 6003:
+                AddItem(player, pCreature,210002,1,9);
+				break;
+			case 6004:
+                AddItem(player, pCreature,210001,1,9);
+				break;
 				
             case 2002:
                 player->PlayerTalkClass->ClearMenus();
@@ -399,7 +423,7 @@ class donorrewarder : public CreatureScript
             case 2003:
                 player->PlayerTalkClass->ClearMenus();                
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Final Achievement Spell Staff of Donation- 15 DP", GOSSIP_SENDER_MAIN, 2301);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Final Achievement Feral Staff of Donation- 15 DP", GOSSIP_SENDER_MAIN, 2303);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Final Achievement Feral Staff of Donation- 15 DP", GOSSIP_SENDER_MAIN, 2302);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
                 return true;
@@ -810,6 +834,14 @@ class donorrewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Druid Caster Set", GOSSIP_SENDER_MAIN, 12002);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Melee Set", GOSSIP_SENDER_MAIN, 12003);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Caster Set", GOSSIP_SENDER_MAIN, 12004);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Paladin Set", GOSSIP_SENDER_MAIN, 12005);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Warrior Set", GOSSIP_SENDER_MAIN, 12006);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Death Knight Set", GOSSIP_SENDER_MAIN, 12007);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Hunter Set", GOSSIP_SENDER_MAIN, 12008);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Rogue Set", GOSSIP_SENDER_MAIN, 12009);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Priest Set", GOSSIP_SENDER_MAIN, 12010);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Mage Set", GOSSIP_SENDER_MAIN, 12011);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Shaman Warlock Set", GOSSIP_SENDER_MAIN, 12012);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(90702, pCreature->GetGUID());
                 return true;
@@ -827,37 +859,31 @@ class donorrewarder : public CreatureScript
 				case 12004:
 							AddItem(player, pCreature, 320294,1,23);
 							break;
-							
-			  switch(player->getClass())
-				{
-					  case CLASS_WARRIOR:
+										  
+					  case 12006:
 							AddItem(player, pCreature, 320268,1,23);
-						  break;
-					  case CLASS_PALADIN:
+							break;
+					  case 12005:
 							AddItem(player, pCreature, 320267,1,23);
-						  break;
-					  case CLASS_HUNTER:
+							break;
+					  case 12008:
 							AddItem(player, pCreature, 320271,1,23);
-						 break;
-					  case CLASS_ROGUE:
+							break;
+					  case 12009:
 							AddItem(player, pCreature, 320270,1,23);
-						 break;
-					  case CLASS_PRIEST:
+							break;
+					  case 12010:
 							AddItem(player, pCreature, 320273,1,23);
-						  break;
-					  case CLASS_DEATH_KNIGHT:
+							break;
+					  case 12007:
 							AddItem(player, pCreature, 320269,1,23);
-							 break;
-					  case CLASS_MAGE:
+							break;
+					  case 12011:
 							AddItem(player, pCreature, 320272,1,23);
 						  break;
-					  case CLASS_WARLOCK:
+					  case 12012:
 							AddItem(player, pCreature, 320274,1,23);
 						  break;
-					  
-					default: break;
-				}
-				break;
 			  
 			case 14000: // cross weapon skill
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate One Hand Sword Weapon Skill - 10 DP", GOSSIP_SENDER_MAIN, 14001);

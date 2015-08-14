@@ -23,7 +23,7 @@ public:
     
     void OnUpdateZone(Player* player, uint32 /*newZone*/, uint32 newArea)
     {
-        if (newArea == 3486 && player->GetSession()->GetSecurity() == SEC_PLAYER)
+        if (newArea == 3486 && newArea == 876 && player->GetSession()->GetSecurity() == SEC_PLAYER)
         {
             player->TeleportTo(map, x, y, z, o);
             ChatHandler(player->GetSession()).PSendSysMessage("|cffff6060[Information]:|r You are not allowed to be here, you aren't a VIP!|r!");

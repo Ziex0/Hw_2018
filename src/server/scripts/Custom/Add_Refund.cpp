@@ -15,6 +15,7 @@ class refundvendor : public CreatureScript
         {
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/icons/Spell_Shadow_Shadowform:25|tRefund: Donor Weapons", GOSSIP_SENDER_MAIN, 2000);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/icons/INV_Axe_113:25|tRefund: Rings/Trinkets/Amulets", GOSSIP_SENDER_MAIN, 3000);
+			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/icons/INV_Axe_113:25|tRefund: Rings/Trinkets/Amulets", GOSSIP_SENDER_MAIN, 4000);
 			
 			 pPlayer->PlayerTalkClass->SendGossipMenu(85006, pCreature->GetGUID());
 
@@ -83,7 +84,7 @@ class refundvendor : public CreatureScript
 			}
 			break;
 
-		case  2303:
+		case  2103:
 			if (pPlayer->HasItemCount(200180, 1))
 			{
 				pPlayer->DestroyItemCount(200180, 1, true);
@@ -248,9 +249,9 @@ class refundvendor : public CreatureScript
 			//end staves
 		case 2004:
 			pPlayer->PlayerTalkClass->ClearMenus();
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Bow  - 8 Dp", GOSSIP_SENDER_MAIN, 2005);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Gun  - 8 Dp", GOSSIP_SENDER_MAIN, 2006);
-			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Wand  - 6 Dp", GOSSIP_SENDER_MAIN, 2007);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Bow  - 8 Dp", GOSSIP_SENDER_MAIN, 2405);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Gun  - 8 Dp", GOSSIP_SENDER_MAIN, 2406);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Wand  - 6 Dp", GOSSIP_SENDER_MAIN, 2407);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: [Main Menu]", GOSSIP_SENDER_MAIN, 9999);
 			pPlayer->PlayerTalkClass->SendGossipMenu(85006, pCreature->GetGUID());
 			return true;

@@ -15,14 +15,6 @@
 #include "ScriptPCH.h"
 #include "Language.h"
 
-enum eTexts
-{
-	TEXT_ON_DANCE = -1700004,
-	TEXT_ON_SALUTE = -1700005,
-	TEXT_ON_SPIT = -1700006,
-	TEXT_ON_LAUGH = -1700007,
-	TEXT_ON_BYE = -1700008
-};
 
 enum eRidingSkills
 {
@@ -46,15 +38,11 @@ class universal_teleporter : public CreatureScript
 {
 public:
 	universal_teleporter()
-		: CreatureScript("universal_teleporter")
-	{
-	}
-
+		: CreatureScript("universal_teleporter") {}
+	
 	struct universal_teleporterAI : public ScriptedAI
 	{
-		universal_teleporterAI(Creature *c) : ScriptedAI(c)
-		{
-		}
+		universal_teleporterAI(Creature *c) : ScriptedAI(c) {}
 
 		void Reset()
 		{
@@ -66,7 +54,6 @@ public:
             me->GetMotionMaster()->Clear();
             ScriptedAI::EnterEvadeMode();
         }
-
 				void ReceiveEmote(Player *pPlayer, uint32 uiTextEmote)
 		{
 			if (pPlayer->isInCombat())
@@ -100,13 +87,13 @@ public:
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:24|t Dungeons ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 32);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:24|t Raids ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 79);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Zones ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 106);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Leveling Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8000);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_FeatsOfStrength_Gladiator_10:24|t Quest Location ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 310);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Custom Boss Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 710);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t Fusion Item Drop Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3810);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Coin_03:24|t I want free Mounts ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 177);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_FeatsOfStrength_Gladiator_10:24|t Event Zone->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 810);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Leveling Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8000);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Gold Farming", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9000);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t Custom Boss Zone ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 710);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "--|cffFF0000Advance Summon Boss Area--", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9710);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t |cffFF00DEChill Area--", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1110);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Professions ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 196);
