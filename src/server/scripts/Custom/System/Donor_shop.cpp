@@ -72,7 +72,7 @@ class donorrewarder : public CreatureScript
                     }
                     else
                     {
-                        sprintf(str,"Item can't be given maybe or maybe and maybe your bag is full or you already got the item!");
+                        sprintf(str,"Item can't be given check your bag is full or you already got the item!");
                         player->MonsterWhisper(str,player->GetGUID(),true);
                     }
 
