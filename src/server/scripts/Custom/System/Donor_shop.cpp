@@ -895,7 +895,7 @@ class donorrewarder : public CreatureScript
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Staff Weapon Skill - 30 DP ", GOSSIP_SENDER_MAIN, 14007);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Polearm Hand Sword Weapon Skill - 18 DP", GOSSIP_SENDER_MAIN, 14008);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Dagger Weapon Skill - 10 DP", GOSSIP_SENDER_MAIN, 14009);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Bow Weapon Skill - 10 DP", GOSSIP_SENDER_MAIN, 14013);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Bow Weapon Skill - 10 DP", GOSSIP_SENDER_MAIN, 14012);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Shield Skill - 10 DP", GOSSIP_SENDER_MAIN, 14011);
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Wand Weapon Skill - 15 DP", GOSSIP_SENDER_MAIN, 14012);
 			
@@ -931,7 +931,7 @@ class donorrewarder : public CreatureScript
 				case 14009:
 				AddItem(player, pCreature, 340022,1,10);
 				break;
-				case 140013:
+				case 140012:
 				AddItem(player, pCreature, 340023,1,10);
 				break;
 				case 140011: //shield

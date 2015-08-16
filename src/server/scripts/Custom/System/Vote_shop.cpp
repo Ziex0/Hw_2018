@@ -838,9 +838,7 @@ class Vote_rewarder : public CreatureScript
 				case 140011:
 				AddItem(player, pCreature, 340024,1,215);
 				break;
-				case 140012:
-				AddItem(player, pCreature, 1,1,215);
-				break;
+				
 				
 			case 9996:
                 if(player->HasItemCount(56808, 1))
