@@ -342,7 +342,7 @@ public:
 			player->SetDisplayId(DISPLAY_ID_HULKING);
 			{
 				CharacterDatabase.PExecute("DELETE FROM `character_morph` WHERE guid = %u;", player->GetGUID());
-				CharacterDatabase.PExecute("INSERT INTO `character_morph` (`guid`, `morph`) VALUES(%u, 50004);", player->GetGUID());
+				CharacterDatabase.PExecute("INSERT INTO `character_morph` (`guid`, `morph`) VALUES(%u, 55580);", player->GetGUID());
 				CharacterDatabase.PExecute("DELETE FROM `character_scale` WHERE guid = %u;", player->GetGUID());
 				CharacterDatabase.PExecute("INSERT INTO `character_scale` (`guid`, `scale`, `comment`) VALUES(%u, 0.80, 'hulking');", player->GetGUID());
 			}
