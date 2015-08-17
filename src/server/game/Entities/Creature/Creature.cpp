@@ -168,6 +168,7 @@ m_creatureInfo(NULL), m_creatureData(NULL), m_path_id(0), m_formation(NULL)
     ResetLootMode(); // restore default loot mode
     TriggerJustRespawned = false;
     m_isTempWorldObject = false;
+	m_lootGenerated = false;
 	
     //bot
     m_bot_owner = NULL;
@@ -1674,6 +1675,8 @@ void Creature::Respawn(bool force)
     }
 
     RemoveCorpse(false);
+	
+	m_lootGenerated = false;
 
     if (getDeathState() == DEAD)
     {

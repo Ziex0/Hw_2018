@@ -705,6 +705,8 @@ class Creature : public Unit, public GridObject<Creature>, public MapCreature
 
         bool m_isTempWorldObject; //true when possessed
 		
+		bool m_lootGenerated;
+		
 		//Bot commands
         Player* GetBotOwner() const { return m_bot_owner; }
         void SetBotOwner(Player* newowner) { m_bot_owner = newowner; }

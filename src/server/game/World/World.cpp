@@ -1271,6 +1271,15 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_WINTERGRASP_BATTLETIME] = ConfigMgr::GetIntDefault("Wintergrasp.BattleTimer", 30);
     m_int_configs[CONFIG_WINTERGRASP_NOBATTLETIME] = ConfigMgr::GetIntDefault("Wintergrasp.NoBattleTimer", 150);
     m_int_configs[CONFIG_WINTERGRASP_RESTART_AFTER_CRASH] = ConfigMgr::GetIntDefault("Wintergrasp.CrashRestartTimer", 10);
+	
+	    // Individual XP/loot rates
+    m_int_configs[CONFIG_VIP_XP_RATE_LEVEL_1] = ConfigMgr::GetIntDefault("Rate.XP.Vip.Level.1", 1);
+    m_int_configs[CONFIG_VIP_XP_RATE_LEVEL_2] = ConfigMgr::GetIntDefault("Rate.XP.Vip.Level.2", 1);
+
+
+    m_int_configs[CONFIG_VIP_LOOT_RATE_LEVEL_1] = ConfigMgr::GetIntDefault("Rate.Loot.Vip.Level.1", 1);
+    m_int_configs[CONFIG_VIP_LOOT_RATE_LEVEL_2] = ConfigMgr::GetIntDefault("Rate.Loot.Vip.Level.2", 1);
+
 	// Player haste cap
 	m_int_configs[CONFIG_PLAYER_HASTE_CAP] = ConfigMgr::GetIntDefault("Player.HasteCap", 0);
 	//Guild-Level-System

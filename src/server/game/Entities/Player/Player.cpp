@@ -923,7 +923,8 @@ Player::Player(WorldSession* session): Unit(true)
     _activeCheats = CHEAT_NONE;
     m_achievementMgr = new AchievementMgr(this);
     m_reputationMgr = new ReputationMgr(this);
-	
+	m_CustomXpRate = 1;
+    m_CustomLootRate = 1;
 	
 }
 
@@ -8345,7 +8346,7 @@ void Player::CheckAreaExploreAndOutdoor()
 				if(GetSession()->IsPremium())
                     XP *= sWorld->getRate(RATE_XP_EXPLORE_PREMIUM);
 
-
+				XP *= GetCustomXpRate();
                 GiveXP(XP, NULL);
                 SendExplorationExperience(area, XP);
             }
@@ -10581,6 +10582,46 @@ void Player::SendLoot(uint64 guid, LootType loot_type)
                     permission = NONE_PERMISSION;
             }
         }
+		
+        if( !creature->m_lootGenerated)
+        {
+            creature->m_lootGenerated = true;
+            if (Group* group = GetGroup())
+            {
+                uint32 viplevel = GetSession()->GetVipLevel();
+
+                std::string lootmethod;
+
+                switch (group->GetLootMethod())
+                {
+                   case MASTER_LOOT:
+                      lootmethod = "MasterLoot";
+                   break;
+                   case FREE_FOR_ALL:
+                      lootmethod = "FreeForAll";
+                   break;
+                   case ROUND_ROBIN:
+                      lootmethod = "RoundRobin";
+                   break;
+                   default:
+                      lootmethod = "GroupLoot";
+                   break;
+                }
+		    
+                std::ostringstream msgtoparty;
+				
+				if(viplevel >= 1)
+                   msgtoparty << "|cff00CCFFVip " << viplevel << "[" << GetName() << "] OpenLoot <" << creature->GetName() << ">" << " LootMethod: " << lootmethod << " ItemCount: " << loot->items.size();
+				else
+                   msgtoparty << "|cff00CCFFPlayer " << "[" << GetName() << "] OpenLoot <" << creature->GetName() << ">" << " LootMethod: " << lootmethod << " ItemCount: " << loot->items.size();
+
+                WorldPacket data;
+                ChatHandler(GetSession()).FillMessageData(&data, uint8(CHAT_MSG_SYSTEM), 0, NULL, msgtoparty.str().c_str());
+                group->BroadcastPacket(&data, false/*, group->GetMemberGroup(GetGUID())*/);
+            }
+        }
+
+        ChatHandler(GetSession()).PSendSysMessage("|cff00CCFF[LOOT] %u items", loot->items.size());
     }
 
     SetLootGUID(guid);
@@ -16836,7 +16877,7 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
     bool rewarded = (m_RewardedQuests.find(quest_id) != m_RewardedQuests.end());
 
     // Not give XP in case already completed once repeatable quest
-    uint32 XP = rewarded ? 0 : uint32(quest->XPValue(this)*sWorld->getRate(RATE_XP_QUEST) * (IsEventActive(sWorld->getIntConfig(CONFIG_RATE_XP_WEEKEND_EVID)) ? sWorld->getRate(RATE_XP_WEEKEND) : 1.0f));
+    uint32 XP = rewarded ? 0 : uint32(quest->XPValue(this)*sWorld->getRate(RATE_XP_QUEST) * GetCustomXpRate() * (IsEventActive(sWorld->getIntConfig(CONFIG_RATE_XP_WEEKEND_EVID)) ? sWorld->getRate(RATE_XP_WEEKEND) : 1.0f));
 
     // handle SPELL_AURA_MOD_XP_QUEST_PCT auras
     Unit::AuraEffectList const& ModXPPctAuras = GetAuraEffectsByType(SPELL_AURA_MOD_XP_QUEST_PCT);

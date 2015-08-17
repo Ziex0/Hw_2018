@@ -2361,6 +2361,12 @@ class Player : public Unit, public GridObject<Player>
         //! Return collision height sent to client
         float GetCollisionHeight(bool mounted) const;
 		
+		 void SetCustomXpRate(uint32 rate) { m_CustomXpRate = rate; }
+        uint32 GetCustomXpRate() const { return m_CustomXpRate; }
+
+        void SetCustomLootRate(uint32 rate) { m_CustomLootRate = rate; }
+        uint32 GetCustomLootRate() const { return m_CustomLootRate; }
+		
 		 /*********************************************************/
         /***                     BOT SYSTEM                    ***/
         /*********************************************************/
@@ -2762,6 +2768,9 @@ class Player : public Unit, public GridObject<Player>
         uint32 _pendingBindTimer;
 
         uint32 _activeCheats;
+		
+		uint32 m_CustomXpRate;
+        uint32 m_CustomLootRate;
 };
 
 void AddItemsSetItem(Player*player, Item* item);
