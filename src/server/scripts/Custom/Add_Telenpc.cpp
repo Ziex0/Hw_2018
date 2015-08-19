@@ -1597,7 +1597,7 @@ public:
 				break;
 			case GOSSIP_ACTION_INFO_DEF + 8911:
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo (530, -266.10f, 921.734f, 84.3799f, 0.582604f);
+				pPlayer->TeleportTo (1, 7446.92f, -1694.54f, 194.947f, 2.47001f);
 				break;
 			case GOSSIP_ACTION_INFO_DEF + 8912:
 				pPlayer->CLOSE_GOSSIP_MENU();
