@@ -1172,7 +1172,7 @@ public:
             case 1460:                                          //Unger Statforth
             case 2357:                                          //Merideth Carlson
             case 4885:                                          //Gregor MacVince
-                if (player->GetReputationRank(72) != REP_EXALTED && race != RACE_HUMAN && race != RACE_ICE_TROLL)
+                if (player->GetReputationRank(72) != REP_EXALTED && race != RACE_HUMAN && race != RACE_ICE_TROLL && race != RACE_WORGEN)
                     player->SEND_GOSSIP_MENU(5855, creature->GetGUID());
                 else canBuy = true;
                 break;

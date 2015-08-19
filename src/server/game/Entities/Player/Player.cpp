@@ -3500,8 +3500,8 @@ void Player::CreateNPCBot(uint8 bot_class)
     {
         case RACE_NONE:
         case RACE_HUMAN:
-			case RACE_ICE_TROLL:
-				case RACE_WORGEN:
+		case RACE_ICE_TROLL:
+		case RACE_WORGEN:
         case RACE_DWARF:
         case RACE_NIGHTELF:
         case RACE_GNOME:
@@ -3514,7 +3514,7 @@ void Player::CreateNPCBot(uint8 bot_class)
             break;
 
         case RACE_ORC:
-			case RACE_GOBLIN:
+		case RACE_GOBLIN:
         case RACE_UNDEAD_PLAYER:
         case RACE_TAUREN:
         case RACE_TROLL:

@@ -1649,6 +1649,9 @@ public:
 			case RACE_ICE_TROLL:
                 raceStr = "Human";
                 break;
+			case RACE_WORGEN:
+                raceStr = "Human";
+                break;
             case RACE_ORC:
                 raceStr = "Orc";
                 break;

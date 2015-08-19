@@ -1905,8 +1905,7 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
 							// Human
                             case RACE_ICE_TROLL:
                                 target->SetDisplayId(target->getGender() == GENDER_MALE ? 10137 : 10138);
-                                break;
-							
+                                break;						
                             // Night Elf
                             case RACE_NIGHTELF:
                                 target->SetDisplayId(target->getGender() == GENDER_MALE ? 10143 : 10144);
