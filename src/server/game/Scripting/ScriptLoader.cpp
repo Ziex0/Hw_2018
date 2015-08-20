@@ -1339,7 +1339,6 @@ void AddBattlegroundScripts()
 	void AddSC_boss_bartimus();
 	void AddSC_universal_npc();
 	void AddSC_npc_1v1arena();
-	//void AddSC_premium_commandscript();
 	
 	//custom folder
 	void AddSC_vipcommands();
@@ -1449,7 +1448,6 @@ void AddCustomScripts()
 	AddSC_boss_bartimus();
 	AddSC_universal_npc();
 	AddSC_npc_1v1arena();
-	//AddSC_premium_commandscript();
 	
 	//custom folder
 	AddSC_vipcommands();

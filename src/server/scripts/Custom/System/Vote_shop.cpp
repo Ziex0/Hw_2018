@@ -95,6 +95,7 @@ class Vote_rewarder : public CreatureScript
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Tabard - 40 VP", GOSSIP_SENDER_MAIN, 10000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Cloak - 40 VP", GOSSIP_SENDER_MAIN, 11000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Shirt - 40 VP ", GOSSIP_SENDER_MAIN, 12000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tPortable Mailbox - 15 VP", GOSSIP_SENDER_MAIN, 5600);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tRoyal Donor Set, 8 Coin - 62 VP", GOSSIP_SENDER_MAIN, 13000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Royal Weapons", GOSSIP_SENDER_MAIN, 32000);
@@ -128,8 +129,10 @@ class Vote_rewarder : public CreatureScript
 						break;				
 				case 5100:
 					AddItem(player, pCreature,29765,3,5);
-				break;
-				
+						break;				
+				case 5600:
+					AddItem(player, pCreature,40768,1,15);
+						break;
 				case 20000:  //dual w
 					AddItem(player, pCreature, 505506,1,150);
 				break;

@@ -35,6 +35,7 @@ public:
 				{ "combat", 		SEC_PLAYER,  false, &HandleCombatStopCommand, 				"", NULL },
 				{ "song",        	SEC_VIP,  	 false, &HandleDoSongCommand,     				"", NULL },
 				//( "time",			SEC_VIP,  	 false, &HandleVIPTimeCommand,     				"", NULL },
+				{ "bank",  			SEC_PLAYER,  false, &HandlePremiumBankCommand,    			"", NULL },
 				{ NULL,             0,                  false, NULL,                            "", NULL }
 		
 		};
@@ -80,6 +81,25 @@ public:
     {
             return true;
     }
+	
+	static bool HandlePremiumBankCommand(ChatHandler* handler, char const* args)
+    {
+        Player *player = handler->GetSession()->GetPlayer();
+        //if (player->GetSession()->IsPremium() && sWorld->getBoolConfig(COMMAND_BANK_PREMIUM))
+        {
+            //Different Checks
+            if (player->isInCombat() || player->isInFlight() || player->GetMap()->IsBattlegroundOrArena() || player->HasStealthAura() || player->HasFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_FEIGN_DEATH) || player->isDead())
+            {
+                handler->SendSysMessage(LANG_PREMIUM_CANT_DO);
+                handler->SetSentErrorMessage(true);
+                return false;
+            }
+
+            handler->GetSession()->SendShowBank(handler->GetSession()->GetPlayer()->GetGUID());
+        }
+        return true;
+    }
+	
 	
 	static bool HandleDoSongCommand(ChatHandler* handler, char const* args)
     {
