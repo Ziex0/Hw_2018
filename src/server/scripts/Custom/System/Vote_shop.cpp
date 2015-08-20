@@ -309,28 +309,13 @@ class Vote_rewarder : public CreatureScript
                 player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
-            case 2301:
-                if(player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT || player->getClass() == CLASS_HUNTER) {
-				  char str[200];
-				  sprintf(str,"Your not a Caster, so you cant buy this item!");
-                player->MonsterWhisper(str,player->GetGUID(),true);
-                player->PlayerTalkClass->SendCloseGossip();
-                } else {
-                AddItem(player, pCreature,200069,1,50);
-                player->PlayerTalkClass->SendCloseGossip();
-						}
+            case 2301:                
+                AddItem(player, pCreature,200069,1,50);                
                 break;
 			
-            case 2302:
-                if(player->getClass() != CLASS_DRUID) {
-				  char str[200];
-				  sprintf(str,"Your not a Druid, so you cant buy this item!");
-                player->MonsterWhisper(str,player->GetGUID(),true);
-                player->PlayerTalkClass->SendCloseGossip();
-                } else {
+            case 2302:             
                 AddItem(player, pCreature,200231,1,50);
-                player->PlayerTalkClass->SendCloseGossip();
-						}
+                break;
                 
             case 2004:
                 player->PlayerTalkClass->ClearMenus();                

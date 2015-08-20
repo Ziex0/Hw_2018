@@ -258,10 +258,10 @@ class refundvendor : public CreatureScript
 			return true;
 			break;
 		case 2405: //bow
-			if (pPlayer->HasItemCount(200172, 1))
+			if (pPlayer->HasItemCount(34334, 1))
 			{
-				pPlayer->DestroyItemCount(200172, 1, true);
-				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200172);
+				pPlayer->DestroyItemCount(34334, 1, true);
+				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(34334);
 				LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 8 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PQuery("INSERT INTO web_db.refund (account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");

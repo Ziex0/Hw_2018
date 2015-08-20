@@ -8983,12 +8983,12 @@ void Player::UpdateZone(uint32 newZone, uint32 newArea)
     }
 	
 	 // Prevent players from accessing GM Island
-			if (sWorld->getBoolConfig(CONFIG_GMISLAND_PLAYERS_NOACCESS_ENABLE) == true)
+			if (sWorld->getBoolConfig(CONFIG_GMISLAND_PLAYERS_NOACCESS_ENABLE) == false)
 			{
 				if (newZone == 876 && AccountMgr::IsPlayerAccount(GetSession()->GetSecurity()))
 				{
 						uint32 map = 13;
-						double coords[4] = { 1.118799, 0.477914, -144.708650, 3.133046 }; // Jail Box
+						double coords[4] = { 1.118799f, 0.477914f, -144.708650f, 3.133046f }; // Jail Box
 						std::string config = ConfigMgr::GetStringDefault("GMIsland.TeleportTo", "");
 						if (config != "")
 				{
@@ -9007,20 +9007,20 @@ void Player::UpdateZone(uint32 newZone, uint32 newArea)
 					{
 					 sLog->outError(LOG_FILTER_GENERAL,"Error: Cannot set tele to GM Island (map: 876). Sending possible hacker to default location. (Jail Box)");
 						map = 13;
-						coords[0] = 1.118799; // x
-						coords[1] = 0.477914; // y
-						coords[2] = -144.708650; // z
-						coords[3] = 3.133046; // orientation
+						coords[0] = 1.118799f; // x
+						coords[1] = 0.477914f; // y
+						coords[2] = -144.708650f; // z
+						coords[3] = 3.133046f; // orientation
 					}
 					 sLog->outError(LOG_FILTER_GENERAL,"Player (GUID: %u) tried to access GM Island.", GetGUIDLow());
-				TeleportTo(map, coords[0], coords[1], coords[2], coords[3]); // Tele to Jail Box
+					TeleportTo(map, coords[0], coords[1], coords[2], coords[3]); // Tele to Jail Box
 					if (map == 13)
 					CastSpell(this, 9454, true); // Cast GM Freeze on player
 
 					if (sWorld->getBoolConfig(CONFIG_GMISLAND_BAN_ENABLE) == false)
 					{
 					 sLog->outError(LOG_FILTER_GENERAL,"Player (GUID: %u) tried to access GM Island. Banning Player Account.", GetGUIDLow());
-					 sWorld->BanAccount(BAN_ACCOUNT, this->GetName(), secsToTimeString(TimeStringToSecs("7d"), true).c_str(), "Being on GM Island", "Anticheat protection");
+					 sWorld->BanAccount(BAN_ACCOUNT, this->GetName(), secsToTimeString(TimeStringToSecs("1d"), true).c_str(), "Being on GM Island", "Anticheat protection");
 					}
 			}
 }

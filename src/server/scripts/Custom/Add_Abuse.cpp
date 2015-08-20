@@ -5,6 +5,10 @@
  *╚═╩╩═╩╩═╩══╩═╝╚═╝╚══╝
  *            www.emudevs.com
 */
+
+#include "ScriptPCH.h"
+#include "Language.h"
+
 struct PlayerAbuse
 {
     uint64 victimGUID;
