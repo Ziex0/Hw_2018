@@ -799,10 +799,19 @@ public:
 
 				break;
 			case GOSSIP_ACTION_INFO_DEF + 62:
+				if (pPlayer->HasItemCount( 320290, 500, false ))
+					{
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(571, 1219.72f, -4865.28f, 41.2479f, 0.313228f);
-
-				break;
+				pPlayer->TeleportTo(571, 6197.58f, 2622.15f, 570.25f, 2.01217f);
+				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
+					}
+				else
+                {
+                    pPlayer->CLOSE_GOSSIP_MENU();
+                    pCreature->MonsterWhisper("You need collect at last 500 Magic Card to get teleport", pPlayer->GetGUID());
+                    return false;
+                }
+                break;
 			case GOSSIP_ACTION_INFO_DEF + 63:
 			case GOSSIP_ACTION_INFO_DEF + 72:
 			case GOSSIP_ACTION_INFO_DEF + 101:
@@ -1482,7 +1491,6 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "SpiritStep", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 711);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Slithering Revenant", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 712);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "OffSet Gear Boss", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 713);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The fallen Boss (PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 714);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shadow Moon ( Daily Star Coins)(PVP Zone)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 715);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Shibuya ( World farm Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 716);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Iron Colossus ( World farm  Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 717);
@@ -1490,7 +1498,7 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Clyde the colossus ( World farm Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 719);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Frostfire General( World farm illusion Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 720);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Zealot ( Patch M required )", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 721);
-
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The fallen Boss ( World farm Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 722);
 				
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -1574,6 +1582,22 @@ public:
                 {
                     pPlayer->CLOSE_GOSSIP_MENU();
                     pCreature->MonsterWhisper("You need collect at last 500 Black Diamond to get teleport", pPlayer->GetGUID());
+                    return false;
+                }
+                break;
+			
+			//sc
+			case GOSSIP_ACTION_INFO_DEF + 722:
+				if (pPlayer->HasItemCount( 320290, 500, false ))
+					{
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(571, 6197.58f, 2622.15f, 570.25f, 2.01217f);
+				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
+					}
+				else
+                {
+                    pPlayer->CLOSE_GOSSIP_MENU();
+                    pCreature->MonsterWhisper("You need collect at last 500 Magic Card to get teleport", pPlayer->GetGUID());
                     return false;
                 }
                 break;

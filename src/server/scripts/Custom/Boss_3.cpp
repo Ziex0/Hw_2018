@@ -240,25 +240,7 @@ class npc_legion_master : public CreatureScript
                         break;
                     case EVENT_P4_MANA_DETONATION:
                     {
-                        // Select a random target in the threat list that has mana
-                        /*std::vector<Unit*> unitList;
-std::list<HostileReference*>& threatList = me->getThreatManager().getThreatList();
-for (std::list<HostileReference*>::const_iterator itr = threatList.begin(); itr != threatList.end(); ++itr)
-{
-if (Unit* target = Unit::GetUnit(*me, (*itr)->getUnitGuid()))
-if (target->GetCreateMana() > 0) // target has mana
-unitList.push_back(target);
-}
-
-if (!unitList.empty())
-{
-std::vector<Unit*>::const_iterator itr = unitList.begin();
-advance(itr, rand() % unitList.size());
-DoCast(*itr, SPELL_MANA_DETONATION);
-}
-
-events.ScheduleEvent(EVENT_P4_MANA_DETONATION, urand(20000, 40000), 0, PHASE_FOUR);
-break;*/
+                        
                     }
                     case EVENT_P5_FURY:
                         if (urand(0, 4) == 0) // 20% chance to increase damage
