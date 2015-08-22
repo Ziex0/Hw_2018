@@ -666,8 +666,8 @@ void Transmogrification::LoadConfig(bool reload)
     AllowArtifact = ConfigMgr::GetBoolDefault("Transmogrification.AllowArtifact", true);
     AllowHeirloom = ConfigMgr::GetBoolDefault("Transmogrification.AllowHeirloom", true);
 
-    AllowMixedArmorTypes = ConfigMgr::GetBoolDefault("Transmogrification.AllowMixedArmorTypes", 1);
-    AllowMixedWeaponTypes = ConfigMgr::GetBoolDefault("Transmogrification.AllowMixedWeaponTypes", 1);
+    AllowMixedArmorTypes = ConfigMgr::GetBoolDefault("Transmogrification.AllowMixedArmorTypes", true);
+    AllowMixedWeaponTypes = ConfigMgr::GetBoolDefault("Transmogrification.AllowMixedWeaponTypes", true);
 
     if (!sObjectMgr->GetItemTemplate(TokenEntry))
     {
