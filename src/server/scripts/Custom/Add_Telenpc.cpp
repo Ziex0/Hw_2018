@@ -802,7 +802,7 @@ public:
 				if (pPlayer->HasItemCount( 320290, 500, false ))
 					{
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(571, 6197.58f, 2622.15f, 570.25f, 2.01217f);
+				pPlayer->TeleportTo(571, 1215.265f, -4870.9096f, 41.248f, 6.1236f);
 				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
 					}
 				else
@@ -1498,7 +1498,7 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Clyde the colossus ( World farm Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 719);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Frostfire General( World farm illusion Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 720);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Zealot ( Patch M required )", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 721);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The fallen Boss ( World farm Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 722);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "The Fallen Boss ( World farm Boss)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 722);
 				
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -1591,7 +1591,7 @@ public:
 				if (pPlayer->HasItemCount( 320290, 500, false ))
 					{
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(571, 6197.58f, 2622.15f, 570.25f, 2.01217f);
+				pPlayer->TeleportTo(571, 6117.1440f, 2666.655f, 574.5975f, 2.0695f);
 				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
 					}
 				else

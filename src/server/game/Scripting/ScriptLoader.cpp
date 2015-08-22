@@ -1378,7 +1378,7 @@ void AddBattlegroundScripts()
 	void AddSC_BotQuests_chapter1();
 	//end Bots
 	void AddSC_npc_glyph_template();
-	void AddSC_vpredeem();
+	//void AddSC_vpredeem();
 	void AddSC_The_Fallen();
 	//void AddSC_Custom_Talent_Template();
 	void AddSC_refundvendor();
@@ -1487,7 +1487,7 @@ void AddCustomScripts()
     AddSC_BotQuests_chapter1();
     //end Bots
 	AddSC_npc_glyph_template();
-	AddSC_vpredeem();
+	//AddSC_vpredeem();
 	AddSC_The_Fallen();
 	//AddSC_Custom_Talent_Template();
 	AddSC_refundvendor();
