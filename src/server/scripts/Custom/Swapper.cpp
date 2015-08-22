@@ -136,10 +136,10 @@ public:
                 break;
 				
 			case 8: //SC
-                if (player->HasItemCount( 340006, 25, false ))
+                if (player->HasItemCount( 340006, 500, false ))
                 {
                     player->CLOSE_GOSSIP_MENU();
-                    player->DestroyItemCount(340006, 25, true, false);
+                    player->DestroyItemCount(340006, 500, true, false);
                     LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + 1 WHERE id = '%u'", player->GetSession()->GetAccountId());
                     _creature->MonsterWhisper("You exchanged successfully, now you got more 2 Donation point, Check your Points At menu!", player->GetGUID());
                 }
