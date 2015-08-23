@@ -422,8 +422,7 @@ public:
                     Glaive->InterruptNonMeleeSpells(true);
                     DoCast(me, SPELL_FLAME_ENRAGE, true);
                     DoResetThreat();
-                    Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0);
-                    if (target && target->isAlive())
+                    if (SelectTarget(SELECT_TARGET_RANDOM, 0))
                     {
                         me->AddThreat(me->getVictim(), 5000000.0f);
                         AttackStart(me->getVictim());
@@ -449,8 +448,8 @@ public:
 
             if (FlameBlastTimer <= diff)
             {
-                DoCastVictim(SPELL_BLAZE_SUMMON, true); // appear at victim
-                DoCastVictim(SPELL_FLAME_BLAST);
+                DoCast(me->getVictim(), SPELL_BLAZE_SUMMON, true); // appear at victim
+                DoCast(me->getVictim(), SPELL_FLAME_BLAST);
                 FlameBlastTimer = 15000; // 10000 is official-like?
                 DoZoneInCombat(); // in case someone is revived
             } else FlameBlastTimer -= diff;
@@ -1040,12 +1039,12 @@ public:
 
                 case EVENT_SHEAR:
                     // no longer exists in 3.0f.2
-                    // DoCastVictim(SPELL_SHEAR);
+                    // DoCast(me->getVictim(), SPELL_SHEAR);
                     Timer[EVENT_SHEAR] = 25000 + (rand()%16 * 1000);
                     break;
 
                 case EVENT_FLAME_CRASH:
-                    DoCastVictim(SPELL_FLAME_CRASH);
+                    DoCast(me->getVictim(), SPELL_FLAME_CRASH);
                     Timer[EVENT_FLAME_CRASH] = urand(30000, 40000);
                     break;
 
@@ -1062,7 +1061,7 @@ public:
                     break;
 
                 case EVENT_DRAW_SOUL:
-                    DoCastVictim(SPELL_DRAW_SOUL);
+                    DoCast(me->getVictim(), SPELL_DRAW_SOUL);
                     Timer[EVENT_DRAW_SOUL] = urand(50000, 60000);
                     break;
 
@@ -1131,7 +1130,7 @@ public:
                         me->GetMotionMaster()->MoveChase(me->getVictim(), 30);
                     else
                         me->GetMotionMaster()->MoveIdle();
-                    DoCastVictim(SPELL_SHADOW_BLAST);
+                    DoCast(me->getVictim(), SPELL_SHADOW_BLAST);
                     Timer[EVENT_SHADOW_BLAST] = 4000;
                     break;
                 case EVENT_SHADOWDEMON:
@@ -1341,7 +1340,7 @@ public:
                     }
                     break;
                 case EVENT_MAIEV_SHADOW_STRIKE:
-                    DoCastVictim(SPELL_SHADOW_STRIKE);
+                    DoCast(me->getVictim(), SPELL_SHADOW_STRIKE);
                     Timer[EVENT_MAIEV_SHADOW_STRIKE] = 60000;
                     break;
                 case EVENT_MAIEV_TRAP:
@@ -1355,7 +1354,7 @@ public:
                     {
                         if (!me->IsWithinDistInMap(me->getVictim(), 40))
                             me->GetMotionMaster()->MoveChase(me->getVictim(), 30);
-                        DoCastVictim(SPELL_THROW_DAGGER);
+                        DoCast(me->getVictim(), SPELL_THROW_DAGGER);
                         Timer[EVENT_MAIEV_THROW_DAGGER] = 2000;
                     }
                     break;
@@ -1778,7 +1777,7 @@ public:
                             EnterPhase(PHASE_TALK);
                         else
                         {
-                            DoCastVictim(SPELL_CHAIN_LIGHTNING);
+                            DoCast(me->getVictim(), SPELL_CHAIN_LIGHTNING);
                             Timer = 30000;
                         }
                     }
@@ -2150,7 +2149,7 @@ public:
                 target->RemoveAurasDueToSpell(SPELL_PARALYZE);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 /*diff*/)
         {
             if (!UpdateVictim())
                 return;
@@ -2162,12 +2161,12 @@ public:
             {
                 TargetGUID = me->getVictim()->GetGUID();
                 me->AddThreat(me->getVictim(), 10000000.0f);
-                DoCastVictim(SPELL_PURPLE_BEAM, true);
-                DoCastVictim(SPELL_PARALYZE, true);
+                DoCast(me->getVictim(), SPELL_PURPLE_BEAM, true);
+                DoCast(me->getVictim(), SPELL_PARALYZE, true);
             }
             // Kill our target if we're very close.
             if (me->IsWithinDistInMap(me->getVictim(), 3))
-                DoCastVictim(SPELL_CONSUME_SOUL);
+                DoCast(me->getVictim(), SPELL_CONSUME_SOUL);
         }
     };
 };
@@ -2248,7 +2247,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateA(uint32 diff)
         {
             if (!me->getVictim())
             {

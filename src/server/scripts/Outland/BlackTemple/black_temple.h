@@ -19,8 +19,6 @@
 #ifndef DEF_BLACK_TEMPLE_H
 #define DEF_BLACK_TEMPLE_H
 
-uint32 const EncounterCount         = 9;
-
 enum eTypes
 {
     DATA_AKAMA                      = 1,

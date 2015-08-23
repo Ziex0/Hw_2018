@@ -666,14 +666,14 @@ public:
 
             if (ArcaneExplosionTimer <= diff)
             {
-                DoCastVictim(SPELL_ARCANE_EXPLOSION);
+                DoCast(me->getVictim(), SPELL_ARCANE_EXPLOSION);
                 Cooldown = 1000;
                 ArcaneExplosionTimer = 14000;
             } else ArcaneExplosionTimer -= diff;
 
             if (ArcaneBoltTimer <= diff)
             {
-                DoCastVictim(SPELL_ARCANE_BOLT);
+                DoCast(me->getVictim(), SPELL_ARCANE_BOLT);
                 ArcaneBoltTimer = 3000;
                 Cooldown = 2000;
             } else ArcaneBoltTimer -= diff;
@@ -836,13 +836,13 @@ public:
             {
                 if (DeadlyPoisonTimer <= diff)
                 {
-                    DoCastVictim(SPELL_DEADLY_POISON);
+                    DoCast(me->getVictim(), SPELL_DEADLY_POISON);
                     DeadlyPoisonTimer = urand(15, 46) * 1000;
                 } else DeadlyPoisonTimer -= diff;
 
                 if (AppearEnvenomTimer <= diff)                   // Cast Envenom. This is cast 4 seconds after Vanish is over
                 {
-                    DoCastVictim(SPELL_ENVENOM);
+                    DoCast(me->getVictim(), SPELL_ENVENOM);
                     AppearEnvenomTimer = 90000;
                 } else AppearEnvenomTimer -= diff;
 
