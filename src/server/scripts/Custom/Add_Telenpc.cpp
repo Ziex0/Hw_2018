@@ -2596,6 +2596,8 @@ case GOSSIP_ACTION_INFO_DEF + 3007:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Inscription", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 204);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Cooking", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 205);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "First Aid", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 206);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Fishing", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 207);
+				
 
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8);
 
@@ -2681,12 +2683,16 @@ case GOSSIP_ACTION_INFO_DEF + 3007:
 				break;
 			case GOSSIP_ACTION_INFO_DEF + 205:
 				CompleteLearnProfession(pPlayer, pCreature, SKILL_COOKING);
-
 				pPlayer->CLOSE_GOSSIP_MENU();
 				break;
+				
 			case GOSSIP_ACTION_INFO_DEF + 206:
 				CompleteLearnProfession(pPlayer, pCreature, SKILL_FIRST_AID);
-
+				pPlayer->CLOSE_GOSSIP_MENU();
+				break;
+				
+			case GOSSIP_ACTION_INFO_DEF + 207:
+				CompleteLearnProfession(pPlayer, pCreature, SKILL_FISHING);
 				pPlayer->CLOSE_GOSSIP_MENU();
 				break;
 				

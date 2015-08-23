@@ -13,7 +13,7 @@ class vpredeem : public CreatureScript
 
         bool OnGossipHello(Player* pPlayer, Creature* pCreature)
         {
-            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Exchange my Star Coins", GOSSIP_SENDER_MAIN, 7000);
+            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Give me Upgrade Vote token", GOSSIP_SENDER_MAIN, 7000);
 			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Exchange my Demon Head", GOSSIP_SENDER_MAIN, 8000);
             
             pPlayer->PlayerTalkClass->SendGossipMenu(85007, pCreature->GetGUID());

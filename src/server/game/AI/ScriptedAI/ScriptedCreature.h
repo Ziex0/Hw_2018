@@ -144,7 +144,7 @@ struct ScriptedAI : public CreatureAI
     void DamageTaken(Unit* /*attacker*/, uint32& /*damage*/) {}
 
     //Called at World update tick
-    virtual void UpdateAI(uint32 diff);
+    virtual void UpdateAI(uint32 /*diff*/);
 
     //Called at creature death
     void JustDied(Unit* /*killer*/) {}
