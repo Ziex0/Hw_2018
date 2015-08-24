@@ -1591,7 +1591,7 @@ public:
 				if (pPlayer->HasItemCount( 320290, 500, false ))
 					{
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(571, 6117.1440f, 2666.655f, 574.5975f, 2.0695f);
+				pPlayer->TeleportTo(571, 6117.1127f, 2668.8349f, 574.4954f, 2.0310f);
 				pCreature->MonsterWhisper("Kill next Boss !!", pPlayer->GetGUID());
 					}
 				else
