@@ -86,7 +86,7 @@ class donorrewarder : public CreatureScript
         {
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/INV_Chest_Plate13:24|tHow much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSatria Donation Armor Token - 5 DP", GOSSIP_SENDER_MAIN, 4005);
+			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSatria Donation Armor Token - 5 DP", GOSSIP_SENDER_MAIN, 4005);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Weapons", GOSSIP_SENDER_MAIN, 2000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Shirts / Cloak / Tabard", GOSSIP_SENDER_MAIN, 300);
