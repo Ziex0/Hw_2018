@@ -36,12 +36,12 @@ public:
         }
         else
         {			
-            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 600 Demon Head to 10 Star Coin"         , GOSSIP_SENDER_MAIN, 3); //Change the ID below
-            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Demon Soul to 100 Golden Pearl"    , GOSSIP_SENDER_MAIN, 4); //Change the ID below
-            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Golden Pearl to 100 Black Diamond" , GOSSIP_SENDER_MAIN, 5); //Change the stats below
-            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Black Diamond to 100 Magic Card"   , GOSSIP_SENDER_MAIN, 6); //Change the stats below
-            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 1000 Magic Card to 30 SC"   			, GOSSIP_SENDER_MAIN, 7);
-			player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|tConvert 500 Star Coin to 1 Donation Points"   	, GOSSIP_SENDER_MAIN, 8);
+            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:24|tConvert 600 Demon Head to 10 Star Coin"         , GOSSIP_SENDER_MAIN, 3); //Change the ID below
+            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:24|tConvert 1000 Demon Soul to 100 Golden Pearl"    , GOSSIP_SENDER_MAIN, 4); //Change the ID below
+            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:24|tConvert 1000 Golden Pearl to 100 Black Diamond" , GOSSIP_SENDER_MAIN, 5); //Change the stats below
+            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:24|tConvert 1000 Black Diamond to 100 Magic Card"   , GOSSIP_SENDER_MAIN, 6); //Change the stats below
+            player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:24|tConvert 1000 Magic Card to 30 Star Coin"   			, GOSSIP_SENDER_MAIN, 7);
+			player->ADD_GOSSIP_ITEM( 4, "|cffADD8E6|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:24|tConvert 500 Star Coin to 1 Donation Points"   	, GOSSIP_SENDER_MAIN, 8);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Return.", GOSSIP_SENDER_MAIN, 9999);
 			player->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
         }

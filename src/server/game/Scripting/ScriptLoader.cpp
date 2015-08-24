@@ -1334,7 +1334,7 @@ void AddBattlegroundScripts()
 	void AddSC_npc_enchantment();
 	void AddSC_Packet_Protection();
 	void AddSC_CPWS_Transmogrification();
-	void AddSC_npc_Fusion();
+	void AddSC_npc_fusion();
 	void AddSC_summon_all_npc();
 	void AddSC_boss_bartimus();
 	void AddSC_universal_npc();
@@ -1443,7 +1443,7 @@ void AddCustomScripts()
 	AddSC_Packet_Protection();
 	AddSC_npc_enchantment();
 	AddSC_CPWS_Transmogrification();
-	AddSC_npc_Fusion();
+	AddSC_npc_fusion();
 	AddSC_summon_all_npc();
 	AddSC_boss_bartimus();
 	AddSC_universal_npc();
