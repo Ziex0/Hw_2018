@@ -590,7 +590,7 @@ uint32 ArenaTeam::GetPoints(uint32 memberRating)
     else if (Type == ARENA_TEAM_3v3)
         points *= 0.88f;
 	else if (Type == ARENA_TEAM_5v5) // 1v1 Arena
-        points *= sWorld->getFloatConfig(CONFIG_ARENA_1V1_ARENAPOINTS_MULTI);
+        points *= 0.99f;
 
     return (uint32) points;
 }

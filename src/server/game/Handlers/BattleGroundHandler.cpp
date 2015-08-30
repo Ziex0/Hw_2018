@@ -34,7 +34,6 @@
 #include "Opcodes.h"
 #include "DisableMgr.h"
 #include "Group.h"
-#include "../../scripts/Custom/npc_arena1v1.h"
 #include "Cfbg/Cfbg.h"
 
 void WorldSession::HandleBattlemasterHelloOpcode(WorldPacket& recvData)
@@ -438,10 +437,6 @@ void WorldSession::HandleBattleFieldPortOpcode(WorldPacket &recvData)
     {
         if (!_player->IsInvitedForBattlegroundQueueType(bgQueueTypeId))
             return;                                 // cheating?
-		
-		// 1v1 Arena. Player can't join arena when forbidden talents are used.
-        if(bgQueueTypeId == BATTLEGROUND_QUEUE_5v5 && Arena1v1CheckTalents(_player) == false)
-            return;
 
         if (!_player->InBattleground())
             _player->SetBattlegroundEntryPoint();
