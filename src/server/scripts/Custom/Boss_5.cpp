@@ -58,7 +58,7 @@ public:
                         events.ScheduleEvent(EVENT_FIREBALL, urand(6000, 11000));
                         break;
                     case EVENT_FIRE_SPIT:
-                        DoCast(me->GetVictim(), SPELL_FIRE_SPIT, true);
+                        DoCast(me->getVictim(), SPELL_FIRE_SPIT, true);
                         events.ScheduleEvent(EVENT_FIRE_SPIT, urand(2000, 9000));
                         break;
                     case EVENT_BLAST_NOVA:
