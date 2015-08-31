@@ -1,138 +1,146 @@
-/*
- *╔═╦═╦═╦╦╦══╦═╦╗─╔╦══╗ 
- *║╦╣║║║║║╠╗╗║╦╣╚╦╝║══╣
- *║╩╣║║║║║╠╩╝║╩╬╗║╔╬══║
- *╚═╩╩═╩╩═╩══╩═╝╚═╝╚══╝
- *           (http://emudevs.com)
- GameObject: (Burning Tree;191160)
- GameObject: (Burning Blaze;190570) - Deals Damage if near
- NPC DisplayID: 24905
-*/
-enum SpellIds
+//Vyran, The Nature Caller by Mi'rael//
+
+#include "ScriptPCH.h"
+#include "Language.h"
+
+enum Spells
 {
-/*     NAME                       SPELLID    CAST-TIME     DAMAGE   */
-    SPELL_FIREBALL               = 70282, //  3 sec       6198-7202
-    SPELL_FIRE_SPIT              = 66796, //  1 sec       5088-5912
-    SPELL_BLAST_NOVA             = 74392, //  2 sec       5688-7312
+	AHUNE = 45954,
+	SPELL_FIREBOLT = 20801,
+	SPELL_CHAINLIGHTNING = 39945,
+	SPELL_ENGRAGE = 8599,
+	SPELL_SCREAM = 13704,
+	SPELL_ACID = 33551,
+	SPELL_SOUL = 32057,
+	SPELL_CLEAVE = 31345
 };
 
-enum EventIds
-{
-    EVENT_NONE,
-    EVENT_FIREBALL,
-    EVENT_FIRE_SPIT,
-    EVENT_BLAST_NOVA,
-    EVENT_SPAWN_FIRE,
-    EVENT_SPAWN_FIRE_CLEANUP
-};
-
-class npc_battle : public CreatureScript
+class boss_Custom_5 : public CreatureScript
 {
 public:
-    npc_battle() : CreatureScript("npc_battle") { }
 
-    struct npc_battleAI : public ScriptedAI
-    {
-        npc_battleAI(Creature* creature) : ScriptedAI(creature) { }
+	boss_Custom_5()
+		: CreatureScript("boss_Custom_5"){}
 
-        void Reset()
-        {
-            events.Reset();
-            events.ScheduleEvent(EVENT_FIREBALL, urand(6000, 11000));
-            events.ScheduleEvent(EVENT_FIRE_SPIT, urand(2000, 9000));
-            events.ScheduleEvent(EVENT_BLAST_NOVA, urand(10000, 19000));
-            events.ScheduleEvent(EVENT_SPAWN_FIRE, urand(30000, 38000));
-        }
+	struct boss_Custom_5AI : public ScriptedAI
+	{
+		boss_Custom_5AI(Creature * c) : ScriptedAI(c){}
+		
+		uint32 AHUNE_Timer;
+		uint32 FIREBOLT_Timer;
+		uint32 CHAINLIGHTNING_Timer;
+		uint32 ENGRAGE_Timer;
+		uint32 SCREAM_Timer;
+		uint32 ACID_Timer;
+		uint32 SOUL_Timer;
+		uint32 CLEAVE_Timer;
 
-        void UpdateAI(uint32 diff)
-        {
-            events.Update(diff);
+		void Reset()
+		{
+			AHUNE_Timer = 4000;
+			FIREBOLT_Timer = 12000;
+			CHAINLIGHTNING_Timer = 18000;
+			ENGRAGE_Timer = 180000;
+			SCREAM_Timer = 20000;
+			ACID_Timer = 30000;
+			SOUL_Timer = 15000;
+			CLEAVE_Timer = 9000;
+		}
 
-            while (uint32 eventId = events.ExecuteEvent())
-            {
-                switch(eventId)
-                {
-                    case EVENT_FIREBALL:
-                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(target, SPELL_FIREBALL);
-                        events.ScheduleEvent(EVENT_FIREBALL, urand(6000, 11000));
-                        break;
-                    case EVENT_FIRE_SPIT:
-                        DoCast(me->getVictim(), SPELL_FIRE_SPIT, true);
-                        events.ScheduleEvent(EVENT_FIRE_SPIT, urand(2000, 9000));
-                        break;
-                    case EVENT_BLAST_NOVA:
-                        DoCast(SPELL_BLAST_NOVA);
-                        events.ScheduleEvent(EVENT_BLAST_NOVA, urand(10000, 19000));
-                        break;
-                    case EVENT_SPAWN_FIRE:
-                        me->MonsterYell("COME to MEEE !!!", LANG_UNIVERSAL, 0);
-                        events.ScheduleEvent(EVENT_SPAWN_FIRE, urand(30000, 38000));
-                        events.ScheduleEvent(EVENT_SPAWN_FIRE_CLEANUP, 15000);
-                        SpawnFire();
-                        break;
-                    case EVENT_SPAWN_FIRE_CLEANUP:
-                        ClearFire();
-                        break;
-                }
-            }
-            DoMeleeAttackIfReady();
-        }
+		void KilledUnit(Unit * /* killed */)
+		{
+			me->MonsterSay("The Power of Nature...is unlimited!", LANG_UNIVERSAL, 0);
+		}
 
-        void SpawnFire()
-        {
-            float x, y, z;
-            gameObjectTree = NULL;
-            gameObjectFire = NULL;
-            gameObjectFire2 = NULL;
-            gameObjectFire3 = NULL;
-            gameObjectFire4 = NULL;
-            // Getting Position
-            me->GetPosition(x, y, z);
-            // Start Spawning
-            gameObjectTree = me->SummonGameObject(191160, x, y, z, 0, 0, 0, 0, 0, 0);
-            gameObjectTreeFire = me->SummonGameObject(190570, gameObjectTree->GetPositionX(), gameObjectTree->GetPositionY(), gameObjectTree->GetPositionZ(), 0, 0, 0, 0, 0, 0);
-            gameObjectFire = me->SummonGameObject(190570, x, y + 10, z, 0, 0, 0, 0, 0, 0);
-            gameObjectFire2 = me->SummonGameObject(190570, x, y -10, z, 0, 0, 0, 0, 0, 0);
-            gameObjectFire3 = me->SummonGameObject(190570, x + 10, y, z, 0, 0, 0, 0, 0, 0);
-            gameObjectFire4 = me->SummonGameObject(190570, x - 10, y, z, 0, 0, 0, 0, 0, 0);
-        }
+		void JustDied(Unit * /* killer */)
+		{
+			me->MonsterYell("I can't...believe this...You won this time, but your journey is far from over!", LANG_UNIVERSAL, 0);
+		}
 
-        void ClearFire()
-        {
-            if (gameObjectTree && gameObjectTreeFire && gameObjectFire && gameObjectFire2 && gameObjectFire3 && gameObjectFire4)
-            {
-                gameObjectTree->Delete();
-                gameObjectTreeFire->Delete();
-                gameObjectFire->Delete();
-                gameObjectFire2->Delete();
-                gameObjectFire3->Delete();
-                gameObjectFire4->Delete();
-            }
-        }
+		void EnterCombat(Unit* /* who */)
+		{
+			me->MonsterYell("Who are you? You've made a terrible mistake. Now you will meet your DEATH!...", LANG_UNIVERSAL, 0);
+		}
 
-        void JustDied(Unit* /* victim */)
-        {
-            events.Reset();
-            ClearFire();
-        }
-    private:
-        EventMap events;
-        GameObject* gameObjectTree;
-        GameObject* gameObjectTreeFire;
-        GameObject* gameObjectFire;
-        GameObject* gameObjectFire2;
-        GameObject* gameObjectFire3;
-        GameObject* gameObjectFire4;
-    };
+		void UpdateAI(uint32 diff)
+		{
+			if (!UpdateVictim())
+				return;
+			if (AHUNE_Timer < diff)
+			{
+				DoCast(me->getVictim(), SPELL_FIREBOLT);
+				AHUNE_Timer = 4000;
+			}
 
-    CreatureAI* GetAI(Creature* creature) const
-    {
-        return new npc_battleAI(creature);
-    }
+			if (FIREBOLT_Timer < diff)
+			{
+				DoCast(me->getVictim(), SPELL_FIREBOLT);
+				FIREBOLT_Timer = 10000;
+			}
+			else
+				FIREBOLT_Timer -= diff;
+
+			if (CHAINLIGHTNING_Timer < diff)
+			{
+				DoCast(me->getVictim(), SPELL_CHAINLIGHTNING);
+				CHAINLIGHTNING_Timer = 12000;
+			}
+			else
+				CHAINLIGHTNING_Timer -= diff;
+
+			if (ENGRAGE_Timer < diff)
+			{
+				DoCast(me->getVictim(), SPELL_ENGRAGE);
+				ENGRAGE_Timer = 180000;
+			}
+			else
+				ENGRAGE_Timer -= diff;
+
+			if (SCREAM_Timer < diff)
+			{
+				DoCast(me->getVictim(), SPELL_SCREAM);
+				SCREAM_Timer = 20000;
+			}
+			else
+				SCREAM_Timer -= diff;
+
+			if (ACID_Timer < diff)
+			{
+				DoCast(me->getVictim(), SPELL_ACID);
+				ACID_Timer = 30000;
+			}
+			else
+				ACID_Timer -= diff;
+
+			if (SOUL_Timer < diff)
+			{
+				DoCast(me->getVictim(), SPELL_SOUL);
+				SOUL_Timer = 15000;
+			}
+			else
+				SOUL_Timer -= diff;
+
+			if (CLEAVE_Timer < diff)
+			{
+				DoCast(me->getVictim(), SPELL_CLEAVE);
+				CLEAVE_Timer = 9000;
+			}
+			else
+				CLEAVE_Timer -= diff;
+
+			DoMeleeAttackIfReady();
+
+		}
+	};
+
+	CreatureAI* GetAI(Creature* creature) const
+	{
+		return new boss_Custom_5AI(creature);
+	}
+
 };
 
-void AddSC_mini_fight()
+void AddSC_boss_Custom_5()
 {
-    new npc_battle;
+	new boss_Custom_5();
 }
