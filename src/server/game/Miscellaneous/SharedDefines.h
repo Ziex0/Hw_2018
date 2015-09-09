@@ -110,7 +110,7 @@ enum Classes
     CLASS_MAGE          = 8,
     CLASS_WARLOCK       = 9,
     CLASS_DARKPALADIN   = 10,
-    CLASS_DRUID         = 11,
+    CLASS_DRUID         = 11
 };
 
 // max+1 for player class
