@@ -25,8 +25,8 @@ public:
 
         {
 			{ "mall",          	 	 SEC_VIP,  false, &HandleVipMallCommand,         	"", NULL },
-			//{ "changerace",          SEC_VIP,  false, &HandleChangeRaceCommand,      	"", NULL },
-			//{ "changefaction",		 SEC_VIP,  false, &HandleChangeFactionCommand,		"", NULL },
+			{ "changerace",          SEC_VIP,  false, &HandleChangeRaceCommand,      	"", NULL },
+			{ "changefaction",		 SEC_VIP,  false, &HandleChangeFactionCommand,		"", NULL },
 			{ "maxskills",			 SEC_VIP,  false, &HandleMaxSkillsCommand,			"", NULL },
 			{ "customize",			 SEC_VIP,  false, &HandleCustomizeCommand,			"", NULL },
 			{ "buffs",      		 SEC_VIP,  false, &HandleBuffCommand,				"", NULL },

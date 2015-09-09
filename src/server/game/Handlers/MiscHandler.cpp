@@ -439,7 +439,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
     if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST) && displaycount < 49)
     {
         // Fake players on WHO LIST                            0,   1,    2,   3,    4,   5
-        //QueryResult result = CharacterDatabase.Query("SELECT name,race,class,level,zone,gender,guild FROM characters_fake WHERE HOUR(time_on) BETWEEN HOUR(NOW()) AND (HOUR(NOW())+3)");
+        //QueryResult result = CharacterDatabase.Query("SELECT name,race,class,level,zone,gender,guild FROM characters_fake WHERE HOUR(time_on) BETWEEN HOUR(NOW()) AND (HOUR(NOW())+17)");
 		QueryResult result = CharacterDatabase.Query("SELECT name,race,class,level,zone,gender,guild FROM characters_fake WHERE online > 1 AND level > 3 ");
         if (result)
         {
@@ -462,7 +462,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
                 data << uint8(gender);                      // player gender 
                 data << uint32(pzoneid);                    // player zone id 
  
-                if ((++matchcount) == 26) 
+                if ((++matchcount) == 23) 
                     break; 
             } 
 			while (result->NextRow()); 
