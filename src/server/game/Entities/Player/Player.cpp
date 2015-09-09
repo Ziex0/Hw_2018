@@ -2310,7 +2310,7 @@ bool Player::BuildEnumData(PreparedQueryResult result, WorldPacket* data)
 
     // show pet at selection character in character list only for non-ghost character
     // Custom - Allow Druid, Paladin and Warrior to have / tame pets like Hunters
-    if (result && !(playerFlags & PLAYER_FLAGS_GHOST) && (plrClass == CLASS_WARLOCK || plrClass == CLASS_HUNTER || plrClass == CLASS_DEATH_KNIGHT || plrClass == CLASS_DRUID || plrClass == CLASS_PALADIN || plrClass == CLASS_WARRIOR))
+    if (result && !(playerFlags & PLAYER_FLAGS_GHOST) && (plrClass == CLASS_WARLOCK || plrClass == CLASS_HUNTER || plrClass == CLASS_DEATH_KNIGHT || plrClass == CLASS_DRUID || plrClass == CLASS_PALADIN || plrClass == CLASS_DARKPALADIN|| plrClass == CLASS_WARRIOR))
     {
         uint32 entry = fields[16].GetUInt32();
         CreatureTemplate const* creatureInfo = sObjectMgr->GetCreatureTemplate(entry);
@@ -3478,6 +3478,8 @@ void Player::CreateNPCBot(uint8 bot_class)
         case CLASS_WARRIOR:
             classStr << "warrior_bot";      break;
         case CLASS_PALADIN:
+            classStr << "paladin_bot";      break;
+		case CLASS_DARKPALADIN:
             classStr << "paladin_bot";      break;
         case CLASS_HUNTER:
             classStr << "hunter_bot";       break;
@@ -7199,7 +7201,8 @@ void Player::GetDodgeFromAgility(float &diminishing, float &nondiminishing)
          0.036587f, // Mage
          0.024211f, // Warlock
          0.0f,      // ??
-         0.056097f  // Druid
+         0.056097f,  // Druid
+		 0.034943f  // darkPaladin
     };
     // Crit/agility to dodge/agility coefficient multipliers; 3.2.0 increased required agility by 15%
     const float crit_to_dodge[MAX_CLASSES] =
@@ -7214,6 +7217,7 @@ void Player::GetDodgeFromAgility(float &diminishing, float &nondiminishing)
          1.00f/1.15f,    // Mage
          0.97f/1.15f,    // Warlock (?)
          0.0f,           // ??
+		 1.00f/1.15f,    // darkPaladin
          2.00f/1.15f     // Druid
     };
 
@@ -13639,7 +13643,7 @@ InventoryResult Player::CanRollForItemInLFG(ItemTemplate const* proto, WorldObje
             if (proto->SubClass != ITEM_SUBCLASS_ARMOR_LEATHER)
                 return EQUIP_ERR_CANT_DO_RIGHT_NOW;
 
-        if (_class == CLASS_MAGE || _class == CLASS_PRIEST || _class == CLASS_WARLOCK)
+        if (_class == CLASS_DARKPALADIN ||_class == CLASS_MAGE || _class == CLASS_PRIEST || _class == CLASS_WARLOCK)
             if (proto->SubClass != ITEM_SUBCLASS_ARMOR_CLOTH)
                 return EQUIP_ERR_CANT_DO_RIGHT_NOW;
     }
