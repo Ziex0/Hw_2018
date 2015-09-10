@@ -1406,6 +1406,7 @@ void AddBattlegroundScripts()
 	void AddSC_chat_filter_playerscript();
 	void AddSC_Vip_Access();
 	void AddSC_cta_npc();
+	void AddSC_Boss_Announcer();
 
 #endif
 
@@ -1516,6 +1517,7 @@ void AddCustomScripts()
 	AddSC_chat_filter_playerscript();
 	AddSC_Vip_Access();
 	AddSC_cta_npc();
+	AddSC_Boss_Announcer();
 
 #endif
 }
