@@ -139,6 +139,7 @@ public:
                 break;
 				
 		case 1: // Vip accounts - LOCKED
+			case 1: // Vip accounts - LOCKED
 					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "This |cffFF0000Premium|r rank same like |cffFF0000Premium|r permanent.. Custom Commands.. Free |cffFF0000Premium|r set.. |cffFF0000Premium|r use timer.. There you can choose how long you want be Premium rank on Server, or you can Get Permanent :)", GOSSIP_SENDER_MAIN, 1000);
 					pPlayer->SEND_GOSSIP_MENU(60032, pCreature->GetGUID());
 					break;
@@ -230,6 +231,7 @@ public:
 				LoginDatabase.PExecute("UPDATE %s.account_data SET dp = '%u' -%u WHERE id = '%u'", website.c_str(), dp, permaMonthsVipPrice, pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("DELETE FROM account_access WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '-1')", pPlayer->GetSession()->GetAccountId());
+				CharacterDatabase.PExecute("INSERT INTO vip_monthly_report (`account_id`, `char_use`, `Perma`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
 				// Set the correct date timestamp and start the 1 month counter
 				CharacterDatabase.PExecute("DELETE FROM `vip_conditions` WHERE `accountId` = '%u'", pPlayer->GetSession()->GetAccountId()); // Overwrite
 				//LoginDatabase.PExecute("REPLACE INTO account_premium (`id`, `setdate`, `unsetdate`, `Premium_type`, `active`) VALUES ('%u', '%u', '%u', '1', '1')", pPlayer->GetSession()->GetAccountId());

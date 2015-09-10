@@ -236,7 +236,7 @@ float Player::GetHealthBonusFromStamina()
     float baseStam = std::min(20.0f, stamina);
     float moreStam = stamina - baseStam;
 
-    return baseStam + (moreStam*15.0f);
+    return baseStam + (moreStam*20.0f);
 }
 
 float Player::GetManaBonusFromIntellect()

@@ -234,6 +234,8 @@ void ChatHandler::SendCustomOfficerChat(const char* message)
         classStr = "|TInterface\\ICONS\\inv_sword_27:14:14:0:-1|t";
     else if (pPlayer->getClass() == CLASS_PALADIN)
         classStr = "|TInterface\\ICONS\\ability_thunderbolt:14:14:0:-1|t";
+	else if (pPlayer->getClass() == CLASS_DARKPALADIN)
+        classStr = "|TInterface\\ICONS\\ability_thunderbolt:14:14:0:-1|t";
     else if(pPlayer->getClass() == CLASS_HUNTER)
         classStr = "|TInterface\\ICONS\\inv_weapon_bow_07:14:14:0:-1|t";
     else if(pPlayer->getClass() == CLASS_ROGUE)

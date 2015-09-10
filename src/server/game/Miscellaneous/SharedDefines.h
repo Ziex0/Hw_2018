@@ -109,12 +109,12 @@ enum Classes
     CLASS_SHAMAN        = 7,
     CLASS_MAGE          = 8,
     CLASS_WARLOCK       = 9,
-    //CLASS_UNK           = 10,
+    CLASS_DARKPALADIN   = 10,
     CLASS_DRUID         = 11
 };
 
 // max+1 for player class
-#define MAX_CLASSES       12
+#define MAX_CLASSES       13
 
 #define CLASSMASK_ALL_PLAYABLE \
 	((1<<(CLASS_WARRIOR-1)) 	| \
@@ -126,6 +126,7 @@ enum Classes
 	(1<<(CLASS_SHAMAN-1)) 		| \
 	(1<<(CLASS_MAGE-1)) 		| \
 	(1<<(CLASS_WARLOCK-1)) 		| \
+	(1<<(CLASS_DARKPALADIN-1)) 	| \
 	(1<<(CLASS_DRUID-1)))
 
 // valid classes for creature_template.unit_class
@@ -139,7 +140,7 @@ enum UnitClass
 
 #define CLASSMASK_ALL_CREATURES ((1<<(UNIT_CLASS_WARRIOR-1)) | (1<<(UNIT_CLASS_PALADIN-1)) | (1<<(UNIT_CLASS_ROGUE-1)) | (1<<(UNIT_CLASS_MAGE-1)))
 
-#define CLASSMASK_WAND_USERS ((1<<(CLASS_PRIEST-1))|(1<<(CLASS_MAGE-1))|(1<<(CLASS_WARLOCK-1)))
+#define CLASSMASK_WAND_USERS ((1<<(CLASS_PRIEST-1))|(1<<(CLASS_MAGE-1))|(1<<(CLASS_DARKPALADIN-1)) | (1<<(CLASS_WARLOCK-1)))
 
 #define PLAYER_MAX_BATTLEGROUND_QUEUES 2
 
@@ -3374,7 +3375,7 @@ enum SpellFamilyNames
     SPELLFAMILY_POTION      = 13,
     // 14 - unused
     SPELLFAMILY_DEATHKNIGHT = 15,
-    // 16 - unused
+    SPELLFAMILY_DARKPALADIN     = 16,
     SPELLFAMILY_PET         = 17
 };
 
