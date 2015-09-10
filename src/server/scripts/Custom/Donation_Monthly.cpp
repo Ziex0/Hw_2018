@@ -236,6 +236,7 @@ public:
 				LoginDatabase.PExecute("UPDATE %s.account_data SET dp = '%u' -%u WHERE id = '%u'", website.c_str(), dp, permaMonthsVipPrice, pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("DELETE FROM account_access WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				LoginDatabase.PExecute("REPLACE INTO `account_access` (`id`, `gmlevel`, `RealmID`) VALUES ('%u', '1', '-1')", pPlayer->GetSession()->GetAccountId());
+				CharacterDatabase.PExecute("INSERT INTO vip_monthly_report (`account_id`, `char_use`, `Perma`) VALUES ('%u', '%s', '1')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName());
 				
 				// Set the correct date timestamp and start the 1 month counter
 				CharacterDatabase.PExecute("DELETE FROM `vip_conditions` WHERE `accountId` = '%u'", pPlayer->GetSession()->GetAccountId()); // Overwrite
