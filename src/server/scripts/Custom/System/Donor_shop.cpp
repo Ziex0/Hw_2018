@@ -64,9 +64,9 @@ class donorrewarder : public CreatureScript
                     {
   			   std::string DateTime = "%Y-%m-%d %H:%M:%S";
 			   ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
-               LoginDatabase.PExecute("UPDATE Web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
+               LoginDatabase.PExecute("UPDATE web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
                //LoginDatabase.PExecute("INSERT INTO db_world.purchases_donation (account_id, character_name, donation_item_id, donation_item_amount) VALUES ('%u', '%s', '%u', '%u')", player->GetSession()->GetAccountId(), player->GetName(), item, count);
-               sprintf(str,"Your points are taken Thank you for your Support!!");
+               sprintf(str,"Your points are taken, Thank you for your Support!!");
                player->MonsterWhisper(str,player->GetGUID(),true);
 			   player->SaveToDB();
                     }
