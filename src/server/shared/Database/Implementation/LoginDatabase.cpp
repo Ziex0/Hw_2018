@@ -97,7 +97,5 @@ void LoginDatabaseConnection::DoPrepareStatements()
 
 	PrepareStatement(LOGIN_UPD_EXPIRED_ACCOUNT_PREMIUM, "UPDATE account_premium SET active = 0 WHERE unsetdate<=UNIX_TIMESTAMP() AND unsetdate<>setdate", CONNECTION_SYNCH);
     PrepareStatement(LOGIN_SEL_PREMIUM, "SELECT 1 FROM account_premium WHERE id = ? AND active = 1", CONNECTION_SYNCH);
-
-    PrepareStatement(LOGIN_SEL_ACCOUNT_ACCESS_BY_ID, "SELECT gmlevel, RealmID FROM account_access WHERE id = ? and (RealmID = ? OR RealmID = -1) ORDER BY gmlevel desc", CONNECTION_SYNCH);
-     
+  
 }
