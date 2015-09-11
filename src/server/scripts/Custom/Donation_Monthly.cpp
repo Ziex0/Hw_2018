@@ -138,7 +138,6 @@ public:
                 return true;
                 break;
 				
-		case 1: // Vip accounts - LOCKED
 			case 1: // Vip accounts - LOCKED
 					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "This |cffFF0000Premium|r rank same like |cffFF0000Premium|r permanent.. Custom Commands.. Free |cffFF0000Premium|r set.. |cffFF0000Premium|r use timer.. There you can choose how long you want be Premium rank on Server, or you can Get Permanent :)", GOSSIP_SENDER_MAIN, 1000);
 					pPlayer->SEND_GOSSIP_MENU(60032, pCreature->GetGUID());

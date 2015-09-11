@@ -554,8 +554,8 @@ uint32 ArenaTeam::GetTypeBySlot(uint8 slot)
         default:
             break;
     }
-    sLog->outError(LOG_FILTER_ARENAS, "FATAL: Unknown arena team slot %u for some arena team", slot);
-    return 0xFFFFFFFF;
+    sLog->outError(LOG_FILTER_ARENAS,"bg.arena", "FATAL: Unknown arena team slot %u for some arena team", slot);
+    return 0xFF;
 }
 
 bool ArenaTeam::IsMember(uint64 guid) const
@@ -589,7 +589,7 @@ uint32 ArenaTeam::GetPoints(uint32 memberRating)
         points *= 0.76f;
     else if (Type == ARENA_TEAM_3v3)
         points *= 0.88f;
-	else if (Type == ARENA_TEAM_5v5) // 1v1 Arena
+	else if (Type == ARENA_TEAM_5v5)
         points *= 0.99f;
 
     return (uint32) points;
