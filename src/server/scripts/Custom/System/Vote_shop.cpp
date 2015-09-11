@@ -860,8 +860,6 @@ class Vote_rewarder : public CreatureScript
                 OnGossipHello(player, pCreature);
                 break;
             }
-
-
             return true;
         }
 
