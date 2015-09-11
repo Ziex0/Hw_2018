@@ -1,18 +1,3 @@
-/*
-CREATE TABLE `vote_purchases` (
-	`account_id` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Account Identifier',
-	`character_name` VARCHAR(12) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
-	`character_guid` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
-	`vote_item_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-	`vote_item_name` VARCHAR(60) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
-	`vote_item_amount` INT(10) UNSIGNED NOT NULL DEFAULT '1',
-	`date` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00'
-)
-COMMENT='Write here a comment if this has been refunded or not.'
-COLLATE='latin1_swedish_ci'
-ENGINE=MyISAM
-;
-*/
 #include "ScriptPCH.h"
 #include <cstring>
 #include "ObjectMgr.h"
@@ -34,7 +19,7 @@ class Vote_rewarder : public CreatureScript
             if (!result) // check
             {
                 sprintf(str,"Your have abused our systems and gotten a negative balance on your Vote Points. Your points are set to 0.");
-				//LoginDatabase.PQuery("UPDATE Web_db.account_data set vp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("UPDATE Web_db.account_data set vp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
                 player->PlayerTalkClass->ClearMenus();
                 OnGossipHello(player, pCreature);
                 pCreature->MonsterSay(str, LANG_UNIVERSAL, player->GetGUID());
@@ -63,7 +48,7 @@ class Vote_rewarder : public CreatureScript
   			   std::string DateTime = "%Y-%m-%d %H:%M:%S";
 			   ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
                LoginDatabase.PExecute("UPDATE Web_db.account_data Set vp = vp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
-               LoginDatabase.PExecute("INSERT INTO purchases_vote (account_id, character_name, vote_item_id, vote_item_name, vote_item_amount, date) VALUES ('%u', '%s', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), itemTemplate->Name1.c_str(), count, DateTime.c_str());
+               //LoginDatabase.PExecute("INSERT INTO purchases_vote (account_id, character_name, vote_item_id, vote_item_name, vote_item_amount, date) VALUES ('%u', '%s', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), itemTemplate->Name1.c_str(), count, DateTime.c_str());
                sprintf(str,"Your points are taken Thank you for your Support!!");
                player->MonsterWhisper(str,player->GetGUID(),true);
 			   player->SaveToDB();
