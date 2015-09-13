@@ -13,7 +13,7 @@ class refundvendor : public CreatureScript
 		
 	bool OnGossipHello(Player* pPlayer, Creature* pCreature)
         {
-            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/icons/Spell_Shadow_Shadowform:25|tRefund: Donor Weapons", GOSSIP_SENDER_MAIN, 2000);
+            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/icons/INV_Axe_113:25|tRefund: Final Achievment Weapons and Shield", GOSSIP_SENDER_MAIN, 2000);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/icons/INV_Axe_113:25|tRefund: Rings/Trinkets/Amulets", GOSSIP_SENDER_MAIN, 3000);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/icons/INV_Axe_113:25|tRefund: Rapier Donor Weapon and Shield", GOSSIP_SENDER_MAIN, 4000);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/icons/INV_Axe_113:25|tRefund: Abomination Misc ( Only Points will refund )", GOSSIP_SENDER_MAIN, 5000);
@@ -37,7 +37,7 @@ class refundvendor : public CreatureScript
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Two-Handed Weapons", GOSSIP_SENDER_MAIN, 2002);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Staves", GOSSIP_SENDER_MAIN, 2003);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Ranged", GOSSIP_SENDER_MAIN, 2004);
-			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Off-Hand Weapons", GOSSIP_SENDER_MAIN, 2005);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Off-Hand Weapons/ Shield", GOSSIP_SENDER_MAIN, 2005);
 			//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Main-Hand Weapons", GOSSIP_SENDER_MAIN, 2006);
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: [Main Menu]", GOSSIP_SENDER_MAIN, 9999);
 			pPlayer->PlayerTalkClass->SendGossipMenu(85006, pCreature->GetGUID());
@@ -322,6 +322,48 @@ class refundvendor : public CreatureScript
 			}
 			break;
 			//end of range
+			
+		case 2005: // shield
+			pPlayer->PlayerTalkClass->ClearMenus();
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Tank Shield 6 DP", GOSSIP_SENDER_MAIN, 2501);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Final Achievement Spell Shield 6 DP", GOSSIP_SENDER_MAIN, 2502);
+			pPlayer->PlayerTalkClass->SendGossipMenu(85006, pCreature->GetGUID());
+			return true;
+			break;
+			
+		case 2501:// tank shield
+			pPlayer->CLOSE_GOSSIP_MENU();
+			if (pPlayer->HasItemCount(200167, 1))
+			{
+				pPlayer->DestroyItemCount(200167, 1, true);
+				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200167);
+				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
+				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
+			}
+			else
+			{
+				pPlayer->GetSession()->SendNotification("Failed. Make sure you have the desired item");
+				pPlayer->PlayerTalkClass->SendCloseGossip();
+			}
+			break;
+		case 2502: //spel shield
+			pPlayer->CLOSE_GOSSIP_MENU();
+			if (pPlayer->HasItemCount(200168, 1))
+			{
+				pPlayer->DestroyItemCount(200168, 1, true);
+				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200168);
+				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
+				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
+			}
+			else
+			{
+				pPlayer->GetSession()->SendNotification("Failed. Make sure you have the desired item");
+				pPlayer->PlayerTalkClass->SendCloseGossip();
+			}
+			break;
+			
 		case 3000: // ringand trinket
 			pPlayer->PlayerTalkClass->ClearMenus();
 			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refund: Donor Melee Ring 5 DP", GOSSIP_SENDER_MAIN, 3001);
