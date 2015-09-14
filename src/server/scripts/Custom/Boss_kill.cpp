@@ -21,7 +21,7 @@ class Boss_Announcer : public PlayerScript
             stream << "|CFF" << tag_colour << 
                       "[Boss Announcer]|r:|cff" << plr_colour << " " << plr <<
                       "|r killed world boss |CFF" << boss_colour << "[" << boss_n << "]|r " << 
-                      (ingroup ? "by " : "with ") << gender << (ingroup ? " group" : "self") << "!";
+                      (ingroup ? "with " : "with ") << gender << (ingroup ? " group" : "self") << "!";
             sWorld->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
         }
     };
