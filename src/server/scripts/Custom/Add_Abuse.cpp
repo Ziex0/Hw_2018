@@ -33,7 +33,7 @@ public:
             {
                 if (itr->first == killer->GetGUID() && itr->second.victimGUID == victim->GetGUID()) // Initial check
                 {
-                    if (GetMSTimeDiffToNow(itr->second.whenKilled) < 180000) // < 3 minutes 180000
+                    if (GetMSTimeDiffToNow(itr->second.whenKilled) < 300000) // < 3 minutes 180000
                     {   // The player won't be able to kill the same player for another 3 minutes
                         ChatHandler(killer->GetSession()).PSendSysMessage("You cannot kill this player for another %u minute(s).", CalculateTimeInMinutes(GetMSTimeDiffToNow(itr->second.whenKilled)));
                         return;

@@ -1362,6 +1362,7 @@ void AddBattlegroundScripts()
 	void AddSC_boss_two();
 	void AddSC_Online_Time_DP();
 	void AddSC_player_abuse();
+	void AddSC_NoFarming();
 	//Bots
 	void AddSC_death_knight_bot();
 	void AddSC_druid_bot();
@@ -1473,6 +1474,7 @@ void AddCustomScripts()
 	AddSC_boss_two();
 	AddSC_Online_Time_DP();
 	AddSC_player_abuse();
+	AddSC_NoFarming();
 	//Bots
     AddSC_death_knight_bot();
     AddSC_druid_bot();
