@@ -855,7 +855,6 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)
         else if (GetOwner()->getClass() == CLASS_HUNTER 
 		|| GetOwner()->getClass() == CLASS_DRUID 
 		|| GetOwner()->getClass() == CLASS_PALADIN
-		|| GetOwner()->getClass() == CLASS_DARKPALADIN 
 		|| GetOwner()->getClass() == CLASS_WARRIOR)
 		
         {

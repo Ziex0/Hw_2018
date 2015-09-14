@@ -3636,13 +3636,6 @@ void ObjectMgr::BuildPlayerLevelInfo(uint8 race, uint8 _class, uint8 level, Play
                 info->stats[STAT_INTELLECT] += (lvl > 6 && (lvl%2) ? 1: 0);
                 info->stats[STAT_SPIRIT]    += (lvl > 7 ? 1: 0);
                 break;
-			case CLASS_DARKPALADIN:
-                info->stats[STAT_STRENGTH]  += (lvl > 3  ? 1: 0);
-                info->stats[STAT_STAMINA]   += (lvl > 33 ? 2: (lvl > 1 ? 1: 0));
-                info->stats[STAT_AGILITY]   += (lvl > 38 ? 1: (lvl > 7 && !(lvl%2) ? 1: 0));
-                info->stats[STAT_INTELLECT] += (lvl > 6 && (lvl%2) ? 1: 0);
-                info->stats[STAT_SPIRIT]    += (lvl > 7 ? 1: 0);
-                break;
             case CLASS_HUNTER:
                 info->stats[STAT_STRENGTH]  += (lvl > 4  ? 1: 0);
                 info->stats[STAT_STAMINA]   += (lvl > 4  ? 1: 0);

@@ -2353,7 +2353,6 @@ public:
         pPlayer->learnSpell(988, false);
         pPlayer->learnSpell(10909, false);
         pPlayer->learnSpell(10890, false);
-        pPlayer->learnSpell(60931, false);
         pPlayer->learnSpell(10955, false);
         pPlayer->learnSpell(34433, false);
         pPlayer->learnSpell(32375, false);
@@ -2371,7 +2370,6 @@ public:
         pPlayer->learnSpell(48113, false);
         pPlayer->learnSpell(48123, false);
         pPlayer->learnSpell(48173, false);
-        pPlayer->learnSpell(47951, false);
         pPlayer->learnSpell(48073, false);
         pPlayer->learnSpell(48078, false);
         pPlayer->learnSpell(48087, false);

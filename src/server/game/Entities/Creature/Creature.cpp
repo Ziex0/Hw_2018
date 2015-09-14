@@ -923,7 +923,6 @@ bool Creature::isCanTrainingOf(Player* player, bool msg) const
                         case CLASS_HUNTER:		player->PlayerTalkClass->SendGossipMenu(10090, GetGUID()); break;
                         case CLASS_MAGE:		player->PlayerTalkClass->SendGossipMenu(328, GetGUID()); break;
                         case CLASS_PALADIN:		player->PlayerTalkClass->SendGossipMenu(1635, GetGUID()); break;
-						case CLASS_DARKPALADIN:	player->PlayerTalkClass->SendGossipMenu(1635, GetGUID()); break;
                         case CLASS_PRIEST:		player->PlayerTalkClass->SendGossipMenu(4436, GetGUID()); break;
                         case CLASS_ROGUE:		player->PlayerTalkClass->SendGossipMenu(4797, GetGUID()); break;
                         case CLASS_SHAMAN:		player->PlayerTalkClass->SendGossipMenu(5003, GetGUID()); break;

@@ -29,7 +29,6 @@
 #define MSG_COLOR_WARLOCK      "|cff9482c9"
 #define MSG_COLOR_WARRIOR      "|cffc79c6e"
 #define MSG_COLOR_DEATH_KNIGHT "|cffc41f3b"
-#define MSG_COLOR_DARKPALADIN  "|cff00ff96"
 
 #define LIMIT_UINT32 2147483647
 #endif
