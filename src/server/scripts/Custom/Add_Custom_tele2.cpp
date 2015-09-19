@@ -19,14 +19,6 @@ enum eRidingSkills
 	COLD_WEATHER_FLYING = 54197
 };
 
-enum eEmblems
-{
-	EMBLEM_OF_FROST = 49426,
-	EMBLEM_OF_TRIUMPH = 47241,
-	EMBLEM_OF_VALOR = 40753,
-	EMBLEM_OF_CONQUEST = 45624,
-	EMBLEM_OF_HEROISM = 40752
-};
 
 class Custom_teleporter : public CreatureScript
 {
@@ -81,24 +73,10 @@ public:
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_FeatsOfStrength_Gladiator_10:24|tLearn Spells] ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 460);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_FeatsOfStrength_Gladiator_10:24|tPlayer Tools] ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 450);
 		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:24|t Buffs Me UP", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2500);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Misc_Coin_03:24|t I want free Mounts ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 177);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_Misc_Gear_01:24|t |cffFF00DEChill Area--", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1110);
+		
 		pPlayer->SEND_GOSSIP_MENU(907, pCreature->GetGUID());
-	}
-
-	bool PlayerReachedMoneyCap(const Player *plr) const
-	{
-		return plr->GetMoney() == MAX_MONEY_AMOUNT;
-	}
-
-	bool PlayerReachedHonorCap(Player *plr) const
-	{
-		int32 maxHonor = sWorld->getIntConfig(CONFIG_MAX_HONOR_POINTS);
-		return plr->GetHonorPoints() == (uint32)maxHonor;
-	}
-
-	bool PlayerReachedArenaCap(Player *plr) const
-	{
-		int32 maxArena = sWorld->getIntConfig(CONFIG_MAX_ARENA_POINTS);
-		return plr->GetArenaPoints() == (uint32)maxArena;
 	}
 
 	bool PlayerHasItemOrSpell(const Player *plr, uint32 itemId, uint32 spellId) const
@@ -112,25 +90,6 @@ public:
 
         return true;
     }
-
-	std::string GetEmblemName(eEmblems emblem) const
-	{
-		switch (emblem)
-		{
-		case EMBLEM_OF_FROST:
-			return "emblem of frost";
-		case EMBLEM_OF_TRIUMPH:
-			return "emblem of triumph";
-		case EMBLEM_OF_VALOR:
-			return "emblem of valor";
-		case EMBLEM_OF_CONQUEST:
-			return "emblem of conquest";
-		case EMBLEM_OF_HEROISM:
-			return "emblem of heroism";
-		default:
-			return "error";
-		}
-	}
 
 	bool PlayerAlreadyHasTwoProfessions(const Player *pPlayer) const
 	{
@@ -238,12 +197,6 @@ public:
 		}
 	}
 
-	void HandleEmblemGive(Player *pPlayer, Creature *pCreature, eEmblems emblem)
-	{
-		pPlayer->AddItem(static_cast<uint32>(emblem), 1);
-		pCreature->MonsterWhisper(("I have given you 1x " + GetEmblemName(emblem) + ".").c_str(), pPlayer->GetGUID());
-	}
-
 	void CreatureWhisperBasedOnRidingSkill(Creature *pCreature, const Player *pPlayer, eRidingSkills skill)
 	{
 		const uint64 &plrGuid = pPlayer->GetGUID();
@@ -337,36 +290,6 @@ public:
 				pPlayer->CLOSE_GOSSIP_MENU();
 
 				break;
-			case GOSSIP_ACTION_INFO_DEF + 3:
-				pPlayer->ModifyMoney(1000000);
-				CreatureWhisperBasedOnBool("I gave you 100 golds.", pCreature, pPlayer, !PlayerReachedMoneyCap(pPlayer));
-				pPlayer->CLOSE_GOSSIP_MENU();
-
-				break;
-			case GOSSIP_ACTION_INFO_DEF + 4:
-				pPlayer->ModifyMoney(5000000);
-				CreatureWhisperBasedOnBool("I gave you 500 golds.", pCreature, pPlayer, !PlayerReachedMoneyCap(pPlayer));
-				pPlayer->CLOSE_GOSSIP_MENU();
-
-				break;
-			case GOSSIP_ACTION_INFO_DEF + 5:
-				pPlayer->ModifyMoney(25000000);
-				CreatureWhisperBasedOnBool("I gave you 2500 golds.", pCreature, pPlayer, !PlayerReachedMoneyCap(pPlayer));
-				pPlayer->CLOSE_GOSSIP_MENU();
-
-				break;
-			case GOSSIP_ACTION_INFO_DEF + 6:
-				pPlayer->ModifyMoney(50000000);
-				CreatureWhisperBasedOnBool("I gave you 5000 golds.", pCreature, pPlayer, !PlayerReachedMoneyCap(pPlayer));
-				pPlayer->CLOSE_GOSSIP_MENU();
-
-				break;
-			case GOSSIP_ACTION_INFO_DEF + 2:
-				pPlayer->ModifyMoney(100000000);
-				CreatureWhisperBasedOnBool("I gave you 10000 golds.", pCreature, pPlayer, !PlayerReachedMoneyCap(pPlayer));
-				pPlayer->CLOSE_GOSSIP_MENU();
-
-				break;
 			case GOSSIP_ACTION_INFO_DEF + 8:
 				MainMenu(pPlayer, pCreature);
 			
@@ -390,19 +313,6 @@ public:
 	
 				break;
 			}
-			case GOSSIP_ACTION_INFO_DEF + 2000:
-					   pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "I want to repair my items.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
-		               pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "I want some gold.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
-		               pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Advance my weapon skills to max.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
-					   pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Heal me.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 26);
-		               pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Remove ressurection sickness.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 27);
-		               pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Rare mounts", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 177);
-		               pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "Give me maximum riding skill.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 186);
-
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8);
-
-				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
-				break;
 
 			case GOSSIP_ACTION_INFO_DEF + 12:
 			{
@@ -1597,7 +1507,7 @@ public:
 				//easy
 				case GOSSIP_ACTION_INFO_DEF + 811:
 				pPlayer->CLOSE_GOSSIP_MENU();
-				pPlayer->TeleportTo(0,-6372.509766f,1262.530029f,7.188300f,2.375766f);
+				pPlayer->TeleportTo(1,2920.26f, 2974.38f, 1.61716f, 4.19481f);
 				break;
 				
 				//Leveling zone
@@ -1641,14 +1551,14 @@ public:
 					break;
 			
 			case GOSSIP_ACTION_INFO_DEF + 177:
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Dark War Talbuk (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 178);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Deathcharger (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 179);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Swift Zulian Tiger (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 180);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "White Polar Bear (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 181);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Great Brewfest Kodo (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 182);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Cobalt Netherwing Drake (flying)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 183);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Reins of Raven Lord (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 184);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Ironbound Proto-Drake (flying)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 185);
+				 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Dark War Talbuk (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 178);
+				 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Deathcharger (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 179);
+				 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Swift Zulian Tiger (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 180);
+				 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "White Polar Bear (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 181);
+				 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Great Brewfest Kodo (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 182);
+				 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Cobalt Netherwing Drake (flying)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 183);
+				 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Reins of Raven Lord (ground)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 184);
+				 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Ironbound Proto-Drake (flying)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 185);
 
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 450);
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -1746,17 +1656,7 @@ public:
 
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
 				break;
-			case GOSSIP_ACTION_INFO_DEF + 188:
-				if (PlayerReachedHonorCap(pPlayer))
-					pCreature->MonsterWhisper("Honor cap reached!", pPlayer->GetGUID());
-				else
-				{
-					pPlayer->ModifyHonorPoints(1);
-					pCreature->MonsterWhisper("I have given you 1 honor points!", pPlayer->GetGUID());
-				}
-
-				pPlayer->CLOSE_GOSSIP_MENU();
-				break;
+			
 				case GOSSIP_ACTION_INFO_DEF + 3000:
         pPlayer->CLOSE_GOSSIP_MENU();
         pPlayer->learnSpell(2457, false);
@@ -2264,18 +2164,7 @@ case GOSSIP_ACTION_INFO_DEF + 3007:
         pPlayer->learnSpell(61290, false);
         pPlayer->learnSpell(47825, false);
 			break;
-			case GOSSIP_ACTION_INFO_DEF + 189:
-				if (PlayerReachedArenaCap(pPlayer))
-					pCreature->MonsterWhisper("Arena points cap reached!", pPlayer->GetGUID());
-				else
-				{
-					pPlayer->ModifyArenaPoints(1);
-					pCreature->MonsterWhisper("I have given you 1 arena points!", pPlayer->GetGUID());
-				}
-
-				pPlayer->CLOSE_GOSSIP_MENU();
-						break;
-						
+			
 				case GOSSIP_ACTION_INFO_DEF + 3011:
 						pPlayer->CLOSE_GOSSIP_MENU();
 						pPlayer->SendTalentWipeConfirm(pCreature->GetGUID());
@@ -2304,26 +2193,7 @@ case GOSSIP_ACTION_INFO_DEF + 3007:
 
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
 				break;
-			case GOSSIP_ACTION_INFO_DEF + 191:
-				HandleEmblemGive(pPlayer, pCreature, EMBLEM_OF_FROST);
-				pPlayer->CLOSE_GOSSIP_MENU();
-				break;
-			case GOSSIP_ACTION_INFO_DEF + 192:
-				HandleEmblemGive(pPlayer, pCreature, EMBLEM_OF_TRIUMPH);
-				pPlayer->CLOSE_GOSSIP_MENU();
-				break;
-			case GOSSIP_ACTION_INFO_DEF + 193:
-				HandleEmblemGive(pPlayer, pCreature, EMBLEM_OF_VALOR);
-				pPlayer->CLOSE_GOSSIP_MENU();
-				break;
-			case GOSSIP_ACTION_INFO_DEF + 194:
-				HandleEmblemGive(pPlayer, pCreature, EMBLEM_OF_CONQUEST);
-				pPlayer->CLOSE_GOSSIP_MENU();
-				break;
-			case GOSSIP_ACTION_INFO_DEF + 195:
-				HandleEmblemGive(pPlayer, pCreature, EMBLEM_OF_HEROISM);
-				pPlayer->CLOSE_GOSSIP_MENU();
-				break;
+			
 			case GOSSIP_ACTION_INFO_DEF + 196:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Alchemy", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 197);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Blacksmithing", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 198);
@@ -2343,70 +2213,58 @@ case GOSSIP_ACTION_INFO_DEF + 3007:
 				break;
 
 					case GOSSIP_ACTION_INFO_DEF + 450:		
-					   pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "I want to repair my items.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
-					   pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "I want to get DRUNK!.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3012);
-					   pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Ugh, Sober me up, I've had enough...", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3013);
-					   pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Heal me.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 26);
-					   pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Advance my weapon skills to max.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
-		               pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Give me maximum riding skill.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 186);
-					   //pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Give me Arena & Honor Points.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 187);
-					   //pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Give me Emblems.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 190);
-
-					   				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8);
-
-				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
-				break;
-				case GOSSIP_ACTION_INFO_DEF + 460:
-									     if(pPlayer->getClass() == CLASS_WARRIOR)
-        {
-pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Learnfor my class.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3000);
-		}
-		if(pPlayer->getClass() == CLASS_DEATH_KNIGHT)
-        {
-pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my Class.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3001);
-        }
- 
-        if(pPlayer->getClass() == CLASS_DRUID)
-        {
-pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my Class.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3002);
-        }
- 
-        if(pPlayer->getClass() == CLASS_HUNTER)
-        {
-pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my Class.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3003);
-        }
- 
-        if(pPlayer->getClass() == CLASS_MAGE)
-        {
-pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my Class.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3004);
-        }
- 
-        if(pPlayer->getClass() == CLASS_PALADIN)
-        {
-pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my Class.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3005);
-        }
- 
-        if(pPlayer->getClass() == CLASS_PRIEST)
-        {
-pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my Class.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3006);
-        }
- 
-        if(pPlayer->getClass() == CLASS_ROGUE )
-        {
-pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my Class.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3007);
-        }
- 
-        if(pPlayer->getClass() == CLASS_SHAMAN)
-        {
-pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my Class.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3008);
-        }
- 
-        if(pPlayer->getClass() == CLASS_WARLOCK)
-        {
-pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my Class..", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3009);
-         }
+					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "I want to repair my items.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "I want to get DRUNK!.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3012);
+					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Ugh, Sober me up, I've had enough...", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3013);
+					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Heal me.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 26);
+					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Advance my weapon skills to max.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
+		            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Give me maximum riding skill.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 186);
+					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8);
+					pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
+					break;
+					
+				case GOSSIP_ACTION_INFO_DEF + 460:				
+					if(pPlayer->getClass() == CLASS_WARRIOR)
+						{
+						pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Learn for my class spell.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3000);
+						}
+					if(pPlayer->getClass() == CLASS_DEATH_KNIGHT)
+						{
+						pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my class spell.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3001);
+						}			 
+					if(pPlayer->getClass() == CLASS_DRUID)
+						{
+						pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my class spell.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3002);
+						}			 
+					if(pPlayer->getClass() == CLASS_HUNTER)
+						{
+						pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my class spell.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3003);
+						}			 
+					if(pPlayer->getClass() == CLASS_MAGE)
+						{
+						pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my class spell.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3004);
+						}			 
+					if(pPlayer->getClass() == CLASS_PALADIN)
+						{
+						pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my class spell.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3005);
+						}			 
+					if(pPlayer->getClass() == CLASS_PRIEST)
+						{
+						pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my class spell.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3006);
+						}			 
+					if(pPlayer->getClass() == CLASS_ROGUE )
+						{
+						pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my class spell.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3007);
+						}			 
+					if(pPlayer->getClass() == CLASS_SHAMAN)
+						{
+						pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my class spell.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3008);
+						}			 
+					if(pPlayer->getClass() == CLASS_WARLOCK)
+						{
+						pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my class spell.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3009);
+						}	 
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8);
-
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
 				break;
 			case GOSSIP_ACTION_INFO_DEF + 197:
@@ -2461,6 +2319,11 @@ pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Learn for my Class..", GOSSIP_SEND
 			case GOSSIP_ACTION_INFO_DEF + 207:
 				CompleteLearnProfession(pPlayer, pCreature, SKILL_FISHING);
 				pPlayer->CLOSE_GOSSIP_MENU();
+				break;
+				
+			case GOSSIP_ACTION_INFO_DEF + 1110:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(0, -8254.06f, -107.952f, 238.931f, 6.03092f);
 				break;
 		}
 
