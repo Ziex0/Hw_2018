@@ -52,19 +52,19 @@ enum Spells
     SPELL_FLASH_HEAL = 71783,
     SPELL_CLEAR_DEBUFFS = 34098,
     SPELL_REPELLING_WAVE = 74509,
-    SPELL_FURY = 66721,
+    SPELL_FURY = 45954,
     SPELL_FRENZY = 47774
 };
 
 enum Summons
 {
-    NPC_SNOBOLD_VASSAL = 500165
+    NPC_SNOBOLD_VASSAL = 28011
 };
 
 enum Models
 {
-    MODEL_BOY = 4641,
-    MODEL_MONSTER = 19679
+    MODEL_BOY = 28213,
+    MODEL_MONSTER = 27569
 };
 
 # define LM_YELL_AGGRO "Send them to Hell!"

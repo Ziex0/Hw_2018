@@ -1346,7 +1346,6 @@ void AddBattlegroundScripts()
 	void AddSC_itemonkill();
 	//void AddSC_GoldOnKill();
 	void AddSC_Duel_Reset();
-	void AddSC_Pro_Lottery();
 	void AddSC_premium_rate();
 	void AddSC_Docommands();
 	void AddSC_Level_item();
@@ -1408,6 +1407,7 @@ void AddBattlegroundScripts()
 	void AddSC_Vip_Access();
 	void AddSC_cta_npc();
 	void AddSC_Boss_Announcer();
+	void AddSc_Script_CustomTeleporter();
 
 #endif
 
@@ -1458,7 +1458,6 @@ void AddCustomScripts()
 	AddSC_itemonkill();
 	//AddSC_GoldOnKill();
 	AddSC_Duel_Reset();
-	AddSC_Pro_Lottery();
 	AddSC_premium_rate();
 	AddSC_Docommands();
 	AddSC_Level_item();
@@ -1520,6 +1519,7 @@ void AddCustomScripts()
 	AddSC_Vip_Access();
 	AddSC_cta_npc();
 	AddSC_Boss_Announcer();
+	AddSc_Script_CustomTeleporter();
 
 #endif
 }
