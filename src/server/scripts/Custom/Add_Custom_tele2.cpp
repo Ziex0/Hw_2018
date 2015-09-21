@@ -1698,7 +1698,8 @@ public:
         pPlayer->learnSpell(57823, false);
         pPlayer->learnSpell(47488, false);
         break;
-				case GOSSIP_ACTION_INFO_DEF + 3001:
+		
+		case GOSSIP_ACTION_INFO_DEF + 3001:
 	    pPlayer->CLOSE_GOSSIP_MENU();
         pPlayer->learnSpell(48778, false);
         pPlayer->learnSpell(48266, false);
@@ -1788,7 +1789,7 @@ public:
         pPlayer->learnSpell(48572, false);
         pPlayer->learnSpell(48447, false);
 			break;
-			case GOSSIP_ACTION_INFO_DEF + 3003:
+		case GOSSIP_ACTION_INFO_DEF + 3003:
 				pPlayer->CLOSE_GOSSIP_MENU();
         pPlayer->learnSpell(75, false);
         pPlayer->learnSpell(1494, false);
@@ -1847,7 +1848,7 @@ public:
         pPlayer->learnSpell(49048, false);
         pPlayer->learnSpell(58434, false);
 				break;
-			case GOSSIP_ACTION_INFO_DEF + 3004:
+		case GOSSIP_ACTION_INFO_DEF + 3004:
 				pPlayer->CLOSE_GOSSIP_MENU();
         pPlayer->learnSpell(130, false);
         pPlayer->learnSpell(475, false);
@@ -1901,7 +1902,7 @@ public:
         pPlayer->learnSpell(42973, false);
         pPlayer->learnSpell(47610, false);
         pPlayer->learnSpell(58659, false);
-	if (pPlayer->GetTeam() == HORDE) {
+		if (pPlayer->GetTeam() == HORDE) {
 				pPlayer->learnSpell(11418, false);
 				pPlayer->learnSpell(11420, false);
 				pPlayer->learnSpell(11417, false);
@@ -1922,8 +1923,8 @@ public:
 				pPlayer->learnSpell(3561, false);	
 			}
 				break;
-				case GOSSIP_ACTION_INFO_DEF + 3005:
-					pPlayer->CLOSE_GOSSIP_MENU();
+		case GOSSIP_ACTION_INFO_DEF + 3005:
+		pPlayer->CLOSE_GOSSIP_MENU();
         pPlayer->learnSpell(21084, false);
         pPlayer->learnSpell(20271, false);
         pPlayer->learnSpell(498, false);
@@ -1974,9 +1975,18 @@ public:
         pPlayer->learnSpell(48782, false);
         pPlayer->learnSpell(53601, false);
         pPlayer->learnSpell(61411, false);
-					break;
-					case GOSSIP_ACTION_INFO_DEF + 3006:
-						pPlayer->CLOSE_GOSSIP_MENU();
+		if (pPlayer->GetTeam() == HORDE) 
+				{
+				pPlayer->learnSpell(53736, false);				
+				}
+			else 
+				{
+				pPlayer->learnSpell(31801, false);	
+				}
+		break;
+					
+		case GOSSIP_ACTION_INFO_DEF + 3006:
+		pPlayer->CLOSE_GOSSIP_MENU();
         pPlayer->learnSpell(586, false);
         pPlayer->learnSpell(2053, false);
         pPlayer->learnSpell(528, false);
@@ -1990,7 +2000,6 @@ public:
         pPlayer->learnSpell(988, false);
         pPlayer->learnSpell(10909, false);
         pPlayer->learnSpell(10890, false);
-        pPlayer->learnSpell(60931, false);
         pPlayer->learnSpell(10955, false);
         pPlayer->learnSpell(34433, false);
         pPlayer->learnSpell(32375, false);
@@ -2008,7 +2017,6 @@ public:
         pPlayer->learnSpell(48113, false);
         pPlayer->learnSpell(48123, false);
         pPlayer->learnSpell(48173, false);
-        pPlayer->learnSpell(47951, false);
         pPlayer->learnSpell(48073, false);
         pPlayer->learnSpell(48078, false);
         pPlayer->learnSpell(48087, false);

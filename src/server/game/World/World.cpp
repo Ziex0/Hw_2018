@@ -451,30 +451,30 @@ void World::LoadConfigSettings(bool reload)
 
     rate_values[RATE_SKILL_DISCOVERY]      = ConfigMgr::GetFloatDefault("Rate.Skill.Discovery", 1.0f);
 
-    rate_values[RATE_DROP_ITEM_POOR]       = ConfigMgr::GetFloatDefault("Rate.Drop.Item.Poor", 1.0f);
-    rate_values[RATE_DROP_ITEM_NORMAL]     = ConfigMgr::GetFloatDefault("Rate.Drop.Item.Normal", 1.0f);
-    rate_values[RATE_DROP_ITEM_UNCOMMON]   = ConfigMgr::GetFloatDefault("Rate.Drop.Item.Uncommon", 1.0f);
-    rate_values[RATE_DROP_ITEM_RARE]       = ConfigMgr::GetFloatDefault("Rate.Drop.Item.Rare", 1.0f);
-    rate_values[RATE_DROP_ITEM_EPIC]       = ConfigMgr::GetFloatDefault("Rate.Drop.Item.Epic", 1.0f);
-    rate_values[RATE_DROP_ITEM_LEGENDARY]  = ConfigMgr::GetFloatDefault("Rate.Drop.Item.Legendary", 1.0f);
-    rate_values[RATE_DROP_ITEM_ARTIFACT]   = ConfigMgr::GetFloatDefault("Rate.Drop.Item.Artifact", 1.0f);
-    rate_values[RATE_DROP_ITEM_REFERENCED] = ConfigMgr::GetFloatDefault("Rate.Drop.Item.Referenced", 1.0f);
+    rate_values[RATE_DROP_ITEM_POOR]			= ConfigMgr::GetFloatDefault("Rate.Drop.Item.Poor", 1.0f);
+    rate_values[RATE_DROP_ITEM_NORMAL]			= ConfigMgr::GetFloatDefault("Rate.Drop.Item.Normal", 1.0f);
+    rate_values[RATE_DROP_ITEM_UNCOMMON]		= ConfigMgr::GetFloatDefault("Rate.Drop.Item.Uncommon", 1.0f);
+    rate_values[RATE_DROP_ITEM_RARE]			= ConfigMgr::GetFloatDefault("Rate.Drop.Item.Rare", 1.0f);
+    rate_values[RATE_DROP_ITEM_EPIC]			= ConfigMgr::GetFloatDefault("Rate.Drop.Item.Epic", 1.0f);
+    rate_values[RATE_DROP_ITEM_LEGENDARY]		= ConfigMgr::GetFloatDefault("Rate.Drop.Item.Legendary", 1.0f);
+    rate_values[RATE_DROP_ITEM_ARTIFACT]		= ConfigMgr::GetFloatDefault("Rate.Drop.Item.Artifact", 1.0f);
+    rate_values[RATE_DROP_ITEM_REFERENCED]		= ConfigMgr::GetFloatDefault("Rate.Drop.Item.Referenced", 1.0f);
     rate_values[RATE_DROP_ITEM_REFERENCED_AMOUNT] = ConfigMgr::GetFloatDefault("Rate.Drop.Item.ReferencedAmount", 1.0f);
-    rate_values[RATE_DROP_MONEY]  = ConfigMgr::GetFloatDefault("Rate.Drop.Money", 1.0f);
-    rate_values[RATE_XP_KILL]     = ConfigMgr::GetFloatDefault("Rate.XP.Kill", 1.0f);
-    rate_values[RATE_XP_QUEST]    = ConfigMgr::GetFloatDefault("Rate.XP.Quest", 1.0f);
-    rate_values[RATE_XP_EXPLORE]  = ConfigMgr::GetFloatDefault("Rate.XP.Explore", 1.0f);
-	rate_values[RATE_XP_WEEKEND]  = ConfigMgr::GetFloatDefault("Rate.XP.Weekend", 2.1f);
-    m_int_configs[CONFIG_RATE_XP_WEEKEND_EVID] = ConfigMgr::GetIntDefault("Rate.XP.Weekend.EVID", 65);
-    rate_values[RATE_REPAIRCOST]  = ConfigMgr::GetFloatDefault("Rate.RepairCost", 1.0f);
+    rate_values[RATE_DROP_MONEY]				= ConfigMgr::GetFloatDefault("Rate.Drop.Money", 1.0f);
+    rate_values[RATE_XP_KILL]					= ConfigMgr::GetFloatDefault("Rate.XP.Kill", 250.0f);
+    rate_values[RATE_XP_QUEST]					= ConfigMgr::GetFloatDefault("Rate.XP.Quest", 1.0f);
+    rate_values[RATE_XP_EXPLORE]				= ConfigMgr::GetFloatDefault("Rate.XP.Explore", 1.0f);
+	rate_values[RATE_XP_WEEKEND]				= ConfigMgr::GetFloatDefault("Rate.XP.Weekend", 2.1f);
+    m_int_configs[CONFIG_RATE_XP_WEEKEND_EVID]	= ConfigMgr::GetIntDefault("Rate.XP.Weekend.EVID", 65);
+    rate_values[RATE_REPAIRCOST]				= ConfigMgr::GetFloatDefault("Rate.RepairCost", 1.0f);
 	
-    rate_values[RATE_XP_KILL_PREMIUM]    = ConfigMgr::GetFloatDefault("Rate.XP.Kill.Premium", 1.0f);
-    rate_values[RATE_XP_QUEST_PREMIUM]   = ConfigMgr::GetFloatDefault("Rate.XP.Quest.Premium", 1.0f);
-    rate_values[RATE_XP_EXPLORE_PREMIUM] = ConfigMgr::GetFloatDefault("Rate.XP.Explore.Premium", 1.0f);
-    rate_values[RATE_REPUTATION_PREMIUM] = ConfigMgr::GetFloatDefault("Rate.Reputation.Premium", 1.0f);
-    rate_values[RATE_HONOR_PREMIUM]      = ConfigMgr::GetFloatDefault("Rate.Honor.Premium", 1.0f);
-    m_bool_configs[COMMAND_BANK_PREMIUM] = ConfigMgr::GetFloatDefault("Command.Bank.Premium", false);
-    m_bool_configs[COMMAND_MAIL_PREMIUM] = ConfigMgr::GetFloatDefault("Command.Mail.Premium", false);
+    rate_values[RATE_XP_KILL_PREMIUM]		= ConfigMgr::GetFloatDefault("Rate.XP.Kill.Premium", 1.0f);
+    rate_values[RATE_XP_QUEST_PREMIUM]		= ConfigMgr::GetFloatDefault("Rate.XP.Quest.Premium", 1.0f);
+    rate_values[RATE_XP_EXPLORE_PREMIUM]	= ConfigMgr::GetFloatDefault("Rate.XP.Explore.Premium", 1.0f);
+    rate_values[RATE_REPUTATION_PREMIUM]	= ConfigMgr::GetFloatDefault("Rate.Reputation.Premium", 1.0f);
+    rate_values[RATE_HONOR_PREMIUM]			= ConfigMgr::GetFloatDefault("Rate.Honor.Premium", 1.0f);
+    m_bool_configs[COMMAND_BANK_PREMIUM]	= ConfigMgr::GetFloatDefault("Command.Bank.Premium", false);
+    m_bool_configs[COMMAND_MAIL_PREMIUM]	= ConfigMgr::GetFloatDefault("Command.Mail.Premium", false);
 
     if (rate_values[RATE_REPAIRCOST] < 0.0f)
     {
