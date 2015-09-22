@@ -302,7 +302,7 @@ class npc_big_ooze : public CreatureScript
                     events.CancelEvent(EVENT_STICKY_OOZE);
             }
 
-            void UpdateAI( uint32 diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;

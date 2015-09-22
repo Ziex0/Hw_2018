@@ -138,7 +138,7 @@ enum Spells
     SPELL_IN_FROSTMOURNE_ROOM           = 74276,
     SPELL_KILL_FROSTMOURNE_PLAYERS      = 75127,
     SPELL_HARVESTED_SOUL                = 72679,
-    SPELL_TRIGGER_VILE_SPIRIT_HEROIC    = 73582,    // TODO: Cast every 3 seconds during Frostmourne phase, targets a Wicked Spirit amd activates it
+    SPELL_TRIGGER_VILE_SPIRIT_HEROIC    = 73582,    /// @todo Cast every 3 seconds during Frostmourne phase, targets a Wicked Spirit amd activates it
 
     // Frostmourne
     SPELL_LIGHTS_FAVOR                  = 69382,
@@ -374,6 +374,25 @@ class NecroticPlagueTargetCheck : public std::unary_function<Unit*, bool>
         uint32 _notAura2;
 };
 
+class HeightDifferenceCheck
+{
+    public:
+        HeightDifferenceCheck(GameObject* go, float diff, bool reverse)
+            : _baseObject(go), _difference(diff), _reverse(reverse)
+        {
+        }
+
+        bool operator()(WorldObject* unit) const
+        {
+            return (unit->GetPositionZ() - _baseObject->GetPositionZ() > _difference) != _reverse;
+        }
+
+    private:
+        GameObject* _baseObject;
+        float _difference;
+        bool _reverse;
+};
+
 class FrozenThroneResetWorker
 {
     public:
@@ -536,11 +555,6 @@ class boss_the_lich_king : public CreatureScript
                 FrozenThroneResetWorker reset;
                 Trinity::GameObjectWorker<FrozenThroneResetWorker> worker(me, reset);
                 me->VisitNearbyGridObject(333.0f, worker);
-				
-				// Restore Tirion's gossip only after The Lich King fully resets to prevent
-                // restarting the encounter while LK still runs back to spawn point
-                if (Creature* tirion = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_HIGHLORD_TIRION_FORDRING)))
-                    tirion->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
 
                 // Reset any light override
                 SendLightOverride(0, 5000);
@@ -856,7 +870,7 @@ class boss_the_lich_king : public CreatureScript
                 events.Update(diff);
 
                 // during Remorseless Winter phases The Lich King is channeling a spell, but we must continue casting other spells
-                if ((me->HasUnitState(UNIT_STATE_CASTING) && !events.IsInPhase(PHASE_TRANSITION)) || events.IsInPhase(PHASE_OUTRO) || events.IsInPhase(PHASE_FROSTMOURNE))
+                if (me->HasUnitState(UNIT_STATE_CASTING) && !(events.IsInPhase(PHASE_TRANSITION) || events.IsInPhase(PHASE_OUTRO) || events.IsInPhase(PHASE_FROSTMOURNE)))
                     return;
 
                 while (uint32 eventId = events.ExecuteEvent())
@@ -1220,6 +1234,11 @@ class npc_tirion_fordring_tft : public CreatureScript
             void JustReachedHome()
             {
                 me->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_ONESHOT_NONE);
+
+                if (_instance->GetBossState(DATA_THE_LICH_KING) == DONE)
+                    return;
+
+                me->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
             }
 
             void UpdateAI(uint32 diff)
@@ -1507,7 +1526,7 @@ class npc_valkyr_shadowguard : public CreatureScript
                             {
                                 std::list<Creature*> triggers;
                                 GetCreatureListWithEntryInGrid(triggers, me, NPC_WORLD_TRIGGER, 150.0f);
-                                //triggers.remove_if(heightdifferenceCheck(platform, 5.0f, false));
+                                triggers.remove_if(HeightDifferenceCheck(platform, 5.0f, true));
                                 if (triggers.empty())
                                     return;
 
@@ -2159,7 +2178,8 @@ class spell_the_lich_king_necrotic_plague_jump : public SpellScriptLoader
             void OnApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
             {
                 if (Unit* caster = GetCaster())
-                    caster->GetAI()->SetData(DATA_PLAGUE_STACK, GetStackAmount());
+                    if (caster->GetAI())
+                        caster->GetAI()->SetData(DATA_PLAGUE_STACK, GetStackAmount());
             }
 
             void OnRemove(AuraEffect const* aurEff, AuraEffectHandleModes /*mode*/)
@@ -2296,8 +2316,8 @@ class spell_the_lich_king_quake : public SpellScriptLoader
 
             void FilterTargets(std::list<WorldObject*>& targets)
             {
-                //if (GameObject* platform = ObjectAccessor::GetGameObject(*GetCaster(), GetCaster()->GetInstanceScript()->GetData64(DATA_ARTHAS_PLATFORM)))
-                    //targets.remove_if(HeightdifferenceCheck(PLATFORM, 3.0f, false));
+                if (GameObject* platform = ObjectAccessor::GetGameObject(*GetCaster(), GetCaster()->GetInstanceScript()->GetData64(DATA_ARTHAS_PLATFORM)))
+                    targets.remove_if(HeightDifferenceCheck(platform, 5.0f, false));
             }
 
             void HandleSendEvent(SpellEffIndex /*effIndex*/)
@@ -2818,8 +2838,6 @@ class spell_the_lich_king_vile_spirit_damage_target_search : public SpellScriptL
             {
                 OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_the_lich_king_vile_spirit_damage_target_search_SpellScript::CheckTargetCount, EFFECT_0, TARGET_UNIT_SRC_AREA_ENEMY);
             }
-
-            Unit* _target;
         };
 
         SpellScript* GetSpellScript() const

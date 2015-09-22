@@ -668,6 +668,7 @@ class npc_frost_freeze_trap : public CreatureScript
         {
             npc_frost_freeze_trapAI(Creature* creature) : ScriptedAI(creature)
             {
+                SetCombatMovement(false);
             }
 
             void DoAction(int32 action)
