@@ -589,7 +589,11 @@ void LFGQueue::UpdateQueueTimers(time_t currTime)
 
 time_t LFGQueue::GetJoinTime(uint64 guid)
 {
-    return QueueDataStore[guid].joinTime;
+    LfgQueueDataContainer::const_iterator itr = QueueDataStore.find(guid);
+    if (itr != QueueDataStore.end())
+        return itr->second.joinTime;
+
+    return 0;
 }
 
 std::string LFGQueue::DumpQueueInfo() const
