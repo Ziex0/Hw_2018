@@ -1361,7 +1361,7 @@ void AddBattlegroundScripts()
 	void AddSC_boss_two();
 	void AddSC_Online_Time_DP();
 	void AddSC_player_abuse();
-	void AddSC_NoFarming();
+	//void AddSC_NoFarming();
 	//Bots
 	void AddSC_death_knight_bot();
 	void AddSC_druid_bot();
@@ -1405,7 +1405,7 @@ void AddBattlegroundScripts()
 	void AddSC_RaceChanger();
 	void AddSC_chat_filter_playerscript();
 	void AddSC_Vip_Access();
-	void AddSC_cta_npc();
+	//void AddSC_cta_npc();
 	void AddSC_Boss_Announcer();
 	void AddSc_Script_CustomTeleporter();
 
@@ -1473,7 +1473,7 @@ void AddCustomScripts()
 	AddSC_boss_two();
 	AddSC_Online_Time_DP();
 	AddSC_player_abuse();
-	AddSC_NoFarming();
+	//AddSC_NoFarming();
 	//Bots
     AddSC_death_knight_bot();
     AddSC_druid_bot();
@@ -1517,7 +1517,7 @@ void AddCustomScripts()
 	AddSC_RaceChanger();
 	AddSC_chat_filter_playerscript();
 	AddSC_Vip_Access();
-	AddSC_cta_npc();
+	//AddSC_cta_npc();
 	AddSC_Boss_Announcer();
 	AddSc_Script_CustomTeleporter();
 
