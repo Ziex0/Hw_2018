@@ -1327,7 +1327,7 @@ void AddBattlegroundScripts()
 
 	void AddSc_Script_UTeleporter();
 	void AddSC_item_enchant_visuals();
-	void AddSC_npc_changer();
+	//void AddSC_npc_changer();
 	void AddSC_NPC_VisualWeapon();
 	//void AddSC_pet_tut();
 	void AddSC_beastmaster_npc();
@@ -1351,10 +1351,10 @@ void AddBattlegroundScripts()
 	void AddSC_Level_item();
 	void AddSC_REFORGER_NPC();
 	//void AddSC_gm_active();
-	void AddSC_Online_Time_VP();
+	//void AddSC_Online_Time_VP();
 	void AddSC_Top5_Killers();
 	//void AddSC_afk_protection();
-	void AddSC_PvP_System();
+	//void AddSC_PvP_System();
 	void AddSC_npc_gurubashi_theme();
 	void AddSC_npc_morpher();
 	void AddSC_boss_nazaryan();
@@ -1375,16 +1375,16 @@ void AddBattlegroundScripts()
 	void AddSC_warrior_bot();
 	void AddSC_script_bot_commands();
 	//advanced
-	void AddSC_BotQuests_chapter1();
+	//void AddSC_BotQuests_chapter1();
 	//end Bots
-	void AddSC_npc_glyph_template();
+	//void AddSC_npc_glyph_template();
 	//void AddSC_vpredeem();
 	void AddSC_The_Fallen();
 	//void AddSC_Custom_Talent_Template();
-	void AddSC_refundvendor();
-	void AddSC_Vote_releaser();
+	//void AddSC_refundvendor();
+	//void AddSC_Vote_releaser();
 	void AddSC_Event_Vendor();
-	void AddSC_berserk_script();
+	//void AddSC_berserk_script();
 	
 	// Custom
 	//void AddSC_city_conquest_boss();
@@ -1440,7 +1440,7 @@ void AddCustomScripts()
 	// Zie
 	AddSc_Script_UTeleporter();
 	AddSC_item_enchant_visuals();
-	AddSC_npc_changer();
+	//AddSC_npc_changer();
 	AddSC_NPC_VisualWeapon();
 	//AddSC_pet_tut();
 	AddSC_beastmaster_npc(); 
@@ -1464,10 +1464,10 @@ void AddCustomScripts()
 	AddSC_Level_item();
 	AddSC_REFORGER_NPC();
 	//AddSC_gm_active();
-	AddSC_Online_Time_VP();
+	//AddSC_Online_Time_VP();
 	AddSC_Top5_Killers();
 	//AddSC_afk_protection();
-	AddSC_PvP_System();
+	//AddSC_PvP_System();
 	AddSC_npc_gurubashi_theme();
 	AddSC_npc_morpher();
 	AddSC_boss_nazaryan();
@@ -1488,16 +1488,16 @@ void AddCustomScripts()
     AddSC_warrior_bot();
     AddSC_script_bot_commands();
     //advanced
-    AddSC_BotQuests_chapter1();
+    //AddSC_BotQuests_chapter1();
     //end Bots
-	AddSC_npc_glyph_template();
+	//AddSC_npc_glyph_template();
 	//AddSC_vpredeem();
 	AddSC_The_Fallen();
 	//AddSC_Custom_Talent_Template();
-	AddSC_refundvendor();
-	AddSC_Vote_releaser();
+	//AddSC_refundvendor();
+	//AddSC_Vote_releaser();
 	AddSC_Event_Vendor();
-	AddSC_berserk_script();
+	//AddSC_berserk_script();
 
 	//AddSC_city_conquest_boss();
 	//AddSC_city_conquest_generic();

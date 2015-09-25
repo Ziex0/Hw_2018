@@ -777,7 +777,7 @@ public:
         else
             me->SaveRecallPosition();
 
-		me->TeleportTo (1, 7446.92f, -1694.54f, 194.947f, 2.47001f);
+		me->TeleportTo(530,-248.53700f, 930.59100f, 84.3797f, 1.5001f);
 		handler->PSendSysMessage("You Have Been Teleported!");
         return true;
     }
