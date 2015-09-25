@@ -1329,38 +1329,38 @@ void AddBattlegroundScripts()
 	void AddSC_item_enchant_visuals();
 	void AddSC_npc_changer();
 	void AddSC_NPC_VisualWeapon();
-	void AddSC_pet_tut();
+	//void AddSC_pet_tut();
 	void AddSC_beastmaster_npc();
 	void AddSC_npc_enchantment();
 	void AddSC_Packet_Protection();
 	void AddSC_PWS_Transmogrification();
 	void AddSC_CS_Transmogrification();
-	void AddSC_npc_fusion();
-	void AddSC_summon_all_npc();
+	//void AddSC_npc_fusion();
+	//void AddSC_summon_all_npc();
 	void AddSC_boss_bartimus();
 	void AddSC_universal_npc();
 	
 	//custom folder
 	void AddSC_vipcommands();
 	//void AddSC_System_Censure();
-	void AddSC_itemonkill();
+	//void AddSC_itemonkill();
 	//void AddSC_GoldOnKill();
 	void AddSC_Duel_Reset();
-	void AddSC_premium_rate();
+	//void AddSC_premium_rate();
 	void AddSC_Docommands();
 	void AddSC_Level_item();
 	void AddSC_REFORGER_NPC();
-	void AddSC_gm_active();
+	//void AddSC_gm_active();
 	void AddSC_Online_Time_VP();
 	void AddSC_Top5_Killers();
-	void AddSC_afk_protection();
+	//void AddSC_afk_protection();
 	void AddSC_PvP_System();
 	void AddSC_npc_gurubashi_theme();
 	void AddSC_npc_morpher();
 	void AddSC_boss_nazaryan();
 	void AddSC_boss_two();
-	void AddSC_Online_Time_DP();
-	void AddSC_player_abuse();
+	//void AddSC_Online_Time_DP();
+	//void AddSC_player_abuse();
 	//void AddSC_NoFarming();
 	//Bots
 	void AddSC_death_knight_bot();
@@ -1387,20 +1387,20 @@ void AddBattlegroundScripts()
 	void AddSC_berserk_script();
 	
 	// Custom
-	void AddSC_city_conquest_boss();
-	void AddSC_city_conquest_generic();
-	void AddSC_city_conquest_portal();
-	void AddSC_city_conquest_spawner();
-	void AddSC_vipmall_security();
-	void AddSC_ExchangeDPNPC();
-	void AddSC_npc_exchanger();
+	//void AddSC_city_conquest_boss();
+	//void AddSC_city_conquest_generic();
+	//void AddSC_city_conquest_portal();
+	//void AddSC_city_conquest_spawner();
+	//void AddSC_vipmall_security();
+	//void AddSC_ExchangeDPNPC();
+	//void AddSC_npc_exchanger();
 	void AddSC_npc_legion_master();
 	void AddSC_BountyHunter();
 	//void AddSC_on_login();
-	void AddSC_Donation_NPC();
+	//void AddSC_Donation_NPC();
 	void AddSC_romeo();
-	void AddSC_donorrewarder();
-	void AddSC_Vote_rewarder();
+	//void AddSC_donorrewarder();
+	//void AddSC_Vote_rewarder();
 	//void AddSC_Online_Time_DP();
 	void AddSC_RaceChanger();
 	void AddSC_chat_filter_playerscript();
@@ -1415,6 +1415,7 @@ void AddCustomScripts()
 {
 #ifdef SCRIPTS
     /* This is where custom scripts should be added. */
+
     AddSC_Mod_ArenaWatcher();
     //AddSC_Mod_AuctionHouseBot();
     AddSC_Mod_AutoLearn();
@@ -1441,38 +1442,38 @@ void AddCustomScripts()
 	AddSC_item_enchant_visuals();
 	AddSC_npc_changer();
 	AddSC_NPC_VisualWeapon();
-	AddSC_pet_tut();
+	//AddSC_pet_tut();
 	AddSC_beastmaster_npc(); 
 	AddSC_Packet_Protection();
 	AddSC_npc_enchantment();
 	AddSC_PWS_Transmogrification();
 	AddSC_CS_Transmogrification();
-	AddSC_npc_fusion();
-	AddSC_summon_all_npc();
+	///AddSC_npc_fusion();
+	//AddSC_summon_all_npc();
 	AddSC_boss_bartimus();
 	AddSC_universal_npc();
 	
 	//custom folder
 	AddSC_vipcommands();
 	//AddSC_System_Censure();
-	AddSC_itemonkill();
+	//AddSC_itemonkill();
 	//AddSC_GoldOnKill();
 	AddSC_Duel_Reset();
-	AddSC_premium_rate();
+	//AddSC_premium_rate();
 	AddSC_Docommands();
 	AddSC_Level_item();
 	AddSC_REFORGER_NPC();
-	AddSC_gm_active();
+	//AddSC_gm_active();
 	AddSC_Online_Time_VP();
 	AddSC_Top5_Killers();
-	AddSC_afk_protection();
+	//AddSC_afk_protection();
 	AddSC_PvP_System();
 	AddSC_npc_gurubashi_theme();
 	AddSC_npc_morpher();
 	AddSC_boss_nazaryan();
 	AddSC_boss_two();
-	AddSC_Online_Time_DP();
-	AddSC_player_abuse();
+	//AddSC_Online_Time_DP();
+	//AddSC_player_abuse();
 	//AddSC_NoFarming();
 	//Bots
     AddSC_death_knight_bot();
@@ -1498,21 +1499,21 @@ void AddCustomScripts()
 	AddSC_Event_Vendor();
 	AddSC_berserk_script();
 
-	AddSC_city_conquest_boss();
-	AddSC_city_conquest_generic();
-	AddSC_city_conquest_portal();
-	AddSC_city_conquest_spawner();
-	AddSC_vipmall_security();
+	//AddSC_city_conquest_boss();
+	//AddSC_city_conquest_generic();
+	//AddSC_city_conquest_portal();
+	//AddSC_city_conquest_spawner();
+	//AddSC_vipmall_security();
 	AddSC_ArenaGambler();
-	AddSC_ExchangeDPNPC();
-	AddSC_npc_exchanger();
+	//AddSC_ExchangeDPNPC();
+	//AddSC_npc_exchanger();
 	AddSC_npc_legion_master();
 	AddSC_BountyHunter();
 	//AddSC_on_login();
-	AddSC_Donation_NPC();
+	//AddSC_Donation_NPC();
 	AddSC_romeo();
-	AddSC_donorrewarder();
-	AddSC_Vote_rewarder();
+	//AddSC_donorrewarder();
+	//AddSC_Vote_rewarder();
 	//AddSC_Online_Time_DP();
 	AddSC_RaceChanger();
 	AddSC_chat_filter_playerscript();
