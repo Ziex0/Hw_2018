@@ -208,7 +208,7 @@ void Player::UpdateArmor()
 
     float value = GetModifierValue(unitMod, BASE_VALUE);    // base armor (from items)
     value *= GetModifierValue(unitMod, BASE_PCT);           // armor percent from items
-    value += GetStat(STAT_AGILITY) * 2.0f;                  // armor bonus from stats
+    value += GetStat(STAT_AGILITY) * 1.0f;                  // armor bonus from stats
     value += GetModifierValue(unitMod, TOTAL_VALUE);
 
     //add dynamic flat mods
@@ -344,7 +344,7 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
                 val2 = level * 2.0f + GetStat(STAT_STRENGTH) + GetStat(STAT_AGILITY) - 20.0f;
                 break;
             case CLASS_SHAMAN:
-                val2 = level * 5.0f + GetStat(STAT_STRENGTH) + GetStat(STAT_AGILITY) - 50.0f;
+                val2 = level * 2.0f + GetStat(STAT_STRENGTH) + GetStat(STAT_AGILITY) - 20.0f;
                 break;
             case CLASS_DRUID:
             {
@@ -385,14 +385,14 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
                 switch (GetShapeshiftForm())
                 {
                     case FORM_CAT:
-                        val2 = getLevel() * (mLevelMult + 3.0f) + GetStat(STAT_STRENGTH) * 2.0f + GetStat(STAT_AGILITY) - 20.0f + weapon_bonus + m_baseFeralAP;
+                        val2 = getLevel() * (mLevelMult + 2.0f) + GetStat(STAT_STRENGTH) * 2.0f + GetStat(STAT_AGILITY) - 20.0f + weapon_bonus + m_baseFeralAP;
                         break;
                     case FORM_BEAR:
                     case FORM_DIREBEAR:
-                        val2 = getLevel() * (mLevelMult + 4.0f) + GetStat(STAT_STRENGTH) * 2.0f - 20.0f + weapon_bonus + m_baseFeralAP;
+                        val2 = getLevel() * (mLevelMult + 3.0f) + GetStat(STAT_STRENGTH) * 2.0f - 20.0f + weapon_bonus + m_baseFeralAP;
                         break;
                     case FORM_MOONKIN:
-                        val2 = getLevel() * (mLevelMult + 2.0f) + GetStat(STAT_STRENGTH) * 2.0f - 20.0f + m_baseFeralAP;
+                        val2 = getLevel() * (mLevelMult + 1.5f) + GetStat(STAT_STRENGTH) * 2.0f - 20.0f + m_baseFeralAP;
                         break;
                     default:
                         val2 = GetStat(STAT_STRENGTH) * 2.0f - 20.0f;
@@ -401,13 +401,13 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
                 break;
             }
             case CLASS_MAGE:
-                val2 = GetStat(STAT_STRENGTH) - 35.0f;
+                val2 = GetStat(STAT_STRENGTH) - 10.0f;
                 break;
             case CLASS_PRIEST:
-                val2 = GetStat(STAT_STRENGTH) - 40.0f;
+                val2 = GetStat(STAT_STRENGTH) - 10.0f;
                 break;
             case CLASS_WARLOCK:
-                val2 = GetStat(STAT_STRENGTH) - 40.0f;
+                val2 = GetStat(STAT_STRENGTH) - 10.0f;
                 break;
         }
     }
@@ -1224,11 +1224,11 @@ void Guardian::UpdateArmor()
 
     // hunter and warlock pets gain 35% of owner's armor value
     if (isPet())
-        bonus_armor = float(CalculatePct(m_owner->GetArmor(), 35));
+        bonus_armor = float(CalculatePct(m_owner->GetArmor(), 15));
 
     value  = GetModifierValue(unitMod, BASE_VALUE);
     value *= GetModifierValue(unitMod, BASE_PCT);
-    value += GetStat(STAT_AGILITY) * 2.0f;
+    value += GetStat(STAT_AGILITY) * 1.0f;
     value += GetModifierValue(unitMod, TOTAL_VALUE) + bonus_armor;
     value *= GetModifierValue(unitMod, TOTAL_PCT);
 
@@ -1318,8 +1318,8 @@ void Guardian::UpdateAttackPowerAndDamage(bool ranged)
                 }
             }
 
-            bonusAP = owner->GetTotalAttackPowerValue(RANGED_ATTACK) * 0.22f * mod;
-            SetBonusDamage(int32(owner->GetTotalAttackPowerValue(RANGED_ATTACK) * 0.1287f * mod));
+            bonusAP = owner->GetTotalAttackPowerValue(RANGED_ATTACK) * 0.45f * mod;
+            SetBonusDamage(int32(owner->GetTotalAttackPowerValue(RANGED_ATTACK) * 0.1787f * mod));
         }
         else if (IsPetGhoul()) //ghouls benefit from deathknight's attack power (may be summon pet or not)
         {
