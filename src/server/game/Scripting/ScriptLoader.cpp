@@ -1327,7 +1327,7 @@ void AddBattlegroundScripts()
 
 	void AddSc_Script_UTeleporter();
 	void AddSC_item_enchant_visuals();
-	//void AddSC_npc_changer();
+	void AddSC_npc_changer();
 	void AddSC_NPC_VisualWeapon();
 	//void AddSC_pet_tut();
 	void AddSC_beastmaster_npc();
@@ -1440,7 +1440,7 @@ void AddCustomScripts()
 	// Zie
 	AddSc_Script_UTeleporter();
 	AddSC_item_enchant_visuals();
-	//AddSC_npc_changer();
+	AddSC_npc_changer();
 	AddSC_NPC_VisualWeapon();
 	//AddSC_pet_tut();
 	AddSC_beastmaster_npc(); 

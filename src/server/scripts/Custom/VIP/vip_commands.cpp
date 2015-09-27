@@ -653,72 +653,7 @@ public:
 
     }
 
-	static bool HandleChangeRaceCommand(ChatHandler* handler, const char* args)
-    {
-		
-			Player *pPlr = handler->GetSession()->GetPlayer();
-			ItemPosCountVec dest;
-			Item* pItem;
-		
-			switch(pPlr->getClass())
-		{
-
-		case CLASS_WARRIOR:
-		case CLASS_PALADIN:
-		case CLASS_HUNTER:
-		case CLASS_MAGE:
-		case CLASS_WARLOCK:
-		case CLASS_DRUID:
-		case CLASS_PRIEST:
-		case CLASS_SHAMAN:
-		case CLASS_ROGUE:
-		case CLASS_DEATH_KNIGHT:
-				//send 1 item
-				pPlr->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, 30, 1, 0);
-				pItem = pPlr->StoreNewItem(dest, 30,true,Item::GenerateItemRandomPropertyId(30));
-				pPlr->SendNewItem(pItem, 1, true, false);
-				dest.clear(); //anytime you add another item. you have to add this to the end! dont forget!
-				default: break;
-
-		}
-
-		return true;
-
-	}
-
-		static bool HandleChangeFactionCommand(ChatHandler* handler, const char* args)
-    {
-		
-			Player *pPlr = handler->GetSession()->GetPlayer();
-			ItemPosCountVec dest;
-			Item* pItem;
-		
-			switch(pPlr->getClass())
-		{
-
-		case CLASS_WARRIOR:
-		case CLASS_PALADIN:
-		case CLASS_HUNTER:
-		case CLASS_MAGE:
-		case CLASS_WARLOCK:
-		case CLASS_DRUID:
-		case CLASS_PRIEST:
-		case CLASS_SHAMAN:
-		case CLASS_ROGUE:
-		case CLASS_DEATH_KNIGHT:
-			pPlr->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, 29, 1, 0);
-			pItem = pPlr->StoreNewItem(dest, 29,true,Item::GenerateItemRandomPropertyId(29));
-			pPlr->SendNewItem(pItem, 1, true, false);
-			dest.clear(); //anytime you add another item. you have to add this to the end! dont forget!
-			default: break;
-
-		}
-
-		return true;
-
-	}
-
-		static bool HandleMaxSkillsCommand(ChatHandler* handler, const char* args)
+	static bool HandleMaxSkillsCommand(ChatHandler* handler, const char* args)
     {
 
         Player* me = handler->GetSession()->GetPlayer();
@@ -727,12 +662,31 @@ public:
         return true;
     }
 
+	static bool HandleChangeRaceCommand(ChatHandler* handler, const char* args)
+    {
+ 
+        Player* me = handler->GetSession()->GetPlayer();
+        me->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
+        handler->PSendSysMessage("Relog to change race of your character.");
+        return true;
+    }
+ 
+	static bool HandleChangeFactionCommand(ChatHandler* handler, const char* args)
+    {
+ 
+        Player* me = handler->GetSession()->GetPlayer();
+        me->SetAtLoginFlag(AT_LOGIN_CHANGE_FACTION);
+        handler->PSendSysMessage("Relog to change faction of your character.");
+        return true;
+    }
+ 
+ 
 	static bool HandleCustomizeCommand(ChatHandler* handler, const char* args)
     {
-
+ 
         Player* me = handler->GetSession()->GetPlayer();
-		me->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);
-		handler->PSendSysMessage("Relog to customize your character.");
+                me->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);
+                handler->PSendSysMessage("Relog to customize your character.");
         return true;
     }
 	

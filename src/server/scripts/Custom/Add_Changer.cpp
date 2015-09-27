@@ -15,8 +15,8 @@ class npc_changer : public CreatureScript
 		bool OnGossipHello(Player * pPlayer, Creature * pCreature)
 		{
 						
-			//pPlayer->ADD_GOSSIP_ITEM(4, "|cff00ff00|TInterface\\icons\\Achievement_Boss_Valanar:24|t|r Change My Race ", GOSSIP_SENDER_MAIN, 0);
-		    //pPlayer->ADD_GOSSIP_ITEM(4, "|cff00ff00|TInterface\\icons\\Achievement_Boss_Valanar:24|t|r Change My Faction", GOSSIP_SENDER_MAIN, 1);
+			pPlayer->ADD_GOSSIP_ITEM(4, "|cff00ff00|TInterface\\icons\\Achievement_Boss_Valanar:24|t|r Change My Race ", GOSSIP_SENDER_MAIN, 0);
+		    pPlayer->ADD_GOSSIP_ITEM(4, "|cff00ff00|TInterface\\icons\\Achievement_Boss_Valanar:24|t|r Change My Faction", GOSSIP_SENDER_MAIN, 1);
 			pPlayer->ADD_GOSSIP_ITEM(4, "|cff00ff00|TInterface\\icons\\Achievement_Boss_Valanar:24|t|r Customize My Char", GOSSIP_SENDER_MAIN, 2);
 			pPlayer->PlayerTalkClass->SendGossipMenu(9425, pCreature->GetGUID());
 			return true;
