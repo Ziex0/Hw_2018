@@ -274,7 +274,10 @@ public:
 
     struct npc_volcanoAI : public ScriptedAI
     {
-        npc_volcanoAI(Creature* creature) : ScriptedAI(creature) {}
+        npc_volcanoAI(Creature* creature) : ScriptedAI(creature)
+        {
+            SetCombatMovement(false);
+        }
 
         void Reset()
         {

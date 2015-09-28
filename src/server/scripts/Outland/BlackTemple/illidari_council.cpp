@@ -303,9 +303,9 @@ public:
                 {
                     if (Council[i])
                     {
-                        if (Creature* member = ObjectAccessor::GetCreature(*me, Council[i]))
-                            if (member->isAlive())
-                                member->AI()->AttackStart(target);
+                        Unit* member = Unit::GetUnit(*me, Council[i]);
+                        if (member && member->isAlive())
+                            member->ToCreature()->AI()->AttackStart(target);
                     }
                 }
 

@@ -590,14 +590,14 @@ public:
 
             if (SoulShockTimer <= diff)
             {
-                DoCastVictim(SPELL_SOUL_SHOCK);
+                DoCast(me->getVictim(), SPELL_SOUL_SHOCK);
                 SoulShockTimer = 5000;
             } else SoulShockTimer -= diff;
 
             if (DeadenTimer <= diff)
             {
                 me->InterruptNonMeleeSpells(false);
-                DoCastVictim(SPELL_DEADEN);
+                DoCast(me->getVictim(), SPELL_DEADEN);
                 DeadenTimer = urand(25000, 35000);
                 if (!(rand()%2))
                 {
@@ -690,7 +690,7 @@ public:
 
             if (SoulScreamTimer <= diff)
             {
-                DoCastVictim(SPELL_SOUL_SCREAM);
+                DoCast(me->getVictim(), SPELL_SOUL_SCREAM);
                 SoulScreamTimer = urand(9000, 11000);
                 if (!(rand()%3))
                 {
