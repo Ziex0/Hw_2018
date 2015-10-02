@@ -1387,7 +1387,7 @@ void AddBattlegroundScripts()
 	//void AddSC_berserk_script();
 	
 	// Custom
-	void AddSC_System_KillingStreak();
+	void AddSC_System_kill();
 	//void AddSC_city_conquest_boss();
 	//void AddSC_city_conquest_generic();
 	//void AddSC_city_conquest_portal();
@@ -1500,7 +1500,7 @@ void AddCustomScripts()
 	AddSC_Event_Vendor();
 	//AddSC_berserk_script();
 
-	AddSC_System_KillingStreak();
+	AddSC_System_kill();
 	//AddSC_city_conquest_boss();
 	//AddSC_city_conquest_generic();
 	//AddSC_city_conquest_portal();
