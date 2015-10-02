@@ -773,6 +773,12 @@ Player::Player(WorldSession* session): Unit(true)
         m_bgBattlegroundQueueID[j].bgQueueTypeId = BATTLEGROUND_QUEUE_NONE;
         m_bgBattlegroundQueueID[j].invitedToInstance = 0;
     }
+	
+	 // PlayedTimeReward
+    ptr_Interval = ConfigMgr::GetIntDefault("PlayedTimeReward.Interval", 0);
+    ptr_Money = ConfigMgr::GetIntDefault("PlayedTimeReward.Money", 0);
+    ptr_Honor = ConfigMgr::GetIntDefault("PlayedTimeReward.Honor", 0);
+    ptr_Arena = ConfigMgr::GetIntDefault("PlayedTimeReward.Arena", 0);
 
     m_logintime = time(NULL);
     m_Last_tick = m_logintime;
@@ -1866,6 +1872,21 @@ void Player::Update(uint32 p_time)
         stmt->setString(2, "");
         stmt->setUInt32(3, GetSession()->GetAccountId());
         LoginDatabase.Execute(stmt);
+    }
+	
+	// PlayedTimeReward
+    if (ptr_Interval > 0)
+    {
+        if (ptr_Interval <= p_time)
+        {
+            GetSession()->SendAreaTriggerMessage("Bonus for played time.");
+            ModifyMoney(ptr_Money);
+            ModifyHonorPoints(ptr_Honor);
+            ModifyArenaPoints(ptr_Arena);
+            ptr_Interval = ConfigMgr::GetIntDefault("PlayedTimeReward.Interval", 0);
+        }
+        else
+            ptr_Interval -= p_time;
     }
 
     if (!m_timedquests.empty())

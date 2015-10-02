@@ -28,6 +28,7 @@
 #    CUSTOM SERVER OPTIONS
 #    LOGGING SYSTEM SETTINGS
 #	 MORPH MASTER CONTROL OPTIONS
+#	 PLAYED TIME REWARD
 #
 ###################################################################################################
 
@@ -4189,6 +4190,17 @@ Transmogrification.SetNpcText = 50001
 
 Transmogrification.SetCostModifier = 3.0
 Transmogrification.SetCopperCost = 0
+
+#
+###################################################################################################
+  PLAYED TIME REWARD
+###################################################################################################
+#
+
+PlayedTimeReward.Interval = 7200
+PlayedTimeReward.Money    = 2000000
+PlayedTimeReward.Honor    = 5
+PlayedTimeReward.Arena    = 1
 
 #
 ###################################################################################################

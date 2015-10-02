@@ -1350,7 +1350,7 @@ void AddBattlegroundScripts()
 	void AddSC_Docommands();
 	void AddSC_Level_item();
 	void AddSC_REFORGER_NPC();
-	//void AddSC_gm_active();
+	void AddSC_gm_active();
 	//void AddSC_Online_Time_VP();
 	void AddSC_Top5_Killers();
 	//void AddSC_afk_protection();
@@ -1381,12 +1381,13 @@ void AddBattlegroundScripts()
 	//void AddSC_vpredeem();
 	void AddSC_The_Fallen();
 	//void AddSC_Custom_Talent_Template();
-	//void AddSC_refundvendor();
+	void AddSC_refundvendor();
 	//void AddSC_Vote_releaser();
 	void AddSC_Event_Vendor();
 	//void AddSC_berserk_script();
 	
 	// Custom
+	void AddSC_System_KillingStreak();
 	//void AddSC_city_conquest_boss();
 	//void AddSC_city_conquest_generic();
 	//void AddSC_city_conquest_portal();
@@ -1463,7 +1464,7 @@ void AddCustomScripts()
 	AddSC_Docommands();
 	AddSC_Level_item();
 	AddSC_REFORGER_NPC();
-	//AddSC_gm_active();
+	AddSC_gm_active();
 	//AddSC_Online_Time_VP();
 	AddSC_Top5_Killers();
 	//AddSC_afk_protection();
@@ -1494,11 +1495,12 @@ void AddCustomScripts()
 	//AddSC_vpredeem();
 	AddSC_The_Fallen();
 	//AddSC_Custom_Talent_Template();
-	//AddSC_refundvendor();
+	AddSC_refundvendor();
 	//AddSC_Vote_releaser();
 	AddSC_Event_Vendor();
 	//AddSC_berserk_script();
 
+	AddSC_System_KillingStreak();
 	//AddSC_city_conquest_boss();
 	//AddSC_city_conquest_generic();
 	//AddSC_city_conquest_portal();
