@@ -69,7 +69,7 @@ public:
 ######*/
 
 #define SPELL_SOUL_CORRUPTION 25805
-#define SPELL_CREATURE_OF_NIGHTMARE 25806
+#define SPELL_CREATURE_OF_NIGHTMARE 45954
 #define SPELL_LEVEL_UP 24312
 
 class boss_twilight_corrupter : public CreatureScript

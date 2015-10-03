@@ -69,14 +69,9 @@ class ExchangeDPNPC : public CreatureScript
 
 	bool OnGossipHello(Player* player, Creature* pCreature)
 	{
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 200VP to 1DP",				GOSSIP_SENDER_MAIN, 1, "|cffFFFFFF Change 200VP to 1DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 500VP to 5DP *",				GOSSIP_SENDER_MAIN, 2, "|cffFFFFFF Change 500VP to 5DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 800VP to 10DP *",				GOSSIP_SENDER_MAIN, 3, "|cffFFFFFF Change 800VP to 10DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 1100VP to 15DP *",			GOSSIP_SENDER_MAIN, 4, "|cffFFFFFF Change 1100VP to 15DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 1400VP to 20DP *",			GOSSIP_SENDER_MAIN, 5, "|cffFFFFFF Change 1400VP to 20DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_chargenegative:30|t|r Exchange 2000VP to 25DP *",				GOSSIP_SENDER_MAIN, 6, "|cffFFFFFF Change 2000VP to 25DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_chargenegative:30|t|r Exchange Massive 5000VP to 100DP *",	GOSSIP_SENDER_MAIN, 7, "|cffFFFFFF Change Massive 5000VP to 100DP|r", 0, false);
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|t Exchange 5 Dp to 100 vp *",		GOSSIP_SENDER_MAIN, 8, "|cffFFFFFF Exchange 5 Dp to 100 Vp|r", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 1000 PVP Donation Coin to 1 DP ", GOSSIP_SENDER_MAIN, 1, "|cffFFFFFF Change 200VP to 1DP|r", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 2000 PVP Donation Coin to 4 DP ", GOSSIP_SENDER_MAIN, 2, "|cffFFFFFF Change 500VP to 5DP|r", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "* |cff00ff00|TInterface\\icons\\spell_holy_fanaticism:30|t|r Exchange 3000 PVP Donation Coin to 8 DP ", GOSSIP_SENDER_MAIN, 3, "|cffFFFFFF Change 800VP to 10DP|r", 0, false);
 		player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
         return true;
 	}
@@ -99,78 +94,33 @@ class ExchangeDPNPC : public CreatureScript
 				ReturnToMainMenu(player, creature);
 				break;
 			case 1:
-				if(!ExchangeToDP(player, 200, 1))
-					sprintf(str, "You dont have enough vote points");
+				if(!ExchangeToDP(player, 1000, 1))
+					sprintf(str, "You dont have enough PVP Donation Coin");
 				else
-					sprintf(str, "You have changed 200vp to 1dp, congratulations");
+					sprintf(str, "You have changed 1000 to 2 DP, congratulations");
 
 				player->MonsterWhisper(str, player->GetGUID(), true);
 				ReturnToMainMenu(player, creature);
 				break;
 			case 2:
-				if(!ExchangeToDP(player, 500, 5))
-					sprintf(str, "You dont have enough vote points");
+				if(!ExchangeToDP(player, 2000, 4))
+					sprintf(str, "You dont have PVP Donation Coin");
 				else
-					sprintf(str, "You have changed 500VP to 5DP, congratulations");
+					sprintf(str, "You have changed 2000 PVP Donation Coin to 4 DP, congratulations");
 
 				player->MonsterWhisper(str, player->GetGUID(), true);
 				ReturnToMainMenu(player, creature);
 				break;
 			case 3:
-				if(!ExchangeToDP(player, 800, 10))
-					sprintf(str, "You dont have enough vote points");
+				if(!ExchangeToDP(player, 3000, 8))
+					sprintf(str, "You dont have enough PVP Donation Coin");
 				else
-					sprintf(str, "You have changed 800VP to 10DP, congratulations");
-
-				player->MonsterWhisper(str, player->GetGUID(), true);
-				ReturnToMainMenu(player, creature);
-				break;
-			case 4:
-				if(!ExchangeToDP(player, 1100, 15))
-					sprintf(str, "You dont have enough vote points");
-				else
-					sprintf(str, "You have changed 1100VP to 15DP, congratulations");
-
-				player->MonsterWhisper(str, player->GetGUID(), true);
-				ReturnToMainMenu(player, creature);
-				break;
-			case 5:
-				if(!ExchangeToDP(player, 1400, 20))
-					sprintf(str, "You dont have enough vote points");
-				else
-					sprintf(str, "You have changed 1400VP to 20DP, congratulations Hero !!");
-
-				player->MonsterWhisper(str, player->GetGUID(), true);
-				ReturnToMainMenu(player, creature);
-				break;
-			case 6:
-				if(!ExchangeToDP(player, 2000, 25))
-					sprintf(str, "You dont have enough vote points");
-				else
-					sprintf(str, "You have changed 2000VP to 25DP, congratulations Hero !!");
-
-				player->MonsterWhisper(str, player->GetGUID(), true);
-				ReturnToMainMenu(player, creature);
-				break;
-			case 7:
-				if(!ExchangeToDP(player, 5000, 100))
-					sprintf(str, "You dont have enough vote points");
-				else
-					sprintf(str, "You have changed 5000VP to 100DP, congratulations Hero !!");
+					sprintf(str, "You have changed 3000 PVP Donation Coin to 8 DP, congratulations");
 
 				player->MonsterWhisper(str, player->GetGUID(), true);
 				ReturnToMainMenu(player, creature);
 				break;
 			
-			case 8:
-				if(!ExchangeToVP(player, 5, 100))
-					sprintf(str, "You dont have enough Donor points");
-				else
-					sprintf(str, "You have changed 5Dp to 100VP, congratulations Hero !!");
-
-				player->MonsterWhisper(str, player->GetGUID(), true);
-				ReturnToMainMenu(player, creature);
-				break;
 		}
 		return true;
 	 }

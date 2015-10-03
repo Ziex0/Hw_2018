@@ -1876,10 +1876,10 @@ void Player::Update(uint32 p_time)
 	
 	// PlayedTimeReward
     if (ptr_Interval > 0)
-    {
+    {       
         if (ptr_Interval <= p_time)
         {
-            GetSession()->SendAreaTriggerMessage("Bonus for played time.");
+            GetSession()->SendAreaTriggerMessage("Honor/Arena for played time !!.");
             ModifyMoney(ptr_Money);
             ModifyHonorPoints(ptr_Honor);
             ModifyArenaPoints(ptr_Arena);
