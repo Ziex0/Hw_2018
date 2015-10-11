@@ -274,7 +274,7 @@ public:
     {
 		if (pPlayer->isInCombat())
 		{
-			pCreature->MonsterWhisper("You are in combat Biatch, wait until your combat is gone.", pPlayer->GetGUID());
+			pCreature->MonsterWhisper("You are in combat, wait until your combat is gone.", pPlayer->GetGUID());
 			pPlayer->CLOSE_GOSSIP_MENU();
 
 			return true;
@@ -981,7 +981,7 @@ public:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "[Armor Zones] ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 610);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "[Event Zone]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 810);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "[Leveling zone]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8000);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "[Gold Farming]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 710);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "[Farm Zone]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 710);
 				
 				if (pPlayer->GetTeam() == HORDE)
 				{					
@@ -1385,13 +1385,25 @@ public:
 
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
-
 				break;
-				//gold
+		
 				case GOSSIP_ACTION_INFO_DEF + 710:
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Gold", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7101);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "VIP Farm Boss", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7102);
+				pPlayer->CLOSE_GOSSIP_MENU();
+				break;
+				
+				//gold
+				case GOSSIP_ACTION_INFO_DEF + 7101:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(0, -5351.8266f, -2534.0097f, 484.1956f, 0.6969f);
+				break;				
+				//farm boss
+				case GOSSIP_ACTION_INFO_DEF + 7102:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(571, 7085.63f, -1805.78f, 822.603f, 1.88154f);
 				break;
+				
 				//Mall non pvp
 				case GOSSIP_ACTION_INFO_DEF + 910:
 				pPlayer->CLOSE_GOSSIP_MENU();

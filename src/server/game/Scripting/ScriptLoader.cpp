@@ -1406,7 +1406,7 @@ void AddBattlegroundScripts()
 	void AddSC_RaceChanger();
 	void AddSC_chat_filter_playerscript();
 	void AddSC_Vip_Access();
-	//void AddSC_cta_npc();
+	void AddSC_system_phase();
 	void AddSC_Boss_Announcer();
 	void AddSc_Script_CustomTeleporter();
 
@@ -1520,7 +1520,7 @@ void AddCustomScripts()
 	AddSC_RaceChanger();
 	AddSC_chat_filter_playerscript();
 	AddSC_Vip_Access();
-	//AddSC_cta_npc();
+	AddSC_system_phase();
 	AddSC_Boss_Announcer();
 	AddSc_Script_CustomTeleporter();
 
