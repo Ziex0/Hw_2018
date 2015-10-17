@@ -1,8 +1,6 @@
 #include "ScriptPCH.h"
 
-
 #define EMOTE_INSANE          "Bartimus can no longer contain his insanity!"
-
 
 enum Spells
 {

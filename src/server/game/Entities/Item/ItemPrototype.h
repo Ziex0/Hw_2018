@@ -501,7 +501,8 @@ enum ItemSubclassGlyph
     ITEM_SUBCLASS_GLYPH_SHAMAN                  = 7,
     ITEM_SUBCLASS_GLYPH_MAGE                    = 8,
     ITEM_SUBCLASS_GLYPH_WARLOCK                 = 9,
-    ITEM_SUBCLASS_GLYPH_DRUID                   = 11
+    ITEM_SUBCLASS_GLYPH_DRUID                   = 11,
+	ITEM_SUBCLASS_GLYPH_BERSERKER               = 12
 };
 
 #define MAX_ITEM_SUBCLASS_GLYPH                   12
