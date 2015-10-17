@@ -7221,6 +7221,7 @@ void Player::GetDodgeFromAgility(float &diminishing, float &nondiminishing)
          0.024211f, // Warlock
          0.0f,      // ??
          0.056097f,  // Druid
+		 0.034943f, // berserker
 
     };
     // Crit/agility to dodge/agility coefficient multipliers; 3.2.0 increased required agility by 15%
@@ -7236,7 +7237,8 @@ void Player::GetDodgeFromAgility(float &diminishing, float &nondiminishing)
          1.00f/1.15f,    // Mage
          0.97f/1.15f,    // Warlock (?)
          0.0f,           // ??
-         2.00f/1.15f     // Druid
+         2.00f/1.15f,     // Druid
+		 1.00f/1.15f    // berserker
     };
 
     uint8 level = getLevel();
@@ -13636,7 +13638,7 @@ InventoryResult Player::CanRollForItemInLFG(ItemTemplate const* proto, WorldObje
 
     if (proto->Class == ITEM_CLASS_ARMOR && proto->SubClass > ITEM_SUBCLASS_ARMOR_MISC && proto->SubClass < ITEM_SUBCLASS_ARMOR_BUCKLER && proto->InventoryType != INVTYPE_CLOAK)
     {
-        if (_class == CLASS_WARRIOR || _class == CLASS_PALADIN || _class == CLASS_DEATH_KNIGHT)
+        if (_class == CLASS_WARRIOR || _class == CLASS_PALADIN || _class == CLASS_DEATH_KNIGHT || _class == CLASS_BERSERKER)
         {
             if (getLevel() < 40)
             {

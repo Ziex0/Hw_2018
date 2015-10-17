@@ -110,17 +110,18 @@ enum Classes
     CLASS_MAGE          = 8,
     CLASS_WARLOCK       = 9,
 	//UNK				= 10,
-    CLASS_DRUID         = 11
+    CLASS_DRUID         = 11,
+	CLASS_BERSERKER     = 12
 };
 
 // max+1 for player class
-#define MAX_CLASSES       13
+#define MAX_CLASSES       14
 
 #define CLASSMASK_ALL_PLAYABLE \
     ((1<<(CLASS_WARRIOR-1))|(1<<(CLASS_PALADIN-1))|(1<<(CLASS_HUNTER-1))| \
     (1<<(CLASS_ROGUE-1))  |(1<<(CLASS_PRIEST-1)) |(1<<(CLASS_SHAMAN-1))| \
     (1<<(CLASS_MAGE-1))   |(1<<(CLASS_WARLOCK-1))|(1<<(CLASS_DRUID-1)) | \
-    (1<<(CLASS_DEATH_KNIGHT-1)))
+    (1<<(CLASS_DEATH_KNIGHT-1)|(1<<(CLASS_BERSERKER-1))))
 	
 // valid classes for creature_template.unit_class
 enum UnitClass
@@ -2704,7 +2705,8 @@ enum QuestSort
     QUEST_SORT_JEWELCRAFTING       = 373,
     QUEST_SORT_NOBLEGARDEN         = 374,
     QUEST_SORT_PILGRIMS_BOUNTY     = 375,
-    QUEST_SORT_LOVE_IS_IN_THE_AIR  = 376
+    QUEST_SORT_LOVE_IS_IN_THE_AIR  = 376,
+    QUEST_SORT_BERSERKER           = 400
 };
 
 inline uint8 ClassByQuestSort(int32 QuestSort)
@@ -2721,6 +2723,7 @@ inline uint8 ClassByQuestSort(int32 QuestSort)
         case QUEST_SORT_PRIEST:         return CLASS_PRIEST;
         case QUEST_SORT_DRUID:          return CLASS_DRUID;
         case QUEST_SORT_DEATH_KNIGHT:   return CLASS_DEATH_KNIGHT;
+		case QUEST_SORT_BERSERKER:   	return CLASS_BERSERKER;
     }
     return 0;
 }
@@ -3368,7 +3371,8 @@ enum SpellFamilyNames
     SPELLFAMILY_POTION      = 13,
     // 14 - unused
     SPELLFAMILY_DEATHKNIGHT = 15,
-    SPELLFAMILY_PET         = 17
+    SPELLFAMILY_PET         = 17,
+	SPELLFAMILY_ERSERKER         = 18
 };
 
 enum TradeStatus
