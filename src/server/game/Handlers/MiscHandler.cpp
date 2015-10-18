@@ -345,13 +345,13 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
             continue;
 
         // check if target is globally visible for player
-        if (!(itr->second->IsVisibleGloballyFor(_player)))
-            continue;
+        if ((itr->second->IsVisibleGloballyFor(_player))
+			continue; 
 
         // check if target's level is in level range
         uint8 lvl = itr->second->getLevel();
         //if (lvl < level_min || lvl > level_max)
-            //continue;
+            continue;
 
         // check if class matches classmask
         uint32 class_ = itr->second->getClass();

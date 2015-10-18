@@ -21,6 +21,7 @@ using namespace std;
 #define E_Warlock "View top 5 Warlock Killers"
 #define E_Druid "View top 5 Druid Killers"
 #define E_Death_knight "View top 5 Death knight Killers"
+#define E_Berserker "View top 5 Berserker Killers"
  /*Top 5 Message*/
 #define M_Warrior "Here is the top 5 Warrior Killers"
 #define M_Paladin "Here is the top 5 Paladin Killers"
@@ -32,6 +33,7 @@ using namespace std;
 #define M_Warlock "Here is the top 5 Warlock Killers"
 #define M_Druid "Here is the top 5 Druid Killers"
 #define M_Death_knight "Here is the top 5 Death knight Killers"
+#define M_Berserker "Here is the top 5 Berserker Killers"
 
 class Top5_Killers : public CreatureScript
 {
@@ -51,6 +53,7 @@ public:
 		player->ADD_GOSSIP_ITEM(1, E_Warlock, GOSSIP_SENDER_MAIN, 8);
 		player->ADD_GOSSIP_ITEM(1, E_Druid, GOSSIP_SENDER_MAIN, 9);
 		player->ADD_GOSSIP_ITEM(1, E_Death_knight, GOSSIP_SENDER_MAIN, 10);
+		player->ADD_GOSSIP_ITEM(1, E_Berserker, GOSSIP_SENDER_MAIN, 15);
 		player->ADD_GOSSIP_ITEM(1, leave, GOSSIP_SENDER_MAIN, 11);
 		player->SEND_GOSSIP_MENU(1, creature->GetGUID());
 		return true;
@@ -75,6 +78,7 @@ public:
 			player->ADD_GOSSIP_ITEM(1, E_Warlock, GOSSIP_SENDER_MAIN, 8);
 			player->ADD_GOSSIP_ITEM(1, E_Druid, GOSSIP_SENDER_MAIN, 9);
 			player->ADD_GOSSIP_ITEM(1, E_Death_knight, GOSSIP_SENDER_MAIN, 10);
+			player->ADD_GOSSIP_ITEM(1, E_Berserker, GOSSIP_SENDER_MAIN, 15);
 			player->ADD_GOSSIP_ITEM(1, leave, GOSSIP_SENDER_MAIN, 11);
 			player->SEND_GOSSIP_MENU(1, creature->GetGUID());
 			break;
@@ -318,6 +322,30 @@ public:
 			player->PlayerTalkClass->SendCloseGossip();
 			}
 			break;
+
+			case 15: //Death knight 
+			{
+			QueryResult result = CharacterDatabase.Query("SELECT name,totalKills FROM characters WHERE class='12' ORDER BY totalKills DESC LIMIT 5");
+		    if(!result)
+			  return false;
+
+			Field * fields = NULL;
+			ChatHandler(player->GetSession()).PSendSysMessage(M_Death_knight);
+			do
+			{
+			fields = result->Fetch();
+			string name = fields[0].GetString();
+			uint32 totalKills = fields[1].GetUInt32();
+			char msg[250];
+			snprintf(msg, 250, "Name: %s, With Total Kills : %u", name.c_str(), totalKills);
+			ChatHandler(player->GetSession()).PSendSysMessage(msg);
+			} 
+			while(result->NextRow());
+			player->SaveToDB();
+			player->PlayerTalkClass->SendCloseGossip();
+			}
+			break;
+
 			}
 		}
 	    return true;

@@ -307,6 +307,7 @@ class spell_item_flask_of_the_north : public SpellScriptLoader
                         break;
                     case CLASS_DEATH_KNIGHT:
                     case CLASS_WARRIOR:
+					case CLASS_BERSERKER:
                         possibleSpells.push_back(SPELL_FLASK_OF_THE_NORTH_STR);
                         break;
                     case CLASS_ROGUE:

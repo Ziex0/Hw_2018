@@ -1716,6 +1716,9 @@ public:
             case CLASS_DRUID:
                 ClassStr = "Druid";
                 break;
+			case CLASS_BERSERKER:
+                ClassStr = "Berserker";
+                break;
         }
 
         std::string timeStr = secsToTimeString(totalPlayerTime, true, true);
