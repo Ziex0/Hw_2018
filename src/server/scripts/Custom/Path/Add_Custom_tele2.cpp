@@ -1759,7 +1759,8 @@ public:
 				pPlayer->learnSpell(47867, false);
 				pPlayer->learnSpell(47889, false);
 				pPlayer->learnSpell(48018, false);
-				pPlayer->learnSpell(47811, false);				
+				pPlayer->learnSpell(47811, false);
+				pPlayer->learnSpell(14063, false);				
 				//lang
 				pPlayer->learnSpell(668, false);
 				pPlayer->learnSpell(669, false);

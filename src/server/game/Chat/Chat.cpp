@@ -250,6 +250,8 @@ void ChatHandler::SendCustomOfficerChat(const char* message)
         classStr = "|TInterface\\ICONS\\spell_nature_drowsy:14:14:0:-1|t";
     else if (pPlayer->getClass() == CLASS_DRUID)
         classStr = "|TInterface\\ICONS\\Ability_Druid_Maul:14:14:0:-1|t";
+	else if (pPlayer->getClass() == CLASS_BERSERKER)
+        classStr = "|TInterface\\ICONS\\Ability_warrior_focusedrage:14:14:0:-1|t";//http://wowwiki.wikia.com/wiki/File:Ability_warrior_focusedrage.png
 
     if (pPlayer->getRace() == RACE_BLOODELF)
         raceStr = pPlayer->getGender() == GENDER_MALE ? "|TInterface\\ICONS\\Achievement_Character_Bloodelf_Male:14:14:0:-1|t" : "|TInterface\\ICONS\\Achievement_Character_Bloodelf_Female:14:14:0:-1|t";
