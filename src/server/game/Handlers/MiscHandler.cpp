@@ -345,7 +345,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
             continue;
 
         // check if target is globally visible for player
-        if ((itr->second->IsVisibleGloballyFor(_player))
+         if (!(itr->second->IsVisibleGloballyFor(_player)))
 			continue; 
 
         // check if target's level is in level range
