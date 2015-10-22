@@ -111,7 +111,8 @@ enum Classes
     CLASS_WARLOCK       = 9,
 	//UNK				= 10,
     CLASS_DRUID         = 11,
-	CLASS_BERSERKER     = 12
+	CLASS_BERSERKER     = 12,
+	CLASS_SPEEDSTER     = 13
 };
 
 // max+1 for player class
@@ -121,7 +122,7 @@ enum Classes
     ((1<<(CLASS_WARRIOR-1))		|(1<<(CLASS_PALADIN-1))		|(1<<(CLASS_HUNTER-1))| \
     (1<<(CLASS_ROGUE-1))		|(1<<(CLASS_PRIEST-1))		|(1<<(CLASS_SHAMAN-1))| \
     (1<<(CLASS_MAGE-1))			|(1<<(CLASS_WARLOCK-1))		|(1<<(CLASS_DRUID-1)) | \
-    (1<<(CLASS_DEATH_KNIGHT-1)	|(1<<(CLASS_BERSERKER-1))))
+    (1<<(CLASS_DEATH_KNIGHT-1)	|(1<<(CLASS_SPEEDSTER-1))	|(1<<(CLASS_BERSERKER-1))))
 	
 // valid classes for creature_template.unit_class
 enum UnitClass
@@ -135,7 +136,7 @@ enum UnitClass
 
 #define CLASSMASK_ALL_CREATURES ((1<<(UNIT_CLASS_WARRIOR-1)) | (1<<(UNIT_CLASS_BERSERKER-1))| (1<<(UNIT_CLASS_PALADIN-1)) | (1<<(UNIT_CLASS_ROGUE-1)) | (1<<(UNIT_CLASS_MAGE-1)))
 
-#define CLASSMASK_WAND_USERS ((1<<(CLASS_PRIEST-1))|(1<<(CLASS_MAGE-1))|(1<<(CLASS_WARLOCK-1)))
+#define CLASSMASK_WAND_USERS ((1<<(CLASS_PRIEST-1)) |(1<<(CLASS_SPEEDSTER-1)) |(1<<(CLASS_MAGE-1))|(1<<(CLASS_WARLOCK-1)))
 
 #define PLAYER_MAX_BATTLEGROUND_QUEUES 2
 

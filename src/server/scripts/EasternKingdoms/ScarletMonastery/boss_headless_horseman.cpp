@@ -928,7 +928,7 @@ void npc_head::npc_headAI::Disappear()
             body->RemoveAurasDueToSpell(SPELL_IMMUNE);//hack, SpellHit doesn't calls if body has immune aura
             DoCast(body, SPELL_FLYING_HEAD);
             me->SetFullHealth();
-            //me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
             me->GetMotionMaster()->MoveIdle();
             CAST_AI(boss_headless_horseman::boss_headless_horsemanAI, body->AI())->returned = true;
