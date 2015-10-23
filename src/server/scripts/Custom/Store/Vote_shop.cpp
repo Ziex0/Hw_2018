@@ -69,20 +69,20 @@ class Vote_rewarder : public CreatureScript
         {
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:24|tHow much Vote points do I have?", GOSSIP_SENDER_MAIN, 19000);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSatria Vote Armor Token - 35 VP", GOSSIP_SENDER_MAIN, 4005);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSatria Vote Armor Token - 35 VP", GOSSIP_SENDER_MAIN, 4006);
+			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSatria Vote Armor Token - 35 VP", GOSSIP_SENDER_MAIN, 4005);
+			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSatria Vote Armor Token - 35 VP", GOSSIP_SENDER_MAIN, 4006);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Weapons", GOSSIP_SENDER_MAIN, 2000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
+            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonorArmors and Shirts", GOSSIP_SENDER_MAIN, 300);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tDual Wield Scroll - 120 VP", GOSSIP_SENDER_MAIN, 20000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSpecial Items", GOSSIP_SENDER_MAIN, 5000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSpecial Tokens", GOSSIP_SENDER_MAIN, 4000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Tabard - 40 VP", GOSSIP_SENDER_MAIN, 10000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Cloak - 40 VP", GOSSIP_SENDER_MAIN, 11000);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Shirt - 40 VP ", GOSSIP_SENDER_MAIN, 12000);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tPortable Mailbox - 15 VP", GOSSIP_SENDER_MAIN, 5600);
+			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tDual Wield Scroll - 120 VP", GOSSIP_SENDER_MAIN, 20000);
+            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSpecial Items", GOSSIP_SENDER_MAIN, 5000);
+            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tSpecial Tokens", GOSSIP_SENDER_MAIN, 4000);
+            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Tabard - 40 VP", GOSSIP_SENDER_MAIN, 10000);
+            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Cloak - 40 VP", GOSSIP_SENDER_MAIN, 11000);
+            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDeath of Unholy Voting Shirt - 40 VP ", GOSSIP_SENDER_MAIN, 12000);
+			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tPortable Mailbox - 15 VP", GOSSIP_SENDER_MAIN, 5600);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tRoyal Donor Set, 8 Coin - 62 VP", GOSSIP_SENDER_MAIN, 13000);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
+			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Royal Weapons", GOSSIP_SENDER_MAIN, 32000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tCosmetic 50% Immune Stun Ring - 30 VP", GOSSIP_SENDER_MAIN, 9997);
 

@@ -87,8 +87,8 @@ class donorrewarder : public CreatureScript
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/INV_Chest_Plate13:24|tHow much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSatria Donation Armor Token - 5 DP", GOSSIP_SENDER_MAIN, 4005);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Weapons", GOSSIP_SENDER_MAIN, 2000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSupreme Donor Weapons", GOSSIP_SENDER_MAIN, 2000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Shirts / Cloak / Tabard", GOSSIP_SENDER_MAIN, 300);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDual Wield - 10 DP", GOSSIP_SENDER_MAIN, 30000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rTitan_Grip - 20 DP", GOSSIP_SENDER_MAIN, 20000);
@@ -533,42 +533,54 @@ class donorrewarder : public CreatureScript
             
             case 3000: // ring,amulet balal
                 player->PlayerTalkClass->ClearMenus();                
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen Dragon Donor Melee Ring - 6 DP", GOSSIP_SENDER_MAIN, 3003);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen Dragon Donor Caster Ring - 6 DP", GOSSIP_SENDER_MAIN, 3004);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen Dragon Donor Melee Trinket - 6 DP", GOSSIP_SENDER_MAIN, 3005);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen Dragon Donor Caster Trinket - 6 DP", GOSSIP_SENDER_MAIN, 3006);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen Dragon Donor Melee Amulet - 6 DP", GOSSIP_SENDER_MAIN, 3007);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen Dragon Donor Caster Amulet - 6 DP", GOSSIP_SENDER_MAIN, 3008);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen Dragon Donor Bag - 5 DP", GOSSIP_SENDER_MAIN, 3009);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen Dragon Donor Caster Bag - 6 DP", GOSSIP_SENDER_MAIN, 3010);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Donor Melee Ring - 5 DP", GOSSIP_SENDER_MAIN, 3003);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Donor Caster Ring - 5 DP", GOSSIP_SENDER_MAIN, 3004);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Donor Melee Trinket - 5 DP", GOSSIP_SENDER_MAIN, 3005);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Donor Caster Trinket - 5 DP", GOSSIP_SENDER_MAIN, 3006);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Donor Melee Amulet - 5 DP", GOSSIP_SENDER_MAIN, 3007);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Donor Caster Amulet - 5 DP", GOSSIP_SENDER_MAIN, 3008);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Donor Range Ring - 5 DP", GOSSIP_SENDER_MAIN, 3011);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Donor Range Trinket - 5 DP", GOSSIP_SENDER_MAIN, 3012);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Donor Range Amulet - 5 DP", GOSSIP_SENDER_MAIN, 3013);
+				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Donor Bag - 5 DP", GOSSIP_SENDER_MAIN, 3009);
+				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Donor Caster Bag - 6 DP", GOSSIP_SENDER_MAIN, 3010);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
                 return true;
                 break;
             
             case 3003:
-                AddItem(player, pCreature, 200162,1,6);
+                AddItem(player, pCreature, 200011,1,5);
                 break;
             case 3004:
-                AddItem(player, pCreature, 200216,1,6);
+                AddItem(player, pCreature, 200019,1,5);
                 break;
             case 3005:
-                AddItem(player, pCreature, 200163,1,6);
+                AddItem(player, pCreature, 200012,1,5);
                 break;
 			case 3006:
-                AddItem(player, pCreature, 200217,1,6);
+                AddItem(player, pCreature, 200018,1,5);
                 break;
 			case 3007:
-                AddItem(player, pCreature, 200161,1,6);
+                AddItem(player, pCreature, 200003,1,5);
                 break;
 			case 3008:
-                AddItem(player, pCreature, 200215,1,6);
+                AddItem(player, pCreature, 200017,1,5);
                 break;
             case 3009:
                 AddItem(player, pCreature, 210008,1,5);
                 break;
 			case 3010:
-				AddItem(player, pCreature, 100134,1,6);
+				AddItem(player, pCreature, 100134,1,5);
+				break;
+			case 3011:
+				AddItem(player, pCreature, 200013,1,5);
+				break;
+			case 3012:
+				AddItem(player, pCreature, 200014,1,5);
+				break;
+			case 3013:
+				AddItem(player, pCreature, 200015,1,5);
 				break;
 			
             case 4000:
