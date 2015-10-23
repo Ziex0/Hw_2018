@@ -940,7 +940,7 @@ void AddSC_boss_headless_horseman()
 {
     new boss_headless_horseman();
     //new npc_head();
-    new npc_pulsing_pumpkin();
-    new npc_wisp_invis();
-    new go_loosely_turned_soil();
+    //new npc_pulsing_pumpkin();
+    //new npc_wisp_invis();
+    //new go_loosely_turned_soil();
 }
