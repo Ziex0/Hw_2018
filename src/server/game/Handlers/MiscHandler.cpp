@@ -255,6 +255,11 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
 {
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: Recvd CMSG_WHO Message");
 
+    time_t now = time(NULL);
+    if (now - timeLastWhoCommand < 5)
+        return;
+    else timeLastWhoCommand = now;
+
     uint32 matchcount = 0;
 
     uint32 level_min, level_max, racemask, classmask, zones_count, str_count;
@@ -351,7 +356,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
         // check if target's level is in level range
         uint8 lvl = itr->second->getLevel();
         //if (lvl < level_min || lvl > level_max)
-            continue;
+            //continue;
 
         // check if class matches classmask
         uint32 class_ = itr->second->getClass();
