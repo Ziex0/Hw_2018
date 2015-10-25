@@ -307,6 +307,9 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
             case CLASS_ROGUE:
                 val2 = level + GetStat(STAT_AGILITY) - 10.0f;
                 break;
+			case CLASS_SPEEDSTER:
+                val2 = level + GetStat(STAT_AGILITY) - 10.0f;
+                break;
             case CLASS_WARRIOR:
                 val2 = level + GetStat(STAT_AGILITY) - 10.0f;
                 break;
@@ -344,6 +347,9 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
                 val2 = level * 3.0f + GetStat(STAT_STRENGTH) * 2.0f - 20.0f;
                 break;
             case CLASS_ROGUE:
+                val2 = level * 2.0f + GetStat(STAT_STRENGTH) + GetStat(STAT_AGILITY) - 20.0f;
+                break;
+			case CLASS_SPEEDSTER:
                 val2 = level * 2.0f + GetStat(STAT_STRENGTH) + GetStat(STAT_AGILITY) - 20.0f;
                 break;
             case CLASS_HUNTER:
@@ -658,6 +664,7 @@ const float m_diminishing_k[MAX_CLASSES] =
     0.9830f,  // Warlock
     0.0f,     // ??
     0.9720f,   // Druid
+	0.9880f,  // SPEEDSTER
 	0.9560f  // berserker
 };
 
@@ -669,6 +676,7 @@ float Player::GetMissPercentageFromDefence() const
         16.00f,     // Paladin //correct
         16.00f,     // Hunter  //?
         16.00f,     // Rogue   //?
+		16.00f,     // Rogue   //?
         16.00f,     // Priest  //?
         16.00f,     // DK      //correct
         16.00f,     // Shaman  //?
@@ -704,6 +712,7 @@ void Player::UpdateParryPercentage()
         0.0f,           // Warlock
         0.0f,           // ??
         0.0f,            // Druid
+		145.560408f,    // Rogue
 		47.003525f     // berserker
     };
 
@@ -744,6 +753,7 @@ void Player::UpdateDodgePercentage()
         150.375940f,    // Warlock
         0.0f,           // ??
         116.890707f,     // Druid
+		145.560408f,    // Rogue
 		88.129021f     // Berserker
     };
 

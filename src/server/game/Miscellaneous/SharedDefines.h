@@ -2708,7 +2708,8 @@ enum QuestSort
     QUEST_SORT_NOBLEGARDEN         = 374,
     QUEST_SORT_PILGRIMS_BOUNTY     = 375,
     QUEST_SORT_LOVE_IS_IN_THE_AIR  = 376,
-    QUEST_SORT_BERSERKER           = 400
+    QUEST_SORT_BERSERKER           = 400,
+	QUEST_SORT_SPEEDSTER		   = 401
 };
 
 inline uint8 ClassByQuestSort(int32 QuestSort)
@@ -2726,6 +2727,7 @@ inline uint8 ClassByQuestSort(int32 QuestSort)
         case QUEST_SORT_DRUID:          return CLASS_DRUID;
         case QUEST_SORT_DEATH_KNIGHT:   return CLASS_DEATH_KNIGHT;
 		case QUEST_SORT_BERSERKER:   	return CLASS_BERSERKER;
+		case QUEST_SORT_SPEEDSTER:   	return CLASS_SPEEDSTER;
     }
     return 0;
 }
