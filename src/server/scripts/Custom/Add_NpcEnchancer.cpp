@@ -1,4 +1,3 @@
-
 #include "ScriptPCH.h"
 #include "Config.h"
 
@@ -395,6 +394,10 @@ bool playerCheckClasse(uint8 playerClass, unsigned char pcc)
 		break;
 	case CLASS_ROGUE:
 		if (playerClass == CLASS_ROGUE)
+			Show = true;
+		break;
+	case CLASS_BERSERKER:
+		if (playerClass == CLASS_BERSERKER)
 			Show = true;
 		break;
 	}
