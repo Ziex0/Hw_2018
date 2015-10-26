@@ -21,22 +21,17 @@ ENGINE=MyISAM
 
 class donorrewarder : public CreatureScript
 {
-    public:
-
-        donorrewarder()
-            : CreatureScript("donorrewarder")
-        {
-        }
-
+   public: donorrewarder(): CreatureScript("donorrewarder") {}
+        
         void AddItem(Player* player, Creature* pCreature, int item , int count, int cost)
         {
             QueryResult result;
-            result = CharacterDatabase.PQuery("SELECT dp FROM Web_db.account_data WHERE id = '%u' AND dp >= '0'", player->GetSession()->GetAccountId());
+            result = CharacterDatabase.PQuery("SELECT dp FROM web_db.account_data WHERE id = '%u' AND dp >= '0'", player->GetSession()->GetAccountId());
             char str[200];
             if (!result) // check
             {
                 sprintf(str,"Your have abused our systems and gotten a negative balance on your Donation Points. Your points are set to 0.");
-				LoginDatabase.PQuery("UPDATE Web_db.account_data set dp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("UPDATE web_db.account_data set dp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
                 player->PlayerTalkClass->ClearMenus();
                 OnGossipHello(player, pCreature);
                 pCreature->MonsterSay(str, LANG_UNIVERSAL, player->GetGUID());
@@ -55,24 +50,25 @@ class donorrewarder : public CreatureScript
             {
                 if (points <cost)
                 {
-                     sprintf(str,"You broke now,you must Donate on www.TheSatria.com!");
+                     sprintf(str,"You broke now,you must Donate on www.HeavenWow.Net");
                      player->MonsterWhisper(str,player->GetGUID(),true);
                 }
                 else
                 {
                     if (player->AddItem(item, count))
                     {
-  			   std::string DateTime = "%Y-%m-%d %H:%M:%S";
-			   ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
+  			std::string DateTime = "%Y-%m-%d %H:%M:%S";
+			ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
                LoginDatabase.PExecute("UPDATE web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
-               //LoginDatabase.PExecute("INSERT INTO db_world.purchases_donation (account_id, character_name, donation_item_id, donation_item_amount) VALUES ('%u', '%s', '%u', '%u')", player->GetSession()->GetAccountId(), player->GetName(), item, count);
+               LoginDatabase.PQuery("INSERT INTO web_db.donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
+                        
                sprintf(str,"Your points are taken, Dont forget to take SCREENSHOT everytime you bought new DONOR item.Thank you for your Support!!");
                player->MonsterWhisper(str,player->GetGUID(),true);
 			   player->SaveToDB();
                     }
                     else
                     {
-                        sprintf(str,"Item can't be given check your bag is full or you already got the item!");
+                        sprintf(str,"Item can't be given maybe your bag is full or you already got the item!");
                         player->MonsterWhisper(str,player->GetGUID(),true);
                     }
 
@@ -84,17 +80,14 @@ class donorrewarder : public CreatureScript
 		
     bool OnGossipHello(Player* player, Creature* pCreature)
         {
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/INV_Chest_Plate13:24|tHow much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
-			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSatria Donation Armor Token - 5 DP", GOSSIP_SENDER_MAIN, 4005);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonation Token ,Coin", GOSSIP_SENDER_MAIN, 4000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSupreme Donor Weapons", GOSSIP_SENDER_MAIN, 2000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Shirts / Cloak / Tabard", GOSSIP_SENDER_MAIN, 300);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDual Wield - 10 DP", GOSSIP_SENDER_MAIN, 30000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rTitan_Grip - 20 DP", GOSSIP_SENDER_MAIN, 20000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSpecial Items", GOSSIP_SENDER_MAIN, 5000);
 			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rRelics", GOSSIP_SENDER_MAIN, 6000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rPremium Rank 2 Token", GOSSIP_SENDER_MAIN, 4000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Tabard - 7 Dp", GOSSIP_SENDER_MAIN, 10000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Cloak - 10 DP", GOSSIP_SENDER_MAIN, 11000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Set - 23 DP ( 8 Pieces )", GOSSIP_SENDER_MAIN, 12000);
@@ -134,201 +127,62 @@ class donorrewarder : public CreatureScript
 				case 5100:
 					AddItem(player, pCreature,29765,3,5);
 				break;
-            case 300:
+				
+			case 4000:
                 player->PlayerTalkClass->ClearMenus();
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt - 6 DP", GOSSIP_SENDER_MAIN, 301);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Tabard - 6 DP", GOSSIP_SENDER_MAIN, 302);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Cloak - 6 DP", GOSSIP_SENDER_MAIN, 303);
-                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donor Steel Shield - 7 DP", GOSSIP_SENDER_MAIN, 304);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donor Ultimate Speed Shirt ->>", GOSSIP_SENDER_MAIN, 310);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donor Coin - 7 DP", GOSSIP_SENDER_MAIN, 4001);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Heaven Soul Token - 11 DP", GOSSIP_SENDER_MAIN, 4012);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Heaven Soul Token Full - 70 DP", GOSSIP_SENDER_MAIN, 4002);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Premium Rank I - 20 DP", GOSSIP_SENDER_MAIN, 4003);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Premium Rank II - 40 DP", GOSSIP_SENDER_MAIN, 4004);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Premium Rank III - 60 DP", GOSSIP_SENDER_MAIN, 4005);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Master Buff Magic - 14 DP", GOSSIP_SENDER_MAIN, 4006);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Master Buff Range - 14 DP", GOSSIP_SENDER_MAIN, 4007);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Master Buff Melee - 14 DP", GOSSIP_SENDER_MAIN, 4008);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Transfer Token - 50 DP", GOSSIP_SENDER_MAIN, 4009);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Dual Wield - 10 DP", GOSSIP_SENDER_MAIN, 4010);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Titan Grip - 20 DP", GOSSIP_SENDER_MAIN, 4011);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
                 return true;
                 break;
-            case 301:
-				player->PlayerTalkClass->ClearMenus();
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Paladin", 		GOSSIP_SENDER_MAIN, 70001);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Warrior", 		GOSSIP_SENDER_MAIN, 70002);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Death Knight", 	GOSSIP_SENDER_MAIN, 70003);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Hunter", 		GOSSIP_SENDER_MAIN, 70004);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Rogue", 		GOSSIP_SENDER_MAIN, 70005);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Warlock", 		GOSSIP_SENDER_MAIN, 70006);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Druid", 		GOSSIP_SENDER_MAIN, 70007);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Mage", 			GOSSIP_SENDER_MAIN, 70008);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Shaman", 		GOSSIP_SENDER_MAIN, 70009);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Shirt Priest", 		GOSSIP_SENDER_MAIN, 70010);
-				
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
-                return true;
+			case 4012:
+                AddItem(player, pCreature, 30242,1,11);
                 break;
-			
-			case 70001:
-                if(player->getClass() != CLASS_PALADIN) 
-				{
-				  char str[200];
-				  sprintf(str,"Your not a paladin, so you cant buy this item!");
-						player->MonsterWhisper(str,player->GetGUID(),true);
-						player->PlayerTalkClass->SendCloseGossip();
-				} else 
-					{
-						AddItem(player, pCreature,200224,1,6);
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-						break;
-			case 70002:
-                if(player->getClass() != CLASS_WARRIOR) 
-				{
-				  char str[200];
-				  sprintf(str,"Your not a warrior, so you cant buy this item!");
-						player->MonsterWhisper(str,player->GetGUID(),true);
-						player->PlayerTalkClass->SendCloseGossip();
-				} else 
-					{
-						AddItem(player, pCreature,200227,1,6);
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-						break;
-			case 70003:
-                if(player->getClass() != CLASS_DEATH_KNIGHT) 
-				{
-				  char str[200];
-				  sprintf(str,"Your not a DK, so you cant buy this item!");
-						player->MonsterWhisper(str,player->GetGUID(),true);
-						player->PlayerTalkClass->SendCloseGossip();
-				} else 
-					{
-						AddItem(player, pCreature,200223,1,6);
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-						break;
-			case 70004:
-                if(player->getClass() != CLASS_HUNTER) 
-				{
-				  char str[200];
-				  sprintf(str,"Your not a hunter, so you cant buy this item!");
-						player->MonsterWhisper(str,player->GetGUID(),true);
-						player->PlayerTalkClass->SendCloseGossip();
-				} else 
-					{
-						AddItem(player, pCreature,200222,1,6);
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-				break;
-			case 70005:
-                if(player->getClass() != CLASS_ROGUE) 
-				{
-				  char str[200];
-				  sprintf(str,"Your not a rogue, so you cant buy this item!");
-						player->MonsterWhisper(str,player->GetGUID(),true);
-						player->PlayerTalkClass->SendCloseGossip();
-				} else 
-					{
-						AddItem(player, pCreature,200221,1,6);
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-				break;
-			case 70006:
-                if(player->getClass() != CLASS_WARLOCK) 
-				{
-				  char str[200];
-				  sprintf(str,"Your not a warlock, so you cant buy this item!");
-						player->MonsterWhisper(str,player->GetGUID(),true);
-						player->PlayerTalkClass->SendCloseGossip();
-				} else 
-					{
-						AddItem(player, pCreature,200220,1,6);
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-				break;
-			case 70007:
-                if(player->getClass() != CLASS_DRUID) 
-				{
-				  char str[200];
-				  sprintf(str,"Your not a Druid, so you cant buy this item!");
-						player->MonsterWhisper(str,player->GetGUID(),true);
-						player->PlayerTalkClass->SendCloseGossip();
-				} else 
-					{
-						AddItem(player, pCreature,200219,1,6);
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-				break;
-			case 70008:
-                if(player->getClass() != CLASS_MAGE) 
-				{
-				  char str[200];
-				  sprintf(str,"Your not a Mage, so you cant buy this item!");
-						player->MonsterWhisper(str,player->GetGUID(),true);
-						player->PlayerTalkClass->SendCloseGossip();
-				} else 
-					{
-						AddItem(player, pCreature,200225,1,6);
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-				break;
-			case 70009:
-                if(player->getClass() != CLASS_SHAMAN) 
-				{
-				  char str[200];
-				  sprintf(str,"Your not a Shaman, so you cant buy this item!");
-						player->MonsterWhisper(str,player->GetGUID(),true);
-						player->PlayerTalkClass->SendCloseGossip();
-				} else 
-					{
-						AddItem(player, pCreature,200218,1,6);
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-				break;
-			case 70010:
-                if(player->getClass() != CLASS_PRIEST) 
-				{
-				  char str[200];
-				  sprintf(str,"Your not a priest, so you cant buy this item!");
-						player->MonsterWhisper(str,player->GetGUID(),true);
-						player->PlayerTalkClass->SendCloseGossip();
-				} else 
-					{
-						AddItem(player, pCreature,200226,1,6);
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-				break;
-            
-            case 302:
-                AddItem(player, pCreature,200165,1,6);
+			case 4001:
+                AddItem(player, pCreature, 31102,1,7);
                 break;
-            case 303:
-                AddItem(player, pCreature,200166,1,6);
+			case 4002:
+                AddItem(player, pCreature, 30250,1,70);
                 break;
-            case 304:
-                AddItem(player, pCreature,100130,1,7);
+			case 4003:
+                AddItem(player, pCreature, 745450,1,20);
                 break;
-			case 310:
-                player->PlayerTalkClass->ClearMenus();
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Shirt I - 5 Dp", GOSSIP_SENDER_MAIN, 311);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Shirt II - 7 Dp", GOSSIP_SENDER_MAIN, 312);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Shirt III - 13 Dp", GOSSIP_SENDER_MAIN, 313);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Shirt IV - 20 Dp", GOSSIP_SENDER_MAIN, 314);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Ultimate Shirt V - 30 Dp", GOSSIP_SENDER_MAIN, 315);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
-                return true;
+			case 4004:
+                AddItem(player, pCreature, 745451,1,40);
                 break;
-			case 311:
-                AddItem(player, pCreature,100125,1,5);
-                break;
-			case 312:
-                AddItem(player, pCreature,100126,1,7);
-                break;
-			case 313:
-                AddItem(player, pCreature,100127,1,13);
-                break;
-			case 314:
-                AddItem(player, pCreature,100128,1,20);
-                break;
-			case 315:
-                AddItem(player, pCreature,100129,1,30);
+			case 4005:
+                AddItem(player, pCreature, 22484,1,60);
                 break;			
+            case 4006:
+                AddItem(player, pCreature, 82000, 1, 14);
+                break;	
+            case 4007:
+                AddItem(player, pCreature, 82001, 1, 14);
+                break;
+			case 4008:
+                AddItem(player, pCreature, 82002, 1, 14);
+                break;
+			case 4009:
+                AddItem(player, pCreature, 66001, 1, 50);
+                break;	
+			case 4010:
+                AddItem(player, pCreature, 90900, 1, 10);
+                break;
+			case 4011:
+                AddItem(player, pCreature, 90901, 1, 20);
+                break;
+				
             case 1000:
                 AddItem(player, pCreature, 0, 0, 0);
                 break;
@@ -583,88 +437,7 @@ class donorrewarder : public CreatureScript
 				AddItem(player, pCreature, 200015,1,5);
 				break;
 			
-            case 4000:
-                player->PlayerTalkClass->ClearMenus();
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Premium Rank 2 for 1 Month - 11 DP", GOSSIP_SENDER_MAIN, 4001);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Premium Rank 2 for 1 Month - 21 DP", GOSSIP_SENDER_MAIN, 4002);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Premium Rank 2 for 1 Month - 33 DP", GOSSIP_SENDER_MAIN, 4003);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Premium Rank 2 for 1 Month - 45 DP", GOSSIP_SENDER_MAIN, 4009);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Cata / MoP Token - 5 DP", GOSSIP_SENDER_MAIN, 5040);
-                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "VIP Rank - 55 DP", GOSSIP_SENDER_MAIN, 4004);
-                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "VIP II Token - 75 DP", GOSSIP_SENDER_MAIN, 4006);
-                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Upgrade to VIP II (This Work if you have VIP 1)- 311 DP", GOSSIP_SENDER_MAIN, 4007);
-                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Signet of Berserking - 10 DP", GOSSIP_SENDER_MAIN, 14010);
-                
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
-                player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
-                return true;
-                break;
-			case 4032:
-				AddItem(player, pCreature, 985410,1,8);
-				break;
-			case 4031:
-				AddItem(player, pCreature, 41596,1,7);
-				break;
-            case 5040:
-                AddItem(player, pCreature, 11,1,5);
-                break;
-            case 4030:
-                AddItem(player, pCreature, 9850100,2,1);
-                break;
-            case 4038:
-                AddItem(player, pCreature, 29435,1,12);
-                break;
-            case 4029:
-                AddItem(player, pCreature, 190,1,10);
-                break;
-            case 4028:
-                AddItem(player, pCreature, 29436,1,10);
-                break;
-			case 14002:
-				AddItem(player, pCreature, 98211,1,3);
-				break;
-			case 14010:
-				AddItem(player, pCreature, 361805,1,10);
-				break;
-            case 4001: // vip token
-				if (player->GetSession()->GetSecurity() >= 1)
-				{
-				player->GetSession()->SendAreaTriggerMessage("Now you can upgrade your Premium to Rank 2, go to Updater Premium Rank NPC in mall");
-				AddItem(player, pCreature, 320264,1,11);
-				player->CLOSE_GOSSIP_MENU();
-				}
-				else
-					if (player->GetSession()->GetSecurity() >= 0)
-				{
-					player->GetSession()->SendAreaTriggerMessage("update your rank to |cffFF0000Premium|r rank 1 first before update to rank 2 !!");
-					player->CLOSE_GOSSIP_MENU();
-				}
-                break;
-            case 4002:
-                AddItem(player, pCreature, 270002,1,4);
-                break;
-            case 4003:
-                AddItem(player, pCreature, 361802,1,5);
-                break;
-            case 4004:
-                AddItem(player, pCreature, 313370,1,55);
-                break;
-            case 4005: //donation armor token
-                AddItem(player, pCreature, 27,1,5);
-                break;
-            case 4006:
-                AddItem(player, pCreature, 13,1,75);
-                break;
-            case 4007:
-                AddItem(player, pCreature, 14,1,15);
-                break;
-            case 4008:
-                AddItem(player, pCreature, 10,1,6);
-                break;
-            case 4010:
-                AddItem(player, pCreature, 11,1,10);
-                break;
-				
+			
 		case 32000: //royal weapon
                 player->PlayerTalkClass->ClearMenus();
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "One-Handed Weapons", GOSSIP_SENDER_MAIN, 32001);

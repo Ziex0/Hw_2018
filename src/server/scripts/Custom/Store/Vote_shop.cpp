@@ -1,25 +1,37 @@
+/*
+CREATE TABLE `vote_purchases` (
+	`account_id` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Account Identifier',
+	`character_name` VARCHAR(12) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`character_guid` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
+	`vote_item_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`vote_item_name` VARCHAR(60) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`vote_item_amount` INT(10) UNSIGNED NOT NULL DEFAULT '1',
+	`date` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00'
+)
+COMMENT='Write here a comment if this has been refunded or not.'
+COLLATE='latin1_swedish_ci'
+ENGINE=MyISAM
+;
+*/
 #include "ScriptPCH.h"
 #include <cstring>
 #include "ObjectMgr.h"
+#include "Language.h"
+#include "Chat.h"
 
 class Vote_rewarder : public CreatureScript
 {
-    public:
-
-        Vote_rewarder()
-            : CreatureScript("Vote_rewarder")
-        {
-        }
-
+    public:Vote_rewarder() : CreatureScript("Vote_rewarder") {}
+       
         void AddItem(Player* player, Creature* pCreature, int item , int count, int cost)
         {
             QueryResult result;
-            result = CharacterDatabase.PQuery("SELECT vp FROM Web_db.account_data WHERE id = '%u' AND vp >= '0'", player->GetSession()->GetAccountId());
+            result = CharacterDatabase.PQuery("SELECT vp FROM web_db.account_data WHERE id = '%u' AND vp >= '0'", player->GetSession()->GetAccountId());
             char str[200];
             if (!result) // check
             {
                 sprintf(str,"Your have abused our systems and gotten a negative balance on your Vote Points. Your points are set to 0.");
-				LoginDatabase.PQuery("UPDATE Web_db.account_data set vp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
+				LoginDatabase.PQuery("UPDATE web_db.account_data set vp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
                 player->PlayerTalkClass->ClearMenus();
                 OnGossipHello(player, pCreature);
                 pCreature->MonsterSay(str, LANG_UNIVERSAL, player->GetGUID());
@@ -38,24 +50,25 @@ class Vote_rewarder : public CreatureScript
             {
                 if (points <cost)
                 {
-                     sprintf(str,"You dont have Vote Points,you must Update your Voting on www.TheSatria.com!");
+                     sprintf(str,"You broke now,you must update your Voting on www.HeavenWow.Net");
                      player->MonsterWhisper(str,player->GetGUID(),true);
                 }
                 else
                 {
                     if (player->AddItem(item, count))
                     {
-  			   std::string DateTime = "%Y-%m-%d %H:%M:%S";
-			   ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
-               LoginDatabase.PExecute("UPDATE Web_db.account_data Set vp = vp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
-               //LoginDatabase.PExecute("INSERT INTO purchases_vote (account_id, character_name, vote_item_id, vote_item_name, vote_item_amount, date) VALUES ('%u', '%s', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), itemTemplate->Name1.c_str(), count, DateTime.c_str());
-               sprintf(str,"Your points are taken Thank you for your Support!!");
+  			std::string DateTime = "%Y-%m-%d %H:%M:%S";
+			ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
+               LoginDatabase.PExecute("UPDATE web_db.account_data Set vp = vp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
+               //LoginDatabase.PQuery("INSERT INTO web_db.vote_purchases (account_id, character_name, character_guid, vote_item_id, voten_item_name, vote_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
+                        
+               sprintf(str,"Your points are taken, Dont forget to take SCREENSHOT everytime you bought new item.Thank you for your Support!!");
                player->MonsterWhisper(str,player->GetGUID(),true);
 			   player->SaveToDB();
                     }
                     else
                     {
-                        sprintf(str,"Item can't be given maybe or maybe and maybe your bag is full or you already got the item!");
+                        sprintf(str,"Item can't be given maybe your bag is full or you already got the item!");
                         player->MonsterWhisper(str,player->GetGUID(),true);
                     }
 
@@ -67,11 +80,12 @@ class Vote_rewarder : public CreatureScript
 		
     bool OnGossipHello(Player* player, Creature* pCreature)
         {
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Get a preview of the donor items", GOSSIP_SENDER_MAIN, 9998);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:24|tHow much Vote points do I have?", GOSSIP_SENDER_MAIN, 19000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Weapons", GOSSIP_SENDER_MAIN, 2000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
-			
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVote Misc Item", GOSSIP_SENDER_MAIN, 3000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVote Shirt ,Tabard and Cloak", GOSSIP_SENDER_MAIN, 4000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVoting Token, Coin etc", GOSSIP_SENDER_MAIN, 5000);
 			
             player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
 
@@ -83,8 +97,154 @@ class Vote_rewarder : public CreatureScript
             player->PlayerTalkClass->ClearMenus();
 
             switch (uiAction)
-            {            
+            {  
+				case 19000: //point check
+				AddItem(player, pCreature, 0, 0, 0);
+				break;	
 				
+			case 5000:
+                player->PlayerTalkClass->ClearMenus();
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Instant 255 Token - 35 VP", GOSSIP_SENDER_MAIN, 5001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Customizer Token - 25 VP", GOSSIP_SENDER_MAIN, 5002);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Worgen Book - 10 VP", GOSSIP_SENDER_MAIN, 5003);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Token for Armor - 30 VP", GOSSIP_SENDER_MAIN, 5004);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Full Vote Token for Armor - 190 VP", GOSSIP_SENDER_MAIN, 5005);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Na'wa Credit Coin ->", GOSSIP_SENDER_MAIN, 5006);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Molten Core Credit ->", GOSSIP_SENDER_MAIN, 5007);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Dual Wield - 250 DP", GOSSIP_SENDER_MAIN, 5008);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Titan Grip - 350 DP", GOSSIP_SENDER_MAIN, 5009);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(9000, pCreature->GetGUID());
+                return true;
+                break;
+			case 5001:
+                AddItem(player, pCreature,55559,1,35);
+                break;
+			case 5002:
+                AddItem(player, pCreature,31,1,25);
+                break;
+			case 5003:
+                AddItem(player, pCreature,23864,1,10);
+                break;
+			case 5004:
+                AddItem(player, pCreature,32572,1,30);
+                break;
+			case 5005:
+                AddItem(player, pCreature,66002,1,190);
+                break;
+			case 5006:// nawa
+                player->PlayerTalkClass->ClearMenus();
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "10 Na'wa Credit Coin - 10 Vp", GOSSIP_SENDER_MAIN, 5101);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "30 Na'wa Credit Coin - 30 VP", GOSSIP_SENDER_MAIN, 5102);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "50 Na'wa Credit Coin - 45 Vp", GOSSIP_SENDER_MAIN, 5103);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(9000, pCreature->GetGUID());
+                return true;
+                break;
+			case 5101:
+                AddItem(player, pCreature,86100,10,10);
+                break;
+			case 5102:
+                AddItem(player, pCreature,86100,30,30);
+                break;
+			case 5103:
+                AddItem(player, pCreature,86100,50,45);
+                break;
+			case 5007:// moltencore
+                player->PlayerTalkClass->ClearMenus();
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "10 Molten Core Credit - 20 Vp", GOSSIP_SENDER_MAIN, 5701);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "30 Molten Core Credit - 60 VP", GOSSIP_SENDER_MAIN, 5702);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "50 Molten Core Credit - 90 Vp", GOSSIP_SENDER_MAIN, 5703);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(9000, pCreature->GetGUID());
+                return true;
+                break;
+			case 5701:
+                AddItem(player, pCreature,86101,10,20);
+                break;
+			case 5702:
+                AddItem(player, pCreature,86101,30,60);
+                break;
+			case 5703:
+                AddItem(player, pCreature,86101,50,90);
+                break;
+			case 5008:
+                AddItem(player, pCreature, 90900, 1, 250);
+                break;
+			case 5009:
+                AddItem(player, pCreature, 90901, 1, 350);
+                break;
+				
+			case 4000:
+                player->PlayerTalkClass->ClearMenus();
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Shirt - 35 VP", GOSSIP_SENDER_MAIN, 4001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Cloak - 35 VP", GOSSIP_SENDER_MAIN, 4002);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Caster Tabard - 30 VP", GOSSIP_SENDER_MAIN, 4003);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Melee Tabard - 30 VP", GOSSIP_SENDER_MAIN, 4004);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Range Tabard - 30 VP", GOSSIP_SENDER_MAIN, 4005);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(9000, pCreature->GetGUID());
+                return true;
+                break;
+			case 4001:
+                AddItem(player, pCreature,85024,1,35);
+                break;
+			case 4002:
+                AddItem(player, pCreature,85022,1,35);
+                break;
+			case 4003:
+                AddItem(player, pCreature,90902,1,30);
+                break;
+			case 4004:
+                AddItem(player, pCreature,38134,1,30);
+                break;
+			case 4005:
+                AddItem(player, pCreature,90903,1,30);
+                break;
+				
+			case 3000:
+                player->PlayerTalkClass->ClearMenus();
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Melee Ring - 30 VP", GOSSIP_SENDER_MAIN, 3001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Caster Ring - 30 VP", GOSSIP_SENDER_MAIN, 3002);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Range Ring - 30 VP", GOSSIP_SENDER_MAIN, 3003);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Melee Trinket - 30 VP", GOSSIP_SENDER_MAIN, 3004);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Caster Trinket - 30 VP", GOSSIP_SENDER_MAIN, 3005);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Range Trinket - 30 VP", GOSSIP_SENDER_MAIN, 3006);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Melee Amulet - 30 VP", GOSSIP_SENDER_MAIN, 3007);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Caster Amulet - 30 VP", GOSSIP_SENDER_MAIN, 3008);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Range Amulet - 30 VP", GOSSIP_SENDER_MAIN, 3009);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(9000, pCreature->GetGUID());
+                return true;
+                break;
+			case 3001:
+                AddItem(player, pCreature,99080,1,30);
+                break;
+			case 3002:
+                AddItem(player, pCreature,99083,1,30);
+                break;
+			case 3003:
+                AddItem(player, pCreature,99086,1,30);
+                break;
+			case 3004:
+                AddItem(player, pCreature,99081,1,30);
+                break;
+			case 3005:
+                AddItem(player, pCreature,99085,1,30);
+                break;
+			case 3006:
+                AddItem(player, pCreature,99088,1,30);
+                break;
+			case 3007:
+                AddItem(player, pCreature,99082,1,30);
+                break;
+			case 3008:
+                AddItem(player, pCreature,99084,1,30);
+                break;
+			case 3009:
+                AddItem(player, pCreature,99087,1,30);
+                break;
+
             case 2000:
                 player->PlayerTalkClass->ClearMenus();
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "One-Handed Weapons", GOSSIP_SENDER_MAIN, 2001);
@@ -96,22 +256,25 @@ class Vote_rewarder : public CreatureScript
                 player->PlayerTalkClass->SendGossipMenu(9000, pCreature->GetGUID());
                 return true;
                 break;
+				
             case 2001:
                 player->PlayerTalkClass->ClearMenus();
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote One Hand Sword - 40 VP", GOSSIP_SENDER_MAIN, 2101);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote One Hand Axe  - 40 VP", GOSSIP_SENDER_MAIN, 2102);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote One Hand Mace - 40 VP", GOSSIP_SENDER_MAIN, 2103);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Dagger  - 40 VP", GOSSIP_SENDER_MAIN, 2104);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Fist  - 40 VP", GOSSIP_SENDER_MAIN, 2105);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Fist Offhand  - 40 VP", GOSSIP_SENDER_MAIN, 2106);
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Vote Spell Dagger  - 40 VP", GOSSIP_SENDER_MAIN, 2105);				
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
                 return true;
                 break;
             case 2101:
-                AddItem(player, pCreature,55248,1,40);
+                AddItem(player, pCreature,50248,1,40);
                 break;
 			case 2102:
-                AddItem(player, pCreature,55290,1,40);
+                AddItem(player, pCreature,50290,1,40);
                 break;
 			case 2103:
                 AddItem(player, pCreature,51937,1,40);
@@ -120,9 +283,11 @@ class Vote_rewarder : public CreatureScript
                 AddItem(player, pCreature,33543,1,40);
                 break;
 			case 2105:
-                AddItem(player, pCreature,200228,1,40);
+                AddItem(player, pCreature,32189,1,40);
                 break;
-			
+			case 2106:
+                AddItem(player, pCreature,32188,1,40);
+                break;
 				
             case 2002:
                 player->PlayerTalkClass->ClearMenus();
