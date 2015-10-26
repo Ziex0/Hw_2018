@@ -5181,6 +5181,7 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
 				cooldown_spell_id = 39511;
 				break;
 			case CLASS_ROGUE:                   // 39511, 40997, 40998, 41002, 41005, 41011
+				case CLASS_SPEEDSTER:
 			case CLASS_WARRIOR:                 // 39511, 40997, 40998, 41002, 41005, 41011
 			case CLASS_BERSERKER:
 			case CLASS_DEATH_KNIGHT:
