@@ -1769,6 +1769,28 @@ public:
 				pPlayer->learnSpell(669, false);
 				pPlayer->learnSpell(46917, false);
 				pPlayer->learnSpell(674, false);
+				pPlayer->learnSpell (23885, false);
+				pPlayer->learnSpell (23881,false);
+				pPlayer->learnSpell (34846,false);
+				pPlayer->learnSpell (59653,false);
+				pPlayer->learnSpell (12162,false);
+				pPlayer->learnSpell (12850,false);
+				pPlayer->learnSpell (12868,false);
+				pPlayer->learnSpell (12721,false);
+				pPlayer->learnSpell (20647,false);
+				pPlayer->learnSpell (58367,false);
+				pPlayer->learnSpell (63326,false);
+				pPlayer->learnSpell (65156,false);
+				pPlayer->learnSpell (64976,false);
+				pPlayer->learnSpell (12976,false);
+				pPlayer->learnSpell (50783,false);
+				pPlayer->learnSpell (26654,false);
+				pPlayer->learnSpell (53385,false);
+
+				pPlayer->learnSpell (20911,false);
+				pPlayer->learnSpell (25899,false);
+				pPlayer->learnSpell (63944,false);
+				pPlayer->learnSpell (68066,false);
 				break;
 				
 			case GOSSIP_ACTION_INFO_DEF + 3000:

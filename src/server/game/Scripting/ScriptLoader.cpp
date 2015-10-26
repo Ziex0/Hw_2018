@@ -1331,7 +1331,7 @@ void AddBattlegroundScripts()
 	void AddSC_NPC_VisualWeapon();
 	//void AddSC_pet_tut();
 	void AddSC_beastmaster_npc();
-	void AddSC_Script_Encantamentos();
+	void AddSC_npc_enchantment();
 	void AddSC_Packet_Protection();
 	void AddSC_PWS_Transmogrification();
 	void AddSC_CS_Transmogrification();
@@ -1446,7 +1446,7 @@ void AddCustomScripts()
 	//AddSC_pet_tut();
 	AddSC_beastmaster_npc(); 
 	AddSC_Packet_Protection();
-	AddSC_Script_Encantamentos();
+	AddSC_npc_enchantment();
 	AddSC_PWS_Transmogrification();
 	AddSC_CS_Transmogrification();
 	///AddSC_npc_fusion();
