@@ -1,4 +1,3 @@
-
 #include "ScriptPCH.h"
 #include "Config.h"
 
@@ -90,12 +89,12 @@ MenusLista mvData[] =
 	{ 100, 10, 4, 0, 0, 0, 0, 0, "[Enchant Chest]" },
 	{ 100, 11, 4, 0, 0, 0, 0, 0, "[Enchant Bracers]" },
 	{ 100, 12, 4, 0, 0, 0, 0, 0, "[Enchant Gloves]" },
-	{ 100, 150, 4, 0, 0, 0, 0, 0, "[NULL]" },
+	//{ 100, 150, 4, 0, 0, 0, 0, 0, "[NULL]" },
 	{ 100, 13, 4, 0, 0, 0, 0, 0, "[Eternal Belt Buckle]" }, //EQUIPMENT_SLOT_WAIST
 	{ 100, 14, 4, 0, 0, 0, 0, 0, "[Enchant Legs]" },	
 	{ 100, 15, 4, 0, 0, 0, 0, 0, "[Enchant Boots]" },
 	{ 100, 16, 4, 0, 333, 450, 0, 0, "Enchant Rings" }, // Requer SKILL_ENCHANTING 450
-	{ 100, 1, 8, 99, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20|t<< Voltar|r" },
+	{ 100, 1, 8, 99, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14|t<< Back|r" },
 	
 	{ 99, 0, 6, 15, 0, 0, 0, 0, "[Enchant Weapon]" },
 	{ 99, 0, 6, 16, 0, 0, 0, 0, "[Enchant OffHand]" },
@@ -110,7 +109,7 @@ MenusLista mvData[] =
 	{ 99, 0, 6, 6, 0, 0, 0, 0, "[Enchant Legs]" },
 	{ 99, 0, 6, 7, 0, 0, 0, 0, "[Enchant Boots]" },
 	{ 99, 98, 6, 0, 333, 450, 0, 0, "Enchant Rings" },
-	{ 99, 1, 8, 99, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20|t<< Voltar|r" },
+	{ 99, 1, 8, 99, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14|t<< Back|r" },
 	
 	// Show1HWeaponMenu			EQUIPMENT_SLOT_MAINHAND		
 	{ 2, 0, 2, 15, 0, 0, 6, 3369, "Rune of Cinderglacier" }, // Exclusivo para classe DK
@@ -130,7 +129,7 @@ MenusLista mvData[] =
 	{ 2, 0, 2, 15, 0, 0, 0, 3789, "Berserking -- 400 Attack Power Proc" },
 	{ 2, 0, 2, 15, 0, 0, 0, 1103, "Exceptional Agility -- 26 Agility" },
 	{ 2, 5, 2, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_book_04:20|tMias+ >>|r" }, //Proxima tela
-	{ 2, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20|t<< Voltar|r" },
+	{ 2, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14|t<< Back|r" },
 	
 	{ 5, 0, 2, 15, 0, 0, 0, 3844, "Exceptional Spirit -- 45 Spirit" },
 	{ 5, 0, 2, 15, 0, 0, 0, 3225, "Executioner -- 120 Arm Pen Proc" },
@@ -142,7 +141,7 @@ MenusLista mvData[] =
 	{ 5, 0, 2, 15, 0, 0, 0, 3851, "Titanguard -- 50 Stamina" },
 	{ 5, 0, 2, 15, 0, 0, 0, 3731, "Titanium Weapon Chain -- Less Disarm Time" },
 	{ 5, 2, 2, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_book_04:20|t<< Menos-|r" },
-	{ 5, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20|t<< Voltar|r" },
+	{ 5, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14|t<< Back|r" },
 
 	// Show1HWeaponMenu			EQUIPMENT_SLOT_OFFHAND		
 	{ 111, 0, 2, 16, 0, 0, 6, 3369, "Rune of Cinderglacier" }, // Exclusivo para classe DK
@@ -162,7 +161,7 @@ MenusLista mvData[] =
 	{ 111, 0, 2, 16, 0, 0, 0, 3789, "Berserking -- 400 Attack Power Proc" },
 	{ 111, 0, 2, 16, 0, 0, 0, 1103, "Exceptional Agility -- 26 Agility" },
 	{ 111, 55, 2, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_book_04:20|tMias+ >>|r" }, //Proxima tela
-	{ 111, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20|t<< Voltar|r" },
+	{ 111, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14|t<< Back|r" },
 
 	{ 55, 0, 2, 16, 0, 0, 0, 3844, "Exceptional Spirit -- 45 Spirit" },
 	{ 55, 0, 2, 16, 0, 0, 0, 3225, "Executioner -- 120 Arm Pen Proc" },
@@ -174,7 +173,7 @@ MenusLista mvData[] =
 	{ 55, 0, 2, 16, 0, 0, 0, 3851, "Titanguard -- 50 Stamina" },
 	{ 55, 0, 2, 16, 0, 0, 0, 3731, "Titanium Weapon Chain -- Less Disarm Time" },
 	{ 55, 111, 2, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_book_04:20|t<< Menos-|r" },
-	{ 55, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20|t<< Voltar|r" },
+	{ 55, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14|t<< Back|r" },
 
 	// Show2HWeaponMenu 			EQUIPMENT_SLOT_MAINHAND			
 	{ 3, 0, 2, 15, 0, 0, 6, 3369, "Rune of Cinderglacier" }, // Exclusivo para classe DK
@@ -191,7 +190,7 @@ MenusLista mvData[] =
 	{ 3, 0, 2, 15, 0, 0, 0, 2670, "Major Agility -- 35 Agility" },
 	{ 3, 0, 2, 15, 0, 0, 0, 3827, "Massacre -- 110 Attack Power" },
 	{ 3, 0, 2, 15, 0, 0, 0, 2673, "Mongoose --120 Agility Proc" },
-	{ 3, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20|t<< Voltar|r" },
+	{ 3, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14|t<< Back|r" },
 
 	// Show2HWeaponMenu 			EQUIPMENT_SLOT_OFFHAND  Só para Warrior	
 	{ 112, 0, 2, 16, 0, 0, 1, 3789, "Berserking -- 400 Attack Power Proc" },
@@ -200,12 +199,12 @@ MenusLista mvData[] =
 	{ 112, 0, 2, 16, 0, 0, 1, 2670, "Major Agility -- 35 Agility" },
 	{ 112, 0, 2, 16, 0, 0, 1, 3827, "Massacre -- 110 Attack Power" },
 	{ 112, 0, 2, 16, 0, 0, 1, 2673, "Mongoose --120 Agility Proc" },
-	{ 112, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20|t<< Voltar|r" },
+	{ 112, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14|t<< Back|r" },
 
 	//ShowRangedMenu            EQUIPMENT_SLOT_RANGED
 	{ 4, 0, 2, 17, 0, 0, 0, 3608, "|TInterface\\icons\\inv_misc_spyglass_02:18:18:-15:0|tHeartseeker Scope" }, // Hunter e warrior
 	{ 4, 0, 2, 17, 0, 0, 3, 3607, "|TInterface\\icons\\inv_misc_spyglass_02:18:18:-15:0|tSun Scope" }, // Somente para hunter
-	{ 4, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20|t<< Voltar|r" },
+	{ 4, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14|t<< Back|r" },
 
 	//ShowShieldMenu           EQUIPMENT_SLOT_OFFHAND   INVTYPE_SHIELD
 	{ 6, 0, 2, 16, 0, 0, 0, 1952, "|TInterface\\icons\\inv_misc_note_01:18:18:-15:0|tDefense -- 20 Defense" }, //30:30:-18:0
@@ -214,7 +213,7 @@ MenusLista mvData[] =
 	{ 6, 0, 2, 16, 0, 0, 0, 3229, "|TInterface\\icons\\inv_misc_note_01:18:18:-15:0|tResilience -- 12 Resilience" },
 	{ 6, 0, 2, 16, 0, 0, 0, 3849, "|TInterface\\icons\\inv_misc_note_01:18:18:-15:0|tTitanium Plating -- 36 Block" },
 	{ 6, 0, 2, 16, 0, 0, 0, 3748, "|TInterface\\icons\\inv_misc_note_01:18:18:-15:0|tTitanium Shield Spike -- 81 Block + 50% less Disarm" },
-	{ 6, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 6, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 
 	//ShowHeadMenu	      0 = EQUIPMENT_SLOT_HEAD	
 	{ 7, 0, 2, 0, 0, 0, 0, 3819, "|TInterface\\icons\\ability_warrior_shieldmastery:18:18:-15:0|tArc. - 30 Spell Power + 10 Mp5" },
@@ -224,7 +223,7 @@ MenusLista mvData[] =
 	{ 7, 0, 2, 0, 0, 0, 0, 3818, "|TInterface\\icons\\ability_warrior_shieldmastery:18:18:-15:0|tArc. - 37 Stamina + 20 Defense" },
 	{ 7, 0, 2, 0, 0, 0, 0, 3817, "|TInterface\\icons\\ability_warrior_shieldmastery:18:18:-15:0|tArc. - 50 Attack Power + 20 Crit" },
 	{ 7, 0, 2, 0, 0, 0, 0, 3795, "|TInterface\\icons\\ability_warrior_shieldmastery:18:18:-15:0|tArc. - 50 Attack Power + 20 Resil" },
-	{ 7, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 7, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 
 	//ShowShouldersMenu      EQUIPMENT_SLOT_SHOULDERS
 	{ 8, 0, 2, 2, 773, 450, 0, 3835, "|TInterface\\icons\\inv_axe_85:18:18:-15:0|tMaster's Inscription of the Axe" }, // Requer SKILL_INSCRIPTION 450
@@ -237,7 +236,7 @@ MenusLista mvData[] =
 	{ 8, 0, 2, 2, 0, 0, 0, 3811, "|TInterface\\icons\\inv_axe_85:18:18:-15:0|tGladiator - 20 Dodge + 15 Defense" },
 	{ 8, 0, 2, 2, 0, 0, 0, 3810, "|TInterface\\icons\\inv_axe_85:18:18:-15:0|tStorm - 24 Spell Power + 15 Crit" },
 	{ 8, 0, 2, 2, 0, 0, 0, 3794, "|TInterface\\icons\\inv_axe_85:18:18:-15:0|tDominance - 23 Spel Pow + 15 Resil" },	
-	{ 8, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 8, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 
 	//ShowCloakMenu			EQUIPMENT_SLOT_BACK
 	{ 9, 0, 2, 14, 202, 450, 0, 3859, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tSpringy Arachnoweave" }, //Requer SKILL_ENGINEERING 450
@@ -252,14 +251,14 @@ MenusLista mvData[] =
 	{ 9, 0, 2, 14, 0, 0, 0, 3294, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tMighty Armor - 225 Armor" },
 	{ 9, 0, 2, 14, 0, 0, 0, 1099, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tMajor Agility - 22 Agility" },
 	{ 9, 0, 2, 14, 0, 0, 0, 3831, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tGreater Speed - 23 Haste" },
-	{ 9, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 9, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 
 	{ 10, 0, 2, 4, 0, 0, 0, 3233, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tExceptional Mana - 150 Mana" },
 	{ 10, 0, 2, 4, 0, 0, 0, 3533, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tGreater Mana Restoration - 10 Mp5" },
 	{ 10, 0, 2, 4, 0, 0, 0, 3245, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tExceptional Resilience - 20 Resilience" },
 	{ 10, 0, 2, 4, 0, 0, 0, 3297, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tSuper Health - 225 Health" },
 	{ 10, 0, 2, 4, 0, 0, 0, 3832, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|t10 of all stats" },
-	{ 10, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 10, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 
 	//ShowBracerMenu		EQUIPMENT_SLOT_WRISTS
 	{ 11, 0, 2, 8, 0, 0, 0, 3845, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tGreater Assault - 50 Attack Power" },
@@ -278,7 +277,7 @@ MenusLista mvData[] =
 	{ 11, 0, 2, 8, 165, 450, 0, 3761, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tFur Lining: Shadow Resist" }, //Reuqer SKILL_LEATHERWORKING 450
 	{ 11, 0, 2, 8, 165, 450, 0, 3760, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tFur Lining: Frost Resist" }, //Reuqer SKILL_LEATHERWORKING 450
 	{ 11, 0, 2, 8, 165, 450, 0, 3759, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tFur Lining: Fire Resist" }, //Reuqer SKILL_LEATHERWORKING 450
-	{ 11, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 11, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 
 	//ShowGlovesMenu		EQUIPMENT_SLOT_HANDS
 	{ 12, 0, 2, 9, 0, 0, 0, 3253, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tArmsman - 2% Threat 10 Parry" },
@@ -290,12 +289,12 @@ MenusLista mvData[] =
 	{ 12, 0, 2, 9, 164, 450, 0, 3723, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tSocket Gloves" }, //Requer SKILL_BLACKSMITHING 450
 	{ 12, 0, 2, 9, 202, 450, 0, 3603, "|TInterface\\icons\\inv_misc_enggizmos_01:18:18:-15:0|tHand-Mounted Pyro Rocket" }, //Requer SKILL_ENGINEERING 450
 	{ 12, 0, 2, 9, 202, 450, 0, 3604, "|TInterface\\icons\\inv_misc_enggizmos_01:18:18:-15:0|tHyperspeed Accelerators" }, //Requer SKILL_ENGINEERING 450
-	{ 12, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 12, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 
 	//ShowBeltMenu			EQUIPMENT_SLOT_WAIST
 	{ 13, 0, 4, 5, 0, 0, 0, 3729, "|TInterface\\icons\\inv_belt_36:18:18:-15:0|tEternal Belt Buckle" },
 	{ 13, 0, 4, 5, 202, 450, 0, 3601, "|TInterface\\icons\\trade_engineering:18:18:-15:0|tFrag Belt" }, //Requer SKILL_ENGINEERING 450
-	{ 13, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 13, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 
 	//ShowLegsMenu			EQUIPMENT_SLOT_LEGS
 	{ 14, 0, 4, 6, 0, 0, 0, 3822, "|TInterface\\icons\\inv_misc_armorkit_32:18:18:-15:0|tLeg Armor - 55 Stam 22 Agil" },
@@ -303,7 +302,7 @@ MenusLista mvData[] =
 	{ 14, 0, 4, 6, 0, 0, 0, 3853, "|TInterface\\icons\\inv_misc_armorkit_18:18:18:-15:0|tLeg Armor - 40 Resil 28 Stam" },
 	{ 14, 0, 4, 6, 0, 0, 0, 3873, "|TInterface\\icons\\spell_nature_astralrecalgroup:18:18:-15:0|tSpellthread - 50 SP 30 Stam" },
 	{ 14, 0, 4, 6, 0, 0, 0, 3872, "|TInterface\\icons\\spell_nature_astralrecalgroup:18:18:-15:0|tSpellthread - 50 SP 22 Spirit" },
-	{ 14, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 14, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 
 	//ShowBootsMenu			EQUIPMENT_SLOT_FEET 
 	{ 15, 15, 4, 0, 0, 0, 0, 0, "" },
@@ -314,26 +313,26 @@ MenusLista mvData[] =
 	{ 15, 0, 4, 7, 202, 450, 0, 3606, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tNitro Boosts" }, //Requer SKILL_ENGINEERING 450
 	{ 15, 0, 4, 7, 202, 450, 0, 983, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tSuperior Agility - 16 Agility" }, //Requer SKILL_ENGINEERING 450
 	{ 15, 0, 4, 7, 202, 450, 0, 3232, "|TInterface\\icons\\inv_enchant_formulagood_01:18:18:-15:0|tVitality - 15 Stam + Speed Increase" }, //Requer SKILL_ENGINEERING 450
-	{ 15, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 15, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 
 	//ShowRingsMenu
 	{ 16, 17, 4, 0, 333, 450, 0, 0, "|TInterface/PaperDoll/UI-PaperDoll-Slot-Finger:30:30:-15:0|tFinger 1" },
 	{ 16, 18, 4, 0, 333, 450, 0, 0, "|TInterface/PaperDoll/UI-PaperDoll-Slot-Finger:30:30:-15:0|tFinger 2" },
-	{ 16, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 16, 100, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 	//EQUIPMENT_SLOT_FINGER1 = 10
 	{ 17, 0, 4, 10, 0, 0, 0, 3839, "|TInterface\\icons\\inv_enchant_formulasuperior_01:18:18:-15:0|tAssault" },
 	{ 17, 0, 4, 10, 0, 0, 0, 3840, "|TInterface\\icons\\inv_enchant_formulasuperior_01:18:18:-15:0|tGreater Spellpower" },
 	{ 17, 0, 4, 10, 0, 0, 0, 3791, "|TInterface\\icons\\inv_enchant_formulasuperior_01:18:18:-15:0|tStamina" },
-	{ 17, 16, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 17, 16, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 	//EQUIPMENT_SLOT_FINGER2 = 11
 	{ 18, 0, 4, 11, 0, 0, 0, 3839, "|TInterface\\icons\\inv_enchant_formulasuperior_01:18:18:-15:0|tAssault" },
 	{ 18, 0, 4, 11, 0, 0, 0, 3840, "|TInterface\\icons\\inv_enchant_formulasuperior_01:18:18:-15:0|tGreater Spellpower" },
 	{ 18, 0, 4, 11, 0, 0, 0, 3791, "|TInterface\\icons\\inv_enchant_formulasuperior_01:18:18:-15:0|tStamina" },
-	{ 18, 16, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" },
+	{ 18, 16, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" },
 	//Remover encatamentos de rings
 	{ 98, 0, 6, 10, 0, 0, 0, 0, "|TInterface/PaperDoll/UI-PaperDoll-Slot-Finger:30:30:-15:0|tFinger1->" },
 	{ 98, 0, 6, 11, 0, 0, 0, 0, "|TInterface/PaperDoll/UI-PaperDoll-Slot-Finger:30:30:-15:0|tFinger2->"},
-	{ 98, 99, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:20:20:-15:0|t<< Voltar|r" }
+	{ 98, 99, 8, 0, 0, 0, 0, 0, "|cff0000FF|TInterface\\icons\\inv_misc_questionmark:14:20:-15:0|t<< Back|r" }
 };
 uint32 GetText(unsigned int menu, Player* pPlayer)
 {
@@ -395,6 +394,10 @@ bool playerCheckClasse(uint8 playerClass, unsigned char pcc)
 		break;
 	case CLASS_ROGUE:
 		if (playerClass == CLASS_ROGUE)
+			Show = true;
+		break;
+	case CLASS_BERSERKER:
+		if (playerClass == CLASS_BERSERKER)
 			Show = true;
 		break;
 	}

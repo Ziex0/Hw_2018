@@ -136,8 +136,6 @@ public:
         SkillLineEntry const *SkillInfo = sSkillLineStore.LookupEntry(skill);
 		skill_name = SkillInfo->name[handler.GetSessionDbcLocale()];
 
-       
-
         LearnSkillRecipesHelper(pPlayer, SkillInfo->id);
 
         uint16 maxLevel = pPlayer->GetPureMaxSkillValue(SkillInfo->id);
