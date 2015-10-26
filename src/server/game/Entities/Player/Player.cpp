@@ -7221,8 +7221,8 @@ void Player::GetDodgeFromAgility(float &diminishing, float &nondiminishing)
          0.024211f, // Warlock
          0.0f,      // ??
          0.056097f,  // Druid
-		 0.034943f, // berserker
-		 0.020957f // SPEEDSTER
+		 0.034943f // berserker
+		
 
     };
     // Crit/agility to dodge/agility coefficient multipliers; 3.2.0 increased required agility by 15%
@@ -7239,8 +7239,8 @@ void Player::GetDodgeFromAgility(float &diminishing, float &nondiminishing)
          0.97f/1.15f,    // Warlock (?)
          0.0f,           // ??
          2.00f/1.15f,     // Druid
-		 1.00f/1.15f,    // berserker
-		 2.00f/1.15f    // SPEEDSTER
+		 1.00f/1.15f    // berserker
+
     };
 
     uint8 level = getLevel();
@@ -13661,7 +13661,7 @@ InventoryResult Player::CanRollForItemInLFG(ItemTemplate const* proto, WorldObje
                 return EQUIP_ERR_CANT_DO_RIGHT_NOW;
         }
 
-        if (_class == CLASS_ROGUE || _class == CLASS_DRUID || _class == CLASS_SPEEDSTER)
+        if (_class == CLASS_ROGUE || _class == CLASS_DRUID )
             if (proto->SubClass != ITEM_SUBCLASS_ARMOR_LEATHER)
                 return EQUIP_ERR_CANT_DO_RIGHT_NOW;
 

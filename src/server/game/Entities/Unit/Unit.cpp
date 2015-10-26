@@ -5181,7 +5181,6 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
 				cooldown_spell_id = 39511;
 				break;
 			case CLASS_ROGUE:                   // 39511, 40997, 40998, 41002, 41005, 41011
-				case CLASS_SPEEDSTER:
 			case CLASS_WARRIOR:                 // 39511, 40997, 40998, 41002, 41005, 41011
 			case CLASS_BERSERKER:
 			case CLASS_DEATH_KNIGHT:
@@ -7173,11 +7172,26 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
 					break;
 				}
 
-			if (pPet && pPet->getVictim() && damage && procSpell)
+			 if (pPet && damage)
 			{
-				uint32 procDmg = damage / 2;
-				pPet->SendSpellNonMeleeDamageLog(pPet->getVictim(), procSpell->Id, procDmg, procSpell->GetSchoolMask(), 0, 0, false, 0, false);
-				pPet->DealDamage(pPet->getVictim(), procDmg, NULL, SPELL_DIRECT_DAMAGE, procSpell->GetSchoolMask(), procSpell, true);
+				if (procSpell)
+                    {
+                        uint32 procDmg = damage / 2;
+                        pPet->SendSpellNonMeleeDamageLog(victim, procSpell->Id, procDmg, procSpell->GetSchoolMask(), 0, 0, false, 0, false);
+                        pPet->DealDamage(victim, procDmg, NULL, SPELL_DIRECT_DAMAGE, procSpell ? procSpell->GetSchoolMask() : SPELL_SCHOOL_MASK_NORMAL, procSpell ? procSpell : NULL, true);
+                    }
+                    else
+                    {
+                        CalcDamageInfo damageInfo;
+                        CalculateMeleeDamage(victim, 0, &damageInfo, BASE_ATTACK);
+                        damageInfo.attacker = pPet;
+                        damageInfo.damage = damageInfo.damage / 2;
+                        // Send log damage message to client
+                        pPet->DealDamageMods(victim, damageInfo.damage, &damageInfo.absorb);
+                        pPet->SendAttackStateUpdate(&damageInfo);
+                        pPet->ProcDamageAndSpell(damageInfo.target, damageInfo.procAttacker, damageInfo.procVictim, damageInfo.procEx, damageInfo.damage, damageInfo.attackType);
+                        pPet->DealMeleeDamage(&damageInfo, true);
+                    }
 				break;
 			}
 			else

@@ -311,7 +311,6 @@ class spell_item_flask_of_the_north : public SpellScriptLoader
                         possibleSpells.push_back(SPELL_FLASK_OF_THE_NORTH_STR);
                         break;
                     case CLASS_ROGUE:
-					case CLASS_SPEEDSTER:
                     case CLASS_HUNTER:
                         possibleSpells.push_back(SPELL_FLASK_OF_THE_NORTH_AP);
                         break;
