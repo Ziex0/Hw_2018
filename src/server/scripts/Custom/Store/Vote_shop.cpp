@@ -111,8 +111,8 @@ class Vote_rewarder : public CreatureScript
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Full Vote Token for Armor - 190 VP", GOSSIP_SENDER_MAIN, 5005);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Na'wa Credit Coin ->", GOSSIP_SENDER_MAIN, 5006);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Molten Core Credit ->", GOSSIP_SENDER_MAIN, 5007);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Dual Wield - 250 DP", GOSSIP_SENDER_MAIN, 5008);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Titan Grip - 350 DP", GOSSIP_SENDER_MAIN, 5009);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Dual Wield - 250 VP", GOSSIP_SENDER_MAIN, 5008);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Titan Grip - 350 VP", GOSSIP_SENDER_MAIN, 5009);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(9000, pCreature->GetGUID());
                 return true;
