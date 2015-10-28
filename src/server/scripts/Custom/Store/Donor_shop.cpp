@@ -84,10 +84,8 @@ class donorrewarder : public CreatureScript
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonation Token ,Coin", GOSSIP_SENDER_MAIN, 4000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSupreme Donor Weapons", GOSSIP_SENDER_MAIN, 2000);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
-			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDual Wield - 10 DP", GOSSIP_SENDER_MAIN, 30000);
-			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rTitan_Grip - 20 DP", GOSSIP_SENDER_MAIN, 20000);
-            //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSpecial Items", GOSSIP_SENDER_MAIN, 5000);
-			//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rRelics", GOSSIP_SENDER_MAIN, 6000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSpecial Items", GOSSIP_SENDER_MAIN, 5000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rRelics", GOSSIP_SENDER_MAIN, 6666);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Tabard - 7 Dp", GOSSIP_SENDER_MAIN, 10000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Cloak - 10 DP", GOSSIP_SENDER_MAIN, 11000);
             //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Set - 23 DP ( 8 Pieces )", GOSSIP_SENDER_MAIN, 12000);
@@ -361,29 +359,62 @@ class donorrewarder : public CreatureScript
 			}
 			break;
 			
+			case 6666:
+                player->PlayerTalkClass->ClearMenus();
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Relic - 5 DP ->", GOSSIP_SENDER_MAIN, 6000);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Heaven God Relic - 5 DP ->", GOSSIP_SENDER_MAIN, 7000);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
+                return true;
+                break;
+				
 			case 6000:
                 player->PlayerTalkClass->ClearMenus();
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen of Dragon Idol - 9 DP", GOSSIP_SENDER_MAIN, 6001);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen of Dragon Totem - 9 DP", GOSSIP_SENDER_MAIN, 6002);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen of Dragon Sigil - 9 DP", GOSSIP_SENDER_MAIN, 6003);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Fallen of Dragon Libram - 9 DP", GOSSIP_SENDER_MAIN, 6004);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Idol - 5 DP", GOSSIP_SENDER_MAIN, 6001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Totem - 5 DP", GOSSIP_SENDER_MAIN, 6002);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Sigil - 5 DP", GOSSIP_SENDER_MAIN, 6003);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Supreme Libram - 5 DP", GOSSIP_SENDER_MAIN, 6004);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
                 return true;
                 break;
 			
 			case 6001:
-                AddItem(player, pCreature,210004,1,9);
+                AddItem(player, pCreature,200004,1,5);
                 break;
             case 6002:
-                AddItem(player, pCreature,210006,1,9);
+                AddItem(player, pCreature,200007,1,5);
                 break;
             case 6003:
-                AddItem(player, pCreature,210002,1,9);
+                AddItem(player, pCreature,200006,1,5);
 				break;
 			case 6004:
-                AddItem(player, pCreature,210001,1,9);
-				break;				            
+                AddItem(player, pCreature,200005,1,5);
+				break;		
+			
+			case 7000:
+                player->PlayerTalkClass->ClearMenus();
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Heaven God Idol - 8 DP", GOSSIP_SENDER_MAIN, 7001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Heaven God Totem - 8 DP", GOSSIP_SENDER_MAIN, 7002);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Heaven God Sigil - 8 DP", GOSSIP_SENDER_MAIN, 7003);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Heaven God Libram - 8 DP", GOSSIP_SENDER_MAIN, 7004);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
+                return true;
+                break;
+			
+			case 7001:
+                AddItem(player, pCreature,310004,1,8);
+                break;
+            case 7002:
+                AddItem(player, pCreature,310007,1,8);
+                break;
+            case 7003:
+                AddItem(player, pCreature,310006,1,8);
+				break;
+			case 7004:
+                AddItem(player, pCreature,310005,1,8);
+				break;
             
             case 3000: // ring,amulet balal
                 player->PlayerTalkClass->ClearMenus();                
@@ -536,9 +567,9 @@ class donorrewarder : public CreatureScript
 				
             case 5000:
                 player->PlayerTalkClass->ClearMenus();
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Characters item Transfer Token - 6 DP", GOSSIP_SENDER_MAIN, 5001);
+                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Characters item Transfer Token - 6 DP", GOSSIP_SENDER_MAIN, 5001);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Custom Mount Token - 3 DP", GOSSIP_SENDER_MAIN, 5002);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Instance Booster - 3 DP", GOSSIP_SENDER_MAIN, 5003);
+                //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Instance Booster - 3 DP", GOSSIP_SENDER_MAIN, 5003);
                 //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Sigil - 6 DP", GOSSIP_SENDER_MAIN, 5004);
                 //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Donors Libram - 6 DP", GOSSIP_SENDER_MAIN, 5005);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
@@ -759,16 +790,7 @@ class donorrewarder : public CreatureScript
 				break;
 				case 14011: //shield
 				AddItem(player, pCreature, 340024,1,10);
-				break;
-				
-				
-				case 20000:  //Titans grip
-				AddItem(player, pCreature, 505505,1,20);
-				break;
-				case 30000:  //dual w
-				AddItem(player, pCreature, 505506,1,5);
-				break;
-				
+				break;				
 				
 			case 9996:
                 if(player->HasItemCount(56808, 1))

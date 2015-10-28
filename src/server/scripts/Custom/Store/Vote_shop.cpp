@@ -86,7 +86,7 @@ class Vote_rewarder : public CreatureScript
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVote Misc Item", GOSSIP_SENDER_MAIN, 3000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVote Shirt ,Tabard and Cloak", GOSSIP_SENDER_MAIN, 4000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVoting Token, Coin etc", GOSSIP_SENDER_MAIN, 5000);
-			
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rRelics", GOSSIP_SENDER_MAIN, 6666);
             player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
 
             return true;
@@ -414,7 +414,30 @@ class Vote_rewarder : public CreatureScript
 				case 14011:
 				AddItem(player, pCreature, 340024,1,215);
 				break;
-				
+			
+			case 6666:
+                player->PlayerTalkClass->ClearMenus();
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Vote Idol - 35 VP", GOSSIP_SENDER_MAIN, 6001);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Vote Totem - 35 VP", GOSSIP_SENDER_MAIN, 6002);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Vote Sigil - 35 VP", GOSSIP_SENDER_MAIN, 6003);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Vote Libram - 35 VP", GOSSIP_SENDER_MAIN, 6004);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
+                player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
+                return true;
+                break;
+			
+			case 6001:
+                AddItem(player, pCreature,99061,1,35);
+                break;
+            case 6002:
+                AddItem(player, pCreature,99062,1,35);
+                break;
+            case 6003:
+                AddItem(player, pCreature,99063,1,35);
+				break;
+			case 6004:
+                AddItem(player, pCreature,99060,1,35);
+				break;			
 							
             case 9998:
                 player->GetSession()->SendListInventory(pCreature->GetGUID());

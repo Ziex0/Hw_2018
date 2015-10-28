@@ -365,7 +365,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
 
         // check if race matches racemask
         uint32 race = itr->second->getRace();
-        //if (!(racemask & (1 << race)))
+        if (!(racemask & (1 << race)))
             continue;
 
         uint32 pzoneid = itr->second->GetZoneId();
