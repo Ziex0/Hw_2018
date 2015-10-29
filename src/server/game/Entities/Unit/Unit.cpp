@@ -2771,7 +2771,7 @@ float Unit::GetUnitCriticalChance(WeaponAttackType attackType, const Unit* victi
 			break;
 			// Just for good manner
 		default:
-			crit = 0.0f;
+			crit = 0.1f;
 			break;
 		}
 	}
