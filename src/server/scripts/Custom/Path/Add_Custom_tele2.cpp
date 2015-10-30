@@ -1701,7 +1701,27 @@ public:
 				GiveRidingSkill(pPlayer, pCreature);
 				pPlayer->CLOSE_GOSSIP_MENU();
 				break;
+			case GOSSIP_ACTION_INFO_DEF + 187:
+				if(pPlayer->getClass() == CLASS_BERSERKER)
+				{
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Reset Talents",GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7100);
+                pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Reset Spells", GOSSIP_SENDER_MAIN,GOSSIP_ACTION_INFO_DEF + 7200);
+				}
+                pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 450);
+				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
+				break;
 				
+			case GOSSIP_ACTION_INFO_DEF +7100: // Reset Talents
+                        pPlayer->resetTalents(true);
+                        pPlayer->SendTalentsInfoData(false);
+                        pPlayer->CLOSE_GOSSIP_MENU();
+                        break;
+            case GOSSIP_ACTION_INFO_DEF +7200: // Reset Spells
+                        pPlayer->resetSpells();
+                        pPlayer->CLOSE_GOSSIP_MENU();
+                        break;
+
+			//spell classess			
 			case GOSSIP_ACTION_INFO_DEF + 460:				
 					if(pPlayer->getClass() == CLASS_WARRIOR)
 						{
@@ -1788,27 +1808,26 @@ public:
 				pPlayer->learnSpell(669, false);
 				pPlayer->learnSpell(46917, false);
 				pPlayer->learnSpell(674, false);
-				pPlayer->learnSpell (23885, false);
 				pPlayer->learnSpell (23881,false);
-				pPlayer->learnSpell (34846,false);
+				pPlayer->learnSpell (100,false);
 				pPlayer->learnSpell (59653,false);
 				pPlayer->learnSpell (12162,false);
 				pPlayer->learnSpell (12850,false);
 				pPlayer->learnSpell (12868,false);
-				pPlayer->learnSpell (12721,false);
-				pPlayer->learnSpell (20647,false);
+				pPlayer->learnSpell (12834,false);
+				pPlayer->learnSpell (5308,false);
 				pPlayer->learnSpell (58367,false);
 				pPlayer->learnSpell (63326,false);
 				pPlayer->learnSpell (65156,false);
 				pPlayer->learnSpell (64976,false);
-				pPlayer->learnSpell (12976,false);
+				pPlayer->learnSpell (12975,false);
 				pPlayer->learnSpell (50783,false);
 				pPlayer->learnSpell (26654,false);
 				pPlayer->learnSpell (53385,false);
 
 				pPlayer->learnSpell (20911,false);
 				pPlayer->learnSpell (25899,false);
-				pPlayer->learnSpell (63944,false);
+				pPlayer->learnSpell (51722,false);
 				pPlayer->learnSpell (68066,false);
 				break;
 				
@@ -2370,6 +2389,7 @@ public:
 					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Heal me.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 26);
 					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Advance my weapon skills to max.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
 		            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Give me maximum riding skill.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 186);
+					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Reset My talent and Spell. ( Carefull if you have Mounts or another spells)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 187);
 					pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8);
 					pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
 					break;

@@ -1360,7 +1360,7 @@ void AddBattlegroundScripts()
 	void AddSC_boss_nazaryan();
 	void AddSC_boss_two();
 	//void AddSC_Online_Time_DP();
-	//void AddSC_player_abuse();
+	//void AddSC_NoFarming();
 	//void AddSC_NoFarming();
 	//Bots
 	void AddSC_death_knight_bot();
@@ -1474,7 +1474,7 @@ void AddCustomScripts()
 	AddSC_boss_nazaryan();
 	AddSC_boss_two();
 	//AddSC_Online_Time_DP();
-	//AddSC_player_abuse();
+	//AddSC_NoFarming();
 	//AddSC_NoFarming();
 	//Bots
     AddSC_death_knight_bot();
