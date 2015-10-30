@@ -23,7 +23,7 @@ class Vote_rewarder : public CreatureScript
 {
     public:Vote_rewarder() : CreatureScript("Vote_rewarder") {}
        
-        void AddItem(Player* player, Creature* pCreature, int item , int count, int cost)
+        void RewardItem(Player* player, Creature* pCreature, int item , int count, int cost)
         {
             QueryResult result;
             result = CharacterDatabase.PQuery("SELECT vp FROM web_db.account_data WHERE id = '%u' AND vp >= '0'", player->GetSession()->GetAccountId());
@@ -46,24 +46,24 @@ class Vote_rewarder : public CreatureScript
                 sprintf(str,"You got %u Vote points!", points);
                 player->MonsterWhisper(str,player->GetGUID(),true);
             }
+            
             else
             {
-                if (points <cost)
+                if (points < cost)
                 {
-                     sprintf(str,"You broke now,you must update your Voting on www.HeavenWow.Net");
+                     sprintf(str,"You don't have enough points for this item, you must vote on www.unforgivenwow.com!");
                      player->MonsterWhisper(str,player->GetGUID(),true);
                 }
                 else
                 {
                     if (player->AddItem(item, count))
                     {
-  			std::string DateTime = "%Y-%m-%d %H:%M:%S";
-			ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
-               LoginDatabase.PExecute("UPDATE web_db.account_data Set vp = vp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
-               //LoginDatabase.PQuery("INSERT INTO web_db.vote_purchases (account_id, character_name, character_guid, vote_item_id, voten_item_name, vote_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
-                        
-               sprintf(str,"Your points are taken, Dont forget to take SCREENSHOT everytime you bought new item.Thank you for your Support!!");
-               player->MonsterWhisper(str,player->GetGUID(),true);
+  			   std::string DateTime = "%Y-%m-%d %H:%M:%S";
+			   ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
+                        CharacterDatabase.PQuery("Update web_db.account_data Set vp = vp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
+                        //LoginDatabase.PQuery("INSERT INTO vote_purchases (account_id, character_name, character_guid, vote_item_id, vote_item_name, vote_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
+                        sprintf(str,"Your points are taken and your item is in your bag!");
+                        player->MonsterWhisper(str,player->GetGUID(),true);
 			   player->SaveToDB();
                     }
                     else
@@ -99,7 +99,7 @@ class Vote_rewarder : public CreatureScript
             switch (uiAction)
             {  
 				case 19000: //point check
-				AddItem(player, pCreature, 0, 0, 0);
+				RewardItem(player, pCreature, 0, 0, 0);
 				break;	
 				
 			case 5000:
@@ -118,19 +118,19 @@ class Vote_rewarder : public CreatureScript
                 return true;
                 break;
 			case 5001:
-                AddItem(player, pCreature,55559,1,35);
+                RewardItem(player, pCreature,55559,1,35);
                 break;
 			case 5002:
-                AddItem(player, pCreature,31,1,25);
+                RewardItem(player, pCreature,31,1,25);
                 break;
 			case 5003:
-                AddItem(player, pCreature,23864,1,10);
+                RewardItem(player, pCreature,23864,1,10);
                 break;
 			case 5004:
-                AddItem(player, pCreature,32572,1,30);
+                RewardItem(player, pCreature,32572,1,30);
                 break;
 			case 5005:
-                AddItem(player, pCreature,66002,1,190);
+                RewardItem(player, pCreature,66002,1,190);
                 break;
 			case 5006:// nawa
                 player->PlayerTalkClass->ClearMenus();
@@ -142,13 +142,13 @@ class Vote_rewarder : public CreatureScript
                 return true;
                 break;
 			case 5101:
-                AddItem(player, pCreature,86100,10,10);
+                RewardItem(player, pCreature,86100,10,10);
                 break;
 			case 5102:
-                AddItem(player, pCreature,86100,30,30);
+                RewardItem(player, pCreature,86100,30,30);
                 break;
 			case 5103:
-                AddItem(player, pCreature,86100,50,45);
+                RewardItem(player, pCreature,86100,50,45);
                 break;
 			case 5007:// moltencore
                 player->PlayerTalkClass->ClearMenus();
@@ -160,19 +160,19 @@ class Vote_rewarder : public CreatureScript
                 return true;
                 break;
 			case 5701:
-                AddItem(player, pCreature,86101,10,20);
+                RewardItem(player, pCreature,86101,10,20);
                 break;
 			case 5702:
-                AddItem(player, pCreature,86101,30,60);
+                RewardItem(player, pCreature,86101,30,60);
                 break;
 			case 5703:
-                AddItem(player, pCreature,86101,50,90);
+                RewardItem(player, pCreature,86101,50,90);
                 break;
 			case 5008:
-                AddItem(player, pCreature, 90900, 1, 250);
+                RewardItem(player, pCreature, 90900, 1, 250);
                 break;
 			case 5009:
-                AddItem(player, pCreature, 90901, 1, 350);
+                RewardItem(player, pCreature, 90901, 1, 350);
                 break;
 				
 			case 4000:
@@ -187,19 +187,19 @@ class Vote_rewarder : public CreatureScript
                 return true;
                 break;
 			case 4001:
-                AddItem(player, pCreature,85024,1,35);
+                RewardItem(player, pCreature,85024,1,35);
                 break;
 			case 4002:
-                AddItem(player, pCreature,85022,1,35);
+                RewardItem(player, pCreature,85022,1,35);
                 break;
 			case 4003:
-                AddItem(player, pCreature,90902,1,30);
+                RewardItem(player, pCreature,90902,1,30);
                 break;
 			case 4004:
-                AddItem(player, pCreature,38134,1,30);
+                RewardItem(player, pCreature,38134,1,30);
                 break;
 			case 4005:
-                AddItem(player, pCreature,90903,1,30);
+                RewardItem(player, pCreature,90903,1,30);
                 break;
 				
 			case 3000:
@@ -218,31 +218,31 @@ class Vote_rewarder : public CreatureScript
                 return true;
                 break;
 			case 3001:
-                AddItem(player, pCreature,99080,1,30);
+                RewardItem(player, pCreature,99080,1,30);
                 break;
 			case 3002:
-                AddItem(player, pCreature,99083,1,30);
+                RewardItem(player, pCreature,99083,1,30);
                 break;
 			case 3003:
-                AddItem(player, pCreature,99086,1,30);
+                RewardItem(player, pCreature,99086,1,30);
                 break;
 			case 3004:
-                AddItem(player, pCreature,99081,1,30);
+                RewardItem(player, pCreature,99081,1,30);
                 break;
 			case 3005:
-                AddItem(player, pCreature,99085,1,30);
+                RewardItem(player, pCreature,99085,1,30);
                 break;
 			case 3006:
-                AddItem(player, pCreature,99088,1,30);
+                RewardItem(player, pCreature,99088,1,30);
                 break;
 			case 3007:
-                AddItem(player, pCreature,99082,1,30);
+                RewardItem(player, pCreature,99082,1,30);
                 break;
 			case 3008:
-                AddItem(player, pCreature,99084,1,30);
+                RewardItem(player, pCreature,99084,1,30);
                 break;
 			case 3009:
-                AddItem(player, pCreature,99087,1,30);
+                RewardItem(player, pCreature,99087,1,30);
                 break;
 
             case 2000:
@@ -271,22 +271,22 @@ class Vote_rewarder : public CreatureScript
                 return true;
                 break;
             case 2101:
-                AddItem(player, pCreature,50248,1,40);
+                RewardItem(player, pCreature,50248,1,40);
                 break;
 			case 2102:
-                AddItem(player, pCreature,50290,1,40);
+                RewardItem(player, pCreature,50290,1,40);
                 break;
 			case 2103:
-                AddItem(player, pCreature,51937,1,40);
+                RewardItem(player, pCreature,51937,1,40);
                 break;
 			case 2104:
-                AddItem(player, pCreature,33543,1,40);
+                RewardItem(player, pCreature,33543,1,40);
                 break;
 			case 2105:
-                AddItem(player, pCreature,32189,1,40);
+                RewardItem(player, pCreature,32189,1,40);
                 break;
 			case 2106:
-                AddItem(player, pCreature,32188,1,40);
+                RewardItem(player, pCreature,32188,1,40);
                 break;
 				
             case 2002:
@@ -300,16 +300,16 @@ class Vote_rewarder : public CreatureScript
                 return true;
                 break;
             case 2201:
-                AddItem(player, pCreature,49706,1,55);
+                RewardItem(player, pCreature,49706,1,55);
                 break;
             case 2202:
-                AddItem(player, pCreature,50415,1,55);
+                RewardItem(player, pCreature,50415,1,55);
                 break;
             case 2203:
-                AddItem(player, pCreature,30179,1,55);
+                RewardItem(player, pCreature,30179,1,55);
 				break;
 			case 2204:
-                AddItem(player, pCreature,50178,1,55);
+                RewardItem(player, pCreature,50178,1,55);
 				break;
             
                 break;
@@ -322,11 +322,11 @@ class Vote_rewarder : public CreatureScript
                 return true;
                 break;
             case 2301:                
-                AddItem(player, pCreature,32607,1,55);                
+                RewardItem(player, pCreature,32607,1,55);                
                 break;
 			
             case 2302:             
-                AddItem(player, pCreature,51887,1,55);
+                RewardItem(player, pCreature,51887,1,55);
                 break;
                 
             case 2004:
@@ -339,13 +339,13 @@ class Vote_rewarder : public CreatureScript
                 return true;
                 break;
             case 2401:
-                AddItem(player, pCreature,50776,1,33);
+                RewardItem(player, pCreature,50776,1,33);
                 break;
             case 2402:
-                AddItem(player, pCreature,51834,1,33);
+                RewardItem(player, pCreature,51834,1,33);
                 break;
             case 2403:
-                AddItem(player, pCreature,50033,1,33);
+                RewardItem(player, pCreature,50033,1,33);
                 break;
             case 2005:
                 player->PlayerTalkClass->ClearMenus();                
@@ -356,10 +356,10 @@ class Vote_rewarder : public CreatureScript
                 return true;
                 break;
             case 2551:
-                AddItem(player, pCreature, 51455,1,30);
+                RewardItem(player, pCreature, 51455,1,30);
                 break;
             case 2552:
-                AddItem(player, pCreature, 51909,1,30);
+                RewardItem(player, pCreature, 51909,1,30);
                 break;				
 		  
 			case 14000: // cross weapon skill
@@ -382,37 +382,37 @@ class Vote_rewarder : public CreatureScript
                 break;
 			
 				case 14001:
-				AddItem(player, pCreature, 340014,1,215);
+				RewardItem(player, pCreature, 340014,1,215);
 				break;
 				case 14909:
-				AddItem(player, pCreature, 340015,1,430);
+				RewardItem(player, pCreature, 340015,1,430);
 				break;
 				case 14003:
-				AddItem(player, pCreature, 340016,1,215);
+				RewardItem(player, pCreature, 340016,1,215);
 				break;
 				case 14004:
-				AddItem(player, pCreature, 340017,1,430);
+				RewardItem(player, pCreature, 340017,1,430);
 				break;
 				case 14005:
-				AddItem(player, pCreature, 340018,1,215);
+				RewardItem(player, pCreature, 340018,1,215);
 				break;
 				case 14006:
-				AddItem(player, pCreature, 340019,1,430);
+				RewardItem(player, pCreature, 340019,1,430);
 				break;
 				case 14007:
-				AddItem(player, pCreature, 340020,1,430);
+				RewardItem(player, pCreature, 340020,1,430);
 				break;
 				case 14008:
-				AddItem(player, pCreature, 340021,1,430);
+				RewardItem(player, pCreature, 340021,1,430);
 				break;
 				case 14009:
-				AddItem(player, pCreature, 340022,1,215);
+				RewardItem(player, pCreature, 340022,1,215);
 				break;
 				case 14010:
-				AddItem(player, pCreature, 340023,1,215);
+				RewardItem(player, pCreature, 340023,1,215);
 				break;
 				case 14011:
-				AddItem(player, pCreature, 340024,1,215);
+				RewardItem(player, pCreature, 340024,1,215);
 				break;
 			
 			case 6666:
@@ -427,16 +427,16 @@ class Vote_rewarder : public CreatureScript
                 break;
 			
 			case 6001:
-                AddItem(player, pCreature,99061,1,35);
+                RewardItem(player, pCreature,99061,1,35);
                 break;
             case 6002:
-                AddItem(player, pCreature,99062,1,35);
+                RewardItem(player, pCreature,99062,1,35);
                 break;
             case 6003:
-                AddItem(player, pCreature,99063,1,35);
+                RewardItem(player, pCreature,99063,1,35);
 				break;
 			case 6004:
-                AddItem(player, pCreature,99060,1,35);
+                RewardItem(player, pCreature,99060,1,35);
 				break;			
 							
             case 9998:

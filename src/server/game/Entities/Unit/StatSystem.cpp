@@ -236,7 +236,7 @@ float Player::GetHealthBonusFromStamina()
     float baseStam = std::min(20.0f, stamina);
     float moreStam = stamina - baseStam;
 
-    return baseStam + (moreStam*20.0f);
+    return baseStam + (moreStam*18.0f);
 }
 
 float Player::GetManaBonusFromIntellect()
@@ -246,7 +246,7 @@ float Player::GetManaBonusFromIntellect()
     float baseInt = std::min(20.0f, intellect);
     float moreInt = intellect - baseInt;
 
-    return baseInt + (moreInt * 15.0f);
+    return baseInt + (moreInt * 16.0f);
 }
 
 
@@ -312,7 +312,7 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
                 val2 = level + GetStat(STAT_AGILITY) - 10.0f;
                 break;
 			case CLASS_BERSERKER:
-                val2 = level + GetStat(STAT_AGILITY) - 10.0f;
+                val2 = level * 1.8f + GetStat(STAT_AGILITY) - 10.0f;
                 break;
             case CLASS_DRUID:
                 switch (GetShapeshiftForm())
@@ -339,7 +339,7 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
                 val2 = level * 3.0f + GetStat(STAT_STRENGTH) * 2.0f - 20.0f;
                 break;
 			case CLASS_BERSERKER:
-                val2 = level * 3.0f + GetStat(STAT_STRENGTH) * 2.0f - 20.0f;
+                val2 = level * 3.2f + GetStat(STAT_STRENGTH) * 2.0f - 20.0f;
                 break;
             case CLASS_DEATH_KNIGHT:
                 val2 = level * 3.0f + GetStat(STAT_STRENGTH) * 2.0f - 20.0f;
@@ -590,7 +590,7 @@ void Player::UpdateBlockPercentage()
         value = value < 0.0f ? 0.0f : value;
     }
     if(value > 50)
-		value = 50;
+		value = 57;
     SetStatFloatValue(PLAYER_BLOCK_PERCENTAGE, value);
 }
 
@@ -627,7 +627,7 @@ void Player::UpdateCritPercentage(WeaponAttackType attType)
     SetStatFloatValue(index, value);
 	{
 		if(value > 50)
-		value = 50;
+		value = 52;
 		SetStatFloatValue(PLAYER_BLOCK_PERCENTAGE, value);
 	}
     
@@ -707,7 +707,7 @@ void Player::UpdateParryPercentage()
         0.0f,           // ??
         0.0f,            // Druid
 		145.560408f,    // Rogue
-		47.003525f     // berserker
+		48.003545f     // berserker
     };
 
     // No parry
@@ -728,7 +728,7 @@ void Player::UpdateParryPercentage()
         value = value < 0.0f ? 0.0f : value;
     }
     if(value > 50)
-		value = 50;
+		value = 58;
     SetStatFloatValue(PLAYER_PARRY_PERCENTAGE, value);
 }
 
@@ -766,7 +766,7 @@ void Player::UpdateDodgePercentage()
 
     value = value < 0.0f ? 0.0f : value;
     if(value > 50)
-		value = 50;
+		value = 62;
     SetStatFloatValue(PLAYER_DODGE_PERCENTAGE, value);
 }
 
@@ -779,7 +779,7 @@ void Player::UpdateSpellCritChance(uint32 school)
         return;
     }
     // For others recalculate it from:
-    float crit = 0.0f;
+    float crit = 0.7f;
     // Crit from Intellect
     crit += GetSpellCritFromIntellect();
     // Increase crit from SPELL_AURA_MOD_SPELL_CRIT_CHANCE

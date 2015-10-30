@@ -13,6 +13,7 @@ COLLATE='latin1_swedish_ci'
 ENGINE=MyISAM
 ;
 */
+
 #include "ScriptPCH.h"
 #include <cstring>
 #include "ObjectMgr.h"
@@ -21,9 +22,10 @@ ENGINE=MyISAM
 
 class donorrewarder : public CreatureScript
 {
-   public: donorrewarder(): CreatureScript("donorrewarder") {}
+    public:donorrewarder() : CreatureScript("donorrewarder") {}
         
-        void AddItem(Player* player, Creature* pCreature, int item , int count, int cost)
+   
+        void RewardItem(Player* player, Creature* pCreature, int item , int count, int cost)
         {
             QueryResult result;
             result = CharacterDatabase.PQuery("SELECT dp FROM web_db.account_data WHERE id = '%u' AND dp >= '0'", player->GetSession()->GetAccountId());
@@ -47,23 +49,15 @@ class donorrewarder : public CreatureScript
                 player->MonsterWhisper(str,player->GetGUID(),true);
             }
             else
-            {
-                if (points <cost)
-                {
-                     sprintf(str,"You broke now,you must Donate on www.HeavenWow.Net");
-                     player->MonsterWhisper(str,player->GetGUID(),true);
-                }
-                else
                 {
                     if (player->AddItem(item, count))
                     {
-  			std::string DateTime = "%Y-%m-%d %H:%M:%S";
-			ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
-               LoginDatabase.PExecute("UPDATE web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
-               //LoginDatabase.PQuery("INSERT INTO web_db.donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
-                        
-               sprintf(str,"Your points are taken, Dont forget to take SCREENSHOT everytime you bought new DONOR item.Thank you for your Support!!");
-               player->MonsterWhisper(str,player->GetGUID(),true);
+  			   std::string DateTime = "%Y-%m-%d %H:%M:%S";
+			   ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
+			   CharacterDatabase.PQuery("Update web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
+                        //LoginDatabase.PQuery("INSERT INTO donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
+                        sprintf(str,"Your points are taken and your item is given!!!");
+                        player->MonsterWhisper(str,player->GetGUID(),true);
 			   player->SaveToDB();
                     }
                     else
@@ -73,7 +67,7 @@ class donorrewarder : public CreatureScript
                     }
 
                 }
-            }
+
             player->PlayerTalkClass->ClearMenus();
             OnGossipHello(player, pCreature);
         }
@@ -105,25 +99,25 @@ class donorrewarder : public CreatureScript
             switch (uiAction)
             {            
 				case 5401:
-					AddItem(player, pCreature,24,1,15);
+					RewardItem(player, pCreature,24,1,15);
 						break;
 				case 19000:
-					AddItem(player, pCreature, 0, 0, 0);
+					RewardItem(player, pCreature, 0, 0, 0);
 						break;
 				case 5402:
-					AddItem(player, pCreature,25,1,15);
+					RewardItem(player, pCreature,25,1,15);
 						break;
 				case 5403:
-					AddItem(player, pCreature,26,1,10);
+					RewardItem(player, pCreature,26,1,10);
 						break;
 				case 5200:
-					AddItem(player, pCreature,40768,1,10);
+					RewardItem(player, pCreature,40768,1,10);
 						break;
 				case 5300:
-					AddItem(player, pCreature,37298,1,10);
+					RewardItem(player, pCreature,37298,1,10);
 						break;
 				case 5100:
-					AddItem(player, pCreature,29765,3,5);
+					RewardItem(player, pCreature,29765,3,5);
 				break;
 				
 			case 4000:
@@ -145,44 +139,44 @@ class donorrewarder : public CreatureScript
                 return true;
                 break;
 			case 4012:
-                AddItem(player, pCreature, 30242,1,11);
+                RewardItem(player, pCreature, 30242,1,11);
                 break;
 			case 4001:
-                AddItem(player, pCreature, 31102,1,7);
+                RewardItem(player, pCreature, 31102,1,7);
                 break;
 			case 4002:
-                AddItem(player, pCreature, 30250,1,70);
+                RewardItem(player, pCreature, 30250,1,70);
                 break;
 			case 4003:
-                AddItem(player, pCreature, 745450,1,20);
+                RewardItem(player, pCreature, 745450,1,20);
                 break;
 			case 4004:
-                AddItem(player, pCreature, 745451,1,40);
+                RewardItem(player, pCreature, 745451,1,40);
                 break;
 			case 4005:
-                AddItem(player, pCreature, 22484,1,60);
+                RewardItem(player, pCreature, 22484,1,60);
                 break;			
             case 4006:
-                AddItem(player, pCreature, 82000, 1, 14);
+                RewardItem(player, pCreature, 82000, 1, 14);
                 break;	
             case 4007:
-                AddItem(player, pCreature, 82001, 1, 14);
+                RewardItem(player, pCreature, 82001, 1, 14);
                 break;
 			case 4008:
-                AddItem(player, pCreature, 82002, 1, 14);
+                RewardItem(player, pCreature, 82002, 1, 14);
                 break;
 			case 4009:
-                AddItem(player, pCreature, 66001, 1, 50);
+                RewardItem(player, pCreature, 66001, 1, 50);
                 break;	
 			case 4010:
-                AddItem(player, pCreature, 90900, 1, 10);
+                RewardItem(player, pCreature, 90900, 1, 10);
                 break;
 			case 4011:
-                AddItem(player, pCreature, 90901, 1, 20);
+                RewardItem(player, pCreature, 90901, 1, 20);
                 break;
 				
             case 1000:
-                AddItem(player, pCreature, 0, 0, 0);
+                RewardItem(player, pCreature, 0, 0, 0);
                 break;
 				
 				//donor weapon
@@ -215,31 +209,31 @@ class donorrewarder : public CreatureScript
 				
 				case 2101:
 					player->CLOSE_GOSSIP_MENU();
-					AddItem(player, pCreature, 30733, 1,7);
+					RewardItem(player, pCreature, 30733, 1,7);
 					break;
 					
 				case 2106:
 					player->CLOSE_GOSSIP_MENU();
-					AddItem(player, pCreature,26624, 1,7);		
+					RewardItem(player, pCreature,26624, 1,7);		
 					break;
 
 				case 2102:
 					player->CLOSE_GOSSIP_MENU();
-					AddItem(player, pCreature,51516, 1,7);
+					RewardItem(player, pCreature,51516, 1,7);
 					break;
 
 				case 2103: //Melee Dagger
 					player->CLOSE_GOSSIP_MENU();
-					AddItem(player, pCreature,43598, 1,7);
+					RewardItem(player, pCreature,43598, 1,7);
 					break;
 
 				case  2104: //Spell Dagger
 					player->CLOSE_GOSSIP_MENU();
-					AddItem(player, pCreature,26624, 1,7);
+					RewardItem(player, pCreature,26624, 1,7);
 					break;
 				case 2105://mace
 					player->CLOSE_GOSSIP_MENU();
-					AddItem(player, pCreature,19019, 1,7);
+					RewardItem(player, pCreature,19019, 1,7);
 					break;
 					//end one hannd
 
@@ -256,21 +250,21 @@ class donorrewarder : public CreatureScript
 			
 					case 2208: //dual axe
 						player->CLOSE_GOSSIP_MENU();
-						AddItem(player, pCreature,50709, 1,11 );
+						RewardItem(player, pCreature,50709, 1,11 );
 						break;
 
 					case 2209:  //dual sword
 						player->CLOSE_GOSSIP_MENU();
-						AddItem(player, pCreature,52062, 1,11 );
+						RewardItem(player, pCreature,52062, 1,11 );
 						break;
 
 					case 2210://dual mace
 					player->CLOSE_GOSSIP_MENU();
-						AddItem(player, pCreature,50756, 1,11 );
+						RewardItem(player, pCreature,50756, 1,11 );
 						break;
 					case 2214://polearm
 					player->CLOSE_GOSSIP_MENU();
-						AddItem(player, pCreature,18869, 1,11 );
+						RewardItem(player, pCreature,18869, 1,11 );
 						break;
 			//end two hand
 
@@ -284,12 +278,12 @@ class donorrewarder : public CreatureScript
 			break;
 		case 2312://spell staff
 		player->CLOSE_GOSSIP_MENU();
-			AddItem(player, pCreature,54806, 1,11 );
+			RewardItem(player, pCreature,54806, 1,11 );
 			break;
 
 		case 2313://feral staff
 		player->CLOSE_GOSSIP_MENU();
-			AddItem(player, pCreature,35514, 1,11 );
+			RewardItem(player, pCreature,35514, 1,11 );
 			break;
 			//end staves
 			
@@ -304,17 +298,17 @@ class donorrewarder : public CreatureScript
 			break;
 		case 2405: //bow
 		player->CLOSE_GOSSIP_MENU();
-			AddItem(player, pCreature,34529, 1,7);
+			RewardItem(player, pCreature,34529, 1,7);
 			break;
 
 		case 2406://gun
 		player->CLOSE_GOSSIP_MENU();
-			AddItem(player, pCreature, 2552, 1, 7);
+			RewardItem(player, pCreature, 2552, 1, 7);
 			break;
 
 		case 2407://wand
 		player->CLOSE_GOSSIP_MENU();
-			AddItem(player, pCreature, 51532, 1,7 );
+			RewardItem(player, pCreature, 51532, 1,7 );
 			break;
 			//end of range
 			
@@ -380,16 +374,16 @@ class donorrewarder : public CreatureScript
                 break;
 			
 			case 6001:
-                AddItem(player, pCreature,200004,1,5);
+                RewardItem(player, pCreature,200004,1,5);
                 break;
             case 6002:
-                AddItem(player, pCreature,200007,1,5);
+                RewardItem(player, pCreature,200007,1,5);
                 break;
             case 6003:
-                AddItem(player, pCreature,200006,1,5);
+                RewardItem(player, pCreature,200006,1,5);
 				break;
 			case 6004:
-                AddItem(player, pCreature,200005,1,5);
+                RewardItem(player, pCreature,200005,1,5);
 				break;		
 			
 			case 7000:
@@ -404,16 +398,16 @@ class donorrewarder : public CreatureScript
                 break;
 			
 			case 7001:
-                AddItem(player, pCreature,310004,1,8);
+                RewardItem(player, pCreature,310004,1,8);
                 break;
             case 7002:
-                AddItem(player, pCreature,310007,1,8);
+                RewardItem(player, pCreature,310007,1,8);
                 break;
             case 7003:
-                AddItem(player, pCreature,310006,1,8);
+                RewardItem(player, pCreature,310006,1,8);
 				break;
 			case 7004:
-                AddItem(player, pCreature,310005,1,8);
+                RewardItem(player, pCreature,310005,1,8);
 				break;
             
             case 3000: // ring,amulet balal
@@ -435,37 +429,37 @@ class donorrewarder : public CreatureScript
                 break;
             
             case 3003:
-                AddItem(player, pCreature, 200011,1,5);
+                RewardItem(player, pCreature, 200011,1,5);
                 break;
             case 3004:
-                AddItem(player, pCreature, 200019,1,5);
+                RewardItem(player, pCreature, 200019,1,5);
                 break;
             case 3005:
-                AddItem(player, pCreature, 200012,1,5);
+                RewardItem(player, pCreature, 200012,1,5);
                 break;
 			case 3006:
-                AddItem(player, pCreature, 200018,1,5);
+                RewardItem(player, pCreature, 200018,1,5);
                 break;
 			case 3007:
-                AddItem(player, pCreature, 200003,1,5);
+                RewardItem(player, pCreature, 200003,1,5);
                 break;
 			case 3008:
-                AddItem(player, pCreature, 200017,1,5);
+                RewardItem(player, pCreature, 200017,1,5);
                 break;
             case 3009:
-                AddItem(player, pCreature, 210008,1,5);
+                RewardItem(player, pCreature, 210008,1,5);
                 break;
 			case 3010:
-				AddItem(player, pCreature, 100134,1,5);
+				RewardItem(player, pCreature, 100134,1,5);
 				break;
 			case 3011:
-				AddItem(player, pCreature, 200013,1,5);
+				RewardItem(player, pCreature, 200013,1,5);
 				break;
 			case 3012:
-				AddItem(player, pCreature, 200014,1,5);
+				RewardItem(player, pCreature, 200014,1,5);
 				break;
 			case 3013:
-				AddItem(player, pCreature, 200015,1,5);
+				RewardItem(player, pCreature, 200015,1,5);
 				break;
 			
 			
@@ -493,16 +487,16 @@ class donorrewarder : public CreatureScript
                 break;
 				
 				case 52000:
-                AddItem(player, pCreature, 34821,1,21);
+                RewardItem(player, pCreature, 34821,1,21);
                 break;
 				case 52001:
-                AddItem(player, pCreature, 30699,1,21);
+                RewardItem(player, pCreature, 30699,1,21);
                 break;
 				case 52002:
-                AddItem(player, pCreature, 42759,1,21);
+                RewardItem(player, pCreature, 42759,1,21);
                 break;
 				case 52003:
-                AddItem(player, pCreature, 34045,1,21);
+                RewardItem(player, pCreature, 34045,1,21);
                 break;
 				
 				case 32002:
@@ -517,16 +511,16 @@ class donorrewarder : public CreatureScript
                 break;
 				
 				case 52004:
-                AddItem(player, pCreature, 40480,1,32);
+                RewardItem(player, pCreature, 40480,1,32);
                 break;
 				case 52005:
-                AddItem(player, pCreature, 19199,1,32);
+                RewardItem(player, pCreature, 19199,1,32);
                 break;
 				case 52006:
-                AddItem(player, pCreature, 35674,1,32);
+                RewardItem(player, pCreature, 35674,1,32);
                 break;
 				case 52007:
-                AddItem(player, pCreature, 45884,1,32);
+                RewardItem(player, pCreature, 45884,1,32);
                 break;
 				
 				case 32003:
@@ -539,10 +533,10 @@ class donorrewarder : public CreatureScript
 				
 				break;
 				case 52008:
-                AddItem(player, pCreature, 29432,1,21);
+                RewardItem(player, pCreature, 29432,1,21);
                 break;
 				case 52009:
-                AddItem(player, pCreature, 29687,1,32);
+                RewardItem(player, pCreature, 29687,1,32);
                 break;
 				
 				case 32004:
@@ -556,13 +550,13 @@ class donorrewarder : public CreatureScript
 				
 				break;
 				case 52010:
-                AddItem(player, pCreature, 47122,1,17);
+                RewardItem(player, pCreature, 47122,1,17);
                 break;
 				case 52011:
-                AddItem(player, pCreature, 34144,1,17);
+                RewardItem(player, pCreature, 34144,1,17);
                 break;
 				case 52015:
-                AddItem(player, pCreature, 100150,1,30);
+                RewardItem(player, pCreature, 100150,1,30);
                 break;
 				
             case 5000:
@@ -577,13 +571,13 @@ class donorrewarder : public CreatureScript
                 return true;
                 break;
             case 5001:
-                AddItem(player, pCreature, 340007,1,6);
+                RewardItem(player, pCreature, 340007,1,6);
                 break;
 			case 5002:
-				AddItem(player, pCreature, 340009,1,3);
+				RewardItem(player, pCreature, 340009,1,3);
                 break;
 			case 5003:
-				AddItem(player, pCreature, 985468,1,3);
+				RewardItem(player, pCreature, 985468,1,3);
                 break;
 			case 5004:
 					if(player->getClass() != 6) {
@@ -592,7 +586,7 @@ class donorrewarder : public CreatureScript
 					player->MonsterWhisper(str,player->GetGUID(),true);
 					player->PlayerTalkClass->SendCloseGossip();
 					} else {
-					AddItem(player, pCreature, 100104,1,6);
+					RewardItem(player, pCreature, 100104,1,6);
 			  } 
 					break;
 				case 5005:
@@ -602,44 +596,44 @@ class donorrewarder : public CreatureScript
 					player->MonsterWhisper(str,player->GetGUID(),true);
 					player->PlayerTalkClass->SendCloseGossip();
 					} else {
-					AddItem(player, pCreature, 100106,1,6);
+					RewardItem(player, pCreature, 100106,1,6);
 			  } 
 					break;
 				case 5006:
-					AddItem(player, pCreature, 4633,1,2);
+					RewardItem(player, pCreature, 4633,1,2);
 					break;
 			 case 10000: // tabard
 			  switch(player->getClass())
 			  {
 			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 100093,1,7);
+					RewardItem(player, pCreature, 100093,1,7);
 			  break;
 			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 100098,1,7);
+					RewardItem(player, pCreature, 100098,1,7);
 				  break;
 			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 100100,1,7);
+					RewardItem(player, pCreature, 100100,1,7);
 				 break;
 			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 100096,1,7);
+					RewardItem(player, pCreature, 100096,1,7);
 				 break;
 			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 100097,1,7);
+					RewardItem(player, pCreature, 100097,1,7);
 			  break;
 			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 100102,1,7);
+					RewardItem(player, pCreature, 100102,1,7);
 					 break;
 			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 100095,1,7);
+					RewardItem(player, pCreature, 100095,1,7);
 				  break;
 			  case CLASS_MAGE:
-					AddItem(player, pCreature, 100099,1,7);
+					RewardItem(player, pCreature, 100099,1,7);
 			  break;
 			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 100094,1,7);
+					RewardItem(player, pCreature, 100094,1,7);
 				  break;
 			  case CLASS_DRUID:
-					AddItem(player, pCreature, 100101,1,7);
+					RewardItem(player, pCreature, 100101,1,7);
 					break;
 
 			  default: break;
@@ -649,34 +643,34 @@ class donorrewarder : public CreatureScript
 			  switch(player->getClass())
 			  {
 			  case CLASS_WARRIOR:
-					AddItem(player, pCreature, 100112,1,10);
+					RewardItem(player, pCreature, 100112,1,10);
 			  break;
 			  case CLASS_PALADIN:
-					AddItem(player, pCreature, 100117,1,10);
+					RewardItem(player, pCreature, 100117,1,10);
 				  break;
 			  case CLASS_HUNTER:
-					AddItem(player, pCreature, 100119,1,10);
+					RewardItem(player, pCreature, 100119,1,10);
 				 break;
 			  case CLASS_ROGUE:
-					AddItem(player, pCreature, 100115,1,10);
+					RewardItem(player, pCreature, 100115,1,10);
 				 break;
 			  case CLASS_PRIEST:
-					AddItem(player, pCreature, 100116,1,10);
+					RewardItem(player, pCreature, 100116,1,10);
 			  break;
 			  case CLASS_DEATH_KNIGHT:
-					AddItem(player, pCreature, 100121,1,10);
+					RewardItem(player, pCreature, 100121,1,10);
 					 break;
 			  case CLASS_SHAMAN:
-					AddItem(player, pCreature, 100114,1,10);
+					RewardItem(player, pCreature, 100114,1,10);
 				  break;
 			  case CLASS_MAGE:
-					AddItem(player, pCreature, 100118,1,10);
+					RewardItem(player, pCreature, 100118,1,10);
 			  break;
 			  case CLASS_WARLOCK:
-					AddItem(player, pCreature, 100113,1,10);
+					RewardItem(player, pCreature, 100113,1,10);
 				  break;
 			  case CLASS_DRUID:
-					AddItem(player, pCreature, 100120,1,10);
+					RewardItem(player, pCreature, 100120,1,10);
 					break;
 
 			  default: break;
@@ -702,41 +696,41 @@ class donorrewarder : public CreatureScript
                 break;
 				
 				case 12001:
-							AddItem(player, pCreature, 320276,1,23);
+							RewardItem(player, pCreature, 320276,1,23);
 						   break;
 				case 12002:
-							AddItem(player, pCreature, 320293,1,23);
+							RewardItem(player, pCreature, 320293,1,23);
 						   break;
 				case 12003:
-							AddItem(player, pCreature, 320275,1,23);
+							RewardItem(player, pCreature, 320275,1,23);
 							break;
 				case 12004:
-							AddItem(player, pCreature, 320294,1,23);
+							RewardItem(player, pCreature, 320294,1,23);
 							break;
 										  
 					  case 12006:
-							AddItem(player, pCreature, 320268,1,23);
+							RewardItem(player, pCreature, 320268,1,23);
 							break;
 					  case 12005:
-							AddItem(player, pCreature, 320267,1,23);
+							RewardItem(player, pCreature, 320267,1,23);
 							break;
 					  case 12008:
-							AddItem(player, pCreature, 320271,1,23);
+							RewardItem(player, pCreature, 320271,1,23);
 							break;
 					  case 12009:
-							AddItem(player, pCreature, 320270,1,23);
+							RewardItem(player, pCreature, 320270,1,23);
 							break;
 					  case 12010:
-							AddItem(player, pCreature, 320273,1,23);
+							RewardItem(player, pCreature, 320273,1,23);
 							break;
 					  case 12007:
-							AddItem(player, pCreature, 320269,1,23);
+							RewardItem(player, pCreature, 320269,1,23);
 							break;
 					  case 12011:
-							AddItem(player, pCreature, 320272,1,23);
+							RewardItem(player, pCreature, 320272,1,23);
 						  break;
 					  case 12012:
-							AddItem(player, pCreature, 320274,1,23);
+							RewardItem(player, pCreature, 320274,1,23);
 						  break;
 			  
 			case 14000: // cross weapon skill
@@ -759,37 +753,37 @@ class donorrewarder : public CreatureScript
                 break;
 			
 				case 14001:
-				AddItem(player, pCreature, 340014,1,10);
+				RewardItem(player, pCreature, 340014,1,10);
 				break;
 				case 14909:
-				AddItem(player, pCreature, 340015,1,14);
+				RewardItem(player, pCreature, 340015,1,14);
 				break;
 				case 14003:
-				AddItem(player, pCreature, 340016,1,10);
+				RewardItem(player, pCreature, 340016,1,10);
 				break;
 				case 14004:
-				AddItem(player, pCreature, 340017,1,14);
+				RewardItem(player, pCreature, 340017,1,14);
 				break;
 				case 14005:
-				AddItem(player, pCreature, 340018,1,10);
+				RewardItem(player, pCreature, 340018,1,10);
 				break;
 				case 14006:
-				AddItem(player, pCreature, 340019,1,14);
+				RewardItem(player, pCreature, 340019,1,14);
 				break;
 				case 14007:
-				AddItem(player, pCreature, 340020,1,14);
+				RewardItem(player, pCreature, 340020,1,14);
 				break;
 				case 14008:
-				AddItem(player, pCreature, 340021,1,14);
+				RewardItem(player, pCreature, 340021,1,14);
 				break;
 				case 14009:
-				AddItem(player, pCreature, 340022,1,10);
+				RewardItem(player, pCreature, 340022,1,10);
 				break;
 				case 14020:
-				AddItem(player, pCreature, 340023,1,10);
+				RewardItem(player, pCreature, 340023,1,10);
 				break;
 				case 14011: //shield
-				AddItem(player, pCreature, 340024,1,10);
+				RewardItem(player, pCreature, 340024,1,10);
 				break;				
 				
 			case 9996:
@@ -800,7 +794,7 @@ class donorrewarder : public CreatureScript
                 player->MonsterWhisper(str,player->GetGUID(),true);
                 player->PlayerTalkClass->SendCloseGossip();
                 } else {
-                AddItem(player, pCreature, 56808,1,30);
+                RewardItem(player, pCreature, 56808,1,30);
                 player->PlayerTalkClass->SendCloseGossip();
                 }
                 break;
@@ -812,7 +806,7 @@ class donorrewarder : public CreatureScript
                 player->MonsterWhisper(str,player->GetGUID(),true);
                 player->PlayerTalkClass->SendCloseGossip();
                 } else {
-                AddItem(player, pCreature, 56809,1,30);
+                RewardItem(player, pCreature, 56809,1,30);
                 player->PlayerTalkClass->SendCloseGossip();
                 }
                 break;
