@@ -1396,22 +1396,23 @@ public:
 				case GOSSIP_ACTION_INFO_DEF + 710:
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Gold", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7101);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Farm Boss", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7102);
-				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Blue Temple", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7103);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Blue Temple", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7104);
+				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Leader Slayer ( Achievement)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7103);
 				pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "<- [Back]", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
 				pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
 				break;
 				
 				//gold
-				case GOSSIP_ACTION_INFO_DEF + 7101:
+			case GOSSIP_ACTION_INFO_DEF + 7101:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(0, -5351.8266f, -2534.0097f, 484.1956f, 0.6969f);
 				break;				
 				//farm boss
-				case GOSSIP_ACTION_INFO_DEF + 7102:
+			case GOSSIP_ACTION_INFO_DEF + 7102:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(571, 7085.63f, -1805.78f, 822.603f, 1.88154f);
 				break;
-				case GOSSIP_ACTION_INFO_DEF + 7103:				
+			case GOSSIP_ACTION_INFO_DEF + 7103:				
 				if(pPlayer->GetTeam() == HORDE)
 					{
 					pPlayer->CLOSE_GOSSIP_MENU();
@@ -1423,13 +1424,17 @@ public:
 					pPlayer->TeleportTo(1, 1934.77f, -4366.29f, 23.9682f, 1.6695f);				
 					}
 					break;
+			case GOSSIP_ACTION_INFO_DEF + 7104:
+				pPlayer->CLOSE_GOSSIP_MENU();
+				pPlayer->TeleportTo(530, -3795.17f, 2664.97f, 104.262f, 4.72127f);
+				break;
 				//Mall non pvp
-				case GOSSIP_ACTION_INFO_DEF + 910:
+			case GOSSIP_ACTION_INFO_DEF + 910:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(530,-248.53700f, 930.59100f, 84.3797f, 1.5001f);
 				break;				
 				//horde demon of sky boss
-				case GOSSIP_ACTION_INFO_DEF + 302:
+			case GOSSIP_ACTION_INFO_DEF + 302:
 				pPlayer->CLOSE_GOSSIP_MENU();
 				pPlayer->TeleportTo(37,1060.4899f, 339.6759f, 336.1799f, 2.4385f);
 				break;

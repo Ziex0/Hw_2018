@@ -9,8 +9,8 @@ struct accepted_stat_format {uint32 stat_type; char* stat_name; int32 base_stat_
 //  Reforging config
 // ########################################################################################
 static const uint32 tokenEntry      = 320281;    // token entry
-static const uint8 maxTokenAmount   = 3;        // max token cost (multiplies the max stat amount also)
-static const uint8 maxReforges      = 3;        // maximum reforges for one item
+static const uint8 maxTokenAmount   = 4;        // max token cost (multiplies the max stat amount also)
+static const uint8 maxReforges      = 4;        // maximum reforges for one item
 static const bool send_cache_packets = true;    // change player cache?
 
 static const accepted_stat_format accepted_stat_types[] =
@@ -420,7 +420,7 @@ private:
         SELECT_ITEM,
         SELECT_STAT_INCREASE,
         SELECT_TOKEN_COST,
-	 VENDOR = GOSSIP_ACTION_INFO_DEF+2,
+		VENDOR = GOSSIP_ACTION_INFO_DEF+2,
         REFORGE,
     };
 
