@@ -113,6 +113,7 @@ class Vote_rewarder : public CreatureScript
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Molten Core Credit ->", GOSSIP_SENDER_MAIN, 5007);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Dual Wield - 250 VP", GOSSIP_SENDER_MAIN, 5008);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Titan Grip - 350 VP", GOSSIP_SENDER_MAIN, 5009);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Reforging Token - 10 VP", GOSSIP_SENDER_MAIN, 5010);
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "[Main Menu]", GOSSIP_SENDER_MAIN, 9999);
                 player->PlayerTalkClass->SendGossipMenu(9000, pCreature->GetGUID());
                 return true;
@@ -174,7 +175,9 @@ class Vote_rewarder : public CreatureScript
 			case 5009:
                 RewardItem(player, pCreature, 90901, 1, 350);
                 break;
-				
+			case 5010:
+                RewardItem(player, pCreature,320281, 1, 10);
+                break;	
 			case 4000:
                 player->PlayerTalkClass->ClearMenus();
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Firdaus Vote Shirt - 35 VP", GOSSIP_SENDER_MAIN, 4001);
