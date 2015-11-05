@@ -21,42 +21,27 @@ ENGINE=MyISAM
 
 class Vote_rewarder : public CreatureScript
 {
+	
     public:Vote_rewarder() : CreatureScript("Vote_rewarder") {}
-       
+		
+		uint32 SelectVPoints(Player* pPlayer)
+			{
+				QueryResult select = LoginDatabase.PQuery("SELECT vp FROM web_db.account_data WHERE id = '%u'",  pPlayer->GetSession()->GetAccountId());
+				if (!select) // Just in case, but should not happen
+				{
+					pPlayer->CLOSE_GOSSIP_MENU();
+					return 0;
+				}
+
+				Field* fields = select->Fetch();
+				uint32 vp = fields[0].GetUInt32();
+
+				return vp;
+			}
         void RewardItem(Player* player, Creature* pCreature, int item , int count, int cost)
         {
-            QueryResult result;
-            result = CharacterDatabase.PQuery("SELECT vp FROM web_db.account_data WHERE id = '%u' AND vp >= '0'", player->GetSession()->GetAccountId());
-            char str[200];
-            if (!result) // check
-            {
-                sprintf(str,"Your have abused our systems and gotten a negative balance on your Vote Points. Your points are set to 0.");
-				LoginDatabase.PQuery("UPDATE web_db.account_data set vp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
-                player->PlayerTalkClass->ClearMenus();
-                OnGossipHello(player, pCreature);
-                pCreature->MonsterSay(str, LANG_UNIVERSAL, player->GetGUID());
-                return;
-            }
-
-            Field *fields = result->Fetch();
-            uint32 points = fields[0].GetUInt32();
- 
-            if (item == 0)
-            {
-                sprintf(str,"You got %u Vote points!", points);
-                player->MonsterWhisper(str,player->GetGUID(),true);
-            }
-            
-            else
-            {
-                if (points < cost)
-                {
-                     sprintf(str,"You don't have enough points for this item, you must vote on www.unforgivenwow.com!");
-                     player->MonsterWhisper(str,player->GetGUID(),true);
-                }
-                else
-                {
-                    if (player->AddItem(item, count))
+            char str[200];             
+            if (player->AddItem(item, count))
                     {
   			   std::string DateTime = "%Y-%m-%d %H:%M:%S";
 			   ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
@@ -70,27 +55,39 @@ class Vote_rewarder : public CreatureScript
                     {
                         sprintf(str,"Item can't be given maybe your bag is full or you already got the item!");
                         player->MonsterWhisper(str,player->GetGUID(),true);
-                    }
+                    }           
 
-                }
-            }
             player->PlayerTalkClass->ClearMenus();
             OnGossipHello(player, pCreature);
         }
 		
     bool OnGossipHello(Player* player, Creature* pCreature)
         {
+			// Prevent exploiting the FusionCMS donate points
+				std::stringstream points;				
+				if (player->GetSession()->GetSecurity() >= 0 && SelectVPoints(player) < 10 )
+				{
+					player->GetSession()->SendAreaTriggerMessage("You cant see item on Donor shop until your points are enought or at last you got 10 VP on your account", SelectVPoints(player));
+					player->CLOSE_GOSSIP_MENU();
+					return false;
+				}
+			else
+			{
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:24|tHow much Vote points do I have?", GOSSIP_SENDER_MAIN, 19000);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Weapons", GOSSIP_SENDER_MAIN, 2000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Weapons", GOSSIP_SENDER_MAIN, 2000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVote Misc Item", GOSSIP_SENDER_MAIN, 3000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVote Shirt ,Tabard and Cloak", GOSSIP_SENDER_MAIN, 4000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVoting Token, Coin etc", GOSSIP_SENDER_MAIN, 5000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rRelics", GOSSIP_SENDER_MAIN, 6666);
             player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
-
-            return true;
-        }
+			}
+			// Show Donate and Voting Points when GossipHello
+				points << "|cff000099|TInterface/ICONS/ABILITY_DRUID_DEMORALIZINGROAR:24|tMy Vote Points: " << SelectVPoints(player);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, points.str().c_str(), GOSSIP_SENDER_MAIN, 100);
+				player->SEND_GOSSIP_MENU(60031, pCreature->GetGUID());
+				return true;
+		}
 
         bool OnGossipSelect(Player* player, Creature* pCreature, uint32 /*uiSender*/, uint32 uiAction)
         {

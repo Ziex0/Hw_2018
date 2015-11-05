@@ -42,7 +42,7 @@ class donorrewarder : public CreatureScript
         {
 			char str[200];             
             if (player->AddItem(item, count))
-                    {
+            {
   			std::string DateTime = "%Y-%m-%d %H:%M:%S";
 			ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
 			CharacterDatabase.PQuery("Update web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
@@ -50,7 +50,7 @@ class donorrewarder : public CreatureScript
             sprintf(str,"Your points are taken and your item is given!!!");
             player->MonsterWhisper(str,player->GetGUID(),true);
 			player->SaveToDB();
-                    }
+            }
                     else
                     {
                         sprintf(str,"Item can't be given maybe your bag is full or you already got the item!");
@@ -74,7 +74,6 @@ class donorrewarder : public CreatureScript
 				}
 			else
 			{
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/INV_Chest_Plate13:24|tHow much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonation Token ,Coin", GOSSIP_SENDER_MAIN, 4000);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSupreme Donor Weapons", GOSSIP_SENDER_MAIN, 2000);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
@@ -92,7 +91,7 @@ class donorrewarder : public CreatureScript
 			}
 			
 			// Show Donate and Voting Points when GossipHello
-				points << "My Donation Points: " << SelectDPoints(player);
+				points << "|cffFF0000|TInterface/ICONS/ABILITY_DRUID_DEMORALIZINGROAR:24|tMy Donation Points: " << SelectDPoints(player);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, points.str().c_str(), GOSSIP_SENDER_MAIN, 100);
 				player->SEND_GOSSIP_MENU(60031, pCreature->GetGUID());
 				return true;
