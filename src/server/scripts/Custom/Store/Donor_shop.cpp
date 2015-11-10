@@ -68,7 +68,7 @@ class donorrewarder : public CreatureScript
 				std::stringstream points;				
 				if (player->GetSession()->GetSecurity() >= 0 && SelectDPoints(player) < 5 )
 				{
-					player->GetSession()->SendAreaTriggerMessage("You cant see item on Donor shop until your points are enought or at last you got 5 DP on your account", SelectDPoints(player));
+					player->GetSession()->SendAreaTriggerMessage("SHOP LOCKED!!,You cant see item on Donor shop until your points are enought or at last you got 5 DP on your account", SelectDPoints(player));
 					player->CLOSE_GOSSIP_MENU();
 					return false;
 				}

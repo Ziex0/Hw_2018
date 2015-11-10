@@ -67,13 +67,12 @@ class Vote_rewarder : public CreatureScript
 				std::stringstream points;				
 				if (player->GetSession()->GetSecurity() >= 0 && SelectVPoints(player) < 10 )
 				{
-					player->GetSession()->SendAreaTriggerMessage("You cant see item on Donor shop until your points are enought or at last you got 10 VP on your account", SelectVPoints(player));
+					player->GetSession()->SendAreaTriggerMessage("SHOP LOCKED!!,You cant see item on Donor shop until your points are enought or at last you got 10 VP on your account", SelectVPoints(player));
 					player->CLOSE_GOSSIP_MENU();
 					return false;
 				}
 			else
 			{
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Spell_Frost_ChillingBlast:24|tHow much Vote points do I have?", GOSSIP_SENDER_MAIN, 19000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Weapons", GOSSIP_SENDER_MAIN, 2000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVote Misc Item", GOSSIP_SENDER_MAIN, 3000);
@@ -85,7 +84,7 @@ class Vote_rewarder : public CreatureScript
 			// Show Donate and Voting Points when GossipHello
 				points << "|cff000099|TInterface/ICONS/ABILITY_DRUID_DEMORALIZINGROAR:24|tMy Vote Points: " << SelectVPoints(player);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, points.str().c_str(), GOSSIP_SENDER_MAIN, 100);
-				player->SEND_GOSSIP_MENU(60031, pCreature->GetGUID());
+				player->SEND_GOSSIP_MENU(60032, pCreature->GetGUID());
 				return true;
 		}
 

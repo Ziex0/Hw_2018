@@ -1827,7 +1827,7 @@ public:
 				pPlayer->learnSpell (64976,false);
 				pPlayer->learnSpell (12975,false);
 				pPlayer->learnSpell (50783,false);
-				pPlayer->learnSpell (26654,false);
+				pPlayer->learnSpell (12328,false);
 				pPlayer->learnSpell (53385,false);
 
 				pPlayer->learnSpell (20911,false);

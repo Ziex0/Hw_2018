@@ -7169,6 +7169,8 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
 				if ((*itr)->GetEntry() == 27893)
 				{
 					pPet = *itr;
+					if (getVictim())
+                            pPet->SetInCombatWith(getVictim());
 					break;
 				}
 
@@ -7180,18 +7182,18 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
                         pPet->SendSpellNonMeleeDamageLog(victim, procSpell->Id, procDmg, procSpell->GetSchoolMask(), 0, 0, false, 0, false);
                         pPet->DealDamage(victim, procDmg, NULL, SPELL_DIRECT_DAMAGE, procSpell ? procSpell->GetSchoolMask() : SPELL_SCHOOL_MASK_NORMAL, procSpell ? procSpell : NULL, true);
                     }
-                    else
-                    {
+                    else if (pPet && pPet->getVictim() && damage && !procSpell)     // copy 50% melee damage
+                {
                         CalcDamageInfo damageInfo;
-                        CalculateMeleeDamage(victim, 0, &damageInfo, BASE_ATTACK);
+                        CalculateMeleeDamage(pPet->getVictim(), 0, &damageInfo, BASE_ATTACK);
                         damageInfo.attacker = pPet;
                         damageInfo.damage = damageInfo.damage / 2;
                         // Send log damage message to client
-                        pPet->DealDamageMods(victim, damageInfo.damage, &damageInfo.absorb);
+                        pPet->DealDamageMods(pPet->getVictim(),damageInfo.damage,&damageInfo.absorb);
                         pPet->SendAttackStateUpdate(&damageInfo);
                         pPet->ProcDamageAndSpell(damageInfo.target, damageInfo.procAttacker, damageInfo.procVictim, damageInfo.procEx, damageInfo.damage, damageInfo.attackType);
-                        pPet->DealMeleeDamage(&damageInfo, true);
-                    }
+                        pPet->DealMeleeDamage(&damageInfo,true);
+                }
 				break;
 			}
 			else
