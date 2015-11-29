@@ -1351,13 +1351,13 @@ void AddBattlegroundScripts()
 	void AddSC_Level_item();
 	void AddSC_REFORGER_NPC();
 	void AddSC_gm_active();
-	//void AddSC_Online_Time_VP();
+	void AddSC_Online_Time_VP();
 	void AddSC_Top5_Killers();
 	//void AddSC_afk_protection();
 	//void AddSC_PvP_System();
 	void AddSC_npc_gurubashi_theme();
 	void AddSC_npc_morpher();
-	void AddSC_boss_nazaryan();
+	void AddSC_boss_maximus();
 	void AddSC_boss_two();
 	//void AddSC_Online_Time_DP();
 	//void AddSC_NoFarming();
@@ -1406,7 +1406,6 @@ void AddBattlegroundScripts()
 	void AddSC_RaceChanger();
 	void AddSC_chat_filter_playerscript();
 	void AddSC_Vip_Access();
-	void AddSC_system_phase();
 	void AddSC_Boss_Announcer();
 	void AddSc_Script_CustomTeleporter();
 
@@ -1465,13 +1464,13 @@ void AddCustomScripts()
 	AddSC_Level_item();
 	AddSC_REFORGER_NPC();
 	AddSC_gm_active();
-	//AddSC_Online_Time_VP();
+	AddSC_Online_Time_VP();
 	AddSC_Top5_Killers();
 	//AddSC_afk_protection();
 	//AddSC_PvP_System();
 	AddSC_npc_gurubashi_theme();
 	AddSC_npc_morpher();
-	AddSC_boss_nazaryan();
+	AddSC_boss_maximus();
 	AddSC_boss_two();
 	//AddSC_Online_Time_DP();
 	//AddSC_NoFarming();
@@ -1520,7 +1519,6 @@ void AddCustomScripts()
 	AddSC_RaceChanger();
 	AddSC_chat_filter_playerscript();
 	AddSC_Vip_Access();
-	AddSC_system_phase();
 	AddSC_Boss_Announcer();
 	AddSc_Script_CustomTeleporter();
 
