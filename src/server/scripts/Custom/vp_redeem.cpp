@@ -51,7 +51,7 @@ class vpredeem : public CreatureScript
 				if(pPlayer->HasItemCount(340006, 100))
 		{
 			pPlayer->DestroyItemCount(340006, 100, true);
-			LoginDatabase.PQuery("Update web_db.account_data Set vp = vp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+			LoginDatabase.PQuery("Update webdb.account_data Set vp = vp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 			char str[200];
 			sprintf(str,"Success. Your Star Coin item has been removed and your points has been added.Check your vp for detail !!");
                 pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);        
@@ -68,7 +68,7 @@ class vpredeem : public CreatureScript
 		{
 			
 			pPlayer->DestroyItemCount(340006, 200, true);
-			LoginDatabase.PQuery("Update web_db.account_data Set vp = vp + 20 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+			LoginDatabase.PQuery("Update webdb.account_data Set vp = vp + 20 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 			char str[200];
 			sprintf(str,"Success. Your Star Coin item has been removed and your points has been added.Check your vp for detail !!");
                 pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);
@@ -84,7 +84,7 @@ class vpredeem : public CreatureScript
 		{
 			
 			pPlayer->DestroyItemCount(340006, 300, true);
-			LoginDatabase.PQuery("Update web_db.account_data Set vp = vp + 30 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+			LoginDatabase.PQuery("Update webdb.account_data Set vp = vp + 30 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 			char str[200];
 			sprintf(str,"Success. Your Star Coin item has been removed and your points has been added.Check your vp for detail !!");
                 pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);
@@ -99,7 +99,7 @@ class vpredeem : public CreatureScript
 			if(pPlayer->HasItemCount(340006, 400))
 		{			
 			pPlayer->DestroyItemCount(340006, 400, true);
-			LoginDatabase.PQuery("Update web_db.account_data Set vp = vp + 40 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+			LoginDatabase.PQuery("Update webdb.account_data Set vp = vp + 40 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 			char str[200];
 			sprintf(str,"Success. Your Star Coin item has been removed and your points has been added.Check your vp for detail !!");
                 pPlayer->MonsterWhisper(str,pPlayer->GetGUID(),true);

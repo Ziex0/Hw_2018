@@ -1,7 +1,7 @@
 #include "ScriptPCH.h"
 
 // IMPORTANT: Write your definitions here:
-static std::string website = "web_db"; 
+static std::string website = "webdb"; 
 static std::string times = "db_char";    // FusionCMS database name
 
 // DONATION POINTS PRICES:

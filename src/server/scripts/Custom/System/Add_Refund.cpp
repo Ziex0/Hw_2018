@@ -60,7 +60,7 @@ class refundvendor : public CreatureScript
 					{
 						pPlayer->DestroyItemCount(30733, 1, true);
 						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(30733);
-						LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+						LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 						//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 						pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 					}
@@ -76,7 +76,7 @@ class refundvendor : public CreatureScript
 					{
 						pPlayer->DestroyItemCount(26624, 1, true);
 						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(26624);
-						LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+						LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 						//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 						pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 					}
@@ -93,7 +93,7 @@ class refundvendor : public CreatureScript
 					{
 						pPlayer->DestroyItemCount(51516, 1, true);
 						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(51516);
-						LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+						LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 						//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 						pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 					}
@@ -110,7 +110,7 @@ class refundvendor : public CreatureScript
 					{
 						pPlayer->DestroyItemCount(43598	, 1, true);
 						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(43598);
-						LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+						LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 						//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 						pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 					}
@@ -127,7 +127,7 @@ class refundvendor : public CreatureScript
 					{
 						pPlayer->DestroyItemCount(26624, 1, true);
 						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(26624);
-						LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+						LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 						//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 						pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 					}
@@ -143,7 +143,7 @@ class refundvendor : public CreatureScript
 					{
 						pPlayer->DestroyItemCount(19019, 1, true);
 						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(19019);
-						LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+						LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 						//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 						pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 					}
@@ -173,7 +173,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(50709, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(50709);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -190,7 +190,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(52062, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(52062);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -207,7 +207,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(50756, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(50756);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -223,7 +223,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(18869, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(18869);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -249,7 +249,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(54806, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(54806);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -266,7 +266,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(35514, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(35514);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 10 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -292,7 +292,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(34529, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(34529);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -309,7 +309,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(2552, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(2552);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -326,7 +326,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(51532, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(51532);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -352,7 +352,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(50729, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(50729);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -368,7 +368,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(44223, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(44223);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -398,7 +398,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200162, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200162);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -414,7 +414,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200163, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200163);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -430,7 +430,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200161, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200161);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -446,7 +446,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200216, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200216);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -462,7 +462,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200217, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200217);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -478,7 +478,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200215, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200215);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -519,7 +519,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(10825, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(10825);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 18 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 18 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -536,7 +536,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(5286, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(5286);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 18 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 18 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -553,7 +553,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(10619, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(10619);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 18 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 18 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -570,7 +570,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(10618, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(10618);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 18 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 18 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -587,7 +587,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(2182, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(2182);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 18 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 18 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -616,7 +616,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(13150, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(13150);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -633,7 +633,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(22199, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(22199);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -650,7 +650,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(10685, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(10685);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -667,7 +667,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(12403, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(12403);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -694,7 +694,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(13050, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(13050);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -711,7 +711,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(14392, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(14392);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 24 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -738,7 +738,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(14118, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(14118);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 17 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 17 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -755,7 +755,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(20350, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(20350);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 17 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 17 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -772,7 +772,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(13924, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(13924);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 17 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 17 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -798,7 +798,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(210908, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(210908);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 15 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 15 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -815,7 +815,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(210903, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(210903);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 15 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 15 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -844,7 +844,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(198200, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(198200);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -861,7 +861,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(198201, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(198201);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -878,7 +878,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(198202, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(198202);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -894,7 +894,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(198203, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(198203);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -911,7 +911,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(198204, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(198204);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 5 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -928,7 +928,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(210008, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(210008);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 4 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 4 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -945,7 +945,7 @@ class refundvendor : public CreatureScript
 			{
 				pPlayer->DestroyItemCount(200168, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(200168);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 				pPlayer->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Dp for detail !!");
 				pPlayer->PlayerTalkClass->SendCloseGossip();

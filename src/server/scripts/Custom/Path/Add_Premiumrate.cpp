@@ -3,7 +3,7 @@
 #include "Chat.h"
 
 // IMPORTANT: Write your definitions here:
-static std::string website = "web_db";       // FusionCMS database name
+static std::string website = "webdb";       // FusionCMS database name
 
 // DONATION POINTS PRICES:
 static uint32 oneMonthVipPrice = 10;               // VIP account price for 1 month (in donation points) (Default: 30 donate points)

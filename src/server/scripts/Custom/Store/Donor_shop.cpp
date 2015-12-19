@@ -22,30 +22,50 @@ ENGINE=MyISAM
 
 class donorrewarder : public CreatureScript
 {
-    public:donorrewarder() : CreatureScript("donorrewarder") {}
-        
-		uint32 SelectDPoints(Player* pPlayer)
-			{
-				QueryResult select = LoginDatabase.PQuery("SELECT dp FROM web_db.account_data WHERE id = '%u'",  pPlayer->GetSession()->GetAccountId());
-				if (!select) // Just in case, but should not happen
-				{
-					pPlayer->CLOSE_GOSSIP_MENU();
-					return 0;
-				}
+    public:
 
-				Field* fields = select->Fetch();
-				uint32 dp = fields[0].GetUInt32();
+        donorrewarder()
+            : CreatureScript("donorrewarder")
+        {
+        }
 
-				return dp;
-			}		
         void RewardItem(Player* player, Creature* pCreature, int item , int count, int cost)
         {
-			char str[200];             
-            if (player->AddItem(item, count))
+            QueryResult result;
+            result = CharacterDatabase.PQuery("SELECT dp FROM webdb.account_data WHERE id = '%u' AND dp >= '0'", player->GetSession()->GetAccountId());
+            char str[200];
+            if (!result) // check
             {
+                sprintf(str,"Your have abused our systems and gotten a negative balance on your Donation Points. Your points are set to 0.");
+				LoginDatabase.PQuery("UPDATE webdb.account_data set dp = 0 WHERE id = '%u'", player->GetSession()->GetAccountId());
+                player->PlayerTalkClass->ClearMenus();
+                OnGossipHello(player, pCreature);
+                pCreature->MonsterSay(str, LANG_UNIVERSAL, player->GetGUID());
+                return;
+            }
+
+            Field *fields = result->Fetch();
+            uint32 points = fields[0].GetUInt32();
+ 
+            if (item == 0)
+            {
+                sprintf(str,"You got %u Donation points!", points);
+                player->MonsterWhisper(str,player->GetGUID(),true);
+            }
+            else
+            {
+                if (points <cost)
+                {
+                     sprintf(str,"You broke now,you must Donate on www.Heavenwow.netm!");
+                     player->MonsterWhisper(str,player->GetGUID(),true);
+                }
+                else
+                {
+                    if (player->AddItem(item, count))
+                    {
   			std::string DateTime = "%Y-%m-%d %H:%M:%S";
 			ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
-			CharacterDatabase.PQuery("Update web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
+			CharacterDatabase.PQuery("Update webdb.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
             //LoginDatabase.PQuery("INSERT INTO donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
             sprintf(str,"Your points are taken and your item is given!!!");
             player->MonsterWhisper(str,player->GetGUID(),true);
@@ -53,27 +73,20 @@ class donorrewarder : public CreatureScript
             }
                     else
                     {
-                        sprintf(str,"Item can't be given maybe your bag is full or you already got the item!");
+                        sprintf(str,"Item can't be given maybe or maybe and maybe your bag is full or you already got the item!");
                         player->MonsterWhisper(str,player->GetGUID(),true);
-                    }           
+                    }
 
+                }
+            }
             player->PlayerTalkClass->ClearMenus();
             OnGossipHello(player, pCreature);
         }
+
 		
     bool OnGossipHello(Player* player, Creature* pCreature)
         {			
-
-		// Prevent exploiting the FusionCMS donate points
-				std::stringstream points;				
-				if (player->GetSession()->GetSecurity() >= 0 && SelectDPoints(player) < 5 )
-				{
-					player->GetSession()->SendAreaTriggerMessage("SHOP LOCKED!!,You cant see item on Donor shop until your points are enought or at last you got 5 DP on your account", SelectDPoints(player));
-					player->CLOSE_GOSSIP_MENU();
-					return false;
-				}
-			else
-			{
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Gear_01:30|t How much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonation Token ,Coin", GOSSIP_SENDER_MAIN, 4000);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSupreme Donor Weapons", GOSSIP_SENDER_MAIN, 2000);
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
@@ -88,13 +101,7 @@ class donorrewarder : public CreatureScript
 				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Portable Mailbox - 10 DP", GOSSIP_SENDER_MAIN, 5200);
 				player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
 
-			}
-			
-			// Show Donate and Voting Points when GossipHello
-				points << "|cffFF0000|TInterface/ICONS/ABILITY_DRUID_DEMORALIZINGROAR:24|tMy Donation Points: " << SelectDPoints(player);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, points.str().c_str(), GOSSIP_SENDER_MAIN, 100);
-				player->SEND_GOSSIP_MENU(60031, pCreature->GetGUID());
-				return true;
+            return true;			
 		}
 
         bool OnGossipSelect(Player* player, Creature* pCreature, uint32 /*uiSender*/, uint32 uiAction)
@@ -123,7 +130,8 @@ class donorrewarder : public CreatureScript
 						break;
 				case 5100:
 					RewardItem(player, pCreature,29765,3,5);
-				break;
+						break;
+			
 				
 			case 4000:
                 player->PlayerTalkClass->ClearMenus();
@@ -331,7 +339,7 @@ class donorrewarder : public CreatureScript
 			{
 				player->DestroyItemCount(50729, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(50729);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", player->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", player->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", player->GetSession()->GetAccountId(), player->GetName(), itemTemplate->Name1.c_str());
 				player->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}
@@ -347,7 +355,7 @@ class donorrewarder : public CreatureScript
 			{
 				player->DestroyItemCount(44223, 1, true);
 				ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(44223);
-				LoginDatabase.PExecute("Update web_db.account_data Set dp = dp + 6 WHERE id = '%u'", player->GetSession()->GetAccountId());
+				LoginDatabase.PExecute("Update webdb.account_data Set dp = dp + 6 WHERE id = '%u'", player->GetSession()->GetAccountId());
 				//LoginDatabase.PExecute("INSERT INTO db_world.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", player->GetSession()->GetAccountId(), player->GetName(), itemTemplate->Name1.c_str());
 				player->GetSession()->SendNotification("Success. Your donor item has been removed and your points has been refunded.Check your Account in Site for detail !!");
 			}

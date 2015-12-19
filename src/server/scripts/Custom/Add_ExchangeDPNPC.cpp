@@ -9,7 +9,7 @@ class ExchangeDPNPC : public CreatureScript
 	 {
 		uint32 points;
 
-		QueryResult result = LoginDatabase.PQuery("SELECT vp FROM web_db.account_data WHERE id = '%u' AND vp >= '0'", player->GetSession()->GetAccountId());
+		QueryResult result = LoginDatabase.PQuery("SELECT vp FROM webdb.account_data WHERE id = '%u' AND vp >= '0'", player->GetSession()->GetAccountId());
         if (result)
         {
             do 
@@ -28,7 +28,7 @@ class ExchangeDPNPC : public CreatureScript
 	 {
 		uint32 points;
 
-		QueryResult result = LoginDatabase.PQuery("SELECT dp FROM web_db.account_data WHERE id = '%u' AND dp >= '0'", player->GetSession()->GetAccountId());
+		QueryResult result = LoginDatabase.PQuery("SELECT dp FROM webdb.account_data WHERE id = '%u' AND dp >= '0'", player->GetSession()->GetAccountId());
         if (result)
         {
             do 
@@ -48,9 +48,9 @@ class ExchangeDPNPC : public CreatureScript
 		 if(GetDP(player) < dp)
 			 return false;
 
-		 LoginDatabase.PQuery("Update web_db.account_data Set dp = dp - '%u' WHERE id = '%u'", dp, player->GetSession()->GetAccountId());
+		 LoginDatabase.PQuery("Update webdb.account_data Set dp = dp - '%u' WHERE id = '%u'", dp, player->GetSession()->GetAccountId());
 
-		 LoginDatabase.PQuery("Update web_db.account_data Set vp = vp + '%u' WHERE id = '%u'", vp, player->GetSession()->GetAccountId());
+		 LoginDatabase.PQuery("Update webdb.account_data Set vp = vp + '%u' WHERE id = '%u'", vp, player->GetSession()->GetAccountId());
 
 		 return true;
 	 }
@@ -60,9 +60,9 @@ class ExchangeDPNPC : public CreatureScript
 		 if(GetVP(player) < vp)
 			 return false;
 
-		 LoginDatabase.PQuery("Update web_db.account_data Set vp = vp - '%u' WHERE id = '%u'", vp, player->GetSession()->GetAccountId());
+		 LoginDatabase.PQuery("Update webdb.account_data Set vp = vp - '%u' WHERE id = '%u'", vp, player->GetSession()->GetAccountId());
 
-		 LoginDatabase.PQuery("Update web_db.account_data Set dp = dp + '%u' WHERE id = '%u'", dp, player->GetSession()->GetAccountId());
+		 LoginDatabase.PQuery("Update webdb.account_data Set dp = dp + '%u' WHERE id = '%u'", dp, player->GetSession()->GetAccountId());
 
 		 return true;
 	 }

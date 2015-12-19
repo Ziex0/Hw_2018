@@ -8,7 +8,7 @@
 #define REWARD_AMOUNT 2 // how much vp gives if player meets online time
 
 // database config
-#define DATABASE "web_db"
+#define DATABASE "webdb"
 #define TABLE "account_data"
 
 struct sPlayerExtention
