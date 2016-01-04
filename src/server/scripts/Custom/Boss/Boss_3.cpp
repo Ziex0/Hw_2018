@@ -58,13 +58,14 @@ enum Spells
 
 enum Summons
 {
-    NPC_SNOBOLD_VASSAL = 28011
+    NPC_SNOBOLD_VASSAL = 34800
 };
 
 enum Models
 {
-    MODEL_BOY = 28213,
+    MODEL_BOY = 15945,
     MODEL_MONSTER = 27569
+	//MODEL_MONSTER_2 = 55570
 };
 
 # define LM_YELL_AGGRO "Send them to Hell!"
@@ -99,7 +100,7 @@ class npc_legion_master : public CreatureScript
 
             void EnterCombat(Unit* /*who*/)
             {
-                me->SetDisplayId(MODEL_MONSTER);
+                me->SetDisplayId(MODEL_MONSTER /*&& MODEL_MONSTER_2*/);
                 me->SetFloatValue(OBJECT_FIELD_SCALE_X, 1.2f);
 
                 me->MonsterYell(LM_YELL_AGGRO, LANG_UNIVERSAL, 0);

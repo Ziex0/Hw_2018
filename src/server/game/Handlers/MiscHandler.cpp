@@ -356,7 +356,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
         // check if class matches classmask
         uint32 class_ = itr->second->getClass();
         //if (!(classmask & (1 << class_)))
-            continue;
+            //continue;
 
         // check if race matches racemask
         uint32 race = itr->second->getRace();
