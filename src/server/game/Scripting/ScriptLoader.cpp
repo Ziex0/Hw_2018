@@ -1408,6 +1408,7 @@ void AddBattlegroundScripts()
 	void AddSC_Vip_Access();
 	void AddSC_Boss_Announcer();
 	void AddSc_Script_CustomTeleporter();
+	void AddSC_Arena_AntiDraw();
 
 #endif
 
@@ -1521,6 +1522,7 @@ void AddCustomScripts()
 	AddSC_Vip_Access();
 	AddSC_Boss_Announcer();
 	AddSc_Script_CustomTeleporter();
+	AddSC_Arena_AntiDraw();
 
 #endif
 }

@@ -199,7 +199,7 @@ class Vote_rewarder : public CreatureScript
                 RewardItem(player, pCreature,90902,1,30);
                 break;
 			case 4004:
-                RewardItem(player, pCreature,38134,1,30);
+                RewardItem(player, pCreature,38314,1,30);
                 break;
 			case 4005:
                 RewardItem(player, pCreature,90903,1,30);
