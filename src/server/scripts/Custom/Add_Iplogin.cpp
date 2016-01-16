@@ -56,7 +56,7 @@ public:
 	//	player->Say(message, LANG_UNIVERSAL);
 	//}
 
-	void OnLogin(Player* player)
+	void OnLogin(Player* player, bool /*firstLogin*/)
 	{
 		//ExecuteLearnScriptInChat(player);
 

@@ -146,7 +146,7 @@ class Mod_DynamicRate_PlayerScript : public PlayerScript
         amount *= DynamicRate[player->GetGUIDLow()].rate;
     }
 
-    void OnLogin(Player* player)
+    void OnLogin(Player* player, bool /*firstLogin*/)
     {
         if (!DynamicRateEnable) return;
 

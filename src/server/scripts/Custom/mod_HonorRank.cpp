@@ -96,7 +96,7 @@ class Mod_HonorRank_PlayerScript : public PlayerScript
         CheckAllTitle(killer);
     }
 
-    void OnLogin(Player* player)
+    void OnLogin(Player* player, bool /*firstLogin*/)
     {
         if (!HonorRankEnable || !HonorRankCheckKill)
             return;

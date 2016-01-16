@@ -151,7 +151,7 @@ public:
         CharacterDatabase.DirectExecute("DELETE FROM custom_item_enchant_visuals WHERE NOT EXISTS(SELECT 1 FROM item_instance WHERE custom_item_enchant_visuals.iguid = item_instance.guid)");
     }
 
-    void OnLogin(Player* player) override
+    void OnLogin(Player* player, bool /*firstLogin*/)
     {
         QueryResult result = CharacterDatabase.PQuery("SELECT iguid, display FROM custom_item_enchant_visuals WHERE iguid IN(SELECT guid FROM item_instance WHERE owner_guid = %u)", player->GetGUIDLow());
         if (result)

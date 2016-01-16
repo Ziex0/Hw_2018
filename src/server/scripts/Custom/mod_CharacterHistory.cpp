@@ -59,7 +59,7 @@ class mod_CharacterHistory_PlayerScript : public PlayerScript
     }
 
     // Called when a player logs in.
-    void OnLogin(Player* player)
+    void OnLogin(Player* player, bool /*firstLogin*/)
     {
         if (!CharacterHistoryEnable || !CharacterHistoryLogin)
             return;

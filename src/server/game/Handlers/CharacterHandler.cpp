@@ -1035,7 +1035,8 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
         SendNotification(LANG_RESET_TALENTS);
     }
 
-    if (pCurrChar->HasAtLoginFlag(AT_LOGIN_FIRST))
+    bool firstLogin = pCurrChar->HasAtLoginFlag(AT_LOGIN_FIRST);
+    if (firstLogin)
         pCurrChar->RemoveAtLoginFlag(AT_LOGIN_FIRST);
 	
 	// Start Permanent Scale system
@@ -1106,7 +1107,7 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
     snprintf(msg, 255, "|cffFFFFFFGoing Online |cff00FF00+%u|cffFFFFFF player(s).", sWorld->GetPlayerCount());
     sWorld->SendGlobalText(msg, NULL);
 
-    sScriptMgr->OnPlayerLogin(pCurrChar);
+    sScriptMgr->OnPlayerLogin(pCurrChar, firstLogin);
     delete holder;
 	
     if (pCurrChar->GetTeam() != pCurrChar->GetOTeam())

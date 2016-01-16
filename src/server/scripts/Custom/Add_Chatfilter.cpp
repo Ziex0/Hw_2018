@@ -29,7 +29,7 @@ class chat_filter_playerscript : public PlayerScript
     public:
         chat_filter_playerscript() : PlayerScript("chat_filter_playerscript") { }
 
-        void OnLogin(Player* player)
+        void OnLogin(Player* player, bool /*firstLogin*/)
         {
             if (player->HasAura(SPELL_AURA_FREEZE))
             {

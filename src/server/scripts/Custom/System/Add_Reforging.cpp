@@ -196,7 +196,7 @@ public:
         DeleteSavedReforges(player->GetGUIDLow()); // delete stored reforges from the player (not DB)
     }
 
-    void OnLogin(Player* player)
+    void OnLogin(Player* player, bool /*firstLogin*/)
     {
         uint32 pGUID = player->GetGUIDLow();
 

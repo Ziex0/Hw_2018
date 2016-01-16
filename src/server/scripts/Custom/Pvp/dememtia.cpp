@@ -26,7 +26,7 @@ public:
 		}
     }
 
-    void OnLogin(Player* player /* OnLogin */)
+    void OnLogin(Player* player, bool /*loginFirst*/)
     {
 		Pet* pet = player->GetPet();
 

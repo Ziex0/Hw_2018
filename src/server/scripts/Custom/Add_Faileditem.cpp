@@ -20,70 +20,45 @@
 #include "Language.h"
 #include "Chat.h"
 
-enum  defines
-{
-								// head,   shoulder,  chest,    legs,     hands,    foot,      wrist,   waist
-	VOTE_ARMOR 					 = 300000 || 300001 || 300002 || 300003 || 300004 || 300005 || 300006 || 300007,
-	VOTE_WEAPON					 = 200000 || 200001 || 200002 || 200003 || 200004 || 200005 || 200006 || 200007, 
-								    // armor  vote
-								  
-	VOTE_TOKEN_GAMBLER			= 300,			    
-	
-	DONATE_ARMOR 					 = 300000 || 300001 || 300002 || 300003 || 300004 || 300005 || 300006 || 300007,
-	DONATE_WEAPON					 = 200000 || 200001 || 200002 || 200003 || 200004 || 200005 || 200006 || 200007, 
-								  							  
-	DONATE_TOKEN_GAMBLER			= 301
-};
 
 class npc_item_gambler : public CreatureScript
 {
 	public:
 		npc_item_gambler() : CreatureScript("npc_item_gambler"){}
 		
-		bool OnGossipHello(Player* player, Creature* pCreature)
+	bool OnGossipHello(Player* player, Creature* pCreature)
 		{
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r I want Play Gamble vote item -> ", GOSSIP_SENDER_MAIN, 5);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r I want Play Donor Gamble item -> ", GOSSIP_SENDER_MAIN, 6);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r I want points Only -> ", GOSSIP_SENDER_MAIN,7);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r I want Play Donor item Gamble -> ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +2);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|r I want points Only -> ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF +3);
 			player->SEND_GOSSIP_MENU(85006, pCreature->GetGUID());
-			return true;
-	
+			return true;	
 		}
 		
-		bool OnGossipSelect(Player* player, Creature* pCreature, uint32 /*uiSender*/, uint32 uiAction)
-        {
-            player->PlayerTalkClass->ClearMenus();
+	bool OnGossipSelect(Player* player, Creature* pCreature, uint32 /*uiSender*/, uint32 uiAction)
+    {
+		if (player->isInCombat())
+		{
+			pCreature->MonsterWhisper("You are in combat !!", player->GetGUID());
+			player->CLOSE_GOSSIP_MENU();
+			return true;
+		}
+
+		player->PlayerTalkClass->ClearMenus();
+
+		switch (uiAction)
+		{
 			
-            switch (uiAction)
-            {
-			
-			//vote
-				case 5:
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,  "|TInterface/ICONS/INV_Chest_Plate13:24|t|r Give my lucky Vote Armor", GOSSIP_SENDER_MAIN, 51);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT,   "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t|r Give my lucky Vote Weapon ", GOSSIP_SENDER_MAIN, 52);
-				break;
-			//Donate 
-				case 6:
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE,  "|TInterface/ICONS/INV_Chest_Plate13:24|t|r Give my lucky Donor Armor", GOSSIP_SENDER_MAIN,  61);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE,  "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t|r Give my lucky DonorWeapon", GOSSIP_SENDER_MAIN,62);
-				break;
-				
-				case 7:
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE,  "|TInterface/ICONS/INV_Chest_Plate13:24|t|r Dp -> 3", GOSSIP_SENDER_MAIN, 71);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE,  "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:24|t|r Vote -> 30", GOSSIP_SENDER_MAIN, 72);
-				break;
-				
-				case 51:
-					if(player->HasItemCount(player->HasItemCount(VOTE_TOKEN_GAMBLER, 1, true)))
-					{
-						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(VOTE_ARMOR);
-						player->DestroyItemCount(VOTE_TOKEN_GAMBLER, 1, true) ;
+				case GOSSIP_ACTION_INFO_DEF +2:
+					player->CLOSE_GOSSIP_MENU();
+					if (player->HasItemCount(301, 1))
+					{	
+						player->DestroyItemCount(301, 1, true);
+						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(urand(1000101,1000188));
 						ChatHandler(player->GetSession()).PSendSysMessage("Your Token %s % %s will be taken", itemTemplate->Name1.c_str());
-						player->AddItem(urand(300200,300210), 1); //id dan jumlah yg didapat
+						player->AddItem(urand(1000101,1000188), 1); //id dan jumlah yg didapat
 						//const uint32 arrayNum[1]={300210}; // 4 dan 5 adalah item ID yg kurang % untuk didapatkan
 						uint32 RandIndex = rand()%25; //jumlah % ID
-						player->GetSession()->SendNotification("Success. you got new Unique Armor Item please Check your bag !!");
-						player->PlayerTalkClass->SendCloseGossip();						
+						player->GetSession()->SendNotification("Success. you got new Unique Armor Item please Check your bag !!");					
 					}
 					else
 					{
@@ -92,55 +67,15 @@ class npc_item_gambler : public CreatureScript
 					}
 					break;
 				
-				case 52:
-					if(player->HasItemCount(player->HasItemCount(VOTE_TOKEN_GAMBLER, 1, true)))
+				case GOSSIP_ACTION_INFO_DEF +3:
+					player->CLOSE_GOSSIP_MENU();
+					if (player->HasItemCount(301, 1))
 					{
-						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(VOTE_WEAPON);
-						player->DestroyItemCount(VOTE_TOKEN_GAMBLER, 1, true) ;
-						ChatHandler(player->GetSession()).PSendSysMessage("Your Token %s % %s will be taken", itemTemplate->Name1.c_str());
-						player->AddItem(urand(300200,300210), 1); //id dan jumlah yg didapat
-						//const uint32 arrayNum[1]={300210}; // 4 dan 5 adalah item ID yg kurang % untuk didapatkan
-						uint32 RandIndex = rand()%25; //jumlah % ID
-						player->GetSession()->SendNotification("Success. you got new Unique Item please Check your bag !!");
-						player->PlayerTalkClass->SendCloseGossip();						
-					}
-					else
-					{
-						player->GetSession()->SendNotification("Failed. Make sure you have the desired item");
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-					break;
-			
-				case 61:
-					if(player->HasItemCount(player->HasItemCount(DONATE_TOKEN_GAMBLER, 1, true)))
-					{
-						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(DONATE_ARMOR);
-						player->DestroyItemCount(DONATE_TOKEN_GAMBLER, 1, true) ;
-						ChatHandler(player->GetSession()).PSendSysMessage("Your Token %s % %s will be taken", itemTemplate->Name1.c_str());
-						player->AddItem(urand(300200,300210), 1); //id dan jumlah yg didapat
-						//const uint32 arrayNum[1]={300210}; // 4 dan 5 adalah item ID yg kurang % untuk didapatkan
-						uint32 RandIndex = rand()%25; //jumlah % ID
-						player->GetSession()->SendNotification("Success. you got new Unique Armor Item please Check your bag !!");
-						player->PlayerTalkClass->SendCloseGossip();						
-					}
-					else
-					{
-						player->GetSession()->SendNotification("Failed. Make sure you have the desired item");
-						player->PlayerTalkClass->SendCloseGossip();
-					}
-					break;
-				
-				case 62:
-					if(player->HasItemCount(player->HasItemCount(DONATE_TOKEN_GAMBLER, 1, true)))
-					{
-						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(DONATE_WEAPON);
-						player->DestroyItemCount(DONATE_TOKEN_GAMBLER, 1, true) ;
-						ChatHandler(player->GetSession()).PSendSysMessage("Your Token %s % %s will be taken", itemTemplate->Name1.c_str());
-						player->AddItem(urand(300200,300210), 1); //id dan jumlah yg didapat
-						//const uint32 arrayNum[1]={300210}; // 4 dan 5 adalah item ID yg kurang % untuk didapatkan
-						uint32 RandIndex = rand()%25; //jumlah % ID
-						player->GetSession()->SendNotification("Success. you got new Unique Item please Check your bag !!");
-						player->PlayerTalkClass->SendCloseGossip();						
+						player->DestroyItemCount(301, 1, true);
+						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(301);
+						LoginDatabase.PExecute("Update webdb.account_data Set vp = vp + 20 WHERE id = '%u'", player->GetSession()->GetAccountId());
+						//LoginDatabase.PExecute("INSERT INTO webdb.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
+						player->GetSession()->SendNotification("Success, convert to 20 VP !!,Check your Account detail on website !!");
 					}
 					else
 					{

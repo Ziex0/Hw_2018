@@ -58,11 +58,11 @@ class Vote_rewarder : public CreatureScript
                 {
                     if (player->AddItem(item, count))
                     {
-  			   std::string DateTime = "%Y-%m-%d %H:%M:%S";
-			   ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
-                    CharacterDatabase.PQuery("Update webdb.account_data Set vp = vp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
-                    //LoginDatabase.PQuery("INSERT INTO vote_purchases (account_id, character_name, character_guid, vote_item_id, vote_item_name, vote_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
-                    sprintf(str,"Your points are taken and your item is in your bag!");
+					std::string DateTime = "%Y-%m-%d %H:%M:%S";
+					ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
+                    CharacterDatabase.PQuery("UPDATE webdb.account_data Set vp = vp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
+                    //LoginDatabase.PQuery("INSERT INTO webdb.vote_purchases (account_id, character_name, character_guid, vote_item_id, vote_item_name, vote_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
+                    sprintf(str,"Points are taken and your item is in your bag!");
                     player->MonsterWhisper(str,player->GetGUID(),true);
 			   player->SaveToDB();
                     }

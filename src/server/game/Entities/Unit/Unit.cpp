@@ -241,7 +241,7 @@ Unit::Unit(bool isWorldObject) : WorldObject(isWorldObject)
 
 	m_attacking = NULL;
 	m_modMeleeHitChance = 0.0f;
-	m_modRangedHitChance = 0.0f;
+	m_modRangedHitChance = 2.0f;
 	m_modSpellHitChance = 0.0f;
 	m_baseSpellCritChance = 5;
 
@@ -632,48 +632,48 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
 	}
 
 	// Rage from Damage made (only from direct weapon damage)
-	if (cleanDamage && damagetype == DIRECT_DAMAGE && this != victim && getPowerType() == POWER_RAGE)
-	{
-		uint32 weaponSpeedHitFactor;
-		uint32 rage_damage = damage + cleanDamage->absorbed_damage;
+    if (cleanDamage && damagetype == DIRECT_DAMAGE && this != victim && getPowerType() == POWER_RAGE)
+    {
+        uint32 weaponSpeedHitFactor;
+        uint32 rage_damage = damage + cleanDamage->absorbed_damage;
 
-		switch (cleanDamage->attackType)
-		{
-		case BASE_ATTACK:
-		{
-			weaponSpeedHitFactor = uint32(GetAttackTime(cleanDamage->attackType) / 1000.0f * 3.5f);
-			if (cleanDamage->hitOutCome == MELEE_HIT_CRIT)
-				weaponSpeedHitFactor *= 2;
+        switch (cleanDamage->attackType)
+        {
+            case BASE_ATTACK:
+            {
+                weaponSpeedHitFactor = uint32(GetAttackTime(cleanDamage->attackType) / 1000.0f * 3.5f);
+                if (cleanDamage->hitOutCome == MELEE_HIT_CRIT)
+                    weaponSpeedHitFactor *= 2;
 
-			RewardRage(rage_damage, weaponSpeedHitFactor, true);
+                RewardRage(rage_damage, weaponSpeedHitFactor, true);
 
-			break;
-		}
-		case OFF_ATTACK:
-		{
-			weaponSpeedHitFactor = uint32(GetAttackTime(cleanDamage->attackType) / 1000.0f * 1.75f);
-			if (cleanDamage->hitOutCome == MELEE_HIT_CRIT)
-				weaponSpeedHitFactor *= 2;
+                break;
+            }
+            case OFF_ATTACK:
+            {
+                weaponSpeedHitFactor = uint32(GetAttackTime(cleanDamage->attackType) / 1000.0f * 1.75f);
+                if (cleanDamage->hitOutCome == MELEE_HIT_CRIT)
+                    weaponSpeedHitFactor *= 2;
 
-			RewardRage(rage_damage, weaponSpeedHitFactor, true);
+                RewardRage(rage_damage, weaponSpeedHitFactor, true);
 
-			break;
-		}
-		case RANGED_ATTACK:
-			break;
-		default:
-			break;
-		}
-	}
+                break;
+            }
+            case RANGED_ATTACK:
+                break;
+            default:
+                break;
+        }
+    }
 
-	if (!damage)
-	{
-		// Rage from absorbed damage
-		if (cleanDamage && cleanDamage->absorbed_damage && victim->getPowerType() == POWER_RAGE)
-			victim->RewardRage(cleanDamage->absorbed_damage, 0, false);
+    if (!damage)
+    {
+        // Rage from absorbed damage
+        if (cleanDamage && cleanDamage->absorbed_damage && victim->getPowerType() == POWER_RAGE)
+            victim->RewardRage(cleanDamage->absorbed_damage, 0, false);
 
-		return 0;
-	}
+        return 0;
+    }
 
 	sLog->outDebug(LOG_FILTER_UNITS, "DealDamageStart");
 
@@ -1013,7 +1013,7 @@ void Unit::CalculateSpellDamageTaken(SpellNonMeleeDamage* damageInfo, int32 dama
 			damage += crit_bonus;
 
 			// Apply SPELL_AURA_MOD_ATTACKER_RANGED_CRIT_DAMAGE or SPELL_AURA_MOD_ATTACKER_MELEE_CRIT_DAMAGE
-			float critPctDamageMod = 0.0f;
+			float critPctDamageMod = 1.0f;
 			if (attackType == RANGED_ATTACK)
 				critPctDamageMod += victim->GetTotalAuraModifier(SPELL_AURA_MOD_ATTACKER_RANGED_CRIT_DAMAGE);
 			else

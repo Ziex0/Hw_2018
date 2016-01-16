@@ -14,6 +14,7 @@ class gm_active : public CreatureScript
         bool OnGossipHello(Player* pPlayer, Creature* pCreature)
         {
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Please Set our Premium Rank !!", GOSSIP_SENDER_MAIN, 2000);
+			pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t Nevermind", GOSSIP_SENDER_MAIN, 1);
 			
             pPlayer->PlayerTalkClass->SendGossipMenu(85005, pCreature->GetGUID());
             return true;

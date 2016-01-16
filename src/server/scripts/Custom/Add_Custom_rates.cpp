@@ -43,7 +43,7 @@ class add_del_rates : public PlayerScript
 public:
 	add_del_rates() : PlayerScript("add_del_rates") { }
 
-	void OnLogin(Player *player)
+	void OnLogin(Player *player, bool /*firstLogin*/)
 	{
 		// set custom xp rate for player on login
 		uint32 rateXP = CustomRates::GetXpRateForVip(player);

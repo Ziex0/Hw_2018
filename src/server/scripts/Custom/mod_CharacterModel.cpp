@@ -23,7 +23,7 @@ class mod_CharacterModel_PlayerScript : public PlayerScript
         mod_CharacterModel_PlayerScript() : PlayerScript("mod_CharacterModel_PlayerScript") { }
 
     // Called when a player logs in.
-    void OnLogin(Player* player)
+    void OnLogin(Player* player, bool /*firstLogin*/)
     {
         if (!CharacterModelEnable)
             return;

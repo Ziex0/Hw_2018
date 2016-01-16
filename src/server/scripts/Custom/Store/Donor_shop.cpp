@@ -65,9 +65,9 @@ class donorrewarder : public CreatureScript
                     {
   			std::string DateTime = "%Y-%m-%d %H:%M:%S";
 			ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
-			CharacterDatabase.PQuery("Update webdb.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
-            //LoginDatabase.PQuery("INSERT INTO donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
-            sprintf(str,"Your points are taken and your item is given!!!");
+			CharacterDatabase.PQuery("UPDATE webdb.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
+            //CharacterDatabase.PQuery("INSERT INTO webdb.donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
+            sprintf(str,"Points are taken and your item is given!!!");
             player->MonsterWhisper(str,player->GetGUID(),true);
 			player->SaveToDB();
             }

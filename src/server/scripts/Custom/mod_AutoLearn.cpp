@@ -163,7 +163,7 @@ public:
     }
 
     // Called when a player logs in.
-    void OnLogin(Player* player)
+    void OnLogin(Player* player, bool /*firstLogin*/)
     {
         if (!AutoLearnEnable || !OnLoginSpellMask)
             return;

@@ -271,7 +271,7 @@ class Mod_MultiKill_PlayerScript : public PlayerScript
         ResetCounter(killed->GetGUIDLow());
     }
 
-    void OnLogin(Player* player)
+    void OnLogin(Player* player, bool /*firstLogin*/)
     {
         ResetCounter(player->GetGUIDLow());
     }
