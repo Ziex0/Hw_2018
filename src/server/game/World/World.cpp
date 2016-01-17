@@ -1274,7 +1274,7 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_VIP_LOOT_RATE_LEVEL_2] = ConfigMgr::GetIntDefault("Rate.Loot.Vip.Level.2", 1);
 
 	// Player haste cap
-	m_int_configs[CONFIG_PLAYER_HASTE_CAP] = ConfigMgr::GetIntDefault("Player.HasteCap", 0);
+	//m_int_configs[CONFIG_PLAYER_HASTE_CAP] = ConfigMgr::GetIntDefault("Player.HasteCap", 0);
 	//Guild-Level-System
     LoadGuildBonusInfo();
 

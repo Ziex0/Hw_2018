@@ -68,13 +68,13 @@ public:
 
 	void MainMenu(Player *pPlayer, Creature *pCreature)
 	{
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface\\icons\\Achievement_Leader_King_Varian_Wrynn:30|t Teleport Menu ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface\\icons\\Achievement_Leader_Sylvanas:30|t Professions ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 196);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|t Learn Spells ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 460);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/Achievement_FeatsOfStrength_Gladiator_10:30|t Player Tools ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 450);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Chest_Plate13:30|t Buffs Me UP", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2500);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Misc_Coin_03:30|t Free Mounts ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 177);
-		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_Misc_Gear_01:30|t Chill Area", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1110);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/Achievement_Zone_Netherstorm_01:35:35|t|cff0000ffTeleport Menu ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 11);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/INV_MISC_GEM_AMETHYST_03:35:35|t|cff0000ffProfessions ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 196);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/ACHIEVEMENT_WIN_WINTERGRASP:35:35|t|cff0000fftLearn Spells ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 460);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/Ability_DualWieldSpecialization:35:35|t|cffff0000Player Tools ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 450);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/Achievement_General_StayClassy:35:35|t|cff0000ffBuffs Me UP", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2500);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/Achievement_Zone_Blackrock_01:35:35|t|cffff0000Free Mounts ->", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 177);
+		pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "|TInterface/ICONS/Achievement_Zone_Azshara_01:35:35|t|cffff0000Chill Area", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1110);
 		
 		pPlayer->SEND_GOSSIP_MENU(907, pCreature->GetGUID());
 	}

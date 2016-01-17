@@ -1,5 +1,5 @@
 /*
-CREATE TABLE `donation_purchases` (
+CREATE TABLE `logs_donate_npc` (
 	`account_id` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Account Identifier',
 	`character_name` VARCHAR(12) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
 	`character_guid` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -54,9 +54,9 @@ class donorrewarder : public CreatureScript
             }
             else
             {
-                if (points <cost)
+                if (points < cost)
                 {
-                     sprintf(str,"You broke now,you must Donate on www.Heavenwow.netm!");
+                     sprintf(str,"You dont have enoguht Points,Donate more on www.Heavenwow.net !! ");
                      player->MonsterWhisper(str,player->GetGUID(),true);
                 }
                 else
@@ -66,7 +66,7 @@ class donorrewarder : public CreatureScript
   			std::string DateTime = "%Y-%m-%d %H:%M:%S";
 			ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(item);
 			CharacterDatabase.PQuery("UPDATE webdb.account_data Set dp = dp - '%u' WHERE id = '%u'", cost, player->GetSession()->GetAccountId());
-            //CharacterDatabase.PQuery("INSERT INTO webdb.donation_purchases (account_id, character_name, character_guid, donation_item_id, donation_item_name, donation_item_amount, date) VALUES ('%u', '%s', '%u', '%u', '%s', '%u', DATE_FORMAT(date, '%s'))", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str(), count, DateTime.c_str());
+            //CharacterDatabase.PQuery("INSERT INTO db_auth.logs_donate_npc(account_id, character_name, character_guid, donation_item_id, donation_item_name) VALUES ('%u', '%s', '%u', '%u', '%s')", player->GetSession()->GetAccountId(), player->GetName(), player->GetGUIDLow(), item, itemTemplate->Name1.c_str());
             sprintf(str,"Points are taken and your item is given!!!");
             player->MonsterWhisper(str,player->GetGUID(),true);
 			player->SaveToDB();

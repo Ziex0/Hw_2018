@@ -357,7 +357,7 @@ enum WorldIntConfigs
     CONFIG_VIP_LOOT_RATE_LEVEL_2,
     
 
-	CONFIG_PLAYER_HASTE_CAP, // Player haste cap
+	//CONFIG_PLAYER_HASTE_CAP, // Player haste cap
     INT_CONFIG_VALUE_COUNT
 };
 

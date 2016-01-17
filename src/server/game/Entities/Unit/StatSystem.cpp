@@ -590,35 +590,35 @@ void Player::UpdateBlockPercentage()
         value = value < 0.0f ? 0.0f : value;
     }
     if(value > 50)
-		value = 57;
+		value = 50;
     SetStatFloatValue(PLAYER_BLOCK_PERCENTAGE, value);
 }
 
 void Player::UpdateCritPercentage(WeaponAttackType attType)
-{
-    BaseModGroup modGroup;
-    uint16 index;
-    CombatRating cr;
+	{
+		BaseModGroup modGroup;
+		uint16 index;
+		CombatRating cr;
 
-    switch (attType)
-    {
-        case OFF_ATTACK:
-            modGroup = OFFHAND_CRIT_PERCENTAGE;
-            index = PLAYER_OFFHAND_CRIT_PERCENTAGE;
-            cr = CR_CRIT_MELEE;
-            break;
-        case RANGED_ATTACK:
-            modGroup = RANGED_CRIT_PERCENTAGE;
-            index = PLAYER_RANGED_CRIT_PERCENTAGE;
-            cr = CR_CRIT_RANGED;
-            break;
-        case BASE_ATTACK:
-        default:
-            modGroup = CRIT_PERCENTAGE;
-            index = PLAYER_CRIT_PERCENTAGE;
-            cr = CR_CRIT_MELEE;
-            break;
-    }
+		switch (attType)
+		{
+		case OFF_ATTACK:
+			modGroup = OFFHAND_CRIT_PERCENTAGE;
+			index = PLAYER_OFFHAND_CRIT_PERCENTAGE;
+			cr = CR_CRIT_MELEE;
+			break;
+		case RANGED_ATTACK:
+			modGroup = RANGED_CRIT_PERCENTAGE;
+			index = PLAYER_RANGED_CRIT_PERCENTAGE;
+			cr = CR_CRIT_RANGED;
+			break;
+		case BASE_ATTACK:
+		default:
+			modGroup = CRIT_PERCENTAGE;
+			index = PLAYER_CRIT_PERCENTAGE;
+			cr = CR_CRIT_MELEE;
+			break;
+		}
 
     float value = GetTotalPercentageModValue(modGroup) + GetRatingBonusValue(cr);
     // Modify crit from weapon skill and maximized defense skill of same level victim difference
@@ -627,7 +627,7 @@ void Player::UpdateCritPercentage(WeaponAttackType attType)
     SetStatFloatValue(index, value);
 	{
 		if(value > 50)
-		value = 52;
+		value = 50;
 		SetStatFloatValue(PLAYER_BLOCK_PERCENTAGE, value);
 	}
     
@@ -728,7 +728,7 @@ void Player::UpdateParryPercentage()
         value = value < 0.0f ? 0.0f : value;
     }
     if(value > 50)
-		value = 58;
+		value = 50;
     SetStatFloatValue(PLAYER_PARRY_PERCENTAGE, value);
 }
 
@@ -766,34 +766,35 @@ void Player::UpdateDodgePercentage()
 
     value = value < 0.0f ? 0.0f : value;
     if(value > 50)
-		value = 62;
+		value = 50;
     SetStatFloatValue(PLAYER_DODGE_PERCENTAGE, value);
 }
 
 void Player::UpdateSpellCritChance(uint32 school)
 {
-    // For normal school set zero crit chance
-    if (school == SPELL_SCHOOL_NORMAL)
-    {
-        SetFloatValue(PLAYER_SPELL_CRIT_PERCENTAGE1, 1.0f);
-        return;
-    }
-    // For others recalculate it from:
-    float crit = 0.7f;
-    // Crit from Intellect
-    crit += GetSpellCritFromIntellect();
-    // Increase crit from SPELL_AURA_MOD_SPELL_CRIT_CHANCE
-    crit += GetTotalAuraModifier(SPELL_AURA_MOD_SPELL_CRIT_CHANCE);
-    // Increase crit from SPELL_AURA_MOD_CRIT_PCT
-    crit += GetTotalAuraModifier(SPELL_AURA_MOD_CRIT_PCT);
-    // Increase crit by school from SPELL_AURA_MOD_SPELL_CRIT_CHANCE_SCHOOL
-    crit += GetTotalAuraModifierByMiscMask(SPELL_AURA_MOD_SPELL_CRIT_CHANCE_SCHOOL, 1<<school);
-    // Increase crit from spell crit ratings
-    crit += GetRatingBonusValue(CR_CRIT_SPELL);
+	// For normal school set zero crit chance
+	if (school == SPELL_SCHOOL_NORMAL)
+	{
+		SetFloatValue(PLAYER_SPELL_CRIT_PERCENTAGE1, 0.0f);
+		return;
+	}
+	// For others recalculate it from:
+	float crit = 0.0f;
+	// Crit from Intellect
+	crit += GetSpellCritFromIntellect();
+	// Increase crit from SPELL_AURA_MOD_SPELL_CRIT_CHANCE
+	crit += GetTotalAuraModifier(SPELL_AURA_MOD_SPELL_CRIT_CHANCE);
+	// Increase crit from SPELL_AURA_MOD_CRIT_PCT
+	crit += GetTotalAuraModifier(SPELL_AURA_MOD_CRIT_PCT);
+	// Increase crit by school from SPELL_AURA_MOD_SPELL_CRIT_CHANCE_SCHOOL
+	crit += GetTotalAuraModifierByMiscMask(SPELL_AURA_MOD_SPELL_CRIT_CHANCE_SCHOOL, 1 << school);
+	// Increase crit from spell crit ratings
+	crit += GetRatingBonusValue(CR_CRIT_SPELL);
 
-    // Store crit value
-    SetFloatValue(PLAYER_SPELL_CRIT_PERCENTAGE1 + school, crit);
+	// Store crit value
+	SetFloatValue(PLAYER_SPELL_CRIT_PERCENTAGE1 + school, crit);
 }
+
 
 void Player::UpdateArmorPenetration(int32 amount)
 {
