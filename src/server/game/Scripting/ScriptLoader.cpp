@@ -1329,7 +1329,7 @@ void AddBattlegroundScripts()
 	void AddSC_item_enchant_visuals();
 	void AddSC_npc_changer();
 	void AddSC_NPC_VisualWeapon();
-	void AddSC_welcome_new_login();
+	//void AddSC_welcome_new_login();
 	void AddSC_beastmaster_npc();
 	void AddSC_npc_enchantment();
 	void AddSC_Packet_Protection();
@@ -1443,7 +1443,7 @@ void AddCustomScripts()
 	AddSC_item_enchant_visuals();
 	AddSC_npc_changer();
 	AddSC_NPC_VisualWeapon();
-	AddSC_welcome_new_login();
+	//AddSC_welcome_new_login();
 	AddSC_beastmaster_npc(); 
 	AddSC_Packet_Protection();
 	AddSC_npc_enchantment();
