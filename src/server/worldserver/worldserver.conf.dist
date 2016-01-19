@@ -4238,3 +4238,60 @@ CostEnchantment = 100000000
  
 #
 ###################################################################################################
+
+###################################################################################################
+# STATS LIMITS
+#
+#    Stats.Limits.Enable
+#        Description: Enable or disable stats system.
+#        Default:     0 - Disabled
+
+Stats.Limits.Enable = 1
+
+#
+#    Stats.Limit.[STAT]
+#        Description: Set percentage limit for dodge, parry, block and crit rating.
+#        Default:     95.0 (95%)
+
+Stats.Limits.Dodge = 95.0
+Stats.Limits.Parry = 95.0
+Stats.Limits.Block = 95.0
+Stats.Limits.Crit  = 95.0
+
+#
+###################################################################################################
+
+###################################################################################################
+# PACKET SPOOF PROTECTION SETTINGS
+#
+# These settings determine which action to take when harmful packet spoofing is detected.
+#
+#    PacketSpoof.Policy
+#        Description: Determines the course of action when packet spoofing is detected.
+#        Default:     1 - (Log + kick)
+#                     0 - (Log only 'network')
+#                     2 - (Log + kick + ban)
+
+PacketSpoof.Policy = 1
+
+#
+#    PacketSpoof.BanMode
+#        Description: If PacketSpoof.Policy equals 2, this will determine the ban mode.
+#        Note:        Banning by character not supported for logical reasons.
+#        Default:     0 - Ban Account
+#                     2 - Ban IP
+#
+
+PacketSpoof.BanMode = 0
+
+#
+#    PacketSpoof.BanDuration
+#        Description: Duration of the ban in seconds. Only valid if PacketSpoof.Policy is set to 2.
+#                     Set to 0 for permanent ban.
+#        Default:     86400 seconds (1 day)
+#
+
+PacketSpoof.BanDuration = 86400
+
+#
+###################################################################################################

@@ -1265,7 +1265,22 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_WINTERGRASP_NOBATTLETIME] = ConfigMgr::GetIntDefault("Wintergrasp.NoBattleTimer", 150);
     m_int_configs[CONFIG_WINTERGRASP_RESTART_AFTER_CRASH] = ConfigMgr::GetIntDefault("Wintergrasp.CrashRestartTimer", 10);
 	
-	    // Individual XP/loot rates
+	// Stats limits
+    m_bool_configs[CONFIG_STATS_LIMITS_ENABLE] = ConfigMgr::GetBoolDefault("Stats.Limits.Enable", false);
+    m_float_configs[CONFIG_STATS_LIMITS_DODGE] = ConfigMgr::GetFloatDefault("Stats.Limits.Dodge", 95.0f);
+    m_float_configs[CONFIG_STATS_LIMITS_PARRY] = ConfigMgr::GetFloatDefault("Stats.Limits.Parry", 95.0f);
+    m_float_configs[CONFIG_STATS_LIMITS_BLOCK] = ConfigMgr::GetFloatDefault("Stats.Limits.Block", 95.0f);
+    m_float_configs[CONFIG_STATS_LIMITS_CRIT] = ConfigMgr::GetFloatDefault("Stats.Limits.Crit", 95.0f);
+	
+	//packet spoof punishment
+    m_int_configs[CONFIG_PACKET_SPOOF_POLICY] = ConfigMgr::GetIntDefault("PacketSpoof.Policy", (uint32)WorldSession::DosProtection::POLICY_KICK);
+    m_int_configs[CONFIG_PACKET_SPOOF_BANMODE] = ConfigMgr::GetIntDefault("PacketSpoof.BanMode", (uint32)BAN_ACCOUNT);
+    if (m_int_configs[CONFIG_PACKET_SPOOF_BANMODE] == BAN_CHARACTER || m_int_configs[CONFIG_PACKET_SPOOF_BANMODE] > BAN_IP)
+        m_int_configs[CONFIG_PACKET_SPOOF_BANMODE] = BAN_ACCOUNT;
+
+    m_int_configs[CONFIG_PACKET_SPOOF_BANDURATION] = ConfigMgr::GetIntDefault("PacketSpoof.BanDuration", 86400);
+	 
+	// Individual XP/loot rates
     m_int_configs[CONFIG_VIP_XP_RATE_LEVEL_1] = ConfigMgr::GetIntDefault("Rate.XP.Vip.Level.1", 1);
     m_int_configs[CONFIG_VIP_XP_RATE_LEVEL_2] = ConfigMgr::GetIntDefault("Rate.XP.Vip.Level.2", 1);
 

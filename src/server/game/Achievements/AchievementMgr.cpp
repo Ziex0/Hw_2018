@@ -118,7 +118,7 @@ bool AchievementCriteriaData::IsValid(AchievementCriteriaEntry const* criteria)
     {
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_NONE:
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_VALUE:
-        case ACHIEVEMENT_CRITERIA_DATA_INSTANCE_SCRIPT:
+		case ACHIEVEMENT_CRITERIA_DATA_INSTANCE_SCRIPT:		
             return true;
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_T_CREATURE:
             if (!creature.id || !sObjectMgr->GetCreatureTemplate(creature.id))
@@ -409,7 +409,7 @@ bool AchievementCriteriaData::Meets(uint32 criteria_id, Player const* source, Un
             return pProto->ItemLevel >= equipped_item.item_level && pProto->Quality >= equipped_item.item_quality;
         }
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_MAP_ID:
-            return source->GetMapId() == map_id.mapId;
+            return source->GetMapId() == map_id.mapId;               
         default:
             break;
     }

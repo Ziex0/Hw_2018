@@ -587,59 +587,59 @@ void Player::UpdateBlockPercentage()
         value += GetTotalAuraModifier(SPELL_AURA_MOD_BLOCK_PERCENT);
         // Increase from rating
         value += GetRatingBonusValue(CR_BLOCK);
+
+        if (sWorld->getBoolConfig(CONFIG_STATS_LIMITS_ENABLE))
+             value = value > sWorld->getFloatConfig(CONFIG_STATS_LIMITS_BLOCK) ? sWorld->getFloatConfig(CONFIG_STATS_LIMITS_BLOCK) : value;
+
         value = value < 0.0f ? 0.0f : value;
     }
-    if(value > 50)
-		value = 50;
     SetStatFloatValue(PLAYER_BLOCK_PERCENTAGE, value);
 }
 
 void Player::UpdateCritPercentage(WeaponAttackType attType)
-	{
-		BaseModGroup modGroup;
-		uint16 index;
-		CombatRating cr;
+{
+    BaseModGroup modGroup;
+    uint16 index;
+    CombatRating cr;
 
-		switch (attType)
-		{
-		case OFF_ATTACK:
-			modGroup = OFFHAND_CRIT_PERCENTAGE;
-			index = PLAYER_OFFHAND_CRIT_PERCENTAGE;
-			cr = CR_CRIT_MELEE;
-			break;
-		case RANGED_ATTACK:
-			modGroup = RANGED_CRIT_PERCENTAGE;
-			index = PLAYER_RANGED_CRIT_PERCENTAGE;
-			cr = CR_CRIT_RANGED;
-			break;
-		case BASE_ATTACK:
-		default:
-			modGroup = CRIT_PERCENTAGE;
-			index = PLAYER_CRIT_PERCENTAGE;
-			cr = CR_CRIT_MELEE;
-			break;
-		}
+    switch (attType)
+    {
+        case OFF_ATTACK:
+            modGroup = OFFHAND_CRIT_PERCENTAGE;
+            index = PLAYER_OFFHAND_CRIT_PERCENTAGE;
+            cr = CR_CRIT_MELEE;
+            break;
+        case RANGED_ATTACK:
+            modGroup = RANGED_CRIT_PERCENTAGE;
+            index = PLAYER_RANGED_CRIT_PERCENTAGE;
+            cr = CR_CRIT_RANGED;
+            break;
+        case BASE_ATTACK:
+        default:
+            modGroup = CRIT_PERCENTAGE;
+            index = PLAYER_CRIT_PERCENTAGE;
+            cr = CR_CRIT_MELEE;
+            break;
+    }
 
     float value = GetTotalPercentageModValue(modGroup) + GetRatingBonusValue(cr);
     // Modify crit from weapon skill and maximized defense skill of same level victim difference
     value += (int32(GetWeaponSkillValue(attType)) - int32(GetMaxSkillValueForLevel())) * 0.04f;
+
+    if (sWorld->getBoolConfig(CONFIG_STATS_LIMITS_ENABLE))
+         value = value > sWorld->getFloatConfig(CONFIG_STATS_LIMITS_CRIT) ? sWorld->getFloatConfig(CONFIG_STATS_LIMITS_CRIT) : value;
+
     value = value < 0.0f ? 0.0f : value;
     SetStatFloatValue(index, value);
-	{
-		if(value > 50)
-		value = 50;
-		SetStatFloatValue(PLAYER_BLOCK_PERCENTAGE, value);
-	}
-    
 }
 
 void Player::UpdateAllCritPercentages()
 {
     float value = GetMeleeCritFromAgility();
 
-    SetBaseModValue(CRIT_PERCENTAGE, PCT_MOD, value / 2.0f);
-	SetBaseModValue(OFFHAND_CRIT_PERCENTAGE, PCT_MOD, value / 2.0f);
-	SetBaseModValue(RANGED_CRIT_PERCENTAGE, PCT_MOD, value / 2.0f);
+    SetBaseModValue(CRIT_PERCENTAGE, PCT_MOD, value);
+    SetBaseModValue(OFFHAND_CRIT_PERCENTAGE, PCT_MOD, value);
+    SetBaseModValue(RANGED_CRIT_PERCENTAGE, PCT_MOD, value);
 
     UpdateCritPercentage(BASE_ATTACK);
     UpdateCritPercentage(OFF_ATTACK);
@@ -705,9 +705,7 @@ void Player::UpdateParryPercentage()
         0.0f,           // Mage
         0.0f,           // Warlock
         0.0f,           // ??
-        0.0f,            // Druid
-		145.560408f,    // Rogue
-		48.003545f     // berserker
+        0.0f            // Druid
     };
 
     // No parry
@@ -725,10 +723,12 @@ void Player::UpdateParryPercentage()
         nondiminishing += GetTotalAuraModifier(SPELL_AURA_MOD_PARRY_PERCENT);
         // apply diminishing formula to diminishing parry chance
         value = nondiminishing + diminishing * parry_cap[pclass] / (diminishing + parry_cap[pclass] * m_diminishing_k[pclass]);
+
+        if (sWorld->getBoolConfig(CONFIG_STATS_LIMITS_ENABLE))
+             value = value > sWorld->getFloatConfig(CONFIG_STATS_LIMITS_PARRY) ? sWorld->getFloatConfig(CONFIG_STATS_LIMITS_PARRY) : value;
+
         value = value < 0.0f ? 0.0f : value;
     }
-    if(value > 50)
-		value = 50;
     SetStatFloatValue(PLAYER_PARRY_PERCENTAGE, value);
 }
 
@@ -746,9 +746,7 @@ void Player::UpdateDodgePercentage()
         150.375940f,    // Mage
         150.375940f,    // Warlock
         0.0f,           // ??
-        116.890707f,     // Druid
-		145.560408f,    // Rogue
-		88.129021f     // Berserker
+        116.890707f     // Druid
     };
 
     float diminishing = 0.0f, nondiminishing = 0.0f;
@@ -764,11 +762,13 @@ void Player::UpdateDodgePercentage()
     uint32 pclass = getClass()-1;
     float value = nondiminishing + (diminishing * dodge_cap[pclass] / (diminishing + dodge_cap[pclass] * m_diminishing_k[pclass]));
 
+    if (sWorld->getBoolConfig(CONFIG_STATS_LIMITS_ENABLE))
+         value = value > sWorld->getFloatConfig(CONFIG_STATS_LIMITS_DODGE) ? sWorld->getFloatConfig(CONFIG_STATS_LIMITS_DODGE) : value;
+
     value = value < 0.0f ? 0.0f : value;
-    if(value > 50)
-		value = 50;
     SetStatFloatValue(PLAYER_DODGE_PERCENTAGE, value);
 }
+
 
 void Player::UpdateSpellCritChance(uint32 school)
 {
