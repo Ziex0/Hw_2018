@@ -32,7 +32,6 @@
 #include "CreatureAI.h"
 #include "Player.h"
 #include "WorldPacket.h"
-#include "CityConquestMgr.h"
 
 // This is the global static registry of scripts.
 template<class TScript>
@@ -176,10 +175,7 @@ void ScriptMgr::Initialize()
 {
     uint32 oldMSTime = getMSTime();
 
-    LoadDatabase();
-	
-	sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Initializing City Conquest Engine (c) SatriaWow");
-    CityConquest.LoadCities();
+    LoadDatabase();	
 
     sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Loading C++ scripts");
 

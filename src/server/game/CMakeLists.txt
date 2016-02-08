@@ -8,7 +8,6 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-file(GLOB_RECURSE sources_CityConquest CityConquest/*.cpp CityConquest/*.h)
 file(GLOB_RECURSE sources_Accounts Accounts/*.cpp Accounts/*.h)
 file(GLOB_RECURSE sources_Anticheat Anticheat/*.cpp Anticheat/*.h)
 file(GLOB_RECURSE sources_Achievements Achievements/*.cpp Achievements/*.h)
@@ -71,7 +70,6 @@ set(game_STAT_SRCS
   ${sources_Battlegrounds}
   ${sources_Calendar}
   ${sources_Chat}
-  ${sources_CityConquest}
   ${sources_Combat}
   ${sources_Conditions}
   ${sources_DataStores}
@@ -148,7 +146,6 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/Battlegrounds/Zones
   ${CMAKE_CURRENT_SOURCE_DIR}/Calendar
   ${CMAKE_CURRENT_SOURCE_DIR}/Chat
-  ${CMAKE_CURRENT_SOURCE_DIR}/CityConquest
   ${CMAKE_CURRENT_SOURCE_DIR}/Chat/Channels
   ${CMAKE_CURRENT_SOURCE_DIR}/Combat
   ${CMAKE_CURRENT_SOURCE_DIR}/Conditions

@@ -80,13 +80,13 @@ class Vote_rewarder : public CreatureScript
 		
     bool OnGossipHello(Player* player, Creature* pCreature)
         {
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Gear_01:30|t How much Vote points do i have?", GOSSIP_SENDER_MAIN, 19000);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface\\icons\\Achievement_Leader_Sylvanas:24|tVote Weapons", GOSSIP_SENDER_MAIN, 2000);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVote Misc Item", GOSSIP_SENDER_MAIN, 3000);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVote Shirt ,Tabard and Cloak", GOSSIP_SENDER_MAIN, 4000);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rVoting Token, Coin etc", GOSSIP_SENDER_MAIN, 5000);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rRelics", GOSSIP_SENDER_MAIN, 6666);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Gear_01:35|t|rHow much Vote points do i have?", GOSSIP_SENDER_MAIN, 19000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/achievement_zone_elwynnforest:35|t|rVote Weapons", GOSSIP_SENDER_MAIN, 2000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/achievement_zone_tirisfalglades_01:35|t|rUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/achievement_zone_zangarmarsh:35|t|rVote Misc Item", GOSSIP_SENDER_MAIN, 3000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/achievement_bg_winwsg:35|t|rVote Shirt ,Tabard and Cloak", GOSSIP_SENDER_MAIN, 4000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:35|t|rVoting Token, Coin etc", GOSSIP_SENDER_MAIN, 5000);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:35|t|rRelics", GOSSIP_SENDER_MAIN, 6666);
             player->PlayerTalkClass->SendGossipMenu(90001, pCreature->GetGUID());
 
             return true;			

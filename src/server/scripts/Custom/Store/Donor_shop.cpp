@@ -86,19 +86,14 @@ class donorrewarder : public CreatureScript
 		
     bool OnGossipHello(Player* player, Creature* pCreature)
         {			
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "|TInterface/ICONS/INV_Misc_Gear_01:30|t How much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonation Token ,Coin", GOSSIP_SENDER_MAIN, 4000);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSupreme Donor Weapons", GOSSIP_SENDER_MAIN, 2000);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rSpecial Items", GOSSIP_SENDER_MAIN, 5000);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rRelics", GOSSIP_SENDER_MAIN, 6666);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Tabard - 7 Dp", GOSSIP_SENDER_MAIN, 10000);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Cloak - 10 DP", GOSSIP_SENDER_MAIN, 11000);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rDonor Set - 23 DP ( 8 Pieces )", GOSSIP_SENDER_MAIN, 12000);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:24|t|rUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|cffFF0000|TInterface\\icons\\Achievement_Leader_Sylvanas:30|tDonor Royal Weapons", GOSSIP_SENDER_MAIN, 32000);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Heaven Gems 5 DP - 3 Gems", GOSSIP_SENDER_MAIN, 5100);
-				//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Portable Mailbox - 10 DP", GOSSIP_SENDER_MAIN, 5200);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/INV_Misc_Gear_01:30:30|t|rHow much Donation points do i have?", GOSSIP_SENDER_MAIN, 19000);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/achievement_zone_bloodmystisle_01:30:30|t|rDonation Token ,Coin", GOSSIP_SENDER_MAIN, 4000);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/achievement_reputation_kirintor:30:30|t|rSupreme Donor Weapons", GOSSIP_SENDER_MAIN, 2000);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:30:30|t|rDonor Rings/Trinkets/Amulets and Bags", GOSSIP_SENDER_MAIN, 3000);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/achievement_reputation_wyrmresttemple:30:30|t|rSpecial Items", GOSSIP_SENDER_MAIN, 5000);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Leader_King_Varian_Wrynn:30:30|t|rRelics", GOSSIP_SENDER_MAIN, 6666);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Achievement_Dungeon_Icecrown_Frostmourne:30:30|t|rUltimate Cross Weapon Skill", GOSSIP_SENDER_MAIN, 14000);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/achievement_bg_winwsg:30:30|t|rValentine Pack - 100 DP", GOSSIP_SENDER_MAIN, 5200);
 				player->PlayerTalkClass->SendGossipMenu(90701, pCreature->GetGUID());
 
             return true;			
@@ -123,7 +118,7 @@ class donorrewarder : public CreatureScript
 					RewardItem(player, pCreature,26,1,10);
 						break;
 				case 5200:
-					RewardItem(player, pCreature,40768,1,10);
+					RewardItem(player, pCreature,9999999,1,100);
 						break;
 				case 5300:
 					RewardItem(player, pCreature,37298,1,10);

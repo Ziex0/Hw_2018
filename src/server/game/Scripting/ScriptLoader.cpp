@@ -1388,10 +1388,6 @@ void AddBattlegroundScripts()
 	
 	// Custom
 	void AddSC_System_kill();
-	//void AddSC_city_conquest_boss();
-	//void AddSC_city_conquest_generic();
-	//void AddSC_city_conquest_portal();
-	//void AddSC_city_conquest_spawner();
 	//void AddSC_vipmall_security();
 	void AddSC_ExchangeDPNPC();
 	//void AddSC_npc_exchanger();
@@ -1404,7 +1400,6 @@ void AddBattlegroundScripts()
 	void AddSC_Vote_rewarder();
 	//void AddSC_Online_Time_DP();
 	void AddSC_RaceChanger();
-	void AddSC_chat_filter_playerscript();
 	void AddSC_Vip_Access();
 	void AddSC_Boss_Announcer();
 	void AddSc_Script_CustomTeleporter();
@@ -1501,10 +1496,6 @@ void AddCustomScripts()
 	//AddSC_berserk_script();
 
 	AddSC_System_kill();
-	//AddSC_city_conquest_boss();
-	//AddSC_city_conquest_generic();
-	//AddSC_city_conquest_portal();
-	//AddSC_city_conquest_spawner();
 	//AddSC_vipmall_security();
 	AddSC_ArenaGambler();
 	AddSC_ExchangeDPNPC();
@@ -1518,7 +1509,6 @@ void AddCustomScripts()
 	AddSC_Vote_rewarder();
 	//AddSC_Online_Time_DP();
 	AddSC_RaceChanger();
-	AddSC_chat_filter_playerscript();
 	AddSC_Vip_Access();
 	AddSC_Boss_Announcer();
 	AddSc_Script_CustomTeleporter();
