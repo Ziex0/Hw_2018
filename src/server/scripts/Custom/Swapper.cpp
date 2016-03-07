@@ -13,7 +13,7 @@ public:
 	
 	uint32 SelectDPoints(Player* pPlayer)
 	{
-		QueryResult select = LoginDatabase.PQuery("SELECT dp FROM webdb.account_data WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
+		QueryResult select = LoginDatabase.PQuery("SELECT dp FROM sitez.accounts_more WHERE id = '%u'", pPlayer->GetSession()->GetAccountId());
 		if (!select) // Just in case, but should not happen
 		{
 			pPlayer->CLOSE_GOSSIP_MENU();
@@ -140,7 +140,7 @@ public:
                 {
                     player->CLOSE_GOSSIP_MENU();
                     player->DestroyItemCount(340006, 500, true, false);
-                    LoginDatabase.PQuery("Update webdb.account_data Set dp = dp + 1 WHERE id = '%u'", player->GetSession()->GetAccountId());
+                    LoginDatabase.PQuery("Update sitez.accounts_more Set dp = dp + 1 WHERE id = '%u'", player->GetSession()->GetAccountId());
                     _creature->MonsterWhisper("You exchanged successfully, now you got more 2 Donation point, Check your Points At menu!", player->GetGUID());
                 }
                 else

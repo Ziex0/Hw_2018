@@ -1380,7 +1380,6 @@ void AddBattlegroundScripts()
 	//void AddSC_LevelEvents();
 	//void AddSC_vpredeem();
 	void AddSC_The_Fallen();
-	//void AddSC_Custom_Talent_Template();
 	void AddSC_refundvendor();
 	//void AddSC_Vote_releaser();
 	void AddSC_Event_Vendor();
@@ -1489,7 +1488,6 @@ void AddCustomScripts()
 	//AddSC_LevelEvents();
 	//AddSC_vpredeem();
 	AddSC_The_Fallen();
-	//AddSC_Custom_Talent_Template();
 	AddSC_refundvendor();
 	//AddSC_Vote_releaser();
 	AddSC_Event_Vendor();

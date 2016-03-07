@@ -73,7 +73,7 @@ class npc_item_gambler : public CreatureScript
 					{
 						player->DestroyItemCount(301, 1, true);
 						ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(301);
-						LoginDatabase.PExecute("Update webdb.account_data Set vp = vp + 20 WHERE id = '%u'", player->GetSession()->GetAccountId());
+						LoginDatabase.PExecute("Update sitez.accounts_more Set vp = vp + 20 WHERE id = '%u'", player->GetSession()->GetAccountId());
 						//LoginDatabase.PExecute("INSERT INTO webdb.refund(account_id, character_name, donation_item_name) VALUES ('%u', '%s', '%s')", pPlayer->GetSession()->GetAccountId(), pPlayer->GetName(), itemTemplate->Name1.c_str());
 						player->GetSession()->SendNotification("Success, convert to 20 VP !!,Check your Account detail on website !!");
 					}
