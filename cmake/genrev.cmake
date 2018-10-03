@@ -18,8 +18,8 @@ if(NOT BUILDDIR)
 endif()
 
 if(NO_GIT)
-  set(rev_date "2015-01-01 00:00:00 +0000")
-  set(rev_hash "TS_Core")
+  set(rev_date "2018-10-03 00:00:00 +0000")
+  set(rev_hash "VZ_Core")
   set(rev_branch "335a")
 else()
   if(GIT_EXEC)
@@ -57,10 +57,10 @@ else()
     # No valid ways available to find/set the revision/hash, so let's force some defaults
     message(STATUS "
     Could not find a proper repository signature (hash) - you may need to pull tags with git fetch -t
-    Continuing anyway - note that the versionstring will be set to \"launched 2015-01-15 00:00:00 (TheSatria)"\")
-    set(rev_date "2015-01-01 00:00:00 +0000")
-    set(rev_hash "TS_Core")
-    set(rev_branch "335a")
+    Continuing anyway - note that the versionstring will be set to \"launched 2018-10-03 00:00:00 (VZ_Core)"\")
+    set(rev_date "2018-10-03 00:00:00 +0000")
+	set(rev_hash "VZ_Core")
+	set(rev_branch "335a")
   else()
     # Extract information required to build a proper versionstring
     string(REGEX REPLACE init-|[0-9]+-g "" rev_hash ${rev_info})
